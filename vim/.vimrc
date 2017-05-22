@@ -60,6 +60,14 @@ imap <right> <nop>
 imap <C-a> <C-o>0
 imap <C-e> <C-o>$
 
+" Adapting Emacs word movement to Vim:
+imap <C-b> <C-o>b
+imap <C-f> <C-o>w
+
+" I'm using C-d here because it won't terminate Vim. If I press it at the
+" wrong time, like in normal mode, it'll just scroll the page down.
+imap <C-d> <C-o>dW
+
 " Quicker window navigation:
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
