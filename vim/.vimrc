@@ -34,13 +34,6 @@ set number " Shows line numbers"
 set ruler " Shows row and column numbers"
 set showcmd "Shows incomplete commands"
 
-" Highlight searches
-set hlsearch
-" Ignore case of searches
-set ignorecase
-" Highlight dynamically as pattern is typed
-set incsearch
-
 " COLORS:
 "Color Scheme"
 "colorscheme desert
@@ -50,16 +43,31 @@ set incsearch
 
 " HardMode:
 
-map <up> <nop>
-map <down> <nop>
-map <left> <nop>
-map <right> <nop>
-imap <up> <nop>
-imap <down> <nop>
-imap <left> <nop>
-imap <right> <nop>
+map <up> :echoe "Please use k."<CR>
+map <down> :echoe "Please use j."<CR>
+map <left> :echoe "Please use h."<CR>
+map <right> :echoe "Please use l."<CR>
+imap <up> :echoe "Please use k."<CR>
+imap <down> :echoe "Please use j."<CR>
+imap <left> :echoe "Please use h."<CR>
+imap <right> :echoe "Please use l."<CR>
+
+" Quicker window navigation:
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+
+" Quicker window closing. It's OK to use C-c since if you don't bind any
+" shortcuts to it, you'll get a message saying 'please quit vim with :quit'.
+" It's also a bonus quick button if there's only one window in the session.
+nnoremap <C-c> <C-w>q
+
+" For when you're stuck:
+nnoremap <F2> :!python3 ~/oblique-strategies/oblique.py<CR>
 
 " FileNavigation:
+
 " NERDTree hotkeys:
 
 noremap <leader>f :NERDTree<CR>
@@ -187,7 +195,6 @@ filetype plugin indent on    " required
 :set expandtab
 
 " MAPPINGS:
-:map <F2> :echo 'Current time is ' . strftime('%c')<CR>
 :map! <F3> <C-R>=strftime('%c')<CR>
 :map <F5> :update<CR>
 
