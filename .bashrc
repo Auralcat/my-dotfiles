@@ -43,7 +43,7 @@ esac
 # uncomment for a colored prompt, if the terminal has the capability; turned
 # off by default to not distract the user: the focus in a terminal window
 # should be on the output of commands, not on the prompt
-#force_color_prompt=yes
+# force_color_prompt=yes
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
@@ -116,7 +116,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export PATH=$PATH:/home/lucas/bin
+export PATH=$PATH:~/bin
 
 # /---------------CUSTOM SETTINGS GO UNDER THIS LINE---------------------------/
 
@@ -124,15 +124,20 @@ export PATH=$PATH:/home/lucas/bin
 export EDITOR='vim'
 
 # Startup commands
+
+# This is so I don't miss my appointments!
+# Shows the current month and the next one
 cal -A 1
 echo
 echo "Compromissos para os próximos 7 dias:"
 echo
+
+# strftime-style formatting
 calcurse -r7 --format-apt='- %S -> %E\n\t%m\n%N'
 
-# MEUS ALIASES
+# MY ALIASES
 alias pomocount='vim ~/pomodorocount2017'
-alias editalbumlist='vim /home/lucas/Documentos/ExportacaoEvernote/Música/ListaAlbums'
+alias editalbumlist='vim ~/Documentos/ExportacaoEvernote/Música/ListaAlbums'
 alias journal='vim diario.txt'
 alias pomodoro='~/"Bash Scripts"/pomodoro.sh'
 alias pomocheck='tail ~/pomodorocount2017'
