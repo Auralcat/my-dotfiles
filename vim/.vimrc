@@ -55,6 +55,11 @@ imap <down> <nop>
 imap <left> <nop>
 imap <right> <nop>
 
+" Set Emacs bindings for insert mode. This is handy when you're typing
+" autocompleted brackets/parentheses/quotes.
+imap <C-a> <C-o>0
+imap <C-e> <C-o>$
+
 " Quicker window navigation:
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
