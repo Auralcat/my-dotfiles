@@ -34,6 +34,13 @@ set number " Shows line numbers"
 set ruler " Shows row and column numbers"
 set showcmd "Shows incomplete commands"
 
+" Highlight searches
+set hlsearch
+" Ignore case of searches
+set ignorecase
+" Highlight dynamically as pattern is typed
+set incsearch
+
 " COLORS:
 "Color Scheme"
 "colorscheme desert
