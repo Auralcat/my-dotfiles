@@ -47,10 +47,13 @@ map <up> :echoe "Please use k."<CR>
 map <down> :echoe "Please use j."<CR>
 map <left> :echoe "Please use h."<CR>
 map <right> :echoe "Please use l."<CR>
-imap <up> :echoe "Please use k."<CR>
-imap <down> :echoe "Please use j."<CR>
-imap <left> :echoe "Please use h."<CR>
-imap <right> :echoe "Please use l."<CR>
+
+" There's no echo in insert mode because you'd insert the :echoe line in it
+" instead.
+imap <up> <nop>
+imap <down> <nop>
+imap <left> <nop>
+imap <right> <nop>
 
 " Quicker window navigation:
 nnoremap <C-j> <C-w>j
@@ -152,7 +155,7 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'scrooloose/nerdtree'
 
 " MultipleCursors: Creates multiple cursors where you can type
-" at the same time. Replicates the feature from Sublime Text/ Atom.
+" at the same time. Replicates the feature from Sublime Text/Atom.
 Plugin 'terryma/vim-multiple-cursors'
 
 " VimRuby: Ruby-related tools.
@@ -195,8 +198,6 @@ filetype plugin indent on    " required
 :set expandtab
 
 " MAPPINGS:
-:map! <F3> <C-R>=strftime('%c')<CR>
 :map <F5> :update<CR>
 
 " ENDMAPPINGS:
-
