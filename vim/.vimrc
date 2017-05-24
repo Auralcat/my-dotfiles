@@ -13,6 +13,13 @@ augroup pencil
     autocmd FileType text call pencil#init({'wrap': 'soft'})
 augroup END
 
+" Encryption
+set viminfo=
+set nobackup
+set nowritebackup
+set noswapfile
+set cm=blowfish2
+
 " ProgrammingMode:
 "Activate rainbow parentheses based on file type:
 augroup programming
