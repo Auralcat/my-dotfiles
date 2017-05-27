@@ -1,10 +1,7 @@
-26"ToggledSettings:
+"ToggledSettings:
 set nocompatible              " be iMproved, required
 filetype off                  " required
 filetype plugin on
-
-" Enable statusline regardless of whether you have more than two windows:
-" set laststatus=2
 
 "VimPencil settings:"
 augroup pencil
@@ -21,9 +18,12 @@ set noswapfile
 set cm=blowfish2
 
 " ProgrammingMode:
-"Activate rainbow parentheses based on file type:
 augroup programming
     autocmd!
+    autocmd FileType python,ruby,c,java set number "Shows line numbers"
+    autocmd FileType python,ruby,c,java set ruler "Shows row and column numbers"
+    autocmd FileType python,ruby,c,java set showcmd "Shows incomplete commands"
+    "Activate rainbow parentheses based on file type:
     autocmd FileType python,ruby,c,java RainbowParentheses
     " Wraps text before column 80.
     autocmd FileType python,ruby,c,java set tw=79
@@ -35,6 +35,8 @@ augroup END
 " Text Mode:
 augroup writing
     autocmd!
+    autocmd FileType text set nonumber
+    autocmd FileType text set noruler
     autocmd FileType text SoftPencil
 augroup END
 
