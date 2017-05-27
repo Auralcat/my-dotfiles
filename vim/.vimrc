@@ -1,4 +1,4 @@
-"ToggledSettings:
+26"ToggledSettings:
 set nocompatible              " be iMproved, required
 filetype off                  " required
 filetype plugin on
@@ -25,6 +25,8 @@ set cm=blowfish2
 augroup programming
     autocmd!
     autocmd FileType python,ruby,c,java RainbowParentheses
+    " Wraps text before column 80.
+    autocmd FileType python,ruby,c,java set tw=79
     autocmd FileType python,ruby,c,java set cc=80
     " Colorscheme for Python files
     autocmd FileType python :colorscheme desert
