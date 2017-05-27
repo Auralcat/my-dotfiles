@@ -3,6 +3,8 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 filetype plugin on
 
+" Just a random change.
+
 "VimPencil settings:"
 augroup pencil
     autocmd!
