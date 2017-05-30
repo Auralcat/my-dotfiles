@@ -3,8 +3,6 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 filetype plugin on
 
-" Just a random change.
-
 "VimPencil settings:"
 augroup pencil
     autocmd!
@@ -224,6 +222,3 @@ filetype plugin indent on    " required
 :set expandtab
 
 " MAPPINGS:
-:map <F5> :update<CR>
-
-" ENDMAPPINGS:
