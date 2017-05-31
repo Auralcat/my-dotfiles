@@ -51,3 +51,4 @@
 
 ;; Python indentation
 (setq python-indent 4)
+(put 'upcase-region 'disabled nil)

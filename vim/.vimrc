@@ -3,6 +3,9 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 filetype plugin on
 
+"Quick update files:
+nnoremap <F5> :update<CR>
+
 "VimPencil settings:"
 augroup pencil
     autocmd!
@@ -45,13 +48,6 @@ set number " Shows line numbers"
 set ruler " Shows row and column numbers"
 set showcmd "Shows incomplete commands"
 
-" COLORS:
-"Color Scheme"
-"colorscheme desert
-"colorscheme wombat
-"colorscheme molokai
-"colorscheme vividchalk
-
 " HardMode:
 
 map <up> :echoe "Please use k."<CR>
@@ -70,6 +66,10 @@ imap <right> <nop>
 " autocompleted brackets/parentheses/quotes.
 imap <C-a> <C-o>0
 imap <C-e> <C-o>$
+
+" Same bindings for normal mode as well
+nnoremap <C-a> ^
+nnoremap <C-e> $
 
 " Adapting Emacs word movement to Vim:
 imap <C-b> <C-o>b
@@ -150,27 +150,13 @@ Plugin 'VundleVim/Vundle.vim'
 " Pass the path to set the runtimepath properly.
 " ENDEXAMPLES:
 
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
-" Install L9 and avoid a Naming conflict if you've already installed a
-" different version somewhere else.
 " PLUGINS:
 
-" YouCompleteMe: Autocomplete plugin
-Plugin 'valloric/youcompleteme'
+" JediVim: autocomplete for Vim:
+Plugin 'davidhalter/jedi-vim'
 
-" vim-snippets: exactly what says on the tin
-Plugin 'honza/vim-snippets'
-
-" Track the engine.
-Plugin 'SirVer/ultisnips'
-"
-" Trigger configuration. Do not use <tab> if you use YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<c-c>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-"
-" " If you want :UltiSnipsEdit to split your window.
-" let g:UltiSnipsEditSplit="vertical"
+" Configuration for JediVim:
+" let g:jedi#completions_command = "<C-n>"
 
 " AutoPairs: insert or delete brackets, parens, quotes in pair
 Plugin 'jiangmiao/auto-pairs'
@@ -181,9 +167,6 @@ Plugin 'scrooloose/nerdtree'
 " MultipleCursors: Creates multiple cursors where you can type
 " at the same time. Replicates the feature from Sublime Text/Atom.
 Plugin 'terryma/vim-multiple-cursors'
-
-" VimRuby: Ruby-related tools.
-Plugin 'vim-ruby/vim-ruby'
 
 "automatically remove all trailing spaces
 autocmd BufWritePre * :%s/\s\+$//e
@@ -220,5 +203,3 @@ filetype plugin indent on    " required
 " Change number of space chars inserted for indentation
 :set shiftwidth=4
 :set expandtab
-
-" MAPPINGS:
