@@ -12,12 +12,6 @@
 (require 'evil)
   (evil-mode 1)
 
-;; YASnippet - Yet Another Snippet package.
-(add-to-list 'load-path
-             "~/.emacs.d/plugins/yasnippet")
-(require 'yasnippet)
-(yas-global-mode 1)
-
 ;; Autopair - Automatically pair braces and quotes like in TextMate
 (require 'autopair)
 (autopair-global-mode) ;; enable autopair in all buffers
