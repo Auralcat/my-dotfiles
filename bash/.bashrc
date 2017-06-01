@@ -138,7 +138,7 @@ calcurse -r7 --format-apt='- %S -> %E\n\t%m\n%N'
 # MY ALIASES
 alias pomocount='vim ~/pomodorocount2017'
 alias editalbumlist='vim ~/Documentos/ExportacaoEvernote/Música/ListaAlbums'
-alias journal='vim -x diario.txt'
+alias journal='vim diario.txt'
 alias pomodoro='~/"Bash Scripts"/pomodoro.sh'
 alias pomocheck='tail ~/pomodorocount2017'
 alias update='sudo apt-get update; sudo apt-get upgrade -y'
