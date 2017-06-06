@@ -3,8 +3,11 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 filetype plugin on
 
-"Quick update files:
-nnoremap <F5> :update<CR>
+" Required for VimOrganizer:
+filetype plugin indent on
+
+au! BufRead,BufWrite,BufWritePost,BufNewFile *.org
+au BufEnter *.org call org#SetOrgFileType()
 
 "VimPencil settings:"
 augroup pencil
@@ -12,13 +15,6 @@ augroup pencil
     autocmd FileType markdown, mkd call pencil#init()
     autocmd FileType text call pencil#init({'wrap': 'soft'})
 augroup END
-
-" Encryption
-set viminfo=
-set nobackup
-set nowritebackup
-set noswapfile
-set cm=blowfish2
 
 " ProgrammingMode:
 augroup programming
@@ -43,10 +39,20 @@ augroup writing
     autocmd FileType text SoftPencil
 augroup END
 
+" Encryption
+set viminfo=
+set nobackup
+set nowritebackup
+set noswapfile
+set cm=blowfish2
+
 set title "Shows title of the file (look up! ^)"
 set number " Shows line numbers"
 set ruler " Shows row and column numbers"
 set showcmd "Shows incomplete commands"
+
+"Quick update files:
+nnoremap <F5> :update<CR>
 
 " HardMode:
 
@@ -160,6 +166,10 @@ Plugin 'davidhalter/jedi-vim'
 
 " AutoPairs: insert or delete brackets, parens, quotes in pair
 Plugin 'jiangmiao/auto-pairs'
+
+" VimOrganizer: VimOrganizer is partly a clone of Emacs' Org-mode, and partly
+" a front end to Org-mode itself. Do Org in Vim.
+Plugin 'hsitz/vimorganizer'
 
 " NERDTree: a tree explorer for Vim
 Plugin 'scrooloose/nerdtree'
