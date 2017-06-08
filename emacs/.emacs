@@ -36,9 +36,6 @@
 (line-number-mode 1)
 (column-number-mode 1)
 
-;; Enable Autocomplete mode
-(auto-complete-mode 1)
-
 ;; Change tab width and change tabs to spaces
 (setq-default tab-width 4)
 (setq-default indent-tabs-mode nil)
