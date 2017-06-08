@@ -3,6 +3,17 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 filetype plugin on
 
+set wildmenu " Enable wild menu
+set title " Shows title of the file
+
+" Enable fuzzy finding files through the :find command
+" and provides tab completion for all file-related tasks
+set path+=**
+
+" Make tags for easier navigation inside the file with C-], gC-](that's g plus
+" C-]) and C-t (helps with completion as well)
+command! MakeTags !ctags -R .
+
 " Required for VimOrganizer:
 filetype plugin indent on
 
@@ -46,13 +57,11 @@ set nowritebackup
 set noswapfile
 set cm=blowfish2
 
-set title "Shows title of the file (look up! ^)"
-set number " Shows line numbers"
-set ruler " Shows row and column numbers"
-set showcmd "Shows incomplete commands"
-
 "Quick update files:
 nnoremap <F5> :update<CR>
+
+"automatically remove all trailing spaces
+autocmd BufWritePre * :%s/\s\+$//e
 
 " HardMode:
 
@@ -98,13 +107,6 @@ nnoremap <C-c> <C-w>q
 
 " For when you're stuck:
 nnoremap <F2> :!python3 ~/oblique-strategies/oblique.py<CR>
-
-" FileNavigation:
-
-" NERDTree hotkeys:
-
-noremap <leader>f :NERDTree<CR>
-noremap <leader>q :NERDTreeClose<CR>
 
 " TabNavigation:
 " Create new tab
@@ -158,12 +160,6 @@ Plugin 'VundleVim/Vundle.vim'
 
 " PLUGINS:
 
-" JediVim: autocomplete for Vim:
-Plugin 'davidhalter/jedi-vim'
-
-" Configuration for JediVim:
-" let g:jedi#completions_command = "<C-n>"
-
 " AutoPairs: insert or delete brackets, parens, quotes in pair
 Plugin 'jiangmiao/auto-pairs'
 
@@ -171,15 +167,9 @@ Plugin 'jiangmiao/auto-pairs'
 " a front end to Org-mode itself. Do Org in Vim.
 Plugin 'hsitz/vimorganizer'
 
-" NERDTree: a tree explorer for Vim
-Plugin 'scrooloose/nerdtree'
-
 " MultipleCursors: Creates multiple cursors where you can type
 " at the same time. Replicates the feature from Sublime Text/Atom.
 Plugin 'terryma/vim-multiple-cursors'
-
-"automatically remove all trailing spaces
-autocmd BufWritePre * :%s/\s\+$//e
 
 " Syntastic: Checks syntax of source code.
 Plugin 'scrooloose/syntastic'
@@ -213,3 +203,8 @@ filetype plugin indent on    " required
 " Change number of space chars inserted for indentation
 :set shiftwidth=4
 :set expandtab
+
+"________SNIPPETS______________________________________________________________
+
+" Insert shebangs for Python
+nnoremap ,#! :-1read $HOME/.vim/.shebang.py<CR>3j
