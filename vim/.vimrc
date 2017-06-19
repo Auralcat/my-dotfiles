@@ -40,6 +40,8 @@ augroup programming
     autocmd FileType python,ruby,c,java set cc=80
     " Colorscheme for Python files
     autocmd FileType python :colorscheme desert
+    " Run Python scripts with F6
+    autocmd FileType python nnoremap <F6> :!python3 %<CR>
 augroup END
 
 " Text Mode:
