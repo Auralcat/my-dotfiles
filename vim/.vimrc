@@ -27,6 +27,12 @@ augroup pencil
     autocmd FileType text call pencil#init({'wrap': 'soft'})
 augroup END
 
+" Templates:
+
+augroup templates
+    autocmd BufNewFile *.py 0r ~/.vim/templates/skeleton.py
+    autocmd BufNewFile *.rb 0r ~/.vim/templates/skeleton.rb
+augroup END
 " ProgrammingMode:
 augroup programming
     autocmd!
@@ -40,8 +46,9 @@ augroup programming
     autocmd FileType python,ruby,c,java set cc=80
     " Colorscheme for Python files
     autocmd FileType python :colorscheme desert
-    " Run Python scripts with F6
+    " Run Python and Ruby scripts with F6
     autocmd FileType python nnoremap <F6> :!python3 %<CR>
+    autocmd FileType ruby nnoremap <F6> :!ruby %<CR>
 augroup END
 
 " Text Mode:
