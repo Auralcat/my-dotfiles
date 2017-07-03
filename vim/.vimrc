@@ -32,6 +32,12 @@ augroup END
 augroup templates
     autocmd BufNewFile *.py 0r ~/.vim/templates/skeleton.py
     autocmd BufNewFile *.rb 0r ~/.vim/templates/skeleton.rb
+    " Scratch files
+    autocmd BufNewFile scratch 0r ~/.vim/templates/skeleton.scratch
+    " Setting a few flags to unregister the scratch buffer
+    autocmd BufNewFile scratch setlocal buftype=nofile
+    autocmd BufNewFile scratch setlocal bufhidden=hide
+    autocmd BufNewFile scratch setlocal noswapfile
 augroup END
 " ProgrammingMode:
 augroup programming
