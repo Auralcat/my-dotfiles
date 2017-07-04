@@ -31,6 +31,8 @@ augroup END
 
 augroup templates
     autocmd BufNewFile *.py 0r ~/.vim/templates/skeleton.py
+    " Templates for Project Euler
+    autocmd BufNewFile euler*.py 0r ~/.vim/templates/skeleton_euler.py
     autocmd BufNewFile *.rb 0r ~/.vim/templates/skeleton.rb
     " Scratch files
     autocmd BufNewFile scratch 0r ~/.vim/templates/skeleton.scratch
@@ -39,6 +41,7 @@ augroup templates
     autocmd BufNewFile scratch setlocal bufhidden=hide
     autocmd BufNewFile scratch setlocal noswapfile
 augroup END
+
 " ProgrammingMode:
 augroup programming
     autocmd!
