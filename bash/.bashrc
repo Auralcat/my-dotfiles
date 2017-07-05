@@ -132,8 +132,10 @@ echo
 echo "Compromissos para os próximos 7 dias:"
 echo
 
-# strftime-style formatting
-calcurse -r7 --format-apt='- %S -> %E\n\t%m\n%N'
+# strftime-style formatting, print to screen and copy to briefing.txt
+calcurse -r7 --format-apt='- %S -> %E\n\t%m\n%N' | tee briefing.txt
+echo
+echo "Você pode olhar os compromissos no arquivo briefing.txt também."
 
 # MY ALIASES
 alias pomocount='vim ~/pomodorocount2017'
@@ -156,3 +158,4 @@ alias clean='sudo apt-get clean'
 alias commit='git add --all; git commit; git push'
 alias wifireload='sudo killall NetworkManager; sudo NetworkManager &'
 alias audioreload='pulseaudio --kill'
+alias briefme='less briefing.txt'
