@@ -136,6 +136,13 @@ echo
 calcurse -r7 --format-apt='- %S -> %E\n\t%m\n%N' | tee ~/.briefing.txt
 echo
 echo "Você pode olhar os compromissos no arquivo briefing.txt também com o comando 'briefme'."
+echo
+
+# Check if .pploweumoney exists
+
+if [ -f ~/.pploweumoney  ]; then
+        echo " ** Alguém está devendo dinheiro pra você! Olhe o arquivo .pploweumoney! **"
+    fi
 
 # MY ALIASES
 alias pomocount='vim ~/pomodorocount2017'
