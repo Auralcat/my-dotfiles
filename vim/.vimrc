@@ -30,10 +30,12 @@ augroup END
 " Templates:
 
 augroup templates
-    autocmd BufNewFile *.py 0r ~/.vim/templates/skeleton.py
     " Templates for Project Euler
     autocmd BufNewFile euler*.py 0r ~/.vim/templates/skeleton_euler.py
+    autocmd BufNewFile euler*.rb 0r ~/.vim/templates/skeleton_euler.rb
+    " General templates
     autocmd BufNewFile *.rb 0r ~/.vim/templates/skeleton.rb
+    autocmd BufNewFile *.py 0r ~/.vim/templates/skeleton.py
     " Scratch files
     autocmd BufNewFile scratch 0r ~/.vim/templates/skeleton.scratch
     " Setting a few flags to unregister the scratch buffer
