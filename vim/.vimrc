@@ -47,19 +47,21 @@ augroup END
 " ProgrammingMode:
 augroup programming
     autocmd!
-    autocmd FileType python,ruby,c,java set number "Shows line numbers"
-    autocmd FileType python,ruby,c,java set ruler "Shows row and column numbers"
-    autocmd FileType python,ruby,c,java set showcmd "Shows incomplete commands"
+    autocmd FileType python,ruby,c,cpp,java set number "Shows line numbers"
+    autocmd FileType python,ruby,c,cpp,java set ruler "Shows row and column numbers"
+    autocmd FileType python,ruby,c,cpp,java set showcmd "Shows incomplete commands"
     "Activate rainbow parentheses based on file type:
-    autocmd FileType python,ruby,c,java RainbowParentheses
+    autocmd FileType python,ruby,c,cpp,java RainbowParentheses
     " Wraps text before column 80.
-    autocmd FileType python,ruby,c,java set tw=79
-    autocmd FileType python,ruby,c,java set cc=80
+    autocmd FileType python,ruby,c,cpp,java set tw=79
+    autocmd FileType python,ruby,c,cpp,java set cc=80
     " Colorscheme for Python files
     autocmd FileType python :colorscheme desert
     " Run Python and Ruby scripts with F6
     autocmd FileType python nnoremap <F6> :!python3 %<CR>
     autocmd FileType ruby nnoremap <F6> :!ruby %<CR>
+    " Compile and run C Programs with F6 with some help from the shell
+    " autocmd FileType cpp nnoremap <F6> :!g -o
 augroup END
 
 " Text Mode:
