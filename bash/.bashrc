@@ -123,50 +123,7 @@ export PATH=$PATH:~/bin
 # Default text editor:
 export EDITOR='vim'
 
-# Startup commands
+# Sourcing the extra config files:
 
-# This is so I don't miss my appointments!
-# Shows the current month and the next one
-cal -A 1
-echo
-echo "Compromissos para os próximos 7 dias:"
-echo
-
-# strftime-style formatting, print to screen and copy to briefing.txt
-calcurse -r7 --format-apt='- %S -> %E\n\t%m\n%N' | tee ~/.briefing.txt
-echo
-echo "Você pode olhar os compromissos no arquivo briefing.txt também com o comando 'briefme'."
-echo
-
-# Check if .pploweumoney exists
-
-if [ -f ~/.pploweumoney  ]; then
-        echo " ** Alguém está devendo dinheiro pra você! Olhe o arquivo .pploweumoney! **"
-    fi
-
-# MY ALIASES
-alias pomocount='vim ~/pomodorocount2017'
-alias editalbumlist='vim ~/Documentos/ExportacaoEvernote/Música/ListaAlbums'
-alias journal='vim diario.txt'
-alias pomodoro='~/"Bash Scripts"/pomodoro.sh'
-alias pomocheck='tail ~/pomodorocount2017'
-alias update='sudo apt-get update; sudo apt-get upgrade -y'
-alias tuxsay='cowsay -f tux'
-alias oblique='python3 ~/oblique-strategies/oblique.py'
-alias refresh='source ~/.bashrc'
-alias xcopy='python3 ~/Python\ Scripts/custom_xclip.py'
-alias vimconfig='vim ~/.vimrc'
-alias bashconfig='vim ~/.bashrc'
-alias unix='curl -L git.io/unix'
-alias weather_full='curl wttr.in/Ponta_grossa'
-alias weather='echo -e "--------------------------------------------------------------------------------\n ** If you want the full weather report, type weather_full. **\n--------------------------------------------------------------------------------\n"; weather_full | head -17'
-alias lynx='lynx -nofilereferer -noreferer -anonymous -cookies -vikeys'
-alias plz='sudo'
-alias clean='sudo apt-get clean'
-alias commit='git add --all; git commit; git push'
-alias wifireload='sudo killall NetworkManager; sudo NetworkManager &'
-alias audioreload='pulseaudio --kill'
-alias briefme='less ~/.briefing.txt'
-alias budget='libreoffice --calc ~/Documentos/Controle\ financeiro.ods'
-alias addtodo='./addtodo.sh'
-alias todo='calcurse -t --format-todo "(%p) %m\n"'
+source .bash_startup
+source .bash_aliases

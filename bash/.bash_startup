@@ -1,0 +1,20 @@
+# This file holds the configuration for what to do when Bash starts.
+#
+# This is so I don't miss my appointments!
+# Shows the current month and the next one
+cal -A 1
+echo
+echo "Compromissos para os próximos 7 dias:"
+echo
+
+# strftime-style formatting, print to screen and copy to briefing.txt
+calcurse -r7 --format-apt='- %S -> %E\n\t%m\n%N' | tee ~/.briefing.txt
+echo
+echo "Você pode olhar os compromissos no arquivo briefing.txt também com o comando 'briefme'."
+echo
+
+# Check if .pploweumoney exists
+
+if [ -f ~/.pploweumoney  ]; then
+        echo " ** Alguém está devendo dinheiro pra você! Olhe o arquivo .pploweumoney! **"
+    fi

@@ -1,0 +1,58 @@
+# This is my alias file.
+
+# Came with the standard .bashrc:
+
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+alias l='ls -CF'
+alias la='ls -A'
+alias ll='ls -alF'
+alias ls='ls --color=auto'
+
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias grep='grep --color=auto'
+
+#-----------------MY-ALIASES---------------------------------------------------
+
+# Pomodoro related:
+alias pomocheck='tail ~/pomodorocount2017'
+alias pomocount='vim ~/pomodorocount2017'
+alias pomodoro='~/"Bash Scripts"/pomodoro.sh'
+
+# Change dotfiles:
+alias bashconfig='vim ~/.bashrc'
+alias vimconfig='vim ~/.vimrc'
+alias startupconfig='vim ~/.bash_startup'
+alias aliasconfig='vim ~/.bash_aliases'
+
+# Reload audio and network adapter:
+alias audioreload='pulseaudio --kill'
+alias wifireload='sudo killall NetworkManager; sudo NetworkManager &'
+
+# Reload the shell
+alias refresh='source ~/.bashrc'
+
+# Working with a todo list
+alias addtodo='./addtodo.sh'
+alias todo='calcurse -t --format-todo "(%p) %m\n"'
+
+# APT shortcuts
+alias clean='sudo apt-get clean'
+alias update='sudo apt-get update; sudo apt-get upgrade -y'
+
+# Git aliases
+alias commit='git add --all; git commit; git push'
+
+# Misc stuff
+alias briefme='less ~/.briefing.txt'
+alias budget='libreoffice --calc ~/Documentos/Controle\ financeiro.ods'
+alias editalbumlist='vim ~/Documentos/ExportacaoEvernote/Música/ListaAlbums'
+alias journal='vim diario.txt'
+alias lynx='lynx -nofilereferer -noreferer -anonymous -cookies -vikeys'
+alias oblique='python3 ~/oblique-strategies/oblique.py'
+alias tuxsay='cowsay -f tux'
+alias unix='curl -L git.io/unix'
+alias weather='echo -e "--------------------------------------------------------------------------------\n ** If you want the full weather report, type weather_full. **\n--------------------------------------------------------------------------------\n"; weather_full | head -17'
+alias weather_full='curl wttr.in/Ponta_grossa'
+alias xcopy='python3 ~/Python\ Scripts/custom_xclip.py'
