@@ -125,5 +125,5 @@ export EDITOR='vim'
 
 # Sourcing the extra config files:
 
-source .bash_startup
-source .bash_aliases
+source ~/.bash_startup
+source ~/.bash_aliases
