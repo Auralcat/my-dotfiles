@@ -30,8 +30,8 @@ alias aliasconfig='vim ~/.bash_aliases'
 alias audioreload='pulseaudio --kill'
 alias wifireload='sudo killall NetworkManager; sudo NetworkManager &'
 
-# Reload the shell
-alias refresh='source ~/.bashrc'
+# Reload the shell; 7/17/17 -> I always type ref then tab, so why not shorten refresh to ref?
+alias ref='source ~/.bashrc'
 
 # Working with a todo list
 alias addtodo='./addtodo.sh'
@@ -56,3 +56,4 @@ alias unix='curl -L git.io/unix'
 alias weather='echo -e "--------------------------------------------------------------------------------\n ** If you want the full weather report, type weather_full. **\n--------------------------------------------------------------------------------\n"; weather_full | head -17'
 alias weather_full='curl wttr.in/Ponta_grossa'
 alias xcopy='python3 ~/Python\ Scripts/custom_xclip.py'
+alias draft='vim scratch'
