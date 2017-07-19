@@ -39,7 +39,6 @@ augroup templates
     " Scratch files
     autocmd BufNewFile scratch 0r ~/.vim/templates/skeleton.scratch
     " Setting a few flags to unregister the scratch buffer
-    autocmd BufNewFile scratch setlocal buftype=nofile
     autocmd BufNewFile scratch setlocal bufhidden=hide
     autocmd BufNewFile scratch setlocal noswapfile
 augroup END

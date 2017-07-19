@@ -44,11 +44,14 @@ alias update='sudo apt-get update; sudo apt-get upgrade -y'
 # Git aliases
 alias commit='git add --all; git commit; git push'
 
+# Specific vim text files:
+alias editalbumlist='vim ~/Documentos/ExportacaoEvernote/Música/ListaAlbums'
+alias journal='vim diario.txt'
+alias draft='vim /tmp/scratch'
+
 # Misc stuff
 alias briefme='less ~/.briefing.txt'
 alias budget='libreoffice --calc ~/Documentos/Controle\ financeiro.ods'
-alias editalbumlist='vim ~/Documentos/ExportacaoEvernote/Música/ListaAlbums'
-alias journal='vim diario.txt'
 alias lynx='lynx -nofilereferer -noreferer -anonymous -cookies -vikeys'
 alias oblique='python3 ~/oblique-strategies/oblique.py'
 alias tuxsay='cowsay -f tux'
@@ -56,4 +59,3 @@ alias unix='curl -L git.io/unix'
 alias weather='echo -e "--------------------------------------------------------------------------------\n ** If you want the full weather report, type weather_full. **\n--------------------------------------------------------------------------------\n"; weather_full | head -17'
 alias weather_full='curl wttr.in/Ponta_grossa'
 alias xcopy='python3 ~/Python\ Scripts/custom_xclip.py'
-alias draft='vim scratch'
