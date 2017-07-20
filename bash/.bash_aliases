@@ -43,6 +43,7 @@ alias update='sudo apt-get update; sudo apt-get upgrade -y'
 
 # Git aliases
 alias commit='git add --all; git commit; git push'
+alias newrepo='./newrepo.sh'
 
 # Specific vim text files:
 alias editalbumlist='vim ~/Documentos/ExportacaoEvernote/Música/ListaAlbums'
