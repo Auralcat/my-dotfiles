@@ -14,6 +14,13 @@ set path+=**
 " C-]) and C-t (helps with completion as well)
 command! MakeTags !ctags -R .
 
+" Enable dictionary completion by pointing to the dict file
+set dictionary+=/usr/share/dict/american-english
+set dictionary+=/usr/share/dict/brazilian-portuguese
+
+" Enable omnicompletion:
+set omnifunc=syntaxcomplete#Complete
+
 " Required for VimOrganizer:
 filetype plugin indent on
 
@@ -135,23 +142,6 @@ noremap <leader>t :tabnew<CR>
 
 " Close tab
 noremap <leader>w :tabclose<CR>
-
-" PgUp/PgDown navigation
-noremap <leader><PageUp> gt
-noremap <leader><PageDown> gT
-noremap <leader>k gt
-noremap <leader>j gT
-" Cycle through tabs by number:
-noremap <leader>1 1gt
-noremap <leader>2 2gt
-noremap <leader>3 3gt
-noremap <leader>4 4gt
-noremap <leader>5 5gt
-noremap <leader>6 6gt
-noremap <leader>7 7gt
-noremap <leader>8 8gt
-noremap <leader>9 9gt
-noremap <leader>0 :tablast<cr>
 
 "______________________________________________________________________________
 
