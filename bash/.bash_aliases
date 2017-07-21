@@ -40,6 +40,12 @@ alias todo='calcurse -t --format-todo "(%p) %m\n"'
 # APT shortcuts
 alias clean='sudo apt-get clean'
 alias update='sudo apt-get update; sudo apt-get upgrade -y'
+alias purge='sudo apt-get purge'
+alias grab='sudo apt-get install -y'
+alias peek='sudo apt-get show'
+
+# Tmux shortcuts
+alias ta='tmux attach'
 
 # Git aliases
 alias commit='git add --all; git commit; git push'
