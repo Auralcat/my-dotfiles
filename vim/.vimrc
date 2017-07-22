@@ -5,6 +5,7 @@ filetype plugin on
 
 set wildmenu " Enable wild menu
 set title " Shows title of the file
+syntax on " Enables syntax by default
 
 " Enable fuzzy finding files through the :find command
 " and provides tab completion for all file-related tasks
