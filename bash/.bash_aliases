@@ -37,8 +37,8 @@ alias wifireload='sudo killall NetworkManager; sudo NetworkManager &'
 alias ref='source ~/.bashrc'
 
 # Working with a todo list
-alias addtodo='./addtodo.sh'
-alias todo='calcurse -t --format-todo "(%p) %m\n"'
+alias addtodo='vim .todo.md'
+alias todo='pandoc .todo.md | lynx -stdin'
 
 # APT shortcuts
 alias clean='sudo apt-get clean'
