@@ -29,6 +29,10 @@ set dictionary+=/usr/share/dict/brazilian-portuguese
 " Enable omnicompletion:
 set omnifunc=syntaxcomplete#Complete
 
+" Set completion behavior to highlight longest word by default and
+" show the menu even if there's only one match
+set completeopt=menuone,preview,longest
+
 " Required for VimOrganizer:
 filetype plugin indent on
 
