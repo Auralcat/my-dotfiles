@@ -7,6 +7,8 @@ set wildmenu " Enable wild menu
 set title " Shows title of the file
 syntax on " Enables syntax by default
 
+set noswapfile " Swapfiles are annoying!
+
 " Enable fuzzy finding files through the :find command
 " and provides tab completion for all file-related tasks
 set path+=**
@@ -89,7 +91,6 @@ augroup encryption
     autocmd BufReadPre diario.txt set viminfo=
     autocmd BufReadPre diario.txt set nobackup
     autocmd BufReadPre diario.txt set nowritebackup
-    autocmd BufReadPre diario.txt set noswapfile
     autocmd BufReadPre diario.txt set cm=blowfish2
 augroup END
 
