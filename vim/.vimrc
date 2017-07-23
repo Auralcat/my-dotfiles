@@ -44,11 +44,6 @@ augroup templates
     " General templates
     autocmd BufNewFile *.rb 0r ~/.vim/templates/skeleton.rb
     autocmd BufNewFile *.py 0r ~/.vim/templates/skeleton.py
-    " Scratch files
-    autocmd BufNewFile scratch.md 0r ~/.vim/templates/skeleton.scratch
-    " Setting a few flags to unregister the scratch buffer
-    autocmd BufNewFile scratch.md setlocal bufhidden=hide
-    autocmd BufNewFile scratch.md setlocal noswapfile
 augroup END
 
 " ScratchMode:
@@ -89,11 +84,14 @@ augroup writing
     autocmd FileType text SoftPencil
 augroup END
 
-" Encryption
-set nobackup
-set nowritebackup
-set noswapfile
-set cm=blowfish2
+" Encryption:
+augroup encryption
+    autocmd BufReadPre diario.txt set viminfo=
+    autocmd BufReadPre diario.txt set nobackup
+    autocmd BufReadPre diario.txt set nowritebackup
+    autocmd BufReadPre diario.txt set noswapfile
+    autocmd BufReadPre diario.txt set cm=blowfish2
+augroup END
 
 "Quick update files:
 nnoremap <F5> :update<CR>
