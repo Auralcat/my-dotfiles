@@ -15,6 +15,9 @@ alias grep='grep --color=auto'
 
 #-----------------MY-ALIASES---------------------------------------------------
 
+# Custom programs:
+alias vim='/usr/local/bin/vim'
+
 # Pomodoro related:
 alias pomocheck='tail ~/pomodorocount2017'
 alias pomocount='vim ~/pomodorocount2017'
@@ -54,7 +57,7 @@ alias newrepo='./newrepo.sh'
 # Specific vim text files:
 alias editalbumlist='vim ~/Documentos/ExportacaoEvernote/Música/ListaAlbums'
 alias journal='vim diario.txt'
-alias draft='vim /tmp/scratch'
+alias draft='vim /tmp/scratch.md'
 
 # Misc stuff
 alias briefme='less ~/.briefing.txt'

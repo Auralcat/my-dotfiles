@@ -45,10 +45,10 @@ augroup templates
     autocmd BufNewFile *.rb 0r ~/.vim/templates/skeleton.rb
     autocmd BufNewFile *.py 0r ~/.vim/templates/skeleton.py
     " Scratch files
-    autocmd BufNewFile scratch 0r ~/.vim/templates/skeleton.scratch
+    autocmd BufNewFile scratch.md 0r ~/.vim/templates/skeleton.scratch
     " Setting a few flags to unregister the scratch buffer
-    autocmd BufNewFile scratch setlocal bufhidden=hide
-    autocmd BufNewFile scratch setlocal noswapfile
+    autocmd BufNewFile scratch.md setlocal bufhidden=hide
+    autocmd BufNewFile scratch.md setlocal noswapfile
 augroup END
 
 " ProgrammingMode:
@@ -80,7 +80,6 @@ augroup writing
 augroup END
 
 " Encryption
-set viminfo=
 set nobackup
 set nowritebackup
 set noswapfile
@@ -217,6 +216,3 @@ filetype plugin indent on    " required
 :set expandtab
 
 "________SNIPPETS______________________________________________________________
-
-" Insert shebangs for Python
-nnoremap ,#! :-1read $HOME/.vim/.shebang.py<CR>3j
