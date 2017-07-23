@@ -51,6 +51,16 @@ augroup templates
     autocmd BufNewFile scratch.md setlocal noswapfile
 augroup END
 
+" ScratchMode:
+augroup scratchfile
+    " Header for the scratch file
+    autocmd BufNewFile scratch.md 0r ~/.vim/templates/skeleton.scratch
+    " Setting a few flags to unregister the scratch buffer
+    autocmd BufNewFile scratch.md setlocal bufhidden=hide
+    autocmd BufNewFile scratch.md setlocal noswapfile
+    autocmd BufNewFile scratch.md setlocal viminfo=
+augroup END
+
 " ProgrammingMode:
 augroup programming
     autocmd!
