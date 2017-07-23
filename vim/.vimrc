@@ -7,8 +7,12 @@ set wildmenu " Enable wild menu
 set title " Shows title of the file
 syntax on " Enables syntax by default
 
+" JuryRiggings:
 set noswapfile " Swapfiles are annoying!
 set backspace=2 " Returns common backspace function to insert mode
+
+" Fixes newline insertion problem in insert mode
+inoremap <CR> <CR>
 
 " Enable fuzzy finding files through the :find command
 " and provides tab completion for all file-related tasks
