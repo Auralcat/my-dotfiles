@@ -31,7 +31,7 @@ au BufEnter *.org call org#SetOrgFileType()
 "VimPencil settings:"
 augroup pencil
     autocmd!
-    autocmd FileType markdown, mkd call pencil#init()
+    autocmd FileType markdown, call pencil#init()
     autocmd FileType text call pencil#init({'wrap': 'soft'})
 augroup END
 
