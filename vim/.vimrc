@@ -103,6 +103,11 @@ augroup encryption
     autocmd BufReadPre diario.txt set cm=blowfish2
 augroup END
 
+" TodoCommands:
+augroup todo
+    " Put a DONE stamp on the selected item.
+    autocmd BufReadPre .todo.md nnoremap <C-i> ^wi*[DONE]*<space><C-[>]
+augroup END
 "Quick update files:
 nnoremap <F5> :update<CR>
 
