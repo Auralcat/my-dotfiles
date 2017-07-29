@@ -52,6 +52,8 @@ augroup templates
     " Templates for Project Euler
     autocmd BufNewFile euler*.py 0r ~/.vim/templates/skeleton_euler.py
     autocmd BufNewFile euler*.rb 0r ~/.vim/templates/skeleton_euler.rb
+    autocmd BufNewFile euler*.java 0r ~/.vim/templates/skeleton_euler.java
+    autocmd BufNewFile euler*.cpp 0r ~/.vim/templates/skeleton_euler.cpp
     " General templates
     autocmd BufNewFile *.rb 0r ~/.vim/templates/skeleton.rb
     autocmd BufNewFile *.py 0r ~/.vim/templates/skeleton.py
