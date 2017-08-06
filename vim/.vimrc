@@ -52,7 +52,7 @@ augroup templates
     " Templates for Project Euler
     autocmd BufNewFile euler*.py 0r ~/.vim/templates/skeleton_euler.py
     autocmd BufNewFile euler*.rb 0r ~/.vim/templates/skeleton_euler.rb
-    autocmd BufNewFile euler*.java 0r ~/.vim/templates/skeleton_euler.java
+    autocmd BufNewFile Euler*.java 0r ~/.vim/templates/skeleton_euler.java
     autocmd BufNewFile euler*.cpp 0r ~/.vim/templates/skeleton_euler.cpp
     " General templates
     autocmd BufNewFile *.rb 0r ~/.vim/templates/skeleton.rb
@@ -218,6 +218,9 @@ Plugin 'junegunn/rainbow_parentheses.vim'
 
 " VimColorSchemes: plugin to manage colorschemes
 Plugin 'flazz/vim-colorschemes'
+
+" VimWiki: Use Vim as your personal wiki
+Plugin 'vimwiki/vimwiki'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
