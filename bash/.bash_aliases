@@ -45,7 +45,7 @@ alias clean='sudo apt-get clean'
 alias update='sudo apt-get update; sudo apt-get upgrade -y'
 alias purge='sudo apt-get purge'
 alias grab='sudo apt-get install -y'
-alias peek='sudo apt-get show'
+alias peek='apt show'
 
 # Tmux shortcuts
 alias ta='tmux attach'

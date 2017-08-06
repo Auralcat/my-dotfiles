@@ -3,6 +3,7 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 filetype plugin on
 
+set laststatus=0 " I don't like the statusline
 set wildmenu " Enable wild menu
 set title " Shows title of the file
 syntax on " Enables syntax by default
