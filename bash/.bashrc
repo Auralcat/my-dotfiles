@@ -126,4 +126,5 @@ export EDITOR='vim'
 # Sourcing the extra config files:
 
 source ~/.bash_startup
-source ~/.bash_aliases
+#source ~/.bash_profile # Temporary fix, needs to be loaded first to override aliases here
+source ~/.bash_aliases # These are the correct aliases
