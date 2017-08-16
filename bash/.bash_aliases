@@ -16,7 +16,6 @@ alias grep='grep --color=auto'
 #-----------------MY-ALIASES---------------------------------------------------
 
 # Custom programs:
-alias vim='/usr/local/bin/vim'
 
 # Pomodoro related:
 alias pomocheck='tail ~/pomodorocount2017'
