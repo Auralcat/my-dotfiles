@@ -12,6 +12,12 @@ syntax on " Enables syntax by default
 set noswapfile " Swapfiles are annoying!
 set backspace=2 " Returns common backspace function to insert mode
 
+" Default tabstop
+set tabstop=4
+" change number of space chars inserted for indentation
+set shiftwidth=4
+set expandtab
+
 " Fixes newline insertion problem in insert mode
 inoremap <CR> <CR>
 
@@ -78,6 +84,9 @@ augroup programming
     autocmd FileType python,ruby,c,cpp,java set showcmd "Shows incomplete commands"
     "Activate rainbow parentheses based on file type:
     autocmd FileType python,ruby,c,cpp,java RainbowParentheses
+    " Ruby: set tab length to 2
+    autocmd FileType ruby set tabstop=2
+    autocmd FileType ruby set shiftwidth=2
     " Wraps text before column 80.
     autocmd FileType python,ruby,c,cpp,java set tw=79
     autocmd FileType python,ruby,c,cpp,java set cc=80
@@ -238,10 +247,5 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 "
-" Set tab length to 4
-:set tabstop=4
-" Change number of space chars inserted for indentation
-:set shiftwidth=4
-:set expandtab
 
 "________SNIPPETS______________________________________________________________
