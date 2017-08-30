@@ -90,8 +90,9 @@ augroup programming
     " Wraps text before column 80.
     autocmd FileType python,ruby,c,cpp,java,javascript set tw=79
     autocmd FileType python,ruby,c,cpp,java,javascript set cc=80
-    " Colorscheme for Python files
+    " Colorschemes for Python and Ruby files
     autocmd FileType python :colorscheme desert
+    autocmd FileType ruby :colorscheme landscape
     " Run Python, JS and Ruby scripts with F6
     autocmd FileType python nnoremap <F6> :!python3 %<CR>
     autocmd FileType ruby nnoremap <F6> :!ruby %<CR>
