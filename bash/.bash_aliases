@@ -55,6 +55,7 @@ alias newrepo='./newrepo.sh'
 alias gp = 'git pull'
 
 # Specific vim text files:
+
 alias editalbumlist='vim ~/Documentos/ExportacaoEvernote/Música/ListaAlbums'
 alias journal='vim ~/diario.txt'
 alias draft='vim /tmp/scratch.md'
