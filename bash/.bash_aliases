@@ -20,7 +20,7 @@ alias grep='grep --color=auto'
 # Pomodoro related:
 alias pomocheck='tail ~/pomodorocount2017'
 alias pomocount='vim ~/pomodorocount2017'
-alias pomodoro='~/"Bash Scripts"/pomodoro.sh'
+alias pomodoro='~/purrcured-scripts/Pomodoro/pomodoro_tmux.py'
 
 # Change dotfiles:
 alias bashconfig='vim ~/.bashrc'
@@ -52,6 +52,7 @@ alias ta='tmux attach'
 # Git aliases
 alias commit='git add --all; git commit; git push'
 alias newrepo='./newrepo.sh'
+alias gp = 'git pull'
 
 # Specific vim text files:
 alias editalbumlist='vim ~/Documentos/ExportacaoEvernote/Música/ListaAlbums'
