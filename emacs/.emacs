@@ -3,14 +3,21 @@
 ;; Started in May 2017.
 
 ;;-----PACKAGES-----------------------------------------------------------------
-;; Fetching MELPA, a package repository
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "http://melpa.org/packages/"))
-    (package-initialize)
+;; Package sources
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                         ("org" . "http://orgmode.org/elpa/")
+                         ("marmalade" . "http://marmalade-repo.org/packages/")
+                         ("melpa-stable" . "http://melpa-stable.milkbox.net/packages/")))
+(package-initialize)
 
-;; Enables Evil mode
-(require 'evil)
-  (evil-mode 1)
+;; If package isn't installed, fetch it
+(defun require-package (package)
+  (setq-default highlight-tabs t)
+  "Install given PACKAGE."
+  (unless (package-installed-p package)
+    (unless (assoc package package-archive-contents)
+      (package-refresh-contents))
+        (package-install package)))
 
 ;; Autopair - Automatically pair braces and quotes like in TextMate
 (require 'autopair)
@@ -26,6 +33,8 @@
   (menu-bar-mode -1))
 
 ;;-----VARIABLES----------------------------------------------------------------
+;; Flycheck adjustments
+
 ;; Set Text mode as default mode for new buffers:
 (setq-default major-mode 'text-mode)
 
@@ -35,6 +44,9 @@
 ;; Set line number mode and column number mode for code files
 (line-number-mode 1)
 (column-number-mode 1)
+
+;; Set autocomplete mode as default
+(auto-complete-mode 1)
 
 ;; Change tab width and change tabs to spaces
 (setq-default tab-width 4)
