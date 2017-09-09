@@ -23,6 +23,12 @@
 (require 'autopair)
 (autopair-global-mode) ;; enable autopair in all buffers
 
+;; Enable improved Javascript mode:
+
+(autoload 'js3-mode "js3" nil t)
+(add-to-list 'auto-mode-alist '("\\.js$" . js3-mode))   (autoload 'js3-mode "js3" nil t)
+(add-to-list 'auto-mode-alist '("\\.js$" . js3-mode))
+
 ;;-----KEYBINDINGS--------------------------------------------------------------
 ;; Remapping the help hotkey so it doesn't clash with Unix backspace.
 ;; Whenever you want to call help you can use M-x help as well. F1 works too.
