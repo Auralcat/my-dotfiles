@@ -2,6 +2,14 @@
 ;; Author: Auralcat
 ;; Started in May 2017.
 
+;;-----ENV-CUSTOMIZATIONS-------------------------------------------------------
+
+;; Store all backups in a specific folder:
+(setq backup-directory-alist `(("." . "~/.emacs_backups")))
+
+;; Backup files by copying them
+(setq backup-by-copying t)
+
 ;;-----PACKAGES-----------------------------------------------------------------
 ;; Package sources
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
