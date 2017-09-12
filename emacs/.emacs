@@ -46,6 +46,19 @@
 (when (not (display-graphic-p))
   (menu-bar-mode -1))
 
+;; Kill all the buffers matching the provided regex
+(global-set-key [24 75] (quote kill-matching-buffers))
+
+;; Open Emacs config file
+;; (find-file "~/.emacs" t)
+
+;; Set C-M-j to join lines
+(global-set-key [27 10] (quote join-line))
+
+;; Better buffer movement. C-x n goes to the next buffer and C-x p goes back
+(global-set-key [27 110] (quote switch-to-next-buffer))
+(global-set-key [27 112] (quote switch-to-prev-buffer))
+
 ;;-----VARIABLES----------------------------------------------------------------
 ;; Flycheck adjustments
 
@@ -75,6 +88,9 @@
 ;; Python indentation
 (setq python-indent 4)
 (put 'upcase-region 'disabled nil)
+
+;; Python: use python3 as default shell interpreter
+(setq python-shell-interpreter "python3")
 
 ;;-----CUSTOMIZATION-THROUGH-M-x-CUSTOMIZE--------------------------------------
 (custom-set-variables
