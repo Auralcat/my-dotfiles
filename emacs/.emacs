@@ -76,7 +76,7 @@
 (column-number-mode 1)
 
 ;; Set autocomplete mode as default
-(auto-complete-mode 1)
+(auto-complete-mode t)
 
 ;; Change tab width and change tabs to spaces
 (setq-default tab-width 4)
@@ -99,6 +99,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(auto-image-file-mode t)
+ '(browse-url-firefox-program "cyberfox")
  '(dynamic-completion-mode t)
  '(global-linum-mode t)
  '(image-animate-loop t))

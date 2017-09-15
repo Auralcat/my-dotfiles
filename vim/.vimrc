@@ -100,6 +100,11 @@ augroup programming
     autocmd FileType javascript nnoremap <F6> :!nodejs % <CR>
     " Compile and run C Programs with F6 with some help from the shell
     " autocmd FileType cpp nnoremap <F6> :!g -o
+    " Enable omnicompletion
+    autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+    autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+    autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
 augroup END
 
 " Text Mode:
