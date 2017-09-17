@@ -1,0 +1,1 @@
+(define-package "concurrent" "20161228.1930" "Concurrent utility functions for emacs lisp" '((emacs "24.3") (deferred "0.5.0")) :commit "94362794405e2ab8c88fcbc2b93fb045e0e9d2e4" :url "https://github.com/kiwanami/emacs-deferred/blob/master/README-concurrent.markdown" :keywords '("deferred" "async" "concurrent"))
