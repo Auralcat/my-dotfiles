@@ -5,3 +5,5 @@ cd
 nyancat
 ipython
 exit
+irb
+clear

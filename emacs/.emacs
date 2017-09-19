@@ -111,6 +111,7 @@
  '(auto-image-file-mode t)
  '(browse-url-firefox-program "cyberfox")
  '(dynamic-completion-mode t)
+ '(frame-background-mode nil)
  '(global-linum-mode t)
  '(image-animate-loop t))
 (custom-set-faces

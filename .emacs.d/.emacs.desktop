@@ -1,0 +1,41 @@
+;; -*- mode: emacs-lisp; coding: emacs-mule; -*-
+;; --------------------------------------------------------------------------
+;; Desktop File for Emacs
+;; --------------------------------------------------------------------------
+;; Created Mon Sep 18 15:22:13 2017
+;; Desktop file format version 206
+;; Emacs version 24.5.1
+
+;; Global section:
+(setq desktop-saved-frameset [frameset 1 (22976 3797 813030 224000) (desktop . "206") "isendra@logos" nil nil ((((tty-type . "screen-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "unspecified-fg") (menu-bar-lines . 0) (background-color . "unspecified-bg") (font . "tty") (height . 34) (width . 136) (modeline . t) (unsplittable) (frameset--id . "E675-03F2-3D76-5B06") (frameset--mini t) (minibuffer . t)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 136) (pixel-height . 33) (total-width . 136) (total-height . 33) (normal-height . 1.0) (normal-width . 1.0) (buffer "init.el" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins 3) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 3456) (start . 3279))))])
+(setq desktop-missing-file-warning nil)
+(setq tags-file-name nil)
+(setq tags-table-list nil)
+(setq search-ring '("VAR" "packa" "In" "inf-ruby" "omf" "inf-ru	" "C-c"))
+(setq regexp-search-ring nil)
+(setq register-alist (list (desktop-list* 97 (vector 'registerv (vector [frameset 1 (22976 3657 768619 801000) register nil nil nil ((((tty-type . "screen-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "unspecified-fg") (menu-bar-lines . 0) (background-color . "unspecified-bg") (font . "tty") (height . 34) (width . 136) (modeline . t) (unsplittable) (frameset--id . "1669-71DD-44A3-76B7") (frameset--mini t) (minibuffer . t) (buffer-list "Unprintable entity" "Unprintable entity" "Unprintable entity") (buried-buffer-list "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity")) ((min-height . 4) (min-width . 20) (min-height-ignore . 2) (min-width-ignore . 4) (min-height-safe . 1) (min-width-safe . 4) (min-pixel-height . 4) (min-pixel-width . 20) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 4) (min-pixel-height-safe . 1) (min-pixel-width-safe . 4)) hc (pixel-width . 136) (pixel-height . 33) (total-width . 136) (total-height . 33) (normal-height . 1.0) (normal-width . 1.0) (combination-limit) (leaf (pixel-width . 92) (pixel-height . 33) (total-width . 92) (total-height . 33) (normal-height . 1.0) (normal-width . 0.6764705882352942) (buffer "*scratch*" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins nil) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 1) (start . 1))) (leaf (last . t) (pixel-width . 44) (pixel-height . 33) (total-width . 44) (total-height . 33) (normal-height . 1.0) (normal-width . 0.32352941176470584) (buffer "*scratch*" (selected) (hscroll . 0) (fringes 0 0 nil) (margins nil) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 1) (start . 1)))))] "1669-71DD-44A3-76B7" (let ((mk (make-marker))) (add-hook 'desktop-delay-hook `(lambda nil (set-marker ,mk ,nil (get-buffer ," *temp*")))) mk)) "Unprintable entity" 'frameset--jump-to-register nil)) (desktop-list* 116 (vector 'registerv (vector [frameset 1 (22976 3000 32673 664000) register nil nil nil ((((tty-type . "screen-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "unspecified-fg") (menu-bar-lines . 0) (background-color . "unspecified-bg") (font . "tty") (height . 34) (width . 136) (modeline . t) (unsplittable) (frameset--id . "7BF6-D983-6724-E370") (frameset--mini t) (minibuffer . t) (buffer-list "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity") (buried-buffer-list "Unprintable entity")) ((min-height . 4) (min-width . 20) (min-height-ignore . 2) (min-width-ignore . 4) (min-height-safe . 1) (min-width-safe . 4) (min-pixel-height . 4) (min-pixel-width . 20) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 4) (min-pixel-height-safe . 1) (min-pixel-width-safe . 4)) hc (pixel-width . 136) (pixel-height . 33) (total-width . 136) (total-height . 33) (normal-height . 1.0) (normal-width . 1.0) (combination-limit) (leaf (pixel-width . 92) (pixel-height . 33) (total-width . 92) (total-height . 33) (normal-height . 1.0) (normal-width . 0.6764705882352942) (buffer "sketch.rb" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins 2) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 895) (start . 894))) (leaf (last . t) (pixel-width . 44) (pixel-height . 33) (total-width . 44) (total-height . 33) (normal-height . 1.0) (normal-width . 0.32352941176470584) (buffer "sketch.rb" (selected) (hscroll . 0) (fringes 0 0 nil) (margins 2) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 895) (start . 894)))))] "7BF6-D983-6724-E370" (let ((mk (make-marker))) (add-hook 'desktop-delay-hook `(lambda nil (set-marker ,mk ,nil (get-buffer ," *temp*")))) mk)) "Unprintable entity" 'frameset--jump-to-register nil))))
+(setq file-name-history '("~/.emacs.d/init.el" "~/.emacs.d/" "~/Ruby Scripts/sketch.rb"))
+
+;; Buffer section -- buffers listed in same order as in buffer list:
+(desktop-create-buffer 206
+  "/home/lucas/my-dotfiles/.emacs.d/init.el"
+  "init.el"
+  'emacs-lisp-mode
+  '(autopair-mode type-break-mode auto-complete-mode linum-mode)
+  3456
+  '(3456 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . prefer-utf-8-unix) (fill-column . 79)))
+
+(desktop-create-buffer 206
+  "/home/lucas/my-dotfiles/.emacs.d/type-break"
+  "type-break"
+  'text-mode
+  '(autopair-mode type-break-mode linum-mode)
+  31
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . undecided-unix)))
+

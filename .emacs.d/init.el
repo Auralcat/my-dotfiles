@@ -5,10 +5,13 @@
 ;;-----ENV-CUSTOMIZATIONS-------------------------------------------------------
 
 ;; Store all backups in a specific folder:
-(setq backup-directory-alist `(("." . "~/.emacs_backups")))
+(setq backup-directory-alist `(("." . "~/.emacs.d/backups")))
 
 ;; Backup files by copying them
 (setq backup-by-copying t)
+
+;; I'm too lazy to type "yes" or "no"
+(fset 'yes-or-no-p 'y-or-n-p)
 
 ;;-----PACKAGES-----------------------------------------------------------------
 ;; Package sources

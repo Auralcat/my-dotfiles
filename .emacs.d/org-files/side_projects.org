@@ -1,0 +1,73 @@
+* Side Projects
+
+** Project Euler Problems
+*** TODO Complete eulerlib for C++ and Java
+*** TODO Port the problems to C++ and Java
+*** TODO Continue solving the problems in the site
+- *NOTE* You don't need to complete this all at once, do a bit every day,
+like porting 1 or 2 problems at a time... work a bit on the libs... there's
+no deadline for this.
+
+** Enhancements
+- Finish song grading port script
+- Add abbreviations to .vimrc
+- Create quoting/unquoting macros for Vim in Markdown mode
+- [X] Personal Wiki
+- Word for non-important -> *SECONDARY*
+
+** Job Hunting
+- Get more info about tech companies you'd want to work for
+    * I'd like one that allows me to work remotely
+- Create resume for Auralcat.
+- SCRAPPED Create international version of your civil name resume.
+- *[DONE]* Create spam target email address auralcat at gmail dot com
+- {DELAYED} Focus on creating Java and C++ programs to display on your GitHub profile.
+- *[DONE]* Create your provisional website with about dot me for now then move to GitHub pages
+- *Learn Javascript* (only piece left for front-end development)
+- Start working as a mystery shopper (registration complete)
+
+** Good Morning Bot For Whatsapp
+- Idea yanked from the last 5algumacoisa video
+- Sends a good morning image to the family group at 5:50 AM every day
+
+** Self-Care Bot For Telegram
+- *[DONE]* Create it! IDEA: Remind ppl to take care of themselves
+- *[DONE]* Same idea as the Pomodoro one: separate the model from the view
+- Put more phrases in phrases.txt
+    * IDEA -> Split the phrases into initial statement, verb and punctuation files.
+- Implement multi-threading (let the bot do the hourly reminders and free it to receive other commands)
+
+** Test Bot For Telegram
+- Integrate captionimg.py with the bot interface
+- Adjust text formatting in the image
+- Receive text input from the user
+- Implement call from inline mode
+
+** DONE Pomodoro Script
+- [X] Instantiate default pomocount file
+- [X] Instantiate DB file
+- [X] Implement portability: remove dependency from the shell script (biggest problem: Windows!)
+    * What needs to be adjusted:
+        + [X] Write pomodoro log to pomocount file (*Why do I have to write it myself every time??*)
+        + [X] *Decoupling the view from the model (leave it open to be displayed anywhere the user wants!)*
+
+- Document the module you created
+- [X] Make a place for a generic print function to be added
+- Implement unit tests
+- Make the usage less verbose
+- Implement a cycle comprising of 3 pomodoros and a long break, like so:
+    P -> B -> P -> B -> P -> B -> P -> LB -> repeat
+- Feature ideas:
+    * [X] Implement breaks
+    * [X] Implement long breaks
+    * Create interface to adjust times for pomodoro, breaks and long breaks
+    * Adjust cycle size
+    * [X] Accumulate pomodoros in a single ta
+** Emacs Customization
+- Programming modes which I use and need more features IMO
+-   * Ruby
+-   * HTML
+-   * JS
+- Python's OK-ish
+- How do I transfer the files from here to Org-mode?
+
