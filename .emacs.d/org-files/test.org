@@ -1,3 +1,0 @@
-* DONE Create a link to another Org file
-  - Gotta write file: in the beginning of the link
-

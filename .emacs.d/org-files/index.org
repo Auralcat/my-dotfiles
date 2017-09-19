@@ -1,3 +1,0 @@
-= Miriam's Wiki =
-    [[file:side_projects.org][Side Projects]]-- coding ideas which pop up every now and then.
-    [[file:tasks.org][Tasks]] -- ye olde todo file
