@@ -1,4 +1,11 @@
 (1
+ (zone-quotes .
+	      [(20170919 1825)
+	       ((emacs
+		 (24))
+		(cl-lib
+		 (0 5)))
+	       "A zone program to display quotes from a specific collection" single])
  (zone-nyan .
 	    [(0 2 2)
 	     ((esxml
@@ -460,7 +467,7 @@
 	     [(12)
 	      nil "A theme loosely based on Tron: Legacy colors" single])
  (transmission .
-	       [(0 11 1)
+	       [(0 12)
 		((emacs
 		  (24 4))
 		 (let-alist
@@ -575,7 +582,7 @@
 		 [(0 2)
 		  nil "A mode for SystemTap" single])
  (systemd .
-	  [(1 4 1)
+	  [(1 6)
 	   nil "Major mode for editing systemd units" tar])
  (syslog-mode .
 	      [(2 2)

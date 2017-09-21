@@ -5,7 +5,7 @@
 ;;-----ENV-CUSTOMIZATIONS-------------------------------------------------------
 
 ;; Store all backups in a specific folder:
-(setq backup-directory-alist `(("." . "~/.emacs.d/backups")))
+(setq backup-directory-alist `(("." . "~/file-bouncer/emacs-backups")))
 
 ;; Backup files by copying them
 (setq backup-by-copying t)
@@ -40,6 +40,12 @@
 (add-to-list 'auto-mode-alist '("\\.js$" . js3-mode))   (autoload 'js3-mode "js3" nil t)
 (add-to-list 'auto-mode-alist '("\\.js$" . js3-mode))
 
+;; Multi-term - Run multiple terminals and interface with Emacs commands
+(require 'multi-term)
+
+;; Setup the program multi-term will need
+(setq multi-term-program "/bin/bash")
+
 ;;-----KEYBINDINGS--------------------------------------------------------------
 ;; Remapping the help hotkey so it doesn't clash with Unix backspace.
 ;; Whenever you want to call help you can use M-x help as well. F1 works too.
@@ -72,8 +78,8 @@
 ;;-----VARIABLES----------------------------------------------------------------
 ;; Flycheck adjustments
 
-;; Set Text mode as default mode for new buffers:
-(setq-default major-mode 'text-mode)
+;; Set Org4 mode as default mode for new buffers:
+(setq-default major-mode 'org-mode)
 
 ;; Set Type Break mode on for all buffers (helps with ergonomics)
 (type-break-mode 1)

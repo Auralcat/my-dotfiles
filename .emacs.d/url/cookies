@@ -1,15 +1,0 @@
-;; Emacs-W3 HTTP cookies file
-;; Automatically generated file!!! DO NOT EDIT!!!
-
-(setq url-cookie-storage
- '((".stackoverflow.com"
-  [url-cookie "prov" "29d45ced-07b4-ffc7-d776-182b52f064ba" "01-Jan-2055 00:00:00.00 GMT" "/" ".stackoverflow.com" nil]
-  [url-cookie "HttpOnly" nil "01-Jan-2055 00:00:00.00 GMT" "/" ".stackoverflow.com" nil]))
-)
-(setq url-cookie-secure-storage
- 'nil)
-
-;; Local Variables:
-;; version-control: never
-;; no-byte-compile: t
-;; End:
