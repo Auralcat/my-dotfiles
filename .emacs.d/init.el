@@ -35,7 +35,6 @@
 (autopair-global-mode) ;; enable autopair in all buffers
 
 ;; Enable improved Javascript mode:
-
 (autoload 'js3-mode "js3" nil t)
 (add-to-list 'auto-mode-alist '("\\.js$" . js3-mode))   (autoload 'js3-mode "js3" nil t)
 (add-to-list 'auto-mode-alist '("\\.js$" . js3-mode))
@@ -60,13 +59,6 @@
 
 ;; Open Emacs config file
 ;; (find-file "~/.emacs" t)
-
-;; Set C-M-j to join lines
-(global-set-key [27 10] (quote join-line))
-
-;; Better buffer movement. C-x n goes to the next buffer and C-x p goes back
-(global-set-key [27 110] (quote switch-to-next-buffer))
-(global-set-key [27 112] (quote switch-to-prev-buffer))
 
 ;; Move to beginning of line or indentation
 (defun back-to-indentation-or-beginning () (interactive)
@@ -121,7 +113,10 @@
  '(browse-url-firefox-program "cyberfox")
  '(dynamic-completion-mode t)
  '(global-linum-mode t)
- '(image-animate-loop t))
+ '(image-animate-loop t)
+ '(org-agenda-files nil)
+ '(org-default-notes-file "~/file-bouncer/everything-bucket")
+ '(remember-data-file "~/file-bouncer/everything-bucket"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
