@@ -67,6 +67,9 @@
 
 (global-set-key (kbd "C-a") (quote back-to-indentation-or-beginning))
 
+;; Org-mode: bind org-capture to C-c c
+(global-set-key (kbd "\C-c c") (quote org-capture))
+
 ;;-----VARIABLES----------------------------------------------------------------
 ;; Flycheck adjustments
 
