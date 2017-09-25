@@ -1,6 +1,8 @@
-/home/lucas/my-dotfiles/.gitignore
-/home/lucas/my-dotfiles/#.gitignore#
+/home/lucas/JavaScript Programs/exercism.io-problems/leap-year/JS/leap.js
+/home/lucas/JavaScript Programs/exercism.io-problems/leap-year/JS/#leap.js#
 /home/lucas/my-dotfiles/.emacs.d/type-break
 /home/lucas/my-dotfiles/.emacs.d/#type-break#
+/home/lucas/JavaScript Programs/exercism.io-problems/leap-year/JS/leap.spec.js
+/home/lucas/JavaScript Programs/exercism.io-problems/leap-year/JS/#leap.spec.js#
 /home/lucas/my-dotfiles/.emacs.d/#type-break#
 /home/lucas/my-dotfiles/.emacs.d/##type-break##
