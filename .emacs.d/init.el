@@ -76,9 +76,6 @@
 ;; Set Org4 mode as default mode for new buffers:
 (setq-default major-mode 'org-mode)
 
-;; Set Type Break mode on for all buffers (helps with ergonomics)
-(type-break-mode 1)
-
 ;; Set default fill to 79
 (set-fill-column 79)
 
