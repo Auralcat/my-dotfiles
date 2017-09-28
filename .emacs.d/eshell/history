@@ -12,3 +12,9 @@ irb
 pip search correios
 pip show correios
 clear
+cd ..
+tree borderify/
+man tree
+apt show tree
+sudo apt-get install tree
+tree borderify/

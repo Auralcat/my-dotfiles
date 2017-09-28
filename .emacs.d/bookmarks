@@ -4,7 +4,7 @@
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
 (("org-capture-last-stored"
  (filename . "~/file-bouncer/everything-bucket")
- (front-context-string . "** TODO Configur")
- (rear-context-string . "2017-09-28 Qui]\n")
- (position . 1260))
+ (front-context-string . "** TODO Embed wi")
+ (rear-context-string . "assets/main.css\n")
+ (position . 2110))
 )

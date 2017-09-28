@@ -70,6 +70,9 @@
 ;; Org-mode: bind org-capture to C-c c
 (global-set-key (kbd "\C-c c") (quote org-capture))
 
+;; Org-mode: bind org-pomodoro to C-c p
+(global-set-key (kbd "\C-c p") (quote org-pomodoro))
+
 ;;-----VARIABLES----------------------------------------------------------------
 ;; Flycheck adjustments
 
