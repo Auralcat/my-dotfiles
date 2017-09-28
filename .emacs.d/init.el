@@ -83,6 +83,9 @@
 (line-number-mode 1)
 (column-number-mode 1)
 
+;; Set desktop save mode - opens last saved session when you start Emacs.
+(desktop-save-mode 1)
+
 ;; Set autocomplete mode as default
 (auto-complete-mode t)
 

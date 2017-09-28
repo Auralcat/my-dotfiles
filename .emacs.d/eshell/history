@@ -9,3 +9,6 @@ irb
 clear
 newsbeuter
 irb
+pip search correios
+pip show correios
+clear
