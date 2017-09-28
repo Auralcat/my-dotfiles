@@ -2,19 +2,19 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Wed Sep 27 23:22:14 2017
+;; Created Thu Sep 28 11:42:25 2017
 ;; Desktop file format version 206
 ;; Emacs version 24.5.1
 
 ;; Global section:
-(setq desktop-saved-frameset [frameset 1 (22988 23766 401056 3000) (desktop . "206") "isendra@logos" nil nil ((((tty-type . "screen-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "unspecified-fg") (menu-bar-lines . 0) (background-color . "unspecified-bg") (font . "tty") (height . 36) (width . 136) (modeline . t) (unsplittable) (frameset--id . "6A18-4349-1D35-7117") (frameset--mini t) (minibuffer . t)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 136) (pixel-height . 35) (total-width . 136) (total-height . 35) (normal-height . 1.0) (normal-width . 1.0) (buffer "tasks.org" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins 3) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 43) (start . 1))))])
+(setq desktop-saved-frameset [frameset 1 (22989 2641 871885 597000) (desktop . "206") "isendra@logos" nil nil ((((tty-type . "screen-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "unspecified-fg") (menu-bar-lines . 0) (background-color . "unspecified-bg") (font . "tty") (height . 37) (width . 136) (modeline . t) (unsplittable) (frameset--id . "6A18-4349-1D35-7117") (frameset--mini t) (minibuffer . t)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 136) (pixel-height . 36) (total-width . 136) (total-height . 36) (normal-height . 1.0) (normal-width . 1.0) (buffer "tasks.org" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins 3) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 1) (start . 1))))])
 (setq desktop-missing-file-warning nil)
 (setq tags-file-name nil)
 (setq tags-table-list nil)
-(setq search-ring nil)
+(setq search-ring '("11" "foo" "H" "in" "zen" "css" "h1" "title"))
 (setq regexp-search-ring nil)
-(setq register-alist nil)
-(setq file-name-history '("~/file-bouncer/org-files/notes.org" "~/.emacs.d/" "~/file-bouncer/org-files/tasks.org" "~/.emacs.d/" "~/file-bouncer/org-files/outreachy.org"))
+(setq register-alist (list (list 82 "Unprintable entity" (let ((mk (make-marker))) (add-hook 'desktop-delay-hook `(lambda nil (set-marker ,mk ,1281 (get-buffer ,"main.css")))) mk))))
+(setq file-name-history '("~/file-bouncer/org-files/a-beginners-guide-to-html-&-css/styles-conference/assets/main.css" "~/file-bouncer/org-files/a-beginners-guide-to-html-&-css/styles-conference/assets" "~/file-bouncer/org-files/a-beginners-guide-to-html-&-css/styles-conference/" "~/file-bouncer/org-files/a-beginners-guide-to-html-&-css/styles-conference/index.html" "~/file-bouncer/org-files/a-beginners-guide-to-html-&-css/" "~/file-bouncer/org-files/a-beginners-guide-to-html-&-css/sample_page.html" "~/file-bouncer/org-files/notes.org" "~/.emacs.d/" "~/file-bouncer/org-files/tasks.org" "~/.emacs.d/" "~/file-bouncer/org-files/outreachy.org"))
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
 (desktop-create-buffer 206
@@ -22,11 +22,33 @@
   "tasks.org"
   'org-mode
   '(autopair-mode linum-mode)
-  43
-  '(3524 nil)
+  1
+  '(222 nil)
   nil
   nil
   '((buffer-file-coding-system . utf-8-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/home/lucas/file-bouncer/org-files/a-beginners-guide-to-html-&-css/styles-conference/index.html"
+  "index.html"
+  'html-mode
+  '(autopair-mode linum-mode)
+  1445
+  '(973 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix) (fill-column . 80)))
+
+(desktop-create-buffer 206
+  "/home/lucas/file-bouncer/org-files/a-beginners-guide-to-html-&-css/styles-conference/assets/main.css"
+  "main.css"
+  'css-mode
+  '(autopair-mode linum-mode)
+  1344
+  '(1263 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix) (fill-column . 80)))
 
 (desktop-create-buffer 206
   "/home/lucas/file-bouncer/org-files/outreachy.org"
@@ -46,6 +68,17 @@
   '(autopair-mode linum-mode)
   472
   '(472 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/home/lucas/file-bouncer/everything-bucket"
+  "everything-bucket"
+  'org-mode
+  '(autopair-mode linum-mode)
+  705
+  '(nil nil)
   nil
   nil
   '((buffer-file-coding-system . utf-8-unix) (truncate-lines . t)))
