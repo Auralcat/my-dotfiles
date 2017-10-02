@@ -2,139 +2,95 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Thu Sep 28 18:02:20 2017
+;; Created Sun Oct  1 17:30:47 2017
 ;; Desktop file format version 206
 ;; Emacs version 24.5.1
 
 ;; Global section:
-(setq desktop-saved-frameset [frameset 1 (22989 25436 436002 206000) (desktop . "206") "lucas@peralta" nil nil ((((tty-type . "xterm-256color") (tty . "/dev/tty") (display-type . color) (background-mode . light) (foreground-color . "unspecified-fg") (menu-bar-lines . 0) (background-color . "unspecified-bg") (font . "tty") (height . 44) (width . 170) (modeline . t) (unsplittable) (frameset--id . "F567-13E4-E20D-F4BC") (frameset--mini t) (minibuffer . t)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 170) (pixel-height . 43) (total-width . 170) (total-height . 43) (normal-height . 1.0) (normal-width . 1.0) (buffer "outreachy.org" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins 3) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 1) (start . 1))))])
+(setq desktop-saved-frameset [frameset 1 (22993 20599 871220 636000) (desktop . "206") "isendra@logos" nil nil ((((tty-type . "screen-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "unspecified-fg") (menu-bar-lines . 0) (background-color . "unspecified-bg") (font . "tty") (height . 36) (width . 136) (modeline . t) (unsplittable) (frameset--id . "F04D-305C-D6D6-3284") (frameset--mini t) (minibuffer . t)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 136) (pixel-height . 35) (total-width . 136) (total-height . 35) (normal-height . 1.0) (normal-width . 1.0) (buffer "tasks.org" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins 3) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 4984) (start . 1))))])
 (setq desktop-missing-file-warning nil)
 (setq tags-file-name nil)
 (setq tags-table-list nil)
-(setq search-ring '("add" "po" "11" "foo" "H" "in" "zen" "css" "h1" "title"))
+(setq search-ring '("font" "Å¡" "blog" "add" "po" "11" "foo" "H" "in" "zen" "css" "h1" "title"))
 (setq regexp-search-ring '("//.*"))
-(setq register-alist (list (list 82 "Unprintable entity" (let ((mk (make-marker))) (add-hook 'desktop-delay-hook `(lambda nil (set-marker ,mk ,1281 (get-buffer ,"main.css")))) mk))))
-(setq file-name-history '("~/file-bouncer/org-files/borderify/README.md" "~/file-bouncer/org-files/borderify/manifest_commented.json" "~/file-bouncer/org-files/borderify/manifest.json" "~/file-bouncer/org-files/borderify/" "~/file-bouncer/org-files/borderify/borderify.js" "~/file-bouncer/org-files/borderify/" "~/file-bouncer/org-files/borderify/manifest.json" "~/my-dotfiles/.emacs.d/init.el" "~/file-bouncer/org-files/outreachy.org" "~/file-bouncer/org-files/a-beginners-guide-to-html-&-css/styles-conference/assets/test.css" "~/file-bouncer/org-files/a-beginners-guide-to-html-&-css/styles-conference/speakers.html" "~/file-bouncer/org-files/a-beginners-guide-to-html-&-css/styles-conference/" "~/file-bouncer/org-files/a-beginners-guide-to-html-&-css/styles-conference/register.html" "~/file-bouncer/everything-bucket" "~/file-bouncer/org-files/a-beginners-guide-to-html-&-css/styles-conference/schedule.html" "~/file-bouncer/org-files/a-beginners-guide-to-html-&-css/styles-conference/venue.html" "~/file-bouncer/org-files/a-beginners-guide-to-html-&-css/styles-conference/assets/main.css" "~/file-bouncer/org-files/a-beginners-guide-to-html-&-css/styles-conference/assets" "~/file-bouncer/org-files/a-beginners-guide-to-html-&-css/styles-conference/" "~/file-bouncer/org-files/a-beginners-guide-to-html-&-css/styles-conference/index.html" "~/file-bouncer/org-files/a-beginners-guide-to-html-&-css/" "~/file-bouncer/org-files/a-beginners-guide-to-html-&-css/sample_page.html" "~/file-bouncer/org-files/notes.org" "~/.emacs.d/" "~/file-bouncer/org-files/tasks.org" "~/.emacs.d/" "~/file-bouncer/org-files/outreachy.org"))
+(setq register-alist (list (list 82 "Unprintable entity" (let ((mk (make-marker))) (add-hook 'desktop-delay-hook `(lambda nil (set-marker ,mk ,nil (get-buffer ," *temp*")))) mk))))
+(setq file-name-history '("~/file-bouncer/org-files/my-awesome-site/_posts/2017-09-30-reflexoes-reuniao-ong.md" "~/file-bouncer/org-files/my-awesome-site/_posts/2017-03-08-saindo-em-publico.md" "~/file-bouncer/org-files/my-awesome-site/_posts/2017-03-07-rands.md" "~/file-bouncer/org-files/my-awesome-site/_posts/2017-03-04-textao.md" "~/file-bouncer/org-files/my-awesome-site/_posts/" "~/file-bouncer/org-files/my-awesome-site/_posts/2017-03-01-baz.md" "~/file-bouncer/org-files/my-awesome-site/_posts/2017-03-01.md" "~/file-bouncer/org-files/my-awesome-site/_posts/2017-02-28-mais-reflexoes.md" "~/file-bouncer/org-files/my-awesome-site/_posts/2017-02-26-carnaval.md" "~/file-bouncer/org-files/my-awesome-site/_posts/2017-25-na-bad.md" "~/file-bouncer/org-files/my-awesome-site/_posts/2017-02-24-nome.md" "~/file-bouncer/org-files/my-awesome-site/_posts/2017-02-23-bar.md" "~/file-bouncer/org-files/my-awesome-site/_posts/2017-02-22-Revelations.md" "~/file-bouncer/org-files/my-awesome-site/_posts/2017-02-21-foo.md" "~/file-bouncer/org-files/my-awesome-site/_site/assets/main.css" "~/file-bouncer/everything-bucket" "~/file-bouncer/org-files/my-awesome-site/_posts/" "~/file-bouncer/org-files/my-awesome-site/" "~/file-bouncer/org-files/my-awesome-site/2017-02-17-Random.md" "~/file-bouncer/org-files/my-awesome-site/_posts/2017-02-16-Mude-este-titulo.md" "~/file-bouncer/org-files/my-awesome-site/_posts/2017-02-15-Me-assumindo-para-o-pai.md" "~/file-bouncer/org-files/my-awesome-site/_posts/2017-02-14-OlÅ·-Mundo!.md" "~/file-bouncer/org-files/my-awesome-site/telegram_posts.txt" "~/file-bouncer/org-files/my-awesome-site/_posts/2017-09-29-Hello-World.md" "~/file-bouncer/org-files/my-awesome-site/_site/" "~/file-bouncer/org-files/my-awesome-site/_config.yml" "~/file-bouncer/org-files/my-awesome-site/index.md" "~/file-bouncer/org-files/my-awesome-site/about.md" "~/file-bouncer/org-files/my-awesome-site/.gitignore" "~/file-bouncer/everything-bucket" "~/file-bouncer/org-files/my-awesome-site/_site/assets/main.css" "~/file-bouncer/org-files/my-awesome-site/_posts/2017-09-29-Hello-World.md" "~/file-bouncer/org-files/my-awesome-site/404.html" "~/file-bouncer/org-files/my-awesome-site/index.md" "~/file-bouncer/org-files/my-awesome-site/_site/jekyll/update/2017/09/29/welcome-to-jekyll.html" "~/file-bouncer/org-files/my-awesome-site/_posts/2017-09-29-Hello-World.md" "~/file-bouncer/org-files/my-awesome-site/_posts/2017-09-29-Hello World.md" "~/file-bouncer/org-files/borderify/README.md" "~/file-bouncer/org-files/borderify/manifest_commented.json" "~/file-bouncer/org-files/borderify/manifest.json" "~/file-bouncer/org-files/borderify/" "~/file-bouncer/org-files/borderify/borderify.js" "~/file-bouncer/org-files/borderify/" "~/file-bouncer/org-files/borderify/manifest.json" "~/my-dotfiles/.emacs.d/init.el" "~/file-bouncer/org-files/outreachy.org" "~/file-bouncer/org-files/a-beginners-guide-to-html-&-css/styles-conference/assets/test.css" "~/file-bouncer/org-files/a-beginners-guide-to-html-&-css/styles-conference/speakers.html" "~/file-bouncer/org-files/a-beginners-guide-to-html-&-css/styles-conference/" "~/file-bouncer/org-files/a-beginners-guide-to-html-&-css/styles-conference/register.html" "~/file-bouncer/everything-bucket" "~/file-bouncer/org-files/a-beginners-guide-to-html-&-css/styles-conference/schedule.html" "~/file-bouncer/org-files/a-beginners-guide-to-html-&-css/styles-conference/venue.html" "~/file-bouncer/org-files/a-beginners-guide-to-html-&-css/styles-conference/assets/main.css" "~/file-bouncer/org-files/a-beginners-guide-to-html-&-css/styles-conference/assets" "~/file-bouncer/org-files/a-beginners-guide-to-html-&-css/styles-conference/" "~/file-bouncer/org-files/a-beginners-guide-to-html-&-css/styles-conference/index.html" "~/file-bouncer/org-files/a-beginners-guide-to-html-&-css/" "~/file-bouncer/org-files/a-beginners-guide-to-html-&-css/sample_page.html" "~/file-bouncer/org-files/notes.org" "~/.emacs.d/" "~/file-bouncer/org-files/tasks.org" "~/.emacs.d/" "~/file-bouncer/org-files/outreachy.org"))
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
+(desktop-create-buffer 206
+  "/home/lucas/file-bouncer/org-files/tasks.org"
+  "tasks.org"
+  'org-mode
+  '(autopair-mode linum-mode)
+  4984
+  '(6397 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix) (fill-column . 80) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/home/lucas/file-bouncer/org-files/my-awesome-site/telegram_posts.txt"
+  "telegram_posts.txt"
+  'text-mode
+  '(autopair-mode linum-mode)
+  32906
+  '(32906 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix) (fill-column . 80)))
+
+(desktop-create-buffer 206
+  "/home/lucas/file-bouncer/everything-bucket"
+  "everything-bucket"
+  'org-mode
+  '(autopair-mode linum-mode)
+  2181
+  '(1343 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/home/lucas/file-bouncer/org-files/my-awesome-site/_posts/2017-09-29-Hello-World.md"
+  "2017-09-29-Hello-World.md"
+  'org-mode
+  '(autopair-mode linum-mode)
+  219
+  '(1 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix) (fill-column . 80) (truncate-lines . t)))
+
 (desktop-create-buffer 206
   "/home/lucas/file-bouncer/org-files/outreachy.org"
   "outreachy.org"
   'org-mode
   '(autopair-mode linum-mode)
-  1
+  6143
   '(4647 nil)
   nil
   nil
   '((buffer-file-coding-system . utf-8-unix) (fill-column . 80) (truncate-lines . t)))
 
 (desktop-create-buffer 206
-  "/home/lucas/file-bouncer/org-files/borderify/manifest.json"
-  "manifest.json"
-  'js-mode
-  '(autopair-mode linum-mode)
-  76
-  '(1 nil)
-  nil
-  nil
-  '((buffer-file-coding-system . utf-8-unix)))
-
-(desktop-create-buffer 206
-  "/home/lucas/file-bouncer/org-files/tasks.org"
-  "tasks.org"
-  'org-mode
-  '(autopair-mode linum-mode)
-  7432
-  '(1695 nil)
-  nil
-  nil
-  '((buffer-file-coding-system . utf-8-unix) (fill-column . 80) (truncate-lines . t)))
-
-(desktop-create-buffer 206
-  "/home/lucas/file-bouncer/org-files/a-beginners-guide-to-html-&-css/styles-conference/speakers.html"
-  "speakers.html"
-  'html-mode
-  '(autopair-mode linum-mode)
-  474
-  '(457 nil)
-  nil
-  nil
-  '((buffer-file-coding-system . utf-8-unix)))
-
-(desktop-create-buffer 206
-  "/home/lucas/file-bouncer/org-files/a-beginners-guide-to-html-&-css/styles-conference/assets/test.css"
-  "test.css"
-  'css-mode
-  '(autopair-mode linum-mode)
-  163
-  '(116 nil)
-  nil
-  nil
-  '((buffer-file-coding-system . utf-8-unix)))
-
-(desktop-create-buffer 206
-  "/home/lucas/file-bouncer/org-files/a-beginners-guide-to-html-&-css/styles-conference/register.html"
-  "register.html"
-  'html-mode
-  '(autopair-mode linum-mode)
-  148
-  '(1 nil)
-  nil
-  nil
-  '((buffer-file-coding-system . utf-8-unix)))
-
-(desktop-create-buffer 206
-  "/home/lucas/file-bouncer/org-files/a-beginners-guide-to-html-&-css/styles-conference/schedule.html"
-  "schedule.html"
-  'html-mode
-  '(autopair-mode linum-mode)
-  155
-  '(173 nil)
-  nil
-  nil
-  '((buffer-file-coding-system . utf-8-unix)))
-
-(desktop-create-buffer 206
-  "/home/lucas/file-bouncer/org-files/a-beginners-guide-to-html-&-css/styles-conference/index.html"
-  "index.html"
-  'html-mode
-  '(autopair-mode linum-mode)
-  2037
-  '(2037 nil)
-  nil
-  nil
-  '((buffer-file-coding-system . utf-8-unix) (fill-column . 80)))
-
-(desktop-create-buffer 206
-  "/home/lucas/file-bouncer/org-files/a-beginners-guide-to-html-&-css/styles-conference/venue.html"
-  "venue.html"
-  'sgml-mode
-  '(autopair-mode linum-mode)
-  256
-  '(293 nil)
-  nil
-  nil
-  '((buffer-file-coding-system . utf-8-unix)))
-
-(desktop-create-buffer 206
-  "/home/lucas/file-bouncer/org-files/a-beginners-guide-to-html-&-css/styles-conference/assets/main.css"
-  "main.css"
-  'css-mode
-  '(autopair-mode linum-mode)
-  1344
-  '(1263 nil)
-  nil
-  nil
-  '((buffer-file-coding-system . utf-8-unix) (fill-column . 80)))
-
-(desktop-create-buffer 206
   "/home/lucas/file-bouncer/org-files/notes.org"
   "notes.org"
   'org-mode
   '(autopair-mode linum-mode)
-  472
+  1
   '(472 nil)
   nil
   nil
   '((buffer-file-coding-system . utf-8-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/home/lucas/file-bouncer/org-files/my-awesome-site/_posts/2017-02-14-OlÅ·-Mundo!.md"
+  "2017-02-14-OlÅ·-Mundo!.md"
+  'snippet-mode
+  '(autopair-mode linum-mode)
+  1
+  '(123 t)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix)))
 

@@ -18,3 +18,9 @@ man tree
 apt show tree
 sudo apt-get install tree
 tree borderify/
+gem install jekyll bundler
+sudo gem install jekyll bundler
+clear
+jekyll new my-awesome-site
+cd my-awesome-site/
+bundle exec jekyll serve
