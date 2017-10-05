@@ -45,6 +45,9 @@
 ;; Setup the program multi-term will need
 (setq multi-term-program "/bin/bash")
 
+;; js-comint - Run JS in the shell, like Nodejs.
+(require 'js-comint)
+
 ;;-----KEYBINDINGS--------------------------------------------------------------
 ;; Remapping the help hotkey so it doesn't clash with Unix backspace.
 ;; Whenever you want to call help you can use M-x help as well. F1 works too.
@@ -72,6 +75,16 @@
 
 ;; Org-mode: bind org-pomodoro to C-c p
 (global-set-key (kbd "\C-c p") (quote org-pomodoro))
+
+;; Javascript: Pass buffer to Node.js
+(add-hook 'js2-mode-hook ;; guessing
+  '(lambda ()
+     (local-set-key "\C-c \C-r" (quote shell-command-on-region 1 4692 "nodejs" nil nil nil t))))
+
+;; SGML mode (AKA HTML mode) - Open buffer in browser
+(add-hook 'sgml-mode-hook
+  '(lambda ()
+     (local-set-key "\C-c\C-o" (quote browse-url-of-buffer))))
 
 ;;-----VARIABLES----------------------------------------------------------------
 ;; Flycheck adjustments

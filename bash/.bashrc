@@ -128,4 +128,7 @@ export EDITOR='vim'
 source ~/.bash_startup
 #source ~/.bash_profile # Temporary fix, needs to be loaded first to override aliases here
 source ~/.bash_aliases # These are the correct aliases
-PATH=/home/lucas/bin:/home/lucas/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/lucas/bin:/snap/bin:/home/lucas/bin:~/opt/android/tools
+
+# CORRECT PATH, UNCOMMENT IF THINGS GO BAD
+# PATH=/home/lucas/bin:/home/lucas/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/lucas/bin:/snap/bin:/home/lucas/bin:~/opt/android/tools
+PATH=/home/lucas/bin:/home/lucas/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/home/lucas/bin:/snap/bin:/home/lucas/bin:~/opt/android/tools:$HOME/.cargo/bin
