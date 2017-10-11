@@ -51,7 +51,7 @@
 ;;-----KEYBINDINGS--------------------------------------------------------------
 ;; Remapping the help hotkey so it doesn't clash with Unix backspace.
 ;; Whenever you want to call help you can use M-x help as well. F1 works too.
-(keyboard-translate ?\C-h ?\C-?)
+(define-key key-translation-map [?\C-h] [?\C-?])
 
 ;; Remove the menu bar in terminal mode
 (when (not (display-graphic-p))
@@ -89,8 +89,11 @@
 ;;-----VARIABLES----------------------------------------------------------------
 ;; Flycheck adjustments
 
-;; Set Org4 mode as default mode for new buffers:
+;; Set Org mode as default mode for new buffers:
 (setq-default major-mode 'org-mode)
+
+;; Enable auto-fill mode by default
+(auto-fill-mode 1)
 
 ;; Set default fill to 79
 (set-fill-column 79)
