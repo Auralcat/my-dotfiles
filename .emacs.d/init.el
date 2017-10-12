@@ -48,6 +48,16 @@
 ;; js-comint - Run JS in the shell, like Nodejs.
 (require 'js-comint)
 
+;; Enhanced Ruby Mode
+(add-to-list 'auto-mode-alist
+                          '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'"
+                            . enh-ruby-mode))
+
+;; Ruby tools: Goodies for ruby-mode
+(require 'ruby-tools)
+;; Start ruby-tools with Enhanced Ruby mode
+(add-hook 'enh-ruby-mode ruby-tools 1)
+
 ;;-----KEYBINDINGS--------------------------------------------------------------
 ;; Remapping the help hotkey so it doesn't clash with Unix backspace.
 ;; Whenever you want to call help you can use M-x help as well. F1 works too.
