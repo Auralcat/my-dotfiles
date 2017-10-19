@@ -42,6 +42,9 @@
 ;; Multi-term - Run multiple terminals and interface with Emacs commands
 (require 'multi-term)
 
+;; Pug-mode - Work with .pug files
+(require 'pug-mode)
+
 ;; Setup the program multi-term will need
 (setq multi-term-program "/bin/bash")
 
@@ -55,8 +58,9 @@
 
 ;; Ruby tools: Goodies for ruby-mode
 (require 'ruby-tools)
+
 ;; Start ruby-tools with Enhanced Ruby mode
-(add-hook 'enh-ruby-mode ruby-tools 1)
+;; (add-hook 'enh-ruby-mode ruby-tools t)
 
 ;;-----KEYBINDINGS--------------------------------------------------------------
 ;; Remapping the help hotkey so it doesn't clash with Unix backspace.
@@ -80,6 +84,9 @@
 
 (global-set-key (kbd "C-a") (quote back-to-indentation-or-beginning))
 
+;; Hippie-Expand: change key to M-SPC
+(global-set-key "\M- " 'hippie-expand)
+
 ;; Org-mode: bind org-capture to C-c c
 (global-set-key (kbd "\C-c c") (quote org-capture))
 
@@ -97,7 +104,6 @@
      (local-set-key "\C-c\C-o" (quote browse-url-of-buffer))))
 
 ;;-----VARIABLES----------------------------------------------------------------
-;; Flycheck adjustments
 
 ;; Set Org mode as default mode for new buffers:
 (setq-default major-mode 'org-mode)
@@ -130,7 +136,14 @@
 
 ;; Python indentation
 (setq python-indent 4)
-(put 'upcase-region 'disabled nil)
+
+;; Pug-mode: use 2 spaces for indentation (DEFAULT: 4)
+(setq pug-tab-width 2)
+
+;; Pug-mode: call pug-compile whenever a .pug file is saved.
+;; Compiles ugly HTML by default, use `pug -P <file_name>`
+;; if you want pretty instead
+(add-hook 'after-save-hook #'pug-compile)
 
 ;; Python: use python3 as default shell interpreter
 (setq python-shell-interpreter "python3")

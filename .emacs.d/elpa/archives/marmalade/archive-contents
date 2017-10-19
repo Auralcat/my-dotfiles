@@ -3568,7 +3568,7 @@
 		(1 4)))
 	      "View xkcd from Emacs" single])
  (emacs-sounds .
-	       [(20161211 1530)
+	       [(20171017 1215)
 		((sound-wav
 		  (20160725 724)))
 		"Sound effects for Emacs" single])
@@ -3922,13 +3922,17 @@
        [(2 11 0)
 	nil "A modern list library for Emacs" single])
  (dart-mode .
-	    [(0 14)
-	     ((cl-lib
+	    [(1 0 0)
+	     ((emacs
+	       (24 5))
+	      (cl-lib
 	       (0 5))
 	      (dash
 	       (2 10 0))
 	      (flycheck
-	       (0 23)))
+	       (0 23))
+	      (s
+	       (1 11)))
 	     "Major mode for editing Dart files" single])
  (d-mode .
 	 [(2 0 4)
