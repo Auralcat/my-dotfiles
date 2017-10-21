@@ -13,6 +13,12 @@
 ;; I'm too lazy to type "yes" or "no"
 (fset 'yes-or-no-p 'y-or-n-p)
 
+;;-----CUSTOM-FUNCTIONS---------------------------------------------------------
+;; Magit: porting the 'commit' alias in my .bash_aliases
+(defun magit-add-all-commit-and-push()
+  (magit-stage-modified)
+  (magit-commit)
+  (magit-push))
 ;;-----PACKAGES-----------------------------------------------------------------
 ;; Package sources
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
