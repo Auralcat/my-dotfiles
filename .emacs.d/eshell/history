@@ -25,3 +25,13 @@ jekyll new my-awesome-site
 cd my-awesome-site/
 bundle exec jekyll serve
 which pug
+sudo gem install crypt
+ls
+ruby encrypt.rb encrypt_me.txt 
+tar -xzvf
+tar --usage
+ruby encrypt.rb encrypt_me.txt 
+ruby encrypt.rb encrypt_me.txt 
+ruby encrypt.rb encrypt_me.txt 
+ruby encrypt.rb encrypt_me.txt
+ruby encrypt.rb encrypt_me.txt password

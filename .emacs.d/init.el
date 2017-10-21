@@ -35,9 +35,7 @@
 (autopair-global-mode) ;; enable autopair in all buffers
 
 ;; Enable improved Javascript mode:
-(autoload 'js3-mode "js3" nil t)
-(add-to-list 'auto-mode-alist '("\\.js$" . js3-mode))   (autoload 'js3-mode "js3" nil t)
-(add-to-list 'auto-mode-alist '("\\.js$" . js3-mode))
+(autoload 'js2-mode "js2" nil t)
 
 ;; Multi-term - Run multiple terminals and interface with Emacs commands
 (require 'multi-term)
@@ -140,10 +138,17 @@
 ;; Pug-mode: use 2 spaces for indentation (DEFAULT: 4)
 (setq pug-tab-width 2)
 
+;; Js2-mode: set syntax highlight level
+(setq js2-highlight-level 3)
+
 ;; Pug-mode: call pug-compile whenever a .pug file is saved.
 ;; Compiles ugly HTML by default, use `pug -P <file_name>`
 ;; if you want pretty instead
-(add-hook 'after-save-hook #'pug-compile)
+(defun pug-compile-saved-file()
+  (when (and (stringp buffer-file-name)
+             (string-match "\\.pug\\'" buffer-file-name))
+     (pug-compile)))
+(add-hook 'after-save-hook 'pug-compile-saved-file)
 
 ;; Python: use python3 as default shell interpreter
 (setq python-shell-interpreter "python3")
