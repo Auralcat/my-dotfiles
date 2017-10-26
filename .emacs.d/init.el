@@ -147,6 +147,7 @@
 ;; Pug-mode: call pug-compile whenever a .pug file is saved.
 ;; Compiles ugly HTML by default, use `pug -P <file_name>`
 ;; if you want pretty instead
+
 (defun pug-compile-saved-file()
   (when (and (stringp buffer-file-name)
              (string-match "\\.pug\\'" buffer-file-name))
@@ -155,6 +156,16 @@
 
 ;; Python: use python3 as default shell interpreter
 (setq python-shell-interpreter "python3")
+
+;;-TWITTERING-MODE--------------------------------------------------------------
+;; Adjust update interval in seconds
+(setq twittering-time-interval 3600)
+
+;; Display icons (if applicable)
+(setq twittering-icon-mode t)
+
+;; Use a master password so you don't have to ask for authentication every time
+(setq twittering-use-master-password t)
 
 ;;-----CUSTOMIZATION-THROUGH-M-x-CUSTOMIZE--------------------------------------
 (custom-set-variables

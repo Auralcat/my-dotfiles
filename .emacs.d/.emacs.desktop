@@ -2,42 +2,53 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Sat Oct 21 20:49:32 2017
+;; Created Thu Oct 26 11:19:22 2017
 ;; Desktop file format version 206
 ;; Emacs version 24.5.1
 
 ;; Global section:
-(setq desktop-saved-frameset [frameset 1 (23019 52988 669914 122000) (desktop . "206") "isendra@logos" nil nil ((((tty-type . "screen-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "unspecified-fg") (menu-bar-lines . 0) (background-color . "unspecified-bg") (font . "tty") (height . 37) (width . 136) (modeline . t) (unsplittable) (frameset--id . "84D3-0A55-7B51-8422") (frameset--mini t) (minibuffer . t)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 136) (pixel-height . 36) (total-width . 136) (total-height . 36) (normal-height . 1.0) (normal-width . 1.0) (buffer "init.el" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins 3) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 1) (start . 1))))])
+(setq desktop-saved-frameset [frameset 1 (23025 57562 238411 981000) (desktop . "206") "isendra@logos" nil nil ((((tty-type . "screen-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "unspecified-fg") (menu-bar-lines . 0) (background-color . "unspecified-bg") (font . "tty") (height . 32) (width . 124) (modeline . t) (unsplittable) (frameset--id . "1537-8267-6F4F-9517") (frameset--mini t) (minibuffer . t)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 124) (pixel-height . 31) (total-width . 124) (total-height . 31) (normal-height . 1.0) (normal-width . 1.0) (buffer "rubyScratch" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins 1) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 1) (start . 1))))])
 (setq desktop-missing-file-warning nil)
 (setq tags-file-name nil)
 (setq tags-table-list nil)
-(setq search-ring '("pus" "t]" "hook" "pug-mode-hook" "hook" "hooj" "js-" "js" "js2-" "VA" "js" "js2" "\"-" "a.#" "pug" "require"))
+(setq search-ring '("asc" "rcirc" "slack" ".soi" "," "pus" "t]" "hook" "pug-mode-hook" "hook" "hooj" "js-" "js" "js2-" "VA" "js"))
 (setq regexp-search-ring '("js2\n" "//.*"))
 (setq register-alist (list (list 49 '(frame-configuration ("Unprintable entity" ((buried-buffer-list "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity") (buffer-list "Unprintable entity" "Unprintable entity") (minibuffer . "Unprintable entity") (name . "F1") (unsplittable) (modeline . t) (width . 136) (height . 36) (font . "tty") (background-color . "unspecified-bg") (menu-bar-lines . 0) (foreground-color . "unspecified-fg") (background-mode . dark) (display-type . color) (tty . "/dev/tty") (tty-type . "screen-256color")) "Unprintable entity")) (let ((mk (make-marker))) (add-hook 'desktop-delay-hook `(lambda nil (set-marker ,mk ,nil (get-buffer ," *temp*")))) mk)) (list 82 "Unprintable entity" (let ((mk (make-marker))) (add-hook 'desktop-delay-hook `(lambda nil (set-marker ,mk ,nil (get-buffer ," *temp*")))) mk))))
-(setq file-name-history '("~/emacs-pug-mode/README.md" "~/emacs-pug-mode" "~/my-dotfiles/.emacs.d/test.js" "~/JavascriptPrograms/FreeCodeCamp/RandomQuote/sprocket.js" "~/JavascriptPrograms/FreeCodeCamp/RandomQuote/main.css" "~/JavascriptPrograms/FreeCodeCamp/RandomQuote/index.html" "~/my-dotfiles/.emacs.d/init.el" "~/JavascriptPrograms/FreeCodeCamp/RandomQuote/" "~/JavascriptPrograms/FreeCodeCamp/RandomQuote/index.pug" "~/Ruby Scripts/sketches/decrypt.rb" "~/Ruby Scripts/sketches/test.rb" "~/Ruby Scripts/sketches/encrypt.rb" "~/Ruby Scripts/sketches/random.rb" "~/JavascriptPrograms/NodeJS/Promises/promise.js" "~/JavascriptPrograms/NodeJS/Promises/readfile_async2.js" "~/JavascriptPrograms/NodeJS/Promises/readfile_async.js" "~/JavascriptPrograms/NodeJS/Promises/text.txt" "~/JavascriptPrograms/NodeJS/Promises/" "~/JavascriptPrograms/NodeJS/Promises/readfile_sync.js" "~/JavascriptPrograms/FreeCodeCamp/Portfolio/index.pug" "~/TestFolder/" "~/TestFolder/test.pug" "~/.nvm/versions/node/v6.11.4/lib/node_modules/pug-cli/index.js" "index.js:246" "~/JavaScript Programs/FreeCodeCamp/Portfolio/style.css" "~/JavaScript Programs/FreeCodeCamp/Portfolio/index.pug" "~/my-dotfiles/.emacs.d/init.el" "~/file-bouncer/org-files/index.pug" "~/JavaScript Programs/FreeCodeCamp/Portfolio/main.css" "~/JavaScript Programs/FreeCodeCamp/Portfolio/test.html" "~/JavaScript Programs/FreeCodeCamp/Portfolio/index.html" "~/JavaScript Programs/FreeCodeCamp/Portfolio/assets/" "~/JavaScript Programs/FreeCodeCamp/Portfolio/assets/main.css" "~/JavaScript Programs/FreeCodeCamp/Portfolio/index.html" "~/JavaScript Programs/FreeCodeCamp/Portfolio/" "~/JavaScript Programs/FreeCodeCamp/Portfolio/index.pug" "~/Ruby Scripts/sketch.rb" "~/my-dotfiles/.emacs.d/init.el" "~/Ruby Scripts/sketches/generators.rb" "~/" "~/site-development/" "~/file-bouncer/blog_drafts/2017-10-08-learning-javascript.md" "~/my-dotfiles/.emacs.d/init.el" "~/auralcat.github.io/_drafts/2017-10-08-learning-javascript.md" "~/JavaScript Programs/Algorithms/range.js" "~/JavaScript Programs/Sketches/profile_lookup.js" "~/JavaScript Programs/Sketches/" "~/file-bouncer/org-files/tasks.org" "~/site-development/assets/" "~/site-development/assets/main.css" "~/site-development/" "~/site-development/hello.html" "~/JavaScript Programs/Sketches/practical.js" "~/my-dotfiles/.emacs.d/init.el" "~/JavaScript Programs/Sketches/cats.js" "~/JavaScript Programs/Sketches/foo.js" "~/JavaScript Programs/Sketches/fizzbuzz.js" "~/JavaScript Programs/Sketches/random.js" "~/my-dotfiles/.emacs.d/init.el" "~/JavaScript Programs/Sketches/random.js" "~/JavaScript Programs/Sketches/web_random.html" "~/my-dotfiles/.emacs.d/init.el" "~/JavaScript Programs/Sketches/random.js" "~/file-bouncer/org-files/outreachy.org" "~/my-dotfiles/.emacs.d/init.el" "~/JavaScript Programs/Sketches/random.js" "~/JavaScript Programs/Sketches/web_random.html" "~/auralcat.github.io/_posts/2017-10-02-teste-tags.md" "~/auralcat.github.io/_layouts/archives.html" "~/auralcat.github.io/_config.yml" "~/auralcat.github.io/Gemfile" "~/auralcat.github.io/_posts/2017-10-02-welcome-to-jekyll.markdown" "~/auralcat.github.io/_posts/2017-10-02-teste-tags.md" "~/auralcat.github.io/tags/transiÅÁÅ„o/" "~/auralcat.github.io/tags/transiÅÁÅ„o/index.html" "~/auralcat.github.io/_layouts/tagpage.html" "~/auralcat.github.io/" "~/auralcat.github.io/_site/_layouts/" "~/auralcat.github.io/_site/_layouts/index.html" "~/auralcat.github.io/_config.yml" "~/auralcat.github.io/about.md" "~/file-bouncer/org-files/my-awesome-site/_posts/" "~/file-bouncer/org-files/my-awesome-site/_posts/2017-10-04-how-I-got-into-linux.md" "~/file-bouncer/org-files/my-awesome-site/_posts/2017-10-02-hello-world.md" "~/file-bouncer/org-files/my-awesome-site/_posts/2017-02-14-OlÅ·-Mundo!.md" "~/file-bouncer/org-files/blog.org" "~/file-bouncer/org-files/my-awesome-site/_posts/2017-09-30-reflexoes-reuniao-ong.md" "~/file-bouncer/org-files/my-awesome-site/_posts/2017-03-08-saindo-em-publico.md" "~/file-bouncer/org-files/my-awesome-site/_posts/2017-03-07-rands.md" "~/file-bouncer/org-files/my-awesome-site/_posts/2017-03-04-textao.md" "~/file-bouncer/org-files/my-awesome-site/_posts/" "~/file-bouncer/org-files/my-awesome-site/_posts/2017-03-01-baz.md" "~/file-bouncer/org-files/my-awesome-site/_posts/2017-03-01.md" "~/file-bouncer/org-files/my-awesome-site/_posts/2017-02-28-mais-reflexoes.md" "~/file-bouncer/org-files/my-awesome-site/_posts/2017-02-26-carnaval.md" "~/file-bouncer/org-files/my-awesome-site/_posts/2017-25-na-bad.md" "~/file-bouncer/org-files/my-awesome-site/_posts/2017-02-24-nome.md" "~/file-bouncer/org-files/my-awesome-site/_posts/2017-02-23-bar.md" "~/file-bouncer/org-files/my-awesome-site/_posts/2017-02-22-Revelations.md"))
+(setq file-name-history '("~/file-bouncer/org-files/emprego.org" "~/JavascriptPrograms/Algorithms/kaprekar_routine.js" "~/my-dotfiles/.emacs.d/" "~/JavascriptPrograms/Algorithms/flatten_array.js" "~/Ruby Scripts/sketches/kaprekar.rb" "~/dev-practice/README.md" "~/emacs-pug-mode/README.md" "~/emacs-pug-mode" "~/my-dotfiles/.emacs.d/test.js" "~/JavascriptPrograms/FreeCodeCamp/RandomQuote/sprocket.js" "~/JavascriptPrograms/FreeCodeCamp/RandomQuote/main.css" "~/JavascriptPrograms/FreeCodeCamp/RandomQuote/index.html" "~/my-dotfiles/.emacs.d/init.el" "~/JavascriptPrograms/FreeCodeCamp/RandomQuote/" "~/JavascriptPrograms/FreeCodeCamp/RandomQuote/index.pug" "~/Ruby Scripts/sketches/decrypt.rb" "~/Ruby Scripts/sketches/test.rb" "~/Ruby Scripts/sketches/encrypt.rb" "~/Ruby Scripts/sketches/random.rb" "~/JavascriptPrograms/NodeJS/Promises/promise.js" "~/JavascriptPrograms/NodeJS/Promises/readfile_async2.js" "~/JavascriptPrograms/NodeJS/Promises/readfile_async.js" "~/JavascriptPrograms/NodeJS/Promises/text.txt" "~/JavascriptPrograms/NodeJS/Promises/" "~/JavascriptPrograms/NodeJS/Promises/readfile_sync.js" "~/JavascriptPrograms/FreeCodeCamp/Portfolio/index.pug" "~/TestFolder/" "~/TestFolder/test.pug" "~/.nvm/versions/node/v6.11.4/lib/node_modules/pug-cli/index.js" "index.js:246" "~/JavaScript Programs/FreeCodeCamp/Portfolio/style.css" "~/JavaScript Programs/FreeCodeCamp/Portfolio/index.pug" "~/my-dotfiles/.emacs.d/init.el" "~/file-bouncer/org-files/index.pug" "~/JavaScript Programs/FreeCodeCamp/Portfolio/main.css" "~/JavaScript Programs/FreeCodeCamp/Portfolio/test.html" "~/JavaScript Programs/FreeCodeCamp/Portfolio/index.html" "~/JavaScript Programs/FreeCodeCamp/Portfolio/assets/" "~/JavaScript Programs/FreeCodeCamp/Portfolio/assets/main.css" "~/JavaScript Programs/FreeCodeCamp/Portfolio/index.html" "~/JavaScript Programs/FreeCodeCamp/Portfolio/" "~/JavaScript Programs/FreeCodeCamp/Portfolio/index.pug" "~/Ruby Scripts/sketch.rb" "~/my-dotfiles/.emacs.d/init.el" "~/Ruby Scripts/sketches/generators.rb" "~/" "~/site-development/" "~/file-bouncer/blog_drafts/2017-10-08-learning-javascript.md" "~/my-dotfiles/.emacs.d/init.el" "~/auralcat.github.io/_drafts/2017-10-08-learning-javascript.md" "~/JavaScript Programs/Algorithms/range.js" "~/JavaScript Programs/Sketches/profile_lookup.js" "~/JavaScript Programs/Sketches/" "~/file-bouncer/org-files/tasks.org" "~/site-development/assets/" "~/site-development/assets/main.css" "~/site-development/" "~/site-development/hello.html" "~/JavaScript Programs/Sketches/practical.js" "~/my-dotfiles/.emacs.d/init.el" "~/JavaScript Programs/Sketches/cats.js" "~/JavaScript Programs/Sketches/foo.js" "~/JavaScript Programs/Sketches/fizzbuzz.js" "~/JavaScript Programs/Sketches/random.js" "~/my-dotfiles/.emacs.d/init.el" "~/JavaScript Programs/Sketches/random.js" "~/JavaScript Programs/Sketches/web_random.html" "~/my-dotfiles/.emacs.d/init.el" "~/JavaScript Programs/Sketches/random.js" "~/file-bouncer/org-files/outreachy.org" "~/my-dotfiles/.emacs.d/init.el" "~/JavaScript Programs/Sketches/random.js" "~/JavaScript Programs/Sketches/web_random.html" "~/auralcat.github.io/_posts/2017-10-02-teste-tags.md" "~/auralcat.github.io/_layouts/archives.html" "~/auralcat.github.io/_config.yml" "~/auralcat.github.io/Gemfile" "~/auralcat.github.io/_posts/2017-10-02-welcome-to-jekyll.markdown" "~/auralcat.github.io/_posts/2017-10-02-teste-tags.md" "~/auralcat.github.io/tags/transiÅÁÅ„o/" "~/auralcat.github.io/tags/transiÅÁÅ„o/index.html" "~/auralcat.github.io/_layouts/tagpage.html" "~/auralcat.github.io/" "~/auralcat.github.io/_site/_layouts/" "~/auralcat.github.io/_site/_layouts/index.html" "~/auralcat.github.io/_config.yml" "~/auralcat.github.io/about.md" "~/file-bouncer/org-files/my-awesome-site/_posts/" "~/file-bouncer/org-files/my-awesome-site/_posts/2017-10-04-how-I-got-into-linux.md" "~/file-bouncer/org-files/my-awesome-site/_posts/2017-10-02-hello-world.md" "~/file-bouncer/org-files/my-awesome-site/_posts/2017-02-14-OlÅ·-Mundo!.md" "~/file-bouncer/org-files/blog.org" "~/file-bouncer/org-files/my-awesome-site/_posts/2017-09-30-reflexoes-reuniao-ong.md" "~/file-bouncer/org-files/my-awesome-site/_posts/2017-03-08-saindo-em-publico.md" "~/file-bouncer/org-files/my-awesome-site/_posts/2017-03-07-rands.md" "~/file-bouncer/org-files/my-awesome-site/_posts/2017-03-04-textao.md" "~/file-bouncer/org-files/my-awesome-site/_posts/" "~/file-bouncer/org-files/my-awesome-site/_posts/2017-03-01-baz.md" "~/file-bouncer/org-files/my-awesome-site/_posts/2017-03-01.md" "~/file-bouncer/org-files/my-awesome-site/_posts/2017-02-28-mais-reflexoes.md"))
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
+(desktop-create-buffer 206
+  "/home/lucas/file-bouncer/org-files/emprego.org"
+  "emprego.org"
+  'org-mode
+  '(autopair-mode linum-mode)
+  1224
+  '(1222 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/home/lucas/JavascriptPrograms/Algorithms/kaprekar_routine.js"
+  "kaprekar_routine.js"
+  'js-mode
+  '(autopair-mode linum-mode)
+  227
+  '(1067 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix)))
+
 (desktop-create-buffer 206
   "/home/lucas/my-dotfiles/.emacs.d/init.el"
   "init.el"
   'emacs-lisp-mode
   '(auto-fill-mode autopair-mode auto-complete-mode linum-mode auto-revert-mode)
-  1
-  '(3170 nil)
+  5327
+  '(4689 nil)
   nil
   nil
   '((buffer-file-coding-system . prefer-utf-8-unix) (fill-column . 79)))
-
-(desktop-create-buffer 206
-  "/home/lucas/emacs-pug-mode/README.md"
-  "README.md"
-  'org-mode
-  '(autopair-mode linum-mode auto-revert-mode)
-  1652
-  '(1654 nil)
-  nil
-  nil
-  '((buffer-file-coding-system . utf-8-unix) (truncate-lines . t)))
 
 (desktop-create-buffer 206
   "/home/lucas/JavascriptPrograms/FreeCodeCamp/RandomQuote/index.pug"
@@ -49,28 +60,6 @@
   nil
   nil
   '((buffer-file-coding-system . utf-8-unix)))
-
-(desktop-create-buffer 206
-  "/home/lucas/my-dotfiles/.emacs.d/test.js"
-  "test.js"
-  'js-mode
-  '(autopair-mode linum-mode)
-  527
-  '(491 nil)
-  nil
-  nil
-  '((buffer-file-coding-system . utf-8-unix)))
-
-(desktop-create-buffer 206
-  "/home/lucas/my-dotfiles/.emacs.d/elpa/pug-mode-1.0.7/pug-mode.el"
-  "pug-mode.el"
-  'emacs-lisp-mode
-  '(autopair-mode linum-mode auto-revert-mode)
-  1
-  '(9208 nil)
-  nil
-  nil
-  '((buffer-file-coding-system . prefer-utf-8-unix)))
 
 (desktop-create-buffer 206
   "/home/lucas/JavascriptPrograms/FreeCodeCamp/RandomQuote/main.css"
@@ -93,17 +82,6 @@
   t
   nil
   '((buffer-file-coding-system . no-conversion)))
-
-(desktop-create-buffer 206
-  "/home/lucas/Ruby Scripts/sketches/test.rb"
-  "test.rb"
-  'enh-ruby-mode
-  '(abbrev-mode autopair-mode linum-mode inf-ruby-minor-mode)
-  120
-  '(120 nil)
-  nil
-  nil
-  '((indent-tabs-mode) (buffer-file-coding-system . utf-8-unix)))
 
 (desktop-create-buffer 206
   "/home/lucas/file-bouncer/org-files/tasks.org"
