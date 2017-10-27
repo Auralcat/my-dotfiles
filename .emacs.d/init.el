@@ -122,9 +122,6 @@
 ;; Set desktop save mode - opens last saved session when you start Emacs.
 (desktop-save-mode 1)
 
-;; Set autocomplete mode as default
-(auto-complete-mode t)
-
 ;; Change tab width and change tabs to spaces
 (setq-default tab-width 4)
 (setq-default indent-tabs-mode nil)
@@ -134,6 +131,11 @@
 
 ;; Shows trailing whitespace, if any:
 (setq-default show-trailing-whitespace t)
+;; Don't do that for terminal mode!
+(add-hook 'multi-term-mode-hook (setq-default show-trailing-whitespace nil))
+;; More terminal mode customizations: disable linum and column modes
+(add-hook 'multi-term-mode-hook (linum-mode nil))
+(add-hook 'multi-term-mode-hook (column-number-mode nil))
 
 ;; Python indentation
 (setq python-indent 4)
@@ -175,6 +177,7 @@
  ;; If there is more than one, they won't work right.
  '(auto-image-file-mode t)
  '(browse-url-firefox-program "cyberfox")
+ '(display-time-24hr-format t)
  '(dynamic-completion-mode t)
  '(global-linum-mode t)
  '(image-animate-loop t)
