@@ -160,8 +160,8 @@
 (setq python-shell-interpreter "python3")
 
 ;;-TWITTERING-MODE--------------------------------------------------------------
-;; Adjust update interval in seconds
-(setq twittering-time-interval 3600)
+;; Adjust update interval in seconds. It's timeR, not time!
+(setq twittering-timer-interval 3600)
 
 ;; Display icons (if applicable)
 (setq twittering-icon-mode t)
