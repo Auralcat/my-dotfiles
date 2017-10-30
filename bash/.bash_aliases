@@ -71,3 +71,8 @@ alias weather='echo -e "--------------------------------------------------------
 alias weather_full='curl wttr.in/Ponta_grossa'
 alias xcopy='python3 ~/Python\ Scripts/custom_xclip.py'
 alias clearswap='sudo swapoff -a && sudo swapon -a'
+
+# Read books in the terminal with less!
+
+alias neuromancer='curl http://www.lib.ru/GIBSON/neuromancer.txt | less'
+alias count_zero='curl https://www.kataan.org/public/ebook/countzero.txt | less'
