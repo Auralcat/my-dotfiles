@@ -15,6 +15,13 @@
 
 ;;-----CUSTOM-FUNCTIONS---------------------------------------------------------
 
+;; Recreate scratch buffer
+(defun create-scratch-buffer (mode-to-be-used)
+  "create a scratch buffer"
+  (interactive)
+  (switch-to-buffer (get-buffer-create "*scratch*"))
+  (org-mode)
+  (insert initial-scratch-message))
 
 ;;-----PACKAGES-----------------------------------------------------------------
 ;; Package sources
@@ -179,8 +186,15 @@
  '(browse-url-firefox-program "cyberfox")
  '(display-time-24hr-format t)
  '(dynamic-completion-mode t)
+ '(enh-ruby-use-encoding-map nil)
  '(global-linum-mode t)
  '(image-animate-loop t)
+ '(initial-buffer-choice nil)
+ '(initial-major-mode (quote org-mode))
+ '(initial-scratch-message
+   "# This buffer is for notes you don't want to save, and for program sketching.
+# You can write the contents of this buffer to a file with C-x C-w.
+# Current default mode for this buffer is: Org-mode.")
  '(org-agenda-files nil)
  '(org-default-notes-file "~/file-bouncer/everything-bucket")
  '(remember-data-file "~/file-bouncer/everything-bucket"))

@@ -4,7 +4,7 @@
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
 (("org-capture-last-stored"
  (filename . "~/file-bouncer/everything-bucket")
- (front-context-string . "** TODO Instalar")
- (rear-context-string . "ello-world.md]]\n")
- (position . 2858))
+ (front-context-string . "** TODO Ideia pa")
+ (rear-context-string . "s/outreachy.org\n")
+ (position . 3221))
 )
