@@ -13,6 +13,21 @@
 ;; I'm too lazy to type "yes" or "no"
 (fset 'yes-or-no-p 'y-or-n-p)
 
+;; Clean whitespace before saving a file
+(add-hook 'before-save-hook (quote whitespace-cleanup))
+
+;;-----HOOKS--------------------------------------------------------------------
+
+;; General programming mode
+(defun set-programming-tweaks ()
+    (linum-mode 1)
+    (column-number-mode 1))
+
+(add-hook 'prog-mode-hook (quote set-programming-tweaks))
+
+;; Ruby
+;; Activate ruby-tools
+(add-hook 'enh-ruby-mode-hook (quote ruby-tools-mode))
 ;;-----IRC----------------------------------------------------------------------
 
 ;; Qui Nov  2 19:57:06 BRST 2017 - Tried using IRC inside Emacs, didn't please
@@ -28,6 +43,7 @@
   (org-mode)
   (insert initial-scratch-message))
 
+;; Saved for posterity
 ;; (define-global-minor-mode my-linum-column-number-mode linum-mode
 ;;   (lambda ()
 ;;     ;; Add the modes you don't want linum to trigger in
@@ -36,7 +52,7 @@
 ;;       (linum-mode)
 ;;       (column-number-mode))))
 
-(my-linum-column-number-mode 1)
+;; (my-linum-column-number-mode 1)
 ;;-----PACKAGES-----------------------------------------------------------------
 ;; Package sources
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
@@ -80,9 +96,6 @@
 
 ;; Ruby tools: Goodies for ruby-mode
 (require 'ruby-tools)
-
-;; Start ruby-tools with Enhanced Ruby mode
-;; (add-hook 'enh-ruby-mode ruby-tools t)
 
 ;;-----KEYBINDINGS--------------------------------------------------------------
 ;; Remapping the help hotkey so it doesn't clash with Unix backspace.
@@ -194,6 +207,9 @@
  ;; If there is more than one, they won't work right.
  '(auto-image-file-mode t)
  '(browse-url-firefox-program "cyberfox")
+ '(custom-safe-themes
+   (quote
+    ("59171e7f5270c0f8c28721bb96ae56d35f38a0d86da35eab4001aebbd99271a8" default)))
  '(display-time-24hr-format t)
  '(dynamic-completion-mode t)
  '(enh-ruby-use-encoding-map nil)
@@ -216,7 +232,6 @@
 # You can write the contents of this buffer to a file with C-x C-w.
 # Current default mode for this buffer is: Org-mode.")
  '(keyboard-coding-system (quote utf-8-unix))
- '(my-linum-column-number-mode t)
  '(org-agenda-files nil)
  '(org-default-notes-file "~/file-bouncer/everything-bucket")
  '(remember-data-file "~/file-bouncer/everything-bucket"))
