@@ -1,9 +1,4 @@
 (1
- (emacs-new-buffer .
-		   [(20171026 1922)
-		    ((emacs
-		      (24)))
-		    "Quickly create new buffers to take notes and more" single])
  (zone-quotes .
 	      [(20170919 1825)
 	       ((emacs
@@ -3577,6 +3572,11 @@
 		((sound-wav
 		  (20160725 724)))
 		"Sound effects for Emacs" single])
+ (emacs-new-buffer .
+		   [(20171026 1922)
+		    ((emacs
+		      (24)))
+		    "Quickly create new buffers to take notes and more" single])
  (emacs-home .
 	     [(20170911 1835)
 	      ((emacs
