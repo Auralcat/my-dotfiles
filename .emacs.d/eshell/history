@@ -36,3 +36,7 @@ ruby encrypt.rb encrypt_me.txt
 ruby encrypt.rb encrypt_me.txt
 ruby encrypt.rb encrypt_me.txt password
 vim test
+echo "This is the Emacs shell"
+screenfetch
+irb
+exit

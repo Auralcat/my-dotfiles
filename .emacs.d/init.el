@@ -13,6 +13,11 @@
 ;; I'm too lazy to type "yes" or "no"
 (fset 'yes-or-no-p 'y-or-n-p)
 
+;;-----IRC----------------------------------------------------------------------
+
+;; Qui Nov  2 19:57:06 BRST 2017 - Tried using IRC inside Emacs, didn't please
+;; me, too many buffers to work with... for now.
+
 ;;-----CUSTOM-FUNCTIONS---------------------------------------------------------
 
 ;; Recreate scratch buffer
@@ -23,6 +28,15 @@
   (org-mode)
   (insert initial-scratch-message))
 
+;; (define-global-minor-mode my-linum-column-number-mode linum-mode
+;;   (lambda ()
+;;     ;; Add the modes you don't want linum to trigger in
+;;     (when (not (memq major-mode
+;;                      (list 'erc-mode 'term-mode 'minibuffer-mode)))
+;;       (linum-mode)
+;;       (column-number-mode))))
+
+(my-linum-column-number-mode 1)
 ;;-----PACKAGES-----------------------------------------------------------------
 ;; Package sources
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
@@ -124,7 +138,6 @@
 
 ;; Set line number mode and column number mode for code files
 (line-number-mode 1)
-(column-number-mode 1)
 
 ;; Set desktop save mode - opens last saved session when you start Emacs.
 (desktop-save-mode 1)
@@ -140,9 +153,6 @@
 (setq-default show-trailing-whitespace t)
 ;; Don't do that for terminal mode!
 (add-hook 'multi-term-mode-hook (setq-default show-trailing-whitespace nil))
-;; More terminal mode customizations: disable linum and column modes
-(add-hook 'multi-term-mode-hook (linum-mode nil))
-(add-hook 'multi-term-mode-hook (column-number-mode nil))
 
 ;; Python indentation
 (setq python-indent 4)
@@ -187,7 +197,17 @@
  '(display-time-24hr-format t)
  '(dynamic-completion-mode t)
  '(enh-ruby-use-encoding-map nil)
- '(global-linum-mode t)
+ '(erc-away-nickname nil)
+ '(erc-modules
+   (quote
+    (completion dcc fill list netsplit networks notifications readonly ring smiley track hl-nicks netsplit fill button match track readonly networks ring autojoin noncommands irccontrols move-to-prompt stamp menu list)))
+ '(erc-nick "Auralcat")
+ '(erc-nicklist-use-icons nil)
+ '(erc-nicklist-voiced-position (quote top))
+ '(erc-script-path (quote ("~/my-dotfiles/.emacs.d/.erc/")))
+ '(erc-try-new-nick-p t)
+ '(erc-user-full-name "Realnamezz")
+ '(global-linum-mode nil)
  '(image-animate-loop t)
  '(initial-buffer-choice nil)
  '(initial-major-mode (quote org-mode))
@@ -195,6 +215,8 @@
    "# This buffer is for notes you don't want to save, and for program sketching.
 # You can write the contents of this buffer to a file with C-x C-w.
 # Current default mode for this buffer is: Org-mode.")
+ '(keyboard-coding-system (quote utf-8-unix))
+ '(my-linum-column-number-mode t)
  '(org-agenda-files nil)
  '(org-default-notes-file "~/file-bouncer/everything-bucket")
  '(remember-data-file "~/file-bouncer/everything-bucket"))
