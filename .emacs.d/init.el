@@ -16,6 +16,9 @@
 ;; Clean whitespace before saving a file
 (add-hook 'before-save-hook (quote whitespace-cleanup))
 
+;; Enable ido-mode (fewer keystrokes to switch buffers!)
+(ido-mode 1)
+
 ;;-----HOOKS--------------------------------------------------------------------
 
 ;; General programming mode
