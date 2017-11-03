@@ -19,6 +19,9 @@
 ;; Enable ido-mode (fewer keystrokes to switch buffers!)
 (ido-mode 1)
 
+;; Replace the built-in buffer menu with ibuffer
+(global-set-key [24 2] (quote ibuffer))
+
 ;;-----HOOKS--------------------------------------------------------------------
 
 ;; General programming mode
