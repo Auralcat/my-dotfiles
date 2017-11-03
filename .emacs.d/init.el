@@ -89,9 +89,6 @@
 ;; Setup the program multi-term will need
 (setq multi-term-program "/bin/bash")
 
-;; js-comint - Run JS in the shell, like Nodejs.
-(require 'js-comint)
-
 ;; Enhanced Ruby Mode
 (add-to-list 'auto-mode-alist
                           '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'"
@@ -175,9 +172,6 @@
 
 ;; Pug-mode: use 2 spaces for indentation (DEFAULT: 4)
 (setq pug-tab-width 2)
-
-;; Js2-mode: set syntax highlight level
-(setq js2-highlight-level 3)
 
 ;; Pug-mode: call pug-compile whenever a .pug file is saved.
 ;; Compiles ugly HTML by default, use `pug -P <file_name>`
