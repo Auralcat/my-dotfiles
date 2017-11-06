@@ -44,3 +44,5 @@ cd
 git clone https://github.com/Auralcat/100-days-of-code.git
 cd 100-days-of-code/
 elinks
+git config --get core.excludesfile
+la

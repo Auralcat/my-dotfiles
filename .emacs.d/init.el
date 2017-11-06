@@ -49,16 +49,6 @@
   (org-mode)
   (insert initial-scratch-message))
 
-;; Saved for posterity
-;; (define-global-minor-mode my-linum-column-number-mode linum-mode
-;;   (lambda ()
-;;     ;; Add the modes you don't want linum to trigger in
-;;     (when (not (memq major-mode
-;;                      (list 'erc-mode 'term-mode 'minibuffer-mode)))
-;;       (linum-mode)
-;;       (column-number-mode))))
-
-;; (my-linum-column-number-mode 1)
 ;;-----PACKAGES-----------------------------------------------------------------
 ;; Package sources
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
@@ -77,28 +67,29 @@
         (package-install package)))
 
 ;; Autopair - Automatically pair braces and quotes like in TextMate
-(require 'autopair)
+(require-package 'autopair)
 (autopair-global-mode) ;; enable autopair in all buffers
 
-;; Enable improved Javascript mode:
-(autoload 'js2-mode "js2" nil t)
-
 ;; Multi-term - Run multiple terminals and interface with Emacs commands
-(require 'multi-term)
+(require-package 'multi-term)
 
 ;; Pug-mode - Work with .pug files
-(require 'pug-mode)
+(require-package 'pug-mode)
 
 ;; Setup the program multi-term will need
 (setq multi-term-program "/bin/bash")
 
 ;; Enhanced Ruby Mode
+(require-package 'enh-ruby-mode)
 (add-to-list 'auto-mode-alist
                           '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'"
                             . enh-ruby-mode))
 
 ;; Ruby tools: Goodies for ruby-mode
-(require 'ruby-tools)
+(require-package 'ruby-tools)
+
+;; Magit - Work with Git inside of Emacs
+(require-package 'magit)
 
 ;;-----KEYBINDINGS--------------------------------------------------------------
 ;; Remapping the help hotkey so it doesn't clash with Unix backspace.
