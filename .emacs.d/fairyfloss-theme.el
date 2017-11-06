@@ -1,12 +1,12 @@
-(deftheme Fairyfloss
+(deftheme fairyfloss
   "Created 2017-11-06.")
 
 (custom-theme-set-variables
- 'Fairyfloss
+ 'fairyfloss
  '(tags-tag-face (quote default)))
 
 (custom-theme-set-faces
- 'Fairyfloss
+ 'fairyfloss
  '(default ((t (:inherit nil :stipple nil :background "#5a5475" :foreground "#f8f8f0" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 1 :width normal :foundry "default" :family "default"))))
  '(cursor ((t (:background "#f8f8f0"))))
  '(fixed-pitch ((t (:family "Monospace"))))
@@ -51,4 +51,4 @@
  '(next-error ((t (:inherit (region)))))
  '(query-replace ((t (:inherit (isearch))))))
 
-(provide-theme 'Fairyfloss)
+(provide-theme 'fairyfloss)
