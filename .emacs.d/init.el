@@ -29,6 +29,9 @@
     (linum-mode 1)
     (column-number-mode 1))
 
+;; Prog-mode is from where all the programming modes are derived from.
+;; This means that if you call prog-mode-hook, the settings will be
+;; applied to ALL programming modes in Emacs.
 (add-hook 'prog-mode-hook (quote set-programming-tweaks))
 
 ;; Ruby
@@ -85,10 +88,10 @@
                           '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'"
                             . enh-ruby-mode))
 
-;; Ruby tools: Goodies for ruby-mode
+;; Ruby tools: Goodies for Ruby programming modes
 (require-package 'ruby-tools)
 
-;; Magit - Work with Git inside of Emacs
+;; Magit - Work with Git inside Emacs
 (require-package 'magit)
 
 ;;-----KEYBINDINGS--------------------------------------------------------------
