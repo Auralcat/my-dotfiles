@@ -1,1 +1,0 @@
-(define-package "erc-hl-nicks" "20160202.1150" "ERC nick highlighter that ignores uniquifying chars when colorizing" 'nil :commit "be181920ce6af0ab5d00d1c638e4e598b3998643" :url "http://www.github.com/leathekd/erc-hl-nicks")

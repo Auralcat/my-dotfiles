@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "ruby-tools" "ruby-tools.el" (23007 37645 446724
-;;;;;;  643000))
-;;; Generated autoloads from ruby-tools.el
+;;;### (autoloads nil "ruby-tools" "../../../../.emacs.d/elpa/ruby-tools-0.1.2/ruby-tools.el"
+;;;;;;  "b9466c3b514e6f4a9f96ebb268dbc778")
+;;; Generated autoloads from ../../../../.emacs.d/elpa/ruby-tools-0.1.2/ruby-tools.el
 
 (autoload 'ruby-tools-mode "ruby-tools" "\
 Collection of handy functions for ruby-mode.
@@ -14,8 +14,10 @@ Collection of handy functions for ruby-mode.
 
 ;;;***
 
-;;;### (autoloads nil nil ("ruby-tools-pkg.el") (23007 37645 559775
-;;;;;;  15000))
+;;;### (autoloads nil nil ("../../../../.emacs.d/elpa/ruby-tools-0.1.2/ruby-tools-autoloads.el"
+;;;;;;  "../../../../.emacs.d/elpa/ruby-tools-0.1.2/ruby-tools-pkg.el"
+;;;;;;  "../../../../.emacs.d/elpa/ruby-tools-0.1.2/ruby-tools.el")
+;;;;;;  (23040 56380 335198 559000))
 
 ;;;***
 

@@ -3,8 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "async" "async.el" (22965 26865 982059 228000))
-;;; Generated autoloads from async.el
+;;;### (autoloads nil "async" "../../../../.emacs.d/elpa/async-1.9.2/async.el"
+;;;;;;  "4c97826e33dbf88092a2923e298f91db")
+;;; Generated autoloads from ../../../../.emacs.d/elpa/async-1.9.2/async.el
 
 (autoload 'async-start-process "async" "\
 Start the executable PROGRAM asynchronously.  See `async-start'.
@@ -23,30 +24,30 @@ When done, the return value is passed to FINISH-FUNC.  Example:
     (async-start
        ;; What to do in the child process
        (lambda ()
-         (message \"This is a test\")
-         (sleep-for 3)
-         222)
+	 (message \"This is a test\")
+	 (sleep-for 3)
+	 222)
 
        ;; What to do when it finishes
        (lambda (result)
-         (message \"Async process done, result should be 222: %s\"
-                  result)))
+	 (message \"Async process done, result should be 222: %s\"
+		  result)))
 
 If FINISH-FUNC is nil or missing, a future is returned that can
 be inspected using `async-get', blocking until the value is
 ready.  Example:
 
     (let ((proc (async-start
-                   ;; What to do in the child process
-                   (lambda ()
-                     (message \"This is a test\")
-                     (sleep-for 3)
-                     222))))
+		   ;; What to do in the child process
+		   (lambda ()
+		     (message \"This is a test\")
+		     (sleep-for 3)
+		     222))))
 
-        (message \"I'm going to do some work here\") ;; ....
+	(message \"I'm going to do some work here\") ;; ....
 
-        (message \"Waiting on async process, result should be 222: %s\"
-                 (async-get proc)))
+	(message \"Waiting on async process, result should be 222: %s\"
+		 (async-get proc)))
 
 If you don't want to use a callback, and you don't care about any
 return value from the child process, pass the `ignore' symbol as
@@ -68,9 +69,9 @@ returns nil.  It can still be useful, however, as an argument to
 
 ;;;***
 
-;;;### (autoloads nil "async-bytecomp" "async-bytecomp.el" (22965
-;;;;;;  26865 915055 832000))
-;;; Generated autoloads from async-bytecomp.el
+;;;### (autoloads nil "async-bytecomp" "../../../../.emacs.d/elpa/async-1.9.2/async-bytecomp.el"
+;;;;;;  "c3f92425d089a0a8527673e0882c2fb5")
+;;; Generated autoloads from ../../../../.emacs.d/elpa/async-1.9.2/async-bytecomp.el
 
 (autoload 'async-byte-recompile-directory "async-bytecomp" "\
 Compile all *.el files in DIRECTORY asynchronously.
@@ -96,9 +97,9 @@ Async compilation of packages can be controlled by
 
 ;;;***
 
-;;;### (autoloads nil "dired-async" "dired-async.el" (22965 26865
-;;;;;;  803050 156000))
-;;; Generated autoloads from dired-async.el
+;;;### (autoloads nil "dired-async" "../../../../.emacs.d/elpa/async-1.9.2/dired-async.el"
+;;;;;;  "ea39a957a7db26e4d92d36a16f7884e2")
+;;; Generated autoloads from ../../../../.emacs.d/elpa/async-1.9.2/dired-async.el
 
 (defvar dired-async-mode nil "\
 Non-nil if Dired-Async mode is enabled.
@@ -116,8 +117,11 @@ Do dired actions asynchronously.
 
 ;;;***
 
-;;;### (autoloads nil nil ("async-pkg.el" "smtpmail-async.el") (22965
-;;;;;;  26866 137584 910000))
+;;;### (autoloads nil nil ("../../../../.emacs.d/elpa/async-1.9.2/async-autoloads.el"
+;;;;;;  "../../../../.emacs.d/elpa/async-1.9.2/async-bytecomp.el"
+;;;;;;  "../../../../.emacs.d/elpa/async-1.9.2/async-pkg.el" "../../../../.emacs.d/elpa/async-1.9.2/async.el"
+;;;;;;  "../../../../.emacs.d/elpa/async-1.9.2/dired-async.el" "../../../../.emacs.d/elpa/async-1.9.2/smtpmail-async.el")
+;;;;;;  (23040 56382 786881 558000))
 
 ;;;***
 
