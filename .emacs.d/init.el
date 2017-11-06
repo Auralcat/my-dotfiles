@@ -52,6 +52,11 @@
   (org-mode)
   (insert initial-scratch-message))
 
+;; I usually keep the terminal window with some transparency to copy stuff from
+;; a browser or whatever... this allows me to toggle the transparency from
+;; Emacs and saves the theme I had before
+(defun toggle-terminal-transparency ())
+
 ;;-----PACKAGES-----------------------------------------------------------------
 ;; Package sources
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
