@@ -2,12 +2,12 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Mon Nov  6 14:47:06 2017
+;; Created Mon Nov  6 14:50:03 2017
 ;; Desktop file format version 206
 ;; Emacs version 24.5.1
 
 ;; Global section:
-(setq desktop-saved-frameset [frameset 1 (23040 37386 319262 609000) (desktop . "206") "lucas@peralta" nil nil ((((tty-type . "xterm-256color") (tty . "/dev/tty") (display-type . color) (background-mode . light) (foreground-color . "unspecified-fg") (menu-bar-lines . 0) (background-color . "unspecified-bg") (font . "tty") (height . 47) (width . 170) (modeline . t) (unsplittable) (frameset--id . "5FDC-5CB4-7E3B-8C6B") (frameset--mini t) (minibuffer . t)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 170) (pixel-height . 46) (total-width . 170) (total-height . 46) (normal-height . 1.0) (normal-width . 1.0) (buffer "fairyfloss-theme.el" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins nil) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 1) (start . 1))))])
+(setq desktop-saved-frameset [frameset 1 (23040 37563 197019 765000) (desktop . "206") "lucas@peralta" nil nil ((((tty-type . "xterm-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "#f8f8f0") (menu-bar-lines . 0) (background-color . "#5a5475") (font . "tty") (height . 47) (width . 170) (modeline . t) (unsplittable) (frameset--id . "9DB8-71D4-D25C-96AE") (frameset--mini t) (minibuffer . t)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 170) (pixel-height . 46) (total-width . 170) (total-height . 46) (normal-height . 1.0) (normal-width . 1.0) (buffer "*Custom Theme*" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins nil) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 84) (start . 1))))])
 (setq desktop-missing-file-warning nil)
 (setq tags-file-name nil)
 (setq tags-table-list nil)
@@ -18,12 +18,23 @@
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
 (desktop-create-buffer 206
+  "/home/lucas/my-dotfiles/.emacs.d/init.el"
+  "init.el"
+  'emacs-lisp-mode
+  '(auto-fill-mode autopair-mode auto-revert-mode)
+  858
+  '(3221 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . prefer-utf-8-unix) (fill-column . 79)))
+
+(desktop-create-buffer 206
   "/home/lucas/my-dotfiles/.emacs.d/fairyfloss-theme.el"
   "fairyfloss-theme.el"
   'emacs-lisp-mode
-  '(autopair-mode)
-  1
-  '(7018 nil)
+  '(autopair-mode auto-revert-mode)
+  161
+  '(1 nil)
   nil
   nil
   '((buffer-file-coding-system . prefer-utf-8-unix)))
@@ -38,17 +49,6 @@
   nil
   nil
   '((buffer-file-coding-system . utf-8-unix) (fill-column . 80) (truncate-lines . t)))
-
-(desktop-create-buffer 206
-  "/home/lucas/my-dotfiles/.emacs.d/init.el"
-  "init.el"
-  'emacs-lisp-mode
-  '(auto-fill-mode autopair-mode auto-revert-mode)
-  858
-  '(3221 nil)
-  nil
-  nil
-  '((buffer-file-coding-system . prefer-utf-8-unix) (fill-column . 79)))
 
 (desktop-create-buffer 206
   "/home/lucas/file-bouncer/org-files/emprego.org"

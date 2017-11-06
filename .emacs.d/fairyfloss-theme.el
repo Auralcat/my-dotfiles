@@ -1,13 +1,12 @@
 (deftheme fairyfloss
-  "Created 2017-11-06.")
+  "Color theme by @sailorhg. Port created 2017-11-06 by @auralcat.")
 
 (custom-theme-set-variables
  'fairyfloss
- '(tags-tag-face (quote default)))
+ )
 
 (custom-theme-set-faces
  'fairyfloss
- '(default ((t (:inherit nil :stipple nil :background "#5a5475" :foreground "#f8f8f0" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 1 :width normal :foundry "default" :family "default"))))
  '(cursor ((t (:background "#f8f8f0"))))
  '(fixed-pitch ((t (:family "Monospace"))))
  '(variable-pitch ((t (:family "Sans Serif"))))
@@ -49,6 +48,7 @@
  '(lazy-highlight ((((class color) (min-colors 88) (background light)) (:background "paleturquoise")) (((class color) (min-colors 88) (background dark)) (:background "paleturquoise4")) (((class color) (min-colors 16)) (:background "turquoise3")) (((class color) (min-colors 8)) (:background "turquoise3")) (t (:underline (:color foreground-color :style line)))))
  '(match ((((class color) (min-colors 88) (background light)) (:background "yellow1")) (((class color) (min-colors 88) (background dark)) (:background "RoyalBlue3")) (((class color) (min-colors 8) (background light)) (:foreground "black" :background "yellow")) (((class color) (min-colors 8) (background dark)) (:foreground "white" :background "blue")) (((type tty) (class mono)) (:inverse-video t)) (t (:background "gray"))))
  '(next-error ((t (:inherit (region)))))
- '(query-replace ((t (:inherit (isearch))))))
+ '(query-replace ((t (:inherit (isearch)))))
+ '(default ((t (:inherit nil :stipple nil :background "#5a5475" :foreground "#f8f8f0" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 1 :width normal :foundry "default" :family "default")))))
 
 (provide-theme 'fairyfloss)
