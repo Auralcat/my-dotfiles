@@ -52,7 +52,8 @@ Authors:
  '(font-lock-regexp-grouping-construct ((t (:inherit (bold)))))
  '(ido-only-match ((t (:foreground "color-84"))))
  '(enh-ruby-op-face ((t (:inherit font-lock-constant-face))))
+ '(enh-ruby-string-delimiter-face ((t (:inherit font-lock-string-face))))
  '(default ((t (:inherit nil :stipple nil :background "#5a5475" :foreground "#f8f8f0" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 1 :width normal :foundry "default" :family "Courier"))))
- '(enh-ruby-string-delimiter-face ((t (:inherit font-lock-string-face)))))
+ '(org-pomodoro-mode-line ((t (:foreground "#FF271A")))))
 
 (provide-theme 'fairyfloss)
