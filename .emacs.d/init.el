@@ -113,7 +113,6 @@
 ;; Whenever you want to call help you can use M-x help as well. F1 works too.
 (define-key key-translation-map [?\C-h] [?\C-?])
 
-
 ;; Remove the menu bar in terminal mode
 (when (not (display-graphic-p))
   (menu-bar-mode -1))
