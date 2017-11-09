@@ -139,15 +139,20 @@
 ;; Org-mode: bind org-pomodoro to C-c p
 (global-set-key (kbd "\C-c p") (quote org-pomodoro))
 
-;; Javascript: Pass buffer to Node.js
-(add-hook 'js2-mode-hook ;; guessing
+;; Enh-ruby-mode: Run buffer in inf-ruby process
+(add-hook 'enh-ruby-mode-hook
   '(lambda ()
-     (local-set-key "\C-c \C-r" (quote shell-command-on-region 1 4692 "nodejs" nil nil nil t))))
+     (local-set-key "\C-c \C-c" (quote ruby-send-buffer))))
+
+;; Elisp-mode: Eval-buffer with C-c C-c
+(add-hook 'emacs-lisp-mode-hook
+  '(lambda ()
+     (local-set-key "\C-c \C-c" (quote eval-buffer))))
 
 ;; SGML mode (AKA HTML mode) - Open buffer in browser
 (add-hook 'sgml-mode-hook
   '(lambda ()
-     (local-set-key "\C-c\C-o" (quote browse-url-of-buffer))))
+     (local-set-key "\C-c \C-o" (quote browse-url-of-buffer))))
 
 ;;-----VARIABLES----------------------------------------------------------------
 
