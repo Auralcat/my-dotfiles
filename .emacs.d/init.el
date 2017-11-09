@@ -113,6 +113,7 @@
 ;; Whenever you want to call help you can use M-x help as well. F1 works too.
 (define-key key-translation-map [?\C-h] [?\C-?])
 
+
 ;; Remove the menu bar in terminal mode
 (when (not (display-graphic-p))
   (menu-bar-mode -1))
@@ -142,7 +143,7 @@
 ;; Enh-ruby-mode: Run buffer in inf-ruby process
 (add-hook 'enh-ruby-mode-hook
   '(lambda ()
-     (local-set-key "\C-c \C-c" (quote ruby-send-buffer))))
+     (local-set-key [3 3] (quote ruby-send-buffer))))
 
 ;; Elisp-mode: Eval-buffer with C-c C-c
 (add-hook 'emacs-lisp-mode-hook
