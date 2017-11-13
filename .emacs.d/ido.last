@@ -2,21 +2,24 @@
 
 ;; ----- ido-last-directory-list -----
 (
+ ("/home/" . "lucas/")
  ("/home/lucas/my-dotfiles/" . ".emacs.d/")
  ("/home/lucas/my-dotfiles/.emacs.d/" . "elpa/")
  ("/home/lucas/100-days-of-code/" . "scripts/")
- ("/home/lucas/" . "LojinhaTechLadies/")
+ ("/home/lucas/" . "100-days-of-code/")
 )
 
 ;; ----- ido-work-directory-list -----
 (
  "/home/lucas/file-bouncer/org-files/"
- "/home/lucas/LojinhaTechLadies/"
- "/home/lucas/fairyfloss/"
- "/home/lucas/100-days-of-code/scripts/"
- "/home/lucas/my-dotfiles/.emacs.d/"
- "/home/lucas/100-days-of-code/"
  "/home/lucas/"
+ "/home/lucas/100-days-of-code/data-scraping/"
+ "/home/lucas/100-days-of-code/"
+ "/home/lucas/100-days-of-code/scripts/"
+ "/home/lucas/fairyfloss/"
+ "/home/lucas/my-dotfiles/vim/"
+ "/home/lucas/LojinhaTechLadies/"
+ "/home/lucas/my-dotfiles/.emacs.d/"
  "~/100-days-of-code/"
  "/home/lucas/.emacs.d/"
  "/home/lucas/my-dotfiles/.emacs.d/elpa/"
@@ -25,41 +28,45 @@
 
 ;; ----- ido-work-file-list -----
 (
- "startup-weekend-oficina.org"
- "README.md"
- "from-ladies-to-ladies.org"
- "fairyfloss-theme.el"
- "eventos.org"
- "workshop-brainstorm.org"
- "scratch.rb"
- "init.el"
+ "duvidas-workshops.org"
+ "diario.txt"
+ "us_elections.py"
  "log.md"
- "songsToCSV.rb"
+ "chuck_norris_jokes.py"
+ "jokes.py"
+ "soccer_matches.py"
+ "jogos_copa_2014.py"
+ "hangman.py"
+ "fairyfloss-theme.el"
 )
 
 ;; ----- ido-dir-file-cache -----
 (
- ("/home/lucas/my-dotfiles/.emacs.d/elpa/" (23044 33585 907234 233000) "./" "log4e-0.3.0/" "dash-2.13.0/" "autopair-0.6.1/" "twittering-mode-3.0.0/" "with-editor-2.7.0/" "gntp-0.1/" "org-pomodoro-2.1.0/" "git-commit-2.11.0/" "enh-ruby-mode-20171101/" "magit-popup-2.11.0/" "color-theme-molokai-0.1/" "async-1.9.2/" "alert-1.2/" "magit-2.11.0/" "ruby-tools-0.1.2/" "multi-term-1.2/" "archives/" "inf-ruby-2.5.1/" "../" "pug-mode-1.0.7/")
+ ("/home/lucas/100-days-of-code/" (23047 31254 192876 235000) "README.md" "r1-log.md" "rules.md" "scripts/" "../" "./" ".git/" "data-scraping/" "log.md" "FAQ.md" "resources.md")
 
- ("/home/lucas/.emacs.d/" (23044 41997 936365 952000) "./" "fairyfloss-backup.el" "auto-save-list/" "default-theme.el" ".emacs.desktop" "fairyfloss-theme.el" "eshell/" "init.el" ".erc/" "ido.last" "elpa/" "../" ".emacs.desktop.lock")
+ ("/home/lucas/.emacs.d/" (23047 28801 271491 453000) ".emacs.desktop" "#type-break#" "init.el" "elpa/" "ido.last" "fairyfloss-backup.el" "../" "fairyfloss-theme.el" "default-theme.el" "./" ".trello/" "auto-save-list/" ".erc/" ".emacs.desktop.lock" "eshell/")
 
- ("~/100-days-of-code/" (23044 41313 96692 507000) "r1-log.md" "./" "scripts/" "FAQ.md" "rules.md" "log.md" "README.md" "resources.md" ".git/" "../")
+ ("~/100-days-of-code/" (23047 28801 284491 946000) "README.md" "r1-log.md" "rules.md" ".#log.md" "scripts/" "#log.md#" "../" "./" ".git/" "data-scraping/" "log.md" "FAQ.md" "resources.md")
 
- ("/home/lucas/100-days-of-code/" (23044 41313 96692 507000) "r1-log.md" "./" "scripts/" "FAQ.md" "rules.md" "log.md" "README.md" "resources.md" ".git/" "../")
+ ("/home/lucas/my-dotfiles/.emacs.d/" (23047 28801 271491 453000) ".emacs.desktop" "#type-break#" "init.el" "elpa/" "ido.last" "fairyfloss-backup.el" "../" "fairyfloss-theme.el" "default-theme.el" "./" ".trello/" "auto-save-list/" ".erc/" ".emacs.desktop.lock" "eshell/")
 
- ("/home/lucas/my-dotfiles/.emacs.d/" (23044 41997 936365 952000) "./" "fairyfloss-backup.el" "auto-save-list/" "default-theme.el" ".emacs.desktop" "fairyfloss-theme.el" "eshell/" "init.el" ".erc/" "ido.last" "elpa/" "../" ".emacs.desktop.lock")
+ ("/home/lucas/100-days-of-code/data-scraping/" (23047 16983 959211 752000) "soccer_matches.py" "../" "./" "chuck_norris_jokes.py")
 
- ("/home/lucas/100-days-of-code/scripts/" (23044 34008 73781 900000) "./" "songsToCSV.rb" "scratch.rb" "songsToCSV.py" "../")
+ ("/home/lucas/file-bouncer/org-files/" (23047 7526 174278 661000) "#tasks.org#" "borderify/" "from-ladies-to-ladies.org" "a-beginners-guide-to-html-&-css/" "tasks.org" "blog.org" "notes.org" "sketches/" "eventos.org" "workshop-brainstorm.org" "../" "./" "startup-weekend-oficina.org" "outreachy-skills.csv" "freelancing.org" "programming-landscape.org" "tasks.org_archive" "index.pug" "outreachy.org" "my-awesome-site/" "FreeCodeCamp/" "freelancing.org_archive" "emprego.org" "test-board.org")
+
+ ("/home/lucas/100-days-of-code/scripts/" (23047 10402 310563 2000) "guessing_game.rb" "songsToCSV.rb" "../" "./" "guessing_game.py" "hangman.py" "#songsToCSV.rb#" "songsToCSV.py")
+
+ ("/home/lucas/fairyfloss/" (23047 4228 899322 124000) "code.png" "Fairyfloss.dvtcolortheme" "README.md" "index.html" "styles/" "fairyfloss.png" "../" "fairyfloss-theme.el" "package.json" "./" "stylesheet.css" ".git/" "fairy_floss_title.png" "CHANGELOG.md" "fairyfloss.tmTheme" "index.less")
+
+ ("/home/lucas/my-dotfiles/.emacs.d/elpa/" (23047 3225 780076 576000) "evil-1.2.13/" "undo-tree-0.6.5/" "twittering-mode-3.0.0/" "log4e-0.3.0/" "ruby-tools-0.1.2/" "gnupg/" "goto-chg-1.7/" "../" "pug-mode-1.0.7/" "with-editor-2.7.0/" "dash-2.13.0/" "./" "magit-2.11.0/" "alert-1.2/" "archives/" "magit-popup-2.11.0/" "multi-term-1.2/" "inf-ruby-2.5.1/" "color-theme-molokai-0.1/" "autopair-0.6.1/" "async-1.9.2/" "gntp-0.1/" "evil-visual-mark-mode-0.0.3/" "git-commit-2.11.0/" "org-pomodoro-2.1.0/" "enh-ruby-mode-20171101/")
+
+ ("/home/lucas/my-dotfiles/vim/" (23046 62575 349946 711000) "templates/" "../" ".vimrc" "./")
+
+ ("/home/" (22514 52449 662298 96000) "../" "./" "test/" "rumsiac/" "lucas/")
 
  ("/home/lucas/LojinhaTechLadies/" (23044 40297 762895 326000) "./" "README.md" ".git/" "../")
 
- ("/home/lucas/file-bouncer/org-files/" (23044 42144 276308 348000) "programming-landscape.org" "./" "outreachy-skills.csv" "borderify/" "a-beginners-guide-to-html-&-css/" "tasks.org_archive" "my-awesome-site/" "emprego.org" "#tasks.org#" "from-ladies-to-ladies.org" "workshop-brainstorm.org" "test-board.org" "blog.org" "freelancing.org" "FreeCodeCamp/" "index.pug" ".#eventos.org" "sketches/" "tasks.org" "freelancing.org_archive" "eventos.org" "../" "outreachy.org" "notes.org")
-
- ("/home/lucas/" (23044 40134 891030 287000) "test" "./" "fairyfloss/" ".briefing.txt" ".elinks/" ".swp" ".bash_aliases" ".gksu.lock" ".lesshst" "check-repos.sh" "Javascript Programs/" ".eclipse/" ".aptitude/" ".node_repl_history" ".TelegramDesktop/" "Público/" ".swt/" "carta.txt" "pokersim/" ".swo" ".xsession-errors" ".calcurse/" "file-bouncer/" ".bashrc" ".bash_history" "PlayOnLinux's virtual drives/" "cartesian-product.py" ".xsel.log" ".gnupg/" "wineprefix/" ".notes" "purrcured-scripts/" ".purple/" "5478_-_Ghost_Trick_-_Phantom_DetectiveUSA_NDS-XPA.nds" ".git-credential-cache/" ".dbus/" "project-euler-programs/" ".Xauthority" "testepython.py" ".twittering-mode.gpg" "test.pomodb" ".ICEauthority" ".emacs.d/" ".pylint.d/" ".config/" ".gitconfig" "Imagens/" ".tmux.conf" ".wine/" ".Xresources" "samplepomocount.txt" "Telegram/" ".pki/" "diario.txt" ".nano/" ".cache/" "test.pub" "law-of-big-numbers.py" ".python_history" ".linuxmint/" "Vídeos/" ".local/" ".calc_history" ".adobe/" "log.txt" "Área de Trabalho/" "LojinhaTechLadies/" "ro-goodies/" ".vim/" "Modelos/" "diario_backup2.txt" ".macromedia/" "test.html" ".icons/" "helloworld.rs" "test.py" ".ssh/" ".PlayOnLinux/" "100-days-of-code/" ".notedb" ".mozilla/" "test-site/" ".cinnamon/" "test_website/" "1084 Etrian Odyssey (US).nds" ".gconf/" "palindrome.py" ".viminfo" "helloworld.c" ".dmrc" ".bash_startup" ".notedb~LOCK" "backup.org" ".gem/" "Música/" ".profile" "resposta_entrevista.txt" "../" ".bash_logout" "my-dotfiles/" ".sudo_as_admin_successful" ".xinputrc" "numbers.cl" "workspace/" "#palindrome.py#" "Downloads/" ".gnome/" "RomanNumerals.py" ".tmux/" ".themes/" "travelling-salesman-problem/" ".dink/" "pasteme" "Documentos/" ".vimrc")
-
  ("/home/lucas/file-bouncer/" (23044 39728 491394 425000) "./" "org-files/" ".gitignore" "batch-pull.rb" "mydb.kdbx" "saved-desktops/" "ListaAlbums" "everything-bucket" "diario.txt" "lembrete.txt" "emacs-backups/" "README.md" "ideias" "emacs-remember-notes" ".mydb.kdbx.lock" "race screens/" ".git/" "color-programming.rb" "blog_drafts/" "../")
-
- ("/home/lucas/fairyfloss/" (23044 34166 364220 193000) "fairyfloss.png" "./" "styles/" "fairyfloss.tmTheme" "fairy_floss_title.png" "index.html" "fairyfloss-theme.el" "CHANGELOG.md" "README.md" "package.json" "code.png" "Fairyfloss.dvtcolortheme" ".git/" "index.less" "../" "stylesheet.css")
 
  ("/home/lucas/my-dotfiles/" (22985 24853 17983 169000) "README.md" ".gitignore" ".emacs.d/" "../" "vim/" "./" "elinks/" "emacs/" ".git/" "tmux/" "bash/" "zsh/")
 

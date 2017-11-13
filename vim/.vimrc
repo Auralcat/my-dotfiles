@@ -67,7 +67,7 @@ augroup templates
     autocmd BufNewFile *.py 0r ~/.vim/templates/skeleton.py
 augroup END
 
-" ScratchMode:
+" ScratchMode: (this was copied from Emacs)
 augroup scratchfile
     " Header for the scratch file
     autocmd BufNewFile scratch.md 0r ~/.vim/templates/skeleton.scratch

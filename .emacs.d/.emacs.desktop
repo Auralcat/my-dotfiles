@@ -2,39 +2,28 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Thu Nov  9 16:59:13 2017
+;; Created Mon Nov 13 15:26:49 2017
 ;; Desktop file format version 206
 ;; Emacs version 24.5.1
 
 ;; Global section:
-(setq desktop-saved-frameset [frameset 1 (23044 42369 123178 442000) (desktop . "206") "lucas@peralta" nil nil ((((tty-type . "xterm-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "#f8f8f0") (menu-bar-lines . 0) (background-color . "#5a5475") (font . "tty") (height . 47) (width . 170) (modeline . t) (unsplittable) (frameset--id . "1264-7D4B-118C-7C5C") (frameset--mini t) (minibuffer . t)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 170) (pixel-height . 46) (total-width . 170) (total-height . 46) (normal-height . 1.0) (normal-width . 1.0) (buffer "init.el" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins nil) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 3986) (start . 3525))))])
+(setq desktop-saved-frameset [frameset 1 (23049 54745 613647 596000) (desktop . "206") "isendra@logos" nil nil ((((tty-type . "screen-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "unspecified-fg") (menu-bar-lines . 0) (background-color . "unspecified-bg") (font . "tty") (height . 37) (width . 136) (modeline . t) (unsplittable) (frameset--id . "10D7-7BFA-30B9-046B") (frameset--mini t) (minibuffer . t)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 136) (pixel-height . 36) (total-width . 136) (total-height . 36) (normal-height . 1.0) (normal-width . 1.0) (buffer "duvidas-workshops.org" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins nil) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 96) (start . 1))))])
 (setq desktop-missing-file-warning nil)
 (setq tags-file-name nil)
 (setq tags-table-list nil)
-(setq search-ring '("ms" "ÅÈ" "Sa" "\"" "Sa" "Oi" ":" "flac" "#" "syn" "directory" "KE" ":" "}" "{" "\""))
-(setq regexp-search-ring '("\"\\s\"" "#......" "\".*'" "#.*\\d\"" "\\;.*" ";.*;" ";.*" "js2\n" "//.*"))
-(setq register-alist (list (list 49 '(frame-configuration ("Unprintable entity" ((buried-buffer-list "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity") (buffer-list "Unprintable entity" "Unprintable entity") (minibuffer . "Unprintable entity") (name . "F1") (unsplittable) (modeline . t) (width . 136) (height . 36) (font . "tty") (background-color . "unspecified-bg") (menu-bar-lines . 0) (foreground-color . "unspecified-fg") (background-mode . dark) (display-type . color) (tty . "/dev/tty") (tty-type . "screen-256color")) "Unprintable entity")) (let ((mk (make-marker))) (add-hook 'desktop-delay-hook `(lambda nil (set-marker ,mk ,nil (get-buffer ," *temp*")))) mk)) (list 82 "Unprintable entity" (let ((mk (make-marker))) (add-hook 'desktop-delay-hook `(lambda nil (set-marker ,mk ,nil (get-buffer ," *temp*")))) mk))))
-(setq file-name-history '("/home/lucas/file-bouncer/org-files/startup-weekend-oficina.org" "/home/lucas/LojinhaTechLadies/README.md" "/home/lucas/file-bouncer/org-files/from-ladies-to-ladies.org" "/home/lucas/fairyfloss/fairyfloss-theme.el" "/home/lucas/file-bouncer/org-files/eventos.org" "/home/lucas/file-bouncer/org-files/workshop-brainstorm.org" "/home/lucas/100-days-of-code/scripts/scratch.rb" "/home/lucas/my-dotfiles/.emacs.d/init.el" "/home/lucas/100-days-of-code/log.md" "/home/lucas/my-dotfiles/.emacs.d/fairyfloss-theme.el" "/home/lucas/100-days-of-code/scripts/songsToCSV.rb" "/home/lucas/my-dotfiles/.emacs.d/fairyfloss-theme.el" "/home/lucas/sampleRb.rb" "~/100-days-of-code/log.md" "/home/lucas/my-dotfiles/.emacs.d/fairyfloss-theme.el" "/home/lucas/100-days-of-code/log.md" "~/fairyfloss/" "~/my-dotfiles/.emacs.d/" "/home/lucas/my-dotfiles/.emacs.d/fairyfloss-theme.el" "/home/lucas/my-dotfiles/.emacs.d/fairyfloss-alt-theme.el" "/home/lucas/.emacs.d/Fairyfloss-theme.el" "/home/lucas/.emacs.d/fairyfloss-theme.el" "~/my-dotfiles/.emacs.d/fairyfloss-theme.el" "~/my-dotfiles/.emacs.d/" "~/" "/home/lucas/fairyfloss.el" "/home/lucas/my-dotfiles/.emacs.d/elpa/atom-one-dark-theme-readme.txt" "/home/lucas/100-days-of-code/log.md" "/home/lucas/100-days-of-code/work in progress/songsToCSV.rb" "~/100-days-of-code/log.md" "~/100-days-of-code/rules.md" "~/100-days-of-code/README.md" "~/testFontify.html" "/usr/share/emacs/24.5/lisp/erc/erc.el.gz" "~/my-dotfiles/.emacs.d/" "~/Ruby Scripts/sketches/blockchain.rb" "~/Ruby Scripts/sketches/avaliar_vaga.rb" "~/Ruby Scripts/sketches/avaliar_vaga_2.rb" "~/Ruby Scripts/sketches/avaliar_vaga.rb" "~/" "~/delete_this.txt" "~/Ruby Scripts/sketches/avaliar_vaga.rb" "~/my-dotfiles/.emacs.d/init.el" "~/Ruby Scripts/sketches/convert_case.rb" "~/JavascriptPrograms/Algorithms/change_case.js" "~/my-dotfiles/.emacs.d/init.el" "~/para-entender-a-internet/README.md" "~/2017/README.md" "~/mande_email_dps.txt" "~/Ruby Scripts/sketches/short_abbrevs.rb" "~/MÅ˙sica/Ambient/Jean Michel JarrÅÈ/2002 - Sessions 2000/" "~/MÅ˙sica/Ambient/Jean Michel JarrÅÈ/2001 - Interior Music/" "~/file-bouncer/org-files/emprego.org" "~/JavascriptPrograms/Algorithms/kaprekar_routine.js" "~/my-dotfiles/.emacs.d/" "~/JavascriptPrograms/Algorithms/flatten_array.js" "~/Ruby Scripts/sketches/kaprekar.rb" "~/dev-practice/README.md" "~/emacs-pug-mode/README.md" "~/emacs-pug-mode" "~/my-dotfiles/.emacs.d/test.js" "~/JavascriptPrograms/FreeCodeCamp/RandomQuote/sprocket.js" "~/JavascriptPrograms/FreeCodeCamp/RandomQuote/main.css" "~/JavascriptPrograms/FreeCodeCamp/RandomQuote/index.html" "~/my-dotfiles/.emacs.d/init.el" "~/JavascriptPrograms/FreeCodeCamp/RandomQuote/" "~/JavascriptPrograms/FreeCodeCamp/RandomQuote/index.pug" "~/Ruby Scripts/sketches/decrypt.rb" "~/Ruby Scripts/sketches/test.rb" "~/Ruby Scripts/sketches/encrypt.rb" "~/Ruby Scripts/sketches/random.rb" "~/JavascriptPrograms/NodeJS/Promises/promise.js" "~/JavascriptPrograms/NodeJS/Promises/readfile_async2.js" "~/JavascriptPrograms/NodeJS/Promises/readfile_async.js" "~/JavascriptPrograms/NodeJS/Promises/text.txt" "~/JavascriptPrograms/NodeJS/Promises/" "~/JavascriptPrograms/NodeJS/Promises/readfile_sync.js" "~/JavascriptPrograms/FreeCodeCamp/Portfolio/index.pug" "~/TestFolder/" "~/TestFolder/test.pug" "~/.nvm/versions/node/v6.11.4/lib/node_modules/pug-cli/index.js" "index.js:246" "~/JavaScript Programs/FreeCodeCamp/Portfolio/style.css" "~/JavaScript Programs/FreeCodeCamp/Portfolio/index.pug" "~/my-dotfiles/.emacs.d/init.el" "~/file-bouncer/org-files/index.pug" "~/JavaScript Programs/FreeCodeCamp/Portfolio/main.css" "~/JavaScript Programs/FreeCodeCamp/Portfolio/test.html" "~/JavaScript Programs/FreeCodeCamp/Portfolio/index.html" "~/JavaScript Programs/FreeCodeCamp/Portfolio/assets/" "~/JavaScript Programs/FreeCodeCamp/Portfolio/assets/main.css" "~/JavaScript Programs/FreeCodeCamp/Portfolio/index.html" "~/JavaScript Programs/FreeCodeCamp/Portfolio/" "~/JavaScript Programs/FreeCodeCamp/Portfolio/index.pug" "~/Ruby Scripts/sketch.rb" "~/my-dotfiles/.emacs.d/init.el" "~/Ruby Scripts/sketches/generators.rb" "~/" "~/site-development/"))
+(setq search-ring '("pos" "#" "co" ")" "on" "'" "Sa" "evil-" "\"" "`" "')" "flac" "ms" "ÅÈ" "Sa" "\""))
+(setq regexp-search-ring '("cha" "C" "\"" "Py" ":" "Pr" "DE" "\\<random\\>" "\\<guess\\>" "FA" "?" "\"\\s\"" "#......" "\".*'" "#.*\\d\"" "\\;.*"))
+(setq register-alist (list '(48 . "Modified version from the one generated by the tm2deftheme gem. Created 2017-11-06.\nAuthors:\n   - Original theme: @sailorhg\n   - Auto-generated port for Emacs: @IrIna\n   - Adjustments: @auralcat\"") '(113) '(97) (desktop-list* 49 (vector 'registerv (vector [frameset 1 (23044 46083 927607 968000) register nil nil nil ((((tty-type . "screen-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "#f8f8f0") (background-color . "#5a5475") (frameset--id . "27B0-231C-D7DD-1726") (frameset--mini t) (font . "tty") (height . 37) (width . 136) (modeline . t) (minibuffer . t) (unsplittable) (buffer-list "Unprintable entity" "Unprintable entity" "Unprintable entity") (buried-buffer-list "Unprintable entity" "Unprintable entity") (menu-bar-lines . 0)) ((min-height . 4) (min-width . 20) (min-height-ignore . 2) (min-width-ignore . 4) (min-height-safe . 1) (min-width-safe . 4) (min-pixel-height . 4) (min-pixel-width . 20) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 4) (min-pixel-height-safe . 1) (min-pixel-width-safe . 4)) hc (pixel-width . 136) (pixel-height . 36) (total-width . 136) (total-height . 36) (normal-height . 1.0) (normal-width . 1.0) (combination-limit) (leaf (pixel-width . 82) (pixel-height . 36) (total-width . 82) (total-height . 36) (normal-height . 1.0) (normal-width . 0.6029411764705883) (buffer "scratch.rb" (selected) (hscroll . 0) (fringes 0 0 nil) (margins nil) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 146) (start . 66))) (leaf (last . t) (pixel-width . 54) (pixel-height . 36) (total-width . 54) (total-height . 36) (normal-height . 1.0) (normal-width . 0.39705882352941174) (buffer "*ruby*" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins nil) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 18) (start . 1)))) (((tty-type . "screen-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "#f8f8f0") (background-color . "#5a5475") (frameset--id . "10FA-9BDA-067A-7E4D") (frameset--mini t) (font . "tty") (height . 37) (width . 136) (modeline . t) (minibuffer . t) (unsplittable) (buffer-list "Unprintable entity") (buried-buffer-list) (menu-bar-lines . 0)) ((min-height . 4) (min-width . 10) (min-height-ignore . 3) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 3) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 136) (pixel-height . 36) (total-width . 136) (total-height . 36) (normal-height . 1.0) (normal-width . 1.0) (buffer "*info*" (selected) (hscroll . 0) (fringes 0 0 nil) (margins nil) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 562639) (start . 561986))) (((tty-type . "screen-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "#f8f8f0") (menu-bar-lines . 0) (background-color . "#5a5475") (font . "tty") (height . 37) (width . 136) (modeline . t) (unsplittable) (frameset--id . "35C1-9A88-4FF0-40D7") (frameset--mini t) (minibuffer . t) (buffer-list "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity") (buried-buffer-list "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity")) ((min-height . 4) (min-width . 10) (min-height-ignore . 3) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 3) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 136) (pixel-height . 36) (total-width . 136) (total-height . 36) (normal-height . 1.0) (normal-width . 1.0) (buffer "*info*" (selected) (hscroll . 0) (fringes 0 0 nil) (margins nil) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 562639) (start . 562639))))] "27B0-231C-D7DD-1726" (let ((mk (make-marker))) (add-hook 'desktop-delay-hook `(lambda nil (set-marker ,mk ,nil (get-buffer ," *temp*")))) mk)) "Unprintable entity" 'frameset--jump-to-register nil)) (list 82 "Unprintable entity" (let ((mk (make-marker))) (add-hook 'desktop-delay-hook `(lambda nil (set-marker ,mk ,nil (get-buffer ," *temp*")))) mk))))
+(setq file-name-history '("/home/lucas/file-bouncer/org-files/duvidas-workshops.org" "/home/lucas/100-days-of-code/scripts/tictactoe.py" "/home/lucas/diario.txt" "~/100-days-of-code/data-scraping/" "~/100-days-of-code/data-scraping/ny_times.py" "/home/lucas/100-days-of-code/data-scraping/us_elections.py" "/home/lucas/100-days-of-code/log.md" "/home/lucas/100-days-of-code/data-scraping/chuck_norris_jokes.py" "/home/lucas/100-days-of-code/data-scraping/jokes.py" "~/100-days-of-code/data-scraping/" "/home/lucas/100-days-of-code/data-scraping/soccer_matches.py" "~/100-days-of-code/data-scraping/" "/home/lucas/100-days-of-code/data-scraping/jogos_copa_2014.py" "/home/lucas/100-days-of-code/scripts/hangman.py" "/home/lucas/fairyfloss/fairyfloss-theme.el" "/home/lucas/100-days-of-code/log.md" "/home/lucas/100-days-of-code/scripts/guessing_game.py" "/home/lucas/100-days-of-code/scripts/guessing_game.rb" "/home/lucas/100-days-of-code/scripts/guessing_game.py" "/home/lucas/my-dotfiles/vim/.vimrc" "/home/lucas/100-days-of-code/log.md" "/home/lucas/100-days-of-code/README.md" "~/100-days-of-code/scripts/" "/home/lucas/100-days-of-code/scripts/songsToCSV.rb" "/home/lucas/fairyfloss/fairyfloss-theme.el" "/home/lucas/file-bouncer/org-files/startup-weekend-oficina.org" "/home/lucas/LojinhaTechLadies/README.md" "/home/lucas/file-bouncer/org-files/from-ladies-to-ladies.org" "/home/lucas/fairyfloss/fairyfloss-theme.el" "/home/lucas/file-bouncer/org-files/eventos.org" "/home/lucas/file-bouncer/org-files/workshop-brainstorm.org" "/home/lucas/100-days-of-code/scripts/scratch.rb" "/home/lucas/my-dotfiles/.emacs.d/init.el" "/home/lucas/100-days-of-code/log.md" "/home/lucas/my-dotfiles/.emacs.d/fairyfloss-theme.el" "/home/lucas/100-days-of-code/scripts/songsToCSV.rb" "/home/lucas/my-dotfiles/.emacs.d/fairyfloss-theme.el" "/home/lucas/sampleRb.rb" "~/100-days-of-code/log.md" "/home/lucas/my-dotfiles/.emacs.d/fairyfloss-theme.el" "/home/lucas/100-days-of-code/log.md" "~/fairyfloss/" "~/my-dotfiles/.emacs.d/" "/home/lucas/my-dotfiles/.emacs.d/fairyfloss-theme.el" "/home/lucas/my-dotfiles/.emacs.d/fairyfloss-alt-theme.el" "/home/lucas/.emacs.d/Fairyfloss-theme.el" "/home/lucas/.emacs.d/fairyfloss-theme.el" "~/my-dotfiles/.emacs.d/fairyfloss-theme.el" "~/my-dotfiles/.emacs.d/" "~/" "/home/lucas/fairyfloss.el" "/home/lucas/my-dotfiles/.emacs.d/elpa/atom-one-dark-theme-readme.txt" "/home/lucas/100-days-of-code/log.md" "/home/lucas/100-days-of-code/work in progress/songsToCSV.rb" "~/100-days-of-code/log.md" "~/100-days-of-code/rules.md" "~/100-days-of-code/README.md" "~/testFontify.html" "/usr/share/emacs/24.5/lisp/erc/erc.el.gz" "~/my-dotfiles/.emacs.d/" "~/Ruby Scripts/sketches/blockchain.rb" "~/Ruby Scripts/sketches/avaliar_vaga.rb" "~/Ruby Scripts/sketches/avaliar_vaga_2.rb" "~/Ruby Scripts/sketches/avaliar_vaga.rb" "~/" "~/delete_this.txt" "~/Ruby Scripts/sketches/avaliar_vaga.rb" "~/my-dotfiles/.emacs.d/init.el" "~/Ruby Scripts/sketches/convert_case.rb" "~/JavascriptPrograms/Algorithms/change_case.js" "~/my-dotfiles/.emacs.d/init.el" "~/para-entender-a-internet/README.md" "~/2017/README.md" "~/mande_email_dps.txt" "~/Ruby Scripts/sketches/short_abbrevs.rb" "~/MÅ˙sica/Ambient/Jean Michel JarrÅÈ/2002 - Sessions 2000/" "~/MÅ˙sica/Ambient/Jean Michel JarrÅÈ/2001 - Interior Music/" "~/file-bouncer/org-files/emprego.org" "~/JavascriptPrograms/Algorithms/kaprekar_routine.js" "~/my-dotfiles/.emacs.d/" "~/JavascriptPrograms/Algorithms/flatten_array.js" "~/Ruby Scripts/sketches/kaprekar.rb" "~/dev-practice/README.md" "~/emacs-pug-mode/README.md" "~/emacs-pug-mode" "~/my-dotfiles/.emacs.d/test.js" "~/JavascriptPrograms/FreeCodeCamp/RandomQuote/sprocket.js" "~/JavascriptPrograms/FreeCodeCamp/RandomQuote/main.css" "~/JavascriptPrograms/FreeCodeCamp/RandomQuote/index.html" "~/my-dotfiles/.emacs.d/init.el" "~/JavascriptPrograms/FreeCodeCamp/RandomQuote/" "~/JavascriptPrograms/FreeCodeCamp/RandomQuote/index.pug" "~/Ruby Scripts/sketches/decrypt.rb" "~/Ruby Scripts/sketches/test.rb" "~/Ruby Scripts/sketches/encrypt.rb" "~/Ruby Scripts/sketches/random.rb" "~/JavascriptPrograms/NodeJS/Promises/promise.js" "~/JavascriptPrograms/NodeJS/Promises/readfile_async2.js" "~/JavascriptPrograms/NodeJS/Promises/readfile_async.js" "~/JavascriptPrograms/NodeJS/Promises/text.txt"))
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
 (desktop-create-buffer 206
-  "/home/lucas/my-dotfiles/.emacs.d/init.el"
-  "init.el"
-  'emacs-lisp-mode
-  '(auto-fill-mode autopair-mode auto-revert-mode)
-  3986
-  '(4813 nil)
-  nil
-  nil
-  '((buffer-file-coding-system . prefer-utf-8-unix) (fill-column . 79)))
-
-(desktop-create-buffer 206
-  "/home/lucas/file-bouncer/org-files/eventos.org"
-  "eventos.org"
+  "/home/lucas/file-bouncer/org-files/duvidas-workshops.org"
+  "duvidas-workshops.org"
   'org-mode
-  '(autopair-mode auto-revert-mode)
-  623
-  '(1401 nil)
+  '(autopair-mode)
+  96
+  '(nil nil)
   nil
   nil
   '((buffer-file-coding-system . utf-8-unix) (truncate-lines . t)))
@@ -43,75 +32,141 @@
   "/home/lucas/file-bouncer/org-files/startup-weekend-oficina.org"
   "startup-weekend-oficina.org"
   'org-mode
-  '(autopair-mode)
-  60
-  '(nil nil)
+  '(autopair-mode undo-tree-mode)
+  403
+  '(403 nil)
   nil
   nil
-  '((buffer-file-coding-system . utf-8-unix) (truncate-lines . t)))
+  '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t)))
 
 (desktop-create-buffer 206
+  "/home/lucas/100-days-of-code/scripts/tictactoe.py"
+  "tictactoe.py"
+  'python-mode
+  '(autopair-mode linum-mode)
+  5056
+  '(3089 nil)
   nil
-  "*info*"
-  'Info-mode
   nil
-  133868
-  '(nil nil)
-  t
-  '("/usr/share/info/emacs-24/org" "External links" ((history ("/usr/share/info/emacs-24/org" "Hyperlinks" 128723) ("/usr/share/info/emacs-24/org" "Top" 1825) ("dir" "Top" 1334))))
-  '((tab-width . 8) (buffer-file-coding-system . utf-8-unix) (case-fold-search . t)))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-file-coding-system . utf-8-unix)))
 
 (desktop-create-buffer 206
   "/home/lucas/100-days-of-code/log.md"
   "log.md"
-  'org-mode
+  'markdown-mode
   '(autopair-mode auto-revert-mode)
-  3850
-  '(3885 nil)
+  6152
+  '(1 nil)
   nil
   nil
-  '((tab-width . 4) (buffer-file-coding-system . utf-8-unix) (truncate-lines . t)))
+  '((tab-width . 4) (buffer-file-coding-system . utf-8-unix)))
 
 (desktop-create-buffer 206
-  "/home/lucas/fairyfloss/fairyfloss-theme.el"
-  "fairyfloss-theme.el"
+  "/home/lucas/100-days-of-code/data-scraping/ny_times.py"
+  "ny_times.py"
+  'python-mode
+  '(autopair-mode linum-mode)
+  44
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-file-coding-system . utf-8-unix)))
+
+(desktop-create-buffer 206
+  "/home/lucas/100-days-of-code/data-scraping/us_elections.py"
+  "us_elections.py"
+  'python-mode
+  '(autopair-mode linum-mode)
+  233
+  '(215 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-file-coding-system . utf-8-unix)))
+
+(desktop-create-buffer 206
+  "/home/lucas/100-days-of-code/data-scraping/chuck_norris_jokes.py"
+  "chuck_norris_jokes.py"
+  'python-mode
+  '(autopair-mode linum-mode)
+  362
+  '(197 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-file-coding-system . utf-8-unix)))
+
+(desktop-create-buffer 206
+  "/home/lucas/100-days-of-code/data-scraping/soccer_matches.py"
+  "soccer_matches.py"
+  'python-mode
+  '(autopair-mode linum-mode)
+  1
+  '(700 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-file-coding-system . utf-8-unix) (overwrite-mode)))
+
+(desktop-create-buffer 206
+  "/home/lucas/100-days-of-code/scripts/hangman.py"
+  "hangman.py"
+  'python-mode
+  '(autopair-mode linum-mode undo-tree-mode)
+  1025
+  '(1879 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-file-coding-system . utf-8-unix) (overwrite-mode)))
+
+(desktop-create-buffer 206
+  "/home/lucas/my-dotfiles/.emacs.d/init.el"
+  "init.el"
   'emacs-lisp-mode
-  '(autopair-mode auto-revert-mode)
-  177
-  '(25 nil)
+  '(auto-fill-mode autopair-mode linum-mode auto-revert-mode undo-tree-mode)
+  5051
+  '(5051 nil)
   nil
   nil
-  '((buffer-file-coding-system . prefer-utf-8-unix)))
+  '((buffer-file-coding-system . prefer-utf-8-unix) (overwrite-mode) (fill-column . 79)))
 
 (desktop-create-buffer 206
-  "/home/lucas/100-days-of-code/scripts/scratch.rb"
-  "scratch.rb"
-  'enh-ruby-mode
-  '(abbrev-mode autopair-mode auto-revert-mode inf-ruby-minor-mode ruby-tools-mode)
-  885
-  '(1510 nil)
+  "/home/lucas/file-bouncer/org-files/eventos.org"
+  "eventos.org"
+  'org-mode
+  '(autopair-mode auto-revert-mode undo-tree-mode)
+  1780
+  '(1526 nil)
   nil
   nil
-  '((indent-tabs-mode) (buffer-file-coding-system . utf-8-unix)))
+  '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t)))
 
 (desktop-create-buffer 206
   "/home/lucas/100-days-of-code/scripts/songsToCSV.rb"
   "songsToCSV.rb"
   'enh-ruby-mode
-  '(abbrev-mode autopair-mode auto-revert-mode inf-ruby-minor-mode ruby-tools-mode)
-  1
-  '(1141 nil)
+  '(abbrev-mode autopair-mode linum-mode auto-revert-mode undo-tree-mode inf-ruby-minor-mode ruby-tools-mode)
+  1905
+  '(2 nil)
   nil
   nil
-  '((indent-tabs-mode) (buffer-file-coding-system . utf-8-unix)))
+  '((indent-tabs-mode) (buffer-file-coding-system . utf-8-unix) (overwrite-mode)))
 
 (desktop-create-buffer 206
   "/home/lucas/file-bouncer/org-files/emprego.org"
   "emprego.org"
   'org-mode
-  '(autopair-mode auto-revert-mode)
+  '(autopair-mode auto-revert-mode undo-tree-mode)
   1958
   '(1456 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/home/lucas/file-bouncer/everything-bucket"
+  "everything-bucket"
+  'org-mode
+  '(autopair-mode)
+  710
+  '(nil nil)
   nil
   nil
   '((buffer-file-coding-system . utf-8-unix) (truncate-lines . t)))
