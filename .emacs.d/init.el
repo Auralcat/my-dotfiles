@@ -84,6 +84,9 @@
 ;; Pug-mode - Work with .pug files
 (require-package 'pug-mode)
 
+;; Php-mode - PHP support for Emacs
+(require-package 'php-mode)
+
 ;; Setup the program multi-term will need
 (setq multi-term-program "/bin/bash")
 
@@ -268,3 +271,4 @@
  ;; If there is more than one, they won't work right.
  )
 (put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
