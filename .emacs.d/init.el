@@ -126,6 +126,12 @@
 ;; Switch to last buffer - I do it all the time
 (global-set-key [27 112] (quote mode-line-other-buffer))
 
+;; M-x gets the fingers too closed up for my taste.
+;; Now I'm testing some combinations, AltGr-v seems cool
+;; Nah, I mapped AltGr-x in the end.
+(global-set-key [187] (quote execute-extended-command))
+
+
 ;; Open Emacs config file
 ;; (find-file "~/.emacs" t)
 
