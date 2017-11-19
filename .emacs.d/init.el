@@ -131,6 +131,8 @@
 ;; Nah, I mapped AltGr-x in the end.
 (global-set-key [187] (quote execute-extended-command))
 
+;; Mapping other-window to Ctrl-o, I don't need open-line
+(global-set-key [15] (quote other-window))
 
 ;; Open Emacs config file
 ;; (find-file "~/.emacs" t)
