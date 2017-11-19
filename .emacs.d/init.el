@@ -134,6 +134,10 @@
 ;; Mapping other-window to Ctrl-o, I don't need open-line
 (global-set-key [15] (quote other-window))
 
+;; Mapping AltGr-d to delete-other-windows,
+;; Another symbol I don't use often.
+(global-set-key [240] (quote delete-other-windows))
+
 ;; Open Emacs config file
 ;; (find-file "~/.emacs" t)
 
