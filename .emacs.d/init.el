@@ -138,6 +138,9 @@
 ;; Another symbol I don't use often.
 (global-set-key [240] (quote delete-other-windows))
 
+;; Map magit-status to C-x g
+(global-set-key [24 103] (quote magit-status))
+
 ;; Open Emacs config file
 ;; (find-file "~/.emacs" t)
 
