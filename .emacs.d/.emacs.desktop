@@ -2,16 +2,16 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Sun Nov 19 20:40:34 2017
+;; Created Sun Nov 19 20:57:26 2017
 ;; Desktop file format version 206
 ;; Emacs version 24.5.1
 
 ;; Global section:
-(setq desktop-saved-frameset [frameset 1 (23058 2146 998537 12000) (desktop . "206") "isendra@logos" nil nil ((((tty-type . "screen-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "#f8f8f0") (menu-bar-lines . 0) (background-color . "#5a5475") (font . "tty") (height . 35) (width . 136) (modeline . t) (unsplittable) (frameset--id . "6F04-D305-999E-AC72") (frameset--mini t) (minibuffer . t)) ((min-height . 8) (min-width . 10) (min-height-ignore . 4) (min-width-ignore . 2) (min-height-safe . 2) (min-width-safe . 2) (min-pixel-height . 8) (min-pixel-width . 10) (min-pixel-height-ignore . 4) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 2) (min-pixel-width-safe . 2)) vc (pixel-width . 136) (pixel-height . 34) (total-width . 136) (total-height . 34) (normal-height . 1.0) (normal-width . 1.0) (combination-limit) (leaf (pixel-width . 136) (pixel-height . 17) (total-width . 136) (total-height . 17) (normal-height . 0.5) (normal-width . 1.0) (buffer "*scratch*" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins nil) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 389) (start . 1))) (leaf (last . t) (pixel-width . 136) (pixel-height . 17) (total-width . 136) (total-height . 17) (normal-height . 0.5) (normal-width . 1.0) (buffer "*Help*" (selected) (hscroll . 0) (fringes 0 0 nil) (margins nil) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 1) (start . 1)))))])
+(setq desktop-saved-frameset [frameset 1 (23058 3158 269261 792000) (desktop . "206") "isendra@logos" nil nil ((((tty-type . "screen-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "#f8f8f0") (menu-bar-lines . 0) (background-color . "#5a5475") (font . "tty") (height . 35) (width . 136) (modeline . t) (unsplittable) (frameset--id . "6F04-D305-999E-AC72") (frameset--mini t) (minibuffer . t)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 136) (pixel-height . 34) (total-width . 136) (total-height . 34) (normal-height . 1.0) (normal-width . 1.0) (buffer "*scratch*" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins nil) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 1) (start . 1))))])
 (setq desktop-missing-file-warning nil)
 (setq tags-file-name nil)
 (setq tags-table-list nil)
-(setq search-ring '("Ja" "KEY" "php" "brow" "php" "C-c"))
+(setq search-ring '("C-c C-x" "Ja" "KEY" "php" "brow" "php" "C-c"))
 (setq regexp-search-ring nil)
 (setq register-alist nil)
 (setq file-name-history '("/home/lucas/PHP-programs/test2.html" "/home/lucas/PHP-programs/test-in-page.html" "/home/lucas/PHP-programs/counter.php" "/home/lucas/PHP-programs/conditions.php" "/home/lucas/PHP-programs/operations.php" "/home/lucas/my-dotfiles/.emacs.d/init.el" "~/PHP-programs/" "/home/lucas/PHP-programs/introduction.php" "/home/lucas/file-bouncer/org-files/notas-startup-weekend.org" "/home/lucas/file-bouncer/org-files/duvidas-workshops.org"))
@@ -22,11 +22,11 @@
   "init.el"
   'emacs-lisp-mode
   '(autopair-mode auto-revert-mode)
-  4248
-  '(568 nil)
+  4849
+  '(4796 nil)
   nil
   nil
-  '((buffer-file-coding-system . prefer-utf-8-unix)))
+  '((buffer-file-coding-system . prefer-utf-8-unix) (fill-column . 36)))
 
 (desktop-create-buffer 206
   "/home/lucas/PHP-programs/introduction.php"
