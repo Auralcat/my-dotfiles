@@ -2,31 +2,31 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Sun Nov 19 08:42:26 2017
+;; Created Sun Nov 19 19:56:15 2017
 ;; Desktop file format version 206
 ;; Emacs version 24.5.1
 
 ;; Global section:
-(setq desktop-saved-frameset [frameset 1 (23057 24594 965357 257000) (desktop . "206") "isendra@logos" nil nil ((((tty-type . "screen-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "#f8f8f0") (menu-bar-lines . 0) (background-color . "#5a5475") (font . "tty") (height . 37) (width . 136) (modeline . t) (unsplittable) (frameset--id . "6F04-D305-999E-AC72") (frameset--mini t) (minibuffer . t)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 136) (pixel-height . 36) (total-width . 136) (total-height . 36) (normal-height . 1.0) (normal-width . 1.0) (buffer "counter.php" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins nil) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 1) (start . 1))))])
+(setq desktop-saved-frameset [frameset 1 (23057 65023 208099 959000) (desktop . "206") "isendra@logos" nil nil ((((tty-type . "screen-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "#f8f8f0") (menu-bar-lines . 0) (background-color . "#5a5475") (font . "tty") (height . 35) (width . 136) (modeline . t) (unsplittable) (frameset--id . "6F04-D305-999E-AC72") (frameset--mini t) (minibuffer . t)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 136) (pixel-height . 34) (total-width . 136) (total-height . 34) (normal-height . 1.0) (normal-width . 1.0) (buffer ":home" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins nil) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 4731) (start . 4248))))])
 (setq desktop-missing-file-warning nil)
 (setq tags-file-name nil)
 (setq tags-table-list nil)
-(setq search-ring '("C-c"))
+(setq search-ring '("KEY" "php" "brow" "php" "C-c"))
 (setq regexp-search-ring nil)
 (setq register-alist nil)
-(setq file-name-history '("/home/lucas/PHP-programs/counter.php" "/home/lucas/PHP-programs/conditions.php" "/home/lucas/PHP-programs/operations.php" "/home/lucas/my-dotfiles/.emacs.d/init.el" "~/PHP-programs/" "/home/lucas/PHP-programs/introduction.php" "/home/lucas/file-bouncer/org-files/notas-startup-weekend.org" "/home/lucas/file-bouncer/org-files/duvidas-workshops.org"))
+(setq file-name-history '("/home/lucas/PHP-programs/test2.html" "/home/lucas/PHP-programs/test-in-page.html" "/home/lucas/PHP-programs/counter.php" "/home/lucas/PHP-programs/conditions.php" "/home/lucas/PHP-programs/operations.php" "/home/lucas/my-dotfiles/.emacs.d/init.el" "~/PHP-programs/" "/home/lucas/PHP-programs/introduction.php" "/home/lucas/file-bouncer/org-files/notas-startup-weekend.org" "/home/lucas/file-bouncer/org-files/duvidas-workshops.org"))
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
 (desktop-create-buffer 206
-  "/home/lucas/PHP-programs/counter.php"
-  "counter.php"
-  'php-mode
-  '(abbrev-mode autopair-mode)
-  1
-  '(315 nil)
+  "/home/lucas/my-dotfiles/.emacs.d/init.el"
+  "init.el"
+  'emacs-lisp-mode
+  '(autopair-mode auto-revert-mode)
+  4352
+  '(1 nil)
   nil
   nil
-  '((show-trailing-whitespace) (tab-width . 4) (indent-tabs-mode) (buffer-file-coding-system . utf-8-unix) (case-fold-search . t)))
+  '((buffer-file-coding-system . prefer-utf-8-unix)))
 
 (desktop-create-buffer 206
   "/home/lucas/PHP-programs/introduction.php"
@@ -38,15 +38,4 @@
   nil
   nil
   '((show-trailing-whitespace) (tab-width . 4) (indent-tabs-mode) (buffer-file-coding-system . utf-8-unix) (case-fold-search . t)))
-
-(desktop-create-buffer 206
-  "/home/lucas/my-dotfiles/.emacs.d/init.el"
-  "init.el"
-  'emacs-lisp-mode
-  '(autopair-mode auto-revert-mode)
-  3033
-  '(nil nil)
-  nil
-  nil
-  '((buffer-file-coding-system . prefer-utf-8-unix)))
 

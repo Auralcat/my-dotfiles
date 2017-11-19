@@ -123,6 +123,9 @@
 ;; Kill all the buffers matching the provided regex
 (global-set-key [24 75] (quote kill-matching-buffers))
 
+;; Switch to last buffer - I do it all the time
+(global-set-key [27 112] (quote mode-line-other-buffer))
+
 ;; Open Emacs config file
 ;; (find-file "~/.emacs" t)
 
