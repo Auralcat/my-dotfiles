@@ -226,6 +226,23 @@
 ;; Python: use python3 as default shell interpreter
 (setq python-shell-interpreter "python3")
 
+;;-MACROS-----------------------------------------------------------------------
+
+;; To save a macro, record it with C-x ( (start) and C-x ) (stop),
+;; give it a name with C-x C-k n (C-k is for maKro) and
+;; insert it in this file with insert-kbd-macro.
+;; Then you execute it calling the function or mapping it to a key! 😊
+
+;; Example macro
+(fset 'kilroy-was-here
+      (lambda (&optional arg)
+        "Keyboard macro."
+        (interactive "p")
+        (kmacro-exec-ring-item
+         (quote
+          (" -- foobar was hereKilroy wsaas here" 0 "%d")) arg)))
+
+
 ;;-TWITTERING-MODE--------------------------------------------------------------
 ;; Adjust update interval in seconds. It's timeR, not time!
 (setq twittering-timer-interval 3600)

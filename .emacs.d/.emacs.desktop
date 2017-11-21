@@ -2,21 +2,54 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Tue Nov 21 15:46:40 2017
+;; Created Tue Nov 21 20:47:32 2017
 ;; Desktop file format version 206
 ;; Emacs version 24.5.1
 
 ;; Global section:
-(setq desktop-saved-frameset [frameset 1 (23060 26240 534150 223000) (desktop . "206") "isendra@logos" nil nil ((((tty-type . "screen-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "unspecified-fg") (menu-bar-lines . 0) (background-color . "unspecified-bg") (font . "tty") (height . 35) (width . 136) (modeline . t) (unsplittable) (frameset--id . "7566-0459-8D04-9F2B") (frameset--mini t) (minibuffer . t)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 136) (pixel-height . 34) (total-width . 136) (total-height . 34) (normal-height . 1.0) (normal-width . 1.0) (buffer "*scratch*" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins nil) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 240) (start . 1))))])
+(setq desktop-saved-frameset [frameset 1 (23060 44292 581813 164000) (desktop . "206") "isendra@logos" nil nil ((((tty-type . "screen-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "#f8f8f0") (menu-bar-lines . 0) (background-color . "#5a5475") (font . "tty") (height . 35) (width . 136) (modeline . t) (unsplittable) (frameset--id . "7566-0459-8D04-9F2B") (frameset--mini t) (minibuffer . t)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 136) (pixel-height . 34) (total-width . 136) (total-height . 34) (normal-height . 1.0) (normal-width . 1.0) (buffer "*scratch*" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins nil) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 392) (start . 1))))])
 (setq desktop-missing-file-warning nil)
 (setq tags-file-name nil)
 (setq tags-table-list nil)
-(setq search-ring '("scratch" "Sa" "\"" " " "bo" "scra" "nudes" "homema" "The" "Sav" "C-c C-x" "Ja" "KEY" "php" "brow" "php"))
+(setq search-ring '("GetImg" "html" "getimgurl" "foods" "GetI" "Sa" "\"" "scratch" "Sa" "\"" " " "bo" "scra" "nudes" "homema" "The"))
 (setq regexp-search-ring '("^    \".*\"" "^    \".*\"Åª" "^    \".*\""))
 (setq register-alist nil)
-(setq file-name-history '("/home/lucas/fairyfloss/fairyfloss-theme.el" "/home/lucas/Python Scripts/sketches/jogo_do_nim.py" "/home/lucas/homemadescripts/stallmanbot.py" "~/homemadescripts/" "/home/lucas/homemadescripts/stallmanbot.py" "~/homemadescripts/" "~/Python Scripts/" "~/homemadescripts/stallmanbot-annotated.py" "~/homemadescripts/" "/home/lucas/homemadescripts/pyconse_info.py" "/home/lucas/homemadescripts/stallmanbot.py" "/home/lucas/PHP-programs/test2.html" "/home/lucas/PHP-programs/test-in-page.html" "/home/lucas/PHP-programs/counter.php" "/home/lucas/PHP-programs/conditions.php" "/home/lucas/PHP-programs/operations.php" "/home/lucas/my-dotfiles/.emacs.d/init.el" "~/PHP-programs/" "/home/lucas/PHP-programs/introduction.php" "/home/lucas/file-bouncer/org-files/notas-startup-weekend.org" "/home/lucas/file-bouncer/org-files/duvidas-workshops.org"))
+(setq file-name-history '("~/Python Scripts/sketches/vet.py" "/home/lucas/homemadescripts/dot.twitterc" "/home/lucas/homemadescripts/.gitignore" "/home/lucas/homemadescripts/.twitterc" "/home/lucas/homemadescripts/dot.twitterc" "~/fairyfloss/" "/home/lucas/fairyfloss/fairyfloss-theme.el" "/home/lucas/Python Scripts/sketches/jogo_do_nim.py" "/home/lucas/homemadescripts/stallmanbot.py" "~/homemadescripts/" "/home/lucas/homemadescripts/stallmanbot.py" "~/homemadescripts/" "~/Python Scripts/" "~/homemadescripts/stallmanbot-annotated.py" "~/homemadescripts/" "/home/lucas/homemadescripts/pyconse_info.py" "/home/lucas/homemadescripts/stallmanbot.py" "/home/lucas/PHP-programs/test2.html" "/home/lucas/PHP-programs/test-in-page.html" "/home/lucas/PHP-programs/counter.php" "/home/lucas/PHP-programs/conditions.php" "/home/lucas/PHP-programs/operations.php" "/home/lucas/my-dotfiles/.emacs.d/init.el" "~/PHP-programs/" "/home/lucas/PHP-programs/introduction.php" "/home/lucas/file-bouncer/org-files/notas-startup-weekend.org" "/home/lucas/file-bouncer/org-files/duvidas-workshops.org"))
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
+(desktop-create-buffer 206
+  "/home/lucas/homemadescripts/stallmanbot.py"
+  "stallmanbot.py"
+  'python-mode
+  '(autopair-mode linum-mode auto-revert-mode)
+  30916
+  '(17387 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-file-coding-system . utf-8-unix)))
+
+(desktop-create-buffer 206
+  "/home/lucas/fairyfloss/fairyfloss-theme.el"
+  "fairyfloss-theme.el"
+  'emacs-lisp-mode
+  '(autopair-mode auto-revert-mode)
+  223
+  '(25 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . prefer-utf-8-unix)))
+
+(desktop-create-buffer 206
+  nil
+  "twittering-mode-3.0.1"
+  'dired-mode
+  nil
+  268
+  '(nil nil)
+  t
+  '("/home/lucas/my-dotfiles/.emacs.d/elpa/twittering-mode-3.0.1/")
+  nil)
+
 (desktop-create-buffer 206
   "/home/lucas/my-dotfiles/.emacs.d/init.el"
   "init.el"
@@ -35,17 +68,6 @@
   '(autopair-mode)
   126
   '(1204 nil)
-  nil
-  nil
-  '((tab-width . 8) (indent-tabs-mode) (buffer-file-coding-system . utf-8-unix)))
-
-(desktop-create-buffer 206
-  "/home/lucas/homemadescripts/stallmanbot.py"
-  "stallmanbot.py"
-  'python-mode
-  '(autopair-mode auto-revert-mode)
-  30991
-  '(26737 nil)
   nil
   nil
   '((tab-width . 8) (indent-tabs-mode) (buffer-file-coding-system . utf-8-unix)))
