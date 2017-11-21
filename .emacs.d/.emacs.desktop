@@ -2,31 +2,53 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Sun Nov 19 20:57:26 2017
+;; Created Tue Nov 21 15:46:40 2017
 ;; Desktop file format version 206
 ;; Emacs version 24.5.1
 
 ;; Global section:
-(setq desktop-saved-frameset [frameset 1 (23058 3158 269261 792000) (desktop . "206") "isendra@logos" nil nil ((((tty-type . "screen-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "#f8f8f0") (menu-bar-lines . 0) (background-color . "#5a5475") (font . "tty") (height . 35) (width . 136) (modeline . t) (unsplittable) (frameset--id . "6F04-D305-999E-AC72") (frameset--mini t) (minibuffer . t)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 136) (pixel-height . 34) (total-width . 136) (total-height . 34) (normal-height . 1.0) (normal-width . 1.0) (buffer "*scratch*" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins nil) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 1) (start . 1))))])
+(setq desktop-saved-frameset [frameset 1 (23060 26240 534150 223000) (desktop . "206") "isendra@logos" nil nil ((((tty-type . "screen-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "unspecified-fg") (menu-bar-lines . 0) (background-color . "unspecified-bg") (font . "tty") (height . 35) (width . 136) (modeline . t) (unsplittable) (frameset--id . "7566-0459-8D04-9F2B") (frameset--mini t) (minibuffer . t)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 136) (pixel-height . 34) (total-width . 136) (total-height . 34) (normal-height . 1.0) (normal-width . 1.0) (buffer "*scratch*" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins nil) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 240) (start . 1))))])
 (setq desktop-missing-file-warning nil)
 (setq tags-file-name nil)
 (setq tags-table-list nil)
-(setq search-ring '("C-c C-x" "Ja" "KEY" "php" "brow" "php" "C-c"))
-(setq regexp-search-ring nil)
+(setq search-ring '("scratch" "Sa" "\"" " " "bo" "scra" "nudes" "homema" "The" "Sav" "C-c C-x" "Ja" "KEY" "php" "brow" "php"))
+(setq regexp-search-ring '("^    \".*\"" "^    \".*\"Åª" "^    \".*\""))
 (setq register-alist nil)
-(setq file-name-history '("/home/lucas/PHP-programs/test2.html" "/home/lucas/PHP-programs/test-in-page.html" "/home/lucas/PHP-programs/counter.php" "/home/lucas/PHP-programs/conditions.php" "/home/lucas/PHP-programs/operations.php" "/home/lucas/my-dotfiles/.emacs.d/init.el" "~/PHP-programs/" "/home/lucas/PHP-programs/introduction.php" "/home/lucas/file-bouncer/org-files/notas-startup-weekend.org" "/home/lucas/file-bouncer/org-files/duvidas-workshops.org"))
+(setq file-name-history '("/home/lucas/fairyfloss/fairyfloss-theme.el" "/home/lucas/Python Scripts/sketches/jogo_do_nim.py" "/home/lucas/homemadescripts/stallmanbot.py" "~/homemadescripts/" "/home/lucas/homemadescripts/stallmanbot.py" "~/homemadescripts/" "~/Python Scripts/" "~/homemadescripts/stallmanbot-annotated.py" "~/homemadescripts/" "/home/lucas/homemadescripts/pyconse_info.py" "/home/lucas/homemadescripts/stallmanbot.py" "/home/lucas/PHP-programs/test2.html" "/home/lucas/PHP-programs/test-in-page.html" "/home/lucas/PHP-programs/counter.php" "/home/lucas/PHP-programs/conditions.php" "/home/lucas/PHP-programs/operations.php" "/home/lucas/my-dotfiles/.emacs.d/init.el" "~/PHP-programs/" "/home/lucas/PHP-programs/introduction.php" "/home/lucas/file-bouncer/org-files/notas-startup-weekend.org" "/home/lucas/file-bouncer/org-files/duvidas-workshops.org"))
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
 (desktop-create-buffer 206
   "/home/lucas/my-dotfiles/.emacs.d/init.el"
   "init.el"
   'emacs-lisp-mode
+  '(auto-fill-mode autopair-mode auto-revert-mode)
+  1560
+  '(2998 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . prefer-utf-8-unix) (fill-column . 79)))
+
+(desktop-create-buffer 206
+  "/home/lucas/Python Scripts/sketches/jogo_do_nim.py"
+  "jogo_do_nim.py"
+  'python-mode
+  '(autopair-mode)
+  126
+  '(1204 nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-file-coding-system . utf-8-unix)))
+
+(desktop-create-buffer 206
+  "/home/lucas/homemadescripts/stallmanbot.py"
+  "stallmanbot.py"
+  'python-mode
   '(autopair-mode auto-revert-mode)
-  4849
-  '(4796 nil)
+  30991
+  '(26737 nil)
   nil
   nil
-  '((buffer-file-coding-system . prefer-utf-8-unix) (fill-column . 36)))
+  '((tab-width . 8) (indent-tabs-mode) (buffer-file-coding-system . utf-8-unix)))
 
 (desktop-create-buffer 206
   "/home/lucas/PHP-programs/introduction.php"
@@ -38,4 +60,48 @@
   nil
   nil
   '((show-trailing-whitespace) (tab-width . 4) (indent-tabs-mode) (buffer-file-coding-system . utf-8-unix) (case-fold-search . t)))
+
+(desktop-create-buffer 206
+  "/home/lucas/.emacs.d/completions"
+  " *completion-save-buffer*"
+  'fundamental-mode
+  nil
+  325
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix)))
+
+(desktop-create-buffer 206
+  nil
+  "home"
+  'dired-mode
+  nil
+  241
+  '(nil nil)
+  t
+  '("/home/")
+  nil)
+
+(desktop-create-buffer 206
+  nil
+  "lucas"
+  'dired-mode
+  nil
+  11351
+  '(2329 nil)
+  t
+  '("/home/lucas/")
+  nil)
+
+(desktop-create-buffer 206
+  nil
+  "homemadescripts"
+  'dired-mode
+  nil
+  185
+  '(nil nil)
+  t
+  '("/home/lucas/homemadescripts/")
+  nil)
 
