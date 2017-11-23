@@ -2,12 +2,12 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Thu Nov 23 10:19:29 2017
+;; Created Thu Nov 23 10:24:25 2017
 ;; Desktop file format version 206
 ;; Emacs version 24.5.1
 
 ;; Global section:
-(setq desktop-saved-frameset [frameset 1 (23062 48337 379962 881000) (desktop . "206") "isendra@logos" nil nil ((((tty-type . "screen-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "#f8f8f0") (menu-bar-lines . 0) (background-color . "#5a5475") (font . "tty") (height . 35) (width . 136) (modeline . t) (unsplittable) (frameset--id . "A1BD-306B-CE1B-1F9A") (frameset--mini t) (minibuffer . t)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 136) (pixel-height . 34) (total-width . 136) (total-height . 34) (normal-height . 1.0) (normal-width . 1.0) (buffer "init.el" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins nil) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 2042) (start . 1126))))])
+(setq desktop-saved-frameset [frameset 1 (23062 48633 677075 498000) (desktop . "206") "isendra@logos" nil nil ((((tty-type . "screen-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "#f8f8f0") (menu-bar-lines . 0) (background-color . "#5a5475") (font . "tty") (height . 35) (width . 136) (modeline . t) (unsplittable) (frameset--id . "A1BD-306B-CE1B-1F9A") (frameset--mini t) (minibuffer . t)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 136) (pixel-height . 34) (total-width . 136) (total-height . 34) (normal-height . 1.0) (normal-width . 1.0) (buffer "init.el" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins nil) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 2057) (start . 2003))))])
 (setq desktop-missing-file-warning nil)
 (setq tags-file-name nil)
 (setq tags-table-list nil)
@@ -22,8 +22,8 @@
   "init.el"
   'emacs-lisp-mode
   '(auto-fill-mode autopair-mode auto-revert-mode helm-mode)
-  2042
-  '(2042 nil)
+  2057
+  '(2095 nil)
   nil
   nil
   '((buffer-file-coding-system . utf-8-unix) (fill-column . 79)))
@@ -32,7 +32,7 @@
   "/home/lucas/my-dotfiles/.emacs.d/elpa/helm-2.8.6/helm-mode.el"
   "helm-mode.el"
   'emacs-lisp-mode
-  '(autopair-mode linum-mode helm-mode)
+  '(autopair-mode helm-mode)
   989
   '(57369 nil)
   nil
@@ -55,9 +55,9 @@
   "*info*"
   'Info-mode
   '(helm-mode)
-  286
-  '(1637 nil)
+  1137872
+  '(1 nil)
   t
-  '("dir" "Top" nil)
-  '((tab-width . 8) (case-fold-search . t)))
+  '("/usr/share/info/emacs-24/emacs" "Calendar/Diary" ((history ("dir" "Top" 286) ("dir" "Top" 20072))))
+  '((tab-width . 8) (buffer-file-coding-system . utf-8-unix) (case-fold-search . t)))
 
