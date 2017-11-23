@@ -57,6 +57,11 @@
 ;; Emacs and saves the theme I had before
 ;; (defun toggle-terminal-transparency ())
 
+;;-----FUNCTION-ALIASES---------------------------------------------------------
+
+;; This is how you define aliases for Elisp functions
+(defalias 'plp 'package-list-packages)
+
 ;;-----PACKAGES-----------------------------------------------------------------
 ;; Package sources
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
@@ -232,6 +237,7 @@
 ;; give it a name with C-x C-k n (C-k is for maKro) and
 ;; insert it in this file with insert-kbd-macro.
 ;; Then you execute it calling the function or mapping it to a key! 😊
+
 
 ;; Example macro
 (fset 'kilroy-was-here
