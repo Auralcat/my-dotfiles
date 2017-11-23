@@ -281,11 +281,9 @@
  '(display-time-world-list
    (quote
     (("Europe/Stockholm" "Stockholm")
-     ("South America/Sao_Paulo" "São Paulo")
-     ("America/Los_Angeles" "Seattle")
+     ("America/Sao_Paulo" "São Paulo (local time)")
      ("America/New_York" "Boston")
-     ("Europe/London" "London")
-     ("Asia/Tokyo" "Tokyo"))))
+     ("Europe/London" "London"))))
  '(dynamic-completion-mode t)
  '(enh-ruby-use-encoding-map nil)
  '(erc-away-nickname nil)
