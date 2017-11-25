@@ -149,6 +149,13 @@
 ;; Map magit-status to C-x g
 (global-set-key [24 103] (quote magit-status))
 
+;; Access buffers with Alt-Gr b
+(global-set-key [8221] (quote ido-switch-buffer))
+
+;; Map the Home and End keys to go to the beginning and end of the buffer
+(global-set-key [home] (quote beginning-of-buffer))
+(global-set-key [end] (quote end-of-buffer))
+
 ;; Open Emacs config file
 ;; (find-file "~/.emacs" t)
 
