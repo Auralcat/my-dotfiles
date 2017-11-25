@@ -262,6 +262,10 @@
 ;; Use a master password so you don't have to ask for authentication every time
 (setq twittering-use-master-password t)
 
+;; Set C-c r in twittering-mode to twittering-reply-to-user
+(add-hook 'twittering-mode-hook
+  (local-set-key [3 114] (quote twittering-reply-to-user)))
+
 ;;-----CUSTOMIZATION-THROUGH-M-x-CUSTOMIZE--------------------------------------
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
