@@ -2,19 +2,19 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Sat Nov 25 13:53:38 2017
+;; Created Sat Nov 25 23:09:08 2017
 ;; Desktop file format version 206
 ;; Emacs version 24.5.1
 
 ;; Global section:
-(setq desktop-saved-frameset [frameset 1 (23065 37378 272931 9000) (desktop . "206") "isendra@logos" nil nil ((((tty-type . "screen-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "#f8f8f0") (menu-bar-lines . 0) (background-color . "#5a5475") (font . "tty") (height . 35) (width . 136) (modeline . t) (unsplittable) (frameset--id . "A1BD-306B-CE1B-1F9A") (frameset--mini t) (mouse-color . "black") (cursor-color . "black") (border-color . "black") (top-toolbar-shadow-color . "#fffffbeeffff") (bottom-toolbar-shadow-color . "#79e77df779e7") (background-toolbar-color . "#cf3ccf3ccf3c") (viper-saved-cursor-color-in-replace-mode . "Red3") (senator-eldoc-use-color . t) (vc-annotate-very-old-color . "#0046FF") (minibuffer . t)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 136) (pixel-height . 34) (total-width . 136) (total-height . 34) (normal-height . 1.0) (normal-width . 1.0) (buffer "miriamretka/amigas" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins nil) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 485) (start . 1))))])
+(setq desktop-saved-frameset [frameset 1 (23066 5172 603855 281000) (desktop . "206") "isendra@logos" nil nil ((((tty-type . "screen-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "#f8f8f0") (menu-bar-lines . 0) (background-color . "#5a5475") (font . "tty") (height . 35) (width . 136) (modeline . t) (unsplittable) (frameset--id . "41C9-F73E-95EE-BAF2") (frameset--mini t) (minibuffer . t)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 136) (pixel-height . 34) (total-width . 136) (total-height . 34) (normal-height . 1.0) (normal-width . 1.0) (buffer "init.el" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins nil) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 1) (start . 1))))])
 (setq desktop-missing-file-warning nil)
 (setq tags-file-name nil)
 (setq tags-table-list nil)
-(setq search-ring '("frequx" "frequ" "last-" "ped" "TW" "." "\"" "va" "nyan" "ido" "pa" "M" "C-c" "Helm" "helm" "easy"))
+(setq search-ring '("keyword" "\"" "#ff" "buddha" "font lock" "highli" "defface" "<<<<<<<" "Storage" "Number" "function" "rectangle" "ar" "\"" "frequx" "frequ"))
 (setq regexp-search-ring '("\\. " "^    \".*\"" "^    \".*\"»" "^    \".*\""))
 (setq register-alist (list (desktop-list* 112 (vector 'registerv (vector [frameset 1 (23061 39020 243668 355000) register nil nil nil ((((tty-type . "screen-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "#f8f8f0") (menu-bar-lines . 0) (background-color . "#5a5475") (font . "tty") (height . 35) (width . 136) (modeline . t) (unsplittable) (frameset--id . "73E1-B1F6-8475-BC2D") (frameset--mini t) (minibuffer . t) (buffer-list "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity") (buried-buffer-list "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity")) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 136) (pixel-height . 34) (total-width . 136) (total-height . 34) (normal-height . 1.0) (normal-width . 1.0) (buffer "stallmanbot.py" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins 4) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 45551) (start . 44841))))] "73E1-B1F6-8475-BC2D" (let ((mk (make-marker))) (add-hook 'desktop-delay-hook `(lambda nil (set-marker ,mk ,nil (get-buffer ," *temp*")))) mk)) "Unprintable entity" 'frameset--jump-to-register nil))))
-(setq file-name-history '("/home/lucas/fairyfloss/fairyfloss-theme.el" "~/my-dotfiles/.emacs.d/fairyfloss-backup.el" "/home/lucas/test.gpg" "/home/lucas/test.txt" "/home/lucas/homemadescripts/telebot_error_log.txt" "/home/lucas/homemadescripts/simple_bot.py" "/home/lucas/homemadescripts/test_debug.py" "/usr/lib/python2.7/socket.py" "/home/lucas/.twitterc" "/home/lucas/Ruby Scripts/sketches/blockchain.rb" "/home/lucas/homemade-bots/SelfCareBot/self_care.py" "~/" "~/homemadescripts/" "/home/lucas/homemadescripts/.twitterc" "~/Python Scripts/sketches/vet.py" "/home/lucas/homemadescripts/dot.twitterc" "/home/lucas/homemadescripts/.gitignore" "/home/lucas/homemadescripts/.twitterc" "/home/lucas/homemadescripts/dot.twitterc" "~/fairyfloss/" "/home/lucas/fairyfloss/fairyfloss-theme.el" "/home/lucas/Python Scripts/sketches/jogo_do_nim.py" "/home/lucas/homemadescripts/stallmanbot.py" "~/homemadescripts/" "/home/lucas/homemadescripts/stallmanbot.py" "~/homemadescripts/" "~/Python Scripts/" "~/homemadescripts/stallmanbot-annotated.py" "~/homemadescripts/" "/home/lucas/homemadescripts/pyconse_info.py" "/home/lucas/homemadescripts/stallmanbot.py" "/home/lucas/PHP-programs/test2.html" "/home/lucas/PHP-programs/test-in-page.html" "/home/lucas/PHP-programs/counter.php" "/home/lucas/PHP-programs/conditions.php" "/home/lucas/PHP-programs/operations.php" "/home/lucas/my-dotfiles/.emacs.d/init.el" "~/PHP-programs/" "/home/lucas/PHP-programs/introduction.php" "/home/lucas/file-bouncer/org-files/notas-startup-weekend.org" "/home/lucas/file-bouncer/org-files/duvidas-workshops.org"))
+(setq file-name-history '("/home/lucas/lisptest.el" "~/.config/sublime-text-3/Packages/User/fairyfloss.tmTheme" "/home/lucas/file-bouncer/org-files/fairyfloss-todo.org" "/home/lucas/fairyfloss/fairyfloss-theme.el" "~/my-dotfiles/.emacs.d/fairyfloss-backup.el" "/home/lucas/test.gpg" "/home/lucas/test.txt" "/home/lucas/homemadescripts/telebot_error_log.txt" "/home/lucas/homemadescripts/simple_bot.py" "/home/lucas/homemadescripts/test_debug.py" "/usr/lib/python2.7/socket.py" "/home/lucas/.twitterc" "/home/lucas/Ruby Scripts/sketches/blockchain.rb" "/home/lucas/homemade-bots/SelfCareBot/self_care.py" "~/" "~/homemadescripts/" "/home/lucas/homemadescripts/.twitterc" "~/Python Scripts/sketches/vet.py" "/home/lucas/homemadescripts/dot.twitterc" "/home/lucas/homemadescripts/.gitignore" "/home/lucas/homemadescripts/.twitterc" "/home/lucas/homemadescripts/dot.twitterc" "~/fairyfloss/" "/home/lucas/fairyfloss/fairyfloss-theme.el" "/home/lucas/Python Scripts/sketches/jogo_do_nim.py" "/home/lucas/homemadescripts/stallmanbot.py" "~/homemadescripts/" "/home/lucas/homemadescripts/stallmanbot.py" "~/homemadescripts/" "~/Python Scripts/" "~/homemadescripts/stallmanbot-annotated.py" "~/homemadescripts/" "/home/lucas/homemadescripts/pyconse_info.py" "/home/lucas/homemadescripts/stallmanbot.py" "/home/lucas/PHP-programs/test2.html" "/home/lucas/PHP-programs/test-in-page.html" "/home/lucas/PHP-programs/counter.php" "/home/lucas/PHP-programs/conditions.php" "/home/lucas/PHP-programs/operations.php" "/home/lucas/my-dotfiles/.emacs.d/init.el" "~/PHP-programs/" "/home/lucas/PHP-programs/introduction.php" "/home/lucas/file-bouncer/org-files/notas-startup-weekend.org" "/home/lucas/file-bouncer/org-files/duvidas-workshops.org"))
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
 (desktop-create-buffer 206
@@ -22,11 +22,22 @@
   "init.el"
   'emacs-lisp-mode
   '(auto-fill-mode autopair-mode auto-revert-mode helm-mode)
-  4925
-  '(4883 nil)
+  1
+  '(14751 nil)
   nil
   nil
   '((buffer-file-coding-system . utf-8-unix) (fill-column . 79)))
+
+(desktop-create-buffer 206
+  "/home/lucas/file-bouncer/org-files/fairyfloss-todo.org"
+  "fairyfloss-todo.org"
+  'org-mode
+  '(autopair-mode helm-mode)
+  398
+  '(1 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix) (truncate-lines . t)))
 
 (desktop-create-buffer 206
   "/home/lucas/.emacs.d/completions"
