@@ -325,6 +325,11 @@
      "  " mode-line-modes mode-line-misc-info mode-line-end-spaces)))
  '(org-agenda-files nil)
  '(org-default-notes-file "~/file-bouncer/everything-bucket")
+ '(org-pomodoro-audio-player "/usr/bin/mpv")
+ '(org-pomodoro-finished-sound
+   "/home/lucas/.emacs.d/elpa/org-pomodoro-2.1.0/resources/Blip.ogg")
+ '(org-pomodoro-format "Focus!~%s")
+ '(org-pomodoro-start-sound-p nil)
  '(remember-data-file "~/file-bouncer/everything-bucket")
  '(shell-file-name "/bin/bash")
  '(tags-tag-face (quote default)))
