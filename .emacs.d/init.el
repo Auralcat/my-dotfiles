@@ -326,9 +326,12 @@
  '(org-agenda-files nil)
  '(org-capture-templates
    (quote
-    (("t" "Task" entry
+    (("s" "Task to self" entry
+      (file+headline "~/file-bouncer/org-files/contact-based-list.org" "Eu")
+      "* TODO %? %i %a" :prepend t)
+     ("t" "Task" entry
       (file "~/file-bouncer/org-files/capture-tasks.org")
-      "* TODO  %? %i %a" :prepend t)
+      "* TODO %? %i %a")
      ("n" "Random notes" plain
       (file "~/file-bouncer/org-files/capture-notes.org")
       "" :clock-in t))))
