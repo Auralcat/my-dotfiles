@@ -169,12 +169,14 @@
 ;; Hippie-Expand: change key to M-SPC
 (global-set-key "\M- " 'hippie-expand)
 
-;; Org-mode: bind org-capture to C-c c
+;;-ORG-MODE---------------------------------------------------------------------
+;; Bind org-capture to C-c c
 (global-set-key (kbd "\C-c c") (quote org-capture))
 
-;; Org-mode: bind org-pomodoro to C-c p
+;; Bind org-pomodoro to C-c p
 (global-set-key (kbd "\C-c p") (quote org-pomodoro))
 
+;;------------------------------------------------------------------------------
 ;; Enh-ruby-mode: Run buffer in inf-ruby process
 (add-hook 'enh-ruby-mode-hook
   '(lambda ()
