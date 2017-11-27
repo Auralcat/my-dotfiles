@@ -2,12 +2,12 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Mon Nov 27 16:10:00 2017
+;; Created Mon Nov 27 16:26:40 2017
 ;; Desktop file format version 206
 ;; Emacs version 24.5.1
 
 ;; Global section:
-(setq desktop-saved-frameset [frameset 1 (23068 21752 969185 733000) (desktop . "206") "isendra@logos" nil nil ((((tty-type . "screen-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "#f8f8f0") (menu-bar-lines . 0) (background-color . "#5a5475") (font . "tty") (height . 32) (width . 136) (modeline . t) (unsplittable) (frameset--id . "41C9-F73E-95EE-BAF2") (frameset--mini t) (minibuffer . t)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 136) (pixel-height . 31) (total-width . 136) (total-height . 31) (normal-height . 1.0) (normal-width . 1.0) (buffer "*Customize Option: Org Capture Templates*" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins nil) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 322) (start . 1))))])
+(setq desktop-saved-frameset [frameset 1 (23068 22752 569097 798000) (desktop . "206") "isendra@logos" nil nil ((((tty-type . "screen-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "#f8f8f0") (menu-bar-lines . 0) (background-color . "#5a5475") (font . "tty") (height . 32) (width . 136) (modeline . t) (unsplittable) (frameset--id . "41C9-F73E-95EE-BAF2") (frameset--mini t) (minibuffer . t)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 136) (pixel-height . 31) (total-width . 136) (total-height . 31) (normal-height . 1.0) (normal-width . 1.0) (buffer "*Customize Option: Org Capture Templates*" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins nil) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 684) (start . 1))))])
 (setq desktop-missing-file-warning nil)
 (setq tags-file-name nil)
 (setq tags-table-list nil)
@@ -22,19 +22,8 @@
   "contact-based-list.org"
   'org-mode
   '(autopair-mode helm-mode undo-tree-mode)
-  76
-  '(76 nil)
-  nil
-  nil
-  '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t)))
-
-(desktop-create-buffer 206
-  "/home/lucas/file-bouncer/org-files/capture-tasks.org"
-  "capture-tasks.org"
-  'org-mode
-  '(autopair-mode helm-mode undo-tree-mode)
-  6
-  '(6 nil)
+  173
+  '(207 nil)
   nil
   nil
   '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t)))

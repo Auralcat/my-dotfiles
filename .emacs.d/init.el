@@ -328,13 +328,13 @@
    (quote
     (("s" "Task to self" entry
       (file+headline "~/file-bouncer/org-files/contact-based-list.org" "Eu")
-      "* TODO %? %i %a" :prepend t)
+      "* TODO %^{Description}" :prepend t :immediate-finish t)
      ("t" "Task" entry
       (file "~/file-bouncer/org-files/capture-tasks.org")
       "* TODO %? %i %a")
-     ("n" "Random notes" plain
+     ("n" "File your random thoughts here" entry
       (file "~/file-bouncer/org-files/capture-notes.org")
-      "" :clock-in t))))
+      "* %U -> %?"))))
  '(org-default-notes-file "~/file-bouncer/everything-bucket")
  '(org-pomodoro-audio-player "/usr/bin/mpv")
  '(org-pomodoro-finished-sound
