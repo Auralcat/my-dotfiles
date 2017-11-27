@@ -324,6 +324,14 @@
      (vc-mode vc-mode)
      "  " mode-line-modes mode-line-misc-info mode-line-end-spaces)))
  '(org-agenda-files nil)
+ '(org-capture-templates
+   (quote
+    (("t" "Task" entry
+      (file "~/file-bouncer/org-files/capture-tasks.org")
+      "* TODO  %? %i %a" :prepend t)
+     ("n" "Random notes" plain
+      (file "~/file-bouncer/org-files/capture-notes.org")
+      "" :clock-in t))))
  '(org-default-notes-file "~/file-bouncer/everything-bucket")
  '(org-pomodoro-audio-player "/usr/bin/mpv")
  '(org-pomodoro-finished-sound
