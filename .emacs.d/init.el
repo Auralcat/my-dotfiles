@@ -2,6 +2,9 @@
 ;; Author: Auralcat
 ;; Started in May 2017.
 
+;; Loading extra files
+(load "~/my-dotfiles/.emacs.d/evilrc")
+
 ;;-----ENV-CUSTOMIZATIONS-------------------------------------------------------
 
 ;; Store all backups in a specific folder:
