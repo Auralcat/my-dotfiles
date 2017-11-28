@@ -28,6 +28,14 @@
 ;; Replace the built-in buffer menu with ibuffer
 (global-set-key [24 2] (quote ibuffer))
 
+;; Prevent the scratch buffer from being killed
+(with-current-buffer "*scratch*"
+    (emacs-lock-mode 'kill))
+
+;; I always have my init.el open, gonna protect it as well
+(with-current-buffer "init.el"
+    (emacs-lock-mode 'kill)))
+
 ;;-----HOOKS--------------------------------------------------------------------
 
 ;; General programming mode
@@ -56,7 +64,10 @@
   (interactive)
   (switch-to-buffer (get-buffer-create "*scratch*"))
   (org-mode)
-  (insert initial-scratch-message))
+  (insert initial-scratch-message)
+  ;; Prevent the scratch buffer from being killed
+  (with-current-buffer "*scratch*"
+      (emacs-lock-mode 'kill)))
 
 ;; I usually keep the terminal window with some transparency to copy stuff from
 ;; a bxrowser or whatever... this allows me to toggle the transparency from
