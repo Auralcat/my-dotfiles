@@ -2,28 +2,72 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Mon Nov 27 16:26:40 2017
+;; Created Tue Nov 28 09:39:22 2017
 ;; Desktop file format version 206
 ;; Emacs version 24.5.1
 
 ;; Global section:
-(setq desktop-saved-frameset [frameset 1 (23068 22752 569097 798000) (desktop . "206") "isendra@logos" nil nil ((((tty-type . "screen-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "#f8f8f0") (menu-bar-lines . 0) (background-color . "#5a5475") (font . "tty") (height . 32) (width . 136) (modeline . t) (unsplittable) (frameset--id . "41C9-F73E-95EE-BAF2") (frameset--mini t) (minibuffer . t)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 136) (pixel-height . 31) (total-width . 136) (total-height . 31) (normal-height . 1.0) (normal-width . 1.0) (buffer "*Customize Option: Org Capture Templates*" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins nil) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 684) (start . 1))))])
+(setq desktop-saved-frameset [frameset 1 (23069 19178 754836 191000) (desktop . "206") "isendra@logos" nil nil ((((tty-type . "screen-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "#f8f8f0") (menu-bar-lines . 0) (background-color . "#5a5475") (font . "tty") (height . 35) (width . 136) (modeline . t) (unsplittable) (frameset--id . "41C9-F73E-95EE-BAF2") (frameset--mini t) (minibuffer . t)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 136) (pixel-height . 34) (total-width . 136) (total-height . 34) (normal-height . 1.0) (normal-width . 1.0) (buffer "*Group*" (selected) (hscroll . 0) (fringes 0 0 nil) (margins nil) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 1) (start . 1))))])
 (setq desktop-missing-file-warning nil)
 (setq tags-file-name nil)
 (setq tags-table-list nil)
-(setq search-ring '("au" "end-" "keyword" "\"" "#ff" "buddha" "font lock" "highli" "defface" "<<<<<<<" "Storage" "Number" "function" "rectangle" "ar" "\""))
-(setq regexp-search-ring '("O" "De" "\\. " "^    \".*\"" "^    \".*\"»" "^    \".*\""))
+(setq search-ring '("file" "ho" "Mo" "Org" "76" "au" "end-" "keyword" "\"" "#ff" "buddha" "font lock" "highli" "defface" "<<<<<<<" "Storage"))
+(setq regexp-search-ring '("\"" "Yo" "\"" "O" "De" "\\. " "^    \".*\"" "^    \".*\"»" "^    \".*\""))
 (setq register-alist (list '(48 . ";;-ORG-MODE---------------------------------------------------------------------\n") '(113) (desktop-list* 112 (vector 'registerv (vector [frameset 1 (23061 39020 243668 355000) register nil nil nil ((((tty-type . "screen-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "#f8f8f0") (menu-bar-lines . 0) (background-color . "#5a5475") (font . "tty") (height . 35) (width . 136) (modeline . t) (unsplittable) (frameset--id . "73E1-B1F6-8475-BC2D") (frameset--mini t) (minibuffer . t) (buffer-list "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity") (buried-buffer-list "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity")) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 136) (pixel-height . 34) (total-width . 136) (total-height . 34) (normal-height . 1.0) (normal-width . 1.0) (buffer "stallmanbot.py" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins 4) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 45551) (start . 44841))))] "73E1-B1F6-8475-BC2D" (let ((mk (make-marker))) (add-hook 'desktop-delay-hook `(lambda nil (set-marker ,mk ,nil (get-buffer ," *temp*")))) mk)) "Unprintable entity" 'frameset--jump-to-register nil))))
-(setq file-name-history '("~/Python Scripts/sketches/bin-to-dec.py" "/home/lucas/pastethis.txt" "/home/lucas/Python Scripts/sketches/send_later_bot.py" "/home/lucas/fairyfloss/fairyfloss-theme.el" "/home/lucas/lisptest.el" "~/.config/sublime-text-3/Packages/User/fairyfloss.tmTheme" "/home/lucas/file-bouncer/org-files/fairyfloss-todo.org" "/home/lucas/fairyfloss/fairyfloss-theme.el" "~/my-dotfiles/.emacs.d/fairyfloss-backup.el" "/home/lucas/test.gpg" "/home/lucas/test.txt" "/home/lucas/homemadescripts/telebot_error_log.txt" "/home/lucas/homemadescripts/simple_bot.py" "/home/lucas/homemadescripts/test_debug.py" "/usr/lib/python2.7/socket.py" "/home/lucas/.twitterc" "/home/lucas/Ruby Scripts/sketches/blockchain.rb" "/home/lucas/homemade-bots/SelfCareBot/self_care.py" "~/" "~/homemadescripts/" "/home/lucas/homemadescripts/.twitterc" "~/Python Scripts/sketches/vet.py" "/home/lucas/homemadescripts/dot.twitterc" "/home/lucas/homemadescripts/.gitignore" "/home/lucas/homemadescripts/.twitterc" "/home/lucas/homemadescripts/dot.twitterc" "~/fairyfloss/" "/home/lucas/fairyfloss/fairyfloss-theme.el" "/home/lucas/Python Scripts/sketches/jogo_do_nim.py" "/home/lucas/homemadescripts/stallmanbot.py" "~/homemadescripts/" "/home/lucas/homemadescripts/stallmanbot.py" "~/homemadescripts/" "~/Python Scripts/" "~/homemadescripts/stallmanbot-annotated.py" "~/homemadescripts/" "/home/lucas/homemadescripts/pyconse_info.py" "/home/lucas/homemadescripts/stallmanbot.py" "/home/lucas/PHP-programs/test2.html" "/home/lucas/PHP-programs/test-in-page.html" "/home/lucas/PHP-programs/counter.php" "/home/lucas/PHP-programs/conditions.php" "/home/lucas/PHP-programs/operations.php" "/home/lucas/my-dotfiles/.emacs.d/init.el" "~/PHP-programs/" "/home/lucas/PHP-programs/introduction.php" "/home/lucas/file-bouncer/org-files/notas-startup-weekend.org" "/home/lucas/file-bouncer/org-files/duvidas-workshops.org"))
+(setq file-name-history '("/home/lucas/.gnus.el" "/home/lucas/my-dotfiles/.emacs.d/dot.gnus.el" "/home/lucas/.gnus.el" "~/transfer.opml" "/etc/ssh/ssh_config" "/home/lucas/file-bouncer/org-files/index.org" "/home/lucas/file-bouncer/everything-bucket" "~/Python Scripts/sketches/bin-to-dec.py" "/home/lucas/pastethis.txt" "/home/lucas/Python Scripts/sketches/send_later_bot.py" "/home/lucas/fairyfloss/fairyfloss-theme.el" "/home/lucas/lisptest.el" "~/.config/sublime-text-3/Packages/User/fairyfloss.tmTheme" "/home/lucas/file-bouncer/org-files/fairyfloss-todo.org" "/home/lucas/fairyfloss/fairyfloss-theme.el" "~/my-dotfiles/.emacs.d/fairyfloss-backup.el" "/home/lucas/test.gpg" "/home/lucas/test.txt" "/home/lucas/homemadescripts/telebot_error_log.txt" "/home/lucas/homemadescripts/simple_bot.py" "/home/lucas/homemadescripts/test_debug.py" "/usr/lib/python2.7/socket.py" "/home/lucas/.twitterc" "/home/lucas/Ruby Scripts/sketches/blockchain.rb" "/home/lucas/homemade-bots/SelfCareBot/self_care.py" "~/" "~/homemadescripts/" "/home/lucas/homemadescripts/.twitterc" "~/Python Scripts/sketches/vet.py" "/home/lucas/homemadescripts/dot.twitterc" "/home/lucas/homemadescripts/.gitignore" "/home/lucas/homemadescripts/.twitterc" "/home/lucas/homemadescripts/dot.twitterc" "~/fairyfloss/" "/home/lucas/fairyfloss/fairyfloss-theme.el" "/home/lucas/Python Scripts/sketches/jogo_do_nim.py" "/home/lucas/homemadescripts/stallmanbot.py" "~/homemadescripts/" "/home/lucas/homemadescripts/stallmanbot.py" "~/homemadescripts/" "~/Python Scripts/" "~/homemadescripts/stallmanbot-annotated.py" "~/homemadescripts/" "/home/lucas/homemadescripts/pyconse_info.py" "/home/lucas/homemadescripts/stallmanbot.py" "/home/lucas/PHP-programs/test2.html" "/home/lucas/PHP-programs/test-in-page.html" "/home/lucas/PHP-programs/counter.php" "/home/lucas/PHP-programs/conditions.php" "/home/lucas/PHP-programs/operations.php" "/home/lucas/my-dotfiles/.emacs.d/init.el" "~/PHP-programs/" "/home/lucas/PHP-programs/introduction.php" "/home/lucas/file-bouncer/org-files/notas-startup-weekend.org" "/home/lucas/file-bouncer/org-files/duvidas-workshops.org"))
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
+(desktop-create-buffer 206
+  "/home/lucas/.gnus.el"
+  ".gnus.el"
+  'emacs-lisp-mode
+  '(autopair-mode linum-mode helm-mode undo-tree-mode)
+  507
+  '(507 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . prefer-utf-8-unix) (overwrite-mode)))
+
+(desktop-create-buffer 206
+  "/home/lucas/my-dotfiles/.emacs.d/dot.gnus.el"
+  "dot.gnus.el"
+  'emacs-lisp-mode
+  '(autopair-mode linum-mode helm-mode undo-tree-mode)
+  288
+  '(288 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . prefer-utf-8-unix) (overwrite-mode)))
+
+(desktop-create-buffer 206
+  "/home/lucas/100-days-of-code/data-scraping/chuck_norris_jokes.py"
+  "chuck_norris_jokes.py"
+  'python-mode
+  '(autopair-mode linum-mode auto-revert-mode helm-mode undo-tree-mode)
+  1
+  '(nil nil)
+  nil
+  nil
+  '((tab-width . 8) (indent-tabs-mode) (buffer-file-coding-system . utf-8-unix) (overwrite-mode)))
+
+(desktop-create-buffer 206
+  nil
+  "100-days-of-code"
+  'dired-mode
+  '(helm-mode)
+  240
+  '(240 nil)
+  t
+  '("/home/lucas/100-days-of-code/")
+  '((overwrite-mode)))
+
 (desktop-create-buffer 206
   "/home/lucas/file-bouncer/org-files/contact-based-list.org"
   "contact-based-list.org"
   'org-mode
   '(autopair-mode helm-mode undo-tree-mode)
-  173
-  '(207 nil)
+  265
+  '(265 nil)
   nil
   nil
   '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t)))
@@ -93,4 +137,48 @@
   nil
   nil
   '((overwrite-mode) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  nil
+  "*info*"
+  'Info-mode
+  '(helm-mode undo-tree-mode)
+  698745
+  '(698745 nil)
+  t
+  '("/usr/share/info/emacs-24/org" "MobileOrg" ((history ("/usr/share/info/emacs-24/org" "Top" 2679) ("/usr/share/info/emacs-24/org" "Properties and Columns" 201940) ("/usr/share/info/emacs-24/org" "Column view" 212377) ("/usr/share/info/emacs-24/org" "Defining columns" 212842) ("/usr/share/info/emacs-24/org" "Scope of column definitions" 213096) ("/usr/share/info/emacs-24/org" "Defining columns" 212672) ("/usr/share/info/emacs-24/org" "Column view" 211441) ("/usr/share/info/emacs-24/org" "Property inheritance" 209628) ("/usr/share/info/emacs-24/org" "Property searches" 208209) ("/usr/share/info/emacs-24/org" "Special properties" 206365) ("/usr/share/info/emacs-24/org" "Property searches" 208209) ("/usr/share/info/emacs-24/org" "Special properties" 206365) ("/usr/share/info/emacs-24/org" "Property syntax" 202191) ("/usr/share/info/emacs-24/org" "Properties and Columns" 200717) ("/usr/share/info/emacs-24/org" "Tag searches" 199405) ("/usr/share/info/emacs-24/org" "Tag groups" 197973) ("/usr/share/info/emacs-24/org" "Setting tags" 191604) ("/usr/share/info/emacs-24/org" "Tag inheritance" 189545) ("/usr/share/info/emacs-24/org" "Tags" 188476) ("/usr/share/info/emacs-24/org" "Checkboxes" 183553) ("/usr/share/info/emacs-24/org" "Tags" 189182) ("/usr/share/info/emacs-24/org" "Tag inheritance" 189545) ("/usr/share/info/emacs-24/org" "Tags" 188476) ("/usr/share/info/emacs-24/org" "Top" 1943) ("dir" "Top" 1562))))
+  '((tab-width . 8) (buffer-file-coding-system . utf-8-unix) (case-fold-search . t)))
+
+(desktop-create-buffer 206
+  nil
+  "data-scraping"
+  'dired-mode
+  '(helm-mode)
+  241
+  '(nil nil)
+  t
+  '("/home/lucas/100-days-of-code/data-scraping/")
+  '((overwrite-mode)))
+
+(desktop-create-buffer 206
+  nil
+  "lucas"
+  'dired-mode
+  '(helm-mode)
+  239
+  '(239 nil)
+  t
+  '("/home/lucas/")
+  '((overwrite-mode)))
+
+(desktop-create-buffer 206
+  "/home/lucas/.newsrc-dribble"
+  ".newsrc-dribble"
+  'fundamental-mode
+  '(helm-mode)
+  1
+  '(nil nil)
+  nil
+  nil
+  nil)
 
