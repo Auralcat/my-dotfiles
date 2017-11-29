@@ -197,9 +197,15 @@
 ;; Bind org-pomodoro to C-c p
 (global-set-key (kbd "\C-c p") (quote org-pomodoro))
 
+;; Open the agenda with C-c a
+(global-set-key [3 97] (quote org-agenda))
+
 ;; Open subheading with C-c RET and invert with M-RET
 (local-set-key [27 13] (quote org-ctrl-c-ret))
 (local-set-key [3 13] (quote org-insert-subheading))
+
+;; Org-agenda: point the files you want it to read
+(add-to-list 'org-agenda-files (expand-file-name "~/file-bouncer/org-files/contact-based-system/"))
 
 ;;------------------------------------------------------------------------------
 ;; Enh-ruby-mode: Run buffer in inf-ruby process
@@ -349,7 +355,9 @@
     ("%e" mode-line-front-space mode-line-mule-info mode-line-client mode-line-modified mode-line-remote mode-line-frame-identification mode-line-buffer-identification mode-line-file-name "   " mode-line-position evil-mode-line-tag
      (vc-mode vc-mode)
      "  " mode-line-modes mode-line-misc-info mode-line-end-spaces)))
- '(org-agenda-files nil)
+ '(org-agenda-files
+   (quote
+    ("/home/lucas/file-bouncer/org-files/contact-based-system/eu.org" "/home/lucas/file-bouncer/org-files/contact-based-system/rosiane.org" "/home/lucas/file-bouncer/org-files/contact-based-system/tatiane-alves.org" "/home/lucas/file-bouncer/org-files/contact-based-system/vanessa.org")))
  '(org-capture-templates
    (quote
     (("s" "Task to self" entry
