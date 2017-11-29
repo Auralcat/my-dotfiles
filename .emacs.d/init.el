@@ -205,7 +205,7 @@
 (local-set-key [3 13] (quote org-insert-subheading))
 
 ;; Org-agenda: point the files you want it to read
-(add-to-list 'org-agenda-files (expand-file-name "~/file-bouncer/org-files/contact-based-system/"))
+(setq org-agenda-files (expand-file-name "~/file-bouncer/org-files/contact-based-system/"))
 
 ;;------------------------------------------------------------------------------
 ;; Enh-ruby-mode: Run buffer in inf-ruby process
@@ -361,11 +361,11 @@
  '(org-capture-templates
    (quote
     (("s" "Task to self" entry
-      (file+headline "~/file-bouncer/org-files/contact-based-list.org" "Eu")
-      "* TODO %^{Description}" :prepend t :immediate-finish t)
+      (file+headline "~/file-bouncer/org-files/contact-based-system/eu.org" "Tarefas")
+      "** TODO %^{Description}" :prepend t :immediate-finish t)
      ("t" "Task" entry
       (file "~/file-bouncer/org-files/capture-tasks.org")
-      "* TODO %? %i %a")
+      "* TODO %? %i")
      ("n" "File your random thoughts here" entry
       (file "~/file-bouncer/org-files/capture-notes.org")
       "* %U -> %?"))))
