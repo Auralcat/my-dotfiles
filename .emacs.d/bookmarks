@@ -3,8 +3,8 @@
 ;;; nevertheless, you probably don't want to edit it.
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
 (("org-capture-last-stored"
- (filename . "~/file-bouncer/everything-bucket")
- (front-context-string . "** TODO Confirma")
- (rear-context-string . "2017-10-31 Ter]\n")
- (position . 3351))
+ (filename . "~/file-bouncer/org-files/contact-based-list.org")
+ (front-context-string . "** TODO Comparar")
+ (rear-context-string . "s:\n\n* Eu [4/19]\n")
+ (position . 77))
 )
