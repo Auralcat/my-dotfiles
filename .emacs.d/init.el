@@ -357,7 +357,7 @@
      "  " mode-line-modes mode-line-misc-info mode-line-end-spaces)))
  '(org-agenda-files
    (quote
-    ("/home/lucas/file-bouncer/org-files/contact-based-system/eu.org" "/home/lucas/file-bouncer/org-files/contact-based-system/rosiane.org" "/home/lucas/file-bouncer/org-files/contact-based-system/tatiane-alves.org" "/home/lucas/file-bouncer/org-files/contact-based-system/vanessa.org")))
+    ("~/file-bouncer/org-files/contact-based-system/workshop-vim.org" "~/file-bouncer/org-files/contact-based-system/pitt.org" "~/file-bouncer/org-files/contact-based-system/kira.org" "~/file-bouncer/org-files/contact-based-system/helioloureiro.org" "/home/lucas/file-bouncer/org-files/contact-based-system/tatiane-alves.org" "~/file-bouncer/org-files/contact-based-system/elaine.org" "~/file-bouncer/org-files/contact-based-system/eu.org" "/home/lucas/file-bouncer/org-files/contact-based-system/rosiane.org" "/home/lucas/file-bouncer/org-files/contact-based-system/vanessa.org")))
  '(org-capture-templates
    (quote
     (("s" "Task to self" entry
@@ -375,6 +375,7 @@
    "/home/lucas/.emacs.d/elpa/org-pomodoro-2.1.0/resources/Blip.ogg")
  '(org-pomodoro-format "Focus!~%s")
  '(org-pomodoro-start-sound-p nil)
+ '(org-todo-keywords (quote ((sequence "TODO" "DONE"))))
  '(remember-data-file "~/file-bouncer/everything-bucket")
  '(shell-file-name "/bin/bash")
  '(tags-tag-face (quote default)))
@@ -383,6 +384,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(org-upcoming-deadline ((t (:foreground "color-91")))))
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
