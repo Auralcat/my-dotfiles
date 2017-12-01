@@ -33,3 +33,13 @@ set expandtab
 " Remove espaços em branco extras do fim das linhas quando salvar qualquer
 " arquivo com texto (seja scripts ou plaintext)
 autocmd BufWritePre * :%s/\s\+$//e
+
+"---GERENCIADOR-DE-PLUGINS------------------------------------------------------
+" Escolha uma das opções abaixo:
+"
+" Vundle: https://github.com/VundleVim/Vundle.vim
+" vim-plug: https://github.com/junegunn/vim-plug
+" Pathogen: https://github.com/tpope/vim-pathogen
+"
+" Onde descobrir plugins: https://vimawesome.com/
+"-------------------------------------------------------------------------------
