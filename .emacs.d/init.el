@@ -357,12 +357,12 @@
      "  " mode-line-modes mode-line-misc-info mode-line-end-spaces)))
  '(org-agenda-files
    (quote
-    ("~/file-bouncer/org-files/contact-based-system/workshop-vim.org" "~/file-bouncer/org-files/contact-based-system/pitt.org" "~/file-bouncer/org-files/contact-based-system/kira.org" "~/file-bouncer/org-files/contact-based-system/helioloureiro.org" "/home/lucas/file-bouncer/org-files/contact-based-system/tatiane-alves.org" "~/file-bouncer/org-files/contact-based-system/elaine.org" "~/file-bouncer/org-files/contact-based-system/eu.org" "/home/lucas/file-bouncer/org-files/contact-based-system/rosiane.org" "/home/lucas/file-bouncer/org-files/contact-based-system/vanessa.org")))
+    ("~/file-bouncer/org-files/contact-based-system/techladies.org" "~/file-bouncer/org-files/contact-based-system/workshop-vim.org" "~/file-bouncer/org-files/contact-based-system/pitt.org" "~/file-bouncer/org-files/contact-based-system/kira.org" "~/file-bouncer/org-files/contact-based-system/helioloureiro.org" "/home/lucas/file-bouncer/org-files/contact-based-system/tatiane-alves.org" "~/file-bouncer/org-files/contact-based-system/elaine.org" "~/file-bouncer/org-files/contact-based-system/eu.org" "/home/lucas/file-bouncer/org-files/contact-based-system/rosiane.org" "/home/lucas/file-bouncer/org-files/contact-based-system/vanessa.org")))
  '(org-capture-templates
    (quote
     (("s" "Task to self" entry
       (file+headline "~/file-bouncer/org-files/contact-based-system/eu.org" "Tarefas")
-      "** TODO %^{Description}" :prepend t :immediate-finish t)
+      "** TODO %i %?" :prepend t)
      ("t" "Task" entry
       (file "~/file-bouncer/org-files/capture-tasks.org")
       "* TODO %? %i")
