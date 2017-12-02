@@ -306,6 +306,11 @@
 (add-hook 'twittering-mode-hook
   (local-set-key [3 114] (quote twittering-reply-to-user)))
 
+;; C-c f: favorite tweet
+(add-hook 'twittering-mode-hook
+  (local-set-key [3 102] (quote twittering-favorite)))
+
+;;
 ;;-----CUSTOMIZATION-THROUGH-M-x-CUSTOMIZE--------------------------------------
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -370,6 +375,15 @@
       (file "~/file-bouncer/org-files/capture-notes.org")
       "* %U -> %?"))))
  '(org-default-notes-file "~/file-bouncer/everything-bucket")
+ '(org-effort-durations
+   (quote
+    (("h" . 60)
+     ("d" . 480)
+     ("w" . 2400)
+     ("m" . 9600)
+     ("y" . 96000)
+     ("pomodoros" . 30)
+     ("pomodoro" . 30))))
  '(org-pomodoro-audio-player "/usr/bin/mpv")
  '(org-pomodoro-finished-sound
    "/home/lucas/.emacs.d/elpa/org-pomodoro-2.1.0/resources/Blip.ogg")

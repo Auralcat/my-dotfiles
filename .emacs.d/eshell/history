@@ -49,7 +49,9 @@ la
 sudo apt install gvim
 gvim
 vim
-# Emacs mode is better for the shell, since you don't need to edit much stuff
 clear
 which vim
 apt show vim-nox
+newsbeuter 
+screenfetch
+# Here you gotta use Emacs mode.
