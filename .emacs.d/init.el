@@ -363,6 +363,8 @@
  '(org-agenda-files
    (quote
     ("~/file-bouncer/org-files/contact-based-system/techladies.org" "~/file-bouncer/org-files/contact-based-system/workshop-vim.org" "~/file-bouncer/org-files/contact-based-system/pitt.org" "~/file-bouncer/org-files/contact-based-system/kira.org" "~/file-bouncer/org-files/contact-based-system/helioloureiro.org" "/home/lucas/file-bouncer/org-files/contact-based-system/tatiane-alves.org" "~/file-bouncer/org-files/contact-based-system/elaine.org" "~/file-bouncer/org-files/contact-based-system/eu.org" "/home/lucas/file-bouncer/org-files/contact-based-system/rosiane.org" "/home/lucas/file-bouncer/org-files/contact-based-system/vanessa.org")))
+ '(org-agenda-scheduled-leaders (quote ("Scheduled: " "Sched. previously %2dx: ")))
+ '(org-agenda-skip-scheduled-if-done t)
  '(org-capture-templates
    (quote
     (("s" "Task to self" entry
@@ -398,6 +400,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(org-upcoming-deadline ((t (:foreground "color-91")))))
+ '(org-upcoming-deadline ((t (:foreground "#B1AA98")))))
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
