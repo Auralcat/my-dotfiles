@@ -349,6 +349,7 @@
  '(erc-script-path (quote ("~/my-dotfiles/.emacs.d/.erc/")))
  '(erc-try-new-nick-p t)
  '(erc-user-full-name "Realnamezz")
+ '(global-auto-revert-mode t)
  '(global-linum-mode nil)
  '(image-animate-loop t)
  '(initial-buffer-choice nil)
@@ -363,6 +364,9 @@
     ("%e" mode-line-front-space mode-line-mule-info mode-line-client mode-line-modified mode-line-remote mode-line-frame-identification mode-line-buffer-identification mode-line-file-name "   " mode-line-position evil-mode-line-tag
      (vc-mode vc-mode)
      "  " mode-line-modes mode-line-misc-info mode-line-end-spaces)))
+ '(org-agenda-files
+   (quote
+    ("/home/lucas/file-bouncer/org-files/contact-based-system/aline-pegas.org" "/home/lucas/file-bouncer/org-files/contact-based-system/elaine.org" "/home/lucas/file-bouncer/org-files/contact-based-system/eu.org" "/home/lucas/file-bouncer/org-files/contact-based-system/helioloureiro.org" "/home/lucas/file-bouncer/org-files/contact-based-system/kira.org" "/home/lucas/file-bouncer/org-files/contact-based-system/pitt.org" "/home/lucas/file-bouncer/org-files/contact-based-system/rosiane.org" "/home/lucas/file-bouncer/org-files/contact-based-system/tatiane-alves.org" "/home/lucas/file-bouncer/org-files/contact-based-system/techladies.org" "/home/lucas/file-bouncer/org-files/contact-based-system/vanessa.org" "/home/lucas/file-bouncer/org-files/contact-based-system/workshop-vim.org")))
  '(org-agenda-scheduled-leaders (quote ("Scheduled: " "Sched. previously %2dx: ")))
  '(org-agenda-skip-scheduled-if-done t)
  '(org-capture-templates
