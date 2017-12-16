@@ -139,6 +139,10 @@
 (require-package 'evil)
 (evil-mode 1)
 
+;; BBDB - the insidious Big Brother DataBase
+(add-to-list 'load-path "~/my-dotfiles/.emacs.d/bbdb-2.35/lisp/")
+(require 'bbdb)
+
 ;; Load configs
 (load "~/my-dotfiles/.emacs.d/evilrc")
 
@@ -366,7 +370,7 @@
      "  " mode-line-modes mode-line-misc-info mode-line-end-spaces)))
  '(org-agenda-files
    (quote
-    ("~/file-bouncer/org-files/contact-based-system/simara.org" "/home/lucas/file-bouncer/org-files/contact-based-system/aline-pegas.org" "/home/lucas/file-bouncer/org-files/contact-based-system/elaine.org" "/home/lucas/file-bouncer/org-files/contact-based-system/eu.org" "/home/lucas/file-bouncer/org-files/contact-based-system/helioloureiro.org" "/home/lucas/file-bouncer/org-files/contact-based-system/kira.org" "/home/lucas/file-bouncer/org-files/contact-based-system/pitt.org" "/home/lucas/file-bouncer/org-files/contact-based-system/rosiane.org" "/home/lucas/file-bouncer/org-files/contact-based-system/tatiane-alves.org" "/home/lucas/file-bouncer/org-files/contact-based-system/techladies.org" "/home/lucas/file-bouncer/org-files/contact-based-system/vanessa.org" "/home/lucas/file-bouncer/org-files/contact-based-system/workshop-vim.org")))
+    ("/home/lucas/file-bouncer/org-files/contact-based-system/vanessa.org" "~/file-bouncer/org-files/site-congresso.org" "~/file-bouncer/org-files/contact-based-system/bia-kunze.org" "~/file-bouncer/org-files/contact-based-system/kell.org" "~/file-bouncer/org-files/contact-based-system/olga_chaim.org" "~/file-bouncer/org-files/contact-based-system/yoko_teles.org" "~/file-bouncer/org-files/contact-based-system/simara.org" "~/file-bouncer/org-files/contact-based-system/anawd.org" "~/file-bouncer/org-files/contact-based-system/ju-palacios.org" "/home/lucas/file-bouncer/org-files/contact-based-system/aline-pegas.org" "/home/lucas/file-bouncer/org-files/contact-based-system/elaine.org" "/home/lucas/file-bouncer/org-files/contact-based-system/eu.org" "/home/lucas/file-bouncer/org-files/contact-based-system/helioloureiro.org" "/home/lucas/file-bouncer/org-files/contact-based-system/kira.org" "/home/lucas/file-bouncer/org-files/contact-based-system/pitt.org" "/home/lucas/file-bouncer/org-files/contact-based-system/rosiane.org" "/home/lucas/file-bouncer/org-files/contact-based-system/tatiane-alves.org" "/home/lucas/file-bouncer/org-files/contact-based-system/techladies.org" "/home/lucas/file-bouncer/org-files/contact-based-system/workshop-vim.org")))
  '(org-agenda-scheduled-leaders (quote ("Scheduled: " "Sched. previously %2dx: ")))
  '(org-agenda-skip-scheduled-if-done t)
  '(org-capture-templates
@@ -396,7 +400,10 @@
  '(org-pomodoro-start-sound-p nil)
  '(org-todo-keywords (quote ((sequence "TODO" "DONE"))))
  '(remember-data-file "~/file-bouncer/everything-bucket")
+ '(send-mail-function (quote smtpmail-send-it))
  '(shell-file-name "/bin/bash")
+ '(smtpmail-smtp-server "smtp.yandex.com")
+ '(smtpmail-smtp-service 25)
  '(tags-tag-face (quote default)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

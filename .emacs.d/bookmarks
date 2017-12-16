@@ -4,7 +4,7 @@
 ;;; -*- End Of Bookmark File Format Version Stamp -*-
 (("org-capture-last-stored"
  (filename . "~/file-bouncer/org-files/contact-based-system/eu.org")
- (front-context-string . "** TODO Colocar ")
+ (front-context-string . "** TODO Falar co")
  (rear-context-string . "$3=$2-$1\n#+END:\n")
- (position . 1487))
+ (position . 1516))
 )
