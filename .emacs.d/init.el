@@ -139,12 +139,12 @@
 (require-package 'evil)
 (evil-mode 1)
 
+;; Load configs
+(load "~/my-dotfiles/.emacs.d/evilrc")
+
 ;; BBDB - the insidious Big Brother DataBase
 (add-to-list 'load-path "~/my-dotfiles/.emacs.d/bbdb-2.35/lisp/")
 (require 'bbdb)
-
-;; Load configs
-(load "~/my-dotfiles/.emacs.d/evilrc")
 
 ;;-----KEYBINDINGS--------------------------------------------------------------
 ;; Remapping the help hotkey so it doesn't clash with Unix backspace.
