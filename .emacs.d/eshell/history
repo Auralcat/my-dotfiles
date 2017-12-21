@@ -54,4 +54,7 @@ which vim
 apt show vim-nox
 newsbeuter 
 screenfetch
-# Here you gotta use Emacs mode.
+# Aqui tem por que usar o eshell!
+ls
+vim
+nvim

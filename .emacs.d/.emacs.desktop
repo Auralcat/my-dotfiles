@@ -2,19 +2,19 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Mon Dec 11 22:32:29 2017
+;; Created Thu Dec 21 00:30:06 2017
 ;; Desktop file format version 206
 ;; Emacs version 24.5.1
 
 ;; Global section:
-(setq desktop-saved-frameset [frameset 1 (23087 9117 190003 974000) (desktop . "206") "isendra@logos" nil nil ((((tty-type . "screen-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "#f8f8f0") (background-color . "#5a5475") (menu-bar-lines . 0) (font . "tty") (height . 32) (width . 136) (modeline . t) (unsplittable) (frameset--id . "7188-E759-9C95-2DDC") (frameset--mini t) (minibuffer . t)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 136) (pixel-height . 31) (total-width . 136) (total-height . 31) (normal-height . 1.0) (normal-width . 1.0) (buffer "eu.org" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins nil) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 2300) (start . 537))))])
+(setq desktop-saved-frameset [frameset 1 (23099 7342 589003 15000) (desktop . "206") "isendra@logos" nil nil ((((tty-type . "screen-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "#f8f8f0") (cursor-color . "#f8f8f0") (background-color . "#5a5475") (menu-bar-lines . 0) (font . "tty") (height . 35) (width . 136) (modeline . t) (unsplittable) (frameset--id . "D446-ACE3-0920-4FBC") (frameset--mini t) (minibuffer . t)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 136) (pixel-height . 34) (total-width . 136) (total-height . 34) (normal-height . 1.0) (normal-width . 1.0) (buffer "*scratch*" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins nil) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 201) (start . 1))))])
 (setq desktop-missing-file-warning nil)
 (setq tags-file-name nil)
 (setq tags-table-list nil)
-(setq search-ring '("mag" "Pa" "jes" "na" "V" "cam" "protocol" "iÅ„" "Auto-Re" "R" "9378" "She" ". h" "cool" "Cu" "Gt"))
-(setq regexp-search-ring '("BAC" "POST" "fuu" "\\[ " "[ " "exe" "\\*" "E" "En" "cola" "PEN" "D:" "DON" "Ela" "org-" "\\</\\.\\>"))
-(setq register-alist (list '(101 . "* Enunciado\n** Antes:\n   ```\n\n   ```\n** Depois:\n   ```\n\n   ```\n") '(105) '(107 . "k") '(48 . "*** Contatos pra perguntar:\n- [[file://~/file-bouncer/org-files/contact-based-system/rosiane.org][Rosiane]]\n- [[file://~/file-bouncer/org-files/contact-based-system/ju_venancio.org][Ju Venancio]]\n") '(113) (desktop-list* 112 (vector 'registerv (vector [frameset 1 (23061 39020 243668 355000) register nil nil nil ((((tty-type . "screen-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "#f8f8f0") (menu-bar-lines . 0) (background-color . "#5a5475") (font . "tty") (height . 35) (width . 136) (modeline . t) (unsplittable) (frameset--id . "73E1-B1F6-8475-BC2D") (frameset--mini t) (minibuffer . t) (buffer-list "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity") (buried-buffer-list "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity")) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 136) (pixel-height . 34) (total-width . 136) (total-height . 34) (normal-height . 1.0) (normal-width . 1.0) (buffer "stallmanbot.py" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins 4) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 45551) (start . 44841))))] "73E1-B1F6-8475-BC2D" (let ((mk (make-marker))) (add-hook 'desktop-delay-hook `(lambda nil (set-marker ,mk ,nil (get-buffer ," *temp*")))) mk)) "Unprintable entity" 'frameset--jump-to-register nil))))
-(setq file-name-history '("/home/lucas/file-bouncer/org-files/contact-based-system/anawd.org" "/home/lucas/file-bouncer/org-files/contact-based-system/yoko_teles.org" "/home/lucas/file-bouncer/org-files/contact-based-system/olga_chaim.org" "/home/lucas/file-bouncer/org-files/contact-based-system/kell.org" "/home/lucas/file-bouncer/org-files/contact-based-system/ju-palacios.org" "/home/lucas/file-bouncer/org-files/contact-based-system/simara.org" "/home/lucas/file-bouncer/org-files/contact-based-system/eu.org_archive" "/home/lucas/file-bouncer/org-files/freelancing.org_archive" "/home/lucas/file-bouncer/vim-primeiros-passos/presentation.md" "/home/lucas/file-bouncer/vim-primeiros-passos/exercicios/exercicios.md" "/home/lucas/file-bouncer/vim-primeiros-passos/exercicios.md" "/home/lucas/file-bouncer/org-files/contact-based-system/ju-palacios.org" "/home/lucas/file-bouncer/org-files/contact-based-system/aline-pegas.org" "/home/lucas/auralcat.github.io/_posts/2017-12-05-produtividade-contatos.md" "/home/lucas/auralcat.github.io/_config.yml" "/home/lucas/file-bouncer/demo/contato2.org" "~/file-bouncer/demo/" "/home/lucas/file-bouncer/demo/contato1.org" "/home/lucas/auralcat.github.io/_posts/2017-12-05-produtividade-contatos.md" "~/file-bouncer/posts/produtividade-contatos.md" "/home/lucas/my-dotfiles/.emacs.d/init.el" "/home/lucas/file-bouncer/playlist-podcast.txt" "/home/lucas/file-bouncer/org-files/contact-based-system/eu.org" "/home/lucas/file-bouncer/vim-primeiros-passos/presentation.md" "/home/lucas/file-bouncer/vim-primeiros-passos/test.md" "~/file-bouncer/vim-primeiros-passos/" "/home/lucas/file-bouncer/vim-primeiros-passos/title.md" "/home/lucas/my-dotfiles/vim/dot.vimrc" "/home/lucas/file-bouncer/vim-instruÅÁÅıes-instalaÅÁÅ„o.txt" "/home/lucas/my-dotfiles/vim/dot.vimrc" "/home/lucas/my-dotfiles/vim/exemplo-vimrc" "~/my-dotfiles/vim/" "/home/lucas/file-bouncer/org-files/contact-based-system/techladies.org" "/home/lucas/file-bouncer/playlist-podcast.txt" "~/file-bouncer/" "/home/lucas/file-bouncer/playlist-podcast.mp3" "/home/lucas/file-bouncer/exemplo-vimrc" "/home/lucas/exemplo-vimrc" "~/file-bouncer/" "/home/lucas/file-bouncer/vim-instruÅÁÅıes-instalaÅÁÅ„o.txt" "/home/lucas/exemplo-vimrc" "/home/lucas/file-bouncer/org-files/contact-based-system/techladies.org" "/home/lucas/vim-instruÅÁÅıes-instalaÅÁÅ„o.txt" "/home/lucas/Passo-a-passo Windows.txt" "/home/lucas/file-bouncer/org-files/contact-based-system/techladies.org" "/home/lucas/file-bouncer/org-files/contact-based-system/tatiane-alves.org" "/home/lucas/zztv.sh" "/home/lucas/file-bouncer/org-files/contact-based-system/pitt.org" "/home/lucas/file-bouncer/org-files/contact-based-system/kira.org" "/home/lucas/file-bouncer/org-files/contact-based-system/helioloureiro.org" "/home/lucas/file-bouncer/everything-bucket" "/home/lucas/file-bouncer/org-files/contact-based-system/rosiane.org" "/home/lucas/file-bouncer/org-files/contact-based-system/tatiane-alves.org" "/home/lucas/file-bouncer/org-files/contact-based-system/elaine.org" "/home/lucas/file-bouncer/org-files/contact-based-system/helioloureiro.org" "/home/lucas/file-bouncer/org-files/contact-based-system/kira.org" "/home/lucas/file-bouncer/org-files/contact-based-system/elaine.org" "/home/lucas/file-bouncer/org-files/contact-based-system/pitt.org" "/home/lucas/file-bouncer/org-files/contact-based-system/elaine.org" "/home/lucas/file-bouncer/org-files/contact-based-system/kira.org" "~/diary" "~/.calcurse/apts" "/home/lucas/file-bouncer/org-files/capture-tasks.org" "/home/lucas/file-bouncer/org-files/contact-based-system/eu.org" "/home/lucas/file-bouncer/org-files/contact-based-system/techladies.org" "/home/lucas/file-bouncer/org-files/contact-based-system/rosiane.org" "/home/lucas/file-bouncer/org-files/contact-based-system/vanessa.org" "/home/lucas/file-bouncer/org-files/contact-based-system/tatiane-alves.org" "/home/lucas/file-bouncer/org-files/contact-based-system/eu.org" "/home/lucas/file-bouncer/org-files/workshop-vim.org" "/home/lucas/my-dotfiles/.emacs.d/evilrc.el" "/home/lucas/my-dotfiles/vim/.vimrc" "/home/lucas/my-dotfiles/.emacs.d/evilrc.el" "/home/lucas/secret_org_table.gpg" "/home/lucas/sample_secret.randomextension" "/home/lucas/.gnus.el" "/home/lucas/my-dotfiles/.emacs.d/dot.gnus.el" "/home/lucas/.gnus.el" "~/transfer.opml" "/etc/ssh/ssh_config" "/home/lucas/file-bouncer/org-files/index.org" "/home/lucas/file-bouncer/everything-bucket" "~/Python Scripts/sketches/bin-to-dec.py" "/home/lucas/pastethis.txt" "/home/lucas/Python Scripts/sketches/send_later_bot.py" "/home/lucas/fairyfloss/fairyfloss-theme.el" "/home/lucas/lisptest.el" "~/.config/sublime-text-3/Packages/User/fairyfloss.tmTheme" "/home/lucas/file-bouncer/org-files/fairyfloss-todo.org" "/home/lucas/fairyfloss/fairyfloss-theme.el" "~/my-dotfiles/.emacs.d/fairyfloss-backup.el" "/home/lucas/test.gpg" "/home/lucas/test.txt" "/home/lucas/homemadescripts/telebot_error_log.txt" "/home/lucas/homemadescripts/simple_bot.py" "/home/lucas/homemadescripts/test_debug.py" "/usr/lib/python2.7/socket.py" "/home/lucas/.twitterc" "/home/lucas/Ruby Scripts/sketches/blockchain.rb"))
+(setq search-ring '("mash" "Est" "Estu" "Atua" "sql" ".l" "Awa" "pla" "mag" "Pa" "jes" "na" "V" "cam" "protocol" "iÅ„"))
+(setq regexp-search-ring '("\\* Ta" "BAC" "POST" "fuu" "\\[ " "[ " "exe" "\\*" "E" "En" "cola" "PEN" "D:" "DON" "Ela" "org-"))
+(setq register-alist (list '(101 . "* Enunciado\n** Antes:\n   ```\n\n   ```\n** Depois:\n   ```\n\n   ```\n") '(105) '(107 . "k") '(48 . "   CLOCK: [2017-12-19 Ter 10:56]--[2017-12-19 Ter 11:21] =>  0:25\n") '(113) (desktop-list* 112 (vector 'registerv (vector [frameset 1 (23061 39020 243668 355000) register nil nil nil ((((tty-type . "screen-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "#f8f8f0") (menu-bar-lines . 0) (background-color . "#5a5475") (font . "tty") (height . 35) (width . 136) (modeline . t) (unsplittable) (frameset--id . "73E1-B1F6-8475-BC2D") (frameset--mini t) (minibuffer . t) (buffer-list "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity") (buried-buffer-list "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity" "Unprintable entity")) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 136) (pixel-height . 34) (total-width . 136) (total-height . 34) (normal-height . 1.0) (normal-width . 1.0) (buffer "stallmanbot.py" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins 4) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 45551) (start . 44841))))] "73E1-B1F6-8475-BC2D" (let ((mk (make-marker))) (add-hook 'desktop-delay-hook `(lambda nil (set-marker ,mk ,nil (get-buffer ," *temp*")))) mk)) "Unprintable entity" 'frameset--jump-to-register nil))))
+(setq file-name-history '("/home/lucas/my-dotfiles/.emacs.d/evilrc.el" "/home/lucas/file-bouncer/org-files/capture-tasks.org" "/home/lucas/file-bouncer/org-files/tasks.org" "/home/lucas/file-bouncer/org-files/contact-based-system/emanoely.org" "/home/lucas/file-bouncer/org-files/contact-based-system/anawd.org" "/home/lucas/file-bouncer/org-files/contact-based-system/yoko_teles.org" "/home/lucas/file-bouncer/org-files/contact-based-system/olga_chaim.org" "/home/lucas/file-bouncer/org-files/contact-based-system/kell.org" "/home/lucas/file-bouncer/org-files/contact-based-system/ju-palacios.org" "/home/lucas/file-bouncer/org-files/contact-based-system/simara.org" "/home/lucas/file-bouncer/org-files/contact-based-system/eu.org_archive" "/home/lucas/file-bouncer/org-files/freelancing.org_archive" "/home/lucas/file-bouncer/vim-primeiros-passos/presentation.md" "/home/lucas/file-bouncer/vim-primeiros-passos/exercicios/exercicios.md" "/home/lucas/file-bouncer/vim-primeiros-passos/exercicios.md" "/home/lucas/file-bouncer/org-files/contact-based-system/ju-palacios.org" "/home/lucas/file-bouncer/org-files/contact-based-system/aline-pegas.org" "/home/lucas/auralcat.github.io/_posts/2017-12-05-produtividade-contatos.md" "/home/lucas/auralcat.github.io/_config.yml" "/home/lucas/file-bouncer/demo/contato2.org" "~/file-bouncer/demo/" "/home/lucas/file-bouncer/demo/contato1.org" "/home/lucas/auralcat.github.io/_posts/2017-12-05-produtividade-contatos.md" "~/file-bouncer/posts/produtividade-contatos.md" "/home/lucas/my-dotfiles/.emacs.d/init.el" "/home/lucas/file-bouncer/playlist-podcast.txt" "/home/lucas/file-bouncer/org-files/contact-based-system/eu.org" "/home/lucas/file-bouncer/vim-primeiros-passos/presentation.md" "/home/lucas/file-bouncer/vim-primeiros-passos/test.md" "~/file-bouncer/vim-primeiros-passos/" "/home/lucas/file-bouncer/vim-primeiros-passos/title.md" "/home/lucas/my-dotfiles/vim/dot.vimrc" "/home/lucas/file-bouncer/vim-instruÅÁÅıes-instalaÅÁÅ„o.txt" "/home/lucas/my-dotfiles/vim/dot.vimrc" "/home/lucas/my-dotfiles/vim/exemplo-vimrc" "~/my-dotfiles/vim/" "/home/lucas/file-bouncer/org-files/contact-based-system/techladies.org" "/home/lucas/file-bouncer/playlist-podcast.txt" "~/file-bouncer/" "/home/lucas/file-bouncer/playlist-podcast.mp3" "/home/lucas/file-bouncer/exemplo-vimrc" "/home/lucas/exemplo-vimrc" "~/file-bouncer/" "/home/lucas/file-bouncer/vim-instruÅÁÅıes-instalaÅÁÅ„o.txt" "/home/lucas/exemplo-vimrc" "/home/lucas/file-bouncer/org-files/contact-based-system/techladies.org" "/home/lucas/vim-instruÅÁÅıes-instalaÅÁÅ„o.txt" "/home/lucas/Passo-a-passo Windows.txt" "/home/lucas/file-bouncer/org-files/contact-based-system/techladies.org" "/home/lucas/file-bouncer/org-files/contact-based-system/tatiane-alves.org" "/home/lucas/zztv.sh" "/home/lucas/file-bouncer/org-files/contact-based-system/pitt.org" "/home/lucas/file-bouncer/org-files/contact-based-system/kira.org" "/home/lucas/file-bouncer/org-files/contact-based-system/helioloureiro.org" "/home/lucas/file-bouncer/everything-bucket" "/home/lucas/file-bouncer/org-files/contact-based-system/rosiane.org" "/home/lucas/file-bouncer/org-files/contact-based-system/tatiane-alves.org" "/home/lucas/file-bouncer/org-files/contact-based-system/elaine.org" "/home/lucas/file-bouncer/org-files/contact-based-system/helioloureiro.org" "/home/lucas/file-bouncer/org-files/contact-based-system/kira.org" "/home/lucas/file-bouncer/org-files/contact-based-system/elaine.org" "/home/lucas/file-bouncer/org-files/contact-based-system/pitt.org" "/home/lucas/file-bouncer/org-files/contact-based-system/elaine.org" "/home/lucas/file-bouncer/org-files/contact-based-system/kira.org" "~/diary" "~/.calcurse/apts" "/home/lucas/file-bouncer/org-files/capture-tasks.org" "/home/lucas/file-bouncer/org-files/contact-based-system/eu.org" "/home/lucas/file-bouncer/org-files/contact-based-system/techladies.org" "/home/lucas/file-bouncer/org-files/contact-based-system/rosiane.org" "/home/lucas/file-bouncer/org-files/contact-based-system/vanessa.org" "/home/lucas/file-bouncer/org-files/contact-based-system/tatiane-alves.org" "/home/lucas/file-bouncer/org-files/contact-based-system/eu.org" "/home/lucas/file-bouncer/org-files/workshop-vim.org" "/home/lucas/my-dotfiles/.emacs.d/evilrc.el" "/home/lucas/my-dotfiles/vim/.vimrc" "/home/lucas/my-dotfiles/.emacs.d/evilrc.el" "/home/lucas/secret_org_table.gpg" "/home/lucas/sample_secret.randomextension" "/home/lucas/.gnus.el" "/home/lucas/my-dotfiles/.emacs.d/dot.gnus.el" "/home/lucas/.gnus.el" "~/transfer.opml" "/etc/ssh/ssh_config" "/home/lucas/file-bouncer/org-files/index.org" "/home/lucas/file-bouncer/everything-bucket" "~/Python Scripts/sketches/bin-to-dec.py" "/home/lucas/pastethis.txt" "/home/lucas/Python Scripts/sketches/send_later_bot.py" "/home/lucas/fairyfloss/fairyfloss-theme.el" "/home/lucas/lisptest.el" "~/.config/sublime-text-3/Packages/User/fairyfloss.tmTheme" "/home/lucas/file-bouncer/org-files/fairyfloss-todo.org" "/home/lucas/fairyfloss/fairyfloss-theme.el" "~/my-dotfiles/.emacs.d/fairyfloss-backup.el" "/home/lucas/test.gpg" "/home/lucas/test.txt" "/home/lucas/homemadescripts/telebot_error_log.txt" "/home/lucas/homemadescripts/simple_bot.py" "/home/lucas/homemadescripts/test_debug.py"))
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
 (desktop-create-buffer 206
@@ -22,8 +22,96 @@
   "eu.org"
   'org-mode
   '(global-auto-revert-mode autopair-mode undo-tree-mode)
-  2300
-  '(2300 nil)
+  3169
+  '(3169 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/home/lucas/file-bouncer/org-files/contact-based-system/yoko_teles.org"
+  "yoko_teles.org"
+  'org-mode
+  '(global-auto-revert-mode autopair-mode undo-tree-mode)
+  1239
+  '(1239 t)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/home/lucas/file-bouncer/org-files/contact-based-system/ju-palacios.org"
+  "ju-palacios.org"
+  'org-mode
+  '(global-auto-revert-mode autopair-mode undo-tree-mode)
+  1
+  '(1 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/home/lucas/file-bouncer/org-files/contact-based-system/kira.org"
+  "kira.org"
+  'org-mode
+  '(global-auto-revert-mode autopair-mode undo-tree-mode)
+  611
+  '(611 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/home/lucas/file-bouncer/org-files/contact-based-system/aline-pegas.org"
+  "aline-pegas.org"
+  'org-mode
+  '(global-auto-revert-mode autopair-mode undo-tree-mode)
+  937
+  '(1102 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/home/lucas/file-bouncer/org-files/contact-based-system/tatiane-alves.org"
+  "tatiane-alves.org"
+  'org-mode
+  '(global-auto-revert-mode autopair-mode undo-tree-mode)
+  614
+  '(1 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/home/lucas/file-bouncer/org-files/contact-based-system/vanessa.org"
+  "vanessa.org"
+  'org-mode
+  '(global-auto-revert-mode autopair-mode undo-tree-mode)
+  984
+  '(1 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/home/lucas/my-dotfiles/.emacs.d/init.el"
+  "init.el"
+  'emacs-lisp-mode
+  '(auto-fill-mode global-auto-revert-mode autopair-mode undo-tree-mode linum-mode)
+  821
+  '(821 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (fill-column . 79)))
+
+(desktop-create-buffer 206
+  "/home/lucas/file-bouncer/org-files/contact-based-system/emanoely.org"
+  "emanoely.org"
+  'org-mode
+  '(global-auto-revert-mode autopair-mode undo-tree-mode)
+  321
+  '(321 nil)
   nil
   nil
   '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t)))
@@ -51,17 +139,6 @@
   '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t)))
 
 (desktop-create-buffer 206
-  "/home/lucas/file-bouncer/org-files/contact-based-system/yoko_teles.org"
-  "yoko_teles.org"
-  'org-mode
-  '(global-auto-revert-mode autopair-mode undo-tree-mode)
-  79
-  '(79 nil)
-  nil
-  nil
-  '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t)))
-
-(desktop-create-buffer 206
   "/home/lucas/file-bouncer/org-files/contact-based-system/olga_chaim.org"
   "olga_chaim.org"
   'org-mode
@@ -84,34 +161,12 @@
   '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t)))
 
 (desktop-create-buffer 206
-  "/home/lucas/file-bouncer/org-files/contact-based-system/ju-palacios.org"
-  "ju-palacios.org"
-  'org-mode
-  '(global-auto-revert-mode autopair-mode undo-tree-mode)
-  68
-  '(68 nil)
-  nil
-  nil
-  '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t)))
-
-(desktop-create-buffer 206
   "/home/lucas/file-bouncer/org-files/contact-based-system/kell.org"
   "kell.org"
   'org-mode
   '(global-auto-revert-mode autopair-mode undo-tree-mode)
   60
   '(60 nil)
-  nil
-  nil
-  '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t)))
-
-(desktop-create-buffer 206
-  "/home/lucas/file-bouncer/org-files/contact-based-system/kira.org"
-  "kira.org"
-  'org-mode
-  '(global-auto-revert-mode autopair-mode undo-tree-mode)
-  90
-  '(90 nil)
   nil
   nil
   '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t)))
@@ -128,50 +183,6 @@
   '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t)))
 
 (desktop-create-buffer 206
-  "/home/lucas/file-bouncer/org-files/contact-based-system/tatiane-alves.org"
-  "tatiane-alves.org"
-  'org-mode
-  '(global-auto-revert-mode autopair-mode undo-tree-mode)
-  2402
-  '(2402 nil)
-  nil
-  nil
-  '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t)))
-
-(desktop-create-buffer 206
-  "/home/lucas/file-bouncer/vim-primeiros-passos/presentation.md"
-  "presentation.md"
-  'org-mode
-  '(global-auto-revert-mode autopair-mode undo-tree-mode)
-  25
-  '(25 nil)
-  nil
-  nil
-  '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t)))
-
-(desktop-create-buffer 206
-  "/home/lucas/file-bouncer/vim-primeiros-passos/exercicios/exercicios.md"
-  "exercicios.md"
-  'org-mode
-  '(global-auto-revert-mode autopair-mode undo-tree-mode)
-  5100
-  '(5100 nil)
-  nil
-  nil
-  '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t)))
-
-(desktop-create-buffer 206
-  "/home/lucas/file-bouncer/org-files/contact-based-system/aline-pegas.org"
-  "aline-pegas.org"
-  'org-mode
-  '(global-auto-revert-mode autopair-mode undo-tree-mode)
-  147
-  '(1 nil)
-  nil
-  nil
-  '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t)))
-
-(desktop-create-buffer 206
   "/home/lucas/file-bouncer/org-files/contact-based-system/rosiane.org"
   "rosiane.org"
   'org-mode
@@ -181,17 +192,6 @@
   nil
   nil
   '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t)))
-
-(desktop-create-buffer 206
-  "/home/lucas/my-dotfiles/.emacs.d/init.el"
-  "init.el"
-  'emacs-lisp-mode
-  '(auto-fill-mode global-auto-revert-mode autopair-mode undo-tree-mode linum-mode)
-  1062
-  '(1062 nil)
-  nil
-  nil
-  '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (fill-column . 79)))
 
 (desktop-create-buffer 206
   "/home/lucas/file-bouncer/org-files/contact-based-system/elaine.org"
@@ -260,13 +260,46 @@
   '((buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines . t)))
 
 (desktop-create-buffer 206
-  "/home/lucas/file-bouncer/org-files/contact-based-system/vanessa.org"
-  "vanessa.org"
+  "/home/lucas/file-bouncer/org-files/contact-based-system/patty-vader.org"
+  "patty-vader.org"
   'org-mode
   '(global-auto-revert-mode autopair-mode undo-tree-mode)
   1
   '(nil nil)
   nil
   nil
-  '((buffer-file-coding-system . undecided-unix) (overwrite-mode) (truncate-lines . t)))
+  '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/home/lucas/file-bouncer/org-files/contact-based-system/ariane.org"
+  "ariane.org"
+  'org-mode
+  '(global-auto-revert-mode autopair-mode undo-tree-mode)
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/home/lucas/file-bouncer/org-files/site-congresso.org"
+  "site-congresso.org"
+  'org-mode
+  '(global-auto-revert-mode autopair-mode undo-tree-mode)
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t)))
+
+(desktop-create-buffer 206
+  "/home/lucas/file-bouncer/org-files/contact-based-system/bia-kunze.org"
+  "bia-kunze.org"
+  'org-mode
+  '(global-auto-revert-mode autopair-mode undo-tree-mode)
+  1
+  '(nil nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t)))
 

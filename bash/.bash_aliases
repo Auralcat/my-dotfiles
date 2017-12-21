@@ -17,6 +17,9 @@ alias grep='grep --color=auto'
 
 # Custom programs:
 
+# When typing emacs in the terminal, start the no-window version one:
+alias emacs='emacs -nw'
+
 # Pomodoro related:
 alias pomocheck='tail ~/pomodorocount2017'
 alias pomocount='vim ~/pomodorocount2017'
