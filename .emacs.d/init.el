@@ -287,10 +287,11 @@
 ;; Compiles ugly HTML by default, use `pug -P <file_name>`
 ;; if you want pretty instead
 
+;; Custom function for compiling only .pug files, with prettified output
 (defun pug-compile-saved-file()
   (when (and (stringp buffer-file-name)
          (string-match "\\.pug\\'" buffer-file-name))
-     (pug-compile)))
+     (pug-compile 1)))
 (add-hook 'after-save-hook 'pug-compile-saved-file)
 
 ;; Python: use python3 as default shell interpreter
