@@ -3,9 +3,9 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "powerline" "powerline.el" (23104 5897 604696
-;;;;;;  533000))
-;;; Generated autoloads from powerline.el
+;;;### (autoloads nil "powerline" "../../../../.emacs.d/elpa/powerline-2.4/powerline.el"
+;;;;;;  "fb318f6b8b413d039da643b50a724cec")
+;;; Generated autoloads from ../../../../.emacs.d/elpa/powerline-2.4/powerline.el
 
 (autoload 'powerline-hud "powerline" "\
 Return an XPM of relative buffer location using FACE1 and FACE2 of optional WIDTH.
@@ -47,9 +47,9 @@ Return empty space using FACE and leaving RESERVE space on the right.
 
 ;;;***
 
-;;;### (autoloads nil "powerline-themes" "powerline-themes.el" (23104
-;;;;;;  5897 452688 569000))
-;;; Generated autoloads from powerline-themes.el
+;;;### (autoloads nil "powerline-themes" "../../../../.emacs.d/elpa/powerline-2.4/powerline-themes.el"
+;;;;;;  "78b535c8eee2b976fc7f9c6e6898c76b")
+;;; Generated autoloads from ../../../../.emacs.d/elpa/powerline-2.4/powerline-themes.el
 
 (autoload 'powerline-default-theme "powerline-themes" "\
 Setup the default mode-line.
@@ -73,8 +73,12 @@ Setup a nano-like mode-line.
 
 ;;;***
 
-;;;### (autoloads nil nil ("powerline-pkg.el" "powerline-separators.el")
-;;;;;;  (23104 5897 716741 720000))
+;;;### (autoloads nil nil ("../../../../.emacs.d/elpa/powerline-2.4/powerline-autoloads.el"
+;;;;;;  "../../../../.emacs.d/elpa/powerline-2.4/powerline-pkg.el"
+;;;;;;  "../../../../.emacs.d/elpa/powerline-2.4/powerline-separators.el"
+;;;;;;  "../../../../.emacs.d/elpa/powerline-2.4/powerline-themes.el"
+;;;;;;  "../../../../.emacs.d/elpa/powerline-2.4/powerline.el") (23104
+;;;;;;  23768 481046 991000))
 
 ;;;***
 
