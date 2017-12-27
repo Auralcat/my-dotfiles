@@ -101,9 +101,9 @@
 ;;-----PACKAGES-----------------------------------------------------------------
 ;; Package sources
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-             ("org" . "http://orgmode.org/elpa/")
-             ("marmalade" . "http://marmalade-repo.org/packages/")
-             ("melpa-stable" . "http://melpa-stable.milkbox.net/packages/")))
+         ("org" . "http://orgmode.org/elpa/")
+         ("marmalade" . "http://marmalade-repo.org/packages/")
+         ("melpa-stable" . "http://melpa-stable.milkbox.net/packages/")))
 (package-initialize)
 
 ;; If package isn't installed, fetch it
@@ -134,8 +134,8 @@
 ;; Enhanced Ruby Mode
 (require-package 'enh-ruby-mode)
 (add-to-list 'auto-mode-alist
-              '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'"
-                . enh-ruby-mode))
+          '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'"
+        . enh-ruby-mode))
 
 ;; Inf-ruby mode: Call IRB with C-c C-s in buffers with Ruby modes
 (require-package 'inf-ruby)
@@ -167,22 +167,23 @@
 ;; Emacs Powerline setup: the modeline is an integral part of this program, so why
 ;; not prettify it? :D
 
-(require-package 'telephone-line)
-(require 'telephone-line)
+;; Smart-mode-line depends on powerline
+(require-package 'powerline)
+(require 'powerline)
 (require-package 'smart-mode-line)
 
 ;; Telephone line setup
 (setq telephone-line-lhs
       '((evil   . (telephone-line-evil-tag-segment))
-        (accent . (telephone-line-vc-segment
-                   telephone-line-erc-modified-channels-segment
-                   telephone-line-process-segment))
-        (nil    . (telephone-line-minor-mode-segment
-                   telephone-line-buffer-segment))))
+    (accent . (telephone-line-vc-segment
+           telephone-line-erc-modified-channels-segment
+           telephone-line-process-segment))
+    (nil    . (telephone-line-minor-mode-segment
+           telephone-line-buffer-segment))))
 (setq telephone-line-rhs
       '((nil    . (telephone-line-misc-info-segment))
-        (accent . (telephone-line-major-mode-segment))
-        (evil   . (telephone-line-airline-position-segment))))
+    (accent . (telephone-line-major-mode-segment))
+    (evil   . (telephone-line-airline-position-segment))))
 
 ;; Activate telephone-line
 (telephone-line-mode t)
@@ -318,7 +319,7 @@
 ;; Custom function for compiling only .pug files, with prettified output
 (defun pug-compile-saved-file()
   (when (and (stringp buffer-file-name)
-         (string-match "\\.pug\\'" buffer-file-name))
+     (string-match "\\.pug\\'" buffer-file-name))
      (pug-compile 1)))
 (add-hook 'after-save-hook 'pug-compile-saved-file)
 
@@ -378,7 +379,7 @@
  '(custom-safe-themes
    (quote
     ("5908457b14343ddca0ff1efa27247fb8eec94bc1eaab60fe58c1d033a3188315" "d857acdacdb74d5a3eb35c1d009d0c598f9954d51da523859db6366479cc31cd" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "36d92f830c21797ce34896a4cf074ce25dbe0dabe77603876d1b42316530c99d" "b04425cc726711a6c91e8ebc20cf5a3927160681941e06bc7900a5a5bfe1a77f" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "59e5301cce088c4a493f1745b0d409eff6ba955f06150f77ffaf39d955bb8442" "da3f9bcccf44c8b3bb64807a4eb55a5b2089488ad28201a968333dee29b10d89" "39d212cddd810c2a5b450b32a0acad8ae85b2d534301b2cf86cbc318874b1a5d" "643ce4d69567eedf342aa4913e004dc37e8d4567b226e04bbbd7f08cdd6fb8a3" "c3009cace2d39b02a3c660a68b05ca2796b9a0f623802c1558addf092b0bc91a" "3f3ff89135934379b84e067b8db7386efc63bef5695be0b1765ed95801a9ac2e" "7326e5068f99b8022e2876503284ef8b35c4a6e2f9f5e2cc7e3a147b2af9bc86" "33b2941efadace8f164466cb183194a29fc2562e539bb932235cf015df85b65c" "002be25c63dc642988bcabf86aa1cc3cff72d168017f7b668974f70b76957324" "3a427b2b50f57b2e97b499b5971c2b79a0862f690ddb372292f72b3aa71e8ffb" "0fc7298072540a92cc11274c4e1712d351aabe3b20f1294da8f3a8ab6e5e2e43" "d3286e2f0cee02a049e98e3e2d9c31f944b0d1b34bf1b9d4bcbf401baca174e0" "32fba6a2b0f2e8388a75ed41e70e7d190966ce5c6fe4ef83abd6935ba6d82edb" "24fac42b4ad7f2eabbd134fd1b3aebab2964ad2e5eeb97a36c30bd343c3e3be3" "91d9e12212df3e3dcf313eee7336910166ebc3735268977f921433fcd15dc0e1" "e278b6a543c79c5758f95cc9d712af0724c565196bdd7393b1b0e738b7e4439a" "be4b75ad1770303225aaae89e446c60af40c5848e916ddf98e8089b1713e623e" "9919034690c9e2409c2dccf722e0b2f574d4d356d45681f807dbf1f70bd34825" "345a53dbeaeab1777e5c25b88481aabd37e1573dc015f6c4bff4d785a18daa7c" "62be4d850eb548bddd7cbcb650c088db83e35c058f03c3124153434a39cb2599" "e4384ced8f89c5133cff92bc314becbc219d7c3500c197c8bef7debc251d4676" "6af1c89536ac7be91d8a709923941299e0d8822fa5b32855b39eef36eb8bb7f1" "f32de7d2d8aa2f209397ab036a58c041e92ae40391c6b080e3e1f79ac5374661" "62c625342d7b9228294b52397ffee4afe5992fdf2cc17e7d328cfe054d6734b0" "e4f6561385e45763498650d034c579c2b545168d55c0d9057cc25dd1b8a2c931" "b6cbc6e9a3c0923ed2a8c08709c75ac5ac1665f4d5e44fbc6e14759ff1010ccb" "518b2cf78e56b057a3d4b44ada6c4b4e298fc9866b7c62391da6aa1d8a357292" "cd0d3e633ecc59e31d99d54af5e063def1ff2a6cb08ae71a3ef68ead857b8f74" "4f7a026ab163805b11d48059c9c8237a62beb54c6b2181f1de3656efe8ee616d" "759b9535d645287a170284034f1e399dc0652c12337e72b3d569ff6848667667" "71d9d87d6141d5aaa6a014edf31e142bbfb4866ae990c57645b193903f65d990" "4c8ef842834add984607af2a650fed685d0ef60d7b38c8ea802001236404b80a" "c0e10052057239274f44a31b02c9869815436776e1f34920005555265eb92001" "90b9b16036e9ff0a357c029efd2d9c8b4efc52cd5c3d32c041016992205696bc" "c71114e53758c572d2a854a66dd783c1cbb5036adc5f021f9fc21033e2eec112" "7baed9f018d6518afa7c55e5e6acd83b69db040ac1e0f7bf8cce0b42c5f29f23" "1a379cd3373fbd40a31285ea126d5433ae7c9827c8e881ce1f62c3ca6f7fae5c" "9671fe89034bdf5ea472289ff5b375d8b99c23f92c4dcfecbca613a3ed2c7844" "0b002097186667b1416e4499172007ca9ae8f9b4d80bcfba5b1722e6d9ef9b95" "f5729cac6fcade83c92e50c823eca0e24add9e6c30d1bcafa5076e07909a1ed2" "4134cc495b3e774194861d932a0c094dc729328664b00d82e02c4d31fead14e0" "3856e441793a643f6b2e733b70f3fc2d8e74cf810368eff22942f738d89c4854" "9b803ba5ea6d16e838c3229c7679e8325cbe43083cd4155202925b3f11c3c912" "c9dd6b38801d2db93472aaa63aa15e7c0de4f3f2acecc72b04ca6b3efa25f600" "764b72b168f2a5935f51977c49781c9864312fd9f45e3cc317997d12aa8db3bf" "40af07c028aab91628cac1a41c62f8e4b4e893bef605765196e6b3d8a02ab2e0" "25b0083e7ffd77261165fc391b8a7f94049537a58536da2f0e6fd83ecff30ae8" "59171e7f5270c0f8c28721bb96ae56d35f38a0d86da35eab4001aebbd99271a8" default)))
- '(display-time-mode t)
+ '(display-time-mode nil)
  '(display-time-world-list
    (quote
     (("Europe/Stockholm" "TalonRO Server Time")

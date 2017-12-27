@@ -54,7 +54,7 @@ which vim
 apt show vim-nox
 newsbeuter 
 screenfetch
-# Aqui tem por que usar o eshell!
 ls
 vim
 nvim
+exit
