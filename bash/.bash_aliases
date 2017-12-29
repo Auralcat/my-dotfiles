@@ -54,8 +54,8 @@ alias ta='tmux attach'
 
 # Git aliases
 alias commit='git add --all; git commit; git push'
-alias newrepo='./newrepo.sh'
 alias gp='git pull'
+alias gs='git status'
 
 # Specific vim text files:
 
