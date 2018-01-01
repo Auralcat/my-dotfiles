@@ -2,12 +2,12 @@
 ;; --------------------------------------------------------------------------
 ;; Desktop File for Emacs
 ;; --------------------------------------------------------------------------
-;; Created Fri Dec 29 14:52:22 2017
+;; Created Fri Dec 29 17:38:08 2017
 ;; Desktop file format version 206
 ;; Emacs version 24.5.1
 
 ;; Global section:
-(setq desktop-saved-frameset [frameset 1 (23110 29382 747902 58000) (desktop . "206") "lucas@peralta" nil nil ((((tty-type . "xterm-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "#f8f8f0") (cursor-color . "#f8f8f0") (background-color . "#5a5475") (menu-bar-lines . 0) (powerline-cache) (tool-bar-lines . 0) (font . "tty") (height . 42) (width . 168) (modeline . t) (unsplittable) (frameset--id . "C0E8-D4E7-43EC-EC9D") (frameset--mini t) (minibuffer . t)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 168) (pixel-height . 41) (total-width . 168) (total-height . 41) (normal-height . 1.0) (normal-width . 1.0) (buffer "init.el" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins 3) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 6104) (start . 5444))))])
+(setq desktop-saved-frameset [frameset 1 (23110 39328 769385 783000) (desktop . "206") "lucas@peralta" nil nil ((((tty-type . "xterm-256color") (tty . "/dev/tty") (display-type . color) (background-mode . dark) (foreground-color . "#f8f8f0") (cursor-color . "#f8f8f0") (background-color . "#5a5475") (menu-bar-lines . 0) (powerline-cache) (tool-bar-lines . 0) (font . "tty") (height . 42) (width . 168) (modeline . t) (unsplittable) (frameset--id . "C0E8-D4E7-43EC-EC9D") (frameset--mini t) (minibuffer . t)) ((min-height . 4) (min-width . 10) (min-height-ignore . 2) (min-width-ignore . 2) (min-height-safe . 1) (min-width-safe . 2) (min-pixel-height . 4) (min-pixel-width . 10) (min-pixel-height-ignore . 2) (min-pixel-width-ignore . 2) (min-pixel-height-safe . 1) (min-pixel-width-safe . 2)) leaf (pixel-width . 168) (pixel-height . 41) (total-width . 168) (total-height . 41) (normal-height . 1.0) (normal-width . 1.0) (buffer "eu.org" (selected . t) (hscroll . 0) (fringes 0 0 nil) (margins nil) (scroll-bars 0 0 t nil) (vscroll . 0) (dedicated) (point . 4566) (start . 627))))])
 (setq desktop-missing-file-warning nil)
 (setq tags-file-name nil)
 (setq tags-table-list nil)
@@ -18,6 +18,17 @@
 
 ;; Buffer section -- buffers listed in same order as in buffer list:
 (desktop-create-buffer 206
+  "/home/lucas/file-bouncer/org-files/contact-based-system/eu.org"
+  "eu.org"
+  'org-mode
+  '(global-auto-revert-mode autopair-mode undo-tree-mode)
+  4566
+  '(4566 nil)
+  nil
+  nil
+  '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t)))
+
+(desktop-create-buffer 206
   "/home/lucas/my-dotfiles/.emacs.d/init.el"
   "init.el"
   'emacs-lisp-mode
@@ -27,17 +38,6 @@
   nil
   nil
   '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (fill-column . 79)))
-
-(desktop-create-buffer 206
-  "/home/lucas/file-bouncer/org-files/contact-based-system/eu.org"
-  "eu.org"
-  'org-mode
-  '(global-auto-revert-mode autopair-mode undo-tree-mode)
-  33306
-  '(33306 nil)
-  nil
-  nil
-  '((buffer-file-coding-system . utf-8-unix) (overwrite-mode) (truncate-lines . t)))
 
 (desktop-create-buffer 206
   "/home/lucas/fairyfloss/fairyfloss-theme.el"
