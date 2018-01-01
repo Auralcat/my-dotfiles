@@ -1,5 +1,5 @@
 # This file holds the configuration for what to do when Bash starts.
-#
+
 # This is so I don't miss my appointments!
 # Shows the current month and the next one
 cal -A 1
@@ -14,7 +14,22 @@ echo "Você pode olhar os compromissos no arquivo briefing.txt também com o com
 echo
 
 # Check if .pploweumoney exists
-
 if [ -f ~/.pploweumoney  ]; then
         echo " ** Alguém está devendo dinheiro pra você! Olhe o arquivo .pploweumoney! **"
     fi
+
+# Auto-pull all the Git repos in your home folder
+echo "Doing a git pull in all the repositories in this computer..."
+for base_dir in $(find ~ -type d)
+do
+      if [ -d "$base_dir/.git" ]
+  then
+    echo "Git repo found in $base_dir"
+    echo "Pulling repo"
+    cd "$base_dir"
+    git pull
+  fi
+done
+
+echo "Finishing"
+cd "$HOME"
