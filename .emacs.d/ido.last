@@ -21,11 +21,13 @@
  ("/home/lucas/Python Scripts/" . "sketches/")
  ("/home/lucas/my-dotfiles/" . ".emacs.d/")
  ("/home/lucas/" . ".emacs.d/")
- ("/home/lucas/file-bouncer/" . "org-files/")
+ ("/home/lucas/file-bouncer/" . "blog_drafts/")
 )
 
 ;; ----- ido-work-directory-list -----
 (
+ "/home/lucas/file-bouncer/blog_drafts/"
+ "/home/lucas/file-bouncer/org-files/"
  "/home/lucas/django-test-api/"
  "/home/lucas/django-test-api/TestAPI/"
  "/home/lucas/.emacs.d/"
@@ -40,7 +42,6 @@
  "/home/lucas/auralcat.github.io/_posts/"
  "/home/lucas/auralcat.github.io/"
  "/home/lucas/100-days-of-code/scripts/"
- "/home/lucas/file-bouncer/org-files/"
  "/home/lucas/file-bouncer/org-files/contact-based-system/"
  "/home/lucas/file-bouncer/org-files/contact-based-system/logs/"
  "/home/lucas/file-bouncer/"
@@ -58,20 +59,28 @@
 
 ;; ----- ido-work-file-list -----
 (
+ "como-uso-tecnica-pomodoro-dia-a-dia.md"
+ "automatizando-commits-com-cronjob.md"
+ "template-post.md"
+ "auto-git-pull.md"
+ "blog.org"
  "vars.env"
  "settings.py"
  "fairyfloss-theme.el"
  "test_views.py"
  "sample-form.pug"
- "another-form.pug"
- "init.el"
- "elegantthemes.pug"
- "grids-galore.pug"
- ".bash-powerline.sh"
 )
 
 ;; ----- ido-dir-file-cache -----
 (
+ ("/home/lucas/file-bouncer/blog_drafts/" (23116 55719 902762 461000) "2017-10-08-learning-javascript.md" "./" ".#template-post.md" "template-post.md" "../" "automatizando-commits-com-cronjob.md" "auto-git-pull.md" "#template-post.md#")
+
+ ("/home/lucas/file-bouncer/" (23116 54532 982717 501000) "ListaAlbums" "org-files/" ".gitignore" "diario.txt" "./" "Getting Started with Orgzly.org" "emacs-backups/" "posts/" "diario_alt.txt" "color-programming.rb" "Orçamento Site XV Congresso Sul-Brasileiro Bethéis.pdf" "playlist-podcast.txt" "orçamento site congresso.odt" "WorkshopPython.pptx" "vim-instruções-instalação.txt" ".git/" "apresentacao-startup-weekend.odp" "../" "blog_drafts/" "lembrete.txt" "Passo a passo instalação Python (Miriam).txt" ".mydb.kdbx.lock" "exemplo-vimrc" "saved-desktops/" "race screens/" "everything-bucket" "README.md" "mydb.kdbx" "vim-primeiros-passos/" "emacs-remember-notes" "ideias" "batch-pull.rb")
+
+ ("/home/lucas/file-bouncer/org-files/" (23116 55618 538652 329000) "programming-landscape.org" "#capture-tasks.org#" "a-beginners-guide-to-html-&-css/" "site-congresso.org" "notes.org" "./" "Getting Started with Orgzly.org" "startup-weekend-oficina.org" "freelancing.org_archive" "sketches/" "eventos.org" "my-awesome-site/" "test-board.org" "outreachy-skills.csv" "outreachy.org" "FreeCodeCamp/" "contact-based-system/" "duvidas-workshops.org" "#tasks.org#" "from-ladies-to-ladies.org" "../" "capture-notes.org" "tasks.org" "freelancing.org" "borderify/" "index.pug" "notas-startup-weekend.org" "workshop-brainstorm.org" "fairyfloss-todo.org" "index.org" "blog.org" "tasks.org_archive" "emprego.org" "capture-tasks.org")
+
+ ("/home/lucas/file-bouncer/org-files/contact-based-system/" (23115 56940 941256 107000) "kira.org_archive" "rosiane.org" "ju-palacios.org" "yoko_teles.org" "ariane.org" "techladies.org" "pitt.org" "./" "aline-pegas.org" "eu.org" "emanoely.org" "kell.org" "tatiane-alves.org" "ju_venancio.org" "logs/" "kira.org" "helioloureiro.org" "elaine.org" "../" "patty-vader.org" "olga_chaim.org" "workshop-vim.org" "bia-kunze.org" "vanessa.org" "anawd.org" "eu.org_archive" "simara.org")
+
  ("/home/lucas/django-test-api/" (23109 8869 924120 946000) "catalog/" "TestAPI/" ".gitignore" "./" ".cache/" "tests/" "manage.py" "requirements.txt" ".git/" "../" "pytest.ini" "static/" "README.md" "vars.env" "db.sqlite3")
 
  ("/home/lucas/django-test-api/TestAPI/" (23109 3746 526725 199000) "settings.pyc" "__init__.py" "settings.py" "./" "wsgi.py" "../" "__init__.pyc" "__pycache__/" "urls.py" "urls.pyc")
@@ -86,10 +95,6 @@
 
  ("/home/lucas/site-development/copycat/" (23106 46944 866350 798000) "../" "./" "sample-form.html" "elegantthemes.html" "sample-form.pug" ".#another-form.pug" "elegantthemes.pug")
 
- ("/home/lucas/file-bouncer/org-files/contact-based-system/" (23106 46921 352699 891000) "yoko_teles.org" "olga_chaim.org" "techladies.org" "kell.org" "ariane.org" "aline-pegas.org" "eu.org" "../" "bia-kunze.org" "simara.org" "./" "workshop-vim.org" "kira.org" "#eu.org#" "rosiane.org" "vanessa.org" "pitt.org" "logs/" "ju-palacios.org" "tatiane-alves.org" "ju_venancio.org" "anawd.org" "kira.org_archive" ".#eu.org" "patty-vader.org" "elaine.org" "emanoely.org" "eu.org_archive" "helioloureiro.org")
-
- ("/home/lucas/file-bouncer/" (23106 46588 583710 575000) "ideias" "emacs-backups/" "README.md" "posts/" ".gitignore" "Passo a passo instalação Python (Miriam).txt" "emacs-remember-notes" "../" "batch-pull.rb" "playlist-podcast.txt" "./" "org-files/" "apresentacao-startup-weekend.odp" ".git/" "color-programming.rb" "orçamento site congresso.odt" "diario_alt.txt" "exemplo-vimrc" "Getting Started with Orgzly.org" "vim-primeiros-passos/" "ListaAlbums" "WorkshopPython.pptx" "race screens/" "Orçamento Site XV Congresso Sul-Brasileiro Bethéis.pdf" "blog_drafts/" "mydb.kdbx" "diario.txt" "lembrete.txt" "saved-desktops/" "everything-bucket" "vim-instruções-instalação.txt")
-
  ("/home/lucas/my-dotfiles/.emacs.d/" (23106 43417 910908 228000) ".emacs.desktop" "#type-break#" "init.el" "elpa/" "tramp" "ido.last" "fairyfloss-backup.el" "recentf" "../" "bbdb-2.35/" "fairyfloss-theme.el" "bookmarks" ".org-id-locations" "evilrc.el" "default-theme.el" "./" "completions" ".trello/" "auto-save-list/" "games/" ".erc/" "dot.gnus.el" "eshell/" "evilrc.el~")
 
  ("/home/lucas/site-development/" (23106 19540 616354 821000) "grids-galore.pug" "test.html" "../" "./" "copycat/" "new_project/" "grids-galore.html" "hello.html" "test.pug" "assets/")
@@ -97,8 +102,6 @@
  ("/home/lucas/file-bouncer/vim-primeiros-passos/" (23101 21513 180801 569000) "presentation.md" "../" "exercicios workshop vim.pptx" "apresentação workshop vim.odp" "./" "presentation/" "apresentação workshop vim.pdf" "exercicios workshop vim.odp" "exercicios/" "apresentação workshop vim.pptx" "exercicios workshop vim.pdf")
 
  ("/home/lucas/file-bouncer/org-files/contact-based-system/logs/" (23101 21513 41801 233000) "teste.gpg" "../" "./" "clonghini.log.gpg")
-
- ("/home/lucas/file-bouncer/org-files/" (23103 62597 651121 353000) "#tasks.org#" "duvidas-workshops.org" "borderify/" "fairyfloss-todo.org" "index.org" "from-ladies-to-ladies.org" "a-beginners-guide-to-html-&-css/" "tasks.org" "blog.org" "notes.org" "notas-startup-weekend.org" "sketches/" "eventos.org" "capture-tasks.org" "workshop-brainstorm.org" "../" "./" "startup-weekend-oficina.org" "contact-based-system/" "outreachy-skills.csv" "freelancing.org" "#capture-tasks.org#" "site-congresso.org" "programming-landscape.org" "Getting Started with Orgzly.org" "tasks.org_archive" "index.pug" "capture-notes.org" "outreachy.org" "my-awesome-site/" "FreeCodeCamp/" "freelancing.org_archive" "emprego.org" "test-board.org")
 
  ("/home/lucas/auralcat.github.io/_drafts/" (23104 3168 749142 97000) "../" "./" "2017-10-02-teste-tags.md")
 

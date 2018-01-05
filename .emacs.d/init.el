@@ -421,7 +421,10 @@
  '(org-agenda-skip-scheduled-if-done t)
  '(org-capture-templates
    (quote
-    (("s" "Task to self" entry
+    (("p" "Side project idea" entry
+      (file+headline "~/file-bouncer/org-files/projetos-programação.org" "Ideias")
+      "** %i %?" :prepend t)
+     ("s" "Task to self" entry
       (file+headline "~/file-bouncer/org-files/contact-based-system/eu.org" "Tarefas")
       "** TODO %i %?" :prepend t)
      ("t" "Task" entry
