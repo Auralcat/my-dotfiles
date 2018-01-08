@@ -4,3 +4,5 @@ miriamretka.el
 *#
 .emacs.d/ido.last
 .emacs.d/bookmarks
+.emacs.d/eshell/lastdir
+.emacs.d/eshell/history
