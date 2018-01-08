@@ -171,6 +171,9 @@
  (winner-mode-enable .
 		     [(0 0 5)
 		      nil "Enables winner mode if its available" tar])
+ (window-shaper .
+		[(20171218 1222)
+		 nil "A utility to easily resize windows within Emacs" single])
  (window-number .
 		[(1 0 3)
 		 nil "Select windows by numbers." single])
@@ -2228,11 +2231,11 @@
 	  ((eieio
 	    (1 3)))
 	  "logging library for Emacs" single])
- (log-mode .
-	   [(0 0 4)
-	    ((emacs
-	      (24 3)))
-	    "Navigate Log Error Messages" single])
+ (lognav-mode .
+	      [(0 0 5)
+	       ((emacs
+		 (24 3)))
+	       "Navigate Log Error Messages" single])
  (load-theme-buffer-local .
 			  [(0 0 2)
 			   nil "Install emacs24 color themes by buffer." single])

@@ -58,3 +58,6 @@ ls
 vim
 nvim
 exit
+source ~/virtual_enviroments/olist-test/bin/activate
+krill -s "https://www.twitter.com/miriamretka"
+screenfetch

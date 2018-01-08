@@ -2,3 +2,5 @@
 miriamretka.el
 *.saves-*
 *#
+.emacs.d/ido.last
+.emacs.d/bookmarks
