@@ -2226,16 +2226,16 @@
  (lolcode-mode .
 	       [(0 2)
 		nil "Major mode for editing LOLCODE" single])
- (logito .
-	 [(0 1)
-	  ((eieio
-	    (1 3)))
-	  "logging library for Emacs" single])
  (lognav-mode .
 	      [(0 0 5)
 	       ((emacs
 		 (24 3)))
 	       "Navigate Log Error Messages" single])
+ (logito .
+	 [(0 1)
+	  ((eieio
+	    (1 3)))
+	  "logging library for Emacs" single])
  (load-theme-buffer-local .
 			  [(0 0 2)
 			   nil "Install emacs24 color themes by buffer." single])

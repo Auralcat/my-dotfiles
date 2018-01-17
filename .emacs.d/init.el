@@ -421,14 +421,11 @@
  '(org-agenda-skip-scheduled-if-done t)
  '(org-capture-templates
    (quote
-<<<<<<< HEAD
-    (("i" "Ideia de post para seu blog" entry
-      (file+headline "~/file-bouncer/org-files/blog.org" "Capturas")
-=======
     (("p" "Side project idea" entry
       (file+headline "~/file-bouncer/org-files/projetos-programação.org" "Ideias")
->>>>>>> 51be686b1db87ff8b2c0bde21009b7d9d4f842f0
       "** %i %?" :prepend t)
+    ("i" "Ideia de post para seu blog" entry
+      (file+headline "~/file-bouncer/org-files/blog.org" "Capturas"))
      ("s" "Task to self" entry
       (file+headline "~/file-bouncer/org-files/contact-based-system/eu.org" "Tarefas")
       "** TODO %i %?" :prepend t)
