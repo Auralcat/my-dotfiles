@@ -46,6 +46,7 @@
 ;; Set font in graphical mode
 (when (display-graphic-p)
   (set-frame-font "Fantasque Sans Mono 12" nil t))
+
 ;;-----HOOKS--------------------------------------------------------------------
 
 ;; General programming mode
@@ -89,7 +90,7 @@
       (fill-region beg end)))
 
 ;; I usually keep the terminal window with some transparency to copy stuff from
-;; a bxrowser or whatever... this allows me to toggle the transparency from
+;; a browser or whatever... this allows me to toggle the transparency from
 ;; Emacs and saves the theme I had before
 ;; (defun toggle-terminal-transparency ())
 
@@ -101,9 +102,9 @@
 ;;-----PACKAGES-----------------------------------------------------------------
 ;; Package sources
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-         ("org" . "http://orgmode.org/elpa/")
-         ("marmalade" . "http://marmalade-repo.org/packages/")
-         ("melpa-stable" . "http://melpa-stable.milkbox.net/packages/")))
+     ("org" . "http://orgmode.org/elpa/")
+     ("marmalade" . "http://marmalade-repo.org/packages/")
+     ("melpa-stable" . "http://melpa-stable.milkbox.net/packages/")))
 (package-initialize)
 
 ;; If package isn't installed, fetch it
@@ -125,6 +126,21 @@
 ;; Pug-mode - Work with .pug files
 (require-package 'pug-mode)
 
+;; js2-mode - A better default Javascript mode
+(require-package 'js2-mode)
+
+;; Web-beautify - Format HTML/CSS and JS code with js-beautify
+(require-package 'web-beautify)
+
+;; Set syntax highlight level
+(setq js2-highlight-level 3)
+
+;; Flycheck - syntax checker, replaces flymake
+(require-package 'flycheck)
+
+;; turn on flychecking globally
+(add-hook 'after-init-hook #'global-flycheck-mode)
+
 ;; Php-mode - PHP support for Emacs
 (require-package 'php-mode)
 
@@ -134,8 +150,8 @@
 ;; Enhanced Ruby Mode
 (require-package 'enh-ruby-mode)
 (add-to-list 'auto-mode-alist
-          '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'"
-        . enh-ruby-mode))
+      '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'"
+    . enh-ruby-mode))
 
 ;; Inf-ruby mode: Call IRB with C-c C-s in buffers with Ruby modes
 (require-package 'inf-ruby)
@@ -176,10 +192,10 @@
 (setq telephone-line-lhs
       '((evil   . (telephone-line-evil-tag-segment))
     (accent . (telephone-line-vc-segment
-           telephone-line-erc-modified-channels-segment
-           telephone-line-process-segment))
+       telephone-line-erc-modified-channels-segment
+       telephone-line-process-segment))
     (nil    . (telephone-line-minor-mode-segment
-           telephone-line-buffer-segment))))
+       telephone-line-buffer-segment))))
 (setq telephone-line-rhs
       '((nil    . (telephone-line-misc-info-segment))
     (accent . (telephone-line-major-mode-segment))
