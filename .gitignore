@@ -6,3 +6,6 @@ miriamretka.el
 .emacs.d/bookmarks
 .emacs.d/eshell/lastdir
 .emacs.d/eshell/history
+.emacs.d/.emacs.desktop
+.emacs.d/.emacs.desktop.lock
+
