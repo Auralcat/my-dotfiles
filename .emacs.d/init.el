@@ -62,6 +62,9 @@
 ;; Ruby
 ;; Activate ruby-tools
 (add-hook 'enh-ruby-mode-hook (quote ruby-tools-mode))
+
+;; Create filling for org-mode
+(add-hook 'org-mode-hook 'auto-fill-mode)
 ;;-----IRC----------------------------------------------------------------------
 
 ;; Qui Nov  2 19:57:06 BRST 2017 - Tried using IRC inside Emacs, didn't please
