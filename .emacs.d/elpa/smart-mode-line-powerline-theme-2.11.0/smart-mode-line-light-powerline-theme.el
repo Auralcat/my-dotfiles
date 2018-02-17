@@ -2,13 +2,6 @@
 
 ;; Copyright (C) 2015 Artur Malabarba <bruce.connor.am@gmail.com>
 
-;; Author: Artur Malabarba <bruce.connor.am@gmail.com>
-;; URL: http://github.com/Bruce-Connor/smart-mode-line
-;; Version: 0.1a
-;; Package-Requires: ((emacs "24.3") (powerline "2.2") (smart-mode-line "2.5"))
-;; Keywords: mode-line faces themes
-;; Separator: -
-
 ;;; License:
 ;;
 ;; This file is NOT part of GNU Emacs.
@@ -23,9 +16,6 @@
 ;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ;; GNU General Public License for more details.
 ;;
-
-;;; Change Log:
-;; 0.1a - 2015/11/08 - Created File.
 
 ;;; Code:
 
@@ -56,7 +46,7 @@ Mimics the appearance of powerline.")
                          (((background light)) :foreground "grey20" :background ,l0
                           :slant italic :box (:line-width -2 :color "white"))))
    `(mode-line     ((t :foreground "black" :background ,l0 :box (:line-width -1 :color "white"))))
-   `(sml/global    ((t :foreground "grey20" :inverse-video nil)))
+   `(sml/global    ((t :foreground "grey20" :background ,l0 :inverse-video nil)))
 
    ;; Layer 0
    `(sml/line-number         ((t :foreground "Black" :inherit sml/global :weight bold :background ,l0)))
@@ -99,7 +89,7 @@ Mimics the appearance of powerline.")
    `(sml/pre-id-separator
      '(""
        (:propertize " " face sml/global)
-       (:eval (propertize " " 'display (funcall ,separator-left nil 'powerline-active1)))
+       (:eval (propertize " " 'display (funcall ,separator-left 'sml/global 'powerline-active1)))
        (:propertize " " face powerline-active1)))
    `(sml/pos-id-separator
      '(""
@@ -112,7 +102,7 @@ Mimics the appearance of powerline.")
        (:propertize " " face powerline-active1)))
    `(sml/pos-minor-modes-separator
      '("" (:propertize " " face powerline-active1)
-       (:eval (propertize " " 'display (funcall ,separator-right 'powerline-active1 nil)))
+       (:eval (propertize " " 'display (funcall ,separator-right 'powerline-active1 'sml/global)))
        (:propertize " " face sml/global)))
    '(sml/pre-modes-separator
      (propertize " " 'face 'sml/modes))))

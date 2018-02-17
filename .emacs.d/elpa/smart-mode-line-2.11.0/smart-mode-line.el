@@ -367,6 +367,7 @@ set `sml/override-theme' to nil."
 (defvar erc-track-position-in-mode-line)
 (defvar sml/simplified nil
   "Temporary dynamic variable. Used for filling.")
+(defvar sml/active-background-color)
 
 (defvar sml/-debug nil
   "Whether debugging information should be printed.")
@@ -933,19 +934,24 @@ If you want it to show the backend, just set it to t."
 (defvar sml/projectile-loaded-p nil "Non-nil if projectile has been loaded.")
 
 (defcustom sml/pos-id-separator " "
-  "Miscellaneous mode-line construct.")
+  "Miscellaneous mode-line construct."
+  :type 'string)
 (put 'sml/pos-id-separator 'risky-local-variable t)
 (defcustom sml/pre-modes-separator " "
-  "Miscellaneous mode-line construct.")
+  "Miscellaneous mode-line construct."
+  :type 'string)
 (put 'sml/pre-modes-separator 'risky-local-variable t)
 (defcustom sml/pre-id-separator ""
-  "Miscellaneous mode-line construct.")
+  "Miscellaneous mode-line construct."
+  :type 'string)
 (put 'sml/pre-id-separator 'risky-local-variable t)
 (defcustom sml/pre-minor-modes-separator ""
-  "Miscellaneous mode-line construct.")
+  "Miscellaneous mode-line construct."
+  :type 'string)
 (put 'sml/pre-minor-modes-separator 'risky-local-variable t)
 (defcustom sml/pos-minor-modes-separator ""
-  "Miscellaneous mode-line construct.")
+  "Miscellaneous mode-line construct."
+  :type 'string)
 (put 'sml/pos-minor-modes-separator 'risky-local-variable t)
 
 (defun sml/-automatically-decide-theme ()
@@ -1071,6 +1077,13 @@ the mode-line will be setup."
   (add-hook 'comint-output-filter-functions 'sml/generate-buffer-identification)
   (add-hook 'eshell-directory-change-hook 'sml/generate-buffer-identification)
 
+  ;; Term support
+  (defadvice term-command-hook (after sml/term-advice-1 activate)
+    (sml/generate-buffer-identification))
+
+  (defadvice term-handle-ansi-terminal-messages (after sml/term-advice-2 activate)
+    (sml/generate-buffer-identification))
+
   ;; Dired overrides the buffer-identification (which we would
   ;; normally respect) but doesn't actually do anything useful with
   ;; it, so we overoverride back.
@@ -1168,7 +1181,9 @@ Might implement a quick flash eventually."
 
   (unless (and (boundp 'erc-track-position-in-mode-line)
                (null erc-track-position-in-mode-line))
-    (setq erc-track-position-in-mode-line t)))
+    (setq erc-track-position-in-mode-line t))
+
+  (run-hooks 'sml/after-setup-hook))
 
 ;;;###autoload
 (defalias 'smart-mode-line-enable #'sml/setup)
@@ -1511,9 +1526,11 @@ duplicated buffer names) from being displayed."
     0))
 
 ;;; Patch, in case the user is using the wrong variable.
-(when (boundp 'sml/hidden-modes)
-  (message "[smart-mode-line] Warning: `sml/hidden-modes' is obsolete, use `rm-blacklist' instead")
-  (setq rm-blacklist sml/hidden-modes))
+(defvar sml/-hidden-modes-bound-by-user
+  (bound-and-true-p sml/hidden-modes))
+(when sml/-hidden-modes-bound-by-user
+  (setq sml/-hidden-modes-bound-by-user nil)
+  (setq rm-blacklist (bound-and-true-p sml/hidden-modes)))
 (define-obsolete-variable-alias 'sml/hidden-modes 'rm-blacklist)
 
 (defun sml/generate-minor-modes ()
@@ -1580,7 +1597,7 @@ duplicated buffer names) from being displayed."
     ((eq major-mode 'dired-mode)
      (replace-regexp-in-string "/[^/]*/$" "/" default-directory))
     ((and (symbolp major-mode)
-          (member major-mode '(shell-mode eshell-mode)))
+          (member major-mode '(shell-mode eshell-mode term-mode)))
      default-directory)
     ;; In indirect buffers, buffer-file-name is nil. The correct value is
     ;; retrieved from the base buffer.

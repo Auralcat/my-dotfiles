@@ -13,6 +13,9 @@ set incsearch " Shows search results as you type them
 set noswapfile " Swapfiles are annoying!
 set backspace=2 " Returns common backspace function to insert mode
 
+" Set graphical font, mostly for Vim Anywhere, I like that idea!
+set guifont=Fantasque\ Sans\ Mono\ Regular
+
 " Default tabstop
 set tabstop=4
 " change number of space chars inserted for indentation
@@ -153,6 +156,9 @@ imap <right> <nop>
 imap <C-a> <C-o>0
 imap <C-e> <C-o>$
 
+" VimEmmet: Keep keybinding compatibility with Emacs
+let g:user_emmet_leader_key='<C-j>'
+
 " Same bindings for normal mode as well
 nnoremap <C-a> ^
 nnoremap <C-e> $
@@ -239,6 +245,12 @@ Plugin 'flazz/vim-colorschemes'
 
 " VimWiki: Use Vim as your personal wiki
 Plugin 'vimwiki/vimwiki'
+
+" VimSurround: Better bracket/surround symbol control in Vim
+Plugin 'tpope/vim-surround'
+
+" VimEmmet: Emmet support for Vim
+Plugin 'mattn/emmet-vim'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required

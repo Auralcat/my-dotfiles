@@ -1,4 +1,4 @@
-(define-package "smart-mode-line" "2.10.1" "A color coded smart mode-line."
+(define-package "smart-mode-line" "2.11.0" "A color coded smart mode-line."
   '((emacs "24.3")
     (rich-minority "0.1.1"))
   :url "http://github.com/Malabarba/smart-mode-line" :keywords

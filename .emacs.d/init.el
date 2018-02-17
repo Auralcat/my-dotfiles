@@ -428,7 +428,7 @@
      ("America/New_York" "Boston")
      ("Europe/London" "London"))))
  '(dynamic-completion-mode t)
- '(emmet-indent-after-insert nil)
+ '(emmet-indent-after-insert t)
  '(emmet-indentation 2)
  '(enh-ruby-use-encoding-map nil)
  '(erc-away-nickname nil)
