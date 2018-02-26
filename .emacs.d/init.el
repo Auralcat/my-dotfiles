@@ -429,7 +429,7 @@
      ("Europe/London" "London"))))
  '(dynamic-completion-mode t)
  '(emmet-indent-after-insert t)
- '(emmet-indentation 2)
+ '(emmet-indentation 4)
  '(enh-ruby-use-encoding-map nil)
  '(erc-away-nickname nil)
  '(erc-modules
@@ -445,6 +445,7 @@
  '(global-auto-revert-mode t)
  '(global-linum-mode nil)
  '(image-animate-loop t)
+ '(indent-tabs-mode nil)
  '(initial-buffer-choice nil)
  '(initial-major-mode (quote org-mode))
  '(initial-scratch-message
