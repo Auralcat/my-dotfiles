@@ -38,6 +38,9 @@ alias wifireload='sudo killall NetworkManager; sudo NetworkManager &'
 # Reload the shell; 7/17/17 -> I always type ref then tab, so why not shorten refresh to ref?
 alias ref='source ~/.bashrc'
 
+# Do a git-pull in all the repos in the system
+alias agp='~/my-dotfiles/bash/auto_git_pull.sh'
+
 # Working with a todo list
 alias addtodo='vim ~/.todo.md'
 alias todo='pandoc ~/.todo.md | lynx -stdin'
