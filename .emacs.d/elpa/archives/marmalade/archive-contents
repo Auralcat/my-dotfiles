@@ -634,7 +634,7 @@
 	    [(0 0 1)
 	     nil "Utilities for opening files with sudo" single])
  (sudden-death .
-	       [(0 1)
+	       [(0 2 1)
 		nil "Totsuzen-no-Shi" single])
  (subshell-proc .
 		[(1 0 0)
@@ -1583,6 +1583,11 @@
 	     (pkg-info
 	      (0 4)))
 	    "Ert-runner Integration Into Emacs." single])
+ (overcast-theme .
+		 [(20180218 2155)
+		  ((emacs
+		    (24)))
+		  "A dark but vibrant color theme for Emacs" single])
  (outlined-elisp-mode .
 		      [(1 0 5)
 		       nil "outline-minor-mode settings for emacs lisp" single])
@@ -3941,7 +3946,7 @@
        [(2 11 0)
 	nil "A modern list library for Emacs" single])
  (dart-mode .
-	    [(1 0 2)
+	    [(1 0 3)
 	     ((emacs
 	       (24 5))
 	      (cl-lib
@@ -3951,7 +3956,7 @@
 	      (flycheck
 	       (0 23))
 	      (s
-	       (1 11)))
+	       (1 10)))
 	     "Major mode for editing Dart files" single])
  (d-mode .
 	 [(2 0 4)

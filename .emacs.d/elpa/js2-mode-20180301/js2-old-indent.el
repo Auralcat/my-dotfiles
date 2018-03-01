@@ -355,7 +355,8 @@ In particular, return the buffer position of the first `for' kwd."
                      (re-search-forward "[^,]]* \\(for\\) " end t)
                      ;; not inside comment or string literal
                      (let ((state (parse-partial-sexp bracket (point))))
-                       (not (or (nth 3 state) (nth 4 state)))))
+                       (and (= 1 (car state))
+                            (not (nth 8 state)))))
                 (match-beginning 1))))))))
 
 (defun js2-array-comp-indentation (parse-status for-kwd)
@@ -563,7 +564,7 @@ Currently, JSX indentation supports the following styles:
 
   React.render(
     <div></div>,
-    document.querySelector(\\='.root\\=')
+    document.querySelector('.root')
   );"
   (let ((current-pos (point))
         (current-line (line-number-at-pos))
