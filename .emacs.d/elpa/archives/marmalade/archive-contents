@@ -782,7 +782,7 @@
 	  [(1 23)
 	   nil "Play the Sokoban game in emacs" single])
  (snakehump .
-	    [(0 1 1)
+	    [(0 3 1)
 	     nil "Convert between compound word conventions" tar])
  (smtpmail-multi .
 		 [(0 6)
@@ -1584,7 +1584,7 @@
 	      (0 4)))
 	    "Ert-runner Integration Into Emacs." single])
  (overcast-theme .
-		 [(20180218 2155)
+		 [(20180301 2215)
 		  ((emacs
 		    (24)))
 		  "A dark but vibrant color theme for Emacs" single])

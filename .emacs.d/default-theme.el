@@ -1,5 +1,5 @@
 (deftheme default
-  "Created 2017-11-06.")
+  "Created 2018-03-03.")
 
 (custom-theme-set-faces
  'default
@@ -15,7 +15,7 @@
  '(trailing-whitespace ((((class color) (background light)) (:background "red1")) (((class color) (background dark)) (:background "red1")) (t (:inverse-video t))))
  '(font-lock-builtin-face ((((class grayscale) (background light)) (:weight bold :foreground "LightGray")) (((class grayscale) (background dark)) (:weight bold :foreground "DimGray")) (((class color) (min-colors 88) (background light)) (:foreground "dark slate blue")) (((class color) (min-colors 88) (background dark)) (:foreground "LightSteelBlue")) (((class color) (min-colors 16) (background light)) (:foreground "Orchid")) (((class color) (min-colors 16) (background dark)) (:foreground "LightSteelBlue")) (((class color) (min-colors 8)) (:weight bold :foreground "blue")) (t (:weight bold))))
  '(font-lock-comment-delimiter-face ((t (:inherit (font-lock-comment-face)))))
- '(font-lock-comment-face ((t (:foreground "color-196"))))
+ '(font-lock-comment-face ((t (:foreground "#d70022"))))
  '(font-lock-constant-face ((((class grayscale) (background light)) (:underline (:color foreground-color :style line) :weight bold :foreground "LightGray")) (((class grayscale) (background dark)) (:underline (:color foreground-color :style line) :weight bold :foreground "Gray50")) (((class color) (min-colors 88) (background light)) (:foreground "dark cyan")) (((class color) (min-colors 88) (background dark)) (:foreground "Aquamarine")) (((class color) (min-colors 16) (background light)) (:foreground "CadetBlue")) (((class color) (min-colors 16) (background dark)) (:foreground "Aquamarine")) (((class color) (min-colors 8)) (:foreground "magenta")) (t (:underline (:color foreground-color :style line) :weight bold))))
  '(font-lock-doc-face ((t (:inherit (font-lock-string-face)))))
  '(font-lock-function-name-face ((t (:inherit minibuffer-prompt))))
@@ -24,7 +24,7 @@
  '(font-lock-preprocessor-face ((t (:inherit (font-lock-builtin-face)))))
  '(font-lock-regexp-grouping-backslash ((t (:inherit (bold)))))
  '(font-lock-regexp-grouping-construct ((t (:inherit (bold)))))
- '(font-lock-string-face ((t (:foreground "color-199"))))
+ '(font-lock-string-face ((t (:foreground "#fc92ea"))))
  '(font-lock-type-face ((((class grayscale) (background light)) (:weight bold :foreground "Gray90")) (((class grayscale) (background dark)) (:weight bold :foreground "DimGray")) (((class color) (min-colors 88) (background light)) (:foreground "ForestGreen")) (((class color) (min-colors 88) (background dark)) (:foreground "PaleGreen")) (((class color) (min-colors 16) (background light)) (:foreground "ForestGreen")) (((class color) (min-colors 16) (background dark)) (:foreground "PaleGreen")) (((class color) (min-colors 8)) (:foreground "green")) (t (:underline (:color foreground-color :style line) :weight bold))))
  '(font-lock-variable-name-face ((((class grayscale) (background light)) (:slant italic :weight bold :foreground "Gray90")) (((class grayscale) (background dark)) (:slant italic :weight bold :foreground "DimGray")) (((class color) (min-colors 88) (background light)) (:foreground "sienna")) (((class color) (min-colors 88) (background dark)) (:foreground "LightGoldenrod")) (((class color) (min-colors 16) (background light)) (:foreground "DarkGoldenrod")) (((class color) (min-colors 16) (background dark)) (:foreground "LightGoldenrod")) (((class color) (min-colors 8)) (:weight light :foreground "yellow")) (t (:slant italic :weight bold))))
  '(font-lock-warning-face ((t (:inherit (error)))))
@@ -45,7 +45,8 @@
  '(match ((((class color) (min-colors 88) (background light)) (:background "yellow1")) (((class color) (min-colors 88) (background dark)) (:background "RoyalBlue3")) (((class color) (min-colors 8) (background light)) (:foreground "black" :background "yellow")) (((class color) (min-colors 8) (background dark)) (:foreground "white" :background "blue")) (((type tty) (class mono)) (:inverse-video t)) (t (:background "gray"))))
  '(next-error ((t (:inherit (region)))))
  '(query-replace ((t (:inherit (isearch)))))
+ '(ido-only-match ((t (:foreground "color-46"))))
  '(default ((t (:family "default" :foundry "default" :width normal :height 1 :weight normal :slant normal :underline nil :overline nil :strike-through nil :box nil :inverse-video nil :foreground "unspecified-fg" :background "unspecified-bg" :stipple nil :inherit nil))))
- '(ido-only-match ((t (:foreground "color-46")))))
+ '(eruby-standard-face ((t (:background "color-100" :foreground "red")))))
 
 (provide-theme 'default)
