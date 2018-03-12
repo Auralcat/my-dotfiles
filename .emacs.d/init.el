@@ -47,6 +47,14 @@
 (when (display-graphic-p)
   (set-frame-font "Fantasque Sans Mono 12" nil t))
 
+;; Org-babel - load languages
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '(
+   (sh . t)
+   (python . t)
+   (ruby . t)
+   ))
 ;;-----HOOKS--------------------------------------------------------------------
 
 ;; General programming mode
