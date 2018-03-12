@@ -7,6 +7,9 @@
 ;; Store all backups in a specific folder:
 (setq backup-directory-alist `(("." . "~/file-bouncer/emacs-backups")))
 
+;; Manual packages load path
+(add-to-list 'load-path "~/my-dotfiles/.emacs.d/manual-packages/")
+
 ;; Backup files by copying them
 (setq backup-by-copying t)
 
@@ -47,6 +50,9 @@
 (when (display-graphic-p)
   (set-frame-font "Fantasque Sans Mono 12" nil t))
 
+;; Org-babel - load ob-elixir
+(load "ob-elixir")
+
 ;; Org-babel - load languages
 (org-babel-do-load-languages
  'org-babel-load-languages
@@ -54,6 +60,7 @@
    (sh . t)
    (python . t)
    (ruby . t)
+   (elixir . t)
    ))
 ;;-----HOOKS--------------------------------------------------------------------
 
