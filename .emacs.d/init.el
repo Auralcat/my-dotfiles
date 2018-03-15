@@ -8,7 +8,7 @@
 (setq backup-directory-alist `(("." . "~/file-bouncer/emacs-backups")))
 
 ;; Manual packages load path
-(add-to-list 'load-path "~/my-dotfiles/.emacs.d/manual-packages/")
+(add-to-list 'load-path "~/my-dotfiles/.emacs.d/manual-packages/ob-elixir/")
 
 ;; Backup files by copying them
 (setq backup-by-copying t)
@@ -508,6 +508,7 @@
    "/home/lucas/.emacs.d/elpa/org-pomodoro-2.1.0/resources/Blip.ogg")
  '(org-pomodoro-format "Focus!~%s")
  '(org-pomodoro-start-sound-p nil)
+ '(org-src-fontify-natively t)
  '(org-todo-keywords (quote ((sequence "TODO" "DONE"))))
  '(remember-data-file "~/file-bouncer/everything-bucket")
  '(send-mail-function (quote smtpmail-send-it))
