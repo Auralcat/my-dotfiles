@@ -1,11 +1,13 @@
 {
   "segments": [
+    "node_version",
     "virtual_env",
     "username",
     "hostname",
     "ssh",
     "cwd",
     "git",
+    "hg",
     "jobs",
     "root"
   ],
