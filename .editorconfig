@@ -2,14 +2,14 @@
 
 # Top-most EditorConfig file
 root = true
-# Alweays indent with 4 spaces!
-indent_style = space
-indent_size = 4
 
 # Unix-style newlines with a newline ending every file
 [*]
 end_of_line = lf
 insert_final_newline = true
+# Always indent with 4 spaces!
+indent_style = space
+indent_size = 4
 
 # Default charset
 [*.{html, css, js, py, rb, erb, pas, exs, java, cpp, rs}]
