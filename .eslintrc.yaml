@@ -2,12 +2,9 @@ extends:
 - eslint:recommended
 - plugin:import/recommended
 - plugin:mozilla/recommended
-- plugin:react/recommended
 
 env:
-  browser: true
   es6: true
-  jquery: true
 
 parserOptions:
   ecmaVersion: 6
@@ -27,21 +24,3 @@ rules:
   no-restricted-syntax: off
   no-use-before-define: off
   object-curly-newline: off
-  react/prop-types: off
-
-overrides:
-  -
-    files: ['src/**/*.js']
-    globals:
-      process: true
-      require: true
-  -
-    files: ['src/extension/**/*.js']
-    env:
-      webextensions: true
-  -
-    files: ['webpack.*.js']
-    rules:
-      import/unambiguous: off
-    env:
-      node: true
