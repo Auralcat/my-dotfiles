@@ -89,6 +89,7 @@ augroup programming
     "Activate rainbow parentheses based on file type:
     autocmd FileType python,ruby,c,cpp,java,javascript RainbowParentheses
     " Ruby: set tab length to 2
+    " OVERRIDEN BY EDITORCONFIG!!
     autocmd FileType ruby set tabstop=2
     autocmd FileType ruby set shiftwidth=2
     " Wraps text before column 80.
