@@ -1589,7 +1589,7 @@
 	      (0 4)))
 	    "Ert-runner Integration Into Emacs." single])
  (overcast-theme .
-		 [(20180301 2215)
+		 [(20180315 1825)
 		  ((emacs
 		    (24)))
 		  "A dark but vibrant color theme for Emacs" single])

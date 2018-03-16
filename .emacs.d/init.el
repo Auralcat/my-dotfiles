@@ -235,9 +235,17 @@
 (setq sml/theme 'powerline)
 (sml/setup)
 
+;; EditorConfig - Helps developers define and maintain consistent
+;; coding styles between different editors and IDEs
+(require-package 'editorconfig)
+
+;; Activate it
+(editorconfig-mode 1)
+
 ;;-----KEYBINDINGS--------------------------------------------------------------
-;; Remapping the help hotkey so it doesn't clash with Unix backspace.
-;; Whenever you want to call help you can use M-x help as well. F1 works too.
+;;Remapping the help hotkey so it doesn't clash with Unix backspace.
+;;Whenever you want to call help you can use M-x help as well. F1
+;;works too.
 (define-key key-translation-map [?\C-h] [?\C-?])
 
 ;; Unfill region
