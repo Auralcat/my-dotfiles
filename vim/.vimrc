@@ -252,6 +252,9 @@ Plugin 'tpope/vim-surround'
 " VimEmmet: Emmet support for Vim
 Plugin 'mattn/emmet-vim'
 
+" EditorConfig: Keep standard configurations between editors and projects
+Plugin 'editorconfig/editorconfig-vim'
+
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
 filetype plugin indent on    " required
