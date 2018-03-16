@@ -156,6 +156,11 @@
 ;; js2-mode - A better default Javascript mode
 (require-package 'js2-mode)
 
+;; Set js2-mode as default mode for JS files
+(add-to-list 'auto-mode-alist
+      '("\\(?:\\.js\\|jsx\\|)file\\)\\'"
+    . js2-mode))
+
 ;; Web-beautify - Format HTML/CSS and JS code with js-beautify
 (require-package 'web-beautify)
 
@@ -176,6 +181,8 @@
 
 ;; Enhanced Ruby Mode
 (require-package 'enh-ruby-mode)
+
+;; Set it as default mode for Ruby files
 (add-to-list 'auto-mode-alist
       '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'"
     . enh-ruby-mode))

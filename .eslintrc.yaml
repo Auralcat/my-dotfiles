@@ -24,3 +24,4 @@ rules:
   no-restricted-syntax: off
   no-use-before-define: off
   object-curly-newline: off
+  no-console: off
