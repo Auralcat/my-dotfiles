@@ -10,6 +10,7 @@ trim_trailing_whitespace = true
 [*]
 end_of_line = lf
 insert_final_newline = true
+
 # Always indent with 4 spaces!
 indent_style = space
 indent_size = 4
@@ -19,5 +20,5 @@ indent_size = 4
 charset = utf-8
 
 # 2 space indentation
-[*.{rb,css}]
+[*.{rb,css,exs,ex}]
 indent_size = 2
