@@ -249,6 +249,8 @@
 ;; Activate it
 (editorconfig-mode 1)
 
+;; YAML mode: work with YAML files
+(requre-package 'yaml-mode)
 ;; -----KEYBINDINGS--------------------------------------------------------------
 ;; Remapping the help hotkey so it doesn't clash with Unix backspace.
 ;; Whenever you want to call help you can use M-x help as well. F1
