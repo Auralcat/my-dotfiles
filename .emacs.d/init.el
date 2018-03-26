@@ -251,7 +251,7 @@
 
 ;; Web Mode - File associations
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
@@ -403,7 +403,7 @@
 ;; css-mode, web-mode and sass-mode
 (add-hook 'sgml-mode-hook 'emmet-mode)
 (add-hook 'sass-mode-hook 'css-mode-tweaks)
-(add-hook 'web-mode-hook 'emmet-mode)
+(add-hook 'web-mode-hook (emmet-mode 1))
 
 ;; By the way, it's nice to add rainbow-mode for CSS
 (add-hook 'css-mode-hook 'css-mode-tweaks)
