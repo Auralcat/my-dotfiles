@@ -141,12 +141,6 @@
 ;; Multi-term - Run multiple terminals and interface with Emacs commands
 (require-package 'multi-term)
 
-;; Pug-mode - Work with .pug files
-(require-package 'pug-mode)
-
-;; I'm replacing Pug with HAML because...
-(require-package 'haml-mode)
-
 ;; ...of this, and...
 (require-package 'emmet-mode)
 
@@ -406,10 +400,10 @@
   (rainbow-mode 1))
 
 ;; Emmet-mode: activate for html-mode, sgml-mode,
-;; css-mode, haml-mode and sass-mode
+;; css-mode, web-mode and sass-mode
 (add-hook 'sgml-mode-hook 'emmet-mode)
 (add-hook 'sass-mode-hook 'css-mode-tweaks)
-(add-hook 'haml-mode-hook 'emmet-mode)
+(add-hook 'web-mode-hook 'emmet-mode)
 
 ;; By the way, it's nice to add rainbow-mode for CSS
 
