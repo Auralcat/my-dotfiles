@@ -250,7 +250,24 @@
 (editorconfig-mode 1)
 
 ;; YAML mode: work with YAML files
-(requre-package 'yaml-mode)
+(require-package 'yaml-mode)
+
+;; Web Mode - Use multiple web-related modes for development
+(require-package 'web-mode)
+
+;; Web Mode - File associations
+(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+
+;; Engine associations
+(setq web-mode-engines-alist
+      '(("php"    . "\\.phtml\\'")
+        ("blade"  . "\\.blade\\."))
+)
+
 ;; -----KEYBINDINGS--------------------------------------------------------------
 ;; Remapping the help hotkey so it doesn't clash with Unix backspace.
 ;; Whenever you want to call help you can use M-x help as well. F1
@@ -493,7 +510,7 @@
                  "  " mode-line-modes mode-line-misc-info mode-line-end-spaces)))
     '(org-agenda-files
          (quote
-             ("/home/lucas/file-bouncer/org-files/contact-based-system/eu.org" "~/file-bouncer/org-files/outreachy-1o-semestre-2018.org" "~/file-bouncer/org-files/blog.org" "~/file-bouncer/org-files/contact-based-system/emanoely.org" "~/file-bouncer/org-files/contact-based-system/patty-vader.org" "/home/lucas/file-bouncer/org-files/contact-based-system/rosiane.org" "~/file-bouncer/org-files/contact-based-system/olga_chaim.org" "/home/lucas/file-bouncer/org-files/contact-based-system/pitt.org" "/home/lucas/file-bouncer/org-files/contact-based-system/kira.org" "/home/lucas/file-bouncer/org-files/contact-based-system/helioloureiro.org" "/home/lucas/file-bouncer/org-files/contact-based-system/elaine.org" "/home/lucas/file-bouncer/org-files/contact-based-system/aline-pegas.org" "~/file-bouncer/org-files/contact-based-system/ariane.org" "/home/lucas/file-bouncer/org-files/contact-based-system/vanessa.org" "~/file-bouncer/org-files/site-congresso.org" "~/file-bouncer/org-files/contact-based-system/bia-kunze.org" "~/file-bouncer/org-files/contact-based-system/kell.org" "~/file-bouncer/org-files/contact-based-system/yoko_teles.org" "~/file-bouncer/org-files/contact-based-system/simara.org" "~/file-bouncer/org-files/contact-based-system/anawd.org" "~/file-bouncer/org-files/contact-based-system/ju-palacios.org" "/home/lucas/file-bouncer/org-files/contact-based-system/tatiane-alves.org" "/home/lucas/file-bouncer/org-files/contact-based-system/techladies.org" "/home/lucas/file-bouncer/org-files/contact-based-system/workshop-vim.org")))
+             ("~/file-bouncer/org-files/stand-up-meeting-2018-03-27.org" "/home/lucas/file-bouncer/org-files/contact-based-system/eu.org" "~/file-bouncer/org-files/outreachy-1o-semestre-2018.org" "~/file-bouncer/org-files/blog.org" "~/file-bouncer/org-files/contact-based-system/emanoely.org" "~/file-bouncer/org-files/contact-based-system/patty-vader.org" "/home/lucas/file-bouncer/org-files/contact-based-system/rosiane.org" "~/file-bouncer/org-files/contact-based-system/olga_chaim.org" "/home/lucas/file-bouncer/org-files/contact-based-system/pitt.org" "/home/lucas/file-bouncer/org-files/contact-based-system/kira.org" "/home/lucas/file-bouncer/org-files/contact-based-system/helioloureiro.org" "/home/lucas/file-bouncer/org-files/contact-based-system/elaine.org" "/home/lucas/file-bouncer/org-files/contact-based-system/aline-pegas.org" "~/file-bouncer/org-files/contact-based-system/ariane.org" "/home/lucas/file-bouncer/org-files/contact-based-system/vanessa.org" "~/file-bouncer/org-files/site-congresso.org" "~/file-bouncer/org-files/contact-based-system/bia-kunze.org" "~/file-bouncer/org-files/contact-based-system/kell.org" "~/file-bouncer/org-files/contact-based-system/yoko_teles.org" "~/file-bouncer/org-files/contact-based-system/simara.org" "~/file-bouncer/org-files/contact-based-system/anawd.org" "~/file-bouncer/org-files/contact-based-system/ju-palacios.org" "/home/lucas/file-bouncer/org-files/contact-based-system/tatiane-alves.org" "/home/lucas/file-bouncer/org-files/contact-based-system/techladies.org" "/home/lucas/file-bouncer/org-files/contact-based-system/workshop-vim.org")))
  '(org-agenda-scheduled-leaders (quote ("Scheduled: " "Sched. previously %2dx: ")))
  '(org-agenda-skip-scheduled-if-done t)
     '(org-capture-templates
