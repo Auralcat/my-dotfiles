@@ -406,6 +406,7 @@
 (add-hook 'web-mode-hook 'emmet-mode)
 
 ;; By the way, it's nice to add rainbow-mode for CSS
+(add-hook 'css-mode-hook 'css-mode-tweaks)
 
 ;; Python: use python3 as default shell interpreter
 (setq python-shell-interpreter "python3")
