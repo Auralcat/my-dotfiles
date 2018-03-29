@@ -262,6 +262,10 @@
         ("blade"  . "\\.blade\\."))
 )
 
+;; Flymake support for PHP files
+(require-package 'flymake-php)
+(add-hook 'php-mode-hook 'flymake-php-load)
+
 ;; -----KEYBINDINGS--------------------------------------------------------------
 ;; Remapping the help hotkey so it doesn't clash with Unix backspace.
 ;; Whenever you want to call help you can use M-x help as well. F1

@@ -20,11 +20,6 @@ alias grep='grep --color=auto'
 # When typing emacs in the terminal, start the no-window version one:
 alias emacs='emacs -nw'
 
-# Pomodoro related:
-alias pomocheck='tail ~/pomodorocount2017'
-alias pomocount='vim ~/pomodorocount2017'
-alias pomodoro='~/purrcured-scripts/Pomodoro/pomodoro_tmux.py'
-
 # Change dotfiles:
 alias bashconfig='vim ~/.bashrc'
 alias vimconfig='vim ~/.vimrc'
@@ -40,10 +35,6 @@ alias ref='source ~/.bashrc'
 
 # Do a git-pull in all the repos in the system
 alias agp='~/my-dotfiles/bash/auto_git_pull.sh'
-
-# Working with a todo list
-alias addtodo='vim ~/.todo.md'
-alias todo='pandoc ~/.todo.md | lynx -stdin'
 
 # APT shortcuts
 alias clean='sudo apt-get clean'
