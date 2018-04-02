@@ -25,16 +25,16 @@
 ;; ido-mode in the minibuffer
 (icomplete-mode 1)
 
+;; Enable windmove (switch windows with Shift+Arrow keys)
+(when (fboundp 'windmove-default-keybindings)
+    (windmove-default-keybindings))
+
 ;; Replace the built-in buffer menu with ibuffer
 (global-set-key [24 2] (quote ibuffer))
 
 ;; Prevent the scratch buffer from being killed
 (with-current-buffer "*scratch*"
     (emacs-lock-mode 'kill))
-
-;; I always have my init.el open, gonna protect it as well
-;;(with-current-buffer "init.el"
-;;  (emacs-lock-mode 'kill)))
 
 ;; Load the Fairyfloss theme on startup
 (load-theme 'fairyfloss)
@@ -285,9 +285,6 @@
 ;; Now I'm testing some combinations, AltGr-v seems cool
 ;; Nah, I mapped AltGr-x in the end.
 (global-set-key [187] (quote execute-extended-command))
-
-;; Mapping other-window to Ctrl-o, I don't need open-line
-(global-set-key [15] (quote other-window))
 
 ;; Mapping AltGr-d to delete-other-windows,
 ;; Another symbol I don't use often.
