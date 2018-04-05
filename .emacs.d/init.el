@@ -65,6 +65,9 @@
    (elixir . t)
    ))
 
+;; Activate company mode
+(global-company-mode 1)
+
 ;;-----HOOKS--------------------------------------------------------------------
 
 ;; General programming mode
