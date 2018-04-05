@@ -203,11 +203,6 @@
 ;; Load configs
 (load "~/my-dotfiles/.emacs.d/evilrc")
 
-;; BBDB - the insidious Big Brother DataBase
-(add-to-list 'load-path "~/my-dotfiles/.emacs.d/bbdb-2.35/lisp/")
-(require 'bbdb)
-(bbdb-initialize 'gnus 'message)
-
 ;; Emacs Powerline setup: the modeline is an integral part of this program, so why
 ;; not prettify it? :D
 
@@ -280,6 +275,8 @@
                               (define-key php-mode-map  (kbd "C-t") 'ac-php-location-stack-back   ) ;go back
                               ))
 
+;; Adjust Auto-complete for Ruby in enh-ruby-mode
+(add-hook 'enh-ruby-mode-hook (setq ac-sources '(ac-ruby))
 ;; -----KEYBINDINGS--------------------------------------------------------------
 ;; Remapping the help hotkey so it doesn't clash with Unix backspace.
 ;; Whenever you want to call help you can use M-x help as well. F1
