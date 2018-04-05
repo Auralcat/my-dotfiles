@@ -327,11 +327,12 @@
 (global-set-key "\M-/" 'hippie-expand)
 
 ;;-WEB-MODE---------------------------------------------------------------------
-;; Map C-c C-v to browse-url-of-buffer
-(define-key web-mode-map (kbd "\C-c \C-v") 'browse-url-of-buffer)
+(defun web-mode-keybindings ()
+    "Define mode-specific keybindings like this."
+    (local-set-key (kbd "C-c C-v") 'browse-url-of-buffer)
+    (local-set-key (kbd "C-c /") 'sgml-close-tag))
 
-;; This might come in handy, sgml-close-tag
-(define-key web-mode-map (kbd "\C-c /") 'sgml-close-tag
+(add-hook 'web-mode-hook 'web-mode-keybindings)
 
 ;;-ORG-MODE---------------------------------------------------------------------
 ;; Bind org-capture to C-c c
@@ -348,7 +349,7 @@
 (local-set-key [3 13] (quote org-insert-subheading))
 
 ;; Org-agenda: point the files you want it to read
-(setq org-agenda-files (list "~/file-bouncer/org-files/contact-based-system/"))
+;; (setq org-agenda-files (list "~/file-bouncer/org-files/contact-based-system/"))
 
 ;;------------------------------------------------------------------------------
 ;; Enh-ruby-mode: Run buffer in inf-ruby process
