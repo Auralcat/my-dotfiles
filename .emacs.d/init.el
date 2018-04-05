@@ -276,7 +276,8 @@
                               ))
 
 ;; Adjust Auto-complete for Ruby in enh-ruby-mode
-(add-hook 'enh-ruby-mode-hook (setq ac-sources '(ac-ruby))
+(add-hook 'enh-ruby-mode-hook (setq ac-sources '(ac-ruby)))
+
 ;; -----KEYBINDINGS--------------------------------------------------------------
 ;; Remapping the help hotkey so it doesn't clash with Unix backspace.
 ;; Whenever you want to call help you can use M-x help as well. F1
@@ -399,20 +400,6 @@
 
 ;; Python indentation
 (setq python-indent 4)
-
-;; Pug-mode: use 2 spaces for indentation (DEFAULT: 4)
-(setq pug-tab-width 2)
-
-;; Pug-mode: call pug-compile whenever a .pug file is saved.
-;; Compiles ugly HTML by default, use `pug -P <file_name>`
-;; if you want pretty instead
-
-;; Custom function for compiling only .pug files, with prettified output
-(defun pug-compile-saved-file()
-  (when (and (stringp buffer-file-name)
-     (string-match "\\.pug\\'" buffer-file-name))
-     (pug-compile 1)))
-(add-hook 'after-save-hook 'pug-compile-saved-file)
 
 (defun css-mode-tweaks()
   (emmet-mode 1)
