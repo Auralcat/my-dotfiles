@@ -1,1 +1,0 @@
-(define-package "ac-php" "2.0.4" "auto-completion source for php" '((ac-php-core "1") (auto-complete "1.4.0") (yasnippet "0.8.0")) :commit "326721527b2f88df7227cdc41708912b2f9c8494" :keywords '("completion" "convenience" "intellisense") :url "https://github.com/xcwen/ac-php")
