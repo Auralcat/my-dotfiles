@@ -65,7 +65,7 @@ alias oblique='python3 ~/oblique-strategies/oblique.py'
 alias tuxsay='cowsay -f tux'
 alias unix='curl -L git.io/unix'
 alias weather='echo -e "--------------------------------------------------------------------------------\n ** If you want the full weather report, type weather_full. **\n--------------------------------------------------------------------------------\n"; weather_full | head -17'
-alias weather_full='curl wttr.in/Ponta_grossa'
+alias weather_full='curl -s wttr.in/Ponta_grossa'
 alias xcopy='python3 ~/Python\ Scripts/custom_xclip.py'
 alias clearswap='sudo swapoff -a && sudo swapon -a'
 
