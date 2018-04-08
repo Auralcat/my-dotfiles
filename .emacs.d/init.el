@@ -65,6 +65,9 @@
    (elixir . t)
    ))
 
+;; Use Bash as default shell interpreter
+(setq org-babel-sh-command "/bin/bash")
+
 ;; Activate Company mode
 (add-hook 'after-init-hook 'global-company-mode)
 
@@ -328,6 +331,9 @@
 (global-set-key "\M- " 'hippie-expand)
 (global-set-key "\M-/" 'hippie-expand)
 
+;; Cmus configurations: use the media keys with it in GUI Emacs
+;; Play/pause button
+
 ;;-WEB-MODE---------------------------------------------------------------------
 (defun web-mode-keybindings ()
     "Define mode-specific keybindings like this."
@@ -522,7 +528,7 @@
                  "  " mode-line-modes mode-line-misc-info mode-line-end-spaces)))
     '(org-agenda-files
          (quote
-             ("/home/lucas/file-bouncer/org-files/contact-based-system/eu.org" "~/file-bouncer/org-files/blog.org" "/home/lucas/file-bouncer/org-files/contact-based-system/rosiane.org" "/home/lucas/file-bouncer/org-files/contact-based-system/elaine.org" "/home/lucas/file-bouncer/org-files/contact-based-system/aline-pegas.org" "~/file-bouncer/org-files/contact-based-system/ariane.org" "~/file-bouncer/org-files/site-congresso.org")))
+             ("~/file-bouncer/org-files/stand-up-meetings/Abril-2018.org" "/home/lucas/file-bouncer/org-files/contact-based-system/eu.org" "~/file-bouncer/org-files/blog.org" "/home/lucas/file-bouncer/org-files/contact-based-system/rosiane.org" "/home/lucas/file-bouncer/org-files/contact-based-system/elaine.org" "/home/lucas/file-bouncer/org-files/contact-based-system/aline-pegas.org" "~/file-bouncer/org-files/contact-based-system/ariane.org" "~/file-bouncer/org-files/site-congresso.org")))
  '(org-agenda-scheduled-leaders (quote ("Scheduled: " "Sched. previously %2dx: ")))
  '(org-agenda-skip-scheduled-if-done t)
     '(org-capture-templates
@@ -555,7 +561,14 @@
          "/home/lucas/.emacs.d/elpa/org-pomodoro-2.1.0/resources/Blip.ogg")
  '(org-pomodoro-format "Focus!~%s")
  '(org-pomodoro-start-sound-p nil)
+ '(org-refile-targets (quote ((org-agenda-files :maxlevel . 3))))
  '(org-src-fontify-natively t)
+    '(org-stuck-projects
+         (quote
+             ("+LEVEL=2/-DONE"
+                 ("TODO" "NEXT" "NEXTACTION" "CANCELLED")
+                 nil "")))
+ '(org-todo-keyword-faces (quote (("CURRENT" . "#ffcc11") ("NEXT" . "#6666ff"))))
  '(org-todo-keywords (quote ((sequence "TODO" "DONE"))))
  '(remember-data-file "~/file-bouncer/everything-bucket")
  '(send-mail-function (quote smtpmail-send-it))
