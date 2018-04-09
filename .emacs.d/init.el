@@ -292,6 +292,22 @@
   (setq eshell-highlight-prompt t
         eshell-prompt-function 'epe-theme-lambda))
 
+;; Make sessions persistent.
+;; What's saved:
+;; - Histories of user input
+;; - Contents of registers
+;; - List of recently copied/cut text blocks to paste, global markers to jump
+;; to, and other so-called rings.
+;; - List of recently changed files with their places and some buffer-local
+;; variables.
+;; (require-package 'session)
+
+;; Initialize session when loading Emacs.
+;; (add-hook 'after-init-hook 'session-initialize)
+
+;; Maybe I can use this together with desktop-save-mode?
+(desktop-save-mode 1)
+
 ;; -----KEYBINDINGS--------------------------------------------------------------
 ;; Remapping the help hotkey so it doesn't clash with Unix backspace.
 ;; Whenever you want to call help you can use M-x help as well. F1
@@ -409,8 +425,6 @@
 ;; Set line number mode and column number mode for code files
 (line-number-mode 1)
 
-;; Set desktop save mode - opens last saved session when you start Emacs.
-(desktop-save-mode 1)
 
 ;; Change tab width and change tabs to spaces
 (setq-default tab-width 4)
@@ -556,7 +570,7 @@
                  ("i" "Ideia de post para seu blog" entry
                      (file+headline "~/file-bouncer/org-files/blog.org" "Capturas"))
                  ("s" "Task to self" entry
-                     (file+headline "~/file-bouncer/org-files/contact-based-system/eu.org" "Tarefas")
+                     (file+headline "~/file-bouncer/org-files/contact-based-system/eu.org" "Tarefas capturadas")
                      "** TODO %i %?" :prepend t)
                  ("t" "Task" entry
                      (file "~/file-bouncer/org-files/capture-tasks.org")
@@ -589,6 +603,7 @@
  '(org-todo-keywords (quote ((sequence "TODO" "DONE"))))
  '(remember-data-file "~/file-bouncer/everything-bucket")
  '(send-mail-function (quote smtpmail-send-it))
+ '(session-use-package t nil (session))
  '(shell-file-name "/bin/bash")
  '(smtpmail-smtp-server "smtp.yandex.com")
  '(smtpmail-smtp-service 25)
