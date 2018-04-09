@@ -344,10 +344,12 @@
 ;; Play/pause button
 
 ;; Eshell - bind M-p to go back to previous buffer
-(defun eshell-keybindings ()
+(defun eshell-tweaks ()
     "Keybindings for the Emacs shell"
-    (local-set-key (kbd "M-p") 'switch-to-prev-buffer))
-(add-hook 'eshell-mode-hook 'eshell-keybindings)
+    (local-set-key (kbd "M-p") 'switch-to-prev-buffer)
+    "Start in Emacs mode"
+    (evil-set-initial-state 'eshell-mode 'emacs))
+(add-hook 'eshell-mode-hook 'eshell-tweaks)
 
 ;;-WEB-MODE---------------------------------------------------------------------
 (defun web-mode-keybindings ()
