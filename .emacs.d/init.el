@@ -283,6 +283,15 @@
     (tern-mode 1))
 (add-hook 'js2-mode-hook 'tern-mode-tweaks)
 
+;; Eshell extras
+(require-package 'eshell-prompt-extras)
+
+;; More configs
+(with-eval-after-load "esh-opt"
+  (autoload 'epe-theme-lambda "eshell-prompt-extras")
+  (setq eshell-highlight-prompt t
+        eshell-prompt-function 'epe-theme-lambda))
+
 ;; -----KEYBINDINGS--------------------------------------------------------------
 ;; Remapping the help hotkey so it doesn't clash with Unix backspace.
 ;; Whenever you want to call help you can use M-x help as well. F1
@@ -333,6 +342,12 @@
 
 ;; Cmus configurations: use the media keys with it in GUI Emacs
 ;; Play/pause button
+
+;; Eshell - bind M-p to go back to previous buffer
+(defun eshell-keybindings ()
+    "Keybindings for the Emacs shell"
+    (local-set-key (kbd "M-p") 'switch-to-prev-buffer))
+(add-hook 'eshell-mode-hook 'eshell-keybindings)
 
 ;;-WEB-MODE---------------------------------------------------------------------
 (defun web-mode-keybindings ()
