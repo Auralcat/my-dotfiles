@@ -564,20 +564,9 @@
  '(org-agenda-skip-scheduled-if-done t)
     '(org-capture-templates
          (quote
-             (("p" "Side project idea" entry
-                  (file+headline "~/file-bouncer/org-files/projetos-programação.org" "Ideias")
-                  "** %i %?" :prepend t)
-                 ("i" "Ideia de post para seu blog" entry
-                     (file+headline "~/file-bouncer/org-files/blog.org" "Capturas"))
-                 ("s" "Task to self" entry
-                     (file+headline "~/file-bouncer/org-files/contact-based-system/eu.org" "Tarefas capturadas")
-                     "** TODO %i %?" :prepend t)
-                 ("t" "Task" entry
-                     (file "~/file-bouncer/org-files/capture-tasks.org")
-                     "* TODO %? %i")
-                 ("n" "File your random thoughts here" entry
-                     (file "~/file-bouncer/org-files/capture-notes.org")
-                     "* %U -> %?"))))
+             (("s" "Task to Self" entry
+                  (file+headline "~/file-bouncer/org-files/contact-based-system/eu.org" "Tarefas capturadas")
+                  "** TODO %?" :prepend t))))
  '(org-default-notes-file "~/file-bouncer/everything-bucket")
     '(org-effort-durations
          (quote
