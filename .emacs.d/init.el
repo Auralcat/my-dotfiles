@@ -49,8 +49,11 @@
 ;; Set font in graphical mode
 (when (display-graphic-p)
     (set-frame-font "Fantasque Sans Mono 12" nil t)
-    ;; Remove menu bar in graphical mode
-    (menu-bar-mode 0))
+    ;; Remove menu and scroll bars in graphical mode
+    (menu-bar-mode 0)
+    (scroll-bar-mode 0)
+    ;; Maximize frame on startup
+    (toggle-frame-maximized))
 
 ;; Org-babel - load ob-elixir
 (load "ob-elixir")
