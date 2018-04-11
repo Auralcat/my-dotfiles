@@ -17,7 +17,9 @@ replaceTable = {/^\*\*\* / => "    +", /^\*\*/ => "->"}
 buf = ""
 
 text.each_line do |line|
+  # Don't process the line if it has any of the excluded words
   buf = line if !linesToRemove.any?{|x| line.include? x}
+
   wordsToRemove.each do |w|
     buf = buf.gsub(w,'')
   end
@@ -29,5 +31,4 @@ text.each_line do |line|
   output << buf if !buf.nil?
 end
 
-puts "Output is:\n"
 puts output.uniq!.join('')
