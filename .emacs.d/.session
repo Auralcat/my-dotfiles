@@ -1,0 +1,17 @@
+;;; Automatically generated on Tue Apr 10 21:26:04 2018
+;;; Invoked by isendra@logos using 24.5.1
+(setq-default session-file-alist '(("~/my-dotfiles/.emacs.d/init.el" 8022 8022 1 nil nil 8022 (overwrite-mode)) ("~/front-end-exercises/css-cards/sass/main.scss" 672 672 1 nil nil nil (overwrite-mode)) ("~/file-bouncer/org-files/developer-roadmap/developer-roadmap.org" 1 1 1 nil nil 815 (overwrite-mode)) ("~/file-bouncer/org-files/stand-up-meetings/Abril-2018.org" 901 901 1 nil nil 1030 (overwrite-mode)) ("~/front-end-exercises/css-cards/index.html" 1 1 1 nil nil 2119 (overwrite-mode)) ("~/my-dotfiles/.emacs.d/elpa/impatient-mode-1.0.0/impatient-mode-autoloads.el" 516 nil 1 nil nil 516 (overwrite-mode)) ("~/my-dotfiles/.emacs.d/elpa/simple-httpd-1.5.0/simple-httpd-autoloads.el" 769 nil 1 nil nil 769 (overwrite-mode)) ("~/my-dotfiles/.emacs.d/elpa/htmlize-1.53/htmlize-autoloads.el" 2749 nil 1 nil nil 2749 (overwrite-mode)) ("~/my-dotfiles/.git/COMMIT_EDITMSG" 22 nil 1 nil nil 22 (overwrite-mode))))
+(setq-default file-name-history '("/home/lucas/front-end-exercises/css-cards/index.html" "~/.emacs.d/elpa/impatient-mode-1.0.0/impatient-mode-autoloads.el" "~/.emacs.d/elpa/simple-httpd-1.5.0/simple-httpd-autoloads.el" "~/.emacs.d/elpa/htmlize-1.53/htmlize-autoloads.el" "/home/lucas/front-end-exercises/css-cards/sass/main.scss" "/home/lucas/front-end-exercises/sass/main.scss" "/home/lucas/front-end-exercises/index.html" "/home/lucas/front-end-exercises/css-cards/css/main.css" "~/file-bouncer/org-files/developer-roadmap/images/devops.png" "~/file-bouncer/org-files/developer-roadmap/images/backend.png" "~/file-bouncer/org-files/developer-roadmap/images/frontend-v2.png" "/home/lucas/file-bouncer/org-files/developer-roadmap/developer-roadmap.org" "~/file-bouncer/org-files/site-congresso.org" "~/file-bouncer/org-files/contact-based-system/ariane.org" "~/file-bouncer/org-files/contact-based-system/aline-pegas.org" "~/file-bouncer/org-files/contact-based-system/elaine.org" "~/file-bouncer/org-files/contact-based-system/rosiane.org" "~/file-bouncer/org-files/blog.org" "~/file-bouncer/org-files/contact-based-system/eu.org" "~/file-bouncer/org-files/stand-up-meetings/Abril-2018.org" "~/my-dotfiles/.emacs.d/init.el" "~/my-dotfiles/.emacs.d/" "/home/lucas/my-dotfiles/.emacs.d/init.el"))
+(setq-default search-ring '("impati" "sass"))
+(setq-default regexp-search-ring '("graph" "toggle"))
+(setq-default buffer-name-history '("index.html<css-cards>" "*Shell Command Output*" "init.el" "main.scss" "*eshell*" "devops.png" "backend.png" "frontend-v2.png"))
+(setq-default evil-search-forward-history '("graph" "toggle"))
+(setq-default extended-command-history '("impatient-mode" "httpd-start" "plp" "sass-mode" "eshell" "magit-pull" "toggle-frame-maximized"))
+(setq-default ido-buffer-history '("index.html<css-cards>" "*Shell Command Output*" "init.el" "main.scss" "*eshell*" "devops.png" "backend.png" "frontend-v2.png"))
+(setq-default ido-file-history '("index.html" "main.scss" "main.css" "developer-roadmap.org" "init.el"))
+(setq-default magit-revision-history '("origin/master"))
+(setq-default minibuffer-history '("Auralcat"))
+(setq-default occur-collect-regexp-history '("\\1"))
+(setq-default serial-name-history '("/dev/ttyS0"))
+(setq-default serial-speed-history '("9600" "1200" "2400" "4800" "14400" "19200" "28800" "38400" "57600" "115200"))
+(setq-default shell-command-history '("sass --help" "sass sass/main.scss " "sass" "xsel -o | sed 's/rifle/code editor/g'"))

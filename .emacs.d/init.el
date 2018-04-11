@@ -263,6 +263,11 @@
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 
+;; Web Mode - Start impatient mode and httpd server
+(defun web-start-impatient-mode ()
+    (impatient-mode 1)
+    (start-httpd 1))
+
 ;; Engine associations
 (setq web-mode-engines-alist
       '(("php"    . "\\.phtml\\'")
@@ -279,6 +284,7 @@
 
 ;; Add Tern to Company
 (require-package 'company-tern)
+(require-package 'tern)
 
 ;; Call that inside js2-mode and add tern to company backends
 (defun tern-mode-tweaks ()
@@ -310,6 +316,9 @@
 
 ;; Maybe I can use this together with desktop-save-mode?
 (desktop-save-mode 1)
+
+;; Impatient mode - Live edit HTML buffers!
+(require-package 'impatient-mode)
 
 ;; -----KEYBINDINGS--------------------------------------------------------------
 ;; Remapping the help hotkey so it doesn't clash with Unix backspace.

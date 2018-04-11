@@ -1,0 +1,11 @@
+;;; Completion Initialization file.
+;; Version = 11
+;; Format is (<string> . <last-use-time>)
+;;  <string> is the completion
+;;  <last-use-time> is the time the completion was last used
+;;    If it is t, the completion will never be pruned from the file.
+;;    Otherwise it is in hours since origin.
+
+("input-d" . 423135)
+("buffers" . 423135)
+("servers" . 423168)
