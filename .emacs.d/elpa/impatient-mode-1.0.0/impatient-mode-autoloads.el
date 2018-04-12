@@ -3,9 +3,20 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "impatient-mode" "impatient-mode.el" (23245
-;;;;;;  21320 710458 687000))
+;;;### (autoloads nil "../../../my-dotfiles/.emacs.d/elpa/impatient-mode-1.0.0/impatient-mode"
+;;;;;;  "impatient-mode.el" "246a3994201eb5cb0d336b09052c84fe")
 ;;; Generated autoloads from impatient-mode.el
+
+(autoload 'impatient-mode "../../../my-dotfiles/.emacs.d/elpa/impatient-mode-1.0.0/impatient-mode" "\
+Serves the buffer live over HTTP.
+
+\(fn &optional ARG)" t nil)
+
+;;;***
+
+;;;### (autoloads nil "impatient-mode" "../../../../.emacs.d/elpa/impatient-mode-1.0.0/impatient-mode.el"
+;;;;;;  "246a3994201eb5cb0d336b09052c84fe")
+;;; Generated autoloads from ../../../../.emacs.d/elpa/impatient-mode-1.0.0/impatient-mode.el
 
 (autoload 'impatient-mode "impatient-mode" "\
 Serves the buffer live over HTTP.
@@ -14,8 +25,10 @@ Serves the buffer live over HTTP.
 
 ;;;***
 
-;;;### (autoloads nil nil ("impatient-mode-pkg.el") (23245 21320
-;;;;;;  822333 93000))
+;;;### (autoloads nil nil ("../../../../.emacs.d/elpa/impatient-mode-1.0.0/impatient-mode-autoloads.el"
+;;;;;;  "../../../../.emacs.d/elpa/impatient-mode-1.0.0/impatient-mode-pkg.el"
+;;;;;;  "../../../../.emacs.d/elpa/impatient-mode-1.0.0/impatient-mode.el"
+;;;;;;  "impatient-mode.el") (23246 17197 616971 442000))
 
 ;;;***
 
