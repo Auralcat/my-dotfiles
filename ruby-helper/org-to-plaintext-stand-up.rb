@@ -12,7 +12,7 @@ wordsToRemove = ["TODO", "DONE"]
 linesToRemove= ["Note taken", "SCHEDULED", "CLOCK"]
 
 # Change Org headings
-replaceTable = {/^\*\*\* / => "    +", /^\*\*/ => "->"}
+replaceTable = {/^\*\*\* / => "    +", /^\*\*/ => "\u{1f449}"}
 
 buf = ""
 
