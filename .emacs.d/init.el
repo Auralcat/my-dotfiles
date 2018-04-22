@@ -46,16 +46,6 @@
 (when (not (display-graphic-p))
   (menu-bar-mode -1))
 
-;; Set font in graphical mode
-(when (display-graphic-p)
-    (set-frame-font "Ubuntu Mono 12" nil t)
-    ;; Remove menu and scroll bars in graphical mode
-    (menu-bar-mode 0)
-    (scroll-bar-mode 0)
-    ;; Enable emoji images
-    ;; (global-emojify-mode)
-    ;; Maximize frame on startup
-    (toggle-frame-maximized))
 
 ;; Org-babel - load ob-elixir
 (load "ob-elixir")
@@ -76,11 +66,6 @@
 ;; Activate Company mode
 (add-hook 'after-init-hook 'global-company-mode)
 
-;;-----IRC----------------------------------------------------------------------
-;; Use Weechat from Emacs
-(require-package 'weechat)
-
-;; Bind M-p to switch to previous buffer
 ;;-----HOOKS--------------------------------------------------------------------
 
 ;; General programming mode
@@ -342,6 +327,41 @@
 ;; Yasnippets - it comes with company-mode, but what you also need is some
 ;; snippets to start with
 (require-package 'yasnippet-snippets)
+
+;; Mode-icons - Indicate modes in the mode line using icons
+(require-package 'mode-icons)
+;; Activate on startup
+(mode-icons-mode)
+
+;; Diminish - free some space in the mode line removing superfluous mode
+;; indications
+(require-package 'diminish)
+
+;; Diminish them!
+(diminish 'company-mode)
+(diminish 'editorconfig-mode)
+
+;; Emojify - add emoji support for Emacs
+(require-package 'emojify)
+
+;;-----GRAPHICAL----------------------------------------------------------------
+;; Set font in graphical mode
+(when (display-graphic-p)
+    (set-frame-font "Ubuntu Mono 12" nil t)
+    ;; Remove menu and scroll bars in graphical mode
+    (menu-bar-mode 0)
+    (scroll-bar-mode 0)
+    ;; Enable emoji images
+    (global-emojify-mode)
+    ;; Maximize frame on startup
+    (toggle-frame-maximized))
+
+;;-----IRC----------------------------------------------------------------------
+;; Use Weechat from Emacs
+(require-package 'weechat)
+
+;; Bind M-p to switch to previous buffer
+
 ;; -----KEYBINDINGS--------------------------------------------------------------
 ;; Remapping the help hotkey so it doesn't clash with Unix backspace.
 ;; Whenever you want to call help you can use M-x help as well. F1
@@ -552,6 +572,7 @@
  '(display-time-24hr-format t)
  '(display-time-day-and-date t)
  '(display-time-default-load-average nil)
+ '(display-time-mail-string "📧")
  '(display-time-mode nil)
     '(display-time-world-list
          (quote
@@ -633,7 +654,13 @@
  '(tags-tag-face (quote default))
  '(tool-bar-mode nil)
  '(tooltip-mode nil)
+ '(weechat-auto-monitor-buffers t)
+    '(weechat-modules
+         (quote
+             (weechat-button weechat-complete weechat-notifications weechat-image)))
  '(weechat-notification-mode t)
+ '(weechat-notifications-icon "~/Imagens/gata.jpg")
+ '(weechat-notifications-sound nil)
  '(yas-global-mode t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
@@ -650,6 +677,7 @@
  '(org-upcoming-deadline ((t (:foreground "#B1AA98"))))
  '(region ((t (:background "deep pink"))))
  '(sml/filename ((t (:inherit sml/global :background "Grey22" :foreground "Black"))))
- '(sml/folder ((t (:inherit sml/global :background "Grey22" :foreground "Black" :weight normal)))))
+ '(sml/folder ((t (:inherit sml/global :background "Grey22" :foreground "Black" :weight normal))))
+ '(sml/time ((t (:inherit sml/global :background "black" :foreground "lawn green")))))
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)

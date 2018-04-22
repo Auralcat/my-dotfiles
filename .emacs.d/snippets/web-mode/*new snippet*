@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: Viewport tag
+# key: vp
+# --
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
