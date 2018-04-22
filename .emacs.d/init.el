@@ -572,8 +572,9 @@
  '(display-time-24hr-format t)
  '(display-time-day-and-date t)
  '(display-time-default-load-average nil)
- '(display-time-mail-string "📧")
- '(display-time-mode nil)
+ '(display-time-mail-face (quote change-log-email))
+ '(display-time-mail-string "✉")
+ '(display-time-mode t)
     '(display-time-world-list
          (quote
              (("Europe/Stockholm" "TalonRO Server Time")
@@ -608,6 +609,7 @@
 # You can write the contents of this buffer to a file with C-x C-w.
 # Current default mode for this buffer is: Org-mode.")
  '(keyboard-coding-system (quote utf-8-unix))
+ '(mode-icons-mode t)
     '(mode-line-format
          (quote
              ("%e" mode-line-front-space mode-line-mule-info mode-line-client mode-line-modified mode-line-remote mode-line-frame-identification mode-line-buffer-identification mode-line-file-name "   " mode-line-position evil-mode-line-tag
@@ -678,6 +680,7 @@
  '(region ((t (:background "deep pink"))))
  '(sml/filename ((t (:inherit sml/global :background "Grey22" :foreground "Black"))))
  '(sml/folder ((t (:inherit sml/global :background "Grey22" :foreground "Black" :weight normal))))
- '(sml/time ((t (:inherit sml/global :background "black" :foreground "lawn green")))))
+ '(sml/time ((t (:inherit sml/global :background "black" :foreground "lawn green" :height 1.2 :family "ALTS-Digital-7"))))
+ '(time-mail-face ((t (:family "IBM 3270"))) t))
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
