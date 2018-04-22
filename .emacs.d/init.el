@@ -680,7 +680,7 @@
  '(region ((t (:background "deep pink"))))
  '(sml/filename ((t (:inherit sml/global :background "Grey22" :foreground "Black"))))
  '(sml/folder ((t (:inherit sml/global :background "Grey22" :foreground "Black" :weight normal))))
- '(sml/time ((t (:inherit sml/global :background "black" :foreground "lawn green" :height 1.2 :family "ALTS-Digital-7"))))
+ '(sml/time ((t (:inherit sml/global :background "black" :foreground "lawn green" :height 1.05 :family "ALTS-Digital-7"))))
  '(time-mail-face ((t (:family "IBM 3270"))) t))
 (put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
