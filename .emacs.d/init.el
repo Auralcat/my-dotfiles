@@ -342,6 +342,7 @@
 ;; Diminish them!
 (diminish 'company-mode)
 (diminish 'editorconfig-mode)
+(diminish 'autopair-mode)
 
 ;; Emojify - add emoji support for Emacs
 (require-package 'emojify)
