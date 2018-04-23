@@ -786,5 +786,3 @@
  '(sml/modes ((t (:inherit sml/global :background "grey40" :foreground "Black" :height 1.0))))
  '(sml/time ((t (:inherit sml/global :background "black" :foreground "chartreuse" :height 1.05 :family "ALTS-Digital-7"))))
  '(time-mail-face ((t (:family "IBM 3270"))) t))
-(put 'downcase-region 'disabled nil)
-(put 'upcase-region 'disabled nil)
