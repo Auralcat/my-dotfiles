@@ -644,6 +644,7 @@
                  ("\\`Snippet" "yas" xpm)
                  ("\\`Term\\'" "term" xpm)
                  ("\\`Web\\'" "html" xpm)
+                 ("\\`twittering-mode\\'" "twitter" xpm)
                  ("\\`XML\\'" "xml" xpm)
                  ("\\`YAML\\'" "yaml" xpm)
                  ("\\` ?YASnippet\\'" "yas" xpm)
@@ -725,9 +726,15 @@
  '(org-agenda-skip-scheduled-if-done t)
     '(org-capture-templates
          (quote
-             (("s" "Task to Self" entry
-                  (file+headline "~/file-bouncer/org-files/contact-based-system/eu.org" "Tarefas capturadas")
-                  "** TODO %?" :prepend t))))
+             (("k" "Testing regex target capturing" entry
+                  (file+regexp "~/file-bouncer/org-files/stand-up-meetings/Abril-2018.org" "\\* CURRENT")
+                  "*** TODO %?")
+                 ("t" "Add task to current stand-up-meeting day" entry
+                     (file+headline "~/file-bouncer/org-files/stand-up-meetings/Abril-2018.org" "O que eu vou fazer hoje")
+                     "*** TODO %?" :prepend t)
+                 ("s" "Task to Self" entry
+                     (file+headline "~/file-bouncer/org-files/contact-based-system/eu.org" "Tarefas capturadas")
+                     "** TODO %?" :prepend t))))
  '(org-default-notes-file "~/file-bouncer/everything-bucket")
     '(org-effort-durations
          (quote
@@ -785,5 +792,5 @@
  '(sml/filename ((t (:inherit sml/global :background "Grey22" :foreground "Black"))))
  '(sml/folder ((t (:inherit sml/global :background "Grey22" :foreground "Black" :weight normal))))
  '(sml/modes ((t (:inherit sml/global :background "grey40" :foreground "Black" :height 1.0))))
- '(sml/time ((t (:inherit sml/global :background "black" :foreground "chartreuse" :height 1.05 :family "ALTS-Digital-7"))))
+ '(sml/time ((t (:inherit sml/global :background "black" :foreground "green" :height 1.05 :foundry "ALTS" :family "Digital"))))
  '(time-mail-face ((t (:family "IBM 3270"))) t))
