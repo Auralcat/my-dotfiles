@@ -710,11 +710,12 @@
                  ("\\`Image\\[xpm\\]\\'" "xpm" ext)
                  ("\\`Image\\[png\\]\\'" "png" ext)
                  ("\\` ?AI\\'" 61500 FontAwesome)
+                 ("\\`twittering-mode\\'" "twitter" xpm)
                  ("\\` ?\\(?:ElDoc\\|Anzu\\|SP\\|Guide\\|PgLn\\|Undo-Tree\\|Ergo.*\\|,\\|Isearch\\|Ind\\)\\'" nil nil))))
  '(mode-icons-change-mode-name t)
  '(mode-icons-generate-emoji-xpms t)
  '(mode-icons-generate-font-xpms t)
- '(mode-icons-mode t)
+ '(mode-icons-mode nil)
     '(mode-line-format
          (quote
              ("%e" mode-line-front-space mode-line-mule-info mode-line-client mode-line-modified mode-line-remote mode-line-frame-identification mode-line-buffer-identification mode-line-file-name "   " mode-line-position evil-mode-line-tag
