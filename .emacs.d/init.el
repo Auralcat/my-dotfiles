@@ -711,8 +711,10 @@
                  ("\\`Image\\[xpm\\]\\'" "xpm" ext)
                  ("\\`Image\\[png\\]\\'" "png" ext)
                  ("\\` ?AI\\'" 61500 FontAwesome)
+                 ("\\`[Enh]Ruby'" "ruby" xpm)
                  ("\\` ?\\(?:ElDoc\\|Anzu\\|SP\\|Guide\\|PgLn\\|Undo-Tree\\|Ergo.*\\|,\\|Isearch\\|Ind\\)\\'" nil nil))))
  '(mode-icons-generate-emoji-xpms t)
+ '(mode-icons-generate-font-xpms t)
  '(mode-icons-mode t)
     '(mode-line-format
          (quote

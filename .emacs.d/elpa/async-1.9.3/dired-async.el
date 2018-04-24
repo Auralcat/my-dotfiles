@@ -66,6 +66,14 @@ Should take same args as `message'."
   :group 'dired-async
   :type 'string)
 
+(defcustom dired-async-mode-lighter '(:eval
+                                      (when (eq major-mode 'dired-mode)
+                                        " Async"))
+  "Mode line lighter used for `dired-async-mode'."
+  :group 'dired-async
+  :risky t
+  :type 'sexp)
+
 (defface dired-async-message
     '((t (:foreground "yellow")))
   "Face used for mode-line message."
@@ -177,11 +185,13 @@ Should take same args as `message'."
 See `dired-create-files' for the behavior of arguments."
   (setq overwrite-query nil)
   (let ((total (length fn-list))
-        failures async-fn-list skipped callback)
+        failures async-fn-list skipped callback
+        async-quiet-switch)
     (let (to)
       (dolist (from fn-list)
         (setq to (funcall name-constructor from))
-        (if (equal to from)
+        (if (and (equal to from)
+                 (null (eq file-creator 'backup-file)))
             (progn
               (setq to nil)
               (dired-log "Cannot %s to same file: %s\n"
@@ -232,6 +242,13 @@ ESC or `q' to not overwrite any of the remaining files,
                         (dired-log "%s `%s' to `%s' failed\n"
                                    operation from to)))
                   (push (cons from to) async-fn-list)))))
+      ;; Fix tramp issue #80 with emacs-26, use "-q" only when needed.
+      (setq async-quiet-switch
+            (if (and (boundp 'tramp-cache-read-persistent-data)
+                     async-fn-list
+                     (cl-loop for (_from . to) in async-fn-list
+                              thereis (file-remote-p to)))
+                "-q" "-Q"))
       ;; When failures have been printed to dired log add the date at bob.
       (when (or failures skipped) (dired-log t))
       ;; When async-fn-list is empty that's mean only one file
@@ -275,7 +292,7 @@ ESC or `q' to not overwrite any of the remaining files,
                             ;; Inline `backup-file' as long as it is not
                             ;; available in emacs.
                             (defalias 'backup-file
-                                ;; Same feature as "cp --backup=numbered from to"
+                                ;; Same feature as "cp -f --backup=numbered from to"
                                 ;; Symlinks are copied as file from source unlike
                                 ;; `dired-copy-file' which is same as cp -d.
                                 ;; Directories are omitted.
@@ -329,8 +346,9 @@ ESC or `q' to not overwrite any of the remaining files,
 
 ;;;###autoload
 (define-minor-mode dired-async-mode
-    "Do dired actions asynchronously."
+  "Do dired actions asynchronously."
   :group 'dired-async
+  :lighter dired-async-mode-lighter
   :global t
   (if dired-async-mode
       (if (fboundp 'advice-add)
@@ -344,6 +362,39 @@ ESC or `q' to not overwrite any of the remaining files,
           (ad-deactivate 'dired-create-files)
           (ad-deactivate 'wdired-do-renames))))
 
+(defmacro dired-async--with-async-create-files (&rest body)
+  "Evaluate BODY with ‘dired-create-files’ set to ‘dired-async-create-files’."
+  (declare (indent 0))
+  `(cl-letf (((symbol-function 'dired-create-files) #'dired-async-create-files))
+     ,@body))
+
+;;;###autoload
+(defun dired-async-do-copy (&optional arg)
+  "Run ‘dired-do-copy’ asynchronously."
+  (interactive "P")
+  (dired-async--with-async-create-files
+    (dired-do-copy arg)))
+
+;;;###autoload
+(defun dired-async-do-symlink (&optional arg)
+  "Run ‘dired-do-symlink’ asynchronously."
+  (interactive "P")
+  (dired-async--with-async-create-files
+    (dired-do-symlink arg)))
+
+;;;###autoload
+(defun dired-async-do-hardlink (&optional arg)
+  "Run ‘dired-do-hardlink’ asynchronously."
+  (interactive "P")
+  (dired-async--with-async-create-files
+    (dired-do-hardlink arg)))
+
+;;;###autoload
+(defun dired-async-do-rename (&optional arg)
+  "Run ‘dired-do-rename’ asynchronously."
+  (interactive "P")
+  (dired-async--with-async-create-files
+    (dired-do-rename arg)))
 
 (provide 'dired-async)
 

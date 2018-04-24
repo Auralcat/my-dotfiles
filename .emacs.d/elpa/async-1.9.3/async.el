@@ -4,7 +4,7 @@
 
 ;; Author: John Wiegley <jwiegley@gmail.com>
 ;; Created: 18 Jun 2012
-;; Version: 1.9.2
+;; Version: 1.9.3
 
 ;; Keywords: async
 ;; X-URL: https://github.com/jwiegley/emacs-async
@@ -31,9 +31,16 @@
 
 ;;; Code:
 
+(eval-when-compile (require 'cl-lib))
+
 (defgroup async nil
   "Simple asynchronous processing in Emacs"
   :group 'emacs)
+
+(defcustom async-variables-noprops-function #'async-variables-noprops
+  "Default function to remove text properties in variables."
+  :group 'async
+  :type 'function)
 
 (defvar async-debug nil)
 (defvar async-send-over-pipe t)
@@ -45,13 +52,35 @@
 (defvar async-current-process nil)
 (defvar async--procvar nil)
 
+(defun async-variables-noprops (sequence)
+  "Remove text properties in SEQUENCE.
+
+Argument SEQUENCE may be a list or a string, if anything else it
+is returned unmodified.
+
+Note that this is a naive function that doesn't remove text properties
+in SEQUENCE recursively, only at the first level which suffice in most
+cases."
+  (cond ((stringp sequence)
+         (substring-no-properties sequence))
+        ((listp sequence)
+         (cl-loop for elm in sequence
+                  if (stringp elm)
+                  collect (substring-no-properties elm)
+                  else collect elm))
+        (t sequence)))
+
 (defun async-inject-variables
-  (include-regexp &optional predicate exclude-regexp)
+  (include-regexp &optional predicate exclude-regexp noprops)
   "Return a `setq' form that replicates part of the calling environment.
+
 It sets the value for every variable matching INCLUDE-REGEXP and
 also PREDICATE.  It will not perform injection for any variable
-matching EXCLUDE-REGEXP (if present).  It is intended to be used
-as follows:
+matching EXCLUDE-REGEXP (if present).
+When NOPROPS is non nil it tries to strip out text properties of each
+variable's value with `async-variables-noprops-function'.
+
+It is intended to be used as follows:
 
     (async-start
        `(lambda ()
@@ -73,6 +102,9 @@ as follows:
                           (or exclude-regexp "-syntax-table\\'")
                           (symbol-name sym))))
                (let ((value (symbol-value sym)))
+                 (when noprops
+                   (setq value (funcall async-variables-noprops-function
+                                        value)))
                  (when (or (null predicate)
                            (funcall predicate sym))
                    (setq bindings (cons `(quote ,value) bindings)
@@ -121,9 +153,9 @@ as follows:
 
 (defun async--receive-sexp (&optional stream)
   (let ((sexp (decode-coding-string (base64-decode-string
-                                     (read stream)) 'utf-8-unix))
+                                     (read stream)) 'utf-8-auto))
 	;; Parent expects UTF-8 encoded text.
-	(coding-system-for-write 'utf-8-unix))
+	(coding-system-for-write 'utf-8-auto))
     (if async-debug
         (message "Received sexp {{{%s}}}" (pp-to-string sexp)))
     (setq sexp (read sexp))
@@ -138,7 +170,7 @@ as follows:
 	(print-circle t))
     (prin1 sexp (current-buffer))
     ;; Just in case the string we're sending might contain EOF
-    (encode-coding-region (point-min) (point-max) 'utf-8-unix)
+    (encode-coding-region (point-min) (point-max) 'utf-8-auto)
     (base64-encode-region (point-min) (point-max) t)
     (goto-char (point-min)) (insert ?\")
     (goto-char (point-max)) (insert ?\" ?\n)))
@@ -154,7 +186,7 @@ as follows:
   "Called from the child Emacs process' command-line."
   ;; Make sure 'message' and 'prin1' encode stuff in UTF-8, as parent
   ;; process expects.
-  (let ((coding-system-for-write 'utf-8-unix))
+  (let ((coding-system-for-write 'utf-8-auto))
     (setq async-in-child-emacs t
 	  debug-on-error async-debug)
     (if debug-on-error
@@ -231,6 +263,12 @@ working directory."
         (set (make-local-variable 'async-callback-for-process) t))
       proc)))
 
+(defvar async-quiet-switch "-Q"
+  "The Emacs parameter to use to call emacs without config.
+Can be one of \"-Q\" or \"-q\".
+Default is \"-Q\" but it is sometimes useful to use \"-q\" to have a
+enhanced config or some more variables loaded.")
+
 ;;;###autoload
 (defun async-start (start-func &optional finish-func)
   "Execute START-FUNC (often a lambda) in a subordinate Emacs process.
@@ -281,14 +319,14 @@ returns nil.  It can still be useful, however, as an argument to
 `async-ready' or `async-wait'."
   (let ((sexp start-func)
 	;; Subordinate Emacs will send text encoded in UTF-8.
-	(coding-system-for-read 'utf-8-unix))
+	(coding-system-for-read 'utf-8-auto))
     (setq async--procvar
           (async-start-process
            "emacs" (file-truename
                     (expand-file-name invocation-name
                                       invocation-directory))
            finish-func
-           "-Q" "-l"
+           async-quiet-switch "-l"
            ;; Using `locate-library' ensure we use the right file
            ;; when the .elc have been deleted.
            (locate-library "async")
