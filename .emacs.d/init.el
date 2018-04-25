@@ -542,15 +542,15 @@
 ;; Use a master password so you don't have to ask for authentication every time
 (setq twittering-use-master-password t)
 
-(add-hook 'twittering-mode-hook
+(defun twittering-mode-tweaks()
   ;; Set C-c r in twittering-mode to twittering-reply-to-user
-  (lambda () (local-set-key [3 114] (quote twittering-reply-to-user)))
+  (local-set-key [3 114] (quote twittering-reply-to-user))
   ;; C-c f: favorite tweet
-  (lambda () (local-set-key [3 102] (quote twittering-favorite)))
+  (local-set-key [3 102] (quote twittering-favorite))
   ;; C-c n: native retweet
-  (lambda () (local-set-key [3 110] (quote twittering-native-retweet))))
+  (local-set-key [3 110] (quote twittering-native-retweet)))
 
-;;
+(add-hook 'twittering-mode-hook 'twittering-mode-tweaks)
 ;;-----CUSTOMIZATION-THROUGH-M-x-CUSTOMIZE--------------------------------------
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
