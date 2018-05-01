@@ -436,8 +436,8 @@
 ;; Bind org-capture to C-c c
 (global-set-key (kbd "\C-c c") (quote org-capture))
 
-;; Bind org-pomodoro to C-c p
-(global-set-key (kbd "\C-c p") (quote org-pomodoro))
+;; Bind org-pomodoro to C-x p
+(global-set-key (kbd "\C-x p") (quote org-pomodoro))
 
 ;; Open the agenda with C-c a
 (global-set-key [3 97] (quote org-agenda))
@@ -798,3 +798,4 @@
  '(sml/modes ((t (:inherit sml/global :background "grey40" :foreground "Black" :height 1.0))))
  '(sml/time ((t (:inherit sml/global :background "black" :foreground "green" :height 1.05 :foundry "ALTS" :family "Digital"))))
  '(time-mail-face ((t (:family "IBM 3270"))) t))
+(put 'upcase-region 'disabled nil)
