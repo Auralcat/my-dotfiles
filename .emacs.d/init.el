@@ -359,6 +359,12 @@
     ;; Maximize frame on startup
     (toggle-frame-maximized))
 
+;; Company-mode web-mode completions
+(require-package 'company-web)
+
+;; Add web-mode completions when started
+(require 'company-web-html)
+
 ;;-----IRC----------------------------------------------------------------------
 ;; Use Weechat from Emacs
 (require-package 'weechat)
@@ -566,7 +572,7 @@
  '(browse-url-firefox-program "firefox")
     '(company-backends
          (quote
-             (company-bbdb company-nxml company-css company-eclim company-semantic company-clang company-xcode company-cmake company-capf company-files
+             (company-web-html company-nxml company-css company-eclim company-semantic company-clang company-cmake company-capf company-files
                  (company-dabbrev-code company-gtags company-etags company-keywords)
                  company-oddmuse company-dabbrev)))
     '(custom-safe-themes
