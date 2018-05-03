@@ -68,6 +68,9 @@
 ;; Activate Company mode
 (add-hook 'after-init-hook 'global-company-mode)
 
+;; Enable Abbrev mode
+(abbrev-mode 1)
+
 ;;-----HOOKS--------------------------------------------------------------------
 
 ;; General programming mode
