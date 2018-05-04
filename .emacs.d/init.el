@@ -442,6 +442,10 @@
 (add-hook 'web-mode-hook 'web-mode-keybindings)
 
 ;;-ORG-MODE---------------------------------------------------------------------
+
+;; We don't need Flycheck in org-mode buffers. Usually.
+(add-hook 'org-mode-hook '(lambda() (flycheck-mode 0)))
+
 ;; Bind org-capture to C-c c
 (global-set-key (kbd "\C-c c") (quote org-capture))
 
