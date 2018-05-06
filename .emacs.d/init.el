@@ -583,6 +583,7 @@
              (company-web-html company-nxml company-css company-eclim company-semantic company-clang company-cmake company-capf company-files
                  (company-dabbrev-code company-gtags company-etags company-keywords)
                  company-oddmuse company-dabbrev)))
+ '(company-dabbrev-downcase nil)
  '(company-idle-delay 0.3)
  '(company-minimum-prefix-length 2)
     '(custom-safe-themes
