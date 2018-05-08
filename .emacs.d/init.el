@@ -359,6 +359,7 @@
         '(set-frame-font "Ubuntu Mono 12" nil t))
     ;; Remove menu and scroll bars in graphical mode
     (menu-bar-mode 0)
+    (tool-bar-mode 0)
     (scroll-bar-mode 0)
     ;; Enable emoji images
     (global-emojify-mode)
