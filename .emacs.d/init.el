@@ -451,7 +451,7 @@
 (setq calendar-longitude -49.25)
 
 ;; Set themes to change at sunrise/sunset
-(change-theme 'fairyfloss 'deeper-blue)
+;; (change-theme 'fairyfloss 'deeper-blue)
 
 ;; Autocompletion for Bootstrap/FontAwesome classes
 (require-package 'ac-html-bootstrap)
@@ -566,7 +566,7 @@
 ;; To save a macro, record it with C-x ( (start) and C-x ) (stop),
 ;; give it a name with C-x C-k n (C-k is for maKro) and
 ;; insert it in this file with insert-kbd-macro.
-;; Then you execute it calling the function or mapping it to a key! 😊
+;; Then you execute it mapping it to a key! 😊
 
 
 ;; Example macro
