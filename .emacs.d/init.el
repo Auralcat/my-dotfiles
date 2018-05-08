@@ -433,6 +433,22 @@
     (evil-set-initial-state 'eshell-mode 'emacs))
 (add-hook 'eshell-mode-hook 'eshell-tweaks)
 
+;; Nyan mode - have a Nyan Cat in your mode-line!
+(require-package 'nyan-mode)
+;; Activate it
+(nyan-mode 1)
+
+;; Theme-changer - switch between themes for day and night
+(require-package 'theme-changer)
+
+;; Set the location name, latitude and longitude
+(setq calendar-location-name "Curitiba, PR")
+(setq calendar-latitude -25.41)
+(setq calendar-longitude -49.25)
+
+;; Set themes to change at sunrise/sunset
+(change-theme 'fairyfloss 'deeper-blue)
+
 ;;-WEB-MODE---------------------------------------------------------------------
 (defun web-mode-keybindings ()
     "Define mode-specific keybindings like this."
