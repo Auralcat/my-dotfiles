@@ -46,7 +46,6 @@
 (when (not (display-graphic-p))
   (menu-bar-mode -1))
 
-
 ;; Org-babel - load ob-elixir
 (load "ob-elixir")
 
@@ -351,9 +350,13 @@
 (require-package 'emojify)
 
 ;;-----GRAPHICAL----------------------------------------------------------------
+
 ;; Set font in graphical mode
 (when (display-graphic-p)
-    (set-frame-font "Ubuntu Mono 12" nil t)
+    ;; Use Fantasque Sans Mono when available
+    (if (member "Fantasque Sans Mono" (font-family-list))
+        (set-frame-font "Fantasque Sans Mono 12")
+        '(set-frame-font "Ubuntu Mono 12" nil t))
     ;; Remove menu and scroll bars in graphical mode
     (menu-bar-mode 0)
     (scroll-bar-mode 0)
