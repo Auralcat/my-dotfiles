@@ -37,7 +37,7 @@
     (emacs-lock-mode 'kill))
 
 ;; Load the Fairyfloss theme on startup
-(load-theme 'fairyfloss)
+;; (load-theme 'fairyfloss)
 
 ;; Enable auto-revert-mode
 (global-auto-revert-mode t)
