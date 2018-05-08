@@ -481,6 +481,11 @@
 ;; Org-agenda: point the files you want it to read
 ;; (setq org-agenda-files (list "~/file-bouncer/org-files/contact-based-system/"))
 
+;; Insert todo heading with C-c C-x M (that's SHIFT+m)
+(local-set-key [3 24 77] (quote org-insert-todo-heading))
+
+;; Insert todo _sub_heading with C-c C-x m
+(local-set-key [3 24 109] (quote org-insert-todo-subheading))
 ;;------------------------------------------------------------------------------
 ;; Enh-ruby-mode: Run buffer in inf-ruby process
 (add-hook 'enh-ruby-mode-hook
