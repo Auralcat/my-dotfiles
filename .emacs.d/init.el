@@ -773,6 +773,10 @@
              ("%e" mode-line-front-space mode-line-mule-info mode-line-client mode-line-modified mode-line-remote mode-line-frame-identification mode-line-buffer-identification mode-line-file-name "   " mode-line-position evil-mode-line-tag
                  (vc-mode vc-mode)
                  "  " mode-line-modes mode-line-misc-info mode-line-end-spaces)))
+ '(nyan-animate-nyancat t)
+ '(nyan-animation-frame-interval 0.2)
+ '(nyan-bar-length 16)
+ '(nyan-mode t)
     '(org-agenda-files
          (quote
              ("~/file-bouncer/org-files/stand-up-meetings/Maio-2018.org" "/home/lucas/file-bouncer/org-files/contact-based-system/eu.org" "~/file-bouncer/org-files/blog.org" "/home/lucas/file-bouncer/org-files/contact-based-system/rosiane.org" "/home/lucas/file-bouncer/org-files/contact-based-system/elaine.org" "/home/lucas/file-bouncer/org-files/contact-based-system/aline-pegas.org" "~/file-bouncer/org-files/contact-based-system/ariane.org" "~/file-bouncer/org-files/site-congresso.org")))
@@ -835,15 +839,16 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(company-scrollbar-bg ((t (:background "light goldenrod"))))
- '(company-scrollbar-fg ((t (:background "tomato"))))
- '(company-template-field ((t (:background "light goldenrod" :foreground "black"))))
- '(company-tooltip ((t (:background "powder blue" :foreground "black"))))
- '(company-tooltip-common ((t (:foreground "red"))))
- '(company-tooltip-selection ((t (:background "light salmon"))))
+ '(default ((((class color) (min-colors 4096)) (:foreground "#5f5f5f" :background "#fdfde7")) (((class color) (min-colors 256)) (:foreground "#5f5f5f" :background "#fdfde7")) (((class color) (min-colors 89)) (:foreground "#5f5f5f" :background "#fdfde7"))))
+ '(company-scrollbar-bg ((((class color) (min-colors 89)) (:background "#5f5f5f"))))
+ '(company-scrollbar-fg ((((class color) (min-colors 89)) (:background "#9e9e9e"))))
+ '(company-template-field ((((class color) (min-colors 89)) (:background "#ffffaf" :foreground "#626262"))))
+ '(company-tooltip ((((class color) (min-colors 89)) (:background "#3a3a3a" :foreground "#5fafd7"))))
+ '(company-tooltip-common ((((class color) (min-colors 89)) (:background "#5f5f5f" :foreground "#5fafd7"))))
+ '(company-tooltip-selection ((((class color) (min-colors 89)) (:background "#626262" :foreground "#afd7ff"))))
  '(org-scheduled-previously ((t (:foreground "#778855"))))
- '(org-upcoming-deadline ((t (:foreground "#B1AA98"))))
- '(region ((t (:background "deep pink"))))
+ '(org-upcoming-deadline ((((class color) (min-colors 89)) (:foreground "#a40000"))))
+ '(region ((((class color) (min-colors 89)) (:foreground "#ffffff" :background "#5fafd7"))))
  '(sml/filename ((t (:inherit sml/global :background "Grey22" :foreground "Black"))))
  '(sml/folder ((t (:inherit sml/global :background "Grey22" :foreground "Black" :weight normal))))
  '(sml/modes ((t (:inherit sml/global :background "grey40" :foreground "Black" :height 1.0))))
