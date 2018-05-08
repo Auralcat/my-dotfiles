@@ -37,7 +37,7 @@
     (emacs-lock-mode 'kill))
 
 ;; Load the Fairyfloss theme on startup
-;; (load-theme 'fairyfloss)
+(load-theme 'fairyfloss)
 
 ;; Set default font for Emacs
 (set-frame-font "Ubuntu Mono 12")
@@ -448,10 +448,10 @@
 ;; ;; Theme-changer - switch between themes for day and night
 ;; (require-package 'theme-changer)
 
-;; ;; Set the location name, latitude and longitude
-;; (setq calendar-location-name "Curitiba, PR")
-;; (setq calendar-latitude -25.41)
-;; (setq calendar-longitude -49.25)
+;; Set the location name, latitude and longitude
+(setq calendar-location-name "Curitiba, PR")
+(setq calendar-latitude -25.41)
+(setq calendar-longitude -49.25)
 
 ;; Set themes to change at sunrise/sunset
 ;; (change-theme 'fairyfloss 'deeper-blue)
