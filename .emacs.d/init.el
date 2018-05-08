@@ -482,7 +482,7 @@
 ;; (setq org-agenda-files (list "~/file-bouncer/org-files/contact-based-system/"))
 
 ;; Always respect the content of a heading when creating todos!
-(local-set-key [M-return] (quote org-insert-todo-heading-respect-content))
+(local-set-key [M-S-return] (quote org-insert-todo-heading-respect-content))
 
 ;; Map C-S-enter to org-insert-todo-subheading
 (local-set-key [C-S-return] (quote org-insert-todo-subheading))
