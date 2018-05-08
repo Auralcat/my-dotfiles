@@ -39,6 +39,9 @@
 ;; Load the Fairyfloss theme on startup
 ;; (load-theme 'fairyfloss)
 
+;; Set default font for Emacs
+(set-frame-font "Ubuntu Mono 12")
+
 ;; Enable auto-revert-mode
 (global-auto-revert-mode t)
 
@@ -442,13 +445,13 @@
 ;; Activate it
 (nyan-mode 1)
 
-;; Theme-changer - switch between themes for day and night
-(require-package 'theme-changer)
+;; ;; Theme-changer - switch between themes for day and night
+;; (require-package 'theme-changer)
 
-;; Set the location name, latitude and longitude
-(setq calendar-location-name "Curitiba, PR")
-(setq calendar-latitude -25.41)
-(setq calendar-longitude -49.25)
+;; ;; Set the location name, latitude and longitude
+;; (setq calendar-location-name "Curitiba, PR")
+;; (setq calendar-latitude -25.41)
+;; (setq calendar-longitude -49.25)
 
 ;; Set themes to change at sunrise/sunset
 ;; (change-theme 'fairyfloss 'deeper-blue)
