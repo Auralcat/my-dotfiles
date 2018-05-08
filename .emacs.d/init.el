@@ -452,13 +452,22 @@
 ;; Set themes to change at sunrise/sunset
 (change-theme 'fairyfloss 'deeper-blue)
 
+;; Autocompletion for Bootstrap/FontAwesome classes
+(require-package 'ac-html-bootstrap)
+
 ;;-WEB-MODE---------------------------------------------------------------------
 (defun web-mode-keybindings ()
     "Define mode-specific keybindings like this."
     (local-set-key (kbd "C-c C-v") 'browse-url-of-buffer)
     (local-set-key (kbd "C-c /") 'sgml-close-tag))
 
+;; Add company backends when loading web-mode.
+(defun web-mode-company-load-backends ()
+    (company-web-bootstrap+)
+    (company-web-fa+))
+
 (add-hook 'web-mode-hook 'web-mode-keybindings)
+(add-hook 'web-mode-hook 'web-mode-company-load-backends)
 
 ;;-ORG-MODE---------------------------------------------------------------------
 
