@@ -3,9 +3,13 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil nil ("moe-dark-theme.el" "moe-light-theme.el"
-;;;;;;  "moe-theme-pkg.el" "moe-theme-switcher.el" "moe-theme.el")
-;;;;;;  (23280 64262 830401 774000))
+;;;### (autoloads nil nil ("../../../../.emacs.d/elpa/moe-theme-1.0.0/moe-dark-theme.el"
+;;;;;;  "../../../../.emacs.d/elpa/moe-theme-1.0.0/moe-light-theme.el"
+;;;;;;  "../../../../.emacs.d/elpa/moe-theme-1.0.0/moe-theme-autoloads.el"
+;;;;;;  "../../../../.emacs.d/elpa/moe-theme-1.0.0/moe-theme-pkg.el"
+;;;;;;  "../../../../.emacs.d/elpa/moe-theme-1.0.0/moe-theme-switcher.el"
+;;;;;;  "../../../../.emacs.d/elpa/moe-theme-1.0.0/moe-theme.el")
+;;;;;;  (23283 27844 652949 717000))
 
 ;;;***
 

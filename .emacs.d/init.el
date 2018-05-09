@@ -352,6 +352,9 @@
 ;; Emojify - add emoji support for Emacs
 (require-package 'emojify)
 
+;; Moe-theme - Light and dark theme
+(require-package 'moe-theme)
+
 ;;-----GRAPHICAL----------------------------------------------------------------
 
 ;; Set font in graphical mode
