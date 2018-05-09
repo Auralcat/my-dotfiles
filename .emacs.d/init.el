@@ -632,7 +632,7 @@
  '(display-battery-mode t)
  '(display-time-24hr-format t)
  '(display-time-day-and-date t)
- '(display-time-default-load-average nil)
+ '(display-default-load-average nil)
  '(display-time-mail-face (quote change-log-email))
  '(display-time-mail-string "✉")
  '(display-time-mode t)
