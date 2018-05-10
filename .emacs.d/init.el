@@ -792,9 +792,12 @@
  '(org-agenda-skip-scheduled-if-done t)
     '(org-capture-templates
          (quote
-             (("t" "Tarefa extra do stand-up (pra não colocar direto na lista do dia, organizar depois)" entry
-                  (file+headline "~/file-bouncer/org-files/contact-based-system/eu.org" "Tarefas extras do stand-up (organizar depois)")
-                  "** TODO %?" :prepend t)
+             (("n" "Note for the current day entry" plain
+                  (file+headline "~/file-bouncer/org-files/stand-up-meetings/Maio-2018.org" "Anotações")
+                  "  - %U %a%?" :prepend t)
+                 ("t" "Tarefa extra do stand-up (pra não colocar direto na lista do dia, organizar depois)" entry
+                     (file+headline "~/file-bouncer/org-files/contact-based-system/eu.org" "Tarefas extras do stand-up (organizar depois)")
+                     "** TODO %?" :prepend t)
                  ("k" "Testing regex target capturing" entry
                      (file+regexp "~/file-bouncer/org-files/stand-up-meetings/Abril-2018.org" "\\* CURRENT")
                      "*** TODO %?")
