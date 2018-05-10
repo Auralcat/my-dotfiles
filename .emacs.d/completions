@@ -6,6 +6,11 @@
 ;;    If it is t, the completion will never be pruned from the file.
 ;;    Otherwise it is in hours since origin.
 
-("input-d" . 423135)
-("buffers" . 423135)
-("servers" . 423168)
+("card-body>h4.card-title" . 423875)
+("card-body>h4.card-titl" . 423875)
+("card-body>h4.card-tit" . 423875)
+("card-body>h4.card-ti" . 423875)
+("card-body>h4.card-t" . 423875)
+("card-body>h4.card" . 423875)
+("card-body>h4.car" . 423875)
+("card-body>h4.ca" . 423875)
