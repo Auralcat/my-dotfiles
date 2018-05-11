@@ -1,0 +1,18 @@
+
+;; ----- amx-history -----
+(
+ plp
+ amx-mode
+ cd
+ df
+ 5x5
+ all
+ amx
+)
+
+;; ----- amx-data -----
+(
+ (cd . 1)
+ (amx-mode . 1)
+ (plp . 1)
+)
