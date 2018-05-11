@@ -367,6 +367,22 @@
 (amx-mode)
 
 ;; Keyfreq: shows most used commands in editing session
+(require-package 'keyfreq)
+
+;; Ignore arrow commands and self-insert-commands
+(setq keyfreq-excluded-commands
+    '(self-insert-command
+         abort-recursive-edit
+         forward-char
+         backward-char
+         previous-line
+         next-line))
+
+;; Activate it
+(keyfreq-mode 1)
+(keyfreq-autosave-mode 1)
+
+
 ;;-----GRAPHICAL----------------------------------------------------------------
 
 ;; Set font in graphical mode
