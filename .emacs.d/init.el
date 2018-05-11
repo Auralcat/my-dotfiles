@@ -366,7 +366,8 @@
 ;; Activate it on startup
 (amx-mode)
 
-;; Keyfreq: shows most used commands in editing session
+;; Keyfreq: shows most used commands in editing session.
+;; To see the data, run (keyfreq) with M-:
 (require-package 'keyfreq)
 
 ;; Ignore arrow commands and self-insert-commands
@@ -381,7 +382,6 @@
 ;; Activate it
 (keyfreq-mode 1)
 (keyfreq-autosave-mode 1)
-
 
 ;;-----GRAPHICAL----------------------------------------------------------------
 
