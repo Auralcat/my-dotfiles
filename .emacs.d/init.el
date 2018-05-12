@@ -358,7 +358,7 @@
 
 ;; Amx-mode: An Alternative M-x mode, shows bindings and last executed command
 ;; in completion options
-(require-package 'amx-mode)
+(require-package 'amx)
 
 ;; Amx's unlisted dependency
 (require-package 'ido-completing-read+)
@@ -367,7 +367,7 @@
 (amx-mode)
 
 ;; Keyfreq: shows most used commands in editing session.
-;; To see the data, run (keyfreq) with M-:
+;; To see the data, run (keyfreq-show) with M-:
 (require-package 'keyfreq)
 
 ;; Ignore arrow commands and self-insert-commands
