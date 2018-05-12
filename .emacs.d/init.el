@@ -376,6 +376,7 @@
 ;; Ignore arrow commands and self-insert-commands
 (setq keyfreq-excluded-commands
     '(self-insert-command
+         org-self-insert-command
          abort-recursive-edit
          forward-char
          backward-char
@@ -605,7 +606,6 @@
 ;; insert it in this file with insert-kbd-macro.
 ;; Then you execute it mapping it to a key! 😊
 
-
 ;; Example macro
 (fset 'kilroy-was-here
       (lambda (&optional arg)
@@ -614,7 +614,6 @@
     (kmacro-exec-ring-item
      (quote
       (" -- foobar was hereKilroy wsaas here" 0 "%d")) arg)))
-
 
 ;;-TWITTERING-MODE--------------------------------------------------------------
 ;; Adjust update interval in seconds. It's timeR, not time!
@@ -642,6 +641,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(amx-prompt-string "M-x → ")
+ '(amx-show-key-bindings t)
     '(ansi-color-faces-vector
          [default default default italic underline success warning error])
     '(ansi-color-names-vector
@@ -695,6 +695,7 @@
  '(global-auto-revert-mode t)
  '(global-emojify-mode t)
  '(global-linum-mode nil)
+ '(ido-enable-flex-matching nil)
  '(image-animate-loop t)
  '(indent-tabs-mode nil)
  '(initial-buffer-choice nil)

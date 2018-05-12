@@ -3,8 +3,8 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "php-mode" "php-mode.el" (23202 32671 771116
-;;;;;;  850000))
+;;;### (autoloads nil "php-mode" "php-mode.el" (23286 63747 944385
+;;;;;;  356000))
 ;;; Generated autoloads from php-mode.el
 
 (let ((loads (get 'php 'custom-loads))) (if (member '"php-mode" loads) nil (put 'php 'custom-loads (cons '"php-mode" loads))))
@@ -37,12 +37,12 @@ Insert current namespace if cursor in namespace context.
 
 \(fn)" t nil)
 
-(dolist (pattern '("\\.php[s345t]?\\'" "/\\.php_cs\\(\\.dist\\)?\\'" "\\.phtml\\'" "/Amkfile\\'" "\\.amk\\'")) (add-to-list 'auto-mode-alist `(,pattern . php-mode) t))
+(add-to-list 'auto-mode-alist (cons (eval-when-compile (rx (or (: "." (or (: "php" (32 (in "s345t"))) "amk" "phtml")) (: "/" (or "Amkfile" ".php_cs" ".php_cs.dist"))) string-end)) 'php-mode) t)
 
 ;;;***
 
-;;;### (autoloads nil "php-project" "php-project.el" (23202 32671
-;;;;;;  491097 999000))
+;;;### (autoloads nil "php-project" "php-project.el" (23286 63747
+;;;;;;  620370 262000))
 ;;; Generated autoloads from php-project.el
 
 (defvar php-project-root 'auto "\
@@ -52,11 +52,16 @@ Method of searching for the top level directory.
       Try to search file in order of `php-project-available-root-files'.
 
 SYMBOL
-      Key of `php-project-available-root-files'.")
+      Key of `php-project-available-root-files'.
+
+STRING
+      A file/directory name of top level marker.
+      If the string is an actual directory path, it is set as the absolute path
+      of the root directory, not the marker.")
 
 (make-variable-buffer-local 'php-project-root)
 
-(put 'php-project-root 'safe-local-variable #'(lambda (v) (assq v php-project-available-root-files)))
+(put 'php-project-root 'safe-local-variable #'(lambda (v) (or (stringp v) (assq v php-project-available-root-files))))
 
 (defvar php-project-bootstrap-scripts nil "\
 List of path to bootstrap php script file.
@@ -67,6 +72,20 @@ defines constants, and sets the class loaders.")
 (make-variable-buffer-local 'php-project-bootstrap-scripts)
 
 (put 'php-project-bootstrap-scripts 'safe-local-variable #'php-project--eval-bootstrap-scripts)
+
+(defvar php-project-php-executable nil "\
+Path to php executable file.")
+
+(make-variable-buffer-local 'php-project-php-executable)
+
+(put 'php-project-php-executable 'safe-local-variable #'(lambda (v) (and (stringp v) (file-executable-p v))))
+
+(defvar php-project-phan-executable nil "\
+Path to phan executable file.")
+
+(make-variable-buffer-local 'php-project-phan-executable)
+
+(put 'php-project-phan-executable 'safe-local-variable #'php-project--eval-bootstrap-scripts)
 
 (defvar php-project-coding-style nil "\
 Symbol value of the coding style of the project that PHP major mode refers to.
@@ -94,7 +113,7 @@ Return path to current PHP project.
 ;;;;;;  "php-exif.el" "php-ext.el" "php-filesystem.el" "php-gd.el"
 ;;;;;;  "php-math.el" "php-mode-pkg.el" "php-pcre.el" "php-regex.el"
 ;;;;;;  "php-simplexml.el" "php-strings.el" "php-var.el" "php-xmlparser.el"
-;;;;;;  "php-xmlreader.el") (23202 32672 306747 729000))
+;;;;;;  "php-xmlreader.el") (23286 63748 595308 260000))
 
 ;;;***
 
