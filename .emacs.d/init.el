@@ -4,6 +4,9 @@
 
 ;;-----ENV-CUSTOMIZATIONS-------------------------------------------------------
 
+;; A small performance improvement
+(setq redisplay-dont-pause t)
+
 ;; Store all backups in a specific folder:
 (setq backup-directory-alist `(("." . "~/file-bouncer/emacs-backups")))
 
