@@ -169,9 +169,12 @@
 ;; ...this!
 (require-package 'sass-mode)
 
-;; Set Sass mode for SCSS files
+;; Set Sass mode for SASS files and Css mode for SCSS files.
 (add-to-list 'auto-mode-alist
-      '("\\.scss\\'" . sass-mode))
+      '("\\.sass\\'" . sass-mode))
+
+(add-to-list 'auto-mode-alist
+      '("\\.scss\\'" . css-mode))
 
 ;; js2-mode - A better default Javascript mode
 (require-package 'js2-mode)
