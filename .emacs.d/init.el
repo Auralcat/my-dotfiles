@@ -127,13 +127,13 @@
 ;; (defun toggle-terminal-transparency ())
 
 ;; Call the live page reload script from within Emacs and bind it to a key
-(defun css-live-reload-current-webpage ()
-    (when (and (stringp buffer-file-name)
-      (string-match "\\.scss\\'" buffer-file-name))
-    (shell-command "~/my-dotfiles/bash/live-reload-firefox.sh")))
+;; (defun css-live-reload-current-webpage ()
+;;     (when (and (stringp buffer-file-name)
+;;       (string-match "\\.scss\\'" buffer-file-name))
+;;     (shell-command "~/my-dotfiles/bash/live-reload-firefox.sh")))
 
 ;; The original idea is to call this function when saving a stylesheet
-(add-hook 'after-save-hook 'css-live-reload-current-webpage)
+;; (add-hook 'after-save-hook 'css-live-reload-current-webpage)
 ;;-----FUNCTION-ALIASES---------------------------------------------------------
 
 ;; This is how you define aliases for Elisp functions
