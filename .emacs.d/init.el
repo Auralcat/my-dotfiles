@@ -390,6 +390,18 @@
 (keyfreq-mode 1)
 (keyfreq-autosave-mode 1)
 
+;; Theme changer
+(require-package 'theme-changer)
+
+;; Set the location
+(setq calendar-location-name "Curitiba, PR")
+(setq calendar-latitude -25.41)
+(setq calendar-longitude -49.25)
+
+;; Specify the day and night themes:
+(require 'theme-changer)
+(change-theme 'tango 'fairyfloss)
+
 ;;-----GRAPHICAL----------------------------------------------------------------
 
 ;; Set font in graphical mode
@@ -486,10 +498,6 @@
 ;; ;; Theme-changer - switch between themes for day and night
 ;; (require-package 'theme-changer)
 
-;; Set the location name, latitude and longitude
-(setq calendar-location-name "Curitiba, PR")
-(setq calendar-latitude -25.41)
-(setq calendar-longitude -49.25)
 
 ;; Set themes to change at sunrise/sunset
 ;; (change-theme 'fairyfloss 'deeper-blue)
