@@ -6,7 +6,7 @@
 ;;    If it is t, the completion will never be pruned from the file.
 ;;    Otherwise it is in hours since origin.
 
-("Auralcat" . 423883)
+("Auralcat" . 424020)
 ("card-body>h4.card-title" . 423875)
 ("card-body>h4.card-titl" . 423875)
 ("card-body>h4.card-tit" . 423875)
