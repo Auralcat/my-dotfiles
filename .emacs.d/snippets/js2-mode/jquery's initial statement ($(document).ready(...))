@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: jquery's initial statement ($(document).ready(...))
+# key: docready
+# --
+\$\(document).ready(function() {
+   $0
+});

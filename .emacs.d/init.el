@@ -402,6 +402,12 @@
 (require 'theme-changer)
 (change-theme 'tango 'fairyfloss)
 
+;; Org-bullets: change org-mode's *s to UTF-8 chars
+(require-package 'org-bullets)
+
+;; Activate it
+(require 'org-bullets)
+(add-hook 'org-mode-hook (lambda() (org-bullets-mode 1)))
 ;;-----GRAPHICAL----------------------------------------------------------------
 
 ;; Set font in graphical mode
