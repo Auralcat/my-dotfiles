@@ -843,6 +843,7 @@
              ("~/file-bouncer/org-files/stand-up-meetings/Maio-2018.org" "/home/lucas/file-bouncer/org-files/contact-based-system/eu.org" "~/file-bouncer/org-files/blog.org" "/home/lucas/file-bouncer/org-files/contact-based-system/rosiane.org" "/home/lucas/file-bouncer/org-files/contact-based-system/elaine.org" "/home/lucas/file-bouncer/org-files/contact-based-system/aline-pegas.org" "~/file-bouncer/org-files/contact-based-system/ariane.org")))
  '(org-agenda-scheduled-leaders (quote ("Scheduled: " "Sched. previously %2dx: ")))
  '(org-agenda-skip-scheduled-if-done t)
+ '(org-bullets-bullet-list (quote ("✿" "❀" "◉" "○" "✸")))
     '(org-capture-templates
          (quote
              (("n" "Note for the current day entry" plain
