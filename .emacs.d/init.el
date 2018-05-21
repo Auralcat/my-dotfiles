@@ -896,6 +896,7 @@
  '(tags-tag-face (quote default))
  '(tool-bar-mode nil)
  '(tooltip-mode nil)
+ '(tramp-default-method "ssh")
  '(weechat-auto-monitor-buffers t)
     '(weechat-modules
          (quote
