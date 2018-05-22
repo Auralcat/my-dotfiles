@@ -73,8 +73,8 @@
 ;; Activate Company mode
 (add-hook 'after-init-hook 'global-company-mode)
 
-;; Enable Abbrev mode
-(abbrev-mode 1)
+;; Enable global Abbrev mode
+(setq-default abbrev-mode t)
 
 ;;-----HOOKS--------------------------------------------------------------------
 
