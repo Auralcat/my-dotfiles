@@ -36,6 +36,10 @@
     ("ma" "margin: auto;" nil 2)
    ))
 
+(define-abbrev-table 'custom-new-theme-mode-abbrev-table '())
+
+(define-abbrev-table 'custom-theme-choose-mode-abbrev-table '())
+
 (define-abbrev-table 'diary-fancy-display-mode-abbrev-table '())
 
 (define-abbrev-table 'diary-mode-abbrev-table '())
@@ -74,17 +78,25 @@
   '(
     ("conversda" "conversa" nil 1)
     ("cosneguiu" "conseguiu" nil 1)
+    ("ctba" "Curitiba" nil 1)
+    ("cudiar" "cuidar" nil 1)
+    ("cwb" "Curitiba" nil 1)
     ("deposi" "depois" nil 1)
     ("elqa" "ela" nil 1)
     ("entreguar" "entregar" nil 1)
     ("eplo" "pelo" nil 1)
     ("hovje" "hoje" nil 1)
     ("moranod" "morando" nil 1)
-    ("n" "não" nil 2)
+    ("n" "não" nil 6)
+    ("oicsa" "coisa" nil 1)
+    ("pg" "Ponta Grossa" nil 1)
     ("qdo" "quando" nil 4)
-    ("sla" "sei lá" nil 2)
-    ("tbm" "também" nil 4)
+    ("qeu" "que" nil 1)
+    ("sla" "sei lá" nil 4)
+    ("tbm" "também" nil 6)
+    ("tepmo" "tempo" nil 1)
     ("vc" "você" nil 3)
+    ("wp" "WordPress" nil 4)
    ))
 
 (define-abbrev-table 'help-mode-abbrev-table '())
