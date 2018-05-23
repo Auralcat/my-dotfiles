@@ -3,8 +3,8 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "with-editor" "with-editor.el" (23234 37547
-;;;;;;  290368 531000))
+;;;### (autoloads nil "with-editor" "with-editor.el" (23300 40579
+;;;;;;  845933 159000))
 ;;; Generated autoloads from with-editor.el
 
 (autoload 'with-editor-export-editor "with-editor" "\
@@ -84,8 +84,8 @@ else like the former.
 
 ;;;***
 
-;;;### (autoloads nil nil ("with-editor-pkg.el") (23234 37547 507478
-;;;;;;  483000))
+;;;### (autoloads nil nil ("with-editor-pkg.el") (23300 40580 133093
+;;;;;;  257000))
 
 ;;;***
 
