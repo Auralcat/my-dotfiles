@@ -2,23 +2,23 @@
 ;; ----- amx-history -----
 (
  plp
- string-insert-rectangle
- twit
- httpd-start
- impatient-mode
  customize-themes
- recover-session
+ toggle-menu-bar-mode-from-frame
+ menu-bar-mode
+ css-mode
+ browse-url-of-buffer
+ string-insert-rectangle
 )
 
 ;; ----- amx-data -----
 (
  (cd . 1)
  (amx-mode . 4)
- (plp . 3)
+ (plp . 7)
  (keyfreq-mode . 7)
  (eval-region . 2)
  (twit . 9)
- (customize-themes . 3)
+ (customize-themes . 5)
  (yas-insert-snippet . 2)
  (customize-group . 3)
  (web-mode . 2)
@@ -31,8 +31,8 @@
  (recover-session . 4)
  (set-face-foreground . 2)
  (customize-create-theme . 2)
- (menu-bar-mode . 1)
- (toggle-menu-bar-mode-from-frame . 1)
+ (menu-bar-mode . 6)
+ (toggle-menu-bar-mode-from-frame . 3)
  (impatient-mode . 4)
  (httpd-start . 4)
  (sort-lines . 7)
@@ -44,4 +44,6 @@
  (make-directory . 2)
  (show-paren-mode . 1)
  (string-insert-rectangle . 1)
+ (browse-url-of-buffer . 1)
+ (css-mode . 2)
 )
