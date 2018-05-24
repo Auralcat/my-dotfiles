@@ -94,6 +94,7 @@
 
 ;; Create filling for org-mode
 (add-hook 'org-mode-hook 'auto-fill-mode)
+
 ;;-----IRC----------------------------------------------------------------------
 
 ;; Qui Nov  2 19:57:06 BRST 2017 - Tried using IRC inside Emacs, didn't please
@@ -505,13 +506,6 @@
 (require-package 'nyan-mode)
 ;; Activate it
 (nyan-mode 1)
-
-;; ;; Theme-changer - switch between themes for day and night
-;; (require-package 'theme-changer)
-
-
-;; Set themes to change at sunrise/sunset
-;; (change-theme 'fairyfloss 'deeper-blue)
 
 ;; Autocompletion for Bootstrap/FontAwesome classes
 (require-package 'ac-html-bootstrap)
