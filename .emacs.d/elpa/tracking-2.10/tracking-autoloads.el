@@ -3,8 +3,7 @@
 ;;; Code:
 (add-to-list 'load-path (or (file-name-directory #$) (car load-path)))
 
-;;;### (autoloads nil "shorten" "shorten.el" (23274 64199 146513
-;;;;;;  418000))
+;;;### (autoloads nil "shorten" "shorten.el" (23306 2422 937737 116000))
 ;;; Generated autoloads from shorten.el
 
 (autoload 'shorten-strings "shorten" "\
@@ -18,8 +17,8 @@ components back together into SHORTENED-STRING.  See also
 
 ;;;***
 
-;;;### (autoloads nil "tracking" "tracking.el" (23274 64198 962511
-;;;;;;  923000))
+;;;### (autoloads nil "tracking" "tracking.el" (23306 2422 838732
+;;;;;;  926000))
 ;;; Generated autoloads from tracking.el
 
 (defvar tracking-mode nil "\
@@ -73,8 +72,8 @@ Switch to the last active buffer.
 
 ;;;***
 
-;;;### (autoloads nil nil ("tracking-pkg.el") (23274 64199 272993
-;;;;;;  348000))
+;;;### (autoloads nil nil ("tracking-pkg.el") (23306 2423 175096
+;;;;;;  700000))
 
 ;;;***
 

@@ -20,4 +20,11 @@
 ;; Some buffers in Emacs are read-only and can be usually killed pressing
 ;; lowercase q. Much more convenient if you ask me.
 
-;; (define-key minibuffer-local-map [escape] 'minibuffer-keyboard-quit
+;; Use gb as goto-bookmark
+(define-key evil-normal-state-map (kbd "gb") 'bookmark-jump)
+
+;; Use gl as list-bookmarks
+(define-key evil-normal-state-map (kbd "gl") 'list-bookmarks)
+
+;; Use gs to set bookmarks
+(define-key evil-normal-state-map (kbd "gs") 'bookmark-set)
