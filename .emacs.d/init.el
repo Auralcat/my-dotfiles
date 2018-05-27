@@ -410,10 +410,14 @@
 (require 'org-bullets)
 (add-hook 'org-mode-hook (lambda() (org-bullets-mode 1)))
 
-;; Org-beautify-theme: sub-theme to make org-mode prettier
-(require-package 'org-beautify-theme)
-(require 'org-beautify-theme)
-(load-theme 'org-beautify)
+;; Nyan mode - have a Nyan Cat in your mode-line!
+(require-package 'nyan-mode)
+;; Activate it
+(nyan-mode 1)
+
+;; Autocompletion for Bootstrap/FontAwesome classes
+(require-package 'ac-html-bootstrap)
+
 ;;-----GRAPHICAL----------------------------------------------------------------
 
 ;; Set font in graphical mode
@@ -502,13 +506,8 @@
     (evil-set-initial-state 'eshell-mode 'emacs))
 (add-hook 'eshell-mode-hook 'eshell-tweaks)
 
-;; Nyan mode - have a Nyan Cat in your mode-line!
-(require-package 'nyan-mode)
-;; Activate it
-(nyan-mode 1)
-
-;; Autocompletion for Bootstrap/FontAwesome classes
-(require-package 'ac-html-bootstrap)
+;; Set C-x j to go to current clocked task in org-mode
+(global-set-key (kbd "C-x j") 'org-clock-goto)
 
 ;;-WEB-MODE---------------------------------------------------------------------
 (defun web-mode-keybindings ()
