@@ -621,15 +621,12 @@
 ;; insert it in this file with insert-kbd-macro.
 ;; Then you execute it mapping it to a key! 😊
 
-;; Example macro
-(fset 'kilroy-was-here
-      (lambda (&optional arg)
-    "Keyboard macro."
-    (interactive "p")
-    (kmacro-exec-ring-item
-     (quote
-      (" -- foobar was hereKilroy wsaas here" 0 "%d")) arg)))
+;; Example macro: Mark todos as done
+(fset 'org-mark-as-done
+   (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ("d" 0 "%d")) arg)))
 
+(add-hook 'org-mode-hook
+    (lambda () (local-set-key (kbd "s-d") (execute-kbd-macro 'org-mark-as-done))))
 ;;-TWITTERING-MODE--------------------------------------------------------------
 ;; Adjust update interval in seconds. It's timeR, not time!
 (setq twittering-timer-interval 3600)
