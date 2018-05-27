@@ -36,9 +36,13 @@
     ("ma" "margin: auto;" nil 2)
    ))
 
+(define-abbrev-table 'csv-mode-abbrev-table '())
+
 (define-abbrev-table 'custom-new-theme-mode-abbrev-table '())
 
 (define-abbrev-table 'custom-theme-choose-mode-abbrev-table '())
+
+(define-abbrev-table 'debugger-mode-abbrev-table '())
 
 (define-abbrev-table 'diary-fancy-display-mode-abbrev-table '())
 
@@ -83,15 +87,16 @@
     ("cwb" "Curitiba" nil 1)
     ("deposi" "depois" nil 1)
     ("elqa" "ela" nil 1)
+    ("emus" "meus" nil 3)
     ("entreguar" "entregar" nil 1)
     ("eplo" "pelo" nil 1)
     ("hovje" "hoje" nil 1)
     ("moranod" "morando" nil 1)
-    ("n" "não" nil 6)
+    ("n" "não" nil 9)
     ("oicsa" "coisa" nil 1)
     ("pg" "Ponta Grossa" nil 1)
     ("qdo" "quando" nil 4)
-    ("qeu" "que" nil 1)
+    ("qeu" "que" nil 2)
     ("sla" "sei lá" nil 4)
     ("tbm" "também" nil 6)
     ("tepmo" "tempo" nil 1)
@@ -106,6 +111,8 @@
 (define-abbrev-table 'ibuffer-mode-abbrev-table '())
 
 (define-abbrev-table 'idl-mode-abbrev-table '())
+
+(define-abbrev-table 'inf-ruby-mode-abbrev-table '())
 
 (define-abbrev-table 'java-mode-abbrev-table '())
 
@@ -174,6 +181,8 @@
 (define-abbrev-table 'prog-mode-abbrev-table '())
 
 (define-abbrev-table 'remember-mode-abbrev-table '())
+
+(define-abbrev-table 'ruby-mode-abbrev-table '())
 
 (define-abbrev-table 'select-tags-table-mode-abbrev-table '())
 
