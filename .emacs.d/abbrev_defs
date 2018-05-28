@@ -85,7 +85,6 @@
     ("avi" "vai" nil 2)
     ("conversda" "conversa" nil 1)
     ("cosneguiu" "conseguiu" nil 1)
-    ("ctba" "Curitiba" nil 1)
     ("cudiar" "cuidar" nil 1)
     ("cwb" "Curitiba" nil 1)
     ("deposi" "depois" nil 1)
@@ -100,9 +99,7 @@
     ("hte" "the" nil 1)
     ("memso" "mesmo" nil 0)
     ("moranod" "morando" nil 1)
-    ("n" "não" nil 10)
     ("oicsa" "coisa" nil 1)
-    ("pg" "Ponta Grossa" nil 1)
     ("probelma" "problema " nil 1)
     ("qdo" "quando" nil 4)
     ("qeu" "que" nil 9)
@@ -169,6 +166,8 @@
 (define-abbrev-table 'magit-stashes-mode-abbrev-table '())
 
 (define-abbrev-table 'magit-status-mode-abbrev-table '())
+
+(define-abbrev-table 'magit-submodule-list-mode-abbrev-table '())
 
 (define-abbrev-table 'message-mode-abbrev-table '())
 

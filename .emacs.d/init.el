@@ -12,6 +12,7 @@
 
 ;; Manual packages load path
 (add-to-list 'load-path "~/my-dotfiles/.emacs.d/manual-packages/ob-elixir/")
+(add-to-list 'load-path "~/my-dotfiles/.emacs.d/manual-packages/emacs-solargraph/")
 
 ;; Backup files by copying them
 (setq backup-by-copying t)
@@ -423,6 +424,21 @@
 ;; CSV mode - edit CSV files
 (require-package 'csv-mode)
 
+;; Ruby Solargraph - completion for Ruby modes
+(require 'solargraph)
+
+;; Solargraph dependency
+(require-package 'request)
+
+;; Helm - Emacs incremental completion and selection narrowing framework
+(require-package 'helm)
+(require 'helm-config)
+(helm-mode 1)
+
+;; Bind the keys I want:
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "C-x b") 'helm-buffers-list)
 ;;-----GRAPHICAL----------------------------------------------------------------
 
 ;; Set font in graphical mode
