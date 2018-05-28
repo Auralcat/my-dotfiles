@@ -76,6 +76,8 @@
 ;; Enable global Abbrev mode
 (setq-default abbrev-mode t)
 
+;; Enable projectile-mode
+(projectile-global-mode 1)
 ;;-----HOOKS--------------------------------------------------------------------
 
 ;; General programming mode
@@ -625,8 +627,6 @@
 (fset 'org-mark-as-done
    (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ("d" 0 "%d")) arg)))
 
-(add-hook 'org-mode-hook
-    (lambda () (local-set-key (kbd "s-d") (execute-kbd-macro 'org-mark-as-done))))
 ;;-TWITTERING-MODE--------------------------------------------------------------
 ;; Adjust update interval in seconds. It's timeR, not time!
 (setq twittering-timer-interval 3600)

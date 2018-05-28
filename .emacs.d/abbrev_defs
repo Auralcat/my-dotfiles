@@ -9,7 +9,9 @@
 
 (define-abbrev-table 'apropos-mode-abbrev-table '())
 
-(define-abbrev-table 'awk-mode-abbrev-table '())
+(define-abbrev-table 'awk-mode-abbrev-table
+  '(
+   ))
 
 (define-abbrev-table 'bibtex-mode-abbrev-table '())
 
@@ -17,9 +19,13 @@
 
 (define-abbrev-table 'bookmark-edit-annotation-mode-abbrev-table '())
 
-(define-abbrev-table 'c++-mode-abbrev-table '())
+(define-abbrev-table 'c++-mode-abbrev-table
+  '(
+   ))
 
-(define-abbrev-table 'c-mode-abbrev-table '())
+(define-abbrev-table 'c-mode-abbrev-table
+  '(
+   ))
 
 (define-abbrev-table 'calendar-mode-abbrev-table '())
 
@@ -54,6 +60,8 @@
 
 (define-abbrev-table 'edit-abbrevs-mode-abbrev-table '())
 
+(define-abbrev-table 'elixir-mode-abbrev-table '())
+
 (define-abbrev-table 'emacs-lisp-byte-code-mode-abbrev-table '())
 
 (define-abbrev-table 'emacs-lisp-mode-abbrev-table '())
@@ -80,30 +88,37 @@
 
 (define-abbrev-table 'global-abbrev-table
   '(
+    ("avi" "vai" nil 2)
     ("conversda" "conversa" nil 1)
     ("cosneguiu" "conseguiu" nil 1)
     ("ctba" "Curitiba" nil 1)
     ("cudiar" "cuidar" nil 1)
     ("cwb" "Curitiba" nil 1)
     ("deposi" "depois" nil 1)
+    ("ehre" "here " nil 1)
     ("elqa" "ela" nil 1)
+    ("emu" "meu" nil 1)
     ("emus" "meus" nil 3)
     ("entreguar" "entregar" nil 1)
     ("eplo" "pelo" nil 1)
     ("hovje" "hoje" nil 1)
     ("htat" "that" nil 2)
+    ("hte" "the" nil 1)
     ("moranod" "morando" nil 1)
     ("n" "não" nil 9)
     ("oicsa" "coisa" nil 1)
     ("pg" "Ponta Grossa" nil 1)
+    ("probelma" "problema " nil 1)
     ("qdo" "quando" nil 4)
-    ("qeu" "que" nil 2)
+    ("qeu" "que" nil 8)
     ("sla" "sei lá" nil 4)
-    ("tbm" "também" nil 6)
+    ("tbm" "também" nil 8)
     ("tepmo" "tempo" nil 1)
     ("vc" "você" nil 3)
     ("wp" "WordPress" nil 4)
    ))
+
+(define-abbrev-table 'grep-mode-abbrev-table '())
 
 (define-abbrev-table 'help-mode-abbrev-table '())
 
@@ -115,7 +130,9 @@
 
 (define-abbrev-table 'inf-ruby-mode-abbrev-table '())
 
-(define-abbrev-table 'java-mode-abbrev-table '())
+(define-abbrev-table 'java-mode-abbrev-table
+  '(
+   ))
 
 (define-abbrev-table 'js-mode-abbrev-table '())
 
@@ -163,7 +180,9 @@
 
 (define-abbrev-table 'messages-buffer-mode-abbrev-table '())
 
-(define-abbrev-table 'objc-mode-abbrev-table '())
+(define-abbrev-table 'objc-mode-abbrev-table
+  '(
+   ))
 
 (define-abbrev-table 'occur-edit-mode-abbrev-table '())
 
@@ -175,7 +194,9 @@
 
 (define-abbrev-table 'package-menu-mode-abbrev-table '())
 
-(define-abbrev-table 'pike-mode-abbrev-table '())
+(define-abbrev-table 'pike-mode-abbrev-table
+  '(
+   ))
 
 (define-abbrev-table 'process-menu-mode-abbrev-table '())
 
