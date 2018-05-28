@@ -429,6 +429,13 @@
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "C-x b") 'helm-buffers-list)
+
+;; Complete with tab in Helm buffer, remap action menu to C-tab
+(define-key helm-map ("kbd <tab>") 'hippie-expand)
+(define-key helm-map ("kbd C-<tab>") 'helm--action-prompt)
+
+;; Enable fuzzy matching
+(setq helm-M-x-fuzzy-match t)
 ;;-----GRAPHICAL----------------------------------------------------------------
 
 ;; Set font in graphical mode
