@@ -77,7 +77,7 @@
 (setq-default abbrev-mode t)
 
 ;; Enable projectile-mode
-(projectile-global-mode 1)
+;; (projectile-mode 1)
 ;;-----HOOKS--------------------------------------------------------------------
 
 ;; General programming mode
@@ -419,6 +419,9 @@
 
 ;; Autocompletion for Bootstrap/FontAwesome classes
 (require-package 'ac-html-bootstrap)
+
+;; CSV mode - edit CSV files
+(require-package 'csv-mode)
 
 ;;-----GRAPHICAL----------------------------------------------------------------
 

@@ -1,0 +1,3 @@
+[submodule ".emacs.d/manual-packages/emacs-solargraph"]
+	path = .emacs.d/manual-packages/emacs-solargraph
+	url = https://github.com/guskovd/emacs-solargraph.git
