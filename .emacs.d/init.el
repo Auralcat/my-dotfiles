@@ -366,16 +366,6 @@
 (require-package 'moe-theme)
 (require 'moe-theme)
 
-;; Amx-mode: An Alternative M-x mode, shows bindings and last executed command
-;; in completion options
-(require-package 'amx)
-
-;; Amx's unlisted dependency
-(require-package 'ido-completing-read+)
-
-;; Activate it on startup
-(amx-mode)
-
 ;; Keyfreq: shows most used commands in editing session.
 ;; To see the data, run (keyfreq-show) with M-:
 (require-package 'keyfreq)

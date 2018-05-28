@@ -1,24 +1,24 @@
 
 ;; ----- amx-history -----
 (
+ eval-region
+ helm-mode
+ helm-M-x
  plp
- customize-themes
- toggle-menu-bar-mode-from-frame
- menu-bar-mode
- css-mode
- browse-url-of-buffer
- string-insert-rectangle
+ flycheck-mode
+ solargraph:complete
+ enh-ruby-mode
 )
 
 ;; ----- amx-data -----
 (
  (cd . 1)
  (amx-mode . 4)
- (plp . 7)
+ (plp . 10)
  (keyfreq-mode . 7)
- (eval-region . 2)
+ (eval-region . 7)
  (twit . 9)
- (customize-themes . 5)
+ (customize-themes . 8)
  (yas-insert-snippet . 2)
  (customize-group . 3)
  (web-mode . 2)
@@ -26,13 +26,13 @@
  (linum-mode . 1)
  (org-clock-timestamps-up . 2)
  (python-mode . 2)
- (enh-ruby-mode . 1)
+ (enh-ruby-mode . 5)
  (life . 1)
  (recover-session . 4)
  (set-face-foreground . 2)
  (customize-create-theme . 2)
- (menu-bar-mode . 6)
- (toggle-menu-bar-mode-from-frame . 3)
+ (menu-bar-mode . 10)
+ (toggle-menu-bar-mode-from-frame . 8)
  (impatient-mode . 4)
  (httpd-start . 4)
  (sort-lines . 7)
@@ -46,4 +46,20 @@
  (string-insert-rectangle . 1)
  (browse-url-of-buffer . 1)
  (css-mode . 2)
+ (tooltip-mode . 1)
+ (ediff-toggle-use-toolbar . 1)
+ (toggle-frame-fullscreen . 2)
+ (csv-mode . 1)
+ (edit-abbrevs . 1)
+ (projectile-mode . 1)
+ (diminish . 1)
+ (ruby-mode . 2)
+ (package-initialize . 1)
+ (emacs-lisp-mode . 1)
+ (package-install . 1)
+ (solargraph:complete . 7)
+ (org-mode . 1)
+ (flycheck-mode . 2)
+ (helm-mode . 3)
+ (helm-M-x . 7)
 )
