@@ -415,7 +415,7 @@
 (require-package 'csv-mode)
 
 ;; Ruby Solargraph - completion for Ruby modes
-(require 'solargraph)
+;; (require 'solargraph)
 
 ;; Solargraph dependency
 (require-package 'request)
@@ -431,8 +431,8 @@
 (global-set-key (kbd "C-x b") 'helm-buffers-list)
 
 ;; Complete with tab in Helm buffer, remap action menu to C-tab
-(define-key helm-map ("kbd <tab>") 'hippie-expand)
-(define-key helm-map ("kbd C-<tab>") 'helm--action-prompt)
+(define-key helm-map (kbd "<tab>") 'hippie-expand)
+(define-key helm-map (kbd "C-<tab>") 'helm--action-prompt)
 
 ;; Enable fuzzy matching
 (setq helm-M-x-fuzzy-match t)
