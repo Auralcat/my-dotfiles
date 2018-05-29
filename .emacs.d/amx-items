@@ -1,19 +1,19 @@
 
 ;; ----- amx-history -----
 (
+ amx-mode
  eval-region
  helm-mode
  helm-M-x
  plp
  flycheck-mode
  solargraph:complete
- enh-ruby-mode
 )
 
 ;; ----- amx-data -----
 (
  (cd . 1)
- (amx-mode . 4)
+ (amx-mode . 5)
  (plp . 10)
  (keyfreq-mode . 7)
  (eval-region . 7)
