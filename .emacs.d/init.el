@@ -427,6 +427,7 @@
 
 ;; Bind the keys I want:
 (global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "»") 'helm-M-x)
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "C-x b") 'helm-buffers-list)
 
@@ -479,11 +480,6 @@
 
 ;; Switch to last buffer - I do it all the time
 (global-set-key [27 112] (quote mode-line-other-buffer))
-
-;; M-x gets the fingers too closed up for my taste.
-;; Now I'm testing some combinations, AltGr-v seems cool
-;; Nah, I mapped AltGr-x in the end.
-(global-set-key [187] (quote execute-extended-command))
 
 ;; Mapping AltGr-d to delete-other-windows,
 ;; Another symbol I don't use often.
