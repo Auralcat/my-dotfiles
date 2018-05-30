@@ -394,7 +394,7 @@
 
 ;; Specify the day and night themes:
 (require 'theme-changer)
-(change-theme 'tango 'fairyfloss)
+(change-theme 'whiteboard 'fairyfloss)
 
 ;; Org-bullets: change org-mode's *s to UTF-8 chars
 (require-package 'org-bullets)
