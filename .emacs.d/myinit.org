@@ -184,27 +184,31 @@ me, too many buffers to work with... for now.
    ;; turn on flychecking globally
    (add-hook 'after-init-hook #'global-flycheck-mode)
    #+END_SRC
+** PHP-mode
+   PHP support for Emacs.
+   #+BEGIN_SRC emacs-lisp
+   (require-package 'php-mode)
+   ;; Flymake support for PHP files
+   (require-package 'flymake-php)
+   (add-hook 'php-mode-hook 'flymake-php-load)
+   #+END_SRC
+** Enhanced-ruby-mode
+   A better ruby-mode.
+   #+BEGIN_SRC emacs-lisp
+   (require-package 'enh-ruby-mode)
+
+   ;; Set it as default mode for Ruby files
+   (add-to-list 'auto-mode-alist
+       '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'"
+       . enh-ruby-mode))
+   #+END_SRC
+** Ruby Tools
+   Goodies for Ruby programming modes.
+   #+BEGIN_SRC emacs-lisp
+   (require-package 'ruby-tools)
+   #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
-;; Php-mode - PHP support for Emacs
-(require-package 'php-mode)
-
-;; Setup the program multi-term will need
-(setq multi-term-program "/bin/bash")
-
-;; Enhanced Ruby Mode
-(require-package 'enh-ruby-mode)
-
-;; Set it as default mode for Ruby files
-(add-to-list 'auto-mode-alist
-      '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'"
-    . enh-ruby-mode))
-
-;; Inf-ruby mode: Call IRB with C-c C-s in buffers with Ruby modes
-(require-package 'inf-ruby)
-
-;; Ruby tools: Goodies for Ruby programming modes
-(require-package 'ruby-tools)
 
 ;; Magit - Work with Git inside Emacs
 (require-package 'magit)
@@ -270,20 +274,11 @@ me, too many buffers to work with... for now.
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 
-;; Web Mode - Start impatient mode and httpd server
-(defun web-start-impatient-mode ()
-    (impatient-mode 1)
-    (start-httpd 1))
-
 ;; Engine associations
 (setq web-mode-engines-alist
       '(("php"    . "\\.phtml\\'")
     ("blade"  . "\\.blade\\."))
 )
-
-;; Flymake support for PHP files
-(require-package 'flymake-php)
-(add-hook 'php-mode-hook 'flymake-php-load)
 
 ;; Company - COMPlete ANYthing inside Emacs
 ;; I switched to it because it works in GUI Emacs and auto-complete doesn't.
@@ -307,25 +302,6 @@ me, too many buffers to work with... for now.
   (autoload 'epe-theme-lambda "eshell-prompt-extras")
   (setq eshell-highlight-prompt t
     eshell-prompt-function 'epe-theme-lambda))
-
-;; Make sessions persistent.
-;; What's saved:
-;; - Histories of user input
-;; - Contents of registers
-;; - List of recently copied/cut text blocks to paste, global markers to jump
-;; to, and other so-called rings.
-;; - List of recently changed files with their places and some buffer-local
-;; variables.
-;; (require-package 'session)
-
-;; Initialize session when loading Emacs.
-;; (add-hook 'after-init-hook 'session-initialize)
-
-;; Maybe I can use this together with desktop-save-mode?
-(desktop-save-mode 1)
-
-;; Impatient mode - Live edit HTML buffers!
-(require-package 'impatient-mode)
 
 ;; Yasnippets - it comes with company-mode, but what you also need is some
 ;; snippets to start with
