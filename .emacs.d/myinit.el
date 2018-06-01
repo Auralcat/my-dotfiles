@@ -12,6 +12,9 @@
 ;; Backup files by copying them
 (setq backup-by-copying t)
 
+;; Save my desktop
+(desktop-save-mode 1)
+
 ;; I'm too lazy to type "yes" or "no"
 (fset 'yes-or-no-p 'y-or-n-p)
 
