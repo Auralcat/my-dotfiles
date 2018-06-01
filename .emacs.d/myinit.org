@@ -40,9 +40,6 @@
 (with-current-buffer "*scratch*"
     (emacs-lock-mode 'kill))
 
-;; Load the Fairyfloss theme on startup
-(load-theme 'fairyfloss)
-
 ;; Set default font for Emacs
 (set-frame-font "Ubuntu Mono 12")
 
