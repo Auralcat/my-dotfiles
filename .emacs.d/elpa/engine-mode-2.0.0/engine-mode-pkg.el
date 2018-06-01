@@ -1,0 +1,1 @@
+(define-package "engine-mode" "2.0.0" "Define and query search engines from within Emacs." 'nil :commit "243d04691475b47a4453ad7106d8268ca14d9f28" :url "https://github.com/hrs/engine-mode/engine-mode.el")

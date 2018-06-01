@@ -424,7 +424,24 @@ me, too many buffers to work with... for now.
 ;; Add web-mode completions when started
 (require 'company-web-html)
 
+;; Engine-mode: query search engines from Emacs
+(require-package 'engine-mode)
+(require 'engine-mode)
+
+(engine-mode t)
+
+;; Define search engines to use
+(defengine github
+    "https://github.com/search?ref=simplesearch&q=%s"
+    :keybinding "g")
+(defengine duckduckgo
+    "https://duckduckgo.com/?q=%s"
+    :keybinding "d")
 #+END_SRC
+
+#+RESULTS:
+: engine/search-duckduckgo
+
 * Graphical
 #+BEGIN_SRC emacs-lisp
 ;; Set font in graphical mode

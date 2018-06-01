@@ -35,9 +35,6 @@
 (with-current-buffer "*scratch*"
     (emacs-lock-mode 'kill))
 
-;; Load the Fairyfloss theme on startup
-(load-theme 'fairyfloss)
-
 ;; Set default font for Emacs
 (set-frame-font "Ubuntu Mono 12")
 
@@ -71,9 +68,6 @@
 
 ;; Enable global Abbrev mode
 (setq-default abbrev-mode t)
-
-;; Enable projectile-mode
-;; (projectile-mode 1)
 
 ;; General programming mode
 (defun set-programming-tweaks ()
@@ -115,11 +109,6 @@
   (interactive "*r")
     (let ((fill-column (point-max)))
       (fill-region beg end)))
-
-;; I usually keep the terminal window with some transparency to copy stuff from
-;; a browser or whatever... this allows me to toggle the transparency from
-;; Emacs and saves the theme I had before
-;; (defun toggle-terminal-transparency ())
 
 ;; Call the live page reload script from within Emacs and bind it to a key
 ;; (defun css-live-reload-current-webpage ()
