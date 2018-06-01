@@ -140,47 +140,52 @@ me, too many buffers to work with... for now.
 (defalias 'plp 'package-list-packages)
 #+END_SRC
 * Packages
-#+BEGIN_SRC emacs-lisp
-;; Autopair - Automatically pair braces and quotes like in TextMate
-(require-package 'autopair)
-(autopair-global-mode) ;; enable autopair in all buffers
-
-;; Multi-term - Run multiple terminals and interface with Emacs commands
-(require-package 'multi-term)
-
-;; ...of this, and...
-(require-package 'emmet-mode)
-
-;; ...this!
-(require-package 'sass-mode)
-
-;; Set Sass mode for SASS files and Css mode for SCSS files.
-(add-to-list 'auto-mode-alist
+** Autopair
+  Automatically pair braces and quotes like in TextMate
+  #+BEGIN_SRC emacs-lisp results :raw
+  (require-package 'autopair)
+  (autopair-global-mode) ;; enable autopair in all buffers
+  #+END_SRC
+** Emmet-mode
+   #+BEGIN_SRC emacs-lisp
+   (require-package 'emmet-mode)
+   #+END_SRC
+** Sass-mode
+   #+BEGIN_SRC emacs_lisp
+   (require-package 'sass-mode)
+   ;; Set Sass mode for SASS files and Css mode for SCSS files.
+   (add-to-list 'auto-mode-alist
       '("\\.sass\\'" . sass-mode))
 
-(add-to-list 'auto-mode-alist
+   (add-to-list 'auto-mode-alist
       '("\\.scss\\'" . css-mode))
+   #+END_SRC
+** Js2-mode
+   A better default Javascript mode
+   #+BEGIN_SRC emacs-lisp
+   (require-package 'js2-mode)
+   ;; Set js2-mode as default mode for JS files
+   (add-to-list 'auto-mode-alist
+         '("\\(?:\\.js\\|jsx\\|)file\\)\\'"
+       . js2-mode))
+   ;; Set syntax highlight level
+   (setq js2-highlight-level 3)
+   #+END_SRC
+** Web-beautify
+   Format HTML/CSS and JS code with js-beautify
+   #+BEGIN_SRC emacs-lisp
+   (require-package 'web-beautify)
 
-;; js2-mode - A better default Javascript mode
-(require-package 'js2-mode)
+   #+END_SRC
+** Flycheck
+   Syntax checker, replaces flymake
+   #+BEGIN_SRC emacs-lisp
+   (require-package 'flycheck)
+   ;; turn on flychecking globally
+   (add-hook 'after-init-hook #'global-flycheck-mode)
+   #+END_SRC
 
-;; Set js2-mode as default mode for JS files
-(add-to-list 'auto-mode-alist
-      '("\\(?:\\.js\\|jsx\\|)file\\)\\'"
-    . js2-mode))
-
-;; Web-beautify - Format HTML/CSS and JS code with js-beautify
-(require-package 'web-beautify)
-
-;; Set syntax highlight level
-(setq js2-highlight-level 3)
-
-;; Flycheck - syntax checker, replaces flymake
-(require-package 'flycheck)
-
-;; turn on flychecking globally
-(add-hook 'after-init-hook #'global-flycheck-mode)
-
+#+BEGIN_SRC emacs-lisp
 ;; Php-mode - PHP support for Emacs
 (require-package 'php-mode)
 
