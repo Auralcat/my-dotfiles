@@ -207,6 +207,100 @@ me, too many buffers to work with... for now.
    #+BEGIN_SRC emacs-lisp
    (require-package 'ruby-tools)
    #+END_SRC
+** Engine mode
+   Query search engines from Emacs.
+   #+BEGIN_SRC emacs-lisp
+   ;; Ensure it's loaded
+   (require-package 'engine-mode)
+   (require 'engine-mode)
+
+   ;; Activate it
+   (engine-mode t)
+
+   ;; Define search engines to use
+   (defengine github
+       "https://github.com/search?ref=simplesearch&q=%s"
+       :keybinding "g")
+   (defengine duckduckgo
+       "https://duckduckgo.com/?q=%s"
+       :keybinding "d")
+   #+END_SRC
+** Smart Mode Line
+   Prettier mode line.
+   #+BEGIN_SRC emacs-lisp
+   ;; Smart-mode-line depends on powerline
+   (require-package 'powerline)
+   (require 'powerline)
+   (require-package 'smart-mode-line)
+
+   ;; Telephone line setup
+   (setq telephone-line-lhs
+       '((evil   . (telephone-line-evil-tag-segment))
+       (accent . (telephone-line-vc-segment
+       telephone-line-erc-modified-channels-segment
+       telephone-line-process-segment))
+       (nil    . (telephone-line-minor-mode-segment
+       telephone-line-buffer-segment))))
+   (setq telephone-line-rhs
+       '((nil    . (telephone-line-misc-info-segment))
+       (accent . (telephone-line-major-mode-segment))
+       (evil   . (telephone-line-airline-position-segment))))
+
+   ;; Activate telephone-line
+   (telephone-line-mode t)
+
+   ;; Activate smart-mode-line
+   (setq sml/theme 'powerline)
+   (sml/setup)
+   #+END_SRC
+** Evil Mode
+   Yes, I'm committing this heresy
+   #+BEGIN_SRC emacs-lisp
+   (require-package 'evil)
+   (evil-mode 1)
+
+   ;; Load configs
+   (load "~/my-dotfiles/.emacs.d/evilrc")
+   #+END_SRC
+** Web Mode
+   I use this for HTML files mostly, works good for PHP too.
+   #+BEGIN_SRC emacs-lisp
+
+   (require-package 'web-mode)
+
+   ;; File associations
+   (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+   (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
+   (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+   (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+   (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+
+   ;; Engine associations
+   (setq web-mode-engines-alist
+       '(("php"    . "\\.phtml\\'")
+       ("blade"  . "\\.blade\\."))
+   )
+   #+END_SRC
+** Helm
+    Incremental completion and selection narrowing framework
+    #+BEGIN_SRC emacs-lisp
+    (require-package 'helm)
+    (require 'helm-config)
+    (helm-mode 1)
+
+    ;; Bind the keys I want:
+    (global-set-key (kbd "M-x") 'helm-M-x)
+    (global-set-key (kbd "»") 'helm-M-x)
+    (global-set-key (kbd "C-x C-f") 'helm-find-files)
+    (global-set-key (kbd "C-x b") 'helm-buffers-list)
+
+    ;; Complete with tab in Helm buffer, remap action menu to C-tab
+    (define-key helm-map (kbd "<tab>") 'hippie-expand)
+    (define-key helm-map (kbd "C-<tab>") 'helm--action-prompt)
+
+    ;; Enable fuzzy matching
+    (setq helm-M-x-fuzzy-match t)
+    #+END_SRC
 
 #+BEGIN_SRC emacs-lisp
 
@@ -219,41 +313,6 @@ me, too many buffers to work with... for now.
 ;; Org-pomodoro: a Pomodoro timer inside Emacs
 (require-package 'org-pomodoro)
 
-;; Yes, I'm committing this heresy
-(require-package 'evil)
-(evil-mode 1)
-
-;; Load configs
-(load "~/my-dotfiles/.emacs.d/evilrc")
-
-;; Emacs Powerline setup: the modeline is an integral part of this program, so why
-;; not prettify it? :D
-
-;; Smart-mode-line depends on powerline
-(require-package 'powerline)
-(require 'powerline)
-(require-package 'smart-mode-line)
-
-;; Telephone line setup
-(setq telephone-line-lhs
-      '((evil   . (telephone-line-evil-tag-segment))
-    (accent . (telephone-line-vc-segment
-       telephone-line-erc-modified-channels-segment
-       telephone-line-process-segment))
-    (nil    . (telephone-line-minor-mode-segment
-       telephone-line-buffer-segment))))
-(setq telephone-line-rhs
-      '((nil    . (telephone-line-misc-info-segment))
-    (accent . (telephone-line-major-mode-segment))
-    (evil   . (telephone-line-airline-position-segment))))
-
-;; Activate telephone-line
-(telephone-line-mode t)
-
-;; Activate smart-mode-line
-(setq sml/theme 'powerline)
-(sml/setup)
-
 ;; EditorConfig - Helps developers define and maintain consistent
 ;; coding styles between different editors and IDEs
 (require-package 'editorconfig)
@@ -263,22 +322,6 @@ me, too many buffers to work with... for now.
 
 ;; YAML mode: work with YAML files
 (require-package 'yaml-mode)
-
-;; Web Mode - Use multiple web-related modes for development
-(require-package 'web-mode)
-
-;; Web Mode - File associations
-(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-
-;; Engine associations
-(setq web-mode-engines-alist
-      '(("php"    . "\\.phtml\\'")
-    ("blade"  . "\\.blade\\."))
-)
 
 ;; Company - COMPlete ANYthing inside Emacs
 ;; I switched to it because it works in GUI Emacs and auto-complete doesn't.
@@ -381,48 +424,13 @@ me, too many buffers to work with... for now.
 
 ;; Solargraph dependency
 (require-package 'request)
-
-;; Helm - Emacs incremental completion and selection narrowing framework
-(require-package 'helm)
-(require 'helm-config)
-(helm-mode 1)
-
-;; Bind the keys I want:
-(global-set-key (kbd "M-x") 'helm-M-x)
-(global-set-key (kbd "»") 'helm-M-x)
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
-(global-set-key (kbd "C-x b") 'helm-buffers-list)
-
-;; Complete with tab in Helm buffer, remap action menu to C-tab
-(define-key helm-map (kbd "<tab>") 'hippie-expand)
-(define-key helm-map (kbd "C-<tab>") 'helm--action-prompt)
-
-;; Enable fuzzy matching
-(setq helm-M-x-fuzzy-match t)
 ;; Company-mode web-mode completions
 (require-package 'company-web)
 
 ;; Add web-mode completions when started
 (require 'company-web-html)
 
-;; Engine-mode: query search engines from Emacs
-(require-package 'engine-mode)
-(require 'engine-mode)
-
-(engine-mode t)
-
-;; Define search engines to use
-(defengine github
-    "https://github.com/search?ref=simplesearch&q=%s"
-    :keybinding "g")
-(defengine duckduckgo
-    "https://duckduckgo.com/?q=%s"
-    :keybinding "d")
 #+END_SRC
-
-#+RESULTS:
-: engine/search-duckduckgo
-
 * Graphical
 #+BEGIN_SRC emacs-lisp
 ;; Set font in graphical mode
