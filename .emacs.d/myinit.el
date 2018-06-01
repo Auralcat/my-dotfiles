@@ -122,84 +122,53 @@
 ;; This is how you define aliases for Elisp functions
 (defalias 'plp 'package-list-packages)
 
-;; Autopair - Automatically pair braces and quotes like in TextMate
 (require-package 'autopair)
 (autopair-global-mode) ;; enable autopair in all buffers
 
-;; Multi-term - Run multiple terminals and interface with Emacs commands
-(require-package 'multi-term)
-
-;; ...of this, and...
 (require-package 'emmet-mode)
 
-;; ...this!
-(require-package 'sass-mode)
-
-;; Set Sass mode for SASS files and Css mode for SCSS files.
-(add-to-list 'auto-mode-alist
-      '("\\.sass\\'" . sass-mode))
-
-(add-to-list 'auto-mode-alist
-      '("\\.scss\\'" . css-mode))
-
-;; js2-mode - A better default Javascript mode
 (require-package 'js2-mode)
-
 ;; Set js2-mode as default mode for JS files
 (add-to-list 'auto-mode-alist
       '("\\(?:\\.js\\|jsx\\|)file\\)\\'"
     . js2-mode))
-
-;; Web-beautify - Format HTML/CSS and JS code with js-beautify
-(require-package 'web-beautify)
-
 ;; Set syntax highlight level
 (setq js2-highlight-level 3)
 
-;; Flycheck - syntax checker, replaces flymake
-(require-package 'flycheck)
+(require-package 'web-beautify)
 
+(require-package 'flycheck)
 ;; turn on flychecking globally
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
-;; Php-mode - PHP support for Emacs
 (require-package 'php-mode)
+;; Flymake support for PHP files
+(require-package 'flymake-php)
+(add-hook 'php-mode-hook 'flymake-php-load)
 
-;; Setup the program multi-term will need
-(setq multi-term-program "/bin/bash")
-
-;; Enhanced Ruby Mode
 (require-package 'enh-ruby-mode)
 
 ;; Set it as default mode for Ruby files
 (add-to-list 'auto-mode-alist
-      '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'"
+    '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'"
     . enh-ruby-mode))
 
-;; Inf-ruby mode: Call IRB with C-c C-s in buffers with Ruby modes
-(require-package 'inf-ruby)
-
-;; Ruby tools: Goodies for Ruby programming modes
 (require-package 'ruby-tools)
 
-;; Magit - Work with Git inside Emacs
-(require-package 'magit)
+;; Ensure it's loaded
+(require-package 'engine-mode)
+(require 'engine-mode)
 
-;; Twittering-mode: Use Twitter from within Emacs!
-(require-package 'twittering-mode)
+;; Activate it
+(engine-mode t)
 
-;; Org-pomodoro: a Pomodoro timer inside Emacs
-(require-package 'org-pomodoro)
-
-;; Yes, I'm committing this heresy
-(require-package 'evil)
-(evil-mode 1)
-
-;; Load configs
-(load "~/my-dotfiles/.emacs.d/evilrc")
-
-;; Emacs Powerline setup: the modeline is an integral part of this program, so why
-;; not prettify it? :D
+;; Define search engines to use
+(defengine github
+    "https://github.com/search?ref=simplesearch&q=%s"
+    :keybinding "g")
+(defengine duckduckgo
+    "https://duckduckgo.com/?q=%s"
+    :keybinding "d")
 
 ;; Smart-mode-line depends on powerline
 (require-package 'powerline)
@@ -208,14 +177,14 @@
 
 ;; Telephone line setup
 (setq telephone-line-lhs
-      '((evil   . (telephone-line-evil-tag-segment))
+    '((evil   . (telephone-line-evil-tag-segment))
     (accent . (telephone-line-vc-segment
-       telephone-line-erc-modified-channels-segment
-       telephone-line-process-segment))
+    telephone-line-erc-modified-channels-segment
+    telephone-line-process-segment))
     (nil    . (telephone-line-minor-mode-segment
-       telephone-line-buffer-segment))))
+    telephone-line-buffer-segment))))
 (setq telephone-line-rhs
-      '((nil    . (telephone-line-misc-info-segment))
+    '((nil    . (telephone-line-misc-info-segment))
     (accent . (telephone-line-major-mode-segment))
     (evil   . (telephone-line-airline-position-segment))))
 
@@ -226,43 +195,44 @@
 (setq sml/theme 'powerline)
 (sml/setup)
 
-;; EditorConfig - Helps developers define and maintain consistent
-;; coding styles between different editors and IDEs
-(require-package 'editorconfig)
+(require-package 'evil)
+(evil-mode 1)
 
-;; Activate it
-(editorconfig-mode 1)
+;; Load configs
+(load "~/my-dotfiles/.emacs.d/evilrc")
 
-;; YAML mode: work with YAML files
-(require-package 'yaml-mode)
-
-;; Web Mode - Use multiple web-related modes for development
 (require-package 'web-mode)
 
-;; Web Mode - File associations
+;; File associations
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
 
-;; Web Mode - Start impatient mode and httpd server
-(defun web-start-impatient-mode ()
-    (impatient-mode 1)
-    (start-httpd 1))
-
 ;; Engine associations
 (setq web-mode-engines-alist
-      '(("php"    . "\\.phtml\\'")
+    '(("php"    . "\\.phtml\\'")
     ("blade"  . "\\.blade\\."))
 )
 
-;; Flymake support for PHP files
-(require-package 'flymake-php)
-(add-hook 'php-mode-hook 'flymake-php-load)
+(require-package 'helm)
+(require 'helm-config)
+(helm-mode 1)
 
-;; Company - COMPlete ANYthing inside Emacs
-;; I switched to it because it works in GUI Emacs and auto-complete doesn't.
+;; Bind the keys I want:
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "»") 'helm-M-x)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "C-x b") 'helm-buffers-list)
+
+;; Complete with tab in Helm buffer, remap action menu to C-tab
+(define-key helm-map (kbd "<tab>") 'hippie-expand)
+(define-key helm-map (kbd "C-<tab>") 'helm--action-prompt)
+
+;; Enable fuzzy matching
+(setq helm-M-x-fuzzy-match t)
+
 (require-package 'company)
 
 ;; Add Tern to Company
@@ -274,6 +244,57 @@
     (add-to-list 'company-backends 'company-tern)
     (tern-mode 1))
 (add-hook 'js2-mode-hook 'tern-mode-tweaks)
+;; Autocompletion for Bootstrap/FontAwesome classes
+(require-package 'ac-html-bootstrap)
+
+;; Web-mode completions
+(require-package 'company-web)
+
+;; Add web-mode completions when started
+(require 'company-web-html)
+
+(require-package 'keyfreq)
+
+;; Ignore arrow commands and self-insert-commands
+(setq keyfreq-excluded-commands
+    '(self-insert-command
+        org-self-insert-command
+        abort-recursive-edit
+        forward-char
+        backward-char
+        previous-line
+        next-line))
+
+;; Activate it
+(keyfreq-mode 1)
+(keyfreq-autosave-mode 1)
+
+(require-package 'diminish)
+
+;; Diminish them!
+(diminish 'company-mode)
+(diminish 'editorconfig-mode)
+(diminish 'autopair-mode)
+(diminish 'helm-mode)
+
+;; Magit - Work with Git inside Emacs
+(require-package 'magit)
+
+;; Twittering-mode: Use Twitter from within Emacs!
+(require-package 'twittering-mode)
+
+;; Org-pomodoro: a Pomodoro timer inside Emacs
+(require-package 'org-pomodoro)
+
+;; EditorConfig - Helps developers define and maintain consistent
+;; coding styles between different editors and IDEs
+(require-package 'editorconfig)
+
+;; Activate it
+(editorconfig-mode 1)
+
+;; YAML mode: work with YAML files
+(require-package 'yaml-mode)
 
 ;; Eshell extras
 (require-package 'eshell-prompt-extras)
@@ -284,25 +305,6 @@
   (setq eshell-highlight-prompt t
     eshell-prompt-function 'epe-theme-lambda))
 
-;; Make sessions persistent.
-;; What's saved:
-;; - Histories of user input
-;; - Contents of registers
-;; - List of recently copied/cut text blocks to paste, global markers to jump
-;; to, and other so-called rings.
-;; - List of recently changed files with their places and some buffer-local
-;; variables.
-;; (require-package 'session)
-
-;; Initialize session when loading Emacs.
-;; (add-hook 'after-init-hook 'session-initialize)
-
-;; Maybe I can use this together with desktop-save-mode?
-(desktop-save-mode 1)
-
-;; Impatient mode - Live edit HTML buffers!
-(require-package 'impatient-mode)
-
 ;; Yasnippets - it comes with company-mode, but what you also need is some
 ;; snippets to start with
 (require-package 'yasnippet-snippets)
@@ -311,40 +313,12 @@
 (require-package 'mode-icons)
 ;; Activate on startup
 (mode-icons-mode)
-
-;; Diminish - free some space in the mode line removing superfluous mode
-;; indications
-(require-package 'diminish)
-
-;; Diminish them!
-(diminish 'company-mode)
-(diminish 'editorconfig-mode)
-(diminish 'autopair-mode)
-
 ;; Emojify - add emoji support for Emacs
 (require-package 'emojify)
 
 ;; Moe-theme - Light and dark theme
 (require-package 'moe-theme)
 (require 'moe-theme)
-
-;; Keyfreq: shows most used commands in editing session.
-;; To see the data, run (keyfreq-show) with M-:
-(require-package 'keyfreq)
-
-;; Ignore arrow commands and self-insert-commands
-(setq keyfreq-excluded-commands
-    '(self-insert-command
-         org-self-insert-command
-         abort-recursive-edit
-         forward-char
-         backward-char
-         previous-line
-         next-line))
-
-;; Activate it
-(keyfreq-mode 1)
-(keyfreq-autosave-mode 1)
 
 ;; Theme changer
 (require-package 'theme-changer)
@@ -370,40 +344,8 @@
 ;; Activate it
 (nyan-mode 1)
 
-;; Autocompletion for Bootstrap/FontAwesome classes
-(require-package 'ac-html-bootstrap)
-
 ;; CSV mode - edit CSV files
 (require-package 'csv-mode)
-
-;; Ruby Solargraph - completion for Ruby modes
-;; (require 'solargraph)
-
-;; Solargraph dependency
-(require-package 'request)
-
-;; Helm - Emacs incremental completion and selection narrowing framework
-(require-package 'helm)
-(require 'helm-config)
-(helm-mode 1)
-
-;; Bind the keys I want:
-(global-set-key (kbd "M-x") 'helm-M-x)
-(global-set-key (kbd "»") 'helm-M-x)
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
-(global-set-key (kbd "C-x b") 'helm-buffers-list)
-
-;; Complete with tab in Helm buffer, remap action menu to C-tab
-(define-key helm-map (kbd "<tab>") 'hippie-expand)
-(define-key helm-map (kbd "C-<tab>") 'helm--action-prompt)
-
-;; Enable fuzzy matching
-(setq helm-M-x-fuzzy-match t)
-;; Company-mode web-mode completions
-(require-package 'company-web)
-
-;; Add web-mode completions when started
-(require 'company-web-html)
 
 ;; Set font in graphical mode
 (when (display-graphic-p)
