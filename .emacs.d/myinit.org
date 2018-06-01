@@ -301,7 +301,63 @@ me, too many buffers to work with... for now.
     ;; Enable fuzzy matching
     (setq helm-M-x-fuzzy-match t)
     #+END_SRC
+** Company
+   *COMPlete ANYthing* inside Emacs.
+   I switched to it because it works in GUI Emacs and auto-complete doesn't.
+   #+BEGIN_SRC emacs-lisp
+   (require-package 'company)
 
+   ;; Add Tern to Company
+   (require-package 'company-tern)
+   (require-package 'tern)
+
+   ;; Call that inside js2-mode and add tern to company backends
+   (defun tern-mode-tweaks ()
+       (add-to-list 'company-backends 'company-tern)
+       (tern-mode 1))
+   (add-hook 'js2-mode-hook 'tern-mode-tweaks)
+   ;; Autocompletion for Bootstrap/FontAwesome classes
+   (require-package 'ac-html-bootstrap)
+
+   ;; Web-mode completions
+   (require-package 'company-web)
+
+   ;; Add web-mode completions when started
+   (require 'company-web-html)
+   #+END_SRC
+** Keyfreq
+   Shows most used commands in editing session.
+   To see the data, run (keyfreq-show) with M-:
+   #+BEGIN_SRC emacs-lisp
+   (require-package 'keyfreq)
+
+   ;; Ignore arrow commands and self-insert-commands
+   (setq keyfreq-excluded-commands
+       '(self-insert-command
+           org-self-insert-command
+           abort-recursive-edit
+           forward-char
+           backward-char
+           previous-line
+           next-line))
+
+   ;; Activate it
+   (keyfreq-mode 1)
+   (keyfreq-autosave-mode 1)
+   #+END_SRC
+** Diminish
+   Free some space in the mode line removing superfluous mode indications.
+   #+BEGIN_SRC emacs-lisp
+
+   (require-package 'diminish)
+
+   ;; Diminish them!
+   (diminish 'company-mode)
+   (diminish 'editorconfig-mode)
+   (diminish 'autopair-mode)
+   (diminish 'helm-mode)
+   #+END_SRC
+** Sort
 #+BEGIN_SRC emacs-lisp
 
 ;; Magit - Work with Git inside Emacs
@@ -323,20 +379,6 @@ me, too many buffers to work with... for now.
 ;; YAML mode: work with YAML files
 (require-package 'yaml-mode)
 
-;; Company - COMPlete ANYthing inside Emacs
-;; I switched to it because it works in GUI Emacs and auto-complete doesn't.
-(require-package 'company)
-
-;; Add Tern to Company
-(require-package 'company-tern)
-(require-package 'tern)
-
-;; Call that inside js2-mode and add tern to company backends
-(defun tern-mode-tweaks ()
-    (add-to-list 'company-backends 'company-tern)
-    (tern-mode 1))
-(add-hook 'js2-mode-hook 'tern-mode-tweaks)
-
 ;; Eshell extras
 (require-package 'eshell-prompt-extras)
 
@@ -354,40 +396,12 @@ me, too many buffers to work with... for now.
 (require-package 'mode-icons)
 ;; Activate on startup
 (mode-icons-mode)
-
-;; Diminish - free some space in the mode line removing superfluous mode
-;; indications
-(require-package 'diminish)
-
-;; Diminish them!
-(diminish 'company-mode)
-(diminish 'editorconfig-mode)
-(diminish 'autopair-mode)
-
 ;; Emojify - add emoji support for Emacs
 (require-package 'emojify)
 
 ;; Moe-theme - Light and dark theme
 (require-package 'moe-theme)
 (require 'moe-theme)
-
-;; Keyfreq: shows most used commands in editing session.
-;; To see the data, run (keyfreq-show) with M-:
-(require-package 'keyfreq)
-
-;; Ignore arrow commands and self-insert-commands
-(setq keyfreq-excluded-commands
-    '(self-insert-command
-         org-self-insert-command
-         abort-recursive-edit
-         forward-char
-         backward-char
-         previous-line
-         next-line))
-
-;; Activate it
-(keyfreq-mode 1)
-(keyfreq-autosave-mode 1)
 
 ;; Theme changer
 (require-package 'theme-changer)
@@ -413,22 +427,9 @@ me, too many buffers to work with... for now.
 ;; Activate it
 (nyan-mode 1)
 
-;; Autocompletion for Bootstrap/FontAwesome classes
-(require-package 'ac-html-bootstrap)
-
 ;; CSV mode - edit CSV files
 (require-package 'csv-mode)
 
-;; Ruby Solargraph - completion for Ruby modes
-;; (require 'solargraph)
-
-;; Solargraph dependency
-(require-package 'request)
-;; Company-mode web-mode completions
-(require-package 'company-web)
-
-;; Add web-mode completions when started
-(require 'company-web-html)
 
 #+END_SRC
 * Graphical
