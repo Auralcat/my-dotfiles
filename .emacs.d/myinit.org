@@ -227,7 +227,14 @@ me, too many buffers to work with... for now.
    (defengine duckduckgo
        "https://duckduckgo.com/?q=%s"
        :keybinding "d")
+   (defengine youtube
+       "https://www.youtube.com/results?search_query=%s"
+       :keybinding "y")
    #+END_SRC
+
+   #+RESULTS:
+   : engine/search-youtube
+
 ** Smart Mode Line
    Prettier mode line.
    #+BEGIN_SRC emacs-lisp
