@@ -74,10 +74,7 @@
 ;; Enable global Abbrev mode
 (setq-default abbrev-mode t)
 
-;; Enable projectile-mode
-;; (projectile-mode 1)
 #+END_SRC
-
 * Hooks
 #+BEGIN_SRC emacs-lisp
 ;; General programming mode
