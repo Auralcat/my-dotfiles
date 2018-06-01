@@ -230,11 +230,10 @@ me, too many buffers to work with... for now.
    (defengine youtube
        "https://www.youtube.com/results?search_query=%s"
        :keybinding "y")
+   (defengine stackoverflow
+       "https://stackoverflow.com/search?q=%s"
+       :keybinding "s")
    #+END_SRC
-
-   #+RESULTS:
-   : engine/search-youtube
-
 ** Smart Mode Line
    Prettier mode line.
    #+BEGIN_SRC emacs-lisp
