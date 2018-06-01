@@ -1,150 +1,7 @@
-;; Emacs configuration file
-;; Author: Auralcat
-;; Started in May 2017.
+(require 'package)
+(setq package-enable-at-startup nil)
 
-;;-----ENV-CUSTOMIZATIONS-------------------------------------------------------
-
-;; A small performance improvement
-(setq redisplay-dont-pause t)
-
-;; Store all backups in a specific folder:
-(setq backup-directory-alist `(("." . "~/file-bouncer/emacs-backups")))
-
-;; Manual packages load path
-(add-to-list 'load-path "~/my-dotfiles/.emacs.d/manual-packages/ob-elixir/")
-(add-to-list 'load-path "~/my-dotfiles/.emacs.d/manual-packages/emacs-solargraph/")
-
-;; Backup files by copying them
-(setq backup-by-copying t)
-
-;; I'm too lazy to type "yes" or "no"
-(fset 'yes-or-no-p 'y-or-n-p)
-
-;; Clean whitespace before saving a file
-(add-hook 'before-save-hook (quote whitespace-cleanup))
-
-;; Enable ido-mode (fewer keystrokes to switch buffers!)
-(ido-mode 1)
-
-;; ido-mode in the minibuffer
-(icomplete-mode 1)
-
-;; Enable windmove (switch windows with Shift+Arrow keys)
-(when (fboundp 'windmove-default-keybindings)
-    (windmove-default-keybindings))
-
-;; Replace the built-in buffer menu with ibuffer
-(global-set-key [24 2] (quote ibuffer))
-
-;; Prevent the scratch buffer from being killed
-(with-current-buffer "*scratch*"
-    (emacs-lock-mode 'kill))
-
-;; Load the Fairyfloss theme on startup
-(load-theme 'fairyfloss)
-
-;; Set default font for Emacs
-(set-frame-font "Ubuntu Mono 12")
-
-;; Enable auto-revert-mode
-(global-auto-revert-mode t)
-
-;; Remove the menu bar in terminal mode
-(when (not (display-graphic-p))
-  (menu-bar-mode -1))
-
-;; Org-babel - load ob-elixir
-(load "ob-elixir")
-
-;; Org-babel - load languages
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '(
-   (sh . t)
-   (python . t)
-   (ruby . t)
-   (elixir . t)
-   (plantuml . t)
-   (dot . t)
-   ))
-
-;; Use Bash as default shell interpreter
-(setq org-babel-sh-command "/bin/bash")
-
-;; Activate Company mode
-(add-hook 'after-init-hook 'global-company-mode)
-
-;; Enable global Abbrev mode
-(setq-default abbrev-mode t)
-
-;; Enable projectile-mode
-;; (projectile-mode 1)
-;;-----HOOKS--------------------------------------------------------------------
-
-;; General programming mode
-(defun set-programming-tweaks ()
-    (linum-mode 1)
-    (column-number-mode 1))
-
-;; Prog-mode is from where all the programming modes are derived from.
-;; This means that if you call prog-mode-hook, the settings will be
-;; applied to ALL programming modes in Emacs.
-(add-hook 'prog-mode-hook (quote set-programming-tweaks))
-
-;; Ruby
-;; Activate ruby-tools
-(add-hook 'enh-ruby-mode-hook (quote ruby-tools-mode))
-
-;; Create filling for org-mode
-(add-hook 'org-mode-hook 'auto-fill-mode)
-
-;;-----IRC----------------------------------------------------------------------
-
-;; Qui Nov  2 19:57:06 BRST 2017 - Tried using IRC inside Emacs, didn't please
-;; me, too many buffers to work with... for now.
-
-;;-----CUSTOM-FUNCTIONS---------------------------------------------------------
-
-;; Recreate scratch buffer
-(defun create-scratch-buffer ()
-  "create a scratch buffer"
-  (interactive)
-  (switch-to-buffer (get-buffer-create "*scratch*"))
-  (org-mode)
-  (insert initial-scratch-message)
-  ;; Prevent the scratch buffer from being killed
-  (with-current-buffer "*scratch*"
-      (emacs-lock-mode 'kill)))
-
-;; Unfill region, AKA leave single huge line
-(defun unfill-region (beg end)
-  "Unfill the region, joining text paragraphs into a single
-  logical line.  This is useful, e.g., for use with
-  `visual-line-mode'."
-  (interactive "*r")
-    (let ((fill-column (point-max)))
-      (fill-region beg end)))
-
-;; I usually keep the terminal window with some transparency to copy stuff from
-;; a browser or whatever... this allows me to toggle the transparency from
-;; Emacs and saves the theme I had before
-;; (defun toggle-terminal-transparency ())
-
-;; Call the live page reload script from within Emacs and bind it to a key
-;; (defun css-live-reload-current-webpage ()
-;;     (when (and (stringp buffer-file-name)
-;;       (string-match "\\.scss\\'" buffer-file-name))
-;;     (shell-command "~/my-dotfiles/bash/live-reload-firefox.sh")))
-
-;; The original idea is to call this function when saving a stylesheet
-;; (add-hook 'after-save-hook 'css-live-reload-current-webpage)
-;;-----FUNCTION-ALIASES---------------------------------------------------------
-
-;; This is how you define aliases for Elisp functions
-(defalias 'plp 'package-list-packages)
-
-;;-----PACKAGES-----------------------------------------------------------------
-;; Package sources
+;; Package repositories
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
      ("org" . "http://orgmode.org/elpa/")
      ("marmalade" . "http://marmalade-repo.org/packages/")
@@ -160,505 +17,10 @@
       (package-refresh-contents))
     (package-install package)))
 
-;; Autopair - Automatically pair braces and quotes like in TextMate
-(require-package 'autopair)
-(autopair-global-mode) ;; enable autopair in all buffers
+;; Load the Org file containing the customizations!
+(org-babel-load-file (expand-file-name "~/my-dotfiles/.emacs.d/myinit.org"))
 
-;; Multi-term - Run multiple terminals and interface with Emacs commands
-(require-package 'multi-term)
-
-;; ...of this, and...
-(require-package 'emmet-mode)
-
-;; ...this!
-(require-package 'sass-mode)
-
-;; Set Sass mode for SASS files and Css mode for SCSS files.
-(add-to-list 'auto-mode-alist
-      '("\\.sass\\'" . sass-mode))
-
-(add-to-list 'auto-mode-alist
-      '("\\.scss\\'" . css-mode))
-
-;; js2-mode - A better default Javascript mode
-(require-package 'js2-mode)
-
-;; Set js2-mode as default mode for JS files
-(add-to-list 'auto-mode-alist
-      '("\\(?:\\.js\\|jsx\\|)file\\)\\'"
-    . js2-mode))
-
-;; Web-beautify - Format HTML/CSS and JS code with js-beautify
-(require-package 'web-beautify)
-
-;; Set syntax highlight level
-(setq js2-highlight-level 3)
-
-;; Flycheck - syntax checker, replaces flymake
-(require-package 'flycheck)
-
-;; turn on flychecking globally
-(add-hook 'after-init-hook #'global-flycheck-mode)
-
-;; Php-mode - PHP support for Emacs
-(require-package 'php-mode)
-
-;; Setup the program multi-term will need
-(setq multi-term-program "/bin/bash")
-
-;; Enhanced Ruby Mode
-(require-package 'enh-ruby-mode)
-
-;; Set it as default mode for Ruby files
-(add-to-list 'auto-mode-alist
-      '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'"
-    . enh-ruby-mode))
-
-;; Inf-ruby mode: Call IRB with C-c C-s in buffers with Ruby modes
-(require-package 'inf-ruby)
-
-;; Ruby tools: Goodies for Ruby programming modes
-(require-package 'ruby-tools)
-
-;; Magit - Work with Git inside Emacs
-(require-package 'magit)
-
-;; Twittering-mode: Use Twitter from within Emacs!
-(require-package 'twittering-mode)
-
-;; Org-pomodoro: a Pomodoro timer inside Emacs
-(require-package 'org-pomodoro)
-
-;; Yes, I'm committing this heresy
-(require-package 'evil)
-(evil-mode 1)
-
-;; Load configs
-(load "~/my-dotfiles/.emacs.d/evilrc")
-
-;; Emacs Powerline setup: the modeline is an integral part of this program, so why
-;; not prettify it? :D
-
-;; Smart-mode-line depends on powerline
-(require-package 'powerline)
-(require 'powerline)
-(require-package 'smart-mode-line)
-
-;; Telephone line setup
-(setq telephone-line-lhs
-      '((evil   . (telephone-line-evil-tag-segment))
-    (accent . (telephone-line-vc-segment
-       telephone-line-erc-modified-channels-segment
-       telephone-line-process-segment))
-    (nil    . (telephone-line-minor-mode-segment
-       telephone-line-buffer-segment))))
-(setq telephone-line-rhs
-      '((nil    . (telephone-line-misc-info-segment))
-    (accent . (telephone-line-major-mode-segment))
-    (evil   . (telephone-line-airline-position-segment))))
-
-;; Activate telephone-line
-(telephone-line-mode t)
-
-;; Activate smart-mode-line
-(setq sml/theme 'powerline)
-(sml/setup)
-
-;; EditorConfig - Helps developers define and maintain consistent
-;; coding styles between different editors and IDEs
-(require-package 'editorconfig)
-
-;; Activate it
-(editorconfig-mode 1)
-
-;; YAML mode: work with YAML files
-(require-package 'yaml-mode)
-
-;; Web Mode - Use multiple web-related modes for development
-(require-package 'web-mode)
-
-;; Web Mode - File associations
-(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-
-;; Web Mode - Start impatient mode and httpd server
-(defun web-start-impatient-mode ()
-    (impatient-mode 1)
-    (start-httpd 1))
-
-;; Engine associations
-(setq web-mode-engines-alist
-      '(("php"    . "\\.phtml\\'")
-    ("blade"  . "\\.blade\\."))
-)
-
-;; Flymake support for PHP files
-(require-package 'flymake-php)
-(add-hook 'php-mode-hook 'flymake-php-load)
-
-;; Company - COMPlete ANYthing inside Emacs
-;; I switched to it because it works in GUI Emacs and auto-complete doesn't.
-(require-package 'company)
-
-;; Add Tern to Company
-(require-package 'company-tern)
-(require-package 'tern)
-
-;; Call that inside js2-mode and add tern to company backends
-(defun tern-mode-tweaks ()
-    (add-to-list 'company-backends 'company-tern)
-    (tern-mode 1))
-(add-hook 'js2-mode-hook 'tern-mode-tweaks)
-
-;; Eshell extras
-(require-package 'eshell-prompt-extras)
-
-;; More configs
-(with-eval-after-load "esh-opt"
-  (autoload 'epe-theme-lambda "eshell-prompt-extras")
-  (setq eshell-highlight-prompt t
-    eshell-prompt-function 'epe-theme-lambda))
-
-;; Make sessions persistent.
-;; What's saved:
-;; - Histories of user input
-;; - Contents of registers
-;; - List of recently copied/cut text blocks to paste, global markers to jump
-;; to, and other so-called rings.
-;; - List of recently changed files with their places and some buffer-local
-;; variables.
-;; (require-package 'session)
-
-;; Initialize session when loading Emacs.
-;; (add-hook 'after-init-hook 'session-initialize)
-
-;; Maybe I can use this together with desktop-save-mode?
-(desktop-save-mode 1)
-
-;; Impatient mode - Live edit HTML buffers!
-(require-package 'impatient-mode)
-
-;; Yasnippets - it comes with company-mode, but what you also need is some
-;; snippets to start with
-(require-package 'yasnippet-snippets)
-
-;; Mode-icons - Indicate modes in the mode line using icons
-(require-package 'mode-icons)
-;; Activate on startup
-(mode-icons-mode)
-
-;; Diminish - free some space in the mode line removing superfluous mode
-;; indications
-(require-package 'diminish)
-
-;; Diminish them!
-(diminish 'company-mode)
-(diminish 'editorconfig-mode)
-(diminish 'autopair-mode)
-
-;; Emojify - add emoji support for Emacs
-(require-package 'emojify)
-
-;; Moe-theme - Light and dark theme
-(require-package 'moe-theme)
-(require 'moe-theme)
-
-;; Keyfreq: shows most used commands in editing session.
-;; To see the data, run (keyfreq-show) with M-:
-(require-package 'keyfreq)
-
-;; Ignore arrow commands and self-insert-commands
-(setq keyfreq-excluded-commands
-    '(self-insert-command
-         org-self-insert-command
-         abort-recursive-edit
-         forward-char
-         backward-char
-         previous-line
-         next-line))
-
-;; Activate it
-(keyfreq-mode 1)
-(keyfreq-autosave-mode 1)
-
-;; Theme changer
-(require-package 'theme-changer)
-
-;; Set the location
-(setq calendar-location-name "Curitiba, PR")
-(setq calendar-latitude -25.41)
-(setq calendar-longitude -49.25)
-
-;; Specify the day and night themes:
-(require 'theme-changer)
-(change-theme 'whiteboard 'fairyfloss)
-
-;; Org-bullets: change org-mode's *s to UTF-8 chars
-(require-package 'org-bullets)
-
-;; Activate it
-(require 'org-bullets)
-(add-hook 'org-mode-hook (lambda() (org-bullets-mode 1)))
-
-;; Nyan mode - have a Nyan Cat in your mode-line!
-(require-package 'nyan-mode)
-;; Activate it
-(nyan-mode 1)
-
-;; Autocompletion for Bootstrap/FontAwesome classes
-(require-package 'ac-html-bootstrap)
-
-;; CSV mode - edit CSV files
-(require-package 'csv-mode)
-
-;; Ruby Solargraph - completion for Ruby modes
-;; (require 'solargraph)
-
-;; Solargraph dependency
-(require-package 'request)
-
-;; Helm - Emacs incremental completion and selection narrowing framework
-(require-package 'helm)
-(require 'helm-config)
-(helm-mode 1)
-
-;; Bind the keys I want:
-(global-set-key (kbd "M-x") 'helm-M-x)
-(global-set-key (kbd "»") 'helm-M-x)
-(global-set-key (kbd "C-x C-f") 'helm-find-files)
-(global-set-key (kbd "C-x b") 'helm-buffers-list)
-
-;; Complete with tab in Helm buffer, remap action menu to C-tab
-(define-key helm-map (kbd "<tab>") 'hippie-expand)
-(define-key helm-map (kbd "C-<tab>") 'helm--action-prompt)
-
-;; Enable fuzzy matching
-(setq helm-M-x-fuzzy-match t)
-;;-----GRAPHICAL----------------------------------------------------------------
-
-;; Set font in graphical mode
-(when (display-graphic-p)
-    ;; Use Fantasque Sans Mono when available
-    (if (member "Fantasque Sans Mono" (font-family-list))
-        (set-frame-font "Fantasque Sans Mono 12")
-        '(set-frame-font "Ubuntu Mono 12" nil t))
-    ;; Remove menu and scroll bars in graphical mode
-    (menu-bar-mode 0)
-    (tool-bar-mode 0)
-    (scroll-bar-mode 0)
-    ;; Enable emoji images
-    (global-emojify-mode)
-    ;; Maximize frame on startup
-    (toggle-frame-maximized))
-
-;; Company-mode web-mode completions
-(require-package 'company-web)
-
-;; Add web-mode completions when started
-(require 'company-web-html)
-
-;;-----IRC----------------------------------------------------------------------
-;; Use Weechat from Emacs
-(require-package 'weechat)
-
-;; Bind M-p to switch to previous buffer
-
-;; -----KEYBINDINGS--------------------------------------------------------------
-;; Remapping the help hotkey so it doesn't clash with Unix backspace.
-;; Whenever you want to call help you can use M-x help as well. F1
-;; works too.
-(define-key key-translation-map [?\C-h] [?\C-?])
-
-;; Unfill region
-(define-key global-map "\C-\M-q" 'unfill-region)
-
-;; Kill all the buffers matching the provided regex
-(global-set-key [24 75] (quote kill-matching-buffers))
-
-;; Switch to last buffer - I do it all the time
-(global-set-key [27 112] (quote mode-line-other-buffer))
-
-;; Mapping AltGr-d to delete-other-windows,
-;; Another symbol I don't use often.
-(global-set-key [240] (quote delete-other-windows))
-
-;; Map magit-status to C-x g
-(global-set-key [24 103] (quote magit-status))
-
-;; Access buffers with Alt-Gr b
-(global-set-key [8221] (quote ido-switch-buffer))
-
-;; Map the Home and End keys to go to the beginning and end of the buffer
-(global-set-key [home] (quote beginning-of-buffer))
-(global-set-key [end] (quote end-of-buffer))
-
-;; Open Emacs config file
-;; (find-file "~/.emacs" t)
-
-;; Move to beginning of line or indentation
-(defun back-to-indentation-or-beginning () (interactive)
-  (if (= (point) (progn (back-to-indentation) (point)))
-      (beginning-of-line)))
-
-(global-set-key (kbd "C-a") (quote back-to-indentation-or-beginning))
-
-;; Hippie-Expand: change key to M-SPC; Replace dabbrev-expand
-(global-set-key "\M- " 'hippie-expand)
-(global-set-key "\M-/" 'hippie-expand)
-
-;; Cmus configurations: use the media keys with it in GUI Emacs
-;; Play/pause button
-
-;; Eshell - bind M-p to go back to previous buffer
-(defun eshell-tweaks ()
-    "Keybindings for the Emacs shell"
-    (local-set-key (kbd "M-p") 'switch-to-prev-buffer)
-    "Start in Emacs mode"
-    (evil-set-initial-state 'eshell-mode 'emacs))
-(add-hook 'eshell-mode-hook 'eshell-tweaks)
-
-;; Set C-x j to go to current clocked task in org-mode
-(global-set-key (kbd "C-x j") 'org-clock-goto)
-
-;;-WEB-MODE---------------------------------------------------------------------
-(defun web-mode-keybindings ()
-    "Define mode-specific keybindings like this."
-    (local-set-key (kbd "C-c C-v") 'browse-url-of-buffer)
-    (local-set-key (kbd "C-c /") 'sgml-close-tag))
-
-;; Add company backends when loading web-mode.
-(defun web-mode-company-load-backends ()
-    (company-web-bootstrap+)
-    (company-web-fa+))
-
-(add-hook 'web-mode-hook 'web-mode-keybindings)
-(add-hook 'web-mode-hook 'web-mode-company-load-backends)
-
-;;-ORG-MODE---------------------------------------------------------------------
-
-;; We don't need Flycheck in org-mode buffers. Usually.
-(add-hook 'org-mode-hook '(lambda() (flycheck-mode 0)))
-
-;; Bind org-capture to C-c c
-(global-set-key (kbd "\C-c c") (quote org-capture))
-
-;; Bind org-pomodoro to C-x p
-(global-set-key (kbd "\C-x p") (quote org-pomodoro))
-
-;; Open the agenda with C-c a
-(global-set-key [3 97] (quote org-agenda))
-
-;; Open subheading with C-c RET and invert with M-RET
-(local-set-key [27 13] (quote org-ctrl-c-ret))
-(local-set-key [3 13] (quote org-insert-subheading))
-
-;; Org-agenda: point the files you want it to read
-;; (setq org-agenda-files (list "~/file-bouncer/org-files/contact-based-system/"))
-
-;; Always respect the content of a heading when creating todos!
-(local-set-key [M-S-return] (quote org-insert-todo-heading-respect-content))
-
-;; Map C-S-enter to org-insert-todo-subheading
-(local-set-key [C-S-return] (quote org-insert-todo-subheading))
-;;------------------------------------------------------------------------------
-;; Enh-ruby-mode: Run buffer in inf-ruby process
-(add-hook 'enh-ruby-mode-hook
-  '(lambda ()
-     (local-set-key [3 3] (quote ruby-send-buffer))))
-
-;; Python-mode: Send buffer to python shell
-(local-set-key [3 2] (quote python-shell-send-buffer))
-
-;; Elisp-mode: Eval-buffer with C-c C-c
-(add-hook 'emacs-lisp-mode-hook
-  '(lambda ()
-     (local-set-key "\C-c \C-c" (quote eval-buffer))))
-
-;; SGML mode (AKA HTML mode) - Open buffer in browser
-(add-hook 'sgml-mode-hook
-  '(lambda ()
-     (local-set-key "\C-c \C-o" (quote browse-url-of-buffer))))
-
-;;-----VARIABLES----------------------------------------------------------------
-
-;; Set Org mode as default mode for new buffers:
-(setq-default major-mode 'org-mode)
-
-;; Enable auto-fill mode by default
-(auto-fill-mode 1)
-
-;; Set default fill to 79
-(set-fill-column 79)
-
-;; Set line number mode and column number mode for code files
-(line-number-mode 1)
-
-
-;; Change tab width and change tabs to spaces
-(setq-default tab-width 4)
-(setq-default indent-tabs-mode nil)
-
-;; Making Emacs auto-indent
-(define-key global-map (kbd "RET") 'newline-and-indent)
-
-;; Shows trailing whitespace, if any:
-(setq-default show-trailing-whitespace t)
-;; Don't do that for terminal mode!
-(add-hook 'multi-term-mode-hook (setq-default show-trailing-whitespace nil))
-
-;; Python indentation
-(setq python-indent 4)
-
-(defun css-mode-tweaks()
-  (emmet-mode 1)
-  (rainbow-mode 1))
-
-;; Emmet-mode: activate for html-mode, sgml-mode,
-;; css-mode, web-mode and sass-mode
-(add-hook 'sgml-mode-hook 'emmet-mode)
-(add-hook 'sass-mode-hook 'css-mode-tweaks)
-(add-hook 'web-mode-hook 'emmet-mode)
-
-;; By the way, it's nice to add rainbow-mode for CSS
-(add-hook 'css-mode-hook 'css-mode-tweaks)
-
-;; Python: use python3 as default shell interpreter
-(setq python-shell-interpreter "python3")
-
-;;-MACROS-----------------------------------------------------------------------
-
-;; To save a macro, record it with C-x ( (start) and C-x ) (stop),
-;; give it a name with C-x C-k n (C-k is for maKro) and
-;; insert it in this file with insert-kbd-macro.
-;; Then you execute it mapping it to a key! 😊
-
-;; Example macro: Mark todos as done
-(fset 'org-mark-as-done
-   (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ("d" 0 "%d")) arg)))
-
-;;-TWITTERING-MODE--------------------------------------------------------------
-;; Adjust update interval in seconds. It's timeR, not time!
-(setq twittering-timer-interval 3600)
-
-;; Display icons (if applicable)
-(setq twittering-icon-mode t)
-
-;; Use a master password so you don't have to ask for authentication every time
-(setq twittering-use-master-password t)
-
-(defun twittering-mode-tweaks()
-  ;; Set C-c r in twittering-mode to twittering-reply-to-user
-  (local-set-key [3 114] (quote twittering-reply-to-user))
-  ;; C-c f: favorite tweet
-  (local-set-key [3 102] (quote twittering-favorite))
-  ;; C-c n: native retweet
-  (local-set-key [3 110] (quote twittering-native-retweet)))
-
-(add-hook 'twittering-mode-hook 'twittering-mode-tweaks)
-;;-----CUSTOMIZATION-THROUGH-M-x-CUSTOMIZE--------------------------------------
+;; Created through M-x customize
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -687,7 +49,7 @@
  '(company-transformers (quote (company-sort-by-backend-importance)))
     '(custom-safe-themes
          (quote
-             ("5d8c90053cf9c111aa50d26596a746fc0dacd18f6bc75fba8251fdd5f43a6277" "dcf7154867ba67b250fe2c5cdc15a7d170acd9cbe6707cc36d9dd1462282224d" "4e7e5808a568cbbc6154298ac4153c2ee15b3aed5dc6e7267e3f18b811c4616a" "b9a06c75084a7744b8a38cb48bc987de10d68f0317697ccbd894b2d0aca06d2b" "a19265ef7ecc16ac4579abb1635fd4e3e1185dcacbc01b7a43cf7ad107c27ced" "b9cbfb43711effa2e0a7fbc99d5e7522d8d8c1c151a3194a4b176ec17c9a8215" "84d2f9eeb3f82d619ca4bfffe5f157282f4779732f48a5ac1484d94d5ff5b279" "f8b5f1c5ab70da141ae308b9ce23ebc2b713dd3a22a6ebb08bfb55f5c7a11287" "5908457b14343ddca0ff1efa27247fb8eec94bc1eaab60fe58c1d033a3188315" "d857acdacdb74d5a3eb35c1d009d0c598f9954d51da523859db6366479cc31cd" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "36d92f830c21797ce34896a4cf074ce25dbe0dabe77603876d1b42316530c99d" "b04425cc726711a6c91e8ebc20cf5a3927160681941e06bc7900a5a5bfe1a77f" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "59e5301cce088c4a493f1745b0d409eff6ba955f06150f77ffaf39d955bb8442" "da3f9bcccf44c8b3bb64807a4eb55a5b2089488ad28201a968333dee29b10d89" "39d212cddd810c2a5b450b32a0acad8ae85b2d534301b2cf86cbc318874b1a5d" "643ce4d69567eedf342aa4913e004dc37e8d4567b226e04bbbd7f08cdd6fb8a3" "c3009cace2d39b02a3c660a68b05ca2796b9a0f623802c1558addf092b0bc91a" "3f3ff89135934379b84e067b8db7386efc63bef5695be0b1765ed95801a9ac2e" "7326e5068f99b8022e2876503284ef8b35c4a6e2f9f5e2cc7e3a147b2af9bc86" "33b2941efadace8f164466cb183194a29fc2562e539bb932235cf015df85b65c" "002be25c63dc642988bcabf86aa1cc3cff72d168017f7b668974f70b76957324" "3a427b2b50f57b2e97b499b5971c2b79a0862f690ddb372292f72b3aa71e8ffb" "0fc7298072540a92cc11274c4e1712d351aabe3b20f1294da8f3a8ab6e5e2e43" "d3286e2f0cee02a049e98e3e2d9c31f944b0d1b34bf1b9d4bcbf401baca174e0" "32fba6a2b0f2e8388a75ed41e70e7d190966ce5c6fe4ef83abd6935ba6d82edb" "24fac42b4ad7f2eabbd134fd1b3aebab2964ad2e5eeb97a36c30bd343c3e3be3" "91d9e12212df3e3dcf313eee7336910166ebc3735268977f921433fcd15dc0e1" "e278b6a543c79c5758f95cc9d712af0724c565196bdd7393b1b0e738b7e4439a" "be4b75ad1770303225aaae89e446c60af40c5848e916ddf98e8089b1713e623e" "9919034690c9e2409c2dccf722e0b2f574d4d356d45681f807dbf1f70bd34825" "345a53dbeaeab1777e5c25b88481aabd37e1573dc015f6c4bff4d785a18daa7c" "62be4d850eb548bddd7cbcb650c088db83e35c058f03c3124153434a39cb2599" "e4384ced8f89c5133cff92bc314becbc219d7c3500c197c8bef7debc251d4676" "6af1c89536ac7be91d8a709923941299e0d8822fa5b32855b39eef36eb8bb7f1" "f32de7d2d8aa2f209397ab036a58c041e92ae40391c6b080e3e1f79ac5374661" "62c625342d7b9228294b52397ffee4afe5992fdf2cc17e7d328cfe054d6734b0" "e4f6561385e45763498650d034c579c2b545168d55c0d9057cc25dd1b8a2c931" "b6cbc6e9a3c0923ed2a8c08709c75ac5ac1665f4d5e44fbc6e14759ff1010ccb" "518b2cf78e56b057a3d4b44ada6c4b4e298fc9866b7c62391da6aa1d8a357292" "cd0d3e633ecc59e31d99d54af5e063def1ff2a6cb08ae71a3ef68ead857b8f74" "4f7a026ab163805b11d48059c9c8237a62beb54c6b2181f1de3656efe8ee616d" "759b9535d645287a170284034f1e399dc0652c12337e72b3d569ff6848667667" "71d9d87d6141d5aaa6a014edf31e142bbfb4866ae990c57645b193903f65d990" "4c8ef842834add984607af2a650fed685d0ef60d7b38c8ea802001236404b80a" "c0e10052057239274f44a31b02c9869815436776e1f34920005555265eb92001" "90b9b16036e9ff0a357c029efd2d9c8b4efc52cd5c3d32c041016992205696bc" "c71114e53758c572d2a854a66dd783c1cbb5036adc5f021f9fc21033e2eec112" "7baed9f018d6518afa7c55e5e6acd83b69db040ac1e0f7bf8cce0b42c5f29f23" "1a379cd3373fbd40a31285ea126d5433ae7c9827c8e881ce1f62c3ca6f7fae5c" "9671fe89034bdf5ea472289ff5b375d8b99c23f92c4dcfecbca613a3ed2c7844" "0b002097186667b1416e4499172007ca9ae8f9b4d80bcfba5b1722e6d9ef9b95" "f5729cac6fcade83c92e50c823eca0e24add9e6c30d1bcafa5076e07909a1ed2" "4134cc495b3e774194861d932a0c094dc729328664b00d82e02c4d31fead14e0" "3856e441793a643f6b2e733b70f3fc2d8e74cf810368eff22942f738d89c4854" "9b803ba5ea6d16e838c3229c7679e8325cbe43083cd4155202925b3f11c3c912" "c9dd6b38801d2db93472aaa63aa15e7c0de4f3f2acecc72b04ca6b3efa25f600" "764b72b168f2a5935f51977c49781c9864312fd9f45e3cc317997d12aa8db3bf" "40af07c028aab91628cac1a41c62f8e4b4e893bef605765196e6b3d8a02ab2e0" "25b0083e7ffd77261165fc391b8a7f94049537a58536da2f0e6fd83ecff30ae8" "59171e7f5270c0f8c28721bb96ae56d35f38a0d86da35eab4001aebbd99271a8" default)))
+             ("3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "5d8c90053cf9c111aa50d26596a746fc0dacd18f6bc75fba8251fdd5f43a6277" "dcf7154867ba67b250fe2c5cdc15a7d170acd9cbe6707cc36d9dd1462282224d" "4e7e5808a568cbbc6154298ac4153c2ee15b3aed5dc6e7267e3f18b811c4616a" "b9a06c75084a7744b8a38cb48bc987de10d68f0317697ccbd894b2d0aca06d2b" "a19265ef7ecc16ac4579abb1635fd4e3e1185dcacbc01b7a43cf7ad107c27ced" "b9cbfb43711effa2e0a7fbc99d5e7522d8d8c1c151a3194a4b176ec17c9a8215" "84d2f9eeb3f82d619ca4bfffe5f157282f4779732f48a5ac1484d94d5ff5b279" "f8b5f1c5ab70da141ae308b9ce23ebc2b713dd3a22a6ebb08bfb55f5c7a11287" "5908457b14343ddca0ff1efa27247fb8eec94bc1eaab60fe58c1d033a3188315" "d857acdacdb74d5a3eb35c1d009d0c598f9954d51da523859db6366479cc31cd" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "36d92f830c21797ce34896a4cf074ce25dbe0dabe77603876d1b42316530c99d" "b04425cc726711a6c91e8ebc20cf5a3927160681941e06bc7900a5a5bfe1a77f" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "59e5301cce088c4a493f1745b0d409eff6ba955f06150f77ffaf39d955bb8442" "da3f9bcccf44c8b3bb64807a4eb55a5b2089488ad28201a968333dee29b10d89" "39d212cddd810c2a5b450b32a0acad8ae85b2d534301b2cf86cbc318874b1a5d" "643ce4d69567eedf342aa4913e004dc37e8d4567b226e04bbbd7f08cdd6fb8a3" "c3009cace2d39b02a3c660a68b05ca2796b9a0f623802c1558addf092b0bc91a" "3f3ff89135934379b84e067b8db7386efc63bef5695be0b1765ed95801a9ac2e" "7326e5068f99b8022e2876503284ef8b35c4a6e2f9f5e2cc7e3a147b2af9bc86" "33b2941efadace8f164466cb183194a29fc2562e539bb932235cf015df85b65c" "002be25c63dc642988bcabf86aa1cc3cff72d168017f7b668974f70b76957324" "3a427b2b50f57b2e97b499b5971c2b79a0862f690ddb372292f72b3aa71e8ffb" "0fc7298072540a92cc11274c4e1712d351aabe3b20f1294da8f3a8ab6e5e2e43" "d3286e2f0cee02a049e98e3e2d9c31f944b0d1b34bf1b9d4bcbf401baca174e0" "32fba6a2b0f2e8388a75ed41e70e7d190966ce5c6fe4ef83abd6935ba6d82edb" "24fac42b4ad7f2eabbd134fd1b3aebab2964ad2e5eeb97a36c30bd343c3e3be3" "91d9e12212df3e3dcf313eee7336910166ebc3735268977f921433fcd15dc0e1" "e278b6a543c79c5758f95cc9d712af0724c565196bdd7393b1b0e738b7e4439a" "be4b75ad1770303225aaae89e446c60af40c5848e916ddf98e8089b1713e623e" "9919034690c9e2409c2dccf722e0b2f574d4d356d45681f807dbf1f70bd34825" "345a53dbeaeab1777e5c25b88481aabd37e1573dc015f6c4bff4d785a18daa7c" "62be4d850eb548bddd7cbcb650c088db83e35c058f03c3124153434a39cb2599" "e4384ced8f89c5133cff92bc314becbc219d7c3500c197c8bef7debc251d4676" "6af1c89536ac7be91d8a709923941299e0d8822fa5b32855b39eef36eb8bb7f1" "f32de7d2d8aa2f209397ab036a58c041e92ae40391c6b080e3e1f79ac5374661" "62c625342d7b9228294b52397ffee4afe5992fdf2cc17e7d328cfe054d6734b0" "e4f6561385e45763498650d034c579c2b545168d55c0d9057cc25dd1b8a2c931" "b6cbc6e9a3c0923ed2a8c08709c75ac5ac1665f4d5e44fbc6e14759ff1010ccb" "518b2cf78e56b057a3d4b44ada6c4b4e298fc9866b7c62391da6aa1d8a357292" "cd0d3e633ecc59e31d99d54af5e063def1ff2a6cb08ae71a3ef68ead857b8f74" "4f7a026ab163805b11d48059c9c8237a62beb54c6b2181f1de3656efe8ee616d" "759b9535d645287a170284034f1e399dc0652c12337e72b3d569ff6848667667" "71d9d87d6141d5aaa6a014edf31e142bbfb4866ae990c57645b193903f65d990" "4c8ef842834add984607af2a650fed685d0ef60d7b38c8ea802001236404b80a" "c0e10052057239274f44a31b02c9869815436776e1f34920005555265eb92001" "90b9b16036e9ff0a357c029efd2d9c8b4efc52cd5c3d32c041016992205696bc" "c71114e53758c572d2a854a66dd783c1cbb5036adc5f021f9fc21033e2eec112" "7baed9f018d6518afa7c55e5e6acd83b69db040ac1e0f7bf8cce0b42c5f29f23" "1a379cd3373fbd40a31285ea126d5433ae7c9827c8e881ce1f62c3ca6f7fae5c" "9671fe89034bdf5ea472289ff5b375d8b99c23f92c4dcfecbca613a3ed2c7844" "0b002097186667b1416e4499172007ca9ae8f9b4d80bcfba5b1722e6d9ef9b95" "f5729cac6fcade83c92e50c823eca0e24add9e6c30d1bcafa5076e07909a1ed2" "4134cc495b3e774194861d932a0c094dc729328664b00d82e02c4d31fead14e0" "3856e441793a643f6b2e733b70f3fc2d8e74cf810368eff22942f738d89c4854" "9b803ba5ea6d16e838c3229c7679e8325cbe43083cd4155202925b3f11c3c912" "c9dd6b38801d2db93472aaa63aa15e7c0de4f3f2acecc72b04ca6b3efa25f600" "764b72b168f2a5935f51977c49781c9864312fd9f45e3cc317997d12aa8db3bf" "40af07c028aab91628cac1a41c62f8e4b4e893bef605765196e6b3d8a02ab2e0" "25b0083e7ffd77261165fc391b8a7f94049537a58536da2f0e6fd83ecff30ae8" "59171e7f5270c0f8c28721bb96ae56d35f38a0d86da35eab4001aebbd99271a8" default)))
  '(display-battery-mode t)
  '(display-default-load-average nil)
  '(display-time-24hr-format t)
@@ -894,6 +256,74 @@
  '(remember-data-file "~/file-bouncer/everything-bucket")
  '(send-mail-function (quote smtpmail-send-it))
  '(shell-file-name "/bin/bash")
+    '(sml/mode-width
+         (if
+             (eq
+                 (powerline-current-separator)
+                 (quote arrow))
+             (quote right)
+             (quote full)))
+    '(sml/pos-id-separator
+         (quote
+             (""
+                 (:propertize " " face powerline-active1)
+                 (:eval
+                     (propertize " "
+                         (quote display)
+                         (funcall
+                             (intern
+                                 (format "powerline-%s-%s"
+                                     (powerline-current-separator)
+                                     (car powerline-default-separator-dir)))
+                             (quote powerline-active1)
+                             (quote powerline-active2))))
+                 (:propertize " " face powerline-active2))))
+    '(sml/pos-minor-modes-separator
+         (quote
+             (""
+                 (:propertize " " face powerline-active1)
+                 (:eval
+                     (propertize " "
+                         (quote display)
+                         (funcall
+                             (intern
+                                 (format "powerline-%s-%s"
+                                     (powerline-current-separator)
+                                     (cdr powerline-default-separator-dir)))
+                             (quote powerline-active1)
+                             (quote sml/global))))
+                 (:propertize " " face sml/global))))
+    '(sml/pre-id-separator
+         (quote
+             (""
+                 (:propertize " " face sml/global)
+                 (:eval
+                     (propertize " "
+                         (quote display)
+                         (funcall
+                             (intern
+                                 (format "powerline-%s-%s"
+                                     (powerline-current-separator)
+                                     (car powerline-default-separator-dir)))
+                             (quote sml/global)
+                             (quote powerline-active1))))
+                 (:propertize " " face powerline-active1))))
+    '(sml/pre-minor-modes-separator
+         (quote
+             (""
+                 (:propertize " " face powerline-active2)
+                 (:eval
+                     (propertize " "
+                         (quote display)
+                         (funcall
+                             (intern
+                                 (format "powerline-%s-%s"
+                                     (powerline-current-separator)
+                                     (cdr powerline-default-separator-dir)))
+                             (quote powerline-active2)
+                             (quote powerline-active1))))
+                 (:propertize " " face powerline-active1))))
+ '(sml/pre-modes-separator (propertize " " (quote face) (quote sml/modes)))
  '(smtpmail-smtp-server "smtp.yandex.com")
  '(smtpmail-smtp-service 25)
  '(tags-tag-face (quote default))
@@ -929,3 +359,4 @@
  '(sml/time ((t (:inherit sml/global :background "black" :foreground "green" :height 1.05 :foundry "ALTS" :family "Digital"))))
  '(time-mail-face ((t (:family "IBM 3270"))) t))
 (put 'upcase-region 'disabled nil)
+(put 'downcase-region 'disabled nil)
