@@ -1,3 +1,7 @@
+;; This replaces the old require-package.
+;; If package isn't installed, fetch it.
+(setq use-package-always-ensure t)
+
 ;; If package isn't installed, fetch it
 (defun require-package (package)
   (setq-default highlight-tabs t)
