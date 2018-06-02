@@ -191,15 +191,15 @@ me, too many buffers to work with... for now.
 ** PHP-mode
    PHP support for Emacs.
    #+BEGIN_SRC emacs-lisp
-   (require-package 'php-mode)
+   (use-package php-mode)
    ;; Flymake support for PHP files
-   (require-package 'flymake-php)
+   (use-package flymake-php)
    (add-hook 'php-mode-hook 'flymake-php-load)
    #+END_SRC
 ** Enhanced-ruby-mode
    A better ruby-mode.
    #+BEGIN_SRC emacs-lisp
-   (require-package 'enh-ruby-mode)
+   (use-package enh-ruby-mode)
 
    ;; Set it as default mode for Ruby files
    (add-to-list 'auto-mode-alist
@@ -209,17 +209,16 @@ me, too many buffers to work with... for now.
 ** Ruby Tools
    Goodies for Ruby programming modes.
    #+BEGIN_SRC emacs-lisp
-   (require-package 'ruby-tools)
+   (use-package ruby-tools)
    #+END_SRC
 ** Engine mode
    Query search engines from Emacs.
    #+BEGIN_SRC emacs-lisp
    ;; Ensure it's loaded
-   (require-package 'engine-mode)
-   (require 'engine-mode)
-
-   ;; Activate it
-   (engine-mode t)
+   (use-package engine-mode
+      :init
+      ;; Activate it
+      (progn (engine-mode t)))
 
    ;; Define search engines to use
    (defengine github
@@ -242,22 +241,6 @@ me, too many buffers to work with... for now.
    (require-package 'powerline)
    (require 'powerline)
    (require-package 'smart-mode-line)
-
-   ;; Telephone line setup
-   (setq telephone-line-lhs
-       '((evil   . (telephone-line-evil-tag-segment))
-       (accent . (telephone-line-vc-segment
-       telephone-line-erc-modified-channels-segment
-       telephone-line-process-segment))
-       (nil    . (telephone-line-minor-mode-segment
-       telephone-line-buffer-segment))))
-   (setq telephone-line-rhs
-       '((nil    . (telephone-line-misc-info-segment))
-       (accent . (telephone-line-major-mode-segment))
-       (evil   . (telephone-line-airline-position-segment))))
-
-   ;; Activate telephone-line
-   (telephone-line-mode t)
 
    ;; Activate smart-mode-line
    (setq sml/theme 'powerline)
