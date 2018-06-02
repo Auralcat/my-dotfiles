@@ -659,24 +659,23 @@ me, too many buffers to work with... for now.
 #+END_SRC
 * Twittering mode
   Use Twitter from within Emacs!
-#+BEGIN_SRC emacs-lisp
-(use-package twittering-mode)
-;; Adjust update interval in seconds. It's timeR, not time!
-(setq twittering-timer-interval 3600)
+  #+BEGIN_SRC emacs-lisp
+  (use-package twittering-mode
+      :init
+      (
+        ;; Adjust update interval in seconds. It's timeR, not time!
+        (setq twittering-timer-interval 3600)
 
-;; Display icons (if applicable)
-(setq twittering-icon-mode t)
+        ;; Display icons (if applicable)
+        (setq twittering-icon-mode t)
 
-;; Use a master password so you don't have to ask for authentication every time
-(setq twittering-use-master-password t)
+        ;; Use a master password so you don't have to ask for authentication every time
+        (setq twittering-use-master-password t))
+      :bind-keymap
+      (
+        ("C-c r" . twittering-reply-to-user)
+        ("C-c f" . twittering-favorite)
+        ("C-c n" . twittering-native-retweet)))
+  #+END_SRC
 
-(defun twittering-mode-tweaks()
-  ;; Set C-c r in twittering-mode to twittering-reply-to-user
-  (local-set-key [3 114] (quote twittering-reply-to-user))
-  ;; C-c f: favorite tweet
-  (local-set-key [3 102] (quote twittering-favorite))
-  ;; C-c n: native retweet
-  (local-set-key [3 110] (quote twittering-native-retweet)))
-
-(add-hook 'twittering-mode-hook 'twittering-mode-tweaks)
-#+END_SRC
+  #+RESULTS:
