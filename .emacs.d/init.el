@@ -121,6 +121,7 @@
                  ("\\`ESS\\[SAS\\]\\'" "sas" xpm)
                  ("\\`ESS\\[BUGS\\]\\'" 61832 FontAwesome)
                  ("\\`iESS\\'" "R" xpm)
+                 ("\\`Rust\\'" "rust" xpm)
                  ("\\`SCSS\\'" "sass" xpm)
                  ("\\`Sass\\'" "sass" xpm)
                  ("\\`Scheme" "scheme" xpm-bw)
