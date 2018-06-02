@@ -159,27 +159,22 @@ me, too many buffers to work with... for now.
       ;; Set Sass mode for SASS files and Css mode for SCSS files.
       :config
       (add-to-list 'auto-mode-alist
-         '("\\.sass\\'" . sass-mode))
+     '("\\.sass\\'" . sass-mode))
 
       (add-to-list 'auto-mode-alist
-         '("\\.scss\\'" . css-mode)))
+     '("\\.scss\\'" . css-mode)))
    #+END_SRC
 ** Js2-mode
    A better default Javascript mode
    #+BEGIN_SRC emacs-lisp
-   (use-package js2-mode
-      :config
-      (;; Set js2-mode as default mode for JS files
-      (add-to-list 'auto-mode-alist
-         '("\\(?:\\.js\\|jsx\\|)file\\)\\'"
-         . js2-mode))
-      ;; Set syntax highlight level
-      (setq js2-highlight-level 3)))
+   (use-package js2-mode)
+
+   ;; Set js2-mode as default mode for JS files
+   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+
+   ;; Set syntax highlight level
+   (setq js2-highlight-level 3)
    #+END_SRC
-
-   #+RESULTS:
-   : t
-
 ** Web-beautify
    Format HTML/CSS and JS code with js-beautify
    #+BEGIN_SRC emacs-lisp
@@ -349,12 +344,12 @@ me, too many buffers to work with... for now.
    ;; Ignore arrow commands and self-insert-commands
    (setq keyfreq-excluded-commands
        '(self-insert-command
-           org-self-insert-command
-           abort-recursive-edit
-           forward-char
-           backward-char
-           previous-line
-           next-line))
+       org-self-insert-command
+       abort-recursive-edit
+       forward-char
+       backward-char
+       previous-line
+       next-line))
 
    ;; Activate it
    (keyfreq-mode 1)
@@ -436,9 +431,9 @@ me, too many buffers to work with... for now.
 ** Theme Changer
    Change current theme depending on time of the day
    #+BEGIN_SRC emacs-lisp
-   (use-package 'theme-changer
-      :init
-      (;; Set the location
+   (use-package theme-changer
+      :config
+      (progn ;; Set the location
       (setq calendar-location-name "Curitiba, PR")
       (setq calendar-latitude -25.41)
       (setq calendar-longitude -49.25)
@@ -461,8 +456,8 @@ me, too many buffers to work with... for now.
 (when (display-graphic-p)
     ;; Use Fantasque Sans Mono when available
     (if (member "Fantasque Sans Mono" (font-family-list))
-        (set-frame-font "Fantasque Sans Mono 12")
-        '(set-frame-font "Ubuntu Mono 12" nil t))
+    (set-frame-font "Fantasque Sans Mono 12")
+    '(set-frame-font "Ubuntu Mono 12" nil t))
     ;; Remove menu and scroll bars in graphical mode
     (menu-bar-mode 0)
     (tool-bar-mode 0)
@@ -661,21 +656,21 @@ me, too many buffers to work with... for now.
   Use Twitter from within Emacs!
   #+BEGIN_SRC emacs-lisp
   (use-package twittering-mode
-      :init
+      :config
       (
-        ;; Adjust update interval in seconds. It's timeR, not time!
-        (setq twittering-timer-interval 3600)
+    ;; Adjust update interval in seconds. It's timeR, not time!
+    (setq twittering-timer-interval 3600)
 
-        ;; Display icons (if applicable)
-        (setq twittering-icon-mode t)
+    ;; Display icons (if applicable)
+    (setq twittering-icon-mode t)
 
-        ;; Use a master password so you don't have to ask for authentication every time
-        (setq twittering-use-master-password t))
+    ;; Use a master password so you don't have to ask for authentication every time
+    (setq twittering-use-master-password t))
       :bind-keymap
       (
-        ("C-c r" . twittering-reply-to-user)
-        ("C-c f" . twittering-favorite)
-        ("C-c n" . twittering-native-retweet)))
+    ("C-c r" . twittering-reply-to-user)
+    ("C-c f" . twittering-favorite)
+    ("C-c n" . twittering-native-retweet)))
   #+END_SRC
 
   #+RESULTS:

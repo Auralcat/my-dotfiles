@@ -6,5 +6,5 @@
 ;;    If it is t, the completion will never be pruned from the file.
 ;;    Otherwise it is in hours since origin.
 
-("Auralcat" . 424368)
-("rumsiac" . 424408)
+("Auralcat" . 424429)
+("rumsiac" . 424429)

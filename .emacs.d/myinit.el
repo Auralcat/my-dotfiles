@@ -125,24 +125,34 @@
 ;; This is how you define aliases for Elisp functions
 (defalias 'plp 'package-list-packages)
 
-(require-package 'autopair)
-(autopair-global-mode) ;; enable autopair in all buffers
+(use-package autopair
+   :init (autopair-global-mode))
 
-(require-package 'emmet-mode)
+(use-package emmet-mode)
 
-(require-package 'js2-mode)
+(use-package sass-mode
+   ;; Set Sass mode for SASS files and Css mode for SCSS files.
+   :config
+   (add-to-list 'auto-mode-alist
+  '("\\.sass\\'" . sass-mode))
+
+   (add-to-list 'auto-mode-alist
+  '("\\.scss\\'" . css-mode)))
+
+(use-package js2-mode)
+
 ;; Set js2-mode as default mode for JS files
-(add-to-list 'auto-mode-alist
-      '("\\(?:\\.js\\|jsx\\|)file\\)\\'"
-    . js2-mode))
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+
 ;; Set syntax highlight level
 (setq js2-highlight-level 3)
 
-(require-package 'web-beautify)
+(use-package web-beautify)
 
-(require-package 'flycheck)
-;; turn on flychecking globally
-(add-hook 'after-init-hook #'global-flycheck-mode)
+(use-package flycheck
+   :config
+   ;; turn on flychecking globally
+   (add-hook 'after-init-hook #'global-flycheck-mode))
 
 (require-package 'php-mode)
 ;; Flymake support for PHP files
@@ -172,6 +182,12 @@
 (defengine duckduckgo
     "https://duckduckgo.com/?q=%s"
     :keybinding "d")
+(defengine youtube
+    "https://www.youtube.com/results?search_query=%s"
+    :keybinding "y")
+(defengine stackoverflow
+    "https://stackoverflow.com/search?q=%s"
+    :keybinding "s")
 
 ;; Smart-mode-line depends on powerline
 (require-package 'powerline)
@@ -261,12 +277,12 @@
 ;; Ignore arrow commands and self-insert-commands
 (setq keyfreq-excluded-commands
     '(self-insert-command
-        org-self-insert-command
-        abort-recursive-edit
-        forward-char
-        backward-char
-        previous-line
-        next-line))
+    org-self-insert-command
+    abort-recursive-edit
+    forward-char
+    backward-char
+    previous-line
+    next-line))
 
 ;; Activate it
 (keyfreq-mode 1)
@@ -279,83 +295,58 @@
 (diminish 'editorconfig-mode)
 (diminish 'autopair-mode)
 (diminish 'helm-mode)
+(diminish 'auto-revert-mode)
 
-;; Magit - Work with Git inside Emacs
-(require-package 'magit)
+(use-package magit)
 
-;; Twittering-mode: Use Twitter from within Emacs!
-(require-package 'twittering-mode)
+(use-package editorconfig
+   :init
+   ;; Activate it.
+   (editorconfig-mode 1))
 
-;; Org-pomodoro: a Pomodoro timer inside Emacs
-(require-package 'org-pomodoro)
+(use-package yaml-mode)
 
-;; EditorConfig - Helps developers define and maintain consistent
-;; coding styles between different editors and IDEs
-(require-package 'editorconfig)
+(use-package csv-mode)
 
-;; Activate it
-(editorconfig-mode 1)
-
-;; YAML mode: work with YAML files
-(require-package 'yaml-mode)
+(use-package nyan-mode
+   :init
+   (nyan-mode 1))
 
 ;; Eshell extras
-(require-package 'eshell-prompt-extras)
+(use-package eshell-prompt-extras)
 
 ;; More configs
 (with-eval-after-load "esh-opt"
-  (autoload 'epe-theme-lambda "eshell-prompt-extras")
-  (setq eshell-highlight-prompt t
+(autoload 'epe-theme-lambda "eshell-prompt-extras")
+(setq eshell-highlight-prompt t
     eshell-prompt-function 'epe-theme-lambda))
 
-;; Yasnippets - it comes with company-mode, but what you also need is some
-;; snippets to start with
-(require-package 'yasnippet-snippets)
+(use-package yasnippet-snippets)
 
-;; Mode-icons - Indicate modes in the mode line using icons
-(require-package 'mode-icons)
-;; Activate on startup
-(mode-icons-mode)
-;; Emojify - add emoji support for Emacs
-(require-package 'emojify)
+(use-package mode-icons
+   :init
+   (mode-icons-mode))
 
-;; Moe-theme - Light and dark theme
-(require-package 'moe-theme)
-(require 'moe-theme)
+(use-package emojify)
 
-;; Theme changer
-(require-package 'theme-changer)
+(use-package theme-changer
+   :config
+   (progn ;; Set the location
+   (setq calendar-location-name "Curitiba, PR")
+   (setq calendar-latitude -25.41)
+   (setq calendar-longitude -49.25)
 
-;; Set the location
-(setq calendar-location-name "Curitiba, PR")
-(setq calendar-latitude -25.41)
-(setq calendar-longitude -49.25)
+   ;; Specify the day and night themes:
+   (change-theme 'whiteboard 'fairyfloss)))
 
-;; Specify the day and night themes:
-(require 'theme-changer)
-(change-theme 'whiteboard 'fairyfloss)
-
-;; Org-bullets: change org-mode's *s to UTF-8 chars
-(require-package 'org-bullets)
-
-;; Activate it
-(require 'org-bullets)
-(add-hook 'org-mode-hook (lambda() (org-bullets-mode 1)))
-
-;; Nyan mode - have a Nyan Cat in your mode-line!
-(require-package 'nyan-mode)
-;; Activate it
-(nyan-mode 1)
-
-;; CSV mode - edit CSV files
-(require-package 'csv-mode)
+(use-package moe-theme)
 
 ;; Set font in graphical mode
 (when (display-graphic-p)
     ;; Use Fantasque Sans Mono when available
     (if (member "Fantasque Sans Mono" (font-family-list))
-        (set-frame-font "Fantasque Sans Mono 12")
-        '(set-frame-font "Ubuntu Mono 12" nil t))
+    (set-frame-font "Fantasque Sans Mono 12")
+    '(set-frame-font "Ubuntu Mono 12" nil t))
     ;; Remove menu and scroll bars in graphical mode
     (menu-bar-mode 0)
     (tool-bar-mode 0)
@@ -459,6 +450,10 @@
 ;; Map C-S-enter to org-insert-todo-subheading
 (local-set-key [C-S-return] (quote org-insert-todo-subheading))
 
+(use-package org-bullets
+   :init
+   (add-hook 'org-mode-hook (lambda() (org-bullets-mode 1))))
+
 ;; Enh-ruby-mode: Run buffer in inf-ruby process
 (add-hook 'enh-ruby-mode-hook
   '(lambda ()
@@ -529,21 +524,19 @@
 (fset 'org-mark-as-done
    (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ("d" 0 "%d")) arg)))
 
-;; Adjust update interval in seconds. It's timeR, not time!
-(setq twittering-timer-interval 3600)
+(use-package twittering-mode
+    :config
+    (
+  ;; Adjust update interval in seconds. It's timeR, not time!
+  (setq twittering-timer-interval 3600)
 
-;; Display icons (if applicable)
-(setq twittering-icon-mode t)
+  ;; Display icons (if applicable)
+  (setq twittering-icon-mode t)
 
-;; Use a master password so you don't have to ask for authentication every time
-(setq twittering-use-master-password t)
-
-(defun twittering-mode-tweaks()
-  ;; Set C-c r in twittering-mode to twittering-reply-to-user
-  (local-set-key [3 114] (quote twittering-reply-to-user))
-  ;; C-c f: favorite tweet
-  (local-set-key [3 102] (quote twittering-favorite))
-  ;; C-c n: native retweet
-  (local-set-key [3 110] (quote twittering-native-retweet)))
-
-(add-hook 'twittering-mode-hook 'twittering-mode-tweaks)
+  ;; Use a master password so you don't have to ask for authentication every time
+  (setq twittering-use-master-password t))
+    :bind-keymap
+    (
+  ("C-c r" . twittering-reply-to-user)
+  ("C-c f" . twittering-favorite)
+  ("C-c n" . twittering-native-retweet)))
