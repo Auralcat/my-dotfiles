@@ -215,10 +215,9 @@ me, too many buffers to work with... for now.
    Query search engines from Emacs.
    #+BEGIN_SRC emacs-lisp
    ;; Ensure it's loaded
-   (use-package engine-mode
-      :init
-      ;; Activate it
-      (progn (engine-mode t)))
+   (use-package engine-mode)
+   ;; Activate it
+   (engine-mode t)
 
    ;; Define search engines to use
    (defengine github

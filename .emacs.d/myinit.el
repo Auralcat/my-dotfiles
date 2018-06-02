@@ -154,24 +154,22 @@
    ;; turn on flychecking globally
    (add-hook 'after-init-hook #'global-flycheck-mode))
 
-(require-package 'php-mode)
+(use-package php-mode)
 ;; Flymake support for PHP files
-(require-package 'flymake-php)
+(use-package flymake-php)
 (add-hook 'php-mode-hook 'flymake-php-load)
 
-(require-package 'enh-ruby-mode)
+(use-package enh-ruby-mode)
 
 ;; Set it as default mode for Ruby files
 (add-to-list 'auto-mode-alist
     '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'"
     . enh-ruby-mode))
 
-(require-package 'ruby-tools)
+(use-package ruby-tools)
 
 ;; Ensure it's loaded
-(require-package 'engine-mode)
-(require 'engine-mode)
-
+(use-package engine-mode)
 ;; Activate it
 (engine-mode t)
 
@@ -193,22 +191,6 @@
 (require-package 'powerline)
 (require 'powerline)
 (require-package 'smart-mode-line)
-
-;; Telephone line setup
-(setq telephone-line-lhs
-    '((evil   . (telephone-line-evil-tag-segment))
-    (accent . (telephone-line-vc-segment
-    telephone-line-erc-modified-channels-segment
-    telephone-line-process-segment))
-    (nil    . (telephone-line-minor-mode-segment
-    telephone-line-buffer-segment))))
-(setq telephone-line-rhs
-    '((nil    . (telephone-line-misc-info-segment))
-    (accent . (telephone-line-major-mode-segment))
-    (evil   . (telephone-line-airline-position-segment))))
-
-;; Activate telephone-line
-(telephone-line-mode t)
 
 ;; Activate smart-mode-line
 (setq sml/theme 'powerline)
