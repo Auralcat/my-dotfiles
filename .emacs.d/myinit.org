@@ -145,23 +145,24 @@ me, too many buffers to work with... for now.
 * Packages
 ** Autopair
   Automatically pair braces and quotes like in TextMate
-  #+BEGIN_SRC emacs-lisp results :raw
-  (require-package 'autopair)
-  (autopair-global-mode) ;; enable autopair in all buffers
+  #+BEGIN_SRC emacs-lisp
+  (use-package autopair
+     :init (autopair-global-mode))
   #+END_SRC
 ** Emmet-mode
    #+BEGIN_SRC emacs-lisp
-   (require-package 'emmet-mode)
+   (use-package emmet-mode)
    #+END_SRC
 ** Sass-mode
-   #+BEGIN_SRC emacs_lisp
-   (require-package 'sass-mode)
-   ;; Set Sass mode for SASS files and Css mode for SCSS files.
-   (add-to-list 'auto-mode-alist
-      '("\\.sass\\'" . sass-mode))
+   #+BEGIN_SRC emacs-lisp
+   (use-package sass-mode
+      ;; Set Sass mode for SASS files and Css mode for SCSS files.
+      :config
+      (add-to-list 'auto-mode-alist
+         '("\\.sass\\'" . sass-mode))
 
-   (add-to-list 'auto-mode-alist
-      '("\\.scss\\'" . css-mode))
+      (add-to-list 'auto-mode-alist
+         '("\\.scss\\'" . css-mode)))
    #+END_SRC
 ** Js2-mode
    A better default Javascript mode

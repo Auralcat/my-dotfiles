@@ -1,3 +1,17 @@
+;; If package isn't installed, fetch it
+(defun require-package (package)
+  (setq-default highlight-tabs t)
+  "Install given PACKAGE."
+  (unless (package-installed-p package)
+    (unless (assoc package package-archive-contents)
+      (package-refresh-contents))
+    (package-install package)))
+
+;; Use-package
+(require-package 'use-package)
+(eval-when-compile
+    (require 'use-package))
+
 (require 'package)
 (setq package-enable-at-startup nil)
 
@@ -7,15 +21,6 @@
      ("marmalade" . "http://marmalade-repo.org/packages/")
      ("melpa-stable" . "http://melpa-stable.milkbox.net/packages/")))
 (package-initialize)
-
-;; If package isn't installed, fetch it
-(defun require-package (package)
-  (setq-default highlight-tabs t)
-  "Install given PACKAGE."
-  (unless (package-installed-p package)
-    (unless (assoc package package-archive-contents)
-      (package-refresh-contents))
-    (package-install package)))
 
 ;; Load the Org file containing the customizations!
 (org-babel-load-file (expand-file-name "~/my-dotfiles/.emacs.d/myinit.org"))
@@ -207,10 +212,10 @@
  '(nyan-animate-nyancat t)
  '(nyan-animation-frame-interval 0.2)
  '(nyan-bar-length 16)
- '(nyan-mode t)
+ '(nyan-mode nil)
     '(org-agenda-files
          (quote
-             ("~/file-bouncer/org-files/projetos-sites/projeto-dermatologia.org" "~/file-bouncer/org-files/stand-up-meetings/Maio-2018.org" "/home/lucas/file-bouncer/org-files/contact-based-system/eu.org" "~/file-bouncer/org-files/blog.org" "/home/lucas/file-bouncer/org-files/contact-based-system/rosiane.org" "/home/lucas/file-bouncer/org-files/contact-based-system/elaine.org" "/home/lucas/file-bouncer/org-files/contact-based-system/aline-pegas.org" "~/file-bouncer/org-files/contact-based-system/ariane.org")))
+             ("~/file-bouncer/org-files/stand-up-meetings/Junho-2018.org" "~/file-bouncer/org-files/projetos-sites/projeto-dermatologia.org" "/home/lucas/file-bouncer/org-files/contact-based-system/eu.org" "~/file-bouncer/org-files/blog.org" "/home/lucas/file-bouncer/org-files/contact-based-system/rosiane.org" "/home/lucas/file-bouncer/org-files/contact-based-system/elaine.org" "/home/lucas/file-bouncer/org-files/contact-based-system/aline-pegas.org" "~/file-bouncer/org-files/contact-based-system/ariane.org")))
  '(org-agenda-scheduled-leaders (quote ("Scheduled: " "Sched. previously %2dx: ")))
  '(org-agenda-skip-scheduled-if-done t)
  '(org-bullets-bullet-list (quote ("✿" "❀" "◉" "○" "✸")))
