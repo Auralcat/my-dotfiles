@@ -3,17 +3,20 @@
 
 (setq url-cookie-storage
  '((".google.com"
-  [url-cookie "1P_JAR" "2018-05-31-16" "30-Jun-2018 16:14:40.00 GMT" "/" ".google.com" nil]
+  [url-cookie "HttpOnly" nil "30-Nov-2018 16:14:13.00 GMT" "/" ".google.com" nil]
   [url-cookie "NID" "131=Lgup60z7qV31WNtixsvnYX-rcQOgyz6V2KiZROoIsio3G8AiWovdkOuBOx5-dzBnPu1CksB6b1e6ctSY0sDXBu5RuJDeCLUmXq1SltI3jxiYJbCkniESz163OLvhqFrv" "30-Nov-2018 16:14:13.00 GMT" "/" ".google.com" nil]
-  [url-cookie "HttpOnly" nil "30-Nov-2018 16:14:13.00 GMT" "/" ".google.com" nil]))
+  [url-cookie "1P_JAR" "2018-05-31-16" "30-Jun-2018 16:14:40.00 GMT" "/" ".google.com" nil]))
 )
 (setq url-cookie-secure-storage
- '(("en.wikipedia.org"
-  [url-cookie "HttpOnly" nil "Mon, 02 Jul 2018 12:00:00 GMT" "/" "en.wikipedia.org" t]
-  [url-cookie "WMF-Last-Access" "31-May-2018" "Mon, 02 Jul 2018 12:00:00 GMT" "/" "en.wikipedia.org" t])
- (".wikipedia.org"
-  [url-cookie "HttpOnly" nil "Mon, 02 Jul 2018 12:00:00 GMT" "/" ".wikipedia.org" t]
-  [url-cookie "WMF-Last-Access-Global" "31-May-2018" "Mon, 02 Jul 2018 12:00:00 GMT" "/" ".wikipedia.org" t]))
+ '((".wikipedia.org"
+  [url-cookie "WMF-Last-Access-Global" "31-May-2018" "Mon, 02 Jul 2018 12:00:00 GMT" "/" ".wikipedia.org" t]
+  [url-cookie "HttpOnly" nil "Mon, 02 Jul 2018 12:00:00 GMT" "/" ".wikipedia.org" t])
+ (".github.com"
+  [url-cookie "logged_in" "no" "Wed, 02 Jun 2038 16:21:10 -0000" "/" ".github.com" t]
+  [url-cookie "HttpOnly" nil "Wed, 02 Jun 2038 16:21:10 -0000" "/" ".github.com" t])
+ ("en.wikipedia.org"
+  [url-cookie "WMF-Last-Access" "31-May-2018" "Mon, 02 Jul 2018 12:00:00 GMT" "/" "en.wikipedia.org" t]
+  [url-cookie "HttpOnly" nil "Mon, 02 Jul 2018 12:00:00 GMT" "/" "en.wikipedia.org" t]))
 )
 
 ;; Local Variables:

@@ -35,6 +35,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+    '(ansi-color-names-vector
+         ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
  '(auto-image-file-mode t)
  '(browse-url-browser-display nil)
  '(browse-url-firefox-program "firefox")
@@ -52,7 +54,7 @@
  '(company-transformers (quote (company-sort-by-backend-importance)))
     '(custom-safe-themes
          (quote
-             ("84d2f9eeb3f82d619ca4bfffe5f157282f4779732f48a5ac1484d94d5ff5b279" fairyfloss default)))
+             ("a19265ef7ecc16ac4579abb1635fd4e3e1185dcacbc01b7a43cf7ad107c27ced" "84d2f9eeb3f82d619ca4bfffe5f157282f4779732f48a5ac1484d94d5ff5b279" fairyfloss default)))
  '(display-battery-mode t)
  '(display-default-load-average nil)
  '(display-time-24hr-format t)
