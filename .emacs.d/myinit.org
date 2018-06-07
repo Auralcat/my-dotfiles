@@ -316,6 +316,10 @@ me, too many buffers to work with... for now.
 
    ;; Add web-mode completions when started
    (require 'company-web-html)
+
+   ;; Company statistics package
+   (use-package company-statistics)
+   (company-statistics-mode)
    #+END_SRC
 ** Keyfreq
    Shows most used commands in editing session.
