@@ -254,6 +254,10 @@
 ;; Add web-mode completions when started
 (require 'company-web-html)
 
+;; Company statistics package
+(use-package company-statistics)
+(company-statistics-mode)
+
 (require-package 'keyfreq)
 
 ;; Ignore arrow commands and self-insert-commands
