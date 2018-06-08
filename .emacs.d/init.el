@@ -52,9 +52,14 @@
  '(company-idle-delay 0.4)
  '(company-minimum-prefix-length 3)
  '(company-transformers (quote (company-sort-by-backend-importance)))
+ '(compilation-message-face (quote default))
+ '(cua-global-mark-cursor-color "#2aa198")
+ '(cua-normal-cursor-color "#839496")
+ '(cua-overwrite-cursor-color "#b58900")
+ '(cua-read-only-cursor-color "#859900")
     '(custom-safe-themes
          (quote
-             ("5d8c90053cf9c111aa50d26596a746fc0dacd18f6bc75fba8251fdd5f43a6277" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "a19265ef7ecc16ac4579abb1635fd4e3e1185dcacbc01b7a43cf7ad107c27ced" "84d2f9eeb3f82d619ca4bfffe5f157282f4779732f48a5ac1484d94d5ff5b279" fairyfloss default)))
+             ("d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "cb1804474af4e9d2b8e6517157c9fe54b8e76364c89bdba9d80fe1df50802c5b" "721bb3cb432bb6be7c58be27d583814e9c56806c06b4077797074b009f322509" "01e067188b0b53325fc0a1c6e06643d7e52bc16b6653de2926a480861ad5aa78" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "a19265ef7ecc16ac4579abb1635fd4e3e1185dcacbc01b7a43cf7ad107c27ced" "84d2f9eeb3f82d619ca4bfffe5f157282f4779732f48a5ac1484d94d5ff5b279" fairyfloss default)))
  '(display-battery-mode t)
  '(display-default-load-average nil)
  '(display-time-24hr-format t)
@@ -85,10 +90,34 @@
  '(erc-try-new-nick-p t)
  '(erc-user-full-name "Realnamezz")
  '(evil-shift-width 2)
+ '(fci-rule-color "#073642")
  '(font-use-system-font nil)
  '(global-auto-revert-mode t)
  '(global-emojify-mode t)
  '(global-linum-mode nil)
+ '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
+    '(highlight-symbol-colors
+         (--map
+             (solarized-color-blend it "#002b36" 0.25)
+             (quote
+                 ("#b58900" "#2aa198" "#dc322f" "#6c71c4" "#859900" "#cb4b16" "#268bd2"))))
+ '(highlight-symbol-foreground-color "#93a1a1")
+    '(highlight-tail-colors
+         (quote
+             (("#073642" . 0)
+                 ("#546E00" . 20)
+                 ("#00736F" . 30)
+                 ("#00629D" . 50)
+                 ("#7B6000" . 60)
+                 ("#8B2C02" . 70)
+                 ("#93115C" . 85)
+                 ("#073642" . 100))))
+    '(hl-bg-colors
+         (quote
+             ("#7B6000" "#8B2C02" "#990A1B" "#93115C" "#3F4D91" "#00629D" "#00736F" "#546E00")))
+    '(hl-fg-colors
+         (quote
+             ("#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36")))
  '(ido-enable-flex-matching nil)
  '(image-animate-loop t)
  '(indent-tabs-mode nil)
@@ -99,6 +128,7 @@
 # You can write the contents of this buffer to a file with C-x C-w.
 # Current default mode for this buffer is: Org-mode.")
  '(keyboard-coding-system (quote utf-8-unix))
+ '(magit-diff-use-overlays nil)
  '(menu-bar-mode nil)
     '(mode-icons
          (quote
@@ -258,10 +288,14 @@
                  nil "")))
  '(org-todo-keyword-faces (quote (("CURRENT" . "#ffcc11") ("NEXT" . "#6666ff"))))
  '(org-todo-keywords (quote ((sequence "TODO" "DONE"))))
+ '(pos-tip-background-color "#073642")
+ '(pos-tip-foreground-color "#93a1a1")
  '(reb-re-syntax (quote string))
  '(remember-data-file "~/file-bouncer/everything-bucket")
+ '(scss-compile-at-save nil)
  '(send-mail-function (quote smtpmail-send-it))
  '(shell-file-name "/bin/bash")
+ '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
     '(sml/mode-width
          (if
              (eq
@@ -333,10 +367,37 @@
  '(smtpmail-smtp-server "smtp.yandex.com")
  '(smtpmail-smtp-service 25)
  '(tags-tag-face (quote default))
+ '(term-default-bg-color "#002b36")
+ '(term-default-fg-color "#839496")
  '(tool-bar-mode nil)
  '(tooltip-mode nil)
  '(tramp-default-method "ssh")
+ '(vc-annotate-background nil)
+    '(vc-annotate-color-map
+         (quote
+             ((20 . "#dc322f")
+                 (40 . "#c85d17")
+                 (60 . "#be730b")
+                 (80 . "#b58900")
+                 (100 . "#a58e00")
+                 (120 . "#9d9100")
+                 (140 . "#959300")
+                 (160 . "#8d9600")
+                 (180 . "#859900")
+                 (200 . "#669b32")
+                 (220 . "#579d4c")
+                 (240 . "#489e65")
+                 (260 . "#399f7e")
+                 (280 . "#2aa198")
+                 (300 . "#2898af")
+                 (320 . "#2793ba")
+                 (340 . "#268fc6")
+                 (360 . "#268bd2"))))
+ '(vc-annotate-very-old-color nil)
  '(weechat-auto-monitor-buffers t)
+    '(weechat-color-list
+         (quote
+             (unspecified "#002b36" "#073642" "#990A1B" "#dc322f" "#546E00" "#859900" "#7B6000" "#b58900" "#00629D" "#268bd2" "#93115C" "#d33682" "#00736F" "#2aa198" "#839496" "#657b83")))
     '(weechat-modules
          (quote
              (weechat-button weechat-complete weechat-notifications weechat-image)))

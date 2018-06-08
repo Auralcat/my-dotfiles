@@ -161,9 +161,17 @@ me, too many buffers to work with... for now.
       (add-to-list 'auto-mode-alist
      '("\\.sass\\'" . sass-mode))
 
-      (add-to-list 'auto-mode-alist
-     '("\\.scss\\'" . css-mode)))
    #+END_SRC
+** SCSS-mode
+   Major mode for SCSS files, together with Sass.
+   #+BEGIN_SRC emacs-lisp
+   (use-package scss-mode
+
+      :config
+      (add-to-list 'auto-mode-alist
+     '("\\.scss\\'" . scss-mode)))
+   #+END_SRC
+
 ** Js2-mode
    A better default Javascript mode
    #+BEGIN_SRC emacs-lisp

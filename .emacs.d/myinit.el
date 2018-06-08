@@ -327,6 +327,8 @@
 
 (use-package moe-theme)
 
+(use-package cyberpunk-theme)
+
 ;; Set font in graphical mode
 (when (display-graphic-p)
     ;; Use Fantasque Sans Mono when available
