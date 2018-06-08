@@ -435,7 +435,11 @@ me, too many buffers to work with... for now.
    #+END_SRC
 
    #+RESULTS:
-
+** Cyberpunk
+   Dark, high-contrast theme
+   #+BEGIN_SRC emacs-lisp
+   (use-package cyberpunk-theme)
+   #+END_SRC
 * Graphical
 #+BEGIN_SRC emacs-lisp
 ;; Set font in graphical mode
