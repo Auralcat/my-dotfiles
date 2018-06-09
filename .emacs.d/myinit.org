@@ -183,6 +183,19 @@ me, too many buffers to work with... for now.
    ;; Set syntax highlight level
    (setq js2-highlight-level 3)
    #+END_SRC
+
+** Persp-mode
+   Allows you to save workspaces in Emacs and reload them from files
+   as well.
+   #+BEGIN_SRC emacs-lisp
+   (use-package persp-mode
+      :init
+      (
+         (with-eval-after-load "persp-mode-autoloads"
+         (setq wg-morph-on nil)  ;; Switch off animation
+         (setq persp-autokill-buffer-on-remove 'kill-weak)
+         (add-hook 'after-init-hooks #'(lambda () (persp-mode 1))))))
+   #+END_SRC
 ** Web-beautify
    Format HTML/CSS and JS code with js-beautify
    #+BEGIN_SRC emacs-lisp

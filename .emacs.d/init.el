@@ -288,6 +288,8 @@
                  nil "")))
  '(org-todo-keyword-faces (quote (("CURRENT" . "#ffcc11") ("NEXT" . "#6666ff"))))
  '(org-todo-keywords (quote ((sequence "TODO" "DONE"))))
+ '(persp-keymap-prefix "p")
+ '(persp-mode t nil (persp-mode))
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
  '(reb-re-syntax (quote string))
