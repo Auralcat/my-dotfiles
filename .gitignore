@@ -9,3 +9,4 @@ miriamretka.el
 .emacs.d/.emacs.desktop
 .emacs.d/.emacs.desktop.lock
 .emacs.d/amx-items
+.emacs.d/persp-confs/*
