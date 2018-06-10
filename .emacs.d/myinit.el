@@ -154,7 +154,8 @@
 ;; Set syntax highlight level
 (setq js2-highlight-level 3)
 
-(use-package persp-mode)
+(use-package perspective)
+(persp-mode)
 
 (use-package highlight-numbers)
 (add-hook 'prog-mode-hook 'highlight-numbers-mode)
