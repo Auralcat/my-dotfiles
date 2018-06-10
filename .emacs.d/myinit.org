@@ -487,9 +487,6 @@ me, too many buffers to work with... for now.
 ;; Unfill region
 (define-key global-map "\C-\M-q" 'unfill-region)
 
-;; Kill all the buffers matching the provided regex
-(global-set-key [24 75] (quote kill-matching-buffers))
-
 ;; Switch to last buffer - I do it all the time
 (global-set-key [27 112] (quote mode-line-other-buffer))
 
@@ -507,9 +504,6 @@ me, too many buffers to work with... for now.
 (global-set-key [home] (quote beginning-of-buffer))
 (global-set-key [end] (quote end-of-buffer))
 
-;; Open Emacs config file
-;; (find-file "~/.emacs" t)
-
 ;; Move to beginning of line or indentation
 (defun back-to-indentation-or-beginning () (interactive)
   (if (= (point) (progn (back-to-indentation) (point)))
@@ -520,9 +514,6 @@ me, too many buffers to work with... for now.
 ;; Hippie-Expand: change key to M-SPC; Replace dabbrev-expand
 (global-set-key "\M- " 'hippie-expand)
 (global-set-key "\M-/" 'hippie-expand)
-
-;; Cmus configurations: use the media keys with it in GUI Emacs
-;; Play/pause button
 
 ;; Eshell - bind M-p to go back to previous buffer
 (defun eshell-tweaks ()
@@ -610,9 +601,6 @@ me, too many buffers to work with... for now.
 (setq-default show-trailing-whitespace t)
 ;; Don't do that for terminal mode!
 (add-hook 'multi-term-mode-hook (setq-default show-trailing-whitespace nil))
-
-;; Python indentation
-(setq python-indent 4)
 
 (defun css-mode-tweaks()
   (emmet-mode 1)
