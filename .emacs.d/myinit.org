@@ -191,6 +191,15 @@ me, too many buffers to work with... for now.
    (use-package persp-mode)
 
    #+END_SRC
+
+** Highlight-numbers mode
+   Sets font lock faces to numbers in Emacs.
+   #+BEGIN_SRC emacs-lisp
+   (use-package highlight-numbers
+      :init (
+         (add-hook 'prog-mode-hook 'highlight-numbers-mode)
+   ))
+   #+END_SRC
 ** Web-beautify
    Format HTML/CSS and JS code with js-beautify
    #+BEGIN_SRC emacs-lisp
