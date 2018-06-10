@@ -31,7 +31,11 @@
 
 ;; Evil Leader configs
 ;; Use SPC as leader key (yah, this is the idea behind Spacemacs)
-(evil-leader/set-leader " ")
+(evil-leader/set-leader "SPC")
 
-;; Use Ace-Jump with Leader J
-(evil-leader/set-key "j" 'evil-ace-jump-char-mode)
+;; Bindings go here
+(evil-leader/set-key
+    ;; Use Ace-Jump with Leader j
+    "j" 'evil-ace-jump-char-mode
+    ;; Call Magit with Leader g
+    "g" 'magit-status)

@@ -1,6 +1,8 @@
 (require 'package)
 (setq package-enable-at-startup nil)
-(setq debug-on-error t)
+
+;; Use this for debugging
+;; (setq debug-on-error t)
 
 ;; Package repositories
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")

@@ -279,16 +279,17 @@ me, too many buffers to work with... for now.
 *** Evil Mode
     Yes, I'm committing this heresy
     #+BEGIN_SRC emacs-lisp
-    (require-package 'evil)
-    (evil-mode 1)
-
-    ;; Load configs
-    (load "~/my-dotfiles/.emacs.d/evilrc")
     #+END_SRC
 **** Evil-leader
      Add a prefix key to Evil mode, like the Leader key in Vim.
      #+BEGIN_SRC emacs-lisp
      (use-package evil-leader)
+     ;; Evil mode needs to be loaded after evil-leader
+     (use-package evil)
+     (evil-mode 1)
+
+     ;; Load configs
+     (load "~/my-dotfiles/.emacs.d/evilrc")
      #+END_SRC
 *** Helm
      Incremental completion and selection narrowing framework
@@ -499,9 +500,6 @@ me, too many buffers to work with... for now.
 ;; Mapping AltGr-d to delete-other-windows,
 ;; Another symbol I don't use often.
 (global-set-key [240] (quote delete-other-windows))
-
-;; Map magit-status to C-x g
-(global-set-key [24 103] (quote magit-status))
 
 ;; Access buffers with Alt-Gr b
 (global-set-key [8221] (quote ido-switch-buffer))
