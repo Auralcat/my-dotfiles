@@ -72,15 +72,11 @@
 ;; Enable global Abbrev mode
 (setq-default abbrev-mode t)
 
-;; General programming mode
-(defun set-programming-tweaks ()
-    (linum-mode 1)
-    (column-number-mode 1))
-
 ;; Prog-mode is from where all the programming modes are derived from.
 ;; This means that if you call prog-mode-hook, the settings will be
 ;; applied to ALL programming modes in Emacs.
-(add-hook 'prog-mode-hook (quote set-programming-tweaks))
+(add-hook 'prog-mode-hook 'linum-mode)
+(add-hook 'text-mode-hook 'column-number-mode)
 
 ;; Ruby
 ;; Activate ruby-tools
@@ -125,15 +121,6 @@
 ;; This is how you define aliases for Elisp functions
 (defalias 'plp 'package-list-packages)
 
-(use-package projectile)
-;; Enable it globally.
-(add-hook 'after-init-hook #'projectile-global-mode)
-
-(use-package autopair
-   :init (autopair-global-mode))
-
-(use-package emmet-mode)
-
 (use-package sass-mode
    ;; Set Sass mode for SASS files and Css mode for SCSS files.
    :config
@@ -154,19 +141,6 @@
 ;; Set syntax highlight level
 (setq js2-highlight-level 3)
 
-(use-package perspective)
-(persp-mode)
-
-(use-package highlight-numbers)
-(add-hook 'prog-mode-hook 'highlight-numbers-mode)
-
-(use-package web-beautify)
-
-(use-package flycheck
-   :config
-   ;; turn on flychecking globally
-   (add-hook 'after-init-hook #'global-flycheck-mode))
-
 (use-package php-mode)
 ;; Flymake support for PHP files
 (use-package flymake-php)
@@ -178,6 +152,42 @@
 (add-to-list 'auto-mode-alist
     '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'"
     . enh-ruby-mode))
+
+(require-package 'web-mode)
+
+;; File associations
+(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
+
+;; Engine associations
+(setq web-mode-engines-alist
+    '(("php"    . "\\.phtml\\'")
+    ("blade"  . "\\.blade\\."))
+)
+
+(use-package yaml-mode)
+
+(use-package csv-mode)
+
+(use-package projectile)
+;; Enable it globally.
+(add-hook 'after-init-hook #'projectile-global-mode)
+
+(use-package autopair
+   :init (autopair-global-mode))
+
+(use-package emmet-mode)
+
+(use-package highlight-numbers)
+(add-hook 'prog-mode-hook 'highlight-numbers-mode)
+
+(use-package flycheck
+   :config
+   ;; turn on flychecking globally
+   (add-hook 'after-init-hook #'global-flycheck-mode))
 
 (use-package ruby-tools)
 
@@ -200,35 +210,11 @@
     "https://stackoverflow.com/search?q=%s"
     :keybinding "s")
 
-;; Smart-mode-line depends on powerline
-(require-package 'powerline)
-(require 'powerline)
-(require-package 'smart-mode-line)
-
-;; Activate smart-mode-line
-(setq sml/theme 'powerline)
-(sml/setup)
-
 (require-package 'evil)
 (evil-mode 1)
 
 ;; Load configs
 (load "~/my-dotfiles/.emacs.d/evilrc")
-
-(require-package 'web-mode)
-
-;; File associations
-(add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-
-;; Engine associations
-(setq web-mode-engines-alist
-    '(("php"    . "\\.phtml\\'")
-    ("blade"  . "\\.blade\\."))
-)
 
 (require-package 'helm)
 (require 'helm-config)
@@ -287,8 +273,7 @@
 (keyfreq-mode 1)
 (keyfreq-autosave-mode 1)
 
-(require-package 'diminish)
-
+(use-package diminish)
 ;; Diminish them!
 (diminish 'company-mode)
 (diminish 'editorconfig-mode)
@@ -296,20 +281,32 @@
 (diminish 'helm-mode)
 (diminish 'auto-revert-mode)
 
-(use-package magit)
-
 (use-package editorconfig
    :init
    ;; Activate it.
    (editorconfig-mode 1))
 
-(use-package yaml-mode)
+(use-package nyan-mode)
+(nyan-mode 1)
 
-(use-package csv-mode)
-
-(use-package nyan-mode
+(use-package mode-icons
    :init
-   (nyan-mode 1))
+   (mode-icons-mode))
+
+(use-package emojify)
+
+;; Smart-mode-line depends on powerline
+(require-package 'powerline)
+(require 'powerline)
+(require-package 'smart-mode-line)
+
+;; Activate smart-mode-line
+(setq sml/theme 'powerline)
+(sml/setup)
+
+(use-package web-beautify)
+
+(use-package magit)
 
 ;; Eshell extras
 (use-package eshell-prompt-extras)
@@ -321,12 +318,6 @@
     eshell-prompt-function 'epe-theme-lambda))
 
 (use-package yasnippet-snippets)
-
-(use-package mode-icons
-   :init
-   (mode-icons-mode))
-
-(use-package emojify)
 
 (use-package theme-changer
    :config
@@ -365,9 +356,6 @@
 ;; Unfill region
 (define-key global-map "\C-\M-q" 'unfill-region)
 
-;; Kill all the buffers matching the provided regex
-(global-set-key [24 75] (quote kill-matching-buffers))
-
 ;; Switch to last buffer - I do it all the time
 (global-set-key [27 112] (quote mode-line-other-buffer))
 
@@ -385,9 +373,6 @@
 (global-set-key [home] (quote beginning-of-buffer))
 (global-set-key [end] (quote end-of-buffer))
 
-;; Open Emacs config file
-;; (find-file "~/.emacs" t)
-
 ;; Move to beginning of line or indentation
 (defun back-to-indentation-or-beginning () (interactive)
   (if (= (point) (progn (back-to-indentation) (point)))
@@ -398,9 +383,6 @@
 ;; Hippie-Expand: change key to M-SPC; Replace dabbrev-expand
 (global-set-key "\M- " 'hippie-expand)
 (global-set-key "\M-/" 'hippie-expand)
-
-;; Cmus configurations: use the media keys with it in GUI Emacs
-;; Play/pause button
 
 ;; Eshell - bind M-p to go back to previous buffer
 (defun eshell-tweaks ()
@@ -455,24 +437,6 @@
    :init
    (add-hook 'org-mode-hook (lambda() (org-bullets-mode 1))))
 
-;; Enh-ruby-mode: Run buffer in inf-ruby process
-(add-hook 'enh-ruby-mode-hook
-  '(lambda ()
-     (local-set-key [3 3] (quote ruby-send-buffer))))
-
-;; Python-mode: Send buffer to python shell
-(local-set-key [3 2] (quote python-shell-send-buffer))
-
-;; Elisp-mode: Eval-buffer with C-c C-c
-(add-hook 'emacs-lisp-mode-hook
-  '(lambda ()
-     (local-set-key "\C-c \C-c" (quote eval-buffer))))
-
-;; SGML mode (AKA HTML mode) - Open buffer in browser
-(add-hook 'sgml-mode-hook
-  '(lambda ()
-     (local-set-key "\C-c \C-o" (quote browse-url-of-buffer))))
-
 ;; Set Org mode as default mode for new buffers:
 (setq-default major-mode 'org-mode)
 
@@ -496,9 +460,6 @@
 (setq-default show-trailing-whitespace t)
 ;; Don't do that for terminal mode!
 (add-hook 'multi-term-mode-hook (setq-default show-trailing-whitespace nil))
-
-;; Python indentation
-(setq python-indent 4)
 
 (defun css-mode-tweaks()
   (emmet-mode 1)

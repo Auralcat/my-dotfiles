@@ -80,15 +80,11 @@
 #+END_SRC
 * Hooks
 #+BEGIN_SRC emacs-lisp
-;; General programming mode
-(defun set-programming-tweaks ()
-    (linum-mode 1)
-    (column-number-mode 1))
-
 ;; Prog-mode is from where all the programming modes are derived from.
 ;; This means that if you call prog-mode-hook, the settings will be
 ;; applied to ALL programming modes in Emacs.
-(add-hook 'prog-mode-hook (quote set-programming-tweaks))
+(add-hook 'prog-mode-hook 'linum-mode)
+(add-hook 'text-mode-hook 'column-number-mode)
 
 ;; Ruby
 ;; Activate ruby-tools
