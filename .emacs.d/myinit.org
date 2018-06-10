@@ -285,6 +285,11 @@ me, too many buffers to work with... for now.
     ;; Load configs
     (load "~/my-dotfiles/.emacs.d/evilrc")
     #+END_SRC
+**** Evil-leader
+     Add a prefix key to Evil mode, like the Leader key in Vim.
+     #+BEGIN_SRC emacs-lisp
+     (use-package evil-leader)
+     #+END_SRC
 *** Helm
      Incremental completion and selection narrowing framework
      #+BEGIN_SRC emacs-lisp

@@ -28,3 +28,10 @@
 
 ;; Use gs to set bookmarks
 (define-key evil-normal-state-map (kbd "gs") 'bookmark-set)
+
+;; Evil Leader configs
+;; Use SPC as leader key (yah, this is the idea behind Spacemacs)
+(evil-leader/set-leader " ")
+
+;; Use Ace-Jump with Leader J
+(evil-leader/set-key "j" 'evil-ace-jump-char-mode)
