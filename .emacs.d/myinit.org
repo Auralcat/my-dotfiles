@@ -369,6 +369,7 @@ me, too many buffers to work with... for now.
        :diminish company-mode
        :diminish undo-tree-mode
        :diminish auto-revert-mode
+       :diminish auto-fill-function
        :diminish abbrev-mode
        :diminish autopair-mode)
     ;; These are loaded at other moments

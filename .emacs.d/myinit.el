@@ -284,7 +284,7 @@
    :diminish company-mode
    :diminish undo-tree-mode
    :diminish auto-revert-mode
-   :diminish auto-fill-mode
+   :diminish auto-fill-function
    :diminish abbrev-mode
    :diminish autopair-mode)
 ;; These are loaded at other moments
