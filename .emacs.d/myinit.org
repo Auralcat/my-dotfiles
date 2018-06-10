@@ -143,6 +143,13 @@ me, too many buffers to work with... for now.
 (defalias 'plp 'package-list-packages)
 #+END_SRC
 * Packages
+** Projectile
+   Manage projects in Emacs.
+   #+BEGIN_SRC emacs-lisp
+   (use-package projectile)
+   ;; Enable it globally.
+   (add-hook 'after-init-hook #'projectile-global-mode)
+   #+END_SRC
 ** Autopair
   Automatically pair braces and quotes like in TextMate
   #+BEGIN_SRC emacs-lisp
@@ -195,10 +202,8 @@ me, too many buffers to work with... for now.
 ** Highlight-numbers mode
    Sets font lock faces to numbers in Emacs.
    #+BEGIN_SRC emacs-lisp
-   (use-package highlight-numbers
-      :init (
-         (add-hook 'prog-mode-hook 'highlight-numbers-mode)
-   ))
+   (use-package highlight-numbers)
+   (add-hook 'prog-mode-hook 'highlight-numbers-mode)
    #+END_SRC
 ** Web-beautify
    Format HTML/CSS and JS code with js-beautify

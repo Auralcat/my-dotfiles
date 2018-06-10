@@ -1,3 +1,4 @@
+
 ;; A small performance improvement
 (setq redisplay-dont-pause t)
 
@@ -124,6 +125,10 @@
 ;; This is how you define aliases for Elisp functions
 (defalias 'plp 'package-list-packages)
 
+(use-package projectile)
+;; Enable it globally.
+(add-hook 'after-init-hook #'projectile-global-mode)
+
 (use-package autopair
    :init (autopair-global-mode))
 
@@ -150,6 +155,9 @@
 (setq js2-highlight-level 3)
 
 (use-package persp-mode)
+
+(use-package highlight-numbers)
+(add-hook 'prog-mode-hook 'highlight-numbers-mode)
 
 (use-package web-beautify)
 
