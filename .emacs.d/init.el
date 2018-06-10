@@ -289,6 +289,7 @@
                  nil "")))
  '(org-todo-keyword-faces (quote (("CURRENT" . "#ffcc11") ("NEXT" . "#6666ff"))))
  '(org-todo-keywords (quote ((sequence "TODO" "DONE"))))
+ '(persp-show-modestring (quote (quote header)))
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
  '(reb-re-syntax (quote string))

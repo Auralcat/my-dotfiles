@@ -190,14 +190,6 @@ me, too many buffers to work with... for now.
    ;; Set syntax highlight level
    (setq js2-highlight-level 3)
    #+END_SRC
-
-** Perspective
-   Switch between named "perspectives" of the editor.
-   #+BEGIN_SRC emacs-lisp
-   (use-package perspective)
-   (persp-mode)
-   #+END_SRC
-
 ** Highlight-numbers mode
    Sets font lock faces to numbers in Emacs.
    #+BEGIN_SRC emacs-lisp
@@ -693,3 +685,11 @@ me, too many buffers to work with... for now.
   #+END_SRC
 
   #+RESULTS:
+* Packages saved for later need
+** Perspective
+# ** Perspective
+#    Switch between named "perspectives" of the editor.
+#    #+BEGIN_SRC emacs-lisp
+#    (use-package perspective)
+#    (persp-mode)
+#    #+END_SRC
