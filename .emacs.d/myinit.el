@@ -278,13 +278,19 @@
 (keyfreq-mode 1)
 (keyfreq-autosave-mode 1)
 
-(use-package diminish)
-;; Diminish them!
-(diminish 'company-mode)
-(diminish 'editorconfig-mode)
-(diminish 'autopair-mode)
-(diminish 'helm-mode)
-(diminish 'auto-revert-mode)
+(use-package diminish
+   ;; These are loaded at startup
+   :diminish helm-mode
+   :diminish company-mode
+   :diminish undo-tree-mode
+   :diminish auto-revert-mode
+   :diminish auto-fill-mode
+   :diminish abbrev-mode
+   :diminish autopair-mode)
+;; These are loaded at other moments
+(eval-after-load "editorconfig" '(diminish 'editorconfig-mode))
+(eval-after-load "yasnippet" '(diminish 'yas-minor-mode))
+(eval-after-load "projectile" '(diminish 'projectile-mode))
 
 (use-package editorconfig
    :init
