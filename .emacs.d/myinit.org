@@ -159,7 +159,7 @@ me, too many buffers to work with... for now.
       ;; Set Sass mode for SASS files and Css mode for SCSS files.
       :config
       (add-to-list 'auto-mode-alist
-     '("\\.sass\\'" . sass-mode))
+     '("\\.sass\\'" . sass-mode)))
 
    #+END_SRC
 ** SCSS-mode
@@ -188,13 +188,8 @@ me, too many buffers to work with... for now.
    Allows you to save workspaces in Emacs and reload them from files
    as well.
    #+BEGIN_SRC emacs-lisp
-   (use-package persp-mode
-      :init
-      (
-         (with-eval-after-load "persp-mode-autoloads"
-         (setq wg-morph-on nil)  ;; Switch off animation
-         (setq persp-autokill-buffer-on-remove 'kill-weak)
-         (add-hook 'after-init-hooks #'(lambda () (persp-mode 1))))))
+   (use-package persp-mode)
+
    #+END_SRC
 ** Web-beautify
    Format HTML/CSS and JS code with js-beautify

@@ -1,5 +1,6 @@
 (require 'package)
 (setq package-enable-at-startup nil)
+(setq debug-on-error t)
 
 ;; Package repositories
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
@@ -59,7 +60,7 @@
  '(cua-read-only-cursor-color "#859900")
     '(custom-safe-themes
          (quote
-             ("d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "cb1804474af4e9d2b8e6517157c9fe54b8e76364c89bdba9d80fe1df50802c5b" "721bb3cb432bb6be7c58be27d583814e9c56806c06b4077797074b009f322509" "01e067188b0b53325fc0a1c6e06643d7e52bc16b6653de2926a480861ad5aa78" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "a19265ef7ecc16ac4579abb1635fd4e3e1185dcacbc01b7a43cf7ad107c27ced" "84d2f9eeb3f82d619ca4bfffe5f157282f4779732f48a5ac1484d94d5ff5b279" fairyfloss default)))
+             ("aad2caf3759b343577768009f89d1a4cbfcea2c4f49331be753c397532250dae" "ec1b0bea97534b2d56d736e454ae09193fc59fbc932710bb88a49dfef515a216" "5d8c90053cf9c111aa50d26596a746fc0dacd18f6bc75fba8251fdd5f43a6277" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "cb1804474af4e9d2b8e6517157c9fe54b8e76364c89bdba9d80fe1df50802c5b" "721bb3cb432bb6be7c58be27d583814e9c56806c06b4077797074b009f322509" "01e067188b0b53325fc0a1c6e06643d7e52bc16b6653de2926a480861ad5aa78" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "a19265ef7ecc16ac4579abb1635fd4e3e1185dcacbc01b7a43cf7ad107c27ced" "84d2f9eeb3f82d619ca4bfffe5f157282f4779732f48a5ac1484d94d5ff5b279" fairyfloss default)))
  '(display-battery-mode t)
  '(display-default-load-average nil)
  '(display-time-24hr-format t)
@@ -412,12 +413,14 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(default ((t (:family "Fantasque Sans Mono" :foundry "PfEd" :slant normal :weight normal :height 120 :width normal))))
  '(company-scrollbar-bg ((((class color) (min-colors 89)) (:background "#5f5f5f"))))
  '(company-scrollbar-fg ((((class color) (min-colors 89)) (:background "#9e9e9e"))))
  '(company-template-field ((((class color) (min-colors 89)) (:background "#ffffaf" :foreground "#626262"))))
  '(company-tooltip ((((class color) (min-colors 89)) (:background "#3a3a3a" :foreground "#5fafd7"))))
  '(company-tooltip-common ((((class color) (min-colors 89)) (:background "#5f5f5f" :foreground "#5fafd7"))))
  '(company-tooltip-selection ((((class color) (min-colors 89)) (:background "#626262" :foreground "#afd7ff"))))
+ '(enh-ruby-number-face ((t (:foreground "medium purple"))) t)
  '(org-scheduled-previously ((t (:foreground "#778855"))))
  '(org-upcoming-deadline ((((class color) (min-colors 89)) (:foreground "#a40000"))))
  '(outline-1 ((t (:inherit font-lock-function-name-face :height 1.0))))

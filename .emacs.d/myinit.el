@@ -1,4 +1,3 @@
-
 ;; A small performance improvement
 (setq redisplay-dont-pause t)
 
@@ -134,10 +133,13 @@
    ;; Set Sass mode for SASS files and Css mode for SCSS files.
    :config
    (add-to-list 'auto-mode-alist
-  '("\\.sass\\'" . sass-mode))
+  '("\\.sass\\'" . sass-mode)))
 
+(use-package scss-mode
+
+   :config
    (add-to-list 'auto-mode-alist
-  '("\\.scss\\'" . css-mode)))
+  '("\\.scss\\'" . scss-mode)))
 
 (use-package js2-mode)
 
@@ -146,6 +148,8 @@
 
 ;; Set syntax highlight level
 (setq js2-highlight-level 3)
+
+(use-package persp-mode)
 
 (use-package web-beautify)
 
