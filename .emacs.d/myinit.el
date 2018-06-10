@@ -210,7 +210,12 @@
     "https://stackoverflow.com/search?q=%s"
     :keybinding "s")
 
-(require-package 'evil)
+
+
+(use-package evil-leader)
+(global-evil-leader-mode)
+;; Evil mode needs to be loaded after evil-leader
+(use-package evil)
 (evil-mode 1)
 
 ;; Load configs
@@ -329,6 +334,8 @@
    ;; Specify the day and night themes:
    (change-theme 'whiteboard 'fairyfloss)))
 
+(use-package ace-jump-mode)
+
 (use-package moe-theme)
 
 (use-package cyberpunk-theme)
@@ -362,9 +369,6 @@
 ;; Mapping AltGr-d to delete-other-windows,
 ;; Another symbol I don't use often.
 (global-set-key [240] (quote delete-other-windows))
-
-;; Map magit-status to C-x g
-(global-set-key [24 103] (quote magit-status))
 
 ;; Access buffers with Alt-Gr b
 (global-set-key [8221] (quote ido-switch-buffer))

@@ -284,6 +284,7 @@ me, too many buffers to work with... for now.
      Add a prefix key to Evil mode, like the Leader key in Vim.
      #+BEGIN_SRC emacs-lisp
      (use-package evil-leader)
+     (global-evil-leader-mode)
      ;; Evil mode needs to be loaded after evil-leader
      (use-package evil)
      (evil-mode 1)
