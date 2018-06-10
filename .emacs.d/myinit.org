@@ -443,6 +443,11 @@ me, too many buffers to work with... for now.
        ;; Specify the day and night themes:
        (change-theme 'whiteboard 'fairyfloss)))
     #+END_SRC
+*** Ace Jump Mode
+    Move to any word with 2 keypresses.
+    #+BEGIN_SRC emacs-lisp
+    (use-package ace-jump-mode)
+    #+END_SRC
 * Themes
 ** Moe
    Light and dark theme
