@@ -1,0 +1,12 @@
+# key: hbf
+# name: Wireframe: header-body-footer
+# --
+<header>
+    $1
+</header>
+<main>
+    $2
+</main>
+<footer>
+    $3
+</footer>
