@@ -405,6 +405,14 @@ me, too many buffers to work with... for now.
     (use-package emojify)
     #+END_SRC
 ** Utilities
+*** Rainbow Delimiters
+    Highlight parentheses, brackets and braces according to their
+    depth.
+    #+BEGIN_SRC emacs-lisp
+    (use-package rainbow-delimiters)
+    ;; Add this to prog-mode
+    (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+    #+END_SRC
 *** Smart Mode Line
     Prettier mode line.
     #+BEGIN_SRC emacs-lisp

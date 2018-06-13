@@ -63,7 +63,7 @@
  '(cua-read-only-cursor-color "#859900")
     '(custom-safe-themes
          (quote
-             ("addfaf4c6f76ef957189d86b1515e9cf9fcd603ab6da795b82b79830eed0b284" "aad2caf3759b343577768009f89d1a4cbfcea2c4f49331be753c397532250dae" "ec1b0bea97534b2d56d736e454ae09193fc59fbc932710bb88a49dfef515a216" "5d8c90053cf9c111aa50d26596a746fc0dacd18f6bc75fba8251fdd5f43a6277" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "cb1804474af4e9d2b8e6517157c9fe54b8e76364c89bdba9d80fe1df50802c5b" "721bb3cb432bb6be7c58be27d583814e9c56806c06b4077797074b009f322509" "01e067188b0b53325fc0a1c6e06643d7e52bc16b6653de2926a480861ad5aa78" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "a19265ef7ecc16ac4579abb1635fd4e3e1185dcacbc01b7a43cf7ad107c27ced" "84d2f9eeb3f82d619ca4bfffe5f157282f4779732f48a5ac1484d94d5ff5b279" fairyfloss default)))
+             ("b9e9ba5aeedcc5ba8be99f1cc9301f6679912910ff92fdf7980929c2fc83ab4d" "addfaf4c6f76ef957189d86b1515e9cf9fcd603ab6da795b82b79830eed0b284" "aad2caf3759b343577768009f89d1a4cbfcea2c4f49331be753c397532250dae" "ec1b0bea97534b2d56d736e454ae09193fc59fbc932710bb88a49dfef515a216" "5d8c90053cf9c111aa50d26596a746fc0dacd18f6bc75fba8251fdd5f43a6277" "a27c00821ccfd5a78b01e4f35dc056706dd9ede09a8b90c6955ae6a390eb1c1e" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "cb1804474af4e9d2b8e6517157c9fe54b8e76364c89bdba9d80fe1df50802c5b" "721bb3cb432bb6be7c58be27d583814e9c56806c06b4077797074b009f322509" "01e067188b0b53325fc0a1c6e06643d7e52bc16b6653de2926a480861ad5aa78" "3c83b3676d796422704082049fc38b6966bcad960f896669dfc21a7a37a748fa" "c74e83f8aa4c78a121b52146eadb792c9facc5b1f02c917e3dbb454fca931223" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "a19265ef7ecc16ac4579abb1635fd4e3e1185dcacbc01b7a43cf7ad107c27ced" "84d2f9eeb3f82d619ca4bfffe5f157282f4779732f48a5ac1484d94d5ff5b279" fairyfloss default)))
  '(display-battery-mode t)
  '(display-default-load-average nil)
  '(display-time-24hr-format t)
@@ -251,7 +251,7 @@
  '(nyan-mode nil)
     '(org-agenda-files
          (quote
-             ("~/file-bouncer/org-files/stand-up-meetings/Junho-2018.org" "~/file-bouncer/org-files/projetos-sites/projeto-dermatologia.org" "/home/lucas/file-bouncer/org-files/contact-based-system/eu.org" "~/file-bouncer/org-files/blog.org" "/home/lucas/file-bouncer/org-files/contact-based-system/rosiane.org" "/home/lucas/file-bouncer/org-files/contact-based-system/elaine.org" "/home/lucas/file-bouncer/org-files/contact-based-system/aline-pegas.org" "~/file-bouncer/org-files/contact-based-system/ariane.org")))
+             ("~/file-bouncer/org-files/stand-up-meetings/Junho-2018.org" "/home/lucas/file-bouncer/org-files/contact-based-system/eu.org" "~/file-bouncer/org-files/blog.org" "/home/lucas/file-bouncer/org-files/contact-based-system/rosiane.org" "/home/lucas/file-bouncer/org-files/contact-based-system/elaine.org" "/home/lucas/file-bouncer/org-files/contact-based-system/aline-pegas.org" "~/file-bouncer/org-files/contact-based-system/ariane.org")))
  '(org-agenda-scheduled-leaders (quote ("Scheduled: " "Sched. previously %2dx: ")))
  '(org-agenda-skip-scheduled-if-done t)
  '(org-bullets-bullet-list (quote ("✿" "❀" "◉" "○" "✸")))
