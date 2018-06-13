@@ -292,6 +292,12 @@ me, too many buffers to work with... for now.
      ;; Load configs
      (load "~/my-dotfiles/.emacs.d/evilrc")
      #+END_SRC
+**** Evil Surround
+     Easier manipulation of delimiters, emulation of vim.surround
+     #+BEGIN_SRC emacs-lisp
+     (use-package evil-surround)
+     (global-evil-surround-mode)
+     #+END_SRC
 *** Helm
      Incremental completion and selection narrowing framework
      #+BEGIN_SRC emacs-lisp
