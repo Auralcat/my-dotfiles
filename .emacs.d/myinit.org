@@ -421,15 +421,13 @@ me, too many buffers to work with... for now.
     #+END_SRC
 *** Smart Mode Line
     Prettier mode line.
+    You can activate it with M-x sml/setup.
     #+BEGIN_SRC emacs-lisp
     ;; Smart-mode-line depends on powerline
     (require-package 'powerline)
     (require 'powerline)
     (require-package 'smart-mode-line)
 
-    ;; Activate smart-mode-line
-    (setq sml/theme 'powerline)
-    (sml/setup)
     #+END_SRC
 *** Web-beautify
     Format HTML/CSS and JS code with js-beautify
@@ -483,11 +481,18 @@ me, too many buffers to work with... for now.
    (use-package moe-theme)
    #+END_SRC
 
-   #+RESULTS:
-** Cyberpunk
-   Dark, high-contrast theme
+* Mode Line
+** Moe Modeline Themes
+   Use moe-theme's powerline support instead of sml
    #+BEGIN_SRC emacs-lisp
-   (use-package cyberpunk-theme)
+   ;; Show highlighted buffer-id as decoration. (Default: nil)
+   (setq moe-theme-highlight-buffer-id t)
+
+   ;; Activate SML
+   (sml/setup)
+   ;; Choose a color for the mode line (Default: blue)
+   (powerline-moe-theme)
+   (moe-theme-set-color 'purple)
    #+END_SRC
 * Graphical
 #+BEGIN_SRC emacs-lisp

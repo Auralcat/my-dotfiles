@@ -251,7 +251,7 @@
  '(nyan-mode nil)
     '(org-agenda-files
          (quote
-             ("~/file-bouncer/org-files/stand-up-meetings/Junho-2018.org" "~/file-bouncer/org-files/projetos-sites/projeto-dermatologia.org" "/home/lucas/file-bouncer/org-files/contact-based-system/eu.org" "~/file-bouncer/org-files/blog.org" "/home/lucas/file-bouncer/org-files/contact-based-system/rosiane.org" "/home/lucas/file-bouncer/org-files/contact-based-system/elaine.org" "/home/lucas/file-bouncer/org-files/contact-based-system/aline-pegas.org" "~/file-bouncer/org-files/contact-based-system/ariane.org")))
+             ("~/file-bouncer/org-files/stand-up-meetings/Junho-2018.org" "/home/lucas/file-bouncer/org-files/contact-based-system/eu.org" "~/file-bouncer/org-files/blog.org" "/home/lucas/file-bouncer/org-files/contact-based-system/rosiane.org" "/home/lucas/file-bouncer/org-files/contact-based-system/elaine.org" "/home/lucas/file-bouncer/org-files/contact-based-system/aline-pegas.org" "~/file-bouncer/org-files/contact-based-system/ariane.org")))
  '(org-agenda-scheduled-leaders (quote ("Scheduled: " "Sched. previously %2dx: ")))
  '(org-agenda-skip-scheduled-if-done t)
  '(org-bullets-bullet-list (quote ("✿" "❀" "◉" "○" "✸")))
@@ -429,7 +429,7 @@
  '(outline-1 ((t (:inherit font-lock-function-name-face :height 1.0))))
  '(region ((((class color) (min-colors 89)) (:foreground "#ffffff" :background "#5fafd7"))))
  '(sml/filename ((t (:inherit sml/global :foreground "Black"))))
- '(sml/folder ((t (:inherit sml/global :background "Grey22" :foreground "Black" :weight normal))))
+ '(sml/folder ((t (:inherit sml/global :foreground "Black" :weight normal))))
  '(sml/modes ((t (:inherit sml/global :background "grey40" :foreground "Black" :height 1.0))))
  '(sml/time ((t (:inherit sml/global :foreground "green" :height 1.05 :foundry "ALTS" :family "Digital"))))
  '(time-mail-face ((t (:family "IBM 3270"))) t))

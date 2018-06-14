@@ -318,10 +318,6 @@
 (require 'powerline)
 (require-package 'smart-mode-line)
 
-;; Activate smart-mode-line
-(setq sml/theme 'powerline)
-(sml/setup)
-
 (use-package web-beautify)
 
 (use-package magit)
@@ -351,9 +347,14 @@
 
 (use-package moe-theme)
 
-(use-package cyberpunk-theme)
+;; Show highlighted buffer-id as decoration. (Default: nil)
+(setq moe-theme-highlight-buffer-id t)
 
-(use-package github-theme)
+;; Activate SML
+(sml/setup)
+;; Choose a color for the mode line (Default: blue)
+(powerline-moe-theme)
+(moe-theme-set-color 'purple)
 
 ;; Set font in graphical mode
 (when (display-graphic-p)
