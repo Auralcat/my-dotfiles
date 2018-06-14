@@ -221,6 +221,9 @@
 ;; Load configs
 (load "~/my-dotfiles/.emacs.d/evilrc")
 
+(use-package evil-surround)
+(global-evil-surround-mode)
+
 (require-package 'helm)
 (require 'helm-config)
 (helm-mode 1)
@@ -306,6 +309,10 @@
 
 (use-package emojify)
 
+(use-package rainbow-delimiters)
+;; Add this to prog-mode
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+
 ;; Smart-mode-line depends on powerline
 (require-package 'powerline)
 (require 'powerline)
@@ -345,6 +352,8 @@
 (use-package moe-theme)
 
 (use-package cyberpunk-theme)
+
+(use-package github-theme)
 
 ;; Set font in graphical mode
 (when (display-graphic-p)

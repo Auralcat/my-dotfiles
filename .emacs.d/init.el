@@ -239,7 +239,7 @@
  '(mode-icons-change-mode-name t)
  '(mode-icons-generate-emoji-xpms t)
  '(mode-icons-generate-font-xpms t)
- '(mode-icons-mode nil)
+ '(mode-icons-mode t)
     '(mode-line-format
          (quote
              ("%e" mode-line-front-space mode-line-mule-info mode-line-client mode-line-modified mode-line-remote mode-line-frame-identification mode-line-buffer-identification mode-line-file-name "   " mode-line-position evil-mode-line-tag
@@ -428,10 +428,10 @@
  '(org-upcoming-deadline ((((class color) (min-colors 89)) (:foreground "#a40000"))))
  '(outline-1 ((t (:inherit font-lock-function-name-face :height 1.0))))
  '(region ((((class color) (min-colors 89)) (:foreground "#ffffff" :background "#5fafd7"))))
- '(sml/filename ((t (:inherit sml/global :background "Grey22" :foreground "Black"))))
+ '(sml/filename ((t (:inherit sml/global :foreground "Black"))))
  '(sml/folder ((t (:inherit sml/global :background "Grey22" :foreground "Black" :weight normal))))
  '(sml/modes ((t (:inherit sml/global :background "grey40" :foreground "Black" :height 1.0))))
- '(sml/time ((t (:inherit sml/global :background "black" :foreground "green" :height 1.05 :foundry "ALTS" :family "Digital"))))
+ '(sml/time ((t (:inherit sml/global :foreground "green" :height 1.05 :foundry "ALTS" :family "Digital"))))
  '(time-mail-face ((t (:family "IBM 3270"))) t))
 (put 'upcase-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
