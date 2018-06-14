@@ -316,7 +316,7 @@
 ;; Smart-mode-line depends on powerline
 (require-package 'powerline)
 (require 'powerline)
-(require-package 'smart-mode-line)
+;; (require-package 'smart-mode-line)
 
 (use-package web-beautify)
 
@@ -351,7 +351,7 @@
 (setq moe-theme-highlight-buffer-id t)
 
 ;; Activate SML
-(sml/setup)
+;; (sml/setup t)
 ;; Choose a color for the mode line (Default: blue)
 (powerline-moe-theme)
 (moe-theme-set-color 'purple)
