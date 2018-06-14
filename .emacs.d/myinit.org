@@ -488,6 +488,14 @@ me, too many buffers to work with... for now.
    #+BEGIN_SRC emacs-lisp
    (use-package cyberpunk-theme)
    #+END_SRC
+** Github
+   I like the light version of this.
+   #+BEGIN_SRC emacs-lisp
+   (use-package github-theme)
+   #+END_SRC
+
+   #+RESULTS:
+
 * Graphical
 #+BEGIN_SRC emacs-lisp
 ;; Set font in graphical mode

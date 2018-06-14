@@ -1,1 +1,1 @@
-("~/my-dotfiles/" "~/ruby-goodies/" "~/fairyfloss/" "~/file-bouncer/" "~/front-loops/" "~/freecodecamp-projects/" "~/")
+("~/my-dotfiles/" "~/file-bouncer/" "~/front-loops/" "~/freecodecamp-projects/" "~/" "~/ruby-goodies/" "~/fairyfloss/")

@@ -239,7 +239,7 @@
  '(mode-icons-change-mode-name t)
  '(mode-icons-generate-emoji-xpms t)
  '(mode-icons-generate-font-xpms t)
- '(mode-icons-mode t)
+ '(mode-icons-mode nil)
     '(mode-line-format
          (quote
              ("%e" mode-line-front-space mode-line-mule-info mode-line-client mode-line-modified mode-line-remote mode-line-frame-identification mode-line-buffer-identification mode-line-file-name "   " mode-line-position evil-mode-line-tag
@@ -251,7 +251,7 @@
  '(nyan-mode nil)
     '(org-agenda-files
          (quote
-             ("~/file-bouncer/org-files/stand-up-meetings/Junho-2018.org" "/home/lucas/file-bouncer/org-files/contact-based-system/eu.org" "~/file-bouncer/org-files/blog.org" "/home/lucas/file-bouncer/org-files/contact-based-system/rosiane.org" "/home/lucas/file-bouncer/org-files/contact-based-system/elaine.org" "/home/lucas/file-bouncer/org-files/contact-based-system/aline-pegas.org" "~/file-bouncer/org-files/contact-based-system/ariane.org")))
+             ("~/file-bouncer/org-files/stand-up-meetings/Junho-2018.org" "~/file-bouncer/org-files/projetos-sites/projeto-dermatologia.org" "/home/lucas/file-bouncer/org-files/contact-based-system/eu.org" "~/file-bouncer/org-files/blog.org" "/home/lucas/file-bouncer/org-files/contact-based-system/rosiane.org" "/home/lucas/file-bouncer/org-files/contact-based-system/elaine.org" "/home/lucas/file-bouncer/org-files/contact-based-system/aline-pegas.org" "~/file-bouncer/org-files/contact-based-system/ariane.org")))
  '(org-agenda-scheduled-leaders (quote ("Scheduled: " "Sched. previously %2dx: ")))
  '(org-agenda-skip-scheduled-if-done t)
  '(org-bullets-bullet-list (quote ("✿" "❀" "◉" "○" "✸")))
