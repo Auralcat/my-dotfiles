@@ -185,8 +185,8 @@ me, too many buffers to work with... for now.
 
     ;; Set it as default mode for Ruby files
     (add-to-list 'auto-mode-alist
-        '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'"
-        . enh-ruby-mode))
+    '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'"
+    . enh-ruby-mode))
     #+END_SRC
 *** Web Mode
     I use this for HTML files mostly, works good for PHP too.
@@ -203,8 +203,8 @@ me, too many buffers to work with... for now.
 
     ;; Engine associations
     (setq web-mode-engines-alist
-        '(("php"    . "\\.phtml\\'")
-        ("blade"  . "\\.blade\\."))
+    '(("php"    . "\\.phtml\\'")
+    ("blade"  . "\\.blade\\."))
     )
     #+END_SRC
 *** YAML-mode
@@ -264,17 +264,17 @@ me, too many buffers to work with... for now.
 
     ;; Define search engines to use
     (defengine github
-        "https://github.com/search?ref=simplesearch&q=%s"
-        :keybinding "g")
+    "https://github.com/search?ref=simplesearch&q=%s"
+    :keybinding "g")
     (defengine duckduckgo
-        "https://duckduckgo.com/?q=%s"
-        :keybinding "d")
+    "https://duckduckgo.com/?q=%s"
+    :keybinding "d")
     (defengine youtube
-        "https://www.youtube.com/results?search_query=%s"
-        :keybinding "y")
+    "https://www.youtube.com/results?search_query=%s"
+    :keybinding "y")
     (defengine stackoverflow
-        "https://stackoverflow.com/search?q=%s"
-        :keybinding "s")
+    "https://stackoverflow.com/search?q=%s"
+    :keybinding "s")
     #+END_SRC
 *** Evil Mode
     Yes, I'm committing this heresy
@@ -330,8 +330,8 @@ me, too many buffers to work with... for now.
 
     ;; Call that inside js2-mode and add tern to company backends
     (defun tern-mode-tweaks ()
-        (add-to-list 'company-backends 'company-tern)
-        (tern-mode 1))
+    (add-to-list 'company-backends 'company-tern)
+    (tern-mode 1))
     (add-hook 'js2-mode-hook 'tern-mode-tweaks)
     ;; Autocompletion for Bootstrap/FontAwesome classes
     (require-package 'ac-html-bootstrap)
@@ -354,13 +354,13 @@ me, too many buffers to work with... for now.
 
     ;; Ignore arrow commands and self-insert-commands
     (setq keyfreq-excluded-commands
-        '(self-insert-command
-        org-self-insert-command
-        abort-recursive-edit
-        forward-char
-        backward-char
-        previous-line
-        next-line))
+    '(self-insert-command
+    org-self-insert-command
+    abort-recursive-edit
+    forward-char
+    backward-char
+    previous-line
+    next-line))
 
     ;; Activate it
     (keyfreq-mode 1)
@@ -448,7 +448,7 @@ me, too many buffers to work with... for now.
     (with-eval-after-load "esh-opt"
     (autoload 'epe-theme-lambda "eshell-prompt-extras")
     (setq eshell-highlight-prompt t
-        eshell-prompt-function 'epe-theme-lambda))
+    eshell-prompt-function 'epe-theme-lambda))
     #+END_SRC
 *** Yasnippets
     It originally came with company-mode, it's handy to write faster

@@ -1,1 +1,1 @@
-("~/my-dotfiles/" "~/file-bouncer/" "~/front-loops/" "~/freecodecamp-projects/" "~/" "~/ruby-goodies/" "~/fairyfloss/")
+("~/my-dotfiles/" "~/file-bouncer/" "~/my-dotfiles/.emacs.d/manual-packages/powerline-evil/" "~/front-loops/" "~/freecodecamp-projects/" "~/" "~/ruby-goodies/" "~/fairyfloss/")

@@ -8,6 +8,7 @@
 ;; Manual packages load path
 (add-to-list 'load-path "~/my-dotfiles/.emacs.d/manual-packages/ob-elixir/")
 (add-to-list 'load-path "~/my-dotfiles/.emacs.d/manual-packages/emacs-solargraph/")
+(add-to-list 'load-path "~/my-dotfiles/.emacs.d/manual-packages/powerline-evil/")
 
 ;; Backup files by copying them
 (setq backup-by-copying t)
@@ -223,6 +224,8 @@
 
 (use-package evil-surround)
 (global-evil-surround-mode)
+
+(require 'powerline-evil)
 
 (require-package 'helm)
 (require 'helm-config)

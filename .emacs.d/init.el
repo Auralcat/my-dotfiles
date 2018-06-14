@@ -293,6 +293,8 @@
  '(persp-show-modestring (quote (quote header)))
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
+ '(powerline-buffer-size-suffix t)
+ '(powerline-gui-use-vcs-glyph t)
  '(reb-re-syntax (quote string))
  '(remember-data-file "~/file-bouncer/everything-bucket")
  '(scss-compile-at-save nil)
