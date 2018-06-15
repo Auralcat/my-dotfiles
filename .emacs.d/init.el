@@ -64,7 +64,7 @@
  '(custom-enabled-themes (quote (fairyfloss)))
     '(custom-safe-themes
          (quote
-             ("aad2caf3759b343577768009f89d1a4cbfcea2c4f49331be753c397532250dae" default)))
+             ("a19265ef7ecc16ac4579abb1635fd4e3e1185dcacbc01b7a43cf7ad107c27ced" "aad2caf3759b343577768009f89d1a4cbfcea2c4f49331be753c397532250dae" default)))
  '(display-battery-mode t)
  '(display-default-load-average nil)
  '(display-time-24hr-format t)

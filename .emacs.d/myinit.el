@@ -8,7 +8,6 @@
 ;; Manual packages load path
 (add-to-list 'load-path "~/my-dotfiles/.emacs.d/manual-packages/ob-elixir/")
 (add-to-list 'load-path "~/my-dotfiles/.emacs.d/manual-packages/emacs-solargraph/")
-(add-to-list 'load-path "~/my-dotfiles/.emacs.d/manual-packages/powerline-evil/")
 
 ;; Backup files by copying them
 (setq backup-by-copying t)
@@ -151,8 +150,8 @@
 
 ;; Set it as default mode for Ruby files
 (add-to-list 'auto-mode-alist
-    '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'"
-    . enh-ruby-mode))
+'("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'"
+. enh-ruby-mode))
 
 (require-package 'web-mode)
 
@@ -165,8 +164,8 @@
 
 ;; Engine associations
 (setq web-mode-engines-alist
-    '(("php"    . "\\.phtml\\'")
-    ("blade"  . "\\.blade\\."))
+'(("php"    . "\\.phtml\\'")
+("blade"  . "\\.blade\\."))
 )
 
 (use-package yaml-mode)
@@ -199,17 +198,17 @@
 
 ;; Define search engines to use
 (defengine github
-    "https://github.com/search?ref=simplesearch&q=%s"
-    :keybinding "g")
+"https://github.com/search?ref=simplesearch&q=%s"
+:keybinding "g")
 (defengine duckduckgo
-    "https://duckduckgo.com/?q=%s"
-    :keybinding "d")
+"https://duckduckgo.com/?q=%s"
+:keybinding "d")
 (defengine youtube
-    "https://www.youtube.com/results?search_query=%s"
-    :keybinding "y")
+"https://www.youtube.com/results?search_query=%s"
+:keybinding "y")
 (defengine stackoverflow
-    "https://stackoverflow.com/search?q=%s"
-    :keybinding "s")
+"https://stackoverflow.com/search?q=%s"
+:keybinding "s")
 
 
 
@@ -224,8 +223,6 @@
 
 (use-package evil-surround)
 (global-evil-surround-mode)
-
-(require 'powerline-evil)
 
 (require-package 'helm)
 (require 'helm-config)
@@ -252,8 +249,8 @@
 
 ;; Call that inside js2-mode and add tern to company backends
 (defun tern-mode-tweaks ()
-    (add-to-list 'company-backends 'company-tern)
-    (tern-mode 1))
+(add-to-list 'company-backends 'company-tern)
+(tern-mode 1))
 (add-hook 'js2-mode-hook 'tern-mode-tweaks)
 ;; Autocompletion for Bootstrap/FontAwesome classes
 (require-package 'ac-html-bootstrap)
@@ -272,13 +269,13 @@
 
 ;; Ignore arrow commands and self-insert-commands
 (setq keyfreq-excluded-commands
-    '(self-insert-command
-    org-self-insert-command
-    abort-recursive-edit
-    forward-char
-    backward-char
-    previous-line
-    next-line))
+'(self-insert-command
+org-self-insert-command
+abort-recursive-edit
+forward-char
+backward-char
+previous-line
+next-line))
 
 ;; Activate it
 (keyfreq-mode 1)
@@ -332,7 +329,7 @@
 (with-eval-after-load "esh-opt"
 (autoload 'epe-theme-lambda "eshell-prompt-extras")
 (setq eshell-highlight-prompt t
-    eshell-prompt-function 'epe-theme-lambda))
+eshell-prompt-function 'epe-theme-lambda))
 
 (use-package yasnippet-snippets)
 

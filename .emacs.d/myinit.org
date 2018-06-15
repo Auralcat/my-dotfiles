@@ -217,6 +217,11 @@ me, too many buffers to work with... for now.
     #+BEGIN_SRC emacs-lisp
     (use-package csv-mode)
     #+END_SRC
+*** Vue-mode
+    Vue components syntax support for Emacs
+    #+BEGIN_SRC emacs-lisp
+    (use-package vue-mode)
+    #+END_SRC
 ** Minor Modes
 *** Projectile
     Manage projects in Emacs.
