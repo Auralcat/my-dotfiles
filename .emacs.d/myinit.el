@@ -172,6 +172,8 @@
 
 (use-package csv-mode)
 
+(use-package vue-mode)
+
 (use-package projectile)
 ;; Enable it globally.
 (add-hook 'after-init-hook #'projectile-global-mode)
@@ -368,6 +370,8 @@ eshell-prompt-function 'epe-theme-lambda))
     (scroll-bar-mode 0)
     ;; Enable emoji images
     (global-emojify-mode)
+    ;; Enable them in the mode line as well.
+    (global-emojify-mode-line-mode)
     ;; Maximize frame on startup
     (toggle-frame-maximized))
 
