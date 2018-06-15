@@ -73,8 +73,8 @@
  '(display-time-format "%a, %d %b %R")
  '(display-time-mail-face (quote change-log-email))
  '(display-time-mail-string "✉")
- '(display-battery-mode t)
  '(display-time-mode t)
+ '(display-battery-mode t)
     '(display-time-world-list
          (quote
              (("Europe/Stockholm" "TalonRO Server Time")
