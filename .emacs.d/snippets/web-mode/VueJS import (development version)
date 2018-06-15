@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: VueJS import (development version)
+# key: vue
+# --
+<script src="https://vuejs.org/js/vue.js" type="text/javascript"></script>

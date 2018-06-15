@@ -61,6 +61,10 @@
  '(cua-normal-cursor-color "#839496")
  '(cua-overwrite-cursor-color "#b58900")
  '(cua-read-only-cursor-color "#859900")
+ '(custom-enabled-themes (quote (fairyfloss)))
+    '(custom-safe-themes
+         (quote
+             ("aad2caf3759b343577768009f89d1a4cbfcea2c4f49331be753c397532250dae" default)))
  '(display-battery-mode t)
  '(display-default-load-average nil)
  '(display-time-24hr-format t)
@@ -302,6 +306,7 @@
  '(scss-compile-at-save nil)
  '(send-mail-function (quote smtpmail-send-it))
  '(shell-file-name "/bin/bash")
+ '(show-paren-mode t)
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
     '(sml/mode-width
          (if
