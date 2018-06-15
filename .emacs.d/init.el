@@ -41,6 +41,7 @@
     '(ansi-color-names-vector
          ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
  '(auto-image-file-mode t)
+ '(battery-mode-line-format " 🔋 %b%p%% ")
  '(browse-url-browser-display nil)
  '(browse-url-firefox-program "firefox")
  '(column-number-mode t)
@@ -238,6 +239,7 @@
                  ("\\` ?AI\\'" 61500 FontAwesome)
                  ("\\`twittering-mode\\'" "twitter" xpm)
                  ("\\` Emmet\\'" "emmet" xpm)
+                 ("\\`Vue\\'" "vue" xpm)
                  ("\\` ?\\(?:ElDoc\\|Anzu\\|SP\\|Guide\\|PgLn\\|Undo-Tree\\|Ergo.*\\|,\\|Isearch\\|Ind\\)\\'" nil nil))))
  '(mode-icons-change-mode-name t)
  '(mode-icons-generate-emoji-xpms t)
@@ -251,7 +253,7 @@
  '(nyan-animate-nyancat t)
  '(nyan-animation-frame-interval 0.2)
  '(nyan-bar-length 16)
- '(nyan-mode nil)
+ '(nyan-mode t)
     '(org-agenda-files
          (quote
              ("~/file-bouncer/org-files/stand-up-meetings/Junho-2018.org" "/home/lucas/file-bouncer/org-files/contact-based-system/eu.org" "~/file-bouncer/org-files/blog.org" "/home/lucas/file-bouncer/org-files/contact-based-system/rosiane.org" "/home/lucas/file-bouncer/org-files/contact-based-system/elaine.org" "/home/lucas/file-bouncer/org-files/contact-based-system/aline-pegas.org" "~/file-bouncer/org-files/contact-based-system/ariane.org")))
@@ -306,7 +308,7 @@
  '(scss-compile-at-save nil)
  '(send-mail-function (quote smtpmail-send-it))
  '(shell-file-name "/bin/bash")
- '(show-paren-mode t)
+ '(show-paren-mode nil)
  '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
     '(sml/mode-width
          (if

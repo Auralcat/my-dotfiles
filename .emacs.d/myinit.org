@@ -513,6 +513,8 @@ me, too many buffers to work with... for now.
     (scroll-bar-mode 0)
     ;; Enable emoji images
     (global-emojify-mode)
+    ;; Enable them in the mode line as well.
+    (global-emojify-mode-line-mode)
     ;; Maximize frame on startup
     (toggle-frame-maximized))
 #+END_SRC
