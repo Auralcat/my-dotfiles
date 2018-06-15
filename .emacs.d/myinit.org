@@ -26,6 +26,9 @@
 ;; Clean whitespace before saving a file
 (add-hook 'before-save-hook (quote whitespace-cleanup))
 
+;; Allow only one theme at a time
+(setq custom-theme-allow-multiple-selections nil)
+
 ;; Enable ido-mode (fewer keystrokes to switch buffers!)
 (ido-mode 1)
 

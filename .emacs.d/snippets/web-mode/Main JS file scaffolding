@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: Main JS file scaffolding
+# key: mainjs
+# --
+<!-- Just a quick way to create a new script, adapt when needed -->
+<script src="./scripts/main.js" type="text/javascript"></script>

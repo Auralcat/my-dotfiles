@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: Main CSS Stylesheet
+# key: maincss
+# --
+<link href="./assets/css/main.css" rel="stylesheet"/>

@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+# name: JS import syntax
+# key: import
+# --
+import { $1 } as $2 from $3;
+$0
