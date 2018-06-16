@@ -493,6 +493,11 @@ me, too many buffers to work with... for now.
     ;; Integrate with Company
     (eval-after-load 'company '(push 'company-robe company-backends))
     #+END_SRC
+*** RVM
+    Ruby Version Manager. Akin to python's virtualenv.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (require-package rvm)
+    #+END_SRC
 * Themes
 ** Moe
    Light and dark theme, with some extra stuff.
