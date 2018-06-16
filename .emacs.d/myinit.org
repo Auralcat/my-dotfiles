@@ -1,9 +1,10 @@
 #+TITLE: Emacs configuration file
 #+AUTHOR: Auralcat
 #+DATE: 2017:05:17
+#+LANGUAGE: en
 
 * Environment Customizations
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 ;; A small performance improvement
 (setq redisplay-dont-pause t)
 
@@ -82,7 +83,7 @@
 
 #+END_SRC
 * Hooks
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 ;; Prog-mode is from where all the programming modes are derived from.
 ;; This means that if you call prog-mode-hook, the settings will be
 ;; applied to ALL programming modes in Emacs.
@@ -99,13 +100,13 @@
 * IRC
 Qui Nov  2 19:57:06 BRST 2017 - Tried using IRC inside Emacs, didn't please
 me, too many buffers to work with... for now.
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 ;; Use Weechat from Emacs
 (require-package 'weechat)
 ;; Bind M-p to switch to previous buffer
 #+END_SRC
 * Custom functions
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 ;; Recreate scratch buffer
 (defun create-scratch-buffer ()
   "create a scratch buffer"
@@ -137,14 +138,14 @@ me, too many buffers to work with... for now.
 
 #+END_SRC
 * Function Aliases
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 ;; This is how you define aliases for Elisp functions
 (defalias 'plp 'package-list-packages)
 #+END_SRC
 * Packages
 ** Major Modes
 *** Sass-mode
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package sass-mode
        ;; Set Sass mode for SASS files and Css mode for SCSS files.
        :config
@@ -154,7 +155,7 @@ me, too many buffers to work with... for now.
     #+END_SRC
 *** SCSS-mode
     Major mode for SCSS files, together with Sass.
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package scss-mode
 
        :config
@@ -164,7 +165,7 @@ me, too many buffers to work with... for now.
 
 *** Js2-mode
     A better default Javascript mode
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package js2-mode)
 
     ;; Set js2-mode as default mode for JS files
@@ -175,7 +176,7 @@ me, too many buffers to work with... for now.
     #+END_SRC
 *** PHP-mode
     PHP support for Emacs.
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package php-mode)
     ;; Flymake support for PHP files
     (use-package flymake-php)
@@ -183,7 +184,7 @@ me, too many buffers to work with... for now.
     #+END_SRC
 *** Enhanced-ruby-mode
     A better ruby-mode.
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package enh-ruby-mode)
 
     ;; Set it as default mode for Ruby files
@@ -193,7 +194,7 @@ me, too many buffers to work with... for now.
     #+END_SRC
 *** Web Mode
     I use this for HTML files mostly, works good for PHP too.
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
 
     (require-package 'web-mode)
 
@@ -212,46 +213,46 @@ me, too many buffers to work with... for now.
     #+END_SRC
 *** YAML-mode
     YAML support for Emacs.
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package yaml-mode)
     #+END_SRC
 *** CSV-mode
     CSV support for Emacs.
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package csv-mode)
     #+END_SRC
 *** Vue-mode
     Vue components syntax support for Emacs
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package vue-mode)
     #+END_SRC
 ** Minor Modes
 *** Projectile
     Manage projects in Emacs.
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package projectile)
     ;; Enable it globally.
     (add-hook 'after-init-hook #'projectile-global-mode)
     #+END_SRC
 *** Autopair
    Automatically pair braces and quotes like in TextMate
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
    (use-package autopair
       :init (autopair-global-mode))
    #+END_SRC
 *** Emmet-mode
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package emmet-mode)
     #+END_SRC
 *** Highlight-numbers mode
     Sets font lock faces to numbers in Emacs.
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package highlight-numbers)
     (add-hook 'prog-mode-hook 'highlight-numbers-mode)
     #+END_SRC
 *** Flycheck
     Syntax checker, replaces flymake
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package flycheck
        :config
        ;; turn on flychecking globally
@@ -259,12 +260,12 @@ me, too many buffers to work with... for now.
     #+END_SRC
 *** Ruby Tools
     Goodies for Ruby programming modes.
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package ruby-tools)
     #+END_SRC
 *** Engine mode
     Query search engines from Emacs.
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
     ;; Ensure it's loaded
     (use-package engine-mode)
     ;; Activate it
@@ -286,11 +287,11 @@ me, too many buffers to work with... for now.
     #+END_SRC
 *** Evil Mode
     Yes, I'm committing this heresy
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
     #+END_SRC
 **** Evil-leader
      Add a prefix key to Evil mode, like the Leader key in Vim.
-     #+BEGIN_SRC emacs-lisp
+     #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package evil-leader)
      (global-evil-leader-mode)
      ;; Evil mode needs to be loaded after evil-leader
@@ -302,13 +303,13 @@ me, too many buffers to work with... for now.
      #+END_SRC
 **** Evil Surround
      Easier manipulation of delimiters, emulation of vim.surround
-     #+BEGIN_SRC emacs-lisp
+     #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package evil-surround)
      (global-evil-surround-mode)
      #+END_SRC
 *** Helm
      Incremental completion and selection narrowing framework
-     #+BEGIN_SRC emacs-lisp
+     #+BEGIN_SRC emacs-lisp :tangle yes
      (require-package 'helm)
      (require 'helm-config)
      (helm-mode 1)
@@ -329,7 +330,7 @@ me, too many buffers to work with... for now.
 *** Company
     *COMPlete ANYthing* inside Emacs.
     I switched to it because it works in GUI Emacs and auto-complete doesn't.
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
     (require-package 'company)
 
     ;; Add Tern to Company
@@ -354,17 +355,11 @@ me, too many buffers to work with... for now.
     (use-package company-statistics)
     (company-statistics-mode)
 
-    ;; Dictionary completion for company, like vim's omnicompletion
-    (use-package company-dict
-       :config
-       (setq company-dict-dir (concat user-emacs-directory "dict/"))
-       ;; Make it available everywhere
-       (add-to-list 'company-backends 'company-dict))
     #+END_SRC
 *** Keyfreq
     Shows most used commands in editing session.
     To see the data, run (keyfreq-show) with M-:
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
     (require-package 'keyfreq)
 
     ;; Ignore arrow commands and self-insert-commands
@@ -383,7 +378,7 @@ me, too many buffers to work with... for now.
     #+END_SRC
 *** Diminish
     Free some space in the mode line removing superfluous mode indications.
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package diminish
        ;; These are loaded at startup
        :diminish helm-mode
@@ -401,7 +396,7 @@ me, too many buffers to work with... for now.
 *** Editorconfig
     Helps developers define and maintain consistent coding styles
     between different editors and IDEs.
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package editorconfig
        :init
        ;; Activate it.
@@ -409,27 +404,27 @@ me, too many buffers to work with... for now.
     #+END_SRC
 *** Nyan-mode
     Put a Nyan Cat in your mode line! :3
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package nyan-mode)
     (nyan-mode 1)
     #+END_SRC
 *** Mode Icons
     Indicate modes in the mode line using icons
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package mode-icons
        :init
        (mode-icons-mode))
     #+END_SRC
 *** Emojify
     Add emoji support for Emacs
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package emojify)
     #+END_SRC
 ** Utilities
 *** Rainbow Delimiters
     Highlight parentheses, brackets and braces according to their
     depth.
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package rainbow-delimiters)
     ;; Add this to prog-mode
     (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
@@ -437,7 +432,7 @@ me, too many buffers to work with... for now.
 *** Smart Mode Line
     Prettier mode line.
     You can activate it with M-x sml/setup.
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
     ;; Smart-mode-line depends on powerline
     (require-package 'powerline)
     (require 'powerline)
@@ -446,16 +441,16 @@ me, too many buffers to work with... for now.
     #+END_SRC
 *** Web-beautify
     Format HTML/CSS and JS code with js-beautify
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package web-beautify)
     #+END_SRC
 *** Magit
     How to win at Git from Emacs.
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package magit)
     #+END_SRC
 *** Eshell configurations
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
     ;; Eshell extras
     (use-package eshell-prompt-extras)
 
@@ -467,12 +462,12 @@ me, too many buffers to work with... for now.
     #+END_SRC
 *** Yasnippets
     It originally came with company-mode, it's handy to write faster
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package yasnippet-snippets)
     #+END_SRC
 *** Theme Changer
     Change current theme depending on time of the day
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package theme-changer
        :config
        (progn ;; Set the location
@@ -485,21 +480,31 @@ me, too many buffers to work with... for now.
     #+END_SRC
 *** Ace Jump Mode
     Move to any word with 2 keypresses.
-    #+BEGIN_SRC emacs-lisp
+    #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package ace-jump-mode)
+    #+END_SRC
+*** Robe
+    Ruby's autocomplete, navigation and project tools, especially for
+    Rails.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package robe)
+    (add-hook 'enh-ruby-mode-hook 'robe-mode)
+
+    ;; Integrate with Company
+    (eval-after-load 'company '(push 'company-robe company-backends))
     #+END_SRC
 * Themes
 ** Moe
    Light and dark theme, with some extra stuff.
    Comes with support for smart-mode-line.
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
    (use-package moe-theme)
    #+END_SRC
 
 * Mode Line
 ** Moe Modeline Themes
    Use moe-theme's powerline support instead of sml
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
    ;; Show highlighted buffer-id as decoration. (Default: nil)
    (setq moe-theme-highlight-buffer-id t)
 
@@ -510,7 +515,7 @@ me, too many buffers to work with... for now.
    (moe-theme-set-color 'purple)
    #+END_SRC
 * Graphical
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 ;; Set font in graphical mode
 (when (display-graphic-p)
     ;; Use Fantasque Sans Mono when available
@@ -529,7 +534,7 @@ me, too many buffers to work with... for now.
     (toggle-frame-maximized))
 #+END_SRC
 * Keybindings
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 ;; Remapping the help hotkey so it doesn't clash with Unix backspace.
 ;; Whenever you want to call help you can use M-x help as well. F1
 ;; works too.
@@ -576,7 +581,7 @@ me, too many buffers to work with... for now.
 
 #+END_SRC
 * Web-mode
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 (defun web-mode-keybindings ()
     "Define mode-specific keybindings like this."
     (local-set-key (kbd "C-c C-v") 'browse-url-of-buffer)
@@ -591,7 +596,7 @@ me, too many buffers to work with... for now.
 (add-hook 'web-mode-hook 'web-mode-company-load-backends)
 #+END_SRC
 * Org-mode
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 ;; We don't need Flycheck in org-mode buffers. Usually.
 (add-hook 'org-mode-hook '(lambda() (flycheck-mode 0)))
 
@@ -619,13 +624,13 @@ me, too many buffers to work with... for now.
 #+END_SRC
 ** Org-bullets
    Change org-mode's *s to UTF-8 chars
-   #+BEGIN_SRC emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
    (use-package org-bullets
       :init
       (add-hook 'org-mode-hook (lambda() (org-bullets-mode 1))))
    #+END_SRC
 * Variables
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 ;; Set Org mode as default mode for new buffers:
 (setq-default major-mode 'org-mode)
 
@@ -668,7 +673,7 @@ me, too many buffers to work with... for now.
 
 #+END_SRC
 * Macros
-#+BEGIN_SRC emacs-lisp
+#+BEGIN_SRC emacs-lisp :tangle yes
 ;; To save a macro, record it with C-x ( (start) and C-x ) (stop),
 ;; give it a name with C-x C-k n (C-k is for maKro) and
 ;; insert it in this file with insert-kbd-macro.
@@ -680,7 +685,7 @@ me, too many buffers to work with... for now.
 #+END_SRC
 * Twittering mode
   Use Twitter from within Emacs!
-  #+BEGIN_SRC emacs-lisp
+  #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package twittering-mode
       :config
       (
@@ -704,7 +709,7 @@ me, too many buffers to work with... for now.
 ** Perspective
 # ** Perspective
 #    Switch between named "perspectives" of the editor.
-#    #+BEGIN_SRC emacs-lisp
+#    #+BEGIN_SRC emacs-lisp :tangle yes
 #    (use-package perspective)
 #    (persp-mode)
 #    #+END_SRC

@@ -1,6 +1,7 @@
 # key: esrc
 # name: Elisp Source block
 # --
-#+BEGIN_SRC emacs-lisp
-$0
+#+BEGIN_SRC emacs-lisp :tangle yes
+$1
 #+END_SRC
+$0
