@@ -357,9 +357,9 @@ me, too many buffers to work with... for now.
     ;; Dictionary completion for company, like vim's omnicompletion
     (use-package company-dict
        :config
-       ((setq company-dict-dir (concat user-emacs-directory "dict/"))
-        ;; Make it available everywhere
-        (add-to-list 'company-backends 'company-dict)))
+       (setq company-dict-dir (concat user-emacs-directory "dict/"))
+       ;; Make it available everywhere
+       (add-to-list 'company-backends 'company-dict))
     #+END_SRC
 *** Keyfreq
     Shows most used commands in editing session.
