@@ -1,1 +1,1 @@
-("~/my-dotfiles/" "/tmp/" "~/file-bouncer/" "~/" "~/my-dotfiles/.emacs.d/manual-packages/powerline-evil/" "~/front-loops/" "~/freecodecamp-projects/" "~/ruby-goodies/" "~/fairyfloss/" "~/literate-devops-notes/" "~/vue-projects/comment-app/" "~/vue-projects/testing-component-creation/")
+("~/file-bouncer/" "~/my-dotfiles/" "~/front-loops/" "/tmp/" "~/" "~/my-dotfiles/.emacs.d/manual-packages/powerline-evil/" "~/freecodecamp-projects/" "~/ruby-goodies/" "~/fairyfloss/" "~/literate-devops-notes/" "~/vue-projects/comment-app/" "~/vue-projects/testing-component-creation/")

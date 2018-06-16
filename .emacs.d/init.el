@@ -407,6 +407,8 @@
                  (340 . "#268fc6")
                  (360 . "#268bd2"))))
  '(vc-annotate-very-old-color nil)
+ '(web-mode-enable-auto-closing t)
+ '(web-mode-enable-auto-expanding nil)
  '(weechat-auto-monitor-buffers t)
     '(weechat-color-list
          (quote
