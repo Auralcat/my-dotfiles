@@ -270,13 +270,6 @@
 (use-package company-statistics)
 (company-statistics-mode)
 
-;; Dictionary completion for company, like vim's omnicompletion
-(use-package company-dict
-   :config
-   (setq company-dict-dir (concat user-emacs-directory "dict/"))
-   ;; Make it available everywhere
-   (add-to-list 'company-backends 'company-dict))
-
 (require-package 'keyfreq)
 
 ;; Ignore arrow commands and self-insert-commands
@@ -356,6 +349,14 @@ eshell-prompt-function 'epe-theme-lambda))
    (change-theme 'whiteboard 'fairyfloss)))
 
 (use-package ace-jump-mode)
+
+(use-package robe)
+(add-hook 'enh-ruby-mode-hook 'robe-mode)
+
+;; Integrate with Company
+(eval-after-load 'company '(push 'company-robe company-backends))
+
+(use-package rvm)
 
 (use-package moe-theme)
 

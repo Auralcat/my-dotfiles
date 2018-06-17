@@ -496,7 +496,7 @@ me, too many buffers to work with... for now.
 *** RVM
     Ruby Version Manager. Akin to python's virtualenv.
     #+BEGIN_SRC emacs-lisp :tangle yes
-    (require-package rvm)
+    (use-package rvm)
     #+END_SRC
 * Themes
 ** Moe
