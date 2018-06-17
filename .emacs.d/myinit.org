@@ -81,6 +81,10 @@
 ;; Enable global Abbrev mode
 (setq-default abbrev-mode t)
 
+;; Save last edited place in files
+(require 'saveplace)
+(setq-default save-place t)
+(save-place-mode 1)
 #+END_SRC
 * Hooks
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -421,6 +425,13 @@ me, too many buffers to work with... for now.
     (use-package emojify)
     #+END_SRC
 ** Utilities
+*** Camcorder
+    Record editing sessions in Emacs.
+    Invoke with M-x camcorder-record, pause with F11 and finish with
+    F12.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package camcorder)
+    #+END_SRC
 *** Rainbow Delimiters
     Highlight parentheses, brackets and braces according to their
     depth.
