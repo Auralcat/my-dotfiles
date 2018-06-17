@@ -44,6 +44,12 @@
  '(battery-mode-line-format " 🔋 %b%p%% ")
  '(browse-url-browser-display nil)
  '(browse-url-firefox-program "firefox")
+    '(camcorder-frame-parameters
+         (quote
+             ((name . "camcorder.el Recording - F12 to Stop - F11 to Pause/Resume")
+                 (height . 240)
+                 (width . 320)
+                 (top . 80))))
  '(column-number-mode t)
  '(company-abort-manual-when-too-short nil)
  '(company-auto-complete (quote (quote company-explicit-action-p)))
@@ -304,6 +310,7 @@
  '(powerline-gui-use-vcs-glyph t)
  '(reb-re-syntax (quote string))
  '(remember-data-file "~/file-bouncer/everything-bucket")
+ '(save-place t nil (saveplace))
  '(scss-compile-at-save nil)
  '(send-mail-function (quote smtpmail-send-it))
  '(shell-file-name "/bin/bash")
