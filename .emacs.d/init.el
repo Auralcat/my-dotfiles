@@ -52,7 +52,7 @@
                  (top . 80))))
  '(column-number-mode t)
  '(company-abort-manual-when-too-short nil)
- '(company-auto-complete (quote (quote company-explicit-action-p)))
+ '(company-auto-complete t)
  '(company-auto-complete-chars (quote (32 41 46)))
     '(company-backends
          (quote
@@ -60,8 +60,8 @@
                  (company-dabbrev-code company-gtags company-etags company-keywords)
                  company-oddmuse company-dabbrev)))
  '(company-dabbrev-downcase nil)
- '(company-idle-delay 0.4)
- '(company-minimum-prefix-length 3)
+ '(company-idle-delay 0.2)
+ '(company-minimum-prefix-length 2)
  '(company-transformers (quote (company-sort-by-backend-importance)))
  '(compilation-message-face (quote default))
  '(cua-global-mark-cursor-color "#2aa198")
