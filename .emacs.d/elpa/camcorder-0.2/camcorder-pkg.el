@@ -1,0 +1,1 @@
+(define-package "camcorder" "0.2" "Record screencasts in gif or other formats." '((emacs "24") (names "20150000") (cl-lib "0.5")) :commit "a2b5e0629ee3c01ead684e148965ac68e533efbd" :keywords '("multimedia" "screencast") :url "http://github.com/Bruce-Connor/camcorder.el")
