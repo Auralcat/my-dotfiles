@@ -53,7 +53,7 @@
  '(column-number-mode t)
  '(company-abort-manual-when-too-short nil)
  '(company-auto-complete t)
- '(company-auto-complete-chars (quote (32 41 46)))
+ '(company-auto-complete-chars (quote (41 46)))
     '(company-backends
          (quote
              (company-web-html company-nxml company-css company-eclim company-semantic company-clang company-cmake company-capf company-files

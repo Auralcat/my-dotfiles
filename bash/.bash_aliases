@@ -73,3 +73,6 @@ alias clearswap='sudo swapoff -a && sudo swapon -a'
 
 alias neuromancer='curl http://www.lib.ru/GIBSON/neuromancer.txt | less'
 alias count_zero='curl https://www.kataan.org/public/ebook/countzero.txt | less'
+
+# Launch XAMPP for PHP practice
+alias xampp='sudo /opt/lampp/xampp'
