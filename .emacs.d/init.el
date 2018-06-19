@@ -71,7 +71,7 @@
  '(custom-enabled-themes (quote (fairyfloss)))
     '(custom-safe-themes
          (quote
-             ("ea63cede1b158a5d1bda96d46b3d84ab72600282cf8b4c2f77383983c225fe2c" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "a19265ef7ecc16ac4579abb1635fd4e3e1185dcacbc01b7a43cf7ad107c27ced" "aad2caf3759b343577768009f89d1a4cbfcea2c4f49331be753c397532250dae" default)))
+             ("b9a06c75084a7744b8a38cb48bc987de10d68f0317697ccbd894b2d0aca06d2b" "ea63cede1b158a5d1bda96d46b3d84ab72600282cf8b4c2f77383983c225fe2c" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "a19265ef7ecc16ac4579abb1635fd4e3e1185dcacbc01b7a43cf7ad107c27ced" "aad2caf3759b343577768009f89d1a4cbfcea2c4f49331be753c397532250dae" default)))
  '(display-battery-mode t)
  '(display-default-load-average nil)
  '(display-time-24hr-format t)
@@ -80,7 +80,7 @@
  '(display-time-format " 📅 %a, %d %b 🕙 %R ")
  '(display-time-mail-face (quote change-log-email))
  '(display-time-mail-string "✉")
- '(display-time-mode t)
+ '(display-time-mode nil)
     '(display-time-world-list
          (quote
              (("Europe/Stockholm" "TalonRO Server Time")
