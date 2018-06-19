@@ -75,6 +75,11 @@
 ;; Enable global Abbrev mode
 (setq-default abbrev-mode t)
 
+;; Save last edited place in files
+(require 'saveplace)
+(setq-default save-place t)
+;; (save-place-mode 1)
+
 ;; Prog-mode is from where all the programming modes are derived from.
 ;; This means that if you call prog-mode-hook, the settings will be
 ;; applied to ALL programming modes in Emacs.
@@ -313,6 +318,8 @@ next-line))
    (mode-icons-mode))
 
 (use-package emojify)
+
+(use-package camcorder)
 
 (use-package rainbow-delimiters)
 ;; Add this to prog-mode

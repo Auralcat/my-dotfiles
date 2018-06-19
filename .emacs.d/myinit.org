@@ -84,7 +84,7 @@
 ;; Save last edited place in files
 (require 'saveplace)
 (setq-default save-place t)
-(save-place-mode 1)
+;; (save-place-mode 1)
 #+END_SRC
 * Hooks
 #+BEGIN_SRC emacs-lisp :tangle yes
