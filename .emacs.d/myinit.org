@@ -516,7 +516,11 @@ me, too many buffers to work with... for now.
    #+BEGIN_SRC emacs-lisp :tangle yes
    (use-package moe-theme)
    #+END_SRC
-
+** Abyss
+   Dark contrast theme
+   #+BEGIN_SRC emacs-lisp :tangle yes
+   (use-package abyss-theme)
+   #+END_SRC
 * Mode Line
 ** Moe Modeline Themes
    Use moe-theme's powerline support instead of sml
