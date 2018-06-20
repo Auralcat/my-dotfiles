@@ -185,6 +185,7 @@ me, too many buffers to work with... for now.
     ;; Flymake support for PHP files
     (use-package flymake-php)
     (add-hook 'php-mode-hook 'flymake-php-load)
+    (add-hook 'php-mode-hook '(push 'company-php company-backends))
     #+END_SRC
 *** Enhanced-ruby-mode
     A better ruby-mode.

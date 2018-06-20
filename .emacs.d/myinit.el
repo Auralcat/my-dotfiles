@@ -367,6 +367,8 @@ eshell-prompt-function 'epe-theme-lambda))
 
 (use-package moe-theme)
 
+(use-package abyss-theme)
+
 ;; Show highlighted buffer-id as decoration. (Default: nil)
 (setq moe-theme-highlight-buffer-id t)
 
