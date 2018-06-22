@@ -510,6 +510,14 @@ me, too many buffers to work with... for now.
     #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package rvm)
     #+END_SRC
+*** Anzu
+    Show search result count in the mode line.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package evil-anzu)
+    (global-anzu-mode)
+    #+END_SRC
+
+
 * Themes
 ** Moe
    Light and dark theme, with some extra stuff.

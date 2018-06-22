@@ -153,6 +153,7 @@
 ;; Flymake support for PHP files
 (use-package flymake-php)
 (add-hook 'php-mode-hook 'flymake-php-load)
+(add-hook 'php-mode-hook '(push 'company-php company-backends))
 
 (use-package enh-ruby-mode)
 
