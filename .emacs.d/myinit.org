@@ -516,8 +516,6 @@ me, too many buffers to work with... for now.
     (use-package evil-anzu)
     (global-anzu-mode)
     #+END_SRC
-
-
 * Themes
 ** Moe
    Light and dark theme, with some extra stuff.
