@@ -71,7 +71,7 @@
  '(custom-enabled-themes (quote (fairyfloss)))
     '(custom-safe-themes
          (quote
-             ("dd2346baba899fa7eee2bba4936cfcdf30ca55cdc2df0a1a4c9808320c4d4b22" "b9a06c75084a7744b8a38cb48bc987de10d68f0317697ccbd894b2d0aca06d2b" "ea63cede1b158a5d1bda96d46b3d84ab72600282cf8b4c2f77383983c225fe2c" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "a19265ef7ecc16ac4579abb1635fd4e3e1185dcacbc01b7a43cf7ad107c27ced" "aad2caf3759b343577768009f89d1a4cbfcea2c4f49331be753c397532250dae" default)))
+             ("8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "dd2346baba899fa7eee2bba4936cfcdf30ca55cdc2df0a1a4c9808320c4d4b22" "b9a06c75084a7744b8a38cb48bc987de10d68f0317697ccbd894b2d0aca06d2b" "ea63cede1b158a5d1bda96d46b3d84ab72600282cf8b4c2f77383983c225fe2c" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "a19265ef7ecc16ac4579abb1635fd4e3e1185dcacbc01b7a43cf7ad107c27ced" "aad2caf3759b343577768009f89d1a4cbfcea2c4f49331be753c397532250dae" default)))
  '(display-battery-mode t)
  '(display-default-load-average nil)
  '(display-time-24hr-format t)
@@ -106,7 +106,9 @@
  '(evil-shift-width 2)
  '(fci-rule-color "#073642")
  '(font-use-system-font nil)
+ '(global-anzu-mode t)
  '(global-auto-revert-mode t)
+ '(global-discover-mode t)
  '(global-emojify-mode t)
  '(global-linum-mode nil)
  '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))

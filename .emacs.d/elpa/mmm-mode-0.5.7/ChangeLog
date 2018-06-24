@@ -1,3 +1,15 @@
+2018-06-21  Dmitry Gutov  <dgutov@yandex.ru>
+
+	Release 0.5.7
+
+2018-06-15  Dmitry Gutov  <dgutov@yandex.ru>
+
+	Fix mmm-indent-line-narrowed
+
+	To actually call the indent function inside the narrowing
+
+	Cc @AdamNiederer
+
 2018-03-23  Dmitry Gutov  <dgutov@yandex.ru>
 
 	Release 0.5.6
