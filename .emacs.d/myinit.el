@@ -326,6 +326,10 @@ next-line))
 ;; Add this to prog-mode
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
+(use-package highlight-sexp)
+;; Activate it for programming modes
+(add-hook 'prog-mode-hook 'highlight-sexp-mode)
+
 ;; Smart-mode-line depends on powerline
 (require-package 'powerline)
 (require 'powerline)
@@ -365,6 +369,9 @@ eshell-prompt-function 'epe-theme-lambda))
 (eval-after-load 'company '(push 'company-robe company-backends))
 
 (use-package rvm)
+
+(use-package evil-anzu)
+(global-anzu-mode)
 
 (use-package moe-theme)
 
