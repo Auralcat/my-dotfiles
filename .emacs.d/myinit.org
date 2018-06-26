@@ -360,6 +360,12 @@ me, too many buffers to work with... for now.
     (use-package company-statistics)
     (company-statistics-mode)
 
+    ;; Company with prescient.el offers better sorting of completion candidates.
+    ;; I don't know if it clashes with company-statistics.
+    (use-package company-prescient)
+
+    ;; Activate it
+    (company-prescient-mode)
     #+END_SRC
 *** Keyfreq
     Shows most used commands in editing session.

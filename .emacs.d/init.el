@@ -306,6 +306,9 @@
                  nil "")))
  '(org-todo-keyword-faces (quote (("CURRENT" . "#ffcc11") ("NEXT" . "#6666ff"))))
  '(org-todo-keywords (quote ((sequence "TODO" "DONE"))))
+    '(package-selected-packages
+         (quote
+             (company-prescient yaxception yasnippet-snippets yaml-mode weechat web-mode web-beautify vue-mode vagrant use-package twittering-mode theme-changer solarized-theme scss-mode sass-mode rvm rust-mode ruby-tools robe rich-minority request rainbow-mode rainbow-delimiters projectile powerline org-pomodoro org-bullets nyan-mode moe-theme mode-icons memoize makey magit keyfreq js2-mode htmlize highlight-sexp highlight-numbers helm-tramp flymake-phpcs flymake-php flymake-elixir flycheck-mix evil-surround evil-leader evil-anzu eshell-prompt-extras eruby-mode enh-ruby-mode engine-mode emojify emmet-mode electric-spacing editorconfig csv-mode company-web company-tern company-statistics company-php cl-generic camcorder autopair ace-jump-mode ac-html-bootstrap abyss-theme)))
  '(persp-show-modestring (quote (quote header)))
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
@@ -313,7 +316,7 @@
  '(powerline-gui-use-vcs-glyph t)
  '(reb-re-syntax (quote string))
  '(remember-data-file "~/file-bouncer/everything-bucket")
- '(save-place t nil (saveplace))
+ '(save-place-mode t nil (saveplace))
  '(scss-compile-at-save nil)
  '(send-mail-function (quote smtpmail-send-it))
  '(shell-file-name "/bin/bash")
@@ -394,7 +397,7 @@
  '(term-default-fg-color "#839496")
  '(tool-bar-mode nil)
  '(tooltip-mode nil)
- '(tramp-default-method "ssh")
+ '(tramp-default-method "ssh" nil (tramp))
  '(vc-annotate-background nil)
     '(vc-annotate-color-map
          (quote
