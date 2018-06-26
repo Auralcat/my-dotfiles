@@ -18,7 +18,7 @@ alias grep='grep --color=auto'
 # Custom programs:
 
 # When typing emacs in the terminal, start the no-window version one:
-alias emacs='emacs -nw'
+# alias emacs='emacs -nw'
 
 # Change dotfiles:
 alias bashconfig='vim ~/.bashrc'

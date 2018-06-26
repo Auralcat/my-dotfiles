@@ -1,4 +1,3 @@
-
 ;; A small performance improvement
 (setq redisplay-dont-pause t)
 
@@ -58,7 +57,7 @@
 (org-babel-do-load-languages
  'org-babel-load-languages
  '(
-   (sh . t)
+  ;; (sh . t)
    (python . t)
    (ruby . t)
    (elixir . t)
@@ -148,12 +147,6 @@
 
 ;; Set syntax highlight level
 (setq js2-highlight-level 3)
-
-(use-package php-mode)
-;; Flymake support for PHP files
-(use-package flymake-php)
-(add-hook 'php-mode-hook 'flymake-php-load)
-(add-hook 'php-mode-hook '(push 'company-php company-backends))
 
 (use-package enh-ruby-mode)
 
@@ -325,10 +318,6 @@ next-line))
 (use-package rainbow-delimiters)
 ;; Add this to prog-mode
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
-
-(use-package highlight-sexp)
-;; Activate it for programming modes
-(add-hook 'prog-mode-hook 'highlight-sexp-mode)
 
 ;; Smart-mode-line depends on powerline
 (require-package 'powerline)
