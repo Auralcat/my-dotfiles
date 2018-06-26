@@ -62,6 +62,7 @@
  '(company-dabbrev-downcase nil)
  '(company-idle-delay 0.2)
  '(company-minimum-prefix-length 2)
+ '(company-prescient-mode t)
  '(company-transformers (quote (company-sort-by-backend-importance)))
  '(compilation-message-face (quote default))
  '(cua-global-mark-cursor-color "#2aa198")
@@ -144,6 +145,7 @@
 # You can write the contents of this buffer to a file with C-x C-w.
 # Current default mode for this buffer is: Org-mode.")
  '(keyboard-coding-system (quote utf-8-unix))
+ '(line-number-mode nil)
  '(magit-diff-use-overlays nil)
  '(menu-bar-mode nil)
     '(mode-icons
@@ -283,6 +285,15 @@
                      (file+headline "~/file-bouncer/org-files/contact-based-system/eu.org" "Tarefas capturadas")
                      "** TODO %?" :prepend t))))
  '(org-default-notes-file "~/file-bouncer/everything-bucket")
+    '(org-duration-units
+         (quote
+             (("min" . 1)
+                 ("h" . 60)
+                 ("d" . 1440)
+                 ("w" . 10080)
+                 ("m" . 43200)
+                 ("y" . 525960.0)
+                 ("pomodoros" . 30))))
     '(org-effort-durations
          (quote
              (("h" . 60)
