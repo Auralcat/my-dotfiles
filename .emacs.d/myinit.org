@@ -178,15 +178,15 @@ me, too many buffers to work with... for now.
     ;; Set syntax highlight level
     (setq js2-highlight-level 3)
     #+END_SRC
-# *** PHP-mode
-#     PHP support for Emacs.
-#     #+BEGIN_SRC emacs-lisp :tangle yes
-#     (use-package php-mode)
-#     ;; Flymake support for PHP files
-#     (use-package flymake-php)
-#     (add-hook 'php-mode-hook 'flymake-php-load)
-#     (add-hook 'php-mode-hook '(push 'company-php company-backends))
-#     #+END_SRC
+*** PHP-mode
+    PHP support for Emacs.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package php-mode)
+    ;; Flymake support for PHP files
+    (use-package flymake-php)
+    (add-hook 'php-mode-hook 'flymake-php-load)
+    (add-hook 'php-mode-hook '(push 'company-php company-backends))
+    #+END_SRC
 *** Enhanced-ruby-mode
     A better ruby-mode.
     #+BEGIN_SRC emacs-lisp :tangle yes

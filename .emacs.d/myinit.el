@@ -82,7 +82,7 @@
 ;; Prog-mode is from where all the programming modes are derived from.
 ;; This means that if you call prog-mode-hook, the settings will be
 ;; applied to ALL programming modes in Emacs.
-(add-hook 'prog-mode-hook 'linum-mode)
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
 (add-hook 'text-mode-hook 'column-number-mode)
 
 ;; Ruby
@@ -147,6 +147,12 @@
 
 ;; Set syntax highlight level
 (setq js2-highlight-level 3)
+
+(use-package php-mode)
+;; Flymake support for PHP files
+(use-package flymake-php)
+(add-hook 'php-mode-hook 'flymake-php-load)
+(add-hook 'php-mode-hook '(push 'company-php company-backends))
 
 (use-package enh-ruby-mode)
 
@@ -268,6 +274,13 @@
 ;; Company statistics package
 (use-package company-statistics)
 (company-statistics-mode)
+
+;; Company with prescient.el offers better sorting of completion candidates.
+;; I don't know if it clashes with company-statistics.
+(use-package company-prescient)
+
+;; Activate it
+(company-prescient-mode)
 
 (require-package 'keyfreq)
 
