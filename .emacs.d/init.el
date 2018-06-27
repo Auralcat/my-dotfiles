@@ -9,7 +9,9 @@
      ("org" . "http://orgmode.org/elpa/")
      ("marmalade" . "http://marmalade-repo.org/packages/")
      ("melpa-stable" . "http://melpa-stable.milkbox.net/packages/")
-     ("melpa" . "http://melpa.org/packages/")))
+     ;; Use it when you can't find what you want in other repos
+     ;; ("melpa" . "http://melpa.org/packages/")
+                            ))
 (package-initialize)
 
 ;; If package isn't installed, fetch it
@@ -304,7 +306,7 @@
  '(org-todo-keywords (quote ((sequence "TODO" "DONE"))))
     '(package-selected-packages
          (quote
-             (vagrant-tramp ob-elixir company-prescient yaxception yasnippet-snippets yaml-mode weechat web-mode web-beautify vue-mode vagrant use-package twittering-mode theme-changer solarized-theme scss-mode sass-mode rvm rust-mode ruby-tools robe rich-minority request rainbow-mode rainbow-delimiters projectile powerline org-pomodoro org-bullets nyan-mode moe-theme mode-icons memoize makey magit keyfreq js2-mode htmlize highlight-sexp highlight-numbers helm-tramp flymake-phpcs flymake-php flymake-elixir flycheck-mix evil-surround evil-leader evil-anzu eshell-prompt-extras eruby-mode enh-ruby-mode engine-mode emojify emmet-mode electric-spacing editorconfig csv-mode company-web company-tern company-statistics company-php cl-generic camcorder autopair ace-jump-mode ac-html-bootstrap abyss-theme)))
+             (vagrant-tramp ob-elixir company-prescient weechat web-mode web-beautify vue-mode vagrant use-package twittering-mode theme-changer solarized-theme scss-mode sass-mode rvm rust-mode ruby-tools robe rich-minority request rainbow-mode rainbow-delimiters projectile powerline org-pomodoro org-bullets nyan-mode moe-theme mode-icons memoize makey magit keyfreq js2-mode htmlize highlight-sexp highlight-numbers helm-tramp flymake-phpcs flymake-php flymake-elixir flycheck-mix evil-surround evil-leader evil-anzu eshell-prompt-extras eruby-mode enh-ruby-mode engine-mode emojify emmet-mode electric-spacing editorconfig csv-mode company-web company-tern company-statistics company-php cl-generic camcorder autopair ace-jump-mode ac-html-bootstrap abyss-theme)))
  '(persp-show-modestring (quote (quote header)))
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
