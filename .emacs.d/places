@@ -1,6 +1,6 @@
 ;;; -*- coding: utf-8 -*-
-(("/home/lucas/file-bouncer/org-files/contact-based-system/eu.org" . 5)
- ("/home/lucas/.emacs.d/completions" . 345)
+(("/home/lucas/.emacs.d/completions" . 345)
+ ("/home/lucas/file-bouncer/org-files/contact-based-system/eu.org" . 5)
  ("/usr/local/share/emacs/26.1/lisp/org/org.el.gz" . 512881)
  ("/home/lucas/file-bouncer/org-files/stand-up-meetings/Junho-2018.org" . 976)
  ("/home/lucas/file-bouncer/org-files/projetos-sites/migracao-acasaqueminhavoqueria.org" . 7680)
@@ -11,7 +11,6 @@
   (dired-filename . "/home/lucas/Soulseek Downloads/complete/Late Night People/10 These Two Oceans.mp3"))
  ("/home/lucas/Música/Rock/David Lee Roth/1986-eat'em and smile [320]/"
   (dired-filename . "/home/lucas/Música/Rock/David Lee Roth/1986-eat'em and smile [320]/AlbumArt_{0EFC1C7A-B4E8-4844-91DB-81F94605C6B5}_Small.jpg"))
- ("/home/lucas/.emacs.d/emms/history" . 221)
  ("/home/lucas/file-bouncer/diario_2018.gpg" . 237668)
  ("/home/lucas/Soulseek Downloads/complete/fluke - six wheels on my wagon/"
   (dired-filename . "/home/lucas/Soulseek Downloads/complete/fluke - six wheels on my wagon/.."))

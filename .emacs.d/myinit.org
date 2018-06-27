@@ -12,7 +12,6 @@
 (setq backup-directory-alist `(("." . "~/file-bouncer/emacs-backups")))
 
 ;; Manual packages load path
-(add-to-list 'load-path "~/my-dotfiles/.emacs.d/manual-packages/ob-elixir/")
 (add-to-list 'load-path "~/my-dotfiles/.emacs.d/manual-packages/emacs-solargraph/")
 
 ;; Backup files by copying them
@@ -57,20 +56,6 @@
 (when (not (display-graphic-p))
   (menu-bar-mode -1))
 
-;; Org-babel - load ob-elixir
-(load "ob-elixir")
-
-;; Org-babel - load languages
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '(
-  ;; (sh . t)
-   (python . t)
-   (ruby . t)
-   (elixir . t)
-   (plantuml . t)
-   (dot . t)
-   ))
 
 ;; Use Bash as default shell interpreter
 (setq org-babel-sh-command "/bin/bash")
@@ -663,6 +648,26 @@ me, too many buffers to work with... for now.
       :init
       (add-hook 'org-mode-hook (lambda() (org-bullets-mode 1))))
    #+END_SRC
+** Org-babel
+*** Elixir
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package ob-elixir)
+    #+END_SRC
+*** Load languages
+   #+BEGIN_SRC emacs-lisp :tangle yes
+     (org-babel-do-load-languages
+     'org-babel-load-languages
+     '(
+     ;; (sh . t)
+        (python . t)
+        (ruby . t)
+        (elixir . t)
+        (plantuml . t)
+        (dot . t)
+     ))
+   #+END_SRC
+
+
 * Variables
 #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Set Org mode as default mode for new buffers:

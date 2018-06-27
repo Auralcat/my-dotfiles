@@ -5,7 +5,6 @@
 (setq backup-directory-alist `(("." . "~/file-bouncer/emacs-backups")))
 
 ;; Manual packages load path
-(add-to-list 'load-path "~/my-dotfiles/.emacs.d/manual-packages/ob-elixir/")
 (add-to-list 'load-path "~/my-dotfiles/.emacs.d/manual-packages/emacs-solargraph/")
 
 ;; Backup files by copying them
@@ -50,20 +49,6 @@
 (when (not (display-graphic-p))
   (menu-bar-mode -1))
 
-;; Org-babel - load ob-elixir
-(load "ob-elixir")
-
-;; Org-babel - load languages
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '(
-  ;; (sh . t)
-   (python . t)
-   (ruby . t)
-   (elixir . t)
-   (plantuml . t)
-   (dot . t)
-   ))
 
 ;; Use Bash as default shell interpreter
 (setq org-babel-sh-command "/bin/bash")
@@ -491,6 +476,19 @@ eshell-prompt-function 'epe-theme-lambda))
    :init
    (add-hook 'org-mode-hook (lambda() (org-bullets-mode 1))))
 
+(use-package ob-elixir)
+
+(org-babel-do-load-languages
+'org-babel-load-languages
+'(
+;; (sh . t)
+   (python . t)
+   (ruby . t)
+   (elixir . t)
+   (plantuml . t)
+   (dot . t)
+))
+
 ;; Set Org mode as default mode for new buffers:
 (setq-default major-mode 'org-mode)
 
@@ -541,8 +539,12 @@ eshell-prompt-function 'epe-theme-lambda))
    (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ("d" 0 "%d")) arg)))
 
 (use-package twittering-mode
-    :config
+    :bind-keymap
     (
+  ("C-c r" . twittering-reply-to-user)
+  ("C-c f" . twittering-favorite)
+  ("C-c n" . twittering-native-retweet)))
+
   ;; Adjust update interval in seconds. It's timeR, not time!
   (setq twittering-timer-interval 3600)
 
@@ -550,9 +552,4 @@ eshell-prompt-function 'epe-theme-lambda))
   (setq twittering-icon-mode t)
 
   ;; Use a master password so you don't have to ask for authentication every time
-  (setq twittering-use-master-password t))
-    :bind-keymap
-    (
-  ("C-c r" . twittering-reply-to-user)
-  ("C-c f" . twittering-favorite)
-  ("C-c n" . twittering-native-retweet)))
+  (setq twittering-use-master-password t)
