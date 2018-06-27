@@ -721,8 +721,12 @@ me, too many buffers to work with... for now.
   Use Twitter from within Emacs!
   #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package twittering-mode
-      :config
+      :bind-keymap
       (
+    ("C-c r" . twittering-reply-to-user)
+    ("C-c f" . twittering-favorite)
+    ("C-c n" . twittering-native-retweet)))
+
     ;; Adjust update interval in seconds. It's timeR, not time!
     (setq twittering-timer-interval 3600)
 
@@ -730,15 +734,11 @@ me, too many buffers to work with... for now.
     (setq twittering-icon-mode t)
 
     ;; Use a master password so you don't have to ask for authentication every time
-    (setq twittering-use-master-password t))
-      :bind-keymap
-      (
-    ("C-c r" . twittering-reply-to-user)
-    ("C-c f" . twittering-favorite)
-    ("C-c n" . twittering-native-retweet)))
+    (setq twittering-use-master-password t)
   #+END_SRC
 
   #+RESULTS:
+  : t
 * Packages saved for later need
 ** Perspective
 # ** Perspective

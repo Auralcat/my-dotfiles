@@ -8,7 +8,8 @@
 (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
      ("org" . "http://orgmode.org/elpa/")
      ("marmalade" . "http://marmalade-repo.org/packages/")
-     ("melpa-stable" . "http://melpa-stable.milkbox.net/packages/")))
+     ("melpa-stable" . "http://melpa-stable.milkbox.net/packages/")
+     ("melpa" . "http://melpa.org/packages/")))
 (package-initialize)
 
 ;; If package isn't installed, fetch it
@@ -43,6 +44,7 @@
  '(auto-image-file-mode t)
  '(battery-mode-line-format " 🔋 %b%p%% ")
  '(browse-url-browser-display nil)
+ '(browse-url-browser-function (quote browse-url-default-browser))
  '(browse-url-firefox-program "firefox")
     '(camcorder-frame-parameters
          (quote
@@ -266,7 +268,7 @@
  '(nyan-mode t)
     '(org-agenda-files
          (quote
-             ("~/file-bouncer/org-files/contact-based-system/eu.org" "~/file-bouncer/org-files/projetos-sites/migracao-acasaqueminhavoqueria.org" "~/file-bouncer/org-files/stand-up-meetings/Junho-2018.org" "~/file-bouncer/org-files/blog.org" "/home/lucas/file-bouncer/org-files/contact-based-system/rosiane.org" "/home/lucas/file-bouncer/org-files/contact-based-system/elaine.org" "/home/lucas/file-bouncer/org-files/contact-based-system/aline-pegas.org" "~/file-bouncer/org-files/contact-based-system/ariane.org")))
+             ("~/file-bouncer/org-files/contact-based-system/eu.org" "~/file-bouncer/org-files/contact-based-system/aline-pegas.org" "~/file-bouncer/org-files/contact-based-system/kira.org" "~/file-bouncer/org-files/contact-based-system/elaine.org")))
  '(org-agenda-scheduled-leaders (quote ("Scheduled: " "Sched. previously %2dx: ")))
  '(org-agenda-skip-scheduled-if-done t)
  '(org-bullets-bullet-list (quote ("✿" "❀" "◉" "○" "✸")))
@@ -285,22 +287,6 @@
                      (file+headline "~/file-bouncer/org-files/contact-based-system/eu.org" "Tarefas capturadas")
                      "** TODO %?" :prepend t))))
  '(org-default-notes-file "~/file-bouncer/everything-bucket")
-    '(org-duration-units
-         (quote
-             (("min" . 1)
-                 ("h" . 60)
-                 ("d" . 1440)
-                 ("w" . 10080)
-                 ("m" . 43200)
-                 ("y" . 525960.0))))
-    '(org-effort-durations
-         (quote
-             (("min" . 1)
-                 ("h" . 60)
-                 ("d" . 480)
-                 ("w" . 2400)
-                 ("m" . 9600)
-                 ("y" . 96000))))
  '(org-plantuml-jar-path "~/file-bouncer/plantuml.jar")
  '(org-pomodoro-audio-player "/usr/bin/mpv")
     '(org-pomodoro-finished-sound
