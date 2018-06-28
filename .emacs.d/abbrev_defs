@@ -64,6 +64,8 @@
 
 (define-abbrev-table 'edit-abbrevs-mode-abbrev-table '())
 
+(define-abbrev-table 'elisp-byte-code-mode-abbrev-table '())
+
 (define-abbrev-table 'elixir-mode-abbrev-table '())
 
 (define-abbrev-table 'emacs-lisp-byte-code-mode-abbrev-table '())
@@ -98,7 +100,17 @@
 
 (define-abbrev-table 'evil-list-view-mode-abbrev-table '())
 
+(define-abbrev-table 'eww-bookmark-mode-abbrev-table '())
+
+(define-abbrev-table 'eww-buffers-mode-abbrev-table '())
+
+(define-abbrev-table 'eww-history-mode-abbrev-table '())
+
+(define-abbrev-table 'eww-mode-abbrev-table '())
+
 (define-abbrev-table 'flycheck-error-list-mode-abbrev-table '())
+
+(define-abbrev-table 'flymake-diagnostics-buffer-mode-abbrev-table '())
 
 (define-abbrev-table 'fundamental-mode-abbrev-table '())
 
@@ -106,7 +118,7 @@
 
 (define-abbrev-table 'global-abbrev-table
   '(
-    ("WP" "WordPress" nil 14)
+    ("WP" "WordPress" nil 15)
     ("avi" "vai" nil 2)
     ("conversda" "conversa" nil 1)
     ("cosneguiu" "conseguiu" nil 1)
@@ -119,6 +131,7 @@
     ("emus" "meus" nil 3)
     ("entreguar" "entregar" nil 1)
     ("eplo" "pelo" nil 1)
+    ("hj" "hoje" nil 3)
     ("hovje" "hoje" nil 1)
     ("htat" "that" nil 2)
     ("hte" "the" nil 1)
@@ -129,14 +142,16 @@
     ("pq" "porque" nil 1)
     ("probelma" "problema " nil 1)
     ("qdo" "quando" nil 4)
-    ("qeu" "que" nil 9)
+    ("qeu" "que" nil 10)
     ("sla" "sei lá" nil 4)
-    ("tbm" "também" nil 8)
+    ("tbm" "também" nil 11)
     ("tepmo" "tempo" nil 1)
     ("tÔ" "tô" nil 6)
     ("uqe" "que" nil 1)
     ("vc" "você" nil 4)
    ))
+
+(define-abbrev-table 'gnus-group-mode-abbrev-table '())
 
 (define-abbrev-table 'grep-mode-abbrev-table '())
 
@@ -156,6 +171,10 @@
 
 (define-abbrev-table 'idl-mode-abbrev-table '())
 
+(define-abbrev-table 'image-dired-display-image-mode-abbrev-table '())
+
+(define-abbrev-table 'image-dired-thumbnail-mode-abbrev-table '())
+
 (define-abbrev-table 'inf-ruby-mode-abbrev-table '())
 
 (define-abbrev-table 'inferior-moz-mode-abbrev-table '())
@@ -163,6 +182,8 @@
 (define-abbrev-table 'java-mode-abbrev-table
   '(
    ))
+
+(define-abbrev-table 'js-jsx-mode-abbrev-table '())
 
 (define-abbrev-table 'js-mode-abbrev-table '())
 
@@ -292,11 +313,15 @@
 
 (define-abbrev-table 'vc-git-log-view-mode-abbrev-table '())
 
+(define-abbrev-table 'vc-git-region-history-mode-abbrev-table '())
+
 (define-abbrev-table 'vue-html-mode-abbrev-table '())
 
 (define-abbrev-table 'vue-mode-abbrev-table '())
 
 (define-abbrev-table 'web-mode-abbrev-table '())
+
+(define-abbrev-table 'xref--xref-buffer-mode-abbrev-table '())
 
 (define-abbrev-table 'yaml-mode-abbrev-table '())
 

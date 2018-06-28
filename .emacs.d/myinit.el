@@ -1,3 +1,4 @@
+
 ;; A small performance improvement
 (setq redisplay-dont-pause t)
 
@@ -134,9 +135,6 @@
 (setq js2-highlight-level 3)
 
 (use-package php-mode)
-;; Flymake support for PHP files
-(use-package flymake-php)
-(add-hook 'php-mode-hook 'flymake-php-load)
 (add-hook 'php-mode-hook '(push 'company-php company-backends))
 
 (use-package enh-ruby-mode)
@@ -359,6 +357,8 @@ eshell-prompt-function 'epe-theme-lambda))
 
 (use-package evil-anzu)
 (global-anzu-mode)
+
+(use-package vagrant-tramp)
 
 (use-package moe-theme)
 

@@ -167,9 +167,6 @@ me, too many buffers to work with... for now.
     PHP support for Emacs.
     #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package php-mode)
-    ;; Flymake support for PHP files
-    (use-package flymake-php)
-    (add-hook 'php-mode-hook 'flymake-php-load)
     (add-hook 'php-mode-hook '(push 'company-php company-backends))
     #+END_SRC
 *** Enhanced-ruby-mode
@@ -665,11 +662,11 @@ me, too many buffers to work with... for now.
      'org-babel-load-languages
      '(
      ;; (sh . t)
-        (python . t)
-        (ruby . t)
-        (elixir . t)
-        (plantuml . t)
-        (dot . t)
+	(python . t)
+	(ruby . t)
+	(elixir . t)
+	(plantuml . t)
+	(dot . t)
      ))
    #+END_SRC
 
