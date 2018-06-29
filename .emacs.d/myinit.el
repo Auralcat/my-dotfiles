@@ -1,4 +1,3 @@
-
 ;; A small performance improvement
 (setq redisplay-dont-pause t)
 
@@ -135,7 +134,7 @@
 (setq js2-highlight-level 3)
 
 (use-package php-mode)
-(add-hook 'php-mode-hook '(push 'company-php company-backends))
+(add-hook 'php-mode-hook (lambda() (add-to-list 'company-backends 'company-php)))
 
 (use-package enh-ruby-mode)
 
@@ -479,15 +478,15 @@ eshell-prompt-function 'epe-theme-lambda))
 (use-package ob-elixir)
 
 (org-babel-do-load-languages
-'org-babel-load-languages
-'(
-;; (sh . t)
-   (python . t)
-   (ruby . t)
-   (elixir . t)
-   (plantuml . t)
-   (dot . t)
-))
+ 'org-babel-load-languages
+ '(
+ ;; (sh . t)
+(python . t)
+(ruby . t)
+(elixir . t)
+(plantuml . t)
+(dot . t)
+ ))
 
 ;; Set Org mode as default mode for new buffers:
 (setq-default major-mode 'org-mode)
