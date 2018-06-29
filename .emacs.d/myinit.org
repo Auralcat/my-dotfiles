@@ -167,7 +167,7 @@ me, too many buffers to work with... for now.
     PHP support for Emacs.
     #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package php-mode)
-    (add-hook 'php-mode-hook '(push 'company-php company-backends))
+    (add-hook 'php-mode-hook (lambda() (add-to-list 'company-backends 'company-php)))
     #+END_SRC
 *** Enhanced-ruby-mode
     A better ruby-mode.
@@ -662,11 +662,11 @@ me, too many buffers to work with... for now.
      'org-babel-load-languages
      '(
      ;; (sh . t)
-	(python . t)
-	(ruby . t)
-	(elixir . t)
-	(plantuml . t)
-	(dot . t)
+    (python . t)
+    (ruby . t)
+    (elixir . t)
+    (plantuml . t)
+    (dot . t)
      ))
    #+END_SRC
 
