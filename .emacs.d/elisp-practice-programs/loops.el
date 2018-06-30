@@ -1,10 +1,2 @@
-(let (i 1)
-    (while (< i 20)
-    (message "I'm counting to %s" i)
-    (setq i (1+ i))))
-
-(let ((x 32))
-    (while (< x 127)
-        (insert-char x)
-        (setq x (+ x 1))))
-(switch-to-buffer "*Messages*")
+(let ((foo 16))
+    (print "The square root of foo is %d" ans))
