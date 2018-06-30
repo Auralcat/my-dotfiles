@@ -1,0 +1,5 @@
+(setq i 1)
+(while (> 20 i)
+    (message "I'm counting to %s" i)
+    (setq i (1+ i)))
+(switch-to-buffer "*Messages*")
