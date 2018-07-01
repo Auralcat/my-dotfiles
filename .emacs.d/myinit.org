@@ -418,6 +418,8 @@ me, too many buffers to work with... for now.
     Browse through Projectile commands using Helm.
     #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package helm-projectile)
+    ;; Activate it.
+    (helm-projectile-on)
     #+END_SRC
 *** Ibuffer-projectile
     Enables filtering buffers by project.
