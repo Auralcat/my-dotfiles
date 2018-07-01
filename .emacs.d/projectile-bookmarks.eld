@@ -1,1 +1,1 @@
-("~/my-dotfiles/" "/tmp/sample-ruby-project/" "~/exercism-exercises/ruby/rna-transcription/" "~/front-loops/" "~/")
+("~/my-dotfiles/" "~/" "/tmp/sample-front-end-page-project/" "/tmp/sample-ruby-project/" "~/exercism-exercises/ruby/rna-transcription/" "~/front-loops/")

@@ -297,7 +297,7 @@ me, too many buffers to work with... for now.
 *** Helm
      Incremental completion and selection narrowing framework
      #+BEGIN_SRC emacs-lisp :tangle yes
-     (require-package 'helm)
+     (use-package helm)
      (require 'helm-config)
      (helm-mode 1)
 
@@ -414,6 +414,11 @@ me, too many buffers to work with... for now.
     (use-package emojify)
     #+END_SRC
 ** Utilities
+*** Helm-projectile
+    Browse through Projectile commands using Helm.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package helm-projectile)
+    #+END_SRC
 *** Ibuffer-projectile
     Enables filtering buffers by project.
     #+BEGIN_SRC emacs-lisp :tangle yes
