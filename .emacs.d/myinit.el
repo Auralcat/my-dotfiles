@@ -538,11 +538,9 @@ eshell-prompt-function 'epe-theme-lambda))
    (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ("d" 0 "%d")) arg)))
 
 (use-package twittering-mode
-    :bind-keymap
-    (
-  ("C-c r" . twittering-reply-to-user)
-  ("C-c f" . twittering-favorite)
-  ("C-c n" . twittering-native-retweet)))
+    :bind (("C-c r" . twittering-reply-to-user)
+           ("C-c f" . twittering-favorite)
+           ("C-c n" . twittering-native-retweet)))
 
   ;; Adjust update interval in seconds. It's timeR, not time!
   (setq twittering-timer-interval 3600)

@@ -1,1 +1,1 @@
-("~/my-dotfiles/" "~/file-bouncer/" "~/" "~/fairyfloss/" "~/portfolio-website/" "~/freecodecamp-projects/" "~/literate-devops-notes/" "~/programa-combinacao-formulas-dermatologicas/" "~/vue-projects/comment-app/" "~/vue-projects/testing-component-creation/" "~/my-dotfiles/.emacs.d/manual-packages/powerline-evil/" "~/front-loops/" "~/ruby-goodies/")
+("~/my-dotfiles/" "/tmp/sample-ruby-project/" "~/exercism-exercises/ruby/rna-transcription/" "~/front-loops/" "~/")
