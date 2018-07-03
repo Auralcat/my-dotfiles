@@ -216,7 +216,7 @@
 (use-package evil-surround)
 (global-evil-surround-mode)
 
-(require-package 'helm)
+(use-package helm)
 (require 'helm-config)
 (helm-mode 1)
 
@@ -307,6 +307,12 @@ next-line))
    (mode-icons-mode))
 
 (use-package emojify)
+
+(use-package helm-projectile)
+;; Activate it.
+(helm-projectile-on)
+
+(use-package ibuffer-projectile)
 
 (use-package camcorder)
 
