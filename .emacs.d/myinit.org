@@ -414,6 +414,11 @@ me, too many buffers to work with... for now.
     (use-package emojify)
     #+END_SRC
 ** Utilities
+*** ReST Client
+    Use it like Postman, but inside Emacs!
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package restclient)
+    #+END_SRC
 *** Helm-projectile
     Browse through Projectile commands using Helm.
     #+BEGIN_SRC emacs-lisp :tangle yes
