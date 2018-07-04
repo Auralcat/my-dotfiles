@@ -308,6 +308,8 @@ next-line))
 
 (use-package emojify)
 
+(use-package restclient)
+
 (use-package helm-projectile)
 ;; Activate it.
 (helm-projectile-on)

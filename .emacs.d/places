@@ -1,8 +1,18 @@
 ;;; -*- coding: utf-8 -*-
 (("/home/lucas/file-bouncer/org-files/contact-based-system/eu.org" . 52162)
  ("/home/lucas/.emacs.d/completions" . 345)
- ("/home/lucas/.emacs.d/ido.last" . 46079)
+ ("/home/lucas/"
+  (dired-filename . "/home/lucas/site-pessoal-wp"))
+ ("/home/lucas/literate-devops-notes/vagrant.org" . 1344)
+ ("/home/lucas/site-pessoal-wp/"
+  (dired-filename . "/home/lucas/site-pessoal-wp/site.yml"))
+ ("/home/lucas/file-bouncer/org-files/stand-up-meetings/Julho-2018.org" . 971)
+ ("/home/lucas/file-bouncer/org-files/site-proprio.org" . 2964)
  ("/home/lucas/my-dotfiles/.emacs.d/init.el" . 1066)
+ ("/home/lucas/site-pessoal-wp/provision/"
+  (dired-filename . "/home/lucas/site-pessoal-wp/provision/default.yml"))
+ ("/home/lucas/file-bouncer/org-files/stand-up-meetings/Julho-2018.org_archive" . 1699)
+ ("/home/lucas/.emacs.d/ido.last" . 46079)
  ("/home/lucas/file-bouncer/org-files/stand-up-meetings/Junho-2018.org_archive" . 14599)
  ("/home/lucas/file-bouncer/org-files/projetos-sites/migracao-acasaqueminhavoqueria.org" . 11139)
  ("/home/lucas/my-dotfiles/.emacs.d/myinit.org" . 21890)
@@ -14,7 +24,6 @@
  ("/home/lucas/my-dotfiles/.emacs.d/elpa/php-mode-1.19.1/php-mode-autoloads.el" . 12654)
  ("/home/lucas/.emacs.d/elpa/mmm-mode-0.5.7/mmm-mode-autoloads.el" . 990)
  ("/usr/share/emacs/24.5/etc/PROBLEMS" . 123909)
- ("/home/lucas/literate-devops-notes/vagrant.org" . 1986)
  ("/home/lucas/avoqueria-vagrant-box/wordpress/wp-config.php" . 2434)
  ("/home/lucas/literate-devops-notes/ssh.org" . 431)
  ("/home/lucas/Downloads/avoqueri_site.sql" . 1704)

@@ -270,7 +270,7 @@
  '(nyan-mode t)
     '(org-agenda-files
          (quote
-             ("~/file-bouncer/org-files/stand-up-meetings/Julho-2018.org" "~/file-bouncer/org-files/contact-based-system/eu.org" "~/file-bouncer/org-files/contact-based-system/aline-pegas.org" "~/file-bouncer/org-files/contact-based-system/kira.org" "~/file-bouncer/org-files/contact-based-system/elaine.org")))
+             ("~/file-bouncer/org-files/site-proprio.org" "~/file-bouncer/org-files/stand-up-meetings/Julho-2018.org" "~/file-bouncer/org-files/contact-based-system/eu.org" "~/file-bouncer/org-files/contact-based-system/aline-pegas.org" "~/file-bouncer/org-files/contact-based-system/kira.org" "~/file-bouncer/org-files/contact-based-system/elaine.org")))
  '(org-agenda-scheduled-leaders (quote ("Scheduled: " "Sched. previously %2dx: ")))
  '(org-agenda-skip-scheduled-if-done t)
  '(org-agenda-start-on-weekday 0)
