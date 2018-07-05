@@ -539,6 +539,14 @@ me, too many buffers to work with... for now.
    #+BEGIN_SRC emacs-lisp :tangle yes
    (use-package abyss-theme)
    #+END_SRC
+** Github Modern
+   #+BEGIN_SRC emacs-lisp :tangle yes
+   (use-package github-modern-theme)
+   #+END_SRC
+** IntelliJ
+   #+BEGIN_SRC emacs-lisp :tangle yes
+   (use-package intellij-theme)
+   #+END_SRC
 * Mode Line
 ** Moe Modeline Themes
    Use moe-theme's powerline support instead of sml
