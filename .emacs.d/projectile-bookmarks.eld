@@ -1,1 +1,1 @@
-("~/my-dotfiles/" "~/file-bouncer/" "~/literate-devops-notes/" "~/" "/tmp/sample-front-end-page-project/" "/tmp/sample-ruby-project/" "~/exercism-exercises/ruby/rna-transcription/" "~/front-loops/" "/tmp/gulp-browsersync-and-sass/" "/tmp/sample-gulp-project/")
+("~/my-dotfiles/" "/tmp/quick-vue-project/" "~/file-bouncer/" "~/" "~/literate-devops-notes/" "/tmp/sample-front-end-page-project/" "/tmp/sample-ruby-project/" "~/exercism-exercises/ruby/rna-transcription/" "~/front-loops/" "/tmp/gulp-browsersync-and-sass/" "/tmp/sample-gulp-project/")

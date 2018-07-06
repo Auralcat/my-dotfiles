@@ -371,6 +371,10 @@ eshell-prompt-function 'epe-theme-lambda))
 
 (use-package abyss-theme)
 
+(use-package github-modern-theme)
+
+(use-package intellij-theme)
+
 ;; Show highlighted buffer-id as decoration. (Default: nil)
 (setq moe-theme-highlight-buffer-id t)
 
