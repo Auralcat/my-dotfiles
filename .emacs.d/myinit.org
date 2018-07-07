@@ -208,6 +208,319 @@ me, too many buffers to work with... for now.
     #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package csv-mode)
     #+END_SRC
+** Minor Modes
+*** Projectile
+    Manage projects in Emacs.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package projectile)
+    ;; Enable it globally.
+    (add-hook 'after-init-hook #'projectile-global-mode)
+    #+END_SRC
+*** Autopair
+   Automatically pair braces and quotes like in TextMate
+   #+BEGIN_SRC emacs-lisp :tangle yes
+   (use-package autopair
+      :init (autopair-global-mode))
+   #+END_SRC
+*** Emmet-mode
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package emmet-mode)
+    #+END_SRC
+*** Highlight-numbers mode
+    Sets font lock faces to numbers in Emacs.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package highlight-numbers)
+    (add-hook 'prog-mode-hook 'highlight-numbers-mode)
+    #+END_SRC
+*** Flycheck
+    Syntax checker, replaces flymake
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package flycheck
+       :config
+       ;; turn on flychecking globally
+       (add-hook 'after-init-hook #'global-flycheck-mode))
+    #+END_SRC
+*** Ruby Tools
+    Goodies for Ruby programming modes.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package ruby-tools)
+    #+END_SRC
+*** Engine mode
+    Query search engines from Emacs.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    ;; Ensure it's loaded
+    (use-package engine-mode)
+    ;; Activate it
+    (engine-mode t)
+
+    ;; Define search engines to use
+    (defengine github
+    "https://github.com/search?ref=simplesearch&q=%s"
+    :keybinding "g")
+    (defengine duckduckgo
+    "https://duckduckgo.com/?q=%s"
+    :keybinding "d")
+    (defengine youtube
+    "https://www.youtube.com/results?search_query=%s"
+    :keybinding "y")
+    (defengine stackoverflow
+    "https://stackoverflow.com/search?q=%s"
+    :keybinding "s")
+    #+END_SRC
+*** Evil Mode
+    Yes, I'm committing this heresy
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    #+END_SRC
+**** Evil-leader
+     Add a prefix key to Evil mode, like the Leader key in Vim.
+     #+BEGIN_SRC emacs-lisp :tangle yes
+     (use-package evil-leader)
+     (global-evil-leader-mode)
+     ;; Evil mode needs to be loaded after evil-leader
+     (use-package evil)
+     (evil-mode 1)
+
+     ;; Load configs
+     (load "~/my-dotfiles/.emacs.d/evilrc")
+     #+END_SRC
+**** Evil Surround
+     Easier manipulation of delimiters, emulation of vim.surround
+     #+BEGIN_SRC emacs-lisp :tangle yes
+     (use-package evil-surround)
+     (global-evil-surround-mode)
+     #+END_SRC
+*** Helm
+     Incremental completion and selection narrowing framework
+     #+BEGIN_SRC emacs-lisp :tangle yes
+     (use-package helm)
+     (require 'helm-config)
+     (helm-mode 1)
+
+     ;; Bind the keys I want:
+     (global-set-key (kbd "M-x") 'helm-M-x)
+     (global-set-key (kbd "»") 'helm-M-x)
+     (global-set-key (kbd "C-x C-f") 'helm-find-files)
+     (global-set-key (kbd "C-x b") 'helm-buffers-list)
+
+     ;; Complete with tab in Helm buffer, remap action menu to C-tab
+     (define-key helm-map (kbd "<tab>") 'hippie-expand)
+     (define-key helm-map (kbd "C-<tab>") 'helm--action-prompt)
+
+     ;; Enable fuzzy matching
+     (setq helm-M-x-fuzzy-match t)
+     #+END_SRC
+*** Company
+    *COMPlete ANYthing* inside Emacs.
+    I switched to it because it works in GUI Emacs and auto-complete doesn't.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (require-package 'company)
+
+    ;; Add Tern to Company
+    (require-package 'company-tern)
+    (require-package 'tern)
+
+    ;; Call that inside js2-mode and add tern to company backends
+    (defun tern-mode-tweaks ()
+    (add-to-list 'company-backends 'company-tern)
+    (tern-mode 1))
+    (add-hook 'js2-mode-hook 'tern-mode-tweaks)
+    ;; Autocompletion for Bootstrap/FontAwesome classes
+    (require-package 'ac-html-bootstrap)
+
+    ;; Web-mode completions
+    (require-package 'company-web)
+
+    ;; Add web-mode completions when started
+    (require 'company-web-html)
+
+    ;; Company statistics package
+    (use-package company-statistics)
+    (company-statistics-mode)
+
+    ;; Company with prescient.el offers better sorting of completion candidates.
+    ;; I don't know if it clashes with company-statistics.
+    (use-package company-prescient)
+
+    ;; Activate it
+    (company-prescient-mode)
+    #+END_SRC
+*** Keyfreq
+    Shows most used commands in editing session.
+    To see the data, run (keyfreq-show) with M-:
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (require-package 'keyfreq)
+
+    ;; Ignore arrow commands and self-insert-commands
+    (setq keyfreq-excluded-commands
+    '(self-insert-command
+    org-self-insert-command
+    abort-recursive-edit
+    forward-char
+    backward-char
+    previous-line
+    next-line))
+
+    ;; Activate it
+    (keyfreq-mode 1)
+    (keyfreq-autosave-mode 1)
+    #+END_SRC
+*** Diminish
+    Free some space in the mode line removing superfluous mode indications.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package diminish
+       ;; These are loaded at startup
+       :diminish helm-mode
+       :diminish company-mode
+       :diminish undo-tree-mode
+       :diminish auto-revert-mode
+       :diminish auto-fill-function
+       :diminish abbrev-mode
+       :diminish autopair-mode)
+    ;; These are loaded at other moments
+    (eval-after-load "editorconfig" '(diminish 'editorconfig-mode))
+    (eval-after-load "yasnippet" '(diminish 'yas-minor-mode))
+    (eval-after-load "projectile" '(diminish 'projectile-mode))
+    #+END_SRC
+*** Editorconfig
+    Helps developers define and maintain consistent coding styles
+    between different editors and IDEs.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package editorconfig
+       :init
+       ;; Activate it.
+       (editorconfig-mode 1))
+    #+END_SRC
+*** Nyan-mode
+    Put a Nyan Cat in your mode line! :3
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package nyan-mode)
+    (nyan-mode 1)
+    #+END_SRC
+*** Mode Icons
+    Indicate modes in the mode line using icons
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package mode-icons
+       :init
+       (mode-icons-mode))
+    #+END_SRC
+*** Emojify
+    Add emoji support for Emacs
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package emojify)
+    #+END_SRC
+** Utilities
+*** ReST Client
+    Use it like Postman, but inside Emacs!
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package restclient)
+    #+END_SRC
+*** Helm-projectile
+    Browse through Projectile commands using Helm.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package helm-projectile)
+    ;; Activate it.
+    (helm-projectile-on)
+    #+END_SRC
+*** Ibuffer-projectile
+    Enables filtering buffers by project.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package ibuffer-projectile)
+    #+END_SRC
+*** Camcorder
+    Record editing sessions in Emacs.
+    Invoke with M-x camcorder-record, pause with F11 and finish with
+    F12.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package camcorder)
+    #+END_SRC
+*** Rainbow Delimiters
+    Highlight parentheses, brackets and braces according to their
+    depth.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package rainbow-delimiters)
+    ;; Add this to prog-mode
+    (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+    #+END_SRC
+*** Smart Mode Line
+    Prettier mode line.
+    You can activate it with M-x sml/setup.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    ;; Smart-mode-line depends on powerline
+    (require-package 'powerline)
+    (require 'powerline)
+    ;; (require-package 'smart-mode-line)
+
+    #+END_SRC
+*** Web-beautify
+    Format HTML/CSS and JS code with js-beautify
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package web-beautify)
+    #+END_SRC
+*** Magit
+    How to win at Git from Emacs.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package magit)
+    #+END_SRC
+*** Eshell configurations
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    ;; Eshell extras
+    (use-package eshell-prompt-extras)
+
+    ;; More configs
+    (with-eval-after-load "esh-opt"
+    (autoload 'epe-theme-lambda "eshell-prompt-extras")
+    (setq eshell-highlight-prompt t
+    eshell-prompt-function 'epe-theme-lambda))
+    #+END_SRC
+*** Yasnippets
+    It originally came with company-mode, it's handy to write faster
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package yasnippet-snippets)
+    #+END_SRC
+*** Theme Changer
+    Change current theme depending on time of the day
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package theme-changer
+       :config
+       (progn ;; Set the location
+       (setq calendar-location-name "Curitiba, PR")
+       (setq calendar-latitude -25.41)
+       (setq calendar-longitude -49.25)
+
+       ;; Specify the day and night themes:
+       (change-theme 'whiteboard 'fairyfloss)))
+    #+END_SRC
+*** Ace Jump Mode
+    Move to any word with 2 keypresses.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package ace-jump-mode)
+    #+END_SRC
+*** Robe
+    Ruby's autocomplete, navigation and project tools, especially for
+    Rails.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package robe)
+    (add-hook 'enh-ruby-mode-hook 'robe-mode)
+
+    ;; Integrate with Company
+    (eval-after-load 'company '(push 'company-robe company-backends))
+    #+END_SRC
+*** RVM
+    Ruby Version Manager. Akin to python's virtualenv.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package rvm)
+    #+END_SRC
+*** Anzu
+    Show search result count in the mode line.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package evil-anzu)
+    (global-anzu-mode)
+    #+END_SRC
+*** Vagrant TRAMP
+    Open files in running Vagrant box using TRAMP
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package vagrant-tramp)
+    #+END_SRC
 * Themes
 ** Moe
    Light and dark theme, with some extra stuff.
@@ -376,7 +689,6 @@ me, too many buffers to work with... for now.
      ))
    #+END_SRC
 
-
 * Variables
 #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Set Org mode as default mode for new buffers:
@@ -414,7 +726,7 @@ me, too many buffers to work with... for now.
 (add-hook 'web-mode-hook 'emmet-mode)
 
 ;; By the way, it's nice to add rainbow-mode for CSS
-(ad-hook 'css-mode-hook 'css-mode-tweaks)
+(add-hook 'css-mode-hook 'css-mode-tweaks)
 
 ;; Python: use python3 as default shell interpreter
 (setq python-shell-interpreter "python3")

@@ -162,8 +162,6 @@
 
 (use-package csv-mode)
 
-(use-package vue-mode)
-
 (use-package projectile)
 ;; Enable it globally.
 (add-hook 'after-init-hook #'projectile-global-mode)
