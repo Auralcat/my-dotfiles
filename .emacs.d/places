@@ -1,14 +1,50 @@
 ;;; -*- coding: utf-8 -*-
-(("/home/lucas/file-bouncer/org-files/contact-based-system/eu.org" . 52162)
+(("/home/lucas/file-bouncer/org-files/stand-up-meetings/Julho-2018.org_archive" . 8647)
  ("/home/lucas/file-bouncer/org-files/site-proprio.org" . 2964)
  ("/home/lucas/.emacs.d/completions" . 345)
- ("/home/lucas/file-bouncer/org-files/stand-up-meetings/Julho-2018.org" . 1639)
- ("/home/lucas/my-dotfiles/.emacs.d/myinit.org" . 3852)
+ ("/home/lucas/my-dotfiles/.emacs.d/myinit.org" . 5777)
+ ("/home/lucas/literate-devops-notes/apache.org" . 63)
+ ("/home/lucas/file-bouncer/org-files/stand-up-meetings/Julho-2018.org" . 4239)
+ ("/home/lucas/v-customers/src/components/Edit.vue" . 3600)
+ ("/home/lucas/v-customers/src/components/CustomerDetails.vue" . 1439)
+ ("/home/lucas/file-bouncer/org-files/contact-based-system/eu.org" . 92131)
+ ("/home/lucas/.emacs.d/type-break" . 31)
  ("/home/lucas/my-dotfiles/.emacs.d/init.el" . 1066)
+ ("/home/lucas/v-customers/dist/static/css/"
+  (dired-filename . "/home/lucas/v-customers/dist/static/css/.."))
+ ("/home/lucas/v-customers/dist/static/js/"
+  (dired-filename . "/home/lucas/v-customers/dist/static/js/.."))
+ ("/home/lucas/v-customers/dist/static/"
+  (dired-filename . "/home/lucas/v-customers/dist/static/.."))
+ ("/home/lucas/v-customers/dist/"
+  (dired-filename . "/home/lucas/v-customers/dist/index.html"))
+ ("/home/lucas/v-customers/src/main.js" . 1342)
+ ("/home/lucas/v-customers/index.html" . 522)
+ ("/tmp/php-error.log" . 10853)
+ ("/home/lucas/slim-php-api-server/src/routes/customers.php" . 1129)
+ ("/home/lucas/slim-php-api-server/public/index.php" . 1105)
+ ("/home/lucas/v-customers/src/components/About.vue" . 174)
+ ("/home/lucas/slim-php-api-server/composer.json" . 48)
+ ("/home/lucas/slim-php-api-server/src/routes/"
+  (dired-filename . "/home/lucas/slim-php-api-server/src/routes/.."))
+ ("/home/lucas/slim-php-api-server/src/config/db-sample.php" . 189)
+ ("/home/lucas/slim-php-api-server/src/config/db.php" . 332)
+ ("/home/lucas/literate-devops-notes/databases.org" . 2832)
+ ("/home/lucas/v-customers/src/App.vue" . 114)
+ ("/home/lucas/slim-php-api-server/src/"
+  (dired-filename . "/home/lucas/slim-php-api-server/src/.."))
+ ("/home/lucas/slim-php-api-server/"
+  (dired-filename . "/home/lucas/slim-php-api-server/composer.json"))
+ ("/home/lucas/slim-php-api-server/public/.htaccess" . 118)
+ ("/sudo:root@logos:/etc/hosts" . 349)
+ ("/sudo:root@logos:/opt/lampp/etc/httpd.conf" . 17828)
+ ("/sudo:root@logos:/opt/lampp/etc/extra/httpd-vhosts.conf" . 1185)
+ ("/opt/lampp/etc/extra/httpd-vhosts.conf" . 1149)
+ ("/home/lucas/slim-php-api-server/public/"
+  (dired-filename . "/home/lucas/slim-php-api-server/public/index.php"))
  ("/home/lucas/"
   (dired-filename . "/home/lucas/site-pessoal-wp"))
  ("/home/lucas/literate-devops-notes/vagrant.org" . 1344)
- ("/home/lucas/file-bouncer/org-files/stand-up-meetings/Julho-2018.org_archive" . 1699)
  ("/home/lucas/.emacs.d/ido.last" . 46079)
  ("/home/lucas/file-bouncer/org-files/stand-up-meetings/Junho-2018.org_archive" . 14599)
  ("/home/lucas/file-bouncer/org-files/projetos-sites/migracao-acasaqueminhavoqueria.org" . 11139)
@@ -22,7 +58,6 @@
  ("/usr/share/emacs/24.5/etc/PROBLEMS" . 123909)
  ("/home/lucas/literate-devops-notes/ssh.org" . 431)
  ("/home/lucas/.emacs.d/elpa/abyss-theme-0.7/abyss-theme-autoloads.el" . 493)
- ("/home/lucas/literate-devops-notes/databases.org" . 3252)
  ("/home/lucas/my-dotfiles/.emacs.d/elpa/magit-2.13.0/magit.info-1" . 262477)
  ("/home/lucas/.emacs.d/elpa/yasnippet-snippets-0.4/yasnippet-snippets-autoloads.el" . 573)
  ("/home/lucas/my-dotfiles/.emacs.d/snippets/js2-mode/it.yasnippet" . 109)
