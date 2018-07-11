@@ -6,4 +6,4 @@
 ;;    If it is t, the completion will never be pruned from the file.
 ;;    Otherwise it is in hours since origin.
 
-("Auralcat" . 425304)
+("auralcat" . 425325)
