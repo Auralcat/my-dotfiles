@@ -1,0 +1,1 @@
+("~/my-dotfiles/" "~/literate-devops-notes/" "~/file-bouncer/" "~/vue-tab-tracker/" "~/vue-tab-tracker/client/")

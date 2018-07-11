@@ -488,6 +488,8 @@ eshell-prompt-function 'epe-theme-lambda))
 
 (use-package ob-elixir)
 
+(use-package ob-restclient)
+
 (org-babel-do-load-languages
  'org-babel-load-languages
  '(

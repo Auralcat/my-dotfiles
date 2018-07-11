@@ -410,6 +410,11 @@ me, too many buffers to work with... for now.
     (use-package emojify)
     #+END_SRC
 ** Utilities
+*** Restart Emacs
+    Restart Emacs from within Emacs
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package restart-emacs)
+    #+END_SRC
 *** ReST Client
     Use it like Postman, but inside Emacs!
     #+BEGIN_SRC emacs-lisp :tangle yes
