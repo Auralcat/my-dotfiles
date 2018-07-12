@@ -307,6 +307,8 @@ next-line))
 
 (use-package emojify)
 
+(use-package restart-emacs)
+
 (use-package restclient)
 
 (use-package helm-projectile)
