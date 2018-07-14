@@ -20,5 +20,5 @@ indent_size = 4
 charset = utf-8
 
 # 2 space indentation
-[*.{rb,css,exs,ex}]
+[*.{rb,css,exs,ex,js,html,vue}]
 indent_size = 2

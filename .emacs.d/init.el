@@ -1,3 +1,41 @@
+(require 'package)
+(setq package-enable-at-startup nil)
+
+;; Use this for debugging
+;; (setq debug-on-error t)
+
+;; Package repositories
+(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+     ("org" . "https://orgmode.org/elpa/")
+     ("marmalade" . "https://marmalade-repo.org/packages/")
+     ("melpa-stable" . "https://melpa-stable.milkbox.net/packages/")
+     ;; Use it when you can't find what you want in other repos
+     ("melpa" . "https://melpa.org/packages/")
+                            ))
+(package-initialize)
+
+;; If package isn't installed, fetch it
+(defun require-package (package)
+  (setq-default highlight-tabs t)
+  "Install given PACKAGE."
+  (unless (package-installed-p package)
+    (unless (assoc package package-archive-contents)
+      (package-refresh-contents))
+    (package-install package)))
+
+;; This replaces the old require-package.
+;; If package isn't installed, fetch it.
+(setq use-package-always-ensure t)
+
+;; Use-package
+(require-package 'use-package)
+(eval-when-compile
+    (require 'use-package))
+
+;; Load the Org file containing the customizations!
+(org-babel-load-file (expand-file-name "~/my-dotfiles/.emacs.d/myinit.org"))
+
+;; Created through M-x customize
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
