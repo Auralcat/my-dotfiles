@@ -225,18 +225,14 @@
 (global-set-key (kbd "C-x C-f") 'helm-find-files)
 (global-set-key (kbd "C-x b") 'helm-buffers-list)
 
-;; Complete with tab in Helm buffer, remap action menu to C-tab
-(define-key helm-map (kbd "<tab>") 'hippie-expand)
-(define-key helm-map (kbd "C-<tab>") 'helm--action-prompt)
-
 ;; Enable fuzzy matching
 (setq helm-M-x-fuzzy-match t)
 
 (require-package 'company)
 
 ;; Add Tern to Company
-(require-package 'company-tern)
-(require-package 'tern)
+(use-package company-tern)
+(use-package tern)
 
 ;; Call that inside js2-mode and add tern to company backends
 (defun tern-mode-tweaks ()

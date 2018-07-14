@@ -303,47 +303,46 @@ me, too many buffers to work with... for now.
      (global-set-key (kbd "C-x C-f") 'helm-find-files)
      (global-set-key (kbd "C-x b") 'helm-buffers-list)
 
-     ;; Complete with tab in Helm buffer, remap action menu to C-tab
-     (define-key helm-map (kbd "<tab>") 'hippie-expand)
-     (define-key helm-map (kbd "C-<tab>") 'helm--action-prompt)
-
      ;; Enable fuzzy matching
      (setq helm-M-x-fuzzy-match t)
      #+END_SRC
+
 *** Company
     *COMPlete ANYthing* inside Emacs.
     I switched to it because it works in GUI Emacs and auto-complete doesn't.
     #+BEGIN_SRC emacs-lisp :tangle yes
-    (require-package 'company)
+      (require-package 'company)
 
-    ;; Add Tern to Company
-    (require-package 'company-tern)
-    (require-package 'tern)
+      ;; Add Tern to Company
+      (use-package company-tern)
+      (use-package tern)
 
-    ;; Call that inside js2-mode and add tern to company backends
-    (defun tern-mode-tweaks ()
-    (add-to-list 'company-backends 'company-tern)
-    (tern-mode 1))
-    (add-hook 'js2-mode-hook 'tern-mode-tweaks)
-    ;; Autocompletion for Bootstrap/FontAwesome classes
-    (require-package 'ac-html-bootstrap)
+      ;; Call that inside js2-mode and add tern to company backends
+      (defun tern-mode-tweaks ()
+      (add-to-list 'company-backends 'company-tern)
+      (tern-mode 1))
+      ;; Add Tern to js2-mode and web-mode
+      (add-hook 'js2-mode-hook 'tern-mode-tweaks)
+      (add-hook 'web-mode-hook 'tern-mode-tweaks)
+      ;; Autocompletion for Bootstrap/FontAwesome classes
+      (require-package 'ac-html-bootstrap)
 
-    ;; Web-mode completions
-    (require-package 'company-web)
+      ;; Web-mode completions
+      (require-package 'company-web)
 
-    ;; Add web-mode completions when started
-    (require 'company-web-html)
+      ;; Add web-mode completions when started
+      (require 'company-web-html)
 
-    ;; Company statistics package
-    (use-package company-statistics)
-    (company-statistics-mode)
+      ;; Company statistics package
+      (use-package company-statistics)
+      (company-statistics-mode)
 
-    ;; Company with prescient.el offers better sorting of completion candidates.
-    ;; I don't know if it clashes with company-statistics.
-    (use-package company-prescient)
+      ;; Company with prescient.el offers better sorting of completion candidates.
+      ;; I don't know if it clashes with company-statistics.
+      (use-package company-prescient)
 
-    ;; Activate it
-    (company-prescient-mode)
+      ;; Activate it
+      (company-prescient-mode)
     #+END_SRC
 *** Keyfreq
     Shows most used commands in editing session.
