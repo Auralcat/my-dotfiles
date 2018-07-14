@@ -1,1 +1,1 @@
-("~/my-dotfiles/" "/tmp/sequelize-test/" "~/file-bouncer/" "~/vue-tab-tracker/server/" "~/vue-tab-tracker/client/" "~/vue-tab-tracker/" "~/literate-devops-notes/")
+("~/my-dotfiles/" "~/vue-tab-tracker/server/" "/tmp/sequelize-test/" "~/file-bouncer/" "~/vue-tab-tracker/client/" "~/vue-tab-tracker/" "~/literate-devops-notes/")

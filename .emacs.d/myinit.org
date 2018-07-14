@@ -379,7 +379,6 @@ me, too many buffers to work with... for now.
     ;; These are loaded at other moments
     (eval-after-load "editorconfig" '(diminish 'editorconfig-mode))
     (eval-after-load "yasnippet" '(diminish 'yas-minor-mode))
-    (eval-after-load "projectile" '(diminish 'projectile-mode))
     #+END_SRC
 *** Editorconfig
     Helps developers define and maintain consistent coding styles
