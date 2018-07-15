@@ -332,7 +332,7 @@
  '(org-todo-keywords (quote ((sequence "TODO" "DONE"))))
     '(package-selected-packages
          (quote
-             (smartparens company-tern restart-emacs ob-restclient doom-themes intellij-theme github-modern-theme restclient helm-projectile ibuffer-projectile yasnippet-classic-snippets yasnippet-snippets yasnippet vagrant-tramp ob-elixir company-prescient weechat web-mode web-beautify vagrant use-package twittering-mode theme-changer solarized-theme scss-mode sass-mode rvm rust-mode ruby-tools robe rich-minority request rainbow-mode rainbow-delimiters projectile powerline org-pomodoro org-bullets nyan-mode moe-theme mode-icons memoize makey magit keyfreq js2-mode htmlize highlight-sexp highlight-numbers helm-tramp flymake-phpcs flymake-php flymake-elixir flycheck-mix evil-surround evil-leader evil-anzu eshell-prompt-extras eruby-mode enh-ruby-mode engine-mode emojify emmet-mode electric-spacing editorconfig csv-mode company-web company-statistics company-php cl-generic camcorder autopair ace-jump-mode ac-html-bootstrap abyss-theme)))
+             (highlight-indentation smartparens company-tern restart-emacs ob-restclient doom-themes intellij-theme github-modern-theme restclient helm-projectile ibuffer-projectile yasnippet-classic-snippets yasnippet-snippets yasnippet vagrant-tramp ob-elixir company-prescient weechat web-mode web-beautify vagrant use-package twittering-mode theme-changer solarized-theme scss-mode sass-mode rvm rust-mode ruby-tools robe rich-minority request rainbow-mode rainbow-delimiters projectile powerline org-pomodoro org-bullets nyan-mode moe-theme mode-icons memoize makey magit keyfreq js2-mode htmlize highlight-sexp highlight-numbers helm-tramp flymake-phpcs flymake-php flymake-elixir flycheck-mix evil-surround evil-leader evil-anzu eshell-prompt-extras eruby-mode enh-ruby-mode engine-mode emojify emmet-mode electric-spacing editorconfig csv-mode company-web company-statistics company-php cl-generic camcorder autopair ace-jump-mode ac-html-bootstrap abyss-theme)))
  '(pdf-view-midnight-colors (quote ("#6a737d" . "#fffbdd")))
  '(persp-show-modestring (quote (quote header)))
  '(pos-tip-background-color "#073642")
@@ -494,3 +494,4 @@
  '(sml/modes ((t (:inherit sml/global :background "grey40" :foreground "Black" :height 1.0))))
  '(sml/time ((t (:inherit sml/global :foreground "green" :height 1.05 :foundry "ALTS" :family "Digital"))))
  '(time-mail-face ((t (:family "IBM 3270"))) t))
+(put 'narrow-to-region 'disabled nil)

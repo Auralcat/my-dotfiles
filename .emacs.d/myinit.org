@@ -408,6 +408,13 @@ me, too many buffers to work with... for now.
     (use-package emojify)
     #+END_SRC
 ** Utilities
+*** Highlight Indentation
+    Show indentation levels in Emacs.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package highlight-indentation :ensure t)
+    #+END_SRC
+
+
 *** Restart Emacs
     Restart Emacs from within Emacs
     #+BEGIN_SRC emacs-lisp :tangle yes
