@@ -238,7 +238,9 @@
 (defun tern-mode-tweaks ()
 (add-to-list 'company-backends 'company-tern)
 (tern-mode 1))
+;; Add Tern to js2-mode and web-mode
 (add-hook 'js2-mode-hook 'tern-mode-tweaks)
+(add-hook 'web-mode-hook 'tern-mode-tweaks)
 ;; Autocompletion for Bootstrap/FontAwesome classes
 (require-package 'ac-html-bootstrap)
 
@@ -287,7 +289,6 @@ next-line))
 ;; These are loaded at other moments
 (eval-after-load "editorconfig" '(diminish 'editorconfig-mode))
 (eval-after-load "yasnippet" '(diminish 'yas-minor-mode))
-(eval-after-load "projectile" '(diminish 'projectile-mode))
 
 (use-package editorconfig
    :init

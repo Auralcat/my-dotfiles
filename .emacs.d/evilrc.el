@@ -14,8 +14,8 @@
 (define-key evil-insert-state-map (kbd "C-a") 'beginning-of-line)
 (define-key evil-insert-state-map (kbd "C-e") 'end-of-line)
 
-;; Use Q in normal mode to kill buffers (since there's no EX mode)
-(define-key evil-normal-state-map (kbd "Q") 'kill-buffer)
+;; Use Q in normal mode to kill current buffer.
+(define-key evil-normal-state-map (kbd "Q") 'kill-current-buffer)
 
 ;; Some buffers in Emacs are read-only and can be usually killed pressing
 ;; lowercase q. Much more convenient if you ask me.
