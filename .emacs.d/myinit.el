@@ -304,6 +304,8 @@ next-line))
 
 (use-package emojify)
 
+(use-package highlight-indentation :ensure t)
+
 (use-package restart-emacs)
 
 (use-package restclient)

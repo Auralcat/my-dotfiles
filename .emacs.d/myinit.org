@@ -584,49 +584,52 @@ me, too many buffers to work with... for now.
 #+END_SRC
 * Keybindings
 #+BEGIN_SRC emacs-lisp :tangle yes
-;; Remapping the help hotkey so it doesn't clash with Unix backspace.
-;; Whenever you want to call help you can use M-x help as well. F1
-;; works too.
-(define-key key-translation-map [?\C-h] [?\C-?])
+  ;; Remapping the help hotkey so it doesn't clash with Unix backspace.
+  ;; Whenever you want to call help you can use M-x help as well. F1
+  ;; works too.
+  (define-key key-translation-map [?\C-h] [?\C-?])
 
-;; Unfill region
-(define-key global-map "\C-\M-q" 'unfill-region)
+  ;; Use the menu key for helm-m-x
+  (global-set-key [menu] (quote helm-M-x))
 
-;; Switch to last buffer - I do it all the time
-(global-set-key [27 112] (quote mode-line-other-buffer))
+  ;; Unfill region
+  (define-key global-map "\C-\M-q" 'unfill-region)
 
-;; Mapping AltGr-d to delete-other-windows,
-;; Another symbol I don't use often.
-(global-set-key [240] (quote delete-other-windows))
+  ;; Switch to last buffer - I do it all the time
+  (global-set-key [27 112] (quote mode-line-other-buffer))
 
-;; Access buffers with Alt-Gr b
-(global-set-key [8221] (quote ido-switch-buffer))
+  ;; Mapping AltGr-d to delete-other-windows,
+  ;; Another symbol I don't use often.
+  (global-set-key [240] (quote delete-other-windows))
 
-;; Map the Home and End keys to go to the beginning and end of the buffer
-(global-set-key [home] (quote beginning-of-buffer))
-(global-set-key [end] (quote end-of-buffer))
+  ;; Access buffers with Alt-Gr b
+  (global-set-key [8221] (quote ido-switch-buffer))
 
-;; Move to beginning of line or indentation
-(defun back-to-indentation-or-beginning () (interactive)
-  (if (= (point) (progn (back-to-indentation) (point)))
-      (beginning-of-line)))
+  ;; Map the Home and End keys to go to the beginning and end of the buffer
+  (global-set-key [home] (quote beginning-of-buffer))
+  (global-set-key [end] (quote end-of-buffer))
 
-(global-set-key (kbd "C-a") (quote back-to-indentation-or-beginning))
+  ;; Move to beginning of line or indentation
+  (defun back-to-indentation-or-beginning () (interactive)
+    (if (= (point) (progn (back-to-indentation) (point)))
+        (beginning-of-line)))
 
-;; Hippie-Expand: change key to M-SPC; Replace dabbrev-expand
-(global-set-key "\M- " 'hippie-expand)
-(global-set-key "\M-/" 'hippie-expand)
+  (global-set-key (kbd "C-a") (quote back-to-indentation-or-beginning))
 
-;; Eshell - bind M-p to go back to previous buffer
-(defun eshell-tweaks ()
-    "Keybindings for the Emacs shell"
-    (local-set-key (kbd "M-p") 'switch-to-prev-buffer)
-    "Start in Emacs mode"
-    (evil-set-initial-state 'eshell-mode 'emacs))
-(add-hook 'eshell-mode-hook 'eshell-tweaks)
+  ;; Hippie-Expand: change key to M-SPC; Replace dabbrev-expand
+  (global-set-key "\M- " 'hippie-expand)
+  (global-set-key "\M-/" 'hippie-expand)
 
-;; Set C-x j to go to current clocked task in org-mode
-(global-set-key (kbd "C-x j") 'org-clock-goto)
+  ;; Eshell - bind M-p to go back to previous buffer
+  (defun eshell-tweaks ()
+      "Keybindings for the Emacs shell"
+      (local-set-key (kbd "M-p") 'switch-to-prev-buffer)
+      "Start in Emacs mode"
+      (evil-set-initial-state 'eshell-mode 'emacs))
+  (add-hook 'eshell-mode-hook 'eshell-tweaks)
+
+  ;; Set C-x j to go to current clocked task in org-mode
+  (global-set-key (kbd "C-x j") 'org-clock-goto)
 
 #+END_SRC
 * Web-mode
