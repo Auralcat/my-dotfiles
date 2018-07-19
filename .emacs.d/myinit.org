@@ -531,24 +531,29 @@ me, too many buffers to work with... for now.
     (use-package vagrant-tramp)
     #+END_SRC
 * Themes
+** Jazz
+   A warm theme with dark colors.
+   #+BEGIN_SRC emacs-lisp :tangle yes
+   (use-package jazz-theme :ensure t)
+   #+END_SRC
 ** Moe
    Light and dark theme, with some extra stuff.
    Comes with support for smart-mode-line.
    #+BEGIN_SRC emacs-lisp :tangle yes
-   (use-package moe-theme)
+   (use-package moe-theme :ensure t)
    #+END_SRC
 ** Abyss
    Dark contrast theme
    #+BEGIN_SRC emacs-lisp :tangle yes
-   (use-package abyss-theme)
+   (use-package abyss-theme :ensure t)
    #+END_SRC
 ** Github Modern
    #+BEGIN_SRC emacs-lisp :tangle yes
-   (use-package github-modern-theme)
+   (use-package github-modern-theme :ensure t)
    #+END_SRC
 ** IntelliJ
    #+BEGIN_SRC emacs-lisp :tangle yes
-   (use-package intellij-theme)
+   (use-package intellij-theme :ensure t)
    #+END_SRC
 * Mode Line
 ** Moe Modeline Themes
