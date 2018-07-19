@@ -2,6 +2,4 @@
 # name: PHP tag
 # key: php
 # --
-<?php
-$0
-?>
+<?php $0 ?>

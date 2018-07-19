@@ -3,7 +3,7 @@ surrounding spaces around operator symbols.  For example, `='
 becomes ` = ', `+=' becomes ` += '.  This is most handy for writing
 C-style source code.
 
-Type `M-x smart-operator-mode' to toggle this minor mode.
+Type `M-x electric-spacing-mode' to toggle this minor mode.
 
 Acknowledgements
 

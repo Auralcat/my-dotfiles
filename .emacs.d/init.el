@@ -41,6 +41,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+    '(ansi-color-names-vector
+         ["#242424" "#e5786d" "#95e454" "#cae682" "#8ac6f2" "#333366" "#ccaa8f" "#f6f3e8"])
     '(ansi-term-color-vector
          [unspecified "#1F1611" "#660000" "#144212" "#EFC232" "#5798AE" "#BE73FD" "#93C1BC" "#E6E1DC"] t)
  '(auto-image-file-mode t)
@@ -129,6 +131,7 @@
  '(erc-user-full-name "Realnamezz")
  '(evil-shift-width 2)
  '(fci-rule-character-color "#452E2E")
+ '(fci-rule-color "#073642")
  '(font-use-system-font nil)
  '(global-anzu-mode t)
  '(global-auto-revert-mode t)
@@ -167,6 +170,9 @@
          "# This buffer is for notes you don't want to save, and for program sketching.
 # You can write the contents of this buffer to a file with C-x C-w.
 # Current default mode for this buffer is: Org-mode.")
+ '(jdee-db-active-breakpoint-face-colors (cons "#f0f0f0" "#4078f2"))
+ '(jdee-db-requested-breakpoint-face-colors (cons "#f0f0f0" "#50a14f"))
+ '(jdee-db-spec-breakpoint-face-colors (cons "#f0f0f0" "#9ca0a4"))
  '(keyboard-coding-system (quote utf-8-unix))
  '(line-number-mode nil)
  '(magit-diff-use-overlays nil)
@@ -292,7 +298,7 @@
  '(nyan-mode t)
     '(org-agenda-files
          (quote
-             ("~/file-bouncer/org-files/site-proprio.org" "~/file-bouncer/org-files/stand-up-meetings/Julho-2018.org" "~/file-bouncer/org-files/contact-based-system/eu.org" "~/file-bouncer/org-files/contact-based-system/aline-pegas.org" "~/file-bouncer/org-files/contact-based-system/kira.org" "~/file-bouncer/org-files/contact-based-system/elaine.org")))
+             ("~/file-bouncer/org-files/projetos-sites/xv-cosbe.org" "~/file-bouncer/org-files/site-proprio.org" "~/file-bouncer/org-files/stand-up-meetings/Julho-2018.org" "~/file-bouncer/org-files/contact-based-system/eu.org" "~/file-bouncer/org-files/contact-based-system/aline-pegas.org" "~/file-bouncer/org-files/contact-based-system/kira.org" "~/file-bouncer/org-files/contact-based-system/elaine.org")))
  '(org-agenda-scheduled-leaders (quote ("Scheduled: " "Sched. previously %2dx: ")))
  '(org-agenda-skip-scheduled-if-done t)
  '(org-agenda-start-on-weekday 0)
@@ -329,7 +335,7 @@
  '(org-todo-keywords (quote ((sequence "TODO" "DONE"))))
     '(package-selected-packages
          (quote
-             (warm-night-theme paganini-theme jazz-theme birds-of-paradise-plus-theme highlight-indentation smartparens company-tern restart-emacs ob-restclient doom-themes intellij-theme github-modern-theme restclient helm-projectile ibuffer-projectile yasnippet-classic-snippets yasnippet-snippets yasnippet vagrant-tramp ob-elixir company-prescient weechat web-mode web-beautify vagrant use-package twittering-mode theme-changer solarized-theme scss-mode sass-mode rvm rust-mode ruby-tools robe rich-minority request rainbow-mode rainbow-delimiters projectile powerline org-pomodoro org-bullets nyan-mode moe-theme mode-icons memoize makey magit keyfreq js2-mode htmlize highlight-sexp highlight-numbers helm-tramp flymake-phpcs flymake-php flymake-elixir flycheck-mix evil-surround evil-leader evil-anzu eshell-prompt-extras eruby-mode enh-ruby-mode engine-mode emojify emmet-mode electric-spacing editorconfig csv-mode company-web company-statistics company-php cl-generic camcorder autopair ace-jump-mode ac-html-bootstrap abyss-theme)))
+             (electric-operator warm-night-theme paganini-theme jazz-theme birds-of-paradise-plus-theme highlight-indentation smartparens company-tern restart-emacs ob-restclient doom-themes intellij-theme github-modern-theme restclient helm-projectile ibuffer-projectile yasnippet-classic-snippets yasnippet-snippets yasnippet vagrant-tramp ob-elixir company-prescient weechat web-mode web-beautify vagrant use-package twittering-mode theme-changer solarized-theme scss-mode sass-mode rvm rust-mode ruby-tools robe rich-minority request rainbow-mode rainbow-delimiters projectile powerline org-pomodoro org-bullets nyan-mode moe-theme mode-icons memoize makey magit keyfreq js2-mode htmlize highlight-sexp highlight-numbers helm-tramp flymake-phpcs flymake-php flymake-elixir flycheck-mix evil-surround evil-leader evil-anzu eshell-prompt-extras eruby-mode enh-ruby-mode engine-mode emojify emmet-mode electric-spacing editorconfig csv-mode company-web company-statistics company-php cl-generic camcorder autopair ace-jump-mode ac-html-bootstrap abyss-theme)))
  '(pdf-view-midnight-colors (quote ("#6a737d" . "#fffbdd")))
  '(persp-show-modestring (quote (quote header)))
  '(pos-tip-background-color "#073642")
@@ -431,6 +437,28 @@
  '(tooltip-mode nil)
  '(tramp-default-method "ssh" nil (tramp))
  '(type-break-mode nil)
+ '(vc-annotate-background nil)
+    '(vc-annotate-color-map
+         (quote
+             ((20 . "#dc322f")
+                 (40 . "#c85d17")
+                 (60 . "#be730b")
+                 (80 . "#b58900")
+                 (100 . "#a58e00")
+                 (120 . "#9d9100")
+                 (140 . "#959300")
+                 (160 . "#8d9600")
+                 (180 . "#859900")
+                 (200 . "#669b32")
+                 (220 . "#579d4c")
+                 (240 . "#489e65")
+                 (260 . "#399f7e")
+                 (280 . "#2aa198")
+                 (300 . "#2898af")
+                 (320 . "#2793ba")
+                 (340 . "#268fc6")
+                 (360 . "#268bd2"))))
+ '(vc-annotate-very-old-color nil)
  '(web-mode-enable-auto-closing t)
  '(web-mode-enable-auto-expanding nil)
  '(weechat-auto-monitor-buffers t)
