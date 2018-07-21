@@ -408,6 +408,14 @@ me, too many buffers to work with... for now.
     (use-package emojify)
     #+END_SRC
 ** Utilities
+*** Writeroom Mode
+    Dims the modeline, perfect for focusing on writing text/code
+    #+BEGIN_SRC emacs-lisp :tangle yes
+      (use-package writeroom-mode :ensure t)
+      ;; Activate it manually, it doesn't play well with Moe modeline globally
+    #+END_SRC
+
+
 *** Highlight Indentation
     Show indentation levels in Emacs.
     #+BEGIN_SRC emacs-lisp :tangle yes

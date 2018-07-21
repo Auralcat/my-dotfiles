@@ -367,13 +367,15 @@ eshell-prompt-function 'epe-theme-lambda))
 
 (use-package vagrant-tramp)
 
-(use-package moe-theme)
+(use-package jazz-theme :ensure t)
 
-(use-package abyss-theme)
+(use-package moe-theme :ensure t)
 
-(use-package github-modern-theme)
+(use-package abyss-theme :ensure t)
 
-(use-package intellij-theme)
+(use-package github-modern-theme :ensure t)
+
+(use-package intellij-theme :ensure t)
 
 ;; Show highlighted buffer-id as decoration. (Default: nil)
 (setq moe-theme-highlight-buffer-id t)
@@ -405,6 +407,9 @@ eshell-prompt-function 'epe-theme-lambda))
 ;; Whenever you want to call help you can use M-x help as well. F1
 ;; works too.
 (define-key key-translation-map [?\C-h] [?\C-?])
+
+;; Use the menu key for helm-m-x
+(global-set-key [menu] (quote helm-M-x))
 
 ;; Unfill region
 (define-key global-map "\C-\M-q" 'unfill-region)
