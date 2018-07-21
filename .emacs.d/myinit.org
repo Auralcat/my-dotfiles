@@ -217,6 +217,8 @@ me, too many buffers to work with... for now.
     Elixir helper package integration for Emacs.
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package alchemist :ensure t)
+      ;; Activate it in Elixir mode
+      (add-hook 'elixir-mode-hook 'alchemist-mode)
     #+END_SRC
 *** Projectile
     Manage projects in Emacs.
