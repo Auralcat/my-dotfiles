@@ -414,8 +414,6 @@ me, too many buffers to work with... for now.
       (use-package writeroom-mode :ensure t)
       ;; Activate it manually, it doesn't play well with Moe modeline globally
     #+END_SRC
-
-
 *** Highlight Indentation
     Show indentation levels in Emacs.
     #+BEGIN_SRC emacs-lisp :tangle yes
