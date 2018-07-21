@@ -304,6 +304,9 @@ next-line))
 
 (use-package emojify)
 
+(use-package writeroom-mode :ensure t)
+;; Activate it manually, it doesn't play well with Moe modeline globally
+
 (use-package highlight-indentation :ensure t)
 
 (use-package restart-emacs)

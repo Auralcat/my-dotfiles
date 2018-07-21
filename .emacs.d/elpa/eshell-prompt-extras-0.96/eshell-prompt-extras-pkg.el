@@ -1,1 +1,0 @@
-(define-package "eshell-prompt-extras" "0.96" "Display extra information for your eshell prompt." 'nil :commit "7581c109673c40aceff278cd524273f50ffe170d" :keywords '("eshell" "prompt") :url "https://github.com/hiddenlotus/eshell-prompt-extras")
