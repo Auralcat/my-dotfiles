@@ -213,6 +213,11 @@ me, too many buffers to work with... for now.
     (use-package csv-mode)
     #+END_SRC
 ** Minor Modes
+*** Alchemist
+    Elixir helper package integration for Emacs.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+      (use-package alchemist :ensure t)
+    #+END_SRC
 *** Projectile
     Manage projects in Emacs.
     #+BEGIN_SRC emacs-lisp :tangle yes
