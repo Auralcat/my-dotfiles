@@ -5,71 +5,74 @@
 
 * Environment Customizations
 #+BEGIN_SRC emacs-lisp :tangle yes
-;; A small performance improvement
-(setq redisplay-dont-pause t)
+  ;; Change window title
+  (setq frame-title-format '("Yes, this is Emacs!"))
 
-;; Store all backups in a specific folder:
-(setq backup-directory-alist `(("." . "~/file-bouncer/emacs-backups")))
+  ;; A small performance improvement
+  (setq redisplay-dont-pause t)
 
-;; Manual packages load path
-(add-to-list 'load-path "~/my-dotfiles/.emacs.d/manual-packages/emacs-solargraph/")
+  ;; Store all backups in a specific folder:
+  (setq backup-directory-alist `(("." . "~/file-bouncer/emacs-backups")))
 
-;; Backup files by copying them
-(setq backup-by-copying t)
+  ;; Manual packages load path
+  (add-to-list 'load-path "~/my-dotfiles/.emacs.d/manual-packages/emacs-solargraph/")
 
-;; Save my desktop
-(desktop-save-mode 1)
+  ;; Backup files by copying them
+  (setq backup-by-copying t)
 
-;; I'm too lazy to type "yes" or "no"
-(fset 'yes-or-no-p 'y-or-n-p)
+  ;; Save my desktop
+  (desktop-save-mode 1)
 
-;; Clean whitespace before saving a file
-(add-hook 'before-save-hook (quote whitespace-cleanup))
+  ;; I'm too lazy to type "yes" or "no"
+  (fset 'yes-or-no-p 'y-or-n-p)
 
-;; Allow only one theme at a time
-(setq custom-theme-allow-multiple-selections nil)
+  ;; Clean whitespace before saving a file
+  (add-hook 'before-save-hook (quote whitespace-cleanup))
 
-;; Enable ido-mode (fewer keystrokes to switch buffers!)
-(ido-mode 1)
+  ;; Allow only one theme at a time
+  (setq custom-theme-allow-multiple-selections nil)
 
-;; ido-mode in the minibuffer
-(icomplete-mode 1)
+  ;; Enable ido-mode (fewer keystrokes to switch buffers!)
+  (ido-mode 1)
 
-;; Enable windmove (switch windows with Shift+Arrow keys)
-(when (fboundp 'windmove-default-keybindings)
-    (windmove-default-keybindings))
+  ;; ido-mode in the minibuffer
+  (icomplete-mode 1)
 
-;; Replace the built-in buffer menu with ibuffer
-(global-set-key [24 2] (quote ibuffer))
+  ;; Enable windmove (switch windows with Shift+Arrow keys)
+  (when (fboundp 'windmove-default-keybindings)
+      (windmove-default-keybindings))
 
-;; Prevent the scratch buffer from being killed
-(with-current-buffer "*scratch*"
-    (emacs-lock-mode 'kill))
+  ;; Replace the built-in buffer menu with ibuffer
+  (global-set-key [24 2] (quote ibuffer))
 
-;; Set default font for Emacs
-(set-frame-font "Ubuntu Mono 12")
+  ;; Prevent the scratch buffer from being killed
+  (with-current-buffer "*scratch*"
+      (emacs-lock-mode 'kill))
 
-;; Enable auto-revert-mode
-(global-auto-revert-mode t)
+  ;; Set default font for Emacs
+  (set-frame-font "Ubuntu Mono 12")
 
-;; Remove the menu bar in terminal mode
-(when (not (display-graphic-p))
-  (menu-bar-mode -1))
+  ;; Enable auto-revert-mode
+  (global-auto-revert-mode t)
+
+  ;; Remove the menu bar in terminal mode
+  (when (not (display-graphic-p))
+    (menu-bar-mode -1))
 
 
-;; Use Bash as default shell interpreter
-(setq org-babel-sh-command "/bin/bash")
+  ;; Use Bash as default shell interpreter
+  (setq org-babel-sh-command "/bin/bash")
 
-;; Activate Company mode
-(add-hook 'after-init-hook 'global-company-mode)
+  ;; Activate Company mode
+  (add-hook 'after-init-hook 'global-company-mode)
 
-;; Enable global Abbrev mode
-(setq-default abbrev-mode t)
+  ;; Enable global Abbrev mode
+  (setq-default abbrev-mode t)
 
-;; Save last edited place in files
-(require 'saveplace)
-(setq-default save-place t)
-;; (save-place-mode 1)
+  ;; Save last edited place in files
+  (require 'saveplace)
+  (setq-default save-place t)
+  ;; (save-place-mode 1)
 #+END_SRC
 * Hooks
 #+BEGIN_SRC emacs-lisp :tangle yes
