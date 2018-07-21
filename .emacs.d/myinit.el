@@ -163,9 +163,11 @@
 
 (use-package csv-mode)
 
-(use-package projectile)
-;; Enable it globally.
-(add-hook 'after-init-hook #'projectile-global-mode)
+(use-package projectile
+ :init
+ (setq projectile-keymap-prefix (kbd "C-c p")))
+ ;; Enable it
+ (add-hook 'after-init-hook #'projectile-global-mode)
 
 (use-package autopair
    :init (autopair-global-mode))

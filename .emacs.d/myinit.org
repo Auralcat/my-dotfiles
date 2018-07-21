@@ -213,9 +213,11 @@ me, too many buffers to work with... for now.
 *** Projectile
     Manage projects in Emacs.
     #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package projectile)
-    ;; Enable it globally.
-    (add-hook 'after-init-hook #'projectile-global-mode)
+      (use-package projectile
+       :init
+       (setq projectile-keymap-prefix (kbd "C-c p")))
+       ;; Enable it
+       (add-hook 'after-init-hook #'projectile-global-mode)
     #+END_SRC
 *** Autopair
    Automatically pair braces and quotes like in TextMate
