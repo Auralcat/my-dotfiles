@@ -186,7 +186,8 @@ me, too many buffers to work with... for now.
     I use this for HTML files mostly, works good for PHP too.
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package web-mode :ensure t
-        :bind (("C-<up>"    . web-mode-element-previous)
+        :bind (:map web-mode-map
+               ("C-<up>"    . web-mode-element-previous)
                ("C-<down>"  . web-mode-element-next)
                ("C-<left>"  . web-mode-element-beginning)
                ("C-<right>" . web-mode-tag-match)
@@ -205,8 +206,10 @@ me, too many buffers to work with... for now.
       ;; Engine associations
       (setq web-mode-engines-alist
       '(("php"    . "\\.phtml\\'")
-      ("blade"  . "\\.blade\\."))
-      )
+      ("blade"  . "\\.blade\\.")))
+
+      ;; Highlight tag when editing
+      (setq web-mode-enable-current-element-highlight t)
     #+END_SRC
 *** YAML-mode
     YAML support for Emacs.

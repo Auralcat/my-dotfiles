@@ -7,6 +7,18 @@
 
 (define-abbrev-table 'Man-mode-abbrev-table '())
 
+(define-abbrev-table 'alchemist-compile-mode-abbrev-table '())
+
+(define-abbrev-table 'alchemist-execute-mode-abbrev-table '())
+
+(define-abbrev-table 'alchemist-iex-mode-abbrev-table '())
+
+(define-abbrev-table 'alchemist-mix-mode-abbrev-table '())
+
+(define-abbrev-table 'alchemist-refcard-mode-abbrev-table '())
+
+(define-abbrev-table 'alchemist-test-report-mode-abbrev-table '())
+
 (define-abbrev-table 'apropos-mode-abbrev-table '())
 
 (define-abbrev-table 'awk-mode-abbrev-table
@@ -116,6 +128,8 @@
 
 (define-abbrev-table 'gfm-mode-abbrev-table '())
 
+(define-abbrev-table 'git-commit-elisp-text-mode-abbrev-table '())
+
 (define-abbrev-table 'global-abbrev-table
   '(
     ("WP" "WordPress" nil 15)
@@ -139,15 +153,16 @@
     ("memso" "mesmo" nil 0)
     ("moranod" "morando" nil 1)
     ("oicsa" "coisa" nil 1)
+    ("ontme" "ontem" nil 0)
     ("pq" "porque" nil 1)
     ("probelma" "problema " nil 1)
     ("qdo" "quando" nil 4)
-    ("qeu" "que" nil 10)
+    ("qeu" "que" nil 11)
     ("sla" "sei lá" nil 4)
-    ("tbm" "também" nil 11)
+    ("tbm" "também" nil 14)
     ("tepmo" "tempo" nil 1)
-    ("tÔ" "tô" nil 6)
-    ("uqe" "que" nil 1)
+    ("tÔ" "tô" nil 7)
+    ("uqe" "que" nil 2)
     ("vc" "você" nil 4)
    ))
 
@@ -245,6 +260,8 @@
 
 (define-abbrev-table 'occur-mode-abbrev-table '())
 
+(define-abbrev-table 'org-export-stack-mode-abbrev-table '())
+
 (define-abbrev-table 'org-mode-abbrev-table '())
 
 (define-abbrev-table 'outline-mode-abbrev-table '())
@@ -262,6 +279,8 @@
 (define-abbrev-table 'prog-mode-abbrev-table '())
 
 (define-abbrev-table 'remember-mode-abbrev-table '())
+
+(define-abbrev-table 'restclient-mode-abbrev-table '())
 
 (define-abbrev-table 'ruby-mode-abbrev-table '())
 
@@ -308,6 +327,8 @@
 (define-abbrev-table 'twittering-edit-mode-abbrev-table '())
 
 (define-abbrev-table 'url-cookie-mode-abbrev-table '())
+
+(define-abbrev-table 'use-package-statistics-mode-abbrev-table '())
 
 (define-abbrev-table 'vc-git-log-edit-mode-abbrev-table '())
 
