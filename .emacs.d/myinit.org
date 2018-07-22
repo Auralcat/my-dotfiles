@@ -185,22 +185,28 @@ me, too many buffers to work with... for now.
 *** Web Mode
     I use this for HTML files mostly, works good for PHP too.
     #+BEGIN_SRC emacs-lisp :tangle yes
+      (use-package web-mode :ensure t
+        :bind (("C-<up>"    . web-mode-element-previous)
+               ("C-<down>"  . web-mode-element-next)
+               ("C-<left>"  . web-mode-element-beginning)
+               ("C-<right>" . web-mode-tag-match)
+               ("C-S-<up>"  . web-mode-element-parent)
+               ("M-<up>"    . web-mode-element-content-select)
+               ("C-k"       . web-mode-element-kill)))
 
-    (require-package 'web-mode)
+      ;; File associations
+      (add-to-list 'auto-mode-alist '("\\.phtml\\'"  . web-mode))
+      (add-to-list 'auto-mode-alist '("\\.php\\'"    . web-mode))
+      (add-to-list 'auto-mode-alist '("\\.erb\\'"    . web-mode))
+      (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+      (add-to-list 'auto-mode-alist '("\\.html?\\'"  . web-mode))
+      (add-to-list 'auto-mode-alist '("\\.vue?\\'"   . web-mode))
 
-    ;; File associations
-    (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
-    (add-to-list 'auto-mode-alist '("\\.php\\'" . web-mode))
-    (add-to-list 'auto-mode-alist '("\\.erb\\'" . web-mode))
-    (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-    (add-to-list 'auto-mode-alist '("\\.html?\\'" . web-mode))
-    (add-to-list 'auto-mode-alist '("\\.vue?\\'" . web-mode))
-
-    ;; Engine associations
-    (setq web-mode-engines-alist
-    '(("php"    . "\\.phtml\\'")
-    ("blade"  . "\\.blade\\."))
-    )
+      ;; Engine associations
+      (setq web-mode-engines-alist
+      '(("php"    . "\\.phtml\\'")
+      ("blade"  . "\\.blade\\."))
+      )
     #+END_SRC
 *** YAML-mode
     YAML support for Emacs.
