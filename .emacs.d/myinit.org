@@ -473,18 +473,6 @@ me, too many buffers to work with... for now.
     ;; Activate it.
     (helm-projectile-on)
     #+END_SRC
-*** Ibuffer-projectile
-    Enables filtering buffers by project.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package ibuffer-projectile)
-    #+END_SRC
-*** Camcorder
-    Record editing sessions in Emacs.
-    Invoke with M-x camcorder-record, pause with F11 and finish with
-    F12.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package camcorder)
-    #+END_SRC
 *** Rainbow Delimiters
     Highlight parentheses, brackets and braces according to their
     depth.
