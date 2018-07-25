@@ -524,19 +524,25 @@ me, too many buffers to work with... for now.
     #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package yasnippet-snippets)
     #+END_SRC
-*** Theme Changer
-    Change current theme depending on time of the day
+*** Circadian
+    Theme changer for Emacs.
     #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package theme-changer
-       :config
-       (progn ;; Set the location
-       (setq calendar-location-name "Curitiba, PR")
-       (setq calendar-latitude -25.41)
-       (setq calendar-longitude -49.25)
+      (use-package circadian
+        :ensure t
+        :config
+        (setq calendar-location-name "Curitiba, PR")
+        (setq calendar-latitude -25.41)
+        (setq calendar-longitude -49.25)
 
-       ;; Specify the day and night themes:
-       (change-theme 'whiteboard 'fairyfloss)))
+        (setq circadian-themes '((:sunrise . whiteboard)
+                                 (:sunset . jazz)))
+
+        (circadian-setup))
     #+END_SRC
+
+    #+RESULTS:
+    : t
+
 *** Ace Jump Mode
     Move to any word with 2 keypresses.
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -572,26 +578,26 @@ me, too many buffers to work with... for now.
 ** Jazz
    A warm theme with dark colors.
    #+BEGIN_SRC emacs-lisp :tangle yes
-   (use-package jazz-theme :ensure t)
+   (use-package jazz-theme :ensure :defer)
    #+END_SRC
 ** Moe
    Light and dark theme, with some extra stuff.
    Comes with support for smart-mode-line.
    #+BEGIN_SRC emacs-lisp :tangle yes
-   (use-package moe-theme :ensure t)
+   (use-package moe-theme :ensure :defer)
    #+END_SRC
 ** Abyss
    Dark contrast theme
    #+BEGIN_SRC emacs-lisp :tangle yes
-   (use-package abyss-theme :ensure t)
+   (use-package abyss-theme :ensure :defer)
    #+END_SRC
 ** Github Modern
    #+BEGIN_SRC emacs-lisp :tangle yes
-   (use-package github-modern-theme :ensure t)
+   (use-package github-modern-theme :ensure :defer)
    #+END_SRC
 ** IntelliJ
    #+BEGIN_SRC emacs-lisp :tangle yes
-   (use-package intellij-theme :ensure t)
+   (use-package intellij-theme :ensure :defer)
    #+END_SRC
 * Mode Line
 ** Moe Modeline Themes

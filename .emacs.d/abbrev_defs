@@ -49,6 +49,24 @@
 
 (define-abbrev-table 'completion-list-mode-abbrev-table '())
 
+(define-abbrev-table 'conf-colon-mode-abbrev-table '())
+
+(define-abbrev-table 'conf-desktop-mode-abbrev-table '())
+
+(define-abbrev-table 'conf-javaprop-mode-abbrev-table '())
+
+(define-abbrev-table 'conf-ppd-mode-abbrev-table '())
+
+(define-abbrev-table 'conf-space-mode-abbrev-table '())
+
+(define-abbrev-table 'conf-toml-mode-abbrev-table '())
+
+(define-abbrev-table 'conf-unix-mode-abbrev-table '())
+
+(define-abbrev-table 'conf-windows-mode-abbrev-table '())
+
+(define-abbrev-table 'conf-xdefaults-mode-abbrev-table '())
+
 (define-abbrev-table 'css-mode-abbrev-table
   '(
     ("aic" "align-items: center;" nil 3)
@@ -75,6 +93,8 @@
 (define-abbrev-table 'edebug-eval-mode-abbrev-table '())
 
 (define-abbrev-table 'edit-abbrevs-mode-abbrev-table '())
+
+(define-abbrev-table 'editorconfig-conf-mode-abbrev-table '())
 
 (define-abbrev-table 'elisp-byte-code-mode-abbrev-table '())
 
@@ -130,41 +150,7 @@
 
 (define-abbrev-table 'git-commit-elisp-text-mode-abbrev-table '())
 
-(define-abbrev-table 'global-abbrev-table
-  '(
-    ("WP" "WordPress" nil 15)
-    ("avi" "vai" nil 2)
-    ("conversda" "conversa" nil 1)
-    ("cosneguiu" "conseguiu" nil 1)
-    ("cudiar" "cuidar" nil 1)
-    ("cwb" "Curitiba" nil 1)
-    ("deposi" "depois" nil 1)
-    ("ehre" "here " nil 1)
-    ("elqa" "ela" nil 1)
-    ("emu" "meu" nil 1)
-    ("emus" "meus" nil 3)
-    ("entreguar" "entregar" nil 1)
-    ("eplo" "pelo" nil 1)
-    ("hj" "hoje" nil 3)
-    ("hovje" "hoje" nil 1)
-    ("htat" "that" nil 2)
-    ("hte" "the" nil 1)
-    ("htem" "them" nil 1)
-    ("memso" "mesmo" nil 0)
-    ("moranod" "morando" nil 1)
-    ("oicsa" "coisa" nil 1)
-    ("ontme" "ontem" nil 0)
-    ("pq" "porque" nil 1)
-    ("probelma" "problema " nil 1)
-    ("qdo" "quando" nil 4)
-    ("qeu" "que" nil 11)
-    ("sla" "sei lá" nil 4)
-    ("tbm" "também" nil 14)
-    ("tepmo" "tempo" nil 1)
-    ("tÔ" "tô" nil 7)
-    ("uqe" "que" nil 2)
-    ("vc" "você" nil 4)
-   ))
+(define-abbrev-table 'global-abbrev-table '())
 
 (define-abbrev-table 'gnus-group-mode-abbrev-table '())
 
@@ -262,7 +248,42 @@
 
 (define-abbrev-table 'org-export-stack-mode-abbrev-table '())
 
-(define-abbrev-table 'org-mode-abbrev-table '())
+(define-abbrev-table 'org-mode-abbrev-table
+  '(
+    ("WP" "WordPress" nil 15)
+    ("avi" "vai" nil 2)
+    ("conversda" "conversa" nil 1)
+    ("cosneguiu" "conseguiu" nil 1)
+    ("cudiar" "cuidar" nil 1)
+    ("cwb" "Curitiba" nil 1)
+    ("deposi" "depois" nil 1)
+    ("ehre" "here " nil 1)
+    ("elqa" "ela" nil 1)
+    ("emu" "meu" nil 1)
+    ("emus" "meus" nil 3)
+    ("entreguar" "entregar" nil 1)
+    ("eplo" "pelo" nil 1)
+    ("hj" "hoje" nil 3)
+    ("hovje" "hoje" nil 1)
+    ("htat" "that" nil 2)
+    ("hte" "the" nil 1)
+    ("htem" "them" nil 1)
+    ("memso" "mesmo" nil 0)
+    ("moranod" "morando" nil 1)
+    ("oicsa" "coisa" nil 1)
+    ("ontme" "ontem" nil 0)
+    ("pq" "porque" nil 1)
+    ("probelma" "problema " nil 1)
+    ("projeots" "projetos" nil 1)
+    ("qdo" "quando" nil 4)
+    ("qeu" "que" nil 12)
+    ("sla" "sei lá" nil 4)
+    ("tbm" "também" nil 15)
+    ("tepmo" "tempo" nil 1)
+    ("tÔ" "tô" nil 7)
+    ("uqe" "que" nil 2)
+    ("vc" "você" nil 5)
+   ))
 
 (define-abbrev-table 'outline-mode-abbrev-table '())
 
@@ -341,6 +362,8 @@
 (define-abbrev-table 'vue-mode-abbrev-table '())
 
 (define-abbrev-table 'web-mode-abbrev-table '())
+
+(define-abbrev-table 'woman-mode-abbrev-table '())
 
 (define-abbrev-table 'xref--xref-buffer-mode-abbrev-table '())
 
