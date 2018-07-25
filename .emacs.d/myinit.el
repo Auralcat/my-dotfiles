@@ -296,7 +296,7 @@ next-line))
 (keyfreq-mode 1)
 (keyfreq-autosave-mode 1)
 
-(use-package diminish
+(use-package diminish :ensure t
    ;; These are loaded at startup
    :diminish helm-mode
    :diminish company-mode
@@ -438,7 +438,7 @@ eshell-prompt-function 'epe-theme-lambda))
 ;; Remapping the help hotkey so it doesn't clash with Unix backspace.
 ;; Whenever you want to call help you can use M-x help as well. F1
 ;; works too.
-(define-key key-translation-map [?\C-h] [?\C-?])
+;; (define-key key-translation-map [?\C-h] [?\C-?])
 
 ;; Use the menu key for helm-m-x
 (global-set-key [menu] (quote helm-M-x))

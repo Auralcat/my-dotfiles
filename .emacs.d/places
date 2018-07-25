@@ -1,10 +1,10 @@
 ;;; -*- coding: utf-8 -*-
-(("/home/lucas/.emacs.d/completions" . 1395)
- ("/home/lucas/file-bouncer/org-files/contact-based-system/kira.org" . 720)
+(("/home/lucas/file-bouncer/org-files/contact-based-system/kira.org" . 720)
  ("/home/lucas/file-bouncer/org-files/contact-based-system/eu.org" . 42955)
  ("/home/lucas/file-bouncer/org-files/stand-up-meetings/Julho-2018.org" . 3148)
  ("/home/lucas/file-bouncer/org-files/site-proprio.org" . 4276)
  ("/home/lucas/file-bouncer/org-files/projetos-sites/xv-cosbe.org" . 60629)
+ ("/home/lucas/.emacs.d/completions" . 1395)
  ("/home/lucas/vue-tab-tracker/client/src/router/index.js" . 230)
  ("/home/lucas/vue-tab-tracker/client/src/components/Songs/SongsPanel.vue" . 1296)
  ("/home/lucas/vue-tab-tracker/client/src/components/Songs/SongsSearchPanel.vue" . 163)
@@ -30,8 +30,6 @@
  ("/home/lucas/vue-tab-tracker/client/src/components/"
   (dired-filename . "/home/lucas/vue-tab-tracker/client/src/components/ViewSong"))
  ("/home/lucas/.emacs.d/elpa/twittering-mode-20180507.721/twittering-mode-autoloads.el" . 582)
- ("/home/lucas/.emacs.d/elpa/warm-night-theme-20161101.728/warm-night-theme-autoloads.el" . 470)
- ("/home/lucas/.emacs.d/elpa/paganini-theme-20180710.821/paganini-theme-autoloads.el" . 447)
  ("/home/lucas/.emacs.d/elpa/jazz-theme-20170411.711/jazz-theme-autoloads.el" . 538)
  ("/home/lucas/.emacs.d/elpa/birds-of-paradise-plus-theme-20130419.1429/birds-of-paradise-plus-theme-autoloads.el" . 686)
  ("/home/lucas/.emacs.d/elpa/company-tern-20161004.1147/company-tern-autoloads.el" . 616)

@@ -630,7 +630,7 @@ me, too many buffers to work with... for now.
   ;; Remapping the help hotkey so it doesn't clash with Unix backspace.
   ;; Whenever you want to call help you can use M-x help as well. F1
   ;; works too.
-  (define-key key-translation-map [?\C-h] [?\C-?])
+  ;; (define-key key-translation-map [?\C-h] [?\C-?])
 
   ;; Use the menu key for helm-m-x
   (global-set-key [menu] (quote helm-M-x))
