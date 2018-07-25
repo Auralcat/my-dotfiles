@@ -355,9 +355,7 @@ next-line))
 (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
 ;; Smart-mode-line depends on powerline
-(require-package 'powerline)
-(require 'powerline)
-;; (require-package 'smart-mode-line)
+(use-package powerline :ensure t)
 
 (use-package web-beautify)
 
@@ -374,15 +372,17 @@ eshell-prompt-function 'epe-theme-lambda))
 
 (use-package yasnippet-snippets)
 
-(use-package theme-changer
-   :config
-   (progn ;; Set the location
-   (setq calendar-location-name "Curitiba, PR")
-   (setq calendar-latitude -25.41)
-   (setq calendar-longitude -49.25)
+(use-package circadian
+  :ensure t
+  :config
+  (setq calendar-location-name "Curitiba, PR")
+  (setq calendar-latitude -25.41)
+  (setq calendar-longitude -49.25)
 
-   ;; Specify the day and night themes:
-   (change-theme 'whiteboard 'fairyfloss)))
+  (setq circadian-themes '((:sunrise . moe-light)
+                           (:sunset . jazz)))
+
+  (circadian-setup))
 
 (use-package ace-jump-mode)
 
@@ -399,24 +399,22 @@ eshell-prompt-function 'epe-theme-lambda))
 
 (use-package vagrant-tramp)
 
-(use-package jazz-theme :ensure t)
+(use-package jazz-theme :ensure :defer)
 
-(use-package moe-theme :ensure t)
+(use-package moe-theme
+ :ensure t
+ :config
+ (moe-dark)
+ (powerline-moe-theme))
+ ;; ;; Show highlighted buffer-id as decoration. (Default: nil)
+ ;; (setq moe-theme-highlight-buffer-id t)
+ ;; Choose a color for the mode line (Default: blue)
 
-(use-package abyss-theme :ensure t)
+(use-package abyss-theme :ensure :defer)
 
-(use-package github-modern-theme :ensure t)
+(use-package github-modern-theme :ensure :defer)
 
-(use-package intellij-theme :ensure t)
-
-;; Show highlighted buffer-id as decoration. (Default: nil)
-(setq moe-theme-highlight-buffer-id t)
-
-;; Activate SML
-;; (sml/setup t)
-;; Choose a color for the mode line (Default: blue)
-(powerline-moe-theme)
-(moe-theme-set-color 'purple)
+(use-package intellij-theme :ensure :defer)
 
 ;; Set font in graphical mode
 (when (display-graphic-p)

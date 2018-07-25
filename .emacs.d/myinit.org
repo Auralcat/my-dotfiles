@@ -493,9 +493,7 @@ me, too many buffers to work with... for now.
     You can activate it with M-x sml/setup.
     #+BEGIN_SRC emacs-lisp :tangle yes
     ;; Smart-mode-line depends on powerline
-    (require-package 'powerline)
-    (require 'powerline)
-    ;; (require-package 'smart-mode-line)
+    (use-package powerline :ensure t)
 
     #+END_SRC
 *** Web-beautify
@@ -534,15 +532,11 @@ me, too many buffers to work with... for now.
         (setq calendar-latitude -25.41)
         (setq calendar-longitude -49.25)
 
-        (setq circadian-themes '((:sunrise . whiteboard)
+        (setq circadian-themes '((:sunrise . moe-light)
                                  (:sunset . jazz)))
 
         (circadian-setup))
     #+END_SRC
-
-    #+RESULTS:
-    : t
-
 *** Ace Jump Mode
     Move to any word with 2 keypresses.
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -584,8 +578,22 @@ me, too many buffers to work with... for now.
    Light and dark theme, with some extra stuff.
    Comes with support for smart-mode-line.
    #+BEGIN_SRC emacs-lisp :tangle yes
-   (use-package moe-theme :ensure :defer)
+     (use-package moe-theme
+      :ensure t
+      :config
+      (moe-dark)
+      (powerline-moe-theme)
+      (moe-theme-set-color 'magenta))
+      ;; ;; Show highlighted buffer-id as decoration. (Default: nil)
+      ;; (setq moe-theme-highlight-buffer-id t)
+      ;; Choose a color for the mode line (Default: blue)
+
+
    #+END_SRC
+
+   #+RESULTS:
+   : t
+
 ** Abyss
    Dark contrast theme
    #+BEGIN_SRC emacs-lisp :tangle yes
@@ -598,19 +606,6 @@ me, too many buffers to work with... for now.
 ** IntelliJ
    #+BEGIN_SRC emacs-lisp :tangle yes
    (use-package intellij-theme :ensure :defer)
-   #+END_SRC
-* Mode Line
-** Moe Modeline Themes
-   Use moe-theme's powerline support instead of sml
-   #+BEGIN_SRC emacs-lisp :tangle yes
-   ;; Show highlighted buffer-id as decoration. (Default: nil)
-   (setq moe-theme-highlight-buffer-id t)
-
-   ;; Activate SML
-   ;; (sml/setup t)
-   ;; Choose a color for the mode line (Default: blue)
-   (powerline-moe-theme)
-   (moe-theme-set-color 'purple)
    #+END_SRC
 * Graphical
 #+BEGIN_SRC emacs-lisp :tangle yes
