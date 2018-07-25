@@ -583,17 +583,9 @@ me, too many buffers to work with... for now.
       :config
       (moe-dark)
       (powerline-moe-theme)
-      (moe-theme-set-color 'magenta))
-      ;; ;; Show highlighted buffer-id as decoration. (Default: nil)
-      ;; (setq moe-theme-highlight-buffer-id t)
       ;; Choose a color for the mode line (Default: blue)
-
-
+      (moe-theme-set-color 'magenta))
    #+END_SRC
-
-   #+RESULTS:
-   : t
-
 ** Abyss
    Dark contrast theme
    #+BEGIN_SRC emacs-lisp :tangle yes
