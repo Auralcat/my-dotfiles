@@ -388,7 +388,7 @@ me, too many buffers to work with... for now.
 *** Diminish
     Free some space in the mode line removing superfluous mode indications.
     #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package diminish
+    (use-package diminish :ensure t
        ;; These are loaded at startup
        :diminish helm-mode
        :diminish company-mode
