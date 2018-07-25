@@ -432,19 +432,26 @@ me, too many buffers to work with... for now.
 *** XTerm Color
     Better shell colorization.
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package xterm-color :ensure t)
+      (use-package xterm-color
+        :ensure t
+        :requires (eshell)
+        :config
+        (;; Add filter function to pre-output
+         (add-to-list 'eshell-preoutput-filter-functions 'xterm-color-filter)
+         (setq eshell-output-filter-functions (remove 'eshell-handle-ansi-color eshell-output-filter-functions))
+         ;; Set eshell $TERM envvar to xterm-256color
+         (setenv "TERM" "xterm-256color")))
 
       (add-hook 'eshell-before-prompt-hook
                 (lambda ()
                   (setq xterm-color-preserve-properties t)))
 
-      ;; Add filter function to pre-output
-      (add-to-list 'eshell-preoutput-filter-functions 'xterm-color-filter)
-      (setq eshell-output-filter-functions (remove 'eshell-handle-ansi-color eshell-output-filter-functions))
 
-      ;; Set eshell $TERM envvar to xterm-256color
-      (setenv "TERM" "xterm-256color")
     #+END_SRC
+
+    #+RESULTS:
+    | lambda | nil | (setq xterm-color-preserve-properties t) |
+
 *** Cheat.sh client
     Access cheat.sh from Emacs
     #+BEGIN_SRC emacs-lisp :tangle yes

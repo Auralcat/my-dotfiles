@@ -323,10 +323,24 @@ next-line))
 
 (use-package emojify)
 
+(use-package xterm-color
+  :ensure t
+  :requires (eshell)
+  :config
+  (;; Add filter function to pre-output
+   (add-to-list 'eshell-preoutput-filter-functions 'xterm-color-filter)
+   (setq eshell-output-filter-functions (remove 'eshell-handle-ansi-color eshell-output-filter-functions))
+   ;; Set eshell $TERM envvar to xterm-256color
+   (setenv "TERM" "xterm-256color")))
+
+(add-hook 'eshell-before-prompt-hook
+          (lambda ()
+            (setq xterm-color-preserve-properties t)))
+
+(use-package cheat-sh :ensure t)
+
 (use-package writeroom-mode :ensure t)
 ;; Activate it manually, it doesn't play well with Moe modeline globally
-
-(use-package highlight-indentation :ensure t)
 
 (use-package restart-emacs)
 
@@ -335,10 +349,6 @@ next-line))
 (use-package helm-projectile)
 ;; Activate it.
 (helm-projectile-on)
-
-(use-package ibuffer-projectile)
-
-(use-package camcorder)
 
 (use-package rainbow-delimiters)
 ;; Add this to prog-mode
