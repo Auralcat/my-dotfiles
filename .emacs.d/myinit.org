@@ -613,8 +613,10 @@ me, too many buffers to work with... for now.
 (when (display-graphic-p)
     ;; Use Fantasque Sans Mono when available
     (if (member "Fantasque Sans Mono" (font-family-list))
+    ;; (set-face-font (quote default) "-PfEd-Fantasque Sans Mono-normal-normal-normal-*-12-*-*-*-m-0-fontset-auto3")
     (set-frame-font "Fantasque Sans Mono 12")
-    '(set-frame-font "Ubuntu Mono 12" nil t))
+    '(set-face-font (quote default) "-DAMA-Ubuntu Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1"))
+
     ;; Remove menu and scroll bars in graphical mode
     (menu-bar-mode 0)
     (tool-bar-mode 0)
@@ -626,6 +628,9 @@ me, too many buffers to work with... for now.
     ;; Maximize frame on startup
     (toggle-frame-maximized))
 #+END_SRC
+
+#+RESULTS:
+
 * Keybindings
 #+BEGIN_SRC emacs-lisp :tangle yes
   ;; Remapping the help hotkey so it doesn't clash with Unix backspace.

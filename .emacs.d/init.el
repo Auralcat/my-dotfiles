@@ -48,7 +48,7 @@
                  (top . 80))))
  '(column-number-mode t)
  '(company-abort-manual-when-too-short nil)
- '(company-auto-complete t)
+ '(company-auto-complete (quote (quote company-explicit-action-p)))
  '(company-auto-complete-chars (quote (41)))
     '(company-backends
          (quote
@@ -484,7 +484,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Fantasque Sans Mono" :foundry "PfEd" :slant normal :weight normal :height 120 :width normal))))
+ '(default ((t (:family "Ubuntu Mono" :foundry "DAMA" :slant normal :weight normal :height 120 :width normal))))
  '(company-scrollbar-bg ((((class color) (min-colors 89)) (:background "#5f5f5f"))))
  '(company-scrollbar-fg ((((class color) (min-colors 89)) (:background "#9e9e9e"))))
  '(company-template-field ((((class color) (min-colors 89)) (:background "#ffffaf" :foreground "#626262"))))

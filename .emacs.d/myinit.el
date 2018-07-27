@@ -263,6 +263,17 @@
 ;; Activate it
 (company-prescient-mode)
 
+(use-package company-box
+  :if window-system
+  :hook (company-mode . company-box-mode))
+
+;; Edit backend color indication.
+;; (setq company-box-backends-colors
+;;       ’((company-yasnippet . (:candidate "yellow" :annotation some-face))
+;;         (company-elisp . (:icon "yellow" :selected (:background "orange"
+;;                                                     :foreground "black")))
+;;         (company-dabbrev . "purple")))
+
 (use-package keyfreq)
 
 ;; Ignore arrow commands and self-insert-commands
@@ -404,7 +415,8 @@ eshell-prompt-function 'epe-theme-lambda))
     ;; Use Fantasque Sans Mono when available
     (if (member "Fantasque Sans Mono" (font-family-list))
     (set-frame-font "Fantasque Sans Mono 12")
-    '(set-frame-font "Ubuntu Mono 12" nil t))
+    '(set-frame-font "-DAMA-Ubuntu Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1" nil nil))
+
     ;; Remove menu and scroll bars in graphical mode
     (menu-bar-mode 0)
     (tool-bar-mode 0)
