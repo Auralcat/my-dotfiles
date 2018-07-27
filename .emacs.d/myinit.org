@@ -804,6 +804,9 @@ me, too many buffers to work with... for now.
 ;; Example macro: Mark todos as done
 (fset 'org-mark-as-done
    (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ("d" 0 "%d")) arg)))
+   (fset 'foobar-was-here
+   [?A ?  ?- ?- ?  ?f ?o ?o ?b ?a ?r ?  ?e ?a backspace backspace ?a backspace ?w ?a ?s ?  ?h ?e ?r ?e ?! escape ?\C-a])
+
 #+END_SRC
 * Twittering mode
   Use Twitter from within Emacs!
