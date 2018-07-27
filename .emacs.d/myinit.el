@@ -1,3 +1,5 @@
+;; Start in scratch buffer
+
 ;; Change window title
 (setq frame-title-format '("Yes, this is Emacs!"))
 
@@ -12,9 +14,6 @@
 
 ;; Backup files by copying them
 (setq backup-by-copying t)
-
-;; Save my desktop
-(desktop-save-mode 1)
 
 ;; I'm too lazy to type "yes" or "no"
 (fset 'yes-or-no-p 'y-or-n-p)
@@ -68,7 +67,7 @@
 ;; (save-place-mode 1)
 
 ;; Load from external file.
-;; (load "~/.emacs.secrets")
+(load "~/.emacs.secrets")
 
 ;; Prog-mode is from where all the programming modes are derived from.
 ;; This means that if you call prog-mode-hook, the settings will be
@@ -151,13 +150,13 @@
 
 (use-package web-mode :ensure t
 :bind (:map web-mode-map
-       ("C-<up>"    . web-mode-element-previous)
-       ("C-<down>"  . web-mode-element-next)
-       ("C-<left>"  . web-mode-element-beginning)
-       ("C-<right>" . web-mode-tag-match)
-       ("C-S-<up>"  . web-mode-element-parent)
-       ("M-<up>"    . web-mode-element-content-select)
-       ("C-k"       . web-mode-element-kill)))
+   ("C-<up>"    . web-mode-element-previous)
+   ("C-<down>"  . web-mode-element-next)
+   ("C-<left>"  . web-mode-element-beginning)
+   ("C-<right>" . web-mode-tag-match)
+   ("C-S-<up>"  . web-mode-element-parent)
+   ("M-<up>"    . web-mode-element-content-select)
+   ("C-k"       . web-mode-element-kill)))
 
   ;; File associations
   (add-to-list 'auto-mode-alist '("\\.phtml\\'"  . web-mode))
@@ -323,8 +322,8 @@ next-line))
  (setenv "TERM" "xterm-256color")))
 
   (add-hook 'eshell-before-prompt-hook
-    (lambda ()
-      (setq xterm-color-preserve-properties t)))
+(lambda ()
+  (setq xterm-color-preserve-properties t)))
 
 (use-package cheat-sh :ensure t)
 
@@ -364,12 +363,8 @@ eshell-prompt-function 'epe-theme-lambda))
 (use-package circadian
 :ensure t
 :config
-(setq calendar-location-name "Curitiba, PR")
-(setq calendar-latitude -25.41)
-(setq calendar-longitude -49.25)
-
 (setq circadian-themes '((:sunrise . moe-light)
-	     (:sunset . jazz)))
+     (:sunset . jazz)))
 
 (circadian-setup))
 
@@ -500,6 +495,12 @@ eshell-prompt-function 'epe-theme-lambda))
 ;; Org-agenda: point the files you want it to read
 ;; (setq org-agenda-files (list "~/file-bouncer/org-files/contact-based-system/"))
 
+;; Change default diary location
+(setq diary-file "~/emacs-diary")
+
+;; Use diary entries in org-agenda
+(setq org-agenda-include-diary t)
+
 ;; Always respect the content of a heading when creating todos!
 (local-set-key [M-S-return] (quote org-insert-todo-heading-respect-content))
 
@@ -578,8 +579,8 @@ eshell-prompt-function 'epe-theme-lambda))
 
 (use-package twittering-mode
     :bind (("C-c r" . twittering-reply-to-user)
-       ("C-c f" . twittering-favorite)
-       ("C-c n" . twittering-native-retweet)))
+   ("C-c f" . twittering-favorite)
+   ("C-c n" . twittering-native-retweet)))
 
   ;; Adjust update interval in seconds. It's timeR, not time!
   (setq twittering-timer-interval 3600)

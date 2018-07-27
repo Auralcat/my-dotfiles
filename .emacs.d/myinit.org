@@ -351,6 +351,14 @@ me, too many buffers to work with... for now.
       ;; Activate it
       (company-prescient-mode)
     #+END_SRC
+**** Front-ends
+***** Company-box
+      Show icons in Company tooltip and different backends.
+      #+BEGIN_SRC emacs-lisp :tangle yes
+      (use-package company-box
+      :hook (company-mode . company-box-mode))
+      #+END_SRC
+
 *** Keyfreq
     Shows most used commands in editing session.
     To see the data, run (keyfreq-show) with M-:
