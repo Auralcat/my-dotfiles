@@ -74,6 +74,12 @@
   (setq-default save-place t)
   ;; (save-place-mode 1)
 #+END_SRC
+* Personal info
+  #+BEGIN_SRC emacs-lisp :tangle yes
+    ;; Load from external file.
+    (load "~/.emacs.secrets")
+  #+END_SRC
+
 * Hooks
 #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Prog-mode is from where all the programming modes are derived from.
@@ -187,13 +193,13 @@ me, too many buffers to work with... for now.
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package web-mode :ensure t
     :bind (:map web-mode-map
-           ("C-<up>"    . web-mode-element-previous)
-           ("C-<down>"  . web-mode-element-next)
-           ("C-<left>"  . web-mode-element-beginning)
-           ("C-<right>" . web-mode-tag-match)
-           ("C-S-<up>"  . web-mode-element-parent)
-           ("M-<up>"    . web-mode-element-content-select)
-           ("C-k"       . web-mode-element-kill)))
+       ("C-<up>"    . web-mode-element-previous)
+       ("C-<down>"  . web-mode-element-next)
+       ("C-<left>"  . web-mode-element-beginning)
+       ("C-<right>" . web-mode-tag-match)
+       ("C-S-<up>"  . web-mode-element-parent)
+       ("M-<up>"    . web-mode-element-content-select)
+       ("C-k"       . web-mode-element-kill)))
 
       ;; File associations
       (add-to-list 'auto-mode-alist '("\\.phtml\\'"  . web-mode))
@@ -430,8 +436,8 @@ me, too many buffers to work with... for now.
      (setenv "TERM" "xterm-256color")))
 
       (add-hook 'eshell-before-prompt-hook
-        (lambda ()
-          (setq xterm-color-preserve-properties t)))
+    (lambda ()
+      (setq xterm-color-preserve-properties t)))
 
 
     #+END_SRC
@@ -515,12 +521,8 @@ me, too many buffers to work with... for now.
       (use-package circadian
     :ensure t
     :config
-    (setq calendar-location-name "Curitiba, PR")
-    (setq calendar-latitude -25.41)
-    (setq calendar-longitude -49.25)
-
     (setq circadian-themes '((:sunrise . moe-light)
-                 (:sunset . jazz)))
+         (:sunset . jazz)))
 
     (circadian-setup))
     #+END_SRC
@@ -672,30 +674,36 @@ me, too many buffers to work with... for now.
 #+END_SRC
 * Org-mode
 #+BEGIN_SRC emacs-lisp :tangle yes
-;; We don't need Flycheck in org-mode buffers. Usually.
-(add-hook 'org-mode-hook '(lambda() (flycheck-mode 0)))
+  ;; We don't need Flycheck in org-mode buffers. Usually.
+  (add-hook 'org-mode-hook '(lambda() (flycheck-mode 0)))
 
-;; Bind org-capture to C-c c
-(global-set-key (kbd "\C-c c") (quote org-capture))
+  ;; Bind org-capture to C-c c
+  (global-set-key (kbd "\C-c c") (quote org-capture))
 
-;; Bind org-pomodoro to C-x p
-(global-set-key (kbd "\C-x p") (quote org-pomodoro))
+  ;; Bind org-pomodoro to C-x p
+  (global-set-key (kbd "\C-x p") (quote org-pomodoro))
 
-;; Open the agenda with C-c a
-(global-set-key [3 97] (quote org-agenda))
+  ;; Open the agenda with C-c a
+  (global-set-key [3 97] (quote org-agenda))
 
-;; Open subheading with C-c RET and invert with M-RET
-(local-set-key [27 13] (quote org-ctrl-c-ret))
-(local-set-key [3 13] (quote org-insert-subheading))
+  ;; Open subheading with C-c RET and invert with M-RET
+  (local-set-key [27 13] (quote org-ctrl-c-ret))
+  (local-set-key [3 13] (quote org-insert-subheading))
 
-;; Org-agenda: point the files you want it to read
-;; (setq org-agenda-files (list "~/file-bouncer/org-files/contact-based-system/"))
+  ;; Org-agenda: point the files you want it to read
+  ;; (setq org-agenda-files (list "~/file-bouncer/org-files/contact-based-system/"))
 
-;; Always respect the content of a heading when creating todos!
-(local-set-key [M-S-return] (quote org-insert-todo-heading-respect-content))
+  ;; Change default diary location
+  (setq diary-file "~/emacs-diary")
 
-;; Map C-S-enter to org-insert-todo-subheading
-(local-set-key [C-S-return] (quote org-insert-todo-subheading))
+  ;; Use diary entries in org-agenda
+  (setq org-agenda-include-diary t)
+
+  ;; Always respect the content of a heading when creating todos!
+  (local-set-key [M-S-return] (quote org-insert-todo-heading-respect-content))
+
+  ;; Map C-S-enter to org-insert-todo-subheading
+  (local-set-key [C-S-return] (quote org-insert-todo-subheading))
 
 #+END_SRC
 ** Org-bullets
@@ -791,8 +799,8 @@ me, too many buffers to work with... for now.
   #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package twittering-mode
       :bind (("C-c r" . twittering-reply-to-user)
-         ("C-c f" . twittering-favorite)
-         ("C-c n" . twittering-native-retweet)))
+     ("C-c f" . twittering-favorite)
+     ("C-c n" . twittering-native-retweet)))
 
     ;; Adjust update interval in seconds. It's timeR, not time!
     (setq twittering-timer-interval 3600)

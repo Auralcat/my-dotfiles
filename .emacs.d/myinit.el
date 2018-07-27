@@ -67,6 +67,9 @@
 (setq-default save-place t)
 ;; (save-place-mode 1)
 
+;; Load from external file.
+;; (load "~/.emacs.secrets")
+
 ;; Prog-mode is from where all the programming modes are derived from.
 ;; This means that if you call prog-mode-hook, the settings will be
 ;; applied to ALL programming modes in Emacs.
@@ -366,7 +369,7 @@ eshell-prompt-function 'epe-theme-lambda))
 (setq calendar-longitude -49.25)
 
 (setq circadian-themes '((:sunrise . moe-light)
-             (:sunset . jazz)))
+	     (:sunset . jazz)))
 
 (circadian-setup))
 
