@@ -405,10 +405,9 @@ eshell-prompt-function 'epe-theme-lambda))
  :ensure t
  :config
  (moe-dark)
- (powerline-moe-theme))
- ;; ;; Show highlighted buffer-id as decoration. (Default: nil)
- ;; (setq moe-theme-highlight-buffer-id t)
+ (powerline-moe-theme)
  ;; Choose a color for the mode line (Default: blue)
+ (moe-theme-set-color 'magenta))
 
 (use-package abyss-theme :ensure :defer)
 

@@ -4,7 +4,7 @@
 
 ;; Author: Magnar Sveen <magnars@gmail.com>
 ;; Version: 2.14.1
-;; Package-Version: 20180726.314
+;; Package-Version: 20180726.513
 ;; Keywords: lists
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -1829,6 +1829,20 @@ Key-value stores are disambiguated by placing a token &plist,
               (dash--match (dash--vector-tail match-form 2) s))))
      (t (dash--match-vector match-form source))))))
 
+(defun dash--normalize-let-varlist (varlist)
+  "Normalize VARLIST so that every binding is a list.
+
+`let' allows specifying a binding which is not a list but simply
+the place which is then automatically bound to nil, such that all
+three of the following are identical and evaluate to nil.
+
+  (let (a) a)
+  (let ((a)) a)
+  (let ((a nil)) a)
+
+This function normalizes all of these to the last form."
+  (--map (if (consp it) it (list it nil)) varlist))
+
 (defmacro -let* (varlist &rest body)
   "Bind variables according to VARLIST then eval BODY.
 
@@ -1841,9 +1855,10 @@ VARLIST.  This is useful if you want to destructure SOURCE
 recursively but also want to name the intermediate structures.
 
 See `-let' for the list of all possible patterns."
-  (declare (debug ((&rest (sexp form)) body))
+  (declare (debug ((&rest [&or (sexp form) sexp]) body))
            (indent 1))
-  (let ((bindings (--mapcat (dash--match (car it) (cadr it)) varlist)))
+  (let* ((varlist (dash--normalize-let-varlist varlist))
+         (bindings (--mapcat (dash--match (car it) (cadr it)) varlist)))
     `(let* ,bindings
        ,@body)))
 
@@ -2008,14 +2023,15 @@ it with pattern
 Note: Clojure programmers may know this feature as the \":as
 binding\".  The difference is that we put the &as at the front
 because we need to support improper list binding."
-  (declare (debug ([&or (&rest (sexp form))
+  (declare (debug ([&or (&rest [&or (sexp form) sexp])
                         (vector [&rest [sexp form]])]
                    body))
            (indent 1))
   (if (vectorp varlist)
       `(let* ,(dash--match (aref varlist 0) (aref varlist 1))
          ,@body)
-    (let* ((inputs (--map-indexed (list (make-symbol (format "input%d" it-index)) (cadr it)) varlist))
+    (let* ((varlist (dash--normalize-let-varlist varlist))
+           (inputs (--map-indexed (list (make-symbol (format "input%d" it-index)) (cadr it)) varlist))
            (new-varlist (--map (list (caar it) (cadr it)) (-zip varlist inputs))))
       `(let ,inputs
          (-let* ,new-varlist ,@body)))))
@@ -2073,7 +2089,7 @@ expands roughly speaking to the following code
 Care is taken to only evaluate each VAL once so that in case of
 multiple assignments it does not cause unexpected side effects.
 
-(fn [MATCH-FORM VAL]...)"
+\(fn [MATCH-FORM VAL]...)"
   (declare (debug (&rest sexp form))
            (indent 1))
   (when (= (mod (length forms) 2) 1)
