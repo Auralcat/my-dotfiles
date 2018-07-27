@@ -429,6 +429,15 @@ me, too many buffers to work with... for now.
     (use-package emojify)
     #+END_SRC
 ** Utilities
+*** Evil-Matchit
+    Adds more matching objects for the % operator in evil, such as
+    def-end in Ruby/Python and HTML tags.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+      (use-package evil-matchit
+        :ensure t
+        :init
+        (global-evil-matchit-mode 1))
+    #+END_SRC
 *** XTerm Color
     Better shell colorization.
     #+BEGIN_SRC emacs-lisp :tangle yes
