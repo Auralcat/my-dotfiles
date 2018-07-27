@@ -81,7 +81,7 @@
 (add-hook 'org-mode-hook 'auto-fill-mode)
 
 ;; Use Weechat from Emacs
-(require-package 'weechat)
+(use-package weechat)
 ;; Bind M-p to switch to previous buffer
 
 ;; Recreate scratch buffer
@@ -147,32 +147,32 @@
 . enh-ruby-mode))
 
 (use-package web-mode :ensure t
-  :bind (:map web-mode-map
-         ("C-<up>"    . web-mode-element-previous)
-         ("C-<down>"  . web-mode-element-next)
-         ("C-<left>"  . web-mode-element-beginning)
-         ("C-<right>" . web-mode-tag-match)
-         ("C-S-<up>"  . web-mode-element-parent)
-         ("M-<up>"    . web-mode-element-content-select)
-         ("C-k"       . web-mode-element-kill)))
+:bind (:map web-mode-map
+       ("C-<up>"    . web-mode-element-previous)
+       ("C-<down>"  . web-mode-element-next)
+       ("C-<left>"  . web-mode-element-beginning)
+       ("C-<right>" . web-mode-tag-match)
+       ("C-S-<up>"  . web-mode-element-parent)
+       ("M-<up>"    . web-mode-element-content-select)
+       ("C-k"       . web-mode-element-kill)))
 
-;; File associations
-(add-to-list 'auto-mode-alist '("\\.phtml\\'"  . web-mode))
-(add-to-list 'auto-mode-alist '("\\.php\\'"    . web-mode))
-(add-to-list 'auto-mode-alist '("\\.erb\\'"    . web-mode))
-(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.html?\\'"  . web-mode))
-(add-to-list 'auto-mode-alist '("\\.vue?\\'"   . web-mode))
+  ;; File associations
+  (add-to-list 'auto-mode-alist '("\\.phtml\\'"  . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.php\\'"    . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.erb\\'"    . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.html?\\'"  . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.vue?\\'"   . web-mode))
 
-;; Engine associations
-(setq web-mode-engines-alist
-'(("php"    . "\\.phtml\\'")
-("blade"  . "\\.blade\\.")))
+  ;; Engine associations
+  (setq web-mode-engines-alist
+  '(("php"    . "\\.phtml\\'")
+  ("blade"  . "\\.blade\\.")))
 
-;; Highlight tag when editing
-(setq web-mode-enable-current-element-highlight t)
+  ;; Highlight tag when editing
+  (setq web-mode-enable-current-element-highlight t)
 
-(use-package yaml-mode)
+(use-package yaml-mode :ensure t)
 
 (use-package csv-mode)
 
@@ -201,25 +201,6 @@
 
 (use-package ruby-tools)
 
-;; Ensure it's loaded
-(use-package engine-mode)
-;; Activate it
-(engine-mode t)
-
-;; Define search engines to use
-(defengine github
-"https://github.com/search?ref=simplesearch&q=%s"
-:keybinding "g")
-(defengine duckduckgo
-"https://duckduckgo.com/?q=%s"
-:keybinding "d")
-(defengine youtube
-"https://www.youtube.com/results?search_query=%s"
-:keybinding "y")
-(defengine stackoverflow
-"https://stackoverflow.com/search?q=%s"
-:keybinding "s")
-
 
 
 (use-package evil-leader)
@@ -247,7 +228,7 @@
 ;; Enable fuzzy matching
 (setq helm-M-x-fuzzy-match t)
 
-(require-package 'company)
+(use-package company)
 
 ;; Add Tern to Company
 (use-package company-tern)
@@ -261,10 +242,10 @@
 (add-hook 'js2-mode-hook 'tern-mode-tweaks)
 (add-hook 'web-mode-hook 'tern-mode-tweaks)
 ;; Autocompletion for Bootstrap/FontAwesome classes
-(require-package 'ac-html-bootstrap)
+(use-package ac-html-bootstrap)
 
 ;; Web-mode completions
-(require-package 'company-web)
+(use-package company-web)
 
 ;; Add web-mode completions when started
 (require 'company-web-html)
@@ -280,7 +261,7 @@
 ;; Activate it
 (company-prescient-mode)
 
-(require-package 'keyfreq)
+(use-package keyfreq)
 
 ;; Ignore arrow commands and self-insert-commands
 (setq keyfreq-excluded-commands
@@ -323,19 +304,24 @@ next-line))
 
 (use-package emojify)
 
-(use-package xterm-color
-  :ensure t
-  :requires (eshell)
-  :config
-  (;; Add filter function to pre-output
-   (add-to-list 'eshell-preoutput-filter-functions 'xterm-color-filter)
-   (setq eshell-output-filter-functions (remove 'eshell-handle-ansi-color eshell-output-filter-functions))
-   ;; Set eshell $TERM envvar to xterm-256color
-   (setenv "TERM" "xterm-256color")))
+(use-package evil-matchit
+:ensure t
+:init
+(global-evil-matchit-mode 1))
 
-(add-hook 'eshell-before-prompt-hook
-          (lambda ()
-            (setq xterm-color-preserve-properties t)))
+(use-package xterm-color
+:ensure t
+:requires (eshell)
+:config
+(;; Add filter function to pre-output
+ (add-to-list 'eshell-preoutput-filter-functions 'xterm-color-filter)
+ (setq eshell-output-filter-functions (remove 'eshell-handle-ansi-color eshell-output-filter-functions))
+ ;; Set eshell $TERM envvar to xterm-256color
+ (setenv "TERM" "xterm-256color")))
+
+  (add-hook 'eshell-before-prompt-hook
+    (lambda ()
+      (setq xterm-color-preserve-properties t)))
 
 (use-package cheat-sh :ensure t)
 
@@ -373,16 +359,16 @@ eshell-prompt-function 'epe-theme-lambda))
 (use-package yasnippet-snippets)
 
 (use-package circadian
-  :ensure t
-  :config
-  (setq calendar-location-name "Curitiba, PR")
-  (setq calendar-latitude -25.41)
-  (setq calendar-longitude -49.25)
+:ensure t
+:config
+(setq calendar-location-name "Curitiba, PR")
+(setq calendar-latitude -25.41)
+(setq calendar-longitude -49.25)
 
-  (setq circadian-themes '((:sunrise . moe-light)
-                           (:sunset . jazz)))
+(setq circadian-themes '((:sunrise . moe-light)
+             (:sunset . jazz)))
 
-  (circadian-setup))
+(circadian-setup))
 
 (use-package ace-jump-mode)
 
@@ -460,7 +446,7 @@ eshell-prompt-function 'epe-theme-lambda))
 ;; Move to beginning of line or indentation
 (defun back-to-indentation-or-beginning () (interactive)
   (if (= (point) (progn (back-to-indentation) (point)))
-      (beginning-of-line)))
+  (beginning-of-line)))
 
 (global-set-key (kbd "C-a") (quote back-to-indentation-or-beginning))
 
@@ -584,11 +570,13 @@ eshell-prompt-function 'epe-theme-lambda))
 ;; Example macro: Mark todos as done
 (fset 'org-mark-as-done
    (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ("d" 0 "%d")) arg)))
+   (fset 'foobar-was-here
+   [?A ?  ?- ?- ?  ?f ?o ?o ?b ?a ?r ?  ?e ?a backspace backspace ?a backspace ?w ?a ?s ?  ?h ?e ?r ?e ?! escape ?\C-a])
 
 (use-package twittering-mode
     :bind (("C-c r" . twittering-reply-to-user)
-           ("C-c f" . twittering-favorite)
-           ("C-c n" . twittering-native-retweet)))
+       ("C-c f" . twittering-favorite)
+       ("C-c n" . twittering-native-retweet)))
 
   ;; Adjust update interval in seconds. It's timeR, not time!
   (setq twittering-timer-interval 3600)
