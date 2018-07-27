@@ -156,7 +156,7 @@
  '(ido-enable-flex-matching nil)
  '(image-animate-loop t)
  '(indent-tabs-mode nil)
- '(initial-buffer-choice nil)
+ '(initial-buffer-choice t)
  '(initial-major-mode (quote org-mode))
     '(initial-scratch-message
          "# This buffer is for notes you don't want to save, and for program sketching.

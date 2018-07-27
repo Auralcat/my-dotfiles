@@ -3,6 +3,11 @@
 #+DATE: 2017:05:17
 #+LANGUAGE: en
 
+* Startup
+  #+BEGIN_SRC emacs-lisp :tangle yes
+  ;; Start in scratch buffer
+  #+END_SRC
+
 * Environment Customizations
 #+BEGIN_SRC emacs-lisp :tangle yes
   ;; Change window title
@@ -19,9 +24,6 @@
 
   ;; Backup files by copying them
   (setq backup-by-copying t)
-
-  ;; Save my desktop
-  (desktop-save-mode 1)
 
   ;; I'm too lazy to type "yes" or "no"
   (fset 'yes-or-no-p 'y-or-n-p)
