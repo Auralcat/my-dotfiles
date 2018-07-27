@@ -148,13 +148,13 @@
 
 (use-package web-mode :ensure t
   :bind (:map web-mode-map
-         ("C-<up>"    . web-mode-element-previous)
-         ("C-<down>"  . web-mode-element-next)
-         ("C-<left>"  . web-mode-element-beginning)
-         ("C-<right>" . web-mode-tag-match)
-         ("C-S-<up>"  . web-mode-element-parent)
-         ("M-<up>"    . web-mode-element-content-select)
-         ("C-k"       . web-mode-element-kill)))
+	 ("C-<up>"    . web-mode-element-previous)
+	 ("C-<down>"  . web-mode-element-next)
+	 ("C-<left>"  . web-mode-element-beginning)
+	 ("C-<right>" . web-mode-tag-match)
+	 ("C-S-<up>"  . web-mode-element-parent)
+	 ("M-<up>"    . web-mode-element-content-select)
+	 ("C-k"       . web-mode-element-kill)))
 
 ;; File associations
 (add-to-list 'auto-mode-alist '("\\.phtml\\'"  . web-mode))
@@ -172,7 +172,7 @@
 ;; Highlight tag when editing
 (setq web-mode-enable-current-element-highlight t)
 
-(use-package yaml-mode)
+(use-package yaml-mode :ensure t)
 
 (use-package csv-mode)
 
@@ -200,25 +200,6 @@
    (add-hook 'after-init-hook #'global-flycheck-mode))
 
 (use-package ruby-tools)
-
-;; Ensure it's loaded
-(use-package engine-mode)
-;; Activate it
-(engine-mode t)
-
-;; Define search engines to use
-(defengine github
-"https://github.com/search?ref=simplesearch&q=%s"
-:keybinding "g")
-(defengine duckduckgo
-"https://duckduckgo.com/?q=%s"
-:keybinding "d")
-(defengine youtube
-"https://www.youtube.com/results?search_query=%s"
-:keybinding "y")
-(defengine stackoverflow
-"https://stackoverflow.com/search?q=%s"
-:keybinding "s")
 
 
 
@@ -323,6 +304,11 @@ next-line))
 
 (use-package emojify)
 
+(use-package evil-matchit
+  :ensure t
+  :init
+  (global-evil-matchit-mode 1))
+
 (use-package xterm-color
   :ensure t
   :requires (eshell)
@@ -334,8 +320,8 @@ next-line))
    (setenv "TERM" "xterm-256color")))
 
 (add-hook 'eshell-before-prompt-hook
-          (lambda ()
-            (setq xterm-color-preserve-properties t)))
+	  (lambda ()
+	    (setq xterm-color-preserve-properties t)))
 
 (use-package cheat-sh :ensure t)
 
@@ -380,7 +366,7 @@ eshell-prompt-function 'epe-theme-lambda))
   (setq calendar-longitude -49.25)
 
   (setq circadian-themes '((:sunrise . moe-light)
-                           (:sunset . jazz)))
+			   (:sunset . jazz)))
 
   (circadian-setup))
 
@@ -584,11 +570,13 @@ eshell-prompt-function 'epe-theme-lambda))
 ;; Example macro: Mark todos as done
 (fset 'org-mark-as-done
    (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ("d" 0 "%d")) arg)))
+   (fset 'foobar-was-here
+   [?A ?  ?- ?- ?  ?f ?o ?o ?b ?a ?r ?  ?e ?a backspace backspace ?a backspace ?w ?a ?s ?  ?h ?e ?r ?e ?! escape ?\C-a])
 
 (use-package twittering-mode
     :bind (("C-c r" . twittering-reply-to-user)
-           ("C-c f" . twittering-favorite)
-           ("C-c n" . twittering-native-retweet)))
+	   ("C-c f" . twittering-favorite)
+	   ("C-c n" . twittering-native-retweet)))
 
   ;; Adjust update interval in seconds. It's timeR, not time!
   (setq twittering-timer-interval 3600)
