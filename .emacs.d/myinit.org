@@ -315,48 +315,57 @@ me, too many buffers to work with... for now.
      #+END_SRC
 
 *** Company
-    *COMPlete ANYthing* inside Emacs.
-    I switched to it because it works in GUI Emacs and auto-complete doesn't.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package company)
+**** Main Config
+     *COMPlete ANYthing* inside Emacs.
+     I switched to it because it works in GUI Emacs and auto-complete doesn't.
+     #+BEGIN_SRC emacs-lisp :tangle yes
+       (use-package company)
 
-      ;; Add Tern to Company
-      (use-package company-tern)
-      (use-package tern)
+       ;; Add Tern to Company
+       (use-package company-tern)
+       (use-package tern)
 
-      ;; Call that inside js2-mode and add tern to company backends
-      (defun tern-mode-tweaks ()
-      (add-to-list 'company-backends 'company-tern)
-      (tern-mode 1))
-      ;; Add Tern to js2-mode and web-mode
-      (add-hook 'js2-mode-hook 'tern-mode-tweaks)
-      (add-hook 'web-mode-hook 'tern-mode-tweaks)
-      ;; Autocompletion for Bootstrap/FontAwesome classes
-      (use-package ac-html-bootstrap)
+       ;; Call that inside js2-mode and add tern to company backends
+       (defun tern-mode-tweaks ()
+       (add-to-list 'company-backends 'company-tern)
+       (tern-mode 1))
+       ;; Add Tern to js2-mode and web-mode
+       (add-hook 'js2-mode-hook 'tern-mode-tweaks)
+       (add-hook 'web-mode-hook 'tern-mode-tweaks)
+       ;; Autocompletion for Bootstrap/FontAwesome classes
+       (use-package ac-html-bootstrap)
 
-      ;; Web-mode completions
-      (use-package company-web)
+       ;; Web-mode completions
+       (use-package company-web)
 
-      ;; Add web-mode completions when started
-      (require 'company-web-html)
+       ;; Add web-mode completions when started
+       (require 'company-web-html)
 
-      ;; Company statistics package
-      (use-package company-statistics)
-      (company-statistics-mode)
+       ;; Company statistics package
+       (use-package company-statistics)
+       (company-statistics-mode)
 
-      ;; Company with prescient.el offers better sorting of completion candidates.
-      ;; I don't know if it clashes with company-statistics.
-      (use-package company-prescient)
+       ;; Company with prescient.el offers better sorting of completion candidates.
+       ;; I don't know if it clashes with company-statistics.
+       (use-package company-prescient)
 
-      ;; Activate it
-      (company-prescient-mode)
-    #+END_SRC
+       ;; Activate it
+       (company-prescient-mode)
+     #+END_SRC
 **** Front-ends
 ***** Company-box
       Show icons in Company tooltip and different backends.
       #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package company-box
-      :hook (company-mode . company-box-mode))
+          (use-package company-box
+          :if window-system
+          :hook (company-mode . company-box-mode))
+
+        ;; Edit backend color indication.
+        ;; (setq company-box-backends-colors
+        ;;       ’((company-yasnippet . (:candidate "yellow" :annotation some-face))
+        ;;         (company-elisp . (:icon "yellow" :selected (:background "orange"
+        ;;                                                     :foreground "black")))
+        ;;         (company-dabbrev . "purple")))
       #+END_SRC
 
 *** Keyfreq
