@@ -399,6 +399,7 @@ me, too many buffers to work with... for now.
     '(self-insert-command
     org-self-insert-command
     abort-recursive-edit
+    company-ignore
     forward-char
     backward-char
     previous-line
@@ -857,8 +858,10 @@ me, too many buffers to work with... for now.
        ("C-c f" . twittering-favorite)
        ("C-c n" . twittering-native-retweet)))
 
+    ;; WIP, needs A LOT of remapping
     ;; Use evil-mode to navigate twittering's frame
-    (evil-set-initial-state 'twittering-mode 'emacs)
+    ;; (evil-set-initial-state 'twittering-mode 'emacs)
+
     ;; Adjust update interval in seconds. It's timeR, not time!
     (setq twittering-timer-interval 3600)
 
