@@ -40,6 +40,9 @@
   ;; Enable ido-mode (fewer keystrokes to switch buffers!)
   (ido-mode 1)
 
+  ;; Easier mark cycling, both local and global
+  (setq set-mark-command-repeat-pop t)
+
   ;; ido-mode in the minibuffer
   (icomplete-mode 1)
 
@@ -849,11 +852,13 @@ me, too many buffers to work with... for now.
 * Twittering mode
   Use Twitter from within Emacs!
   #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package twittering-mode
-      :bind (("C-c r" . twittering-reply-to-user)
-     ("C-c f" . twittering-favorite)
-     ("C-c n" . twittering-native-retweet)))
+    (use-package twittering-mode
+        :bind (("C-c r" . twittering-reply-to-user)
+       ("C-c f" . twittering-favorite)
+       ("C-c n" . twittering-native-retweet)))
 
+    ;; Use evil-mode to navigate twittering's frame
+    (evil-set-initial-state 'twittering-mode 'emacs)
     ;; Adjust update interval in seconds. It's timeR, not time!
     (setq twittering-timer-interval 3600)
 
@@ -864,8 +869,6 @@ me, too many buffers to work with... for now.
     (setq twittering-use-master-password t)
   #+END_SRC
 
-  #+RESULTS:
-  : t
 * Packages saved for later need
 ** Perspective
 # ** Perspective
