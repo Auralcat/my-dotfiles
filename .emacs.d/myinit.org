@@ -382,8 +382,9 @@ me, too many buffers to work with... for now.
         (fa_cog :face font-lock-variable-name-face) ;; Variable
         (fa_cube :face font-lock-constant-face) ;; Feature
         (md_color_lens :face font-lock-doc-face))) ;; Face
-      #+END_SRC
 
+        (setq company-box-icons-yasnippet 'fa_bookmark)
+      #+END_SRC
 *** Keyfreq
     Shows most used commands in editing session.
     To see the data, run (keyfreq-show) with M-:
