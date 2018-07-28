@@ -286,6 +286,8 @@
 (fa_cube :face font-lock-constant-face) ;; Feature
 (md_color_lens :face font-lock-doc-face))) ;; Face
 
+(setq company-box-icons-yasnippet 'fa_bookmark)
+
 (use-package keyfreq)
 
 ;; Ignore arrow commands and self-insert-commands
@@ -387,7 +389,7 @@ eshell-prompt-function 'epe-theme-lambda))
 :ensure t
 :config
 (setq circadian-themes '((:sunrise . moe-light)
- (:sunset . jazz)))
+ (:sunset . fairyfloss)))
 
 (circadian-setup))
 
@@ -406,28 +408,32 @@ eshell-prompt-function 'epe-theme-lambda))
 
 (use-package vagrant-tramp)
 
-(use-package jazz-theme :ensure :defer)
+(use-package jazz-theme :ensure t
+:defer t)
 
 (use-package moe-theme
  :ensure t
  :config
+ ;; I just want to touch the theme, don't use it
  (moe-dark)
+ (disable-theme 'moe-dark)
  (powerline-moe-theme)
  ;; Choose a color for the mode line (Default: blue)
  (moe-theme-set-color 'magenta))
 
-(use-package abyss-theme :ensure :defer)
+(use-package abyss-theme :ensure :defer t)
 
-(use-package github-modern-theme :ensure :defer)
+(use-package github-modern-theme :ensure :defer t)
 
-(use-package intellij-theme :ensure :defer)
+(use-package intellij-theme :ensure :defer t)
+
+(use-package doom-themes :ensure :defer t)
 
 ;; Set font in graphical mode
 (when (display-graphic-p)
     ;; Use Fantasque Sans Mono when available
     (if (member "Fantasque Sans Mono" (font-family-list))
-    ;; (set-face-font (quote default) "-PfEd-Fantasque Sans Mono-normal-normal-normal-*-12-*-*-*-m-0-fontset-auto3")
-    (set-frame-font "Fantasque Sans Mono 12")
+    (set-face-attribute (quote default) nil :font "Fantasque Sans Mono" :height 120)
     '(set-face-attribute (quote default) nil :font "Ubuntu Mono" :height 120))
 
     ;; Remove menu and scroll bars in graphical mode
