@@ -1,5 +1,8 @@
 ;; Start in scratch buffer
 
+;; Set fallback font
+(set-face-attribute 'default nil :font "Ubuntu Mono" :height 120)
+
 ;; Change window title
 (setq frame-title-format '("Yes, this is Emacs!"))
 
@@ -41,9 +44,6 @@
 (with-current-buffer "*scratch*"
     (emacs-lock-mode 'kill))
 
-;; Set default font for Emacs
-(set-frame-font "Ubuntu Mono 12")
-
 ;; Enable auto-revert-mode
 (global-auto-revert-mode t)
 
@@ -51,6 +51,8 @@
 (when (not (display-graphic-p))
   (menu-bar-mode -1))
 
+;; ;; Use alternate icon fonts when available
+;; (add-to-list 'load-path "~/.local/share/icons-in-terminal/")
 
 ;; Use Bash as default shell interpreter
 (setq org-babel-sh-command "/bin/bash")
@@ -264,15 +266,25 @@
 (company-prescient-mode)
 
 (use-package company-box
-  :if window-system
-  :hook (company-mode . company-box-mode))
+:diminish company-box-mode
+:if window-system
+:hook (company-mode . company-box-mode))
 
-;; Edit backend color indication.
-;; (setq company-box-backends-colors
-;;       ’((company-yasnippet . (:candidate "yellow" :annotation some-face))
-;;         (company-elisp . (:icon "yellow" :selected (:background "orange"
-;;                                                     :foreground "black")))
-;;         (company-dabbrev . "purple")))
+;; Add alternate icon font
+(add-to-list 'load-path "~/.local/share/icons-in-terminal/")
+
+;; Temporary fix
+(add-to-list 'load-path "~/.emacs.d/manual-packages/font-lock+/")
+(require 'font-lock+)
+(require 'icons-in-terminal)
+
+(setq company-box-icons-unknown 'fa_question_circle)
+
+(setq company-box-icons-elisp
+'((fa_tag :face font-lock-function-name-face) ;; Function
+(fa_cog :face font-lock-variable-name-face) ;; Variable
+(fa_cube :face font-lock-constant-face) ;; Feature
+(md_color_lens :face font-lock-doc-face))) ;; Face
 
 (use-package keyfreq)
 
@@ -375,7 +387,7 @@ eshell-prompt-function 'epe-theme-lambda))
 :ensure t
 :config
 (setq circadian-themes '((:sunrise . moe-light)
-     (:sunset . jazz)))
+ (:sunset . jazz)))
 
 (circadian-setup))
 
@@ -414,8 +426,9 @@ eshell-prompt-function 'epe-theme-lambda))
 (when (display-graphic-p)
     ;; Use Fantasque Sans Mono when available
     (if (member "Fantasque Sans Mono" (font-family-list))
+    ;; (set-face-font (quote default) "-PfEd-Fantasque Sans Mono-normal-normal-normal-*-12-*-*-*-m-0-fontset-auto3")
     (set-frame-font "Fantasque Sans Mono 12")
-    '(set-frame-font "-DAMA-Ubuntu Mono-normal-normal-normal-*-*-*-*-*-m-0-iso10646-1" nil nil))
+    '(set-face-attribute (quote default) nil :font "Ubuntu Mono" :height 120))
 
     ;; Remove menu and scroll bars in graphical mode
     (menu-bar-mode 0)

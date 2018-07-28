@@ -6,8 +6,9 @@
                          (or (file-name-directory #$) (car load-path))))
 
 
-;;;### (autoloads nil "cheat-sh" "cheat-sh.el" (0 0 0 0))
-;;; Generated autoloads from cheat-sh.el
+;;;### (autoloads nil "cheat-sh" "../../../../.emacs.d/elpa/cheat-sh-20170802.1118/cheat-sh.el"
+;;;;;;  "d46bff717161de02847cd8ea749c582e")
+;;; Generated autoloads from ../../../../.emacs.d/elpa/cheat-sh-20170802.1118/cheat-sh.el
 
 (autoload 'cheat-sh "cheat-sh" "\
 Look up THING on cheat.sh and display the result.
@@ -47,8 +48,20 @@ Search for THING on cheat.sh and display the result.
 Search TOPIC for THING on cheat.sh and display the result.
 
 \(fn TOPIC THING)" t nil)
+
+;;;### (autoloads "actual autoloads are elsewhere" "cheat-sh" "../../../../.emacs.d/elpa/cheat-sh-20170802.1118/cheat-sh.el"
+;;;;;;  (0 0 0 0))
+;;; Generated autoloads from ../../../../.emacs.d/elpa/cheat-sh-20170802.1118/cheat-sh.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "cheat-sh" '("cheat-sh-")))
+
+;;;***
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../.emacs.d/elpa/cheat-sh-20170802.1118/cheat-sh-autoloads.el"
+;;;;;;  "../../../../.emacs.d/elpa/cheat-sh-20170802.1118/cheat-sh.el")
+;;;;;;  (0 0 0 0))
 
 ;;;***
 
