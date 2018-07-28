@@ -30,6 +30,9 @@
 ;; Enable ido-mode (fewer keystrokes to switch buffers!)
 (ido-mode 1)
 
+;; Easier mark cycling, both local and global
+(setq set-mark-command-repeat-pop t)
+
 ;; ido-mode in the minibuffer
 (icomplete-mode 1)
 
@@ -389,7 +392,7 @@ eshell-prompt-function 'epe-theme-lambda))
 :ensure t
 :config
 (setq circadian-themes '((:sunrise . moe-light)
- (:sunset . fairyfloss)))
+ (:sunset . jazz)))
 
 (circadian-setup))
 
