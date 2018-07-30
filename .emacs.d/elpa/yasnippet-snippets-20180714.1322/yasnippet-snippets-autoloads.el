@@ -6,9 +6,9 @@
                          (or (file-name-directory #$) (car load-path))))
 
 
-;;;### (autoloads nil "yasnippet-snippets" "yasnippet-snippets.el"
-;;;;;;  (0 0 0 0))
-;;; Generated autoloads from yasnippet-snippets.el
+;;;### (autoloads nil "yasnippet-snippets" "../../../../.emacs.d/elpa/yasnippet-snippets-20180714.1322/yasnippet-snippets.el"
+;;;;;;  "a2a497116e0bf4ae60b1127afb6be1e1")
+;;; Generated autoloads from ../../../../.emacs.d/elpa/yasnippet-snippets-20180714.1322/yasnippet-snippets.el
 
 (autoload 'yasnippet-snippets-initialize "yasnippet-snippets" "\
 
@@ -16,12 +16,22 @@
 \(fn)" nil nil)
 
 (eval-after-load 'yasnippet '(yasnippet-snippets-initialize))
+
+;;;### (autoloads "actual autoloads are elsewhere" "yasnippet-snippets"
+;;;;;;  "../../../../.emacs.d/elpa/yasnippet-snippets-20180714.1322/yasnippet-snippets.el"
+;;;;;;  (0 0 0 0))
+;;; Generated autoloads from ../../../../.emacs.d/elpa/yasnippet-snippets-20180714.1322/yasnippet-snippets.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "yasnippet-snippets" '("yasnippet-snippets-dir")))
 
 ;;;***
+
+;;;***
 
-;;;### (autoloads nil nil ("yasnippet-snippets-pkg.el") (0 0 0 0))
+;;;### (autoloads nil nil ("../../../../.emacs.d/elpa/yasnippet-snippets-20180714.1322/yasnippet-snippets-autoloads.el"
+;;;;;;  "../../../../.emacs.d/elpa/yasnippet-snippets-20180714.1322/yasnippet-snippets-pkg.el"
+;;;;;;  "../../../../.emacs.d/elpa/yasnippet-snippets-20180714.1322/yasnippet-snippets.el")
+;;;;;;  (0 0 0 0))
 
 ;;;***
 

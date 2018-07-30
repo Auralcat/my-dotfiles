@@ -1,4 +1,4 @@
-(define-package "php-mode" "20180608.950" "Major mode for editing PHP code"
+(define-package "php-mode" "20180729.1023" "Major mode for editing PHP code"
   '((emacs "24.3")
     (cl-lib "0.5"))
   :keywords
@@ -7,7 +7,7 @@
   '(("Eric James Michael Ritz"))
   :maintainer
   '("USAMI Kenta" . "tadsan@zonu.me")
-  :url "https://github.com/ejmr/php-mode")
+  :url "https://github.com/emacs-php/php-mode")
 ;; Local Variables:
 ;; no-byte-compile: t
 ;; End:

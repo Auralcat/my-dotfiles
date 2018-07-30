@@ -292,25 +292,31 @@
  '(nyan-mode t)
     '(org-agenda-files
          (quote
-             ("~/file-bouncer/org-files/site-proprio.org" "~/file-bouncer/org-files/stand-up-meetings/Julho-2018.org" "~/file-bouncer/org-files/contact-based-system/eu.org" "~/file-bouncer/org-files/contact-based-system/aline-pegas.org" "~/file-bouncer/org-files/contact-based-system/kira.org" "~/file-bouncer/org-files/contact-based-system/elaine.org")))
+             ("~/file-bouncer/org-files/stand-up-meetings/Agosto-2018.org" "~/file-bouncer/org-files/site-proprio.org" "~/file-bouncer/org-files/stand-up-meetings/Julho-2018.org" "~/file-bouncer/org-files/contact-based-system/eu.org" "~/file-bouncer/org-files/contact-based-system/aline-pegas.org" "~/file-bouncer/org-files/contact-based-system/kira.org" "~/file-bouncer/org-files/contact-based-system/elaine.org")))
  '(org-agenda-scheduled-leaders (quote ("Scheduled: " "Sched. previously %2dx: ")))
  '(org-agenda-skip-scheduled-if-done t)
  '(org-agenda-start-on-weekday 0)
  '(org-bullets-bullet-list (quote ("✿" "❀" "◉" "○" "✸")))
     '(org-capture-templates
          (quote
-             (("n" "Note for the current day entry" plain
-                  (file+headline "~/file-bouncer/org-files/stand-up-meetings/Maio-2018.org" "Anotações")
-                  "  - %U %a%?" :prepend t)
+             (("p" "Add podcast to list" entry
+                  (file+headline "~/file-bouncer/media-list.org" "Podcasts")
+                  "** %^{Nome do podcast}" :immediate-finish t)
+                 ("m" "Add movie to list" entry
+                     (file+headline "~/file-bouncer/media-list.org" "Filmes")
+                     "** %^{Nome do filme}" :immediate-finish t)
+                 ("a" "Add music album to list" entry
+                     (file+headline "~/file-bouncer/media-list.org" "Álbuns musicais")
+                     "** %^{Nome do álbum}" :immediate-finish t)
+                 ("b" "Add book to list" entry
+                     (file+headline "~/file-bouncer/media-list.org" "Livros")
+                     "** %^{Nome do livro}" :immediate-finish t)
                  ("t" "Tarefa extra do stand-up (pra não colocar direto na lista do dia, organizar depois)" entry
                      (file+headline "~/file-bouncer/org-files/contact-based-system/eu.org" "Tarefas extras do stand-up (organizar depois)")
-                     "** TODO %?" :prepend t)
+                     "** TODO %^{Tarefa}" :prepend t :immediate-finish t)
                  ("k" "Testing regex target capturing" entry
                      (file+regexp "~/file-bouncer/org-files/stand-up-meetings/Abril-2018.org" "\\* CURRENT")
-                     "*** TODO %?")
-                 ("s" "Task to Self" entry
-                     (file+headline "~/file-bouncer/org-files/contact-based-system/eu.org" "Tarefas capturadas")
-                     "** TODO %?" :prepend t))))
+                     "*** TODO %?"))))
  '(org-default-notes-file "~/file-bouncer/everything-bucket")
  '(org-plantuml-jar-path "~/file-bouncer/plantuml.jar")
  '(org-pomodoro-audio-player "/usr/bin/mpv")
@@ -338,7 +344,7 @@
  '(org-todo-keywords (quote ((sequence "TODO" "DONE"))))
     '(package-selected-packages
          (quote
-             (company-box xterm-color evil-matchit evil-string-inflection circadian diminish alchemist sublimity writeroom-mode electric-operator jazz-theme highlight-indentation smartparens company-tern restart-emacs ob-restclient doom-themes intellij-theme github-modern-theme restclient helm-projectile ibuffer-projectile yasnippet-classic-snippets vagrant-tramp ob-elixir company-prescient weechat web-mode web-beautify vagrant use-package twittering-mode solarized-theme scss-mode sass-mode rvm rust-mode ruby-tools robe rich-minority request rainbow-mode rainbow-delimiters projectile powerline org-pomodoro org-bullets nyan-mode moe-theme mode-icons memoize makey magit keyfreq js2-mode htmlize highlight-sexp highlight-numbers helm-tramp flymake-phpcs flymake-php flymake-elixir flycheck-mix evil-surround evil-leader evil-anzu eshell-prompt-extras eruby-mode enh-ruby-mode emojify emmet-mode electric-spacing editorconfig csv-mode company-web company-statistics company-php cl-generic camcorder autopair ace-jump-mode ac-html-bootstrap abyss-theme)))
+             (yasnippet-snippets cheat-sh yaml-mode company-box xterm-color evil-matchit evil-string-inflection circadian diminish alchemist sublimity writeroom-mode electric-operator jazz-theme highlight-indentation smartparens company-tern restart-emacs ob-restclient doom-themes intellij-theme github-modern-theme restclient helm-projectile ibuffer-projectile yasnippet-classic-snippets vagrant-tramp ob-elixir company-prescient weechat web-mode web-beautify vagrant use-package twittering-mode solarized-theme scss-mode sass-mode rvm rust-mode ruby-tools robe rich-minority request rainbow-mode rainbow-delimiters projectile powerline org-pomodoro org-bullets nyan-mode moe-theme mode-icons memoize makey magit keyfreq js2-mode htmlize highlight-sexp highlight-numbers helm-tramp flymake-phpcs flymake-php flymake-elixir flycheck-mix evil-surround evil-leader evil-anzu eshell-prompt-extras eruby-mode enh-ruby-mode emojify emmet-mode electric-spacing editorconfig csv-mode company-web company-statistics company-php cl-generic camcorder autopair ace-jump-mode ac-html-bootstrap abyss-theme)))
  '(pdf-view-midnight-colors (quote ("#6a737d" . "#fffbdd")))
  '(persp-show-modestring (quote (quote header)))
  '(pos-tip-background-color "#073642")

@@ -298,6 +298,7 @@
 '(self-insert-command
 org-self-insert-command
 abort-recursive-edit
+company-ignore
 forward-char
 backward-char
 previous-line
@@ -616,11 +617,15 @@ eshell-prompt-function 'epe-theme-lambda))
    ("C-c f" . twittering-favorite)
    ("C-c n" . twittering-native-retweet)))
 
-  ;; Adjust update interval in seconds. It's timeR, not time!
-  (setq twittering-timer-interval 3600)
+;; WIP, needs A LOT of remapping
+;; Use evil-mode to navigate twittering's frame
+;; (evil-set-initial-state 'twittering-mode 'emacs)
 
-  ;; Display icons (if applicable)
-  (setq twittering-icon-mode t)
+;; Adjust update interval in seconds. It's timeR, not time!
+(setq twittering-timer-interval 3600)
 
-  ;; Use a master password so you don't have to ask for authentication every time
-  (setq twittering-use-master-password t)
+;; Display icons (if applicable)
+(setq twittering-icon-mode t)
+
+;; Use a master password so you don't have to ask for authentication every time
+(setq twittering-use-master-password t)

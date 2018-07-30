@@ -1035,7 +1035,7 @@ with two prefix arguments remove ignored files only.
 \(git clean -f -d [-x|-X])
 
 \(fn &optional ARG)" t nil)
- (autoload 'magit-ignore-popup "extras" nil t)
+ (autoload 'magit-gitignore-popup "magit-extras" nil t)
 
 (autoload 'magit-gitignore "magit-extras" "\
 Instruct Git to ignore FILE-OR-PATTERN.
