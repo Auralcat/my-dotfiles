@@ -12,7 +12,7 @@
 ;; Maintainer: Jonas Bernoulli <jonas@bernoul.li>
 
 ;; Package-Requires: ((emacs "25.1") (dash "20180413") (with-editor "20180414"))
-;; Package-Version: 20180713.2144
+;; Package-Version: 20180730.2140
 ;; Keywords: git tools vc
 ;; Homepage: https://github.com/magit/magit
 
@@ -418,13 +418,15 @@ This is only used if Magit is available."
 
 (defvar git-commit-mode)
 
-;;;###autoload
-(defun git-commit-setup ()
+(defun git-commit-file-not-found ()
   ;; cygwin git will pass a cygwin path (/cygdrive/c/foo/.git/...),
   ;; try to handle this in window-nt Emacs.
   (--when-let
-      (and (eq system-type 'windows-nt)
-           (not (file-accessible-directory-p default-directory))
+      (and (or (string-match-p git-commit-filename-regexp buffer-file-name)
+               (if (boundp 'git-rebase-filename-regexp)
+                   (string-match-p git-rebase-filename-regexp buffer-file-name)))
+           (not (file-accessible-directory-p
+                 (file-name-directory buffer-file-name)))
            (if (require 'magit-git nil t)
                ;; Emacs prepends a "c:".
                (magit-expand-git-file-name (substring buffer-file-name 2))
@@ -434,7 +436,15 @@ This is only used if Magit is available."
                   (concat (match-string 2 buffer-file-name) ":/"
                           (match-string 3 buffer-file-name)))))
     (when (file-accessible-directory-p (file-name-directory it))
-      (find-alternate-file it)))
+      (let ((inhibit-read-only t))
+        (insert-file-contents it t)
+        t))))
+
+(when (eq system-type 'windows-nt)
+  (add-hook 'find-file-not-found-functions #'git-commit-file-not-found))
+
+;;;###autoload
+(defun git-commit-setup ()
   ;; Pretend that git-commit-mode is a major-mode,
   ;; so that directory-local settings can be used.
   (let ((default-directory
@@ -808,7 +818,11 @@ Added to `font-lock-extend-region-functions'."
   (setq-local comment-end-skip "\n")
   (setq-local comment-use-syntax nil)
   (setq-local git-commit--branch-name-regexp
-              (if (featurep 'magit-git)
+              (if (and (featurep 'magit-git)
+                       ;; When using cygwin git, we may end up in a
+                       ;; non-existing directory, which would cause
+                       ;; any git calls to signal an error.
+                       (file-accessible-directory-p default-directory))
                   (progn
                     ;; Make sure the below functions are available.
                     (require 'magit)

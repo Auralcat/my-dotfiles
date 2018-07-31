@@ -360,6 +360,7 @@ Warning: does not play well with electric-indent-mode.
   (setq-local require-final-newline        mode-require-final-newline)
   (setq-local beginning-of-defun-function  'enh-ruby-beginning-of-defun)
   (setq-local end-of-defun-function        'enh-ruby-end-of-defun)
+  (setq-local show-paren-data-function     'erm-show-paren-data-function)
 
   (setq-local paragraph-start
               (concat "$\\|" page-delimiter))
@@ -376,9 +377,6 @@ Warning: does not play well with electric-indent-mode.
 
   (add-hook 'change-major-mode-hook 'erm-major-mode-changed     nil t)
   (add-hook 'kill-buffer-hook       'erm-buffer-killed          nil t)
-
-  (add-function :around (local 'show-paren-data-function)
-                #'erm--advise-show-paren-data-function)
 
   (abbrev-mode)
   (erm-reset-buffer))
@@ -1111,14 +1109,18 @@ With ARG, do it that many times."
   (interactive "^p")
   (unless arg (setq arg 1))
   (let ((cont t)
-        prop)
+        prop
+        pos)
     (goto-char
      (save-excursion
        (while (>= (setq arg (1- arg)) 0)
          (while (progn
                   (enh-ruby-backward-sexp 1)
-                  (setq prop (get-text-property (point) 'indent))
-                  (not (or (eq prop 'b) (eq prop 'd))))))
+                  (setq pos (point))
+                  (setq prop (get-text-property pos 'indent))
+                  (and
+                   (> pos (point-min))
+                   (not (or (eq prop 'b) (eq prop 'd)))))))
        (point)))))
 
 (defun enh-ruby-end-of-defun (&optional arg)
@@ -1146,14 +1148,16 @@ With ARG, do it that many times."
   (interactive "^p")
   (unless arg (setq arg 1))
   (let ((cont t)
-        prop)
+        prop
+        pos)
     (goto-char
      (save-excursion
        (while (>= (setq arg (1- arg)) 0)
          (while (progn
                   (enh-ruby-forward-sexp 1)
-                  (setq prop (get-text-property (- (point) 3) 'indent))
-                  (not (eq prop 'e)))))
+                  (setq pos (point))
+                  (setq prop (get-text-property (- pos 3) 'indent))
+                  (and (< pos (point-max)) (not (eq prop 'e))))))
        (point)))))
 
 (defun enh-ruby-backward-sexp (&optional arg)
@@ -1443,7 +1447,7 @@ With ARG, do it that many times."
          (string= "end" (buffer-substring end-pos (point)))
          (eq (get-text-property end-pos 'indent) 'e))))
 
-(defun erm--advise-show-paren-data-function (orig &rest args)
+(defun erm-show-paren-data-function ()
   ;; First check if we are on opening ('b or 'd). We only care about
   ;; the word openers "if", "do" etc (normal show-paren handles "{")
   (if (and (memq (get-text-property (point) 'indent) '(b d))
@@ -1470,8 +1474,7 @@ With ARG, do it that many times."
              (save-excursion (skip-syntax-forward "(w") (point))
              (or (not (looking-at "\\w"))
                  (not (memq (get-text-property (point) 'indent) '(b d)))))))
-      ;; Otherwise, delegate to normal show-paren-data-function
-      (apply orig args))))
+      (show-paren--default))))
 
 (erm-reset)
 
