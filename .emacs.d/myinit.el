@@ -335,6 +335,13 @@ next-line))
 
 (use-package emojify)
 
+(use-package yatemplate
+:ensure t
+:init
+(setq yatemplate-dir "~/.emacs.d/templates")
+(yatemplate-fill-alist)
+(auto-insert-mode 1))
+
 (use-package evil-matchit
 :ensure t
 :init
