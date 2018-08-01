@@ -521,6 +521,9 @@ eshell-prompt-function 'epe-theme-lambda))
 ;; We don't need Flycheck in org-mode buffers. Usually.
 (add-hook 'org-mode-hook '(lambda() (flycheck-mode 0)))
 
+;; Keep agenda file list in a single file so I can publish my config
+(setq org-agenda-files "~/file-bouncer/org-agenda-file-list.org")
+
 ;; Bind org-capture to C-c c
 (global-set-key (kbd "\C-c c") (quote org-capture))
 
