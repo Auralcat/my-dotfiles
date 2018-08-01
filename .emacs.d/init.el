@@ -290,9 +290,6 @@
  '(nyan-animation-frame-interval 0.2)
  '(nyan-bar-length 16)
  '(nyan-mode t)
-    '(org-agenda-files
-         (quote
-             ("~/file-bouncer/org-files/projetos-sites/xv-cosbe.org" "~/file-bouncer/org-files/stand-up-meetings/Agosto-2018.org" "~/file-bouncer/org-files/site-proprio.org" "~/file-bouncer/org-files/contact-based-system/eu.org" "~/file-bouncer/org-files/contact-based-system/aline-pegas.org" "~/file-bouncer/org-files/contact-based-system/kira.org" "~/file-bouncer/org-files/contact-based-system/elaine.org")))
  '(org-agenda-scheduled-leaders (quote ("Scheduled: " "Sched. previously %2dx: ")))
  '(org-agenda-skip-scheduled-if-done t)
  '(org-agenda-start-on-weekday 0)
