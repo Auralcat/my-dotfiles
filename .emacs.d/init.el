@@ -296,9 +296,12 @@
  '(org-bullets-bullet-list (quote ("✿" "❀" "◉" "○" "✸")))
     '(org-capture-templates
          (quote
-             (("p" "Add podcast to list" entry
-                  (file+headline "~/file-bouncer/media-list.org" "Podcasts")
-                  "** %^{Nome do podcast}" :immediate-finish t)
+             (("e" "Add new Emacs task" entry
+                  (file+headline "~/file-bouncer/org-files/projetos-em-andamento/configuracoes-emacs.org" "Tarefas")
+                  "** TODO %^{Tarefa}" :prepend t :immediate-finish t :time-prompt t)
+                 ("p" "Add podcast to list" entry
+                     (file+headline "~/file-bouncer/media-list.org" "Podcasts")
+                     "** %^{Nome do podcast}" :immediate-finish t)
                  ("m" "Add movie to list" entry
                      (file+headline "~/file-bouncer/media-list.org" "Filmes")
                      "** %^{Nome do filme}" :immediate-finish t)
