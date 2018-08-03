@@ -203,14 +203,14 @@ me, too many buffers to work with... for now.
     I use this for HTML files mostly, works good for PHP too.
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package web-mode :ensure t
-    :bind (:map web-mode-map
-       ("C-<up>"    . web-mode-element-previous)
-       ("C-<down>"  . web-mode-element-next)
-       ("C-<left>"  . web-mode-element-beginning)
-       ("C-<right>" . web-mode-tag-match)
-       ("C-S-<up>"  . web-mode-element-parent)
-       ("M-<up>"    . web-mode-element-content-select)
-       ("C-k"       . web-mode-element-kill)))
+      :bind (:map web-mode-map
+        ("C-<up>"    . web-mode-element-previous)
+        ("C-<down>"  . web-mode-element-next)
+        ("C-<left>"  . web-mode-element-beginning)
+        ("C-<right>" . web-mode-tag-match)
+        ("C-S-<up>"  . web-mode-element-parent)
+        ("M-<up>"    . web-mode-element-content-select)
+        ("C-k"       . web-mode-element-kill)))
 
       ;; File associations
       (add-to-list 'auto-mode-alist '("\\.phtml\\'"  . web-mode))
@@ -227,6 +227,7 @@ me, too many buffers to work with... for now.
 
       ;; Highlight tag when editing
       (setq web-mode-enable-current-element-highlight t)
+
     #+END_SRC
 *** YAML-mode
     YAML support for Emacs.
@@ -338,9 +339,18 @@ me, too many buffers to work with... for now.
        (defun tern-mode-tweaks ()
        (add-to-list 'company-backends 'company-tern)
        (tern-mode 1))
+
+       ;; Web-mode needs HTML, CSS and JS completions
+       (defun web-mode-tweaks ()
+       (require 'company-web-html)
+       (set (make-local-variable 'company-backends) '(company-web-html company-tern))
+       (tern-mode 1)
+       (company-mode t)))
+
        ;; Add Tern to js2-mode and web-mode
        (add-hook 'js2-mode-hook 'tern-mode-tweaks)
-       (add-hook 'web-mode-hook 'tern-mode-tweaks)
+       (add-hook 'web-mode-hook 'web-mode-tweaks)
+
        ;; Autocompletion for Bootstrap/FontAwesome classes
        (use-package ac-html-bootstrap)
 
@@ -361,6 +371,10 @@ me, too many buffers to work with... for now.
        ;; Activate it
        (company-prescient-mode)
      #+END_SRC
+
+     #+RESULTS:
+     : web-mode-tweaks
+
 **** Front-ends
 ***** Company-box
       Show icons in Company tooltip and different backends.

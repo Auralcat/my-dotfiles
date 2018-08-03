@@ -52,7 +52,8 @@
  '(company-auto-complete-chars (quote (41)))
     '(company-backends
          (quote
-             (company-web-html company-nxml company-css company-eclim company-semantic company-clang company-cmake company-capf company-files
+             ((company-tern company-web-html company-css)
+                 company-semantic company-capf company-files
                  (company-dabbrev-code company-gtags company-etags company-keywords)
                  company-oddmuse company-dabbrev)))
  '(company-box-doc-enable nil)
@@ -61,7 +62,7 @@
  '(company-minimum-prefix-length 2)
  '(company-prescient-mode t)
  '(company-tooltip-minimum 6)
- '(company-transformers (quote (company-sort-by-backend-importance)))
+ '(company-transformers nil)
  '(compilation-message-face (quote default))
  '(cua-global-mark-cursor-color "#2aa198")
  '(cua-normal-cursor-color "#839496")
