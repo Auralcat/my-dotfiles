@@ -155,29 +155,29 @@
 
 (use-package web-mode :ensure t
 :bind (:map web-mode-map
-   ("C-<up>"    . web-mode-element-previous)
-   ("C-<down>"  . web-mode-element-next)
-   ("C-<left>"  . web-mode-element-beginning)
-   ("C-<right>" . web-mode-tag-match)
-   ("C-S-<up>"  . web-mode-element-parent)
-   ("M-<up>"    . web-mode-element-content-select)
-   ("C-k"       . web-mode-element-kill)))
+  ("C-<up>"    . web-mode-element-previous)
+  ("C-<down>"  . web-mode-element-next)
+  ("C-<left>"  . web-mode-element-beginning)
+  ("C-<right>" . web-mode-tag-match)
+  ("C-S-<up>"  . web-mode-element-parent)
+  ("M-<up>"    . web-mode-element-content-select)
+  ("C-k"       . web-mode-element-kill)))
 
-  ;; File associations
-  (add-to-list 'auto-mode-alist '("\\.phtml\\'"  . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.php\\'"    . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.erb\\'"    . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.html?\\'"  . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.vue?\\'"   . web-mode))
+;; File associations
+(add-to-list 'auto-mode-alist '("\\.phtml\\'"  . web-mode))
+(add-to-list 'auto-mode-alist '("\\.php\\'"    . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'"    . web-mode))
+(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html?\\'"  . web-mode))
+(add-to-list 'auto-mode-alist '("\\.vue?\\'"   . web-mode))
 
-  ;; Engine associations
-  (setq web-mode-engines-alist
-  '(("php"    . "\\.phtml\\'")
-  ("blade"  . "\\.blade\\.")))
+;; Engine associations
+(setq web-mode-engines-alist
+'(("php"    . "\\.phtml\\'")
+("blade"  . "\\.blade\\.")))
 
-  ;; Highlight tag when editing
-  (setq web-mode-enable-current-element-highlight t)
+;; Highlight tag when editing
+(setq web-mode-enable-current-element-highlight t)
 
 (use-package yaml-mode :ensure t)
 
@@ -245,9 +245,19 @@
 (defun tern-mode-tweaks ()
 (add-to-list 'company-backends 'company-tern)
 (tern-mode 1))
+
+;; Web-mode needs HTML, CSS and JS completions
+(defun web-mode-tweaks ()
+(require 'company-web-html)
+(set (make-local-variable 'company-backends) '(company-web-html company-css company-tern))
+(emmet-mode 1)
+(tern-mode 1)
+(company-mode t))
+
 ;; Add Tern to js2-mode and web-mode
 (add-hook 'js2-mode-hook 'tern-mode-tweaks)
-(add-hook 'web-mode-hook 'tern-mode-tweaks)
+(add-hook 'web-mode-hook 'web-mode-tweaks)
+
 ;; Autocompletion for Bootstrap/FontAwesome classes
 (use-package ac-html-bootstrap)
 
