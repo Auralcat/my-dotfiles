@@ -2505,7 +2505,25 @@ command which is about to be called are committed.
 
 \(fn &optional ARG)" t nil)
 
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-wip" '("magit-wip-")))
+(autoload 'magit-wip-commit-initial-backup "magit-wip" "\
+Before saving, commit current file to a worktree wip ref.
+
+The user has to add this function to `backup-buffer'.
+
+Commit the current state of the visited file before saving the
+current buffer to that file.  This backs up the same version of
+the file as `backup-buffer' would, but stores the backup in the
+worktree wip ref, which is also used by the various Magit Wip
+modes, instead of in a backup file as `backup-buffer' would.
+
+This function ignores the variables that affect `backup-buffer'
+and can be used along-side that function, which is recommended
+because this function only backs up files that are tracked in
+a Git repository.
+
+\(fn)" nil nil)
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-wip" '("magit-")))
 
 ;;;***
 

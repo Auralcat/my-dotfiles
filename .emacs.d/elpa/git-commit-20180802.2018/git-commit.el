@@ -12,7 +12,7 @@
 ;; Maintainer: Jonas Bernoulli <jonas@bernoul.li>
 
 ;; Package-Requires: ((emacs "25.1") (dash "20180413") (with-editor "20180414"))
-;; Package-Version: 20180730.2140
+;; Package-Version: 20180802.2018
 ;; Keywords: git tools vc
 ;; Homepage: https://github.com/magit/magit
 
@@ -448,7 +448,8 @@ This is only used if Magit is available."
   ;; Pretend that git-commit-mode is a major-mode,
   ;; so that directory-local settings can be used.
   (let ((default-directory
-          (if (file-exists-p ".dir-locals.el")
+          (if (or (file-exists-p ".dir-locals.el")
+                  (not (fboundp 'magit-toplevel)))
               default-directory
             ;; When $GIT_DIR/.dir-locals.el doesn't exist,
             ;; fallback to $GIT_WORK_TREE/.dir-locals.el,
@@ -481,6 +482,9 @@ This is only used if Magit is available."
             'git-commit-save-message nil t)
   (add-hook 'with-editor-pre-cancel-hook
             'git-commit-save-message nil t)
+  (when (bound-and-true-p magit-wip-merge-branch)
+    (add-hook 'with-editor-post-finish-hook
+              'magit-wip-commit nil t))
   (setq with-editor-cancel-message
         'git-commit-cancel-message)
   (make-local-variable 'log-edit-comment-ring-index)
