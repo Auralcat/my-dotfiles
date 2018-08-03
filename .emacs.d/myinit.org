@@ -204,13 +204,13 @@ me, too many buffers to work with... for now.
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package web-mode :ensure t
       :bind (:map web-mode-map
-	("C-<up>"    . web-mode-element-previous)
-	("C-<down>"  . web-mode-element-next)
-	("C-<left>"  . web-mode-element-beginning)
-	("C-<right>" . web-mode-tag-match)
-	("C-S-<up>"  . web-mode-element-parent)
-	("M-<up>"    . web-mode-element-content-select)
-	("C-k"       . web-mode-element-kill)))
+    ("C-<up>"    . web-mode-element-previous)
+    ("C-<down>"  . web-mode-element-next)
+    ("C-<left>"  . web-mode-element-beginning)
+    ("C-<right>" . web-mode-tag-match)
+    ("C-S-<up>"  . web-mode-element-parent)
+    ("M-<up>"    . web-mode-element-content-select)
+    ("C-k"       . web-mode-element-kill)))
 
       ;; File associations
       (add-to-list 'auto-mode-alist '("\\.phtml\\'"  . web-mode))
@@ -331,25 +331,25 @@ me, too many buffers to work with... for now.
      #+BEGIN_SRC emacs-lisp :tangle yes
        (use-package company)
 
-       ;; Add Tern to Company
-       (use-package company-tern)
-       (use-package tern)
+       ;; Web-mode needs HTML and CSS completions.
+       ;; JS is not satisfactory at this point IMO
 
-       ;; Call that inside js2-mode and add tern to company backends
-       (defun tern-mode-tweaks ()
-       (add-to-list 'company-backends 'company-tern)
-       (tern-mode 1))
+       ;; Replacing Tern with ac-js2 and js2-refactor
+       (use-package ac-js2)
+       (use-package js2-refactor
+       :diminish js2-refactor-mode)
 
-       ;; Web-mode needs HTML, CSS and JS completions
+       ;; Add to js2-mode
+       (add-hook 'js2-mode-hook #'js2-refactor-mode)
+       (js2r-add-keybindings-with-prefix "C-c r")
+
        (defun web-mode-tweaks ()
        (require 'company-web-html)
-       (set (make-local-variable 'company-backends) '(company-web-html company-css company-tern))
+       (set (make-local-variable 'company-backends) '(company-web-html company-css))
        (emmet-mode 1)
-       (tern-mode 1)
        (company-mode t))
 
-       ;; Add Tern to js2-mode and web-mode
-       (add-hook 'js2-mode-hook 'tern-mode-tweaks)
+       ;; Add tweaks
        (add-hook 'web-mode-hook 'web-mode-tweaks)
 
        ;; Autocompletion for Bootstrap/FontAwesome classes
@@ -357,9 +357,6 @@ me, too many buffers to work with... for now.
 
        ;; Web-mode completions
        (use-package company-web)
-
-       ;; Add web-mode completions when started
-       (require 'company-web-html)
 
        ;; Company statistics package
        (use-package company-statistics)
@@ -374,34 +371,34 @@ me, too many buffers to work with... for now.
      #+END_SRC
 
      #+RESULTS:
-     : web-mode-tweaks
+     : t
 
 **** Front-ends
 ***** Company-box
       Show icons in Company tooltip and different backends.
       #+BEGIN_SRC emacs-lisp :tangle yes
-	(use-package company-box
-	:diminish company-box-mode
-	:if window-system
-	:hook (company-mode . company-box-mode))
+    (use-package company-box
+    :diminish company-box-mode
+    :if window-system
+    :hook (company-mode . company-box-mode))
 
-	;; Add alternate icon font
-	(add-to-list 'load-path "~/.local/share/icons-in-terminal/")
+    ;; Add alternate icon font
+    (add-to-list 'load-path "~/.local/share/icons-in-terminal/")
 
-	;; Temporary fix
-	(add-to-list 'load-path "~/.emacs.d/manual-packages/font-lock+/")
-	(require 'font-lock+)
-	(require 'icons-in-terminal)
+    ;; Temporary fix
+    (add-to-list 'load-path "~/.emacs.d/manual-packages/font-lock+/")
+    (require 'font-lock+)
+    (require 'icons-in-terminal)
 
-	(setq company-box-icons-unknown 'fa_question_circle)
+    (setq company-box-icons-unknown 'fa_question_circle)
 
-	(setq company-box-icons-elisp
-	'((fa_tag :face font-lock-function-name-face) ;; Function
-	(fa_cog :face font-lock-variable-name-face) ;; Variable
-	(fa_cube :face font-lock-constant-face) ;; Feature
-	(md_color_lens :face font-lock-doc-face))) ;; Face
+    (setq company-box-icons-elisp
+    '((fa_tag :face font-lock-function-name-face) ;; Function
+    (fa_cog :face font-lock-variable-name-face) ;; Variable
+    (fa_cube :face font-lock-constant-face) ;; Feature
+    (md_color_lens :face font-lock-doc-face))) ;; Face
 
-	(setq company-box-icons-yasnippet 'fa_bookmark)
+    (setq company-box-icons-yasnippet 'fa_bookmark)
       #+END_SRC
 *** Keyfreq
     Shows most used commands in editing session.
@@ -584,7 +581,7 @@ me, too many buffers to work with... for now.
 *** Circadian
     Theme changer for Emacs.
     #+BEGIN_SRC emacs-lisp :tangle yes
-	(use-package circadian
+    (use-package circadian
       :ensure t
       :config
       (setq circadian-themes '((:sunrise . moe-light)
@@ -885,7 +882,8 @@ me, too many buffers to work with... for now.
   Use Twitter from within Emacs!
   #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package twittering-mode
-	:bind (("C-c r" . twittering-reply-to-user)
+    :bind (:map twittering-mode-map
+       ("C-c r" . twittering-reply-to-user)
        ("C-c f" . twittering-favorite)
        ("C-c n" . twittering-native-retweet)))
 
@@ -902,6 +900,9 @@ me, too many buffers to work with... for now.
     ;; Use a master password so you don't have to ask for authentication every time
     (setq twittering-use-master-password t)
   #+END_SRC
+
+  #+RESULTS:
+  : t
 
 * Packages saved for later need
 ** Perspective
