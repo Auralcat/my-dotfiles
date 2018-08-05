@@ -1,1 +1,1 @@
-("~/my-dotfiles/")
+("~/my-dotfiles/" "~/v-calculator/" "~/file-bouncer/" "~/curso-javascript-ninja/")

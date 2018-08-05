@@ -154,30 +154,30 @@
 . enh-ruby-mode))
 
 (use-package web-mode :ensure t
-:bind (:map web-mode-map
-  ("C-<up>"    . web-mode-element-previous)
-  ("C-<down>"  . web-mode-element-next)
-  ("C-<left>"  . web-mode-element-beginning)
-  ("C-<right>" . web-mode-tag-match)
-  ("C-S-<up>"  . web-mode-element-parent)
-  ("M-<up>"    . web-mode-element-content-select)
-  ("C-k"       . web-mode-element-kill)))
+  :bind (:map web-mode-map
+("C-<up>"    . web-mode-element-previous)
+("C-<down>"  . web-mode-element-next)
+("C-<left>"  . web-mode-element-beginning)
+("C-<right>" . web-mode-tag-match)
+("C-S-<up>"  . web-mode-element-parent)
+("M-<up>"    . web-mode-element-content-select)
+("C-k"       . web-mode-element-kill)))
 
-;; File associations
-(add-to-list 'auto-mode-alist '("\\.phtml\\'"  . web-mode))
-(add-to-list 'auto-mode-alist '("\\.php\\'"    . web-mode))
-(add-to-list 'auto-mode-alist '("\\.erb\\'"    . web-mode))
-(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-(add-to-list 'auto-mode-alist '("\\.html?\\'"  . web-mode))
-(add-to-list 'auto-mode-alist '("\\.vue?\\'"   . web-mode))
+  ;; File associations
+  (add-to-list 'auto-mode-alist '("\\.phtml\\'"  . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.php\\'"    . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.erb\\'"    . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.html?\\'"  . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.vue?\\'"   . web-mode))
 
-;; Engine associations
-(setq web-mode-engines-alist
-'(("php"    . "\\.phtml\\'")
-("blade"  . "\\.blade\\.")))
+  ;; Engine associations
+  (setq web-mode-engines-alist
+  '(("php"    . "\\.phtml\\'")
+  ("blade"  . "\\.blade\\.")))
 
-;; Highlight tag when editing
-(setq web-mode-enable-current-element-highlight t)
+  ;; Highlight tag when editing
+  (setq web-mode-enable-current-element-highlight t)
 
 (use-package yaml-mode :ensure t)
 
@@ -237,25 +237,25 @@
 
 (use-package company)
 
-;; Add Tern to Company
-(use-package company-tern)
-(use-package tern)
+;; Web-mode needs HTML and CSS completions.
+;; JS is not satisfactory at this point IMO
 
-;; Call that inside js2-mode and add tern to company backends
-(defun tern-mode-tweaks ()
-(add-to-list 'company-backends 'company-tern)
-(tern-mode 1))
+;; Replacing Tern with ac-js2 and js2-refactor
+(use-package ac-js2)
+(use-package js2-refactor
+:diminish js2-refactor-mode)
 
-;; Web-mode needs HTML, CSS and JS completions
+;; Add to js2-mode
+(add-hook 'js2-mode-hook #'js2-refactor-mode)
+(js2r-add-keybindings-with-prefix "C-c r")
+
 (defun web-mode-tweaks ()
 (require 'company-web-html)
-(set (make-local-variable 'company-backends) '(company-web-html company-css company-tern))
+(set (make-local-variable 'company-backends) '(company-web-html company-css))
 (emmet-mode 1)
-(tern-mode 1)
 (company-mode t))
 
-;; Add Tern to js2-mode and web-mode
-(add-hook 'js2-mode-hook 'tern-mode-tweaks)
+;; Add tweaks
 (add-hook 'web-mode-hook 'web-mode-tweaks)
 
 ;; Autocompletion for Bootstrap/FontAwesome classes
@@ -263,9 +263,6 @@
 
 ;; Web-mode completions
 (use-package company-web)
-
-;; Add web-mode completions when started
-(require 'company-web-html)
 
 ;; Company statistics package
 (use-package company-statistics)
@@ -407,12 +404,12 @@ eshell-prompt-function 'epe-theme-lambda))
 (use-package yasnippet-snippets)
 
 (use-package circadian
-:ensure t
-:config
-(setq circadian-themes '((:sunrise . moe-light)
- (:sunset . jazz)))
+  :ensure t
+  :config
+  (setq circadian-themes '((:sunrise . moe-light)
+   (:sunset . jazz)))
 
-(circadian-setup))
+  (circadian-setup))
 
 (use-package ace-jump-mode)
 
@@ -635,7 +632,8 @@ eshell-prompt-function 'epe-theme-lambda))
    [?A ?  ?- ?- ?  ?f ?o ?o ?b ?a ?r ?  ?e ?a backspace backspace ?a backspace ?w ?a ?s ?  ?h ?e ?r ?e ?! escape ?\C-a])
 
 (use-package twittering-mode
-    :bind (("C-c r" . twittering-reply-to-user)
+:bind (:map twittering-mode-map
+   ("C-c r" . twittering-reply-to-user)
    ("C-c f" . twittering-favorite)
    ("C-c n" . twittering-native-retweet)))
 

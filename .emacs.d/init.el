@@ -122,6 +122,7 @@
  '(erc-user-full-name "Realnamezz")
  '(evil-shift-width 2)
  '(fci-rule-character-color "#452E2E")
+ '(fci-rule-color "#151515")
  '(font-use-system-font nil)
  '(global-anzu-mode t)
  '(global-auto-revert-mode t)
@@ -292,7 +293,7 @@
     '(org-capture-templates
          (quote
              (("e" "Add new Emacs task" entry
-                  (file+headline "~/file-bouncer/org-files/projetos-em-andamento/configuracoes-emacs.org" "Tarefas")
+                  (file+headline "~/file-bouncer/org-files/projetos/configuracoes-emacs.org" "Tarefas")
                   "** TODO %^{Tarefa}" :prepend t :immediate-finish t :time-prompt t)
                  ("p" "Add podcast to list" entry
                      (file+headline "~/file-bouncer/media-list.org" "Podcasts")
