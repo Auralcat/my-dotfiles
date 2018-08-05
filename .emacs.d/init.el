@@ -50,7 +50,8 @@
  '(company-auto-complete-chars (quote (41)))
     '(company-backends
          (quote
-             ((company-tern company-web-html company-css)
+             (company-yasnippet
+                 (company-tern company-web-html company-css)
                  company-semantic company-capf company-files
                  (company-dabbrev-code company-gtags company-etags company-keywords)
                  company-oddmuse company-dabbrev)))
