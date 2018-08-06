@@ -140,6 +140,22 @@
 ;; Set js2-mode as default mode for JS files
 (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
+(defun js2-mode-tweaks ()
+;; Use company-yas as main backend
+  (set (make-local-variable 'company-backends) '(company-yasnippet company-etags company-capf))
+  (company-mode t))
+
+(add-hook 'js2-mode-hook 'js2-mode-tweaks)
+
+ ;; Replacing Tern with ac-js2 and js2-refactor
+ (use-package ac-js2)
+ (use-package js2-refactor
+ :diminish js2-refactor-mode)
+
+ ;; Add to js2-mode
+ (add-hook 'js2-mode-hook #'js2-refactor-mode)
+ (js2r-add-keybindings-with-prefix "C-c r")
+
 ;; Set syntax highlight level
 (setq js2-highlight-level 3)
 
@@ -239,15 +255,6 @@
 
 ;; Web-mode needs HTML and CSS completions.
 ;; JS is not satisfactory at this point IMO
-
-;; Replacing Tern with ac-js2 and js2-refactor
-(use-package ac-js2)
-(use-package js2-refactor
-:diminish js2-refactor-mode)
-
-;; Add to js2-mode
-(add-hook 'js2-mode-hook #'js2-refactor-mode)
-(js2r-add-keybindings-with-prefix "C-c r")
 
 (defun web-mode-tweaks ()
 (require 'company-web-html)
