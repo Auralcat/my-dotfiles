@@ -10,3 +10,6 @@ miriamretka.el
 .emacs.d/.emacs.desktop.lock
 .emacs.d/amx-items
 .emacs.d/persp-confs/*
+.emacs.d/company-statistics-cache.el
+.emacs.d/places
+.emacs.d/projectile-bookmarks.eld
