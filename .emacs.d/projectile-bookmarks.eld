@@ -1,1 +1,1 @@
-("~/my-dotfiles/" "~/file-bouncer/" "~/vue-tab-tracker/client/" "/tmp/replace-with-this/" "~/v-calculator/")
+("~/my-dotfiles/" "~/file-bouncer/" "~/v-calculator/" "~/vue-tab-tracker/client/" "/tmp/replace-with-this/")

@@ -1,4 +1,4 @@
-(define-package "mode-icons" "20170216.1420" "Show icons for modes"
+(define-package "mode-icons" "20180806.2253" "Show icons for modes"
   '((emacs "24")
     (cl-lib "0.5"))
   :keywords
