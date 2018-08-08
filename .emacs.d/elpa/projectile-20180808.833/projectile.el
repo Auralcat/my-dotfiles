@@ -4,7 +4,7 @@
 
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/projectile
-;; Package-Version: 20180728.1457
+;; Package-Version: 20180808.833
 ;; Keywords: project, convenience
 ;; Version: 1.1.0-snapshot
 ;; Package-Requires: ((emacs "25.1") (pkg-info "0.4"))
@@ -149,10 +149,12 @@ Otherwise consider the current directory the project root."
           (const :tag "Default" default)
           (function :tag "Custom function")))
 
-(defcustom projectile-keymap-prefix (kbd "C-c C-p")
+(defcustom projectile-keymap-prefix nil
   "Projectile keymap prefix."
   :group 'projectile
   :type 'string)
+
+(make-obsolete-variable 'projectile-keymap-prefix "Use (define-key projectile-mode-map (kbd ...) 'projectile-command-map) instead." "1.1.0")
 
 (defcustom projectile-cache-file
   (expand-file-name "projectile.cache" user-emacs-directory)
@@ -1902,7 +1904,7 @@ With FLEX-MATCHING, match any file that contains the base name of current file"
          (fulldirname (if (file-name-directory current-file)
                           (file-name-directory current-file) "./"))
          (dirname (file-name-nondirectory (directory-file-name fulldirname)))
-         (filename (projectile--file-name-sans-extensions current-file))
+         (filename (regexp-quote (projectile--file-name-sans-extensions current-file)))
          (file-list (mapcar (lambda (ext)
                               (if flex-matching
                                   (concat ".*" filename ".*" "\." ext "\\'")
@@ -3500,7 +3502,8 @@ Invokes the command referenced by `projectile-switch-project-action' on switch.
 With a prefix ARG invokes `projectile-commander' instead of
 `projectile-switch-project-action.'"
   (interactive "P")
-  (let ((projects (projectile-relevant-known-projects)))
+  (let ((projects (projectile-relevant-known-projects))
+        (projectile-require-project-root nil))
     (if projects
         (projectile-completing-read
          "Switch to project: " projects
@@ -3959,7 +3962,8 @@ is chosen."
 
 (defvar projectile-mode-map
   (let ((map (make-sparse-keymap)))
-    (define-key map projectile-keymap-prefix 'projectile-command-map)
+    (when projectile-keymap-prefix
+      (define-key map projectile-keymap-prefix 'projectile-command-map))
     map)
   "Keymap for Projectile mode.")
 
