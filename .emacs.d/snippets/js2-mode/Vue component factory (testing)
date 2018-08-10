@@ -1,0 +1,8 @@
+# key: factory
+# name: Vue component factory (testing)
+# --
+const factory = (values = {}) => {
+  return shallowMount(${1:Component}, {
+    ${2:data}: { ...values }
+  })
+}

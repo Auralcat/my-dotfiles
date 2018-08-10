@@ -746,8 +746,13 @@ Toggle generic helm completion.
 All functions in Emacs that use `completing-read'
 or `read-file-name' and friends will use helm interface
 when this mode is turned on.
+
 However you can modify this behavior for functions of your choice
 with `helm-completing-read-handlers-alist'.
+
+Also commands using `completion-in-region' will be helmized when
+`helm-mode-handle-completion-in-region' is non nil, you can modify
+this behavior with `helm-mode-no-completion-in-region-in-modes'.
 
 Called with a positive arg, turn on unconditionally, with a
 negative arg turn off.
@@ -760,8 +765,8 @@ with a nil value.
 
 About `ido-mode':
 When you are using `helm-mode', DO NOT use `ido-mode', instead if you
-want some commands use `ido' add these commands to
-`helm-completing-read-handlers-alist' with ido as value.
+want some commands use `ido', add these commands to
+`helm-completing-read-handlers-alist' with `ido' as value.
 
 Note: This mode is incompatible with Emacs23.
 

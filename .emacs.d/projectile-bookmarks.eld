@@ -1,1 +1,1 @@
-("~/my-dotfiles/" "~/file-bouncer/" "~/v-calculator/" "~/vue-tab-tracker/client/")
+("~/my-dotfiles/" "~/v-calculator/" "~/file-bouncer/" "~/vue-tab-tracker/client/")
