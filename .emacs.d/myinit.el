@@ -638,9 +638,13 @@ eshell-prompt-function 'epe-theme-lambda))
    (fset 'foobar-was-here
    [?A ?  ?- ?- ?  ?f ?o ?o ?b ?a ?r ?  ?e ?a backspace backspace ?a backspace ?w ?a ?s ?  ?h ?e ?r ?e ?! escape ?\C-a])
 
+;; Quicker replies in Twittering-mode.
+(fset 'my-twittering-mode-reply-to-user
+ (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([3 return 3 18 67] 0 "%d")) arg)))
+
 (use-package twittering-mode
 :bind (:map twittering-mode-map
-   ("C-c r" . twittering-reply-to-user)
+   ("C-c r" . my-twittering-mode-reply-to-user)
    ("C-c f" . twittering-favorite)
    ("C-c n" . twittering-native-retweet)))
 
