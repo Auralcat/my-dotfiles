@@ -4,7 +4,7 @@
 
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/projectile
-;; Package-Version: 20180808.833
+;; Package-Version: 20180815.2057
 ;; Keywords: project, convenience
 ;; Version: 1.1.0-snapshot
 ;; Package-Requires: ((emacs "25.1") (pkg-info "0.4"))
@@ -723,12 +723,7 @@ The cache is created both in memory and on the hard drive."
 (defun projectile-track-known-projects-find-file-hook ()
   "Function for caching projects with `find-file-hook'."
   (when (and projectile-track-known-projects-automatically (projectile-project-p))
-    (let ((known-projects (and (sequencep projectile-known-projects)
-                               (copy-sequence projectile-known-projects))))
-      (projectile-add-known-project (projectile-project-root))
-      (unless (equal known-projects projectile-known-projects)
-        (projectile-merge-known-projects)))))
-
+    (projectile-add-known-project (projectile-project-root))))
 
 (defun projectile-maybe-invalidate-cache (force)
   "Invalidate if FORCE or project's dirconfig newer than cache."
@@ -3239,25 +3234,39 @@ Should be set via .dir-locals.el.")
 It takes precedence over the default command for the project type when set.
 Should be set via .dir-locals.el.")
 
+(defun projectile-default-generic-command (project-type command-type)
+  "Generic retrieval of COMMAND-TYPEs default cmd-value for PROJECT-TYPE.
+
+If found, checks if value is symbol or string. In case of symbol resolves
+to function `funcall's. Return value of function MUST be string to be executed as command."
+  (let ((command (plist-get (gethash project-type projectile-project-types) command-type)))
+    (cond
+     ((stringp command) command)
+     ((functionp command)
+      (if (fboundp command)
+        (funcall (symbol-function command))))
+     (t
+      (user-error "The value for: %s in project-type: %s was neither a function nor a string." command-type project-type)))))
+
 (defun projectile-default-configure-command (project-type)
   "Retrieve default configure command for PROJECT-TYPE."
-  (plist-get (gethash project-type projectile-project-types) 'configure-command))
+  (projectile-default-generic-command project-type 'configure-command))
 
 (defun projectile-default-compilation-command (project-type)
   "Retrieve default compilation command for PROJECT-TYPE."
-  (plist-get (gethash project-type projectile-project-types) 'compile-command))
+  (projectile-default-generic-command project-type 'compile-command))
 
 (defun projectile-default-compilation-dir (project-type)
   "Retrieve default compilation directory for PROJECT-TYPE."
-  (plist-get (gethash project-type projectile-project-types) 'compilation-dir))
+  (projectile-default-generic-command project-type 'compilation-dir))
 
 (defun projectile-default-test-command (project-type)
   "Retrieve default test command for PROJECT-TYPE."
-  (plist-get (gethash project-type projectile-project-types) 'test-command))
+  (projectile-default-generic-command project-type 'test-command))
 
 (defun projectile-default-run-command (project-type)
   "Retrieve default run command for PROJECT-TYPE."
-  (plist-get (gethash project-type projectile-project-types) 'run-command))
+  (projectile-default-generic-command project-type 'run-command))
 
 (defun projectile-configure-command (compile-dir)
   "Retrieve the configure command for COMPILE-DIR.
@@ -3674,7 +3683,8 @@ See `projectile--cleanup-known-projects'."
     (setq projectile-known-projects
           (delete-dups
            (cons (file-name-as-directory (abbreviate-file-name project-root))
-                 projectile-known-projects)))))
+                 projectile-known-projects)))
+    (projectile-merge-known-projects)))
 
 (defun projectile-load-known-projects ()
   "Load saved projects from `projectile-known-projects-file'.
