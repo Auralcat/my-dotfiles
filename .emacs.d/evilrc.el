@@ -4,10 +4,6 @@
 ;; Now I need C-e, $ is too far for me 😂
 (define-key evil-normal-state-map (kbd "C-e") 'end-of-line)
 
-;; Add C-a and C-e to insert mode
-(define-key evil-insert-state-map (kbd "C-a") 'beginning-of-line)
-(define-key evil-insert-state-map (kbd "C-e") 'end-of-line)
-
 ;; Use Q in normal mode to kill current buffer.
 (define-key evil-normal-state-map (kbd "Q") 'kill-current-buffer)
 
@@ -22,6 +18,15 @@
 
 ;; Use gs to set bookmarks
 (define-key evil-normal-state-map (kbd "gs") 'bookmark-set)
+
+;; INSERT MODE
+;; Add C-a and C-e to insert mode
+(define-key evil-insert-state-map (kbd "C-a") 'beginning-of-line)
+(define-key evil-insert-state-map (kbd "C-e") 'end-of-line)
+
+;; Use C-y to paste text, just like Emacs mode
+;; The previous command was copy-line-from-above, not that useful IMO
+(define-key evil-insert-state-map (kbd "C-y") 'yank)
 
 ;; Evil Leader configs
 ;; Use SPC as leader key (yah, this is the idea behind Spacemacs)

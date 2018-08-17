@@ -781,8 +781,8 @@ me, too many buffers to work with... for now.
   ;; Bind org-pomodoro to C-x p
   (global-set-key (kbd "\C-x p") (quote org-pomodoro))
 
-  ;; Open the agenda with C-c a
-  (global-set-key [3 97] (quote org-agenda))
+  ;; Open the agenda with F12
+  (global-set-key [f12] (quote org-agenda))
 
   ;; Open subheading with C-c RET and invert with M-RET
   (local-set-key [27 13] (quote org-ctrl-c-ret))
