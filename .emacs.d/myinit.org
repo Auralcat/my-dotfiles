@@ -713,6 +713,9 @@ me, too many buffers to work with... for now.
   ;; Switch to last buffer - I do it all the time
   (global-set-key [27 112] (quote mode-line-other-buffer))
 
+  ;; Save buffer with F5
+  (global-set-key [f5] (quote save-buffer))
+
   ;; Mapping AltGr-d to delete-other-windows,
   ;; Another symbol I don't use often.
   (global-set-key [240] (quote delete-other-windows))
