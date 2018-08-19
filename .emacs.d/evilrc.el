@@ -28,6 +28,10 @@
 ;; The previous command was copy-line-from-above, not that useful IMO
 (define-key evil-insert-state-map (kbd "C-y") 'yank)
 
+;; Use C-. to paste last insertion.
+;; This command is originally bound to C-a, but I overrode it.
+(define-key evil-insert-state-map (kbd "C-.") 'evil-paste-last-insertion)
+
 ;; Evil Leader configs
 ;; Use SPC as leader key (yah, this is the idea behind Spacemacs)
 (evil-leader/set-leader "SPC")

@@ -486,6 +486,9 @@ eshell-prompt-function 'epe-theme-lambda))
 ;; Switch to last buffer - I do it all the time
 (global-set-key [27 112] (quote mode-line-other-buffer))
 
+;; Save buffer with F5
+(global-set-key [f5] (quote save-buffer))
+
 ;; Mapping AltGr-d to delete-other-windows,
 ;; Another symbol I don't use often.
 (global-set-key [240] (quote delete-other-windows))
@@ -546,8 +549,8 @@ eshell-prompt-function 'epe-theme-lambda))
 ;; Bind org-pomodoro to C-x p
 (global-set-key (kbd "\C-x p") (quote org-pomodoro))
 
-;; Open the agenda with C-c a
-(global-set-key [3 97] (quote org-agenda))
+;; Open the agenda with F12
+(global-set-key [f12] (quote org-agenda))
 
 ;; Open subheading with C-c RET and invert with M-RET
 (local-set-key [27 13] (quote org-ctrl-c-ret))

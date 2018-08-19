@@ -12,8 +12,8 @@
 ;;	Xavier Maillard <xavier@maillard.im>
 ;; Created: Sep 4, 2007
 ;; Version: HEAD
-;; Package-Version: 20180817.1119
-;; Identity: $Id: 10934a970c422f92382053416df8028cfbf9ee7a $
+;; Package-Version: 20180818.1451
+;; Identity: $Id: 39c4fc97e6f5684287386630e7c7cf872257fae7 $
 ;; Keywords: twitter web
 ;; URL: http://twmode.sf.net/
 
@@ -96,7 +96,7 @@
   :group 'hypermedia)
 
 (defconst twittering-mode-version "HEAD")
-(defconst twittering-mode-identity "$Id: 10934a970c422f92382053416df8028cfbf9ee7a $")
+(defconst twittering-mode-identity "$Id: 39c4fc97e6f5684287386630e7c7cf872257fae7 $")
 (defvar twittering-api-host "api.twitter.com")
 (defvar twittering-api-search-host "search.twitter.com")
 (defvar twittering-web-host "twitter.com")
@@ -3173,7 +3173,7 @@ FORMAT is a response data format (\"xml\", \"atom\", \"json\")"
 		    twittering-list-index-retrieved)))
     result))
 
-(defun twittering-http-post (account-info-alist host method &optional parameters format additional-info sentinel clean-up-sentinel)
+(defun twittering-http-post (account-info-alist host method &optional parameters format additional-info sentinel clean-up-sentinel post-body)
   "Send HTTP POST request to api.twitter.com (or search.twitter.com)
 ACCOUNT-INFO-ALIST is an alist used by
 `twittering-add-application-header-to-http-request'.
@@ -3195,7 +3195,7 @@ FORMAT is a response data format (\"xml\", \"atom\", \"json\")"
 	 (path (concat "/" method "." format))
 	 (headers nil)
 	 (port nil)
-	 (post-body "")
+	 (post-body (or post-body ""))
 	 (request
 	  (twittering-add-application-header-to-http-request
 	   (twittering-make-http-request "POST" headers host port path
@@ -5396,6 +5396,7 @@ string and the number of new statuses for the timeline."
 ;;;;
 
 (defvar twittering-user-id-db (make-hash-table :test 'equal))
+(defvar twittering-user-screen-name-db (make-hash-table :test 'equal))
 (defcustom twittering-user-id-db-file
   (expand-file-name "~/.twittering-mode-user-info.gz")
   "*The file to which user IDs are stored.
@@ -5406,17 +5407,22 @@ The file is loaded with `with-auto-compression-mode'."
 (defun twittering-registered-user-screen-names ()
   (let ((result '()))
     (maphash
-     (lambda (user-id properties)
-       (let ((screen-name (cdr (assq 'screen-name properties))))
-	 (setq result (cons screen-name result))))
-     twittering-user-id-db)
+     (lambda (user-screen-name properties)
+       (setq result (cons user-screen-name result)))
+     twittering-user-screen-name-db)
     result))
 
 (defun twittering-find-user (user-id)
   (gethash user-id twittering-user-id-db))
 
+(defun twittering-find-user-screen-name (user-screen-name)
+  (gethash user-screen-name twittering-user-screen-name-db))
+
 (defun twittering-register-user-id (user-id properties)
-  (puthash user-id properties twittering-user-id-db))
+  (let ((screen-name (cdr (assq 'screen-name properties))))
+    (puthash user-id properties twittering-user-id-db)
+    (when screen-name
+      (puthash screen-name properties twittering-user-screen-name-db))))
 
 (defun twittering-register-user-id-from-status (status)
   (let* ((id (cdr (assq 'user-id status)))
@@ -6112,8 +6118,8 @@ verify-credentials -- Verify the current credentials.
       of `twittering-send-http-request' via `twittering-http-get'.
 send-direct-message -- Send a direct message.
   Valid key symbols in ARGS-ALIST:
-    username -- the username who the message is sent to.
-    status -- the sent message.
+    recipient-id -- the user ID who the message is sent to.
+    text -- the sent message.
 mute -- Mute a user.
   Valid key symbols in ARGS-ALIST:
     user-id -- the user-id that will be muted.
@@ -6423,8 +6429,8 @@ get-service-configuration -- Get the configuration of the server.
    ((eq command 'send-direct-message)
     ;; Send a direct message.
     (let ((parameters
-	   `(("screen_name" . ,(cdr (assq 'username args-alist)))
-	     ("text" . ,(cdr (assq 'status args-alist))))))
+	   `(("user_id" . ,(cdr (assq 'id args-alist)))
+	     ("text" . ,(cdr (assq 'text args-alist))))))
       (twittering-http-post account-info-alist twittering-api-host
 			    (twittering-api-path "direct_messages/new")
 			    parameters nil additional-info)))
@@ -6801,13 +6807,24 @@ get-service-configuration -- Get the configuration of the server.
    ((eq command 'send-direct-message)
     ;; Send a direct message.
     (let* ((host twittering-api-host)
-	   (method "1.1/direct_messages/new")
-	   (http-parameters
-	    `(("screen_name" . ,(cdr (assq 'username args-alist)))
-	      ("text" . ,(cdr (assq 'status args-alist)))))
-	   (format-str "json"))
+	   (method "1.1/direct_messages/events/new")
+	   (http-parameters nil)
+	   (format-str "json")
+	   (additional-info nil)
+	   (recipient-id (cdr (assq 'recipient-id args-alist)))
+	   (text (cdr (assq 'text args-alist)))
+	   (obj
+	    `((event
+	       .
+	       ((type . "message_create")
+		(message_create
+		 .
+		 ((target . ((recipient_id . ,recipient-id)))
+		  (message_data . ((text . ,text)))))))))
+	   (post-body (json-encode obj))
+	   )
       (twittering-http-post account-info-alist host method http-parameters
-			    format-str additional-info)))
+			    format-str additional-info nil nil post-body)))
    ((memq command '(mute unmute))
     ;; Mute a user.
     (let* ((user-id (cdr (assq 'user-id args-alist)))
@@ -8179,33 +8196,60 @@ To convert a JSON object from other timelines, use
 JSON-OBJECT must originate in the timeline of direct message events.
 To convert a JSON object from other timelines, use
 `twittering-json-object-to-a-status'."
-  (mapcar
-   (lambda (ev)
-     (let* ((id (cdr (assq 'id ev)))
-	    (epoch-timestamp-str (cdr (assq 'created_timestamp ev)))
-	    (created-at
-	     (twittering-epoch-timestamp-to-time epoch-timestamp-str))
-	    (msg-create (cdr (assq 'message_create ev)))
-	    (msg-data (cdr (assq 'message_data msg-create)))
-	    (sender-id (cdr (assq 'sender_id msg-create)))
-	    (user-info (twittering-find-user sender-id))
-	    (user-name (or (cdr (assq 'name user-info))
-			   (format "UNKNOWN-NAME(ID:%s)" sender-id)))
-	    (user-screen-name
-	     (or (cdr (assq 'screen-name user-info))
-		 (format "UNKNOWN-SCREEN-NAME(ID:%s)" sender-id)))
-	    (user-profile-image-url (cdr (assq 'profile-image-url user-info)))
-	    )
-       `(,@(twittering-extract-common-element-from-json msg-data)
-	 (id . ,id)
-	 (created-at . ,created-at)
-	 (user-id . ,sender-id)
-	 (user-name . ,user-name)
-	 (user-screen-name . ,user-screen-name)
-	 (user-profile-image-url . ,user-profile-image-url)
-	 )))
-   (cdr (assq 'events json-object)))
-  )
+  (let* ((events (cdr (assq 'events json-object)))
+	 (apps (cdr (assq 'apps json-object))))
+    (mapcar
+     (lambda (ev)
+       (let* ((id (cdr (assq 'id ev)))
+	      (epoch-timestamp-str (cdr (assq 'created_timestamp ev)))
+	      (created-at
+	       (twittering-epoch-timestamp-to-time epoch-timestamp-str))
+	      (msg-create (cdr (assq 'message_create ev)))
+	      (msg-data (cdr (assq 'message_data msg-create)))
+	      (target (cdr (assq 'target msg-create)))
+	      (recipient-id (cdr (assq 'recipient_id target)))
+	      (recipient-info (twittering-find-user recipient-id))
+	      (recipient-name
+	       (or (cdr (assq 'name recipient-info))
+		   (format "UNKNOWN-NAME(ID:%s)" recipient-id)))
+	      (recipient-screen-name
+	       (or (cdr (assq 'screen-name recipient-info))
+		   (format "UNKNOWN-SCREEN-NAME(ID:%s)" recipient-id)))
+	      (sender-id (cdr (assq 'sender_id msg-create)))
+	      (user-info (twittering-find-user sender-id))
+	      (user-name (or (cdr (assq 'name user-info))
+			     (format "UNKNOWN-NAME(ID:%s)" sender-id)))
+	      (user-screen-name
+	       (or (cdr (assq 'screen-name user-info))
+		   (format "UNKNOWN-SCREEN-NAME(ID:%s)" sender-id)))
+	      (user-profile-image-url (cdr (assq 'profile-image-url user-info)))
+	      (source-app-id (cdr (assq 'source_app_id msg-create)))
+	      (source-app-name
+	       (if source-app-id
+		   (cdr (assq 'name (assq (intern source-app-id) apps)))
+		 ;; A message without `source_app_id' has been observed.
+		 ""))
+	      (source-app-url
+	       (if source-app-id
+		   (cdr (assq 'url (assq (intern source-app-id) apps)))
+		 ;; A message without `source_app_id' has been observed.
+		 ""))
+	      )
+	 `(,@(twittering-extract-common-element-from-json msg-data)
+	   (id . ,id)
+	   (created-at . ,created-at)
+	   (user-id . ,sender-id)
+	   (user-name . ,user-name)
+	   (user-screen-name . ,user-screen-name)
+	   (user-profile-image-url . ,user-profile-image-url)
+	   (recipient-id . ,recipient-id)
+	   (recipient-name . ,recipient-name)
+	   (recipient-screen-name . ,recipient-screen-name)
+	   (source . ,source-app-name)
+	   (source-uri . ,source-app-url)
+	   )))
+     events)
+    ))
 
 (defun twittering-json-object-to-a-status-on-direct-messages (json-object)
   "Convert JSON-OBJECT representing a tweet into an alist representation.
@@ -11622,11 +11666,17 @@ Pairs of a key symbol and an associated value are following:
 	    (cons status twittering-edit-history))
       (cond
        ((eq tweet-type 'direct-message)
-	(if direct-message-recipient
-	    (twittering-call-api 'send-direct-message
-				 `((username . ,direct-message-recipient)
-				   (status . ,status)))
-	  (message "No username specified")))
+	(if (null direct-message-recipient)
+	    (message "No direct message recipient specified")
+	  (let* ((recipient-info
+		  (twittering-find-user-screen-name direct-message-recipient))
+		 (recipient-id (cdr (assq 'id recipient-info))))
+	    (if recipient-id
+		(twittering-call-api 'send-direct-message
+				     `((recipient-id . ,recipient-id)
+				       (text . ,status)))
+	      (message "Failed to find the user ID of %s"
+		       direct-message-recipient)))))
        ((eq tweet-type 'reply)
 	(twittering-call-api 'update-status
 			     `((status . ,status)
@@ -11768,11 +11818,17 @@ Pairs of a key symbol and an associated value are following:
 	      (when (twittering-status-not-blank-p status)
 		(cond
 		 ((eq tweet-type 'direct-message)
-		  (if username
-		      (twittering-call-api 'send-direct-message
-					   `((username . ,username)
-					     (status . ,status)))
-		    (message "No username specified")))
+		  (if (null username)
+		      (message "No direct message recipient specified")
+		    (let* ((recipient-info
+			    (twittering-find-user-screen-name username))
+			   (recipient-id (cdr (assq 'id recipient-info))))
+		      (if recipient-id
+			  (twittering-call-api 'send-direct-message
+					       `((recipient-id . ,recipient-id)
+						 (text . ,status)))
+			(message "Failed to find the user ID of %s"
+				 username)))))
 		 (t
 		  (let ((parameters `(("status" . ,status)))
 			(as-reply

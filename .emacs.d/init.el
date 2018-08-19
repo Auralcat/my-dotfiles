@@ -164,6 +164,7 @@
          "# This buffer is for notes you don't want to save, and for program sketching.
 # You can write the contents of this buffer to a file with C-x C-w.
 # Current default mode for this buffer is: Org-mode.")
+ '(js2-strict-missing-semi-warning nil)
  '(keyboard-coding-system (quote utf-8-unix))
  '(line-number-mode nil)
  '(magit-diff-use-overlays nil)

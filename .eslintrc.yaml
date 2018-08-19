@@ -6,6 +6,10 @@ extends:
 env:
   es6: true
 
+ecmaFeatures:
+  module: true
+  modules: true
+
 parserOptions:
   ecmaVersion: 6
 
@@ -25,3 +29,7 @@ rules:
   no-use-before-define: off
   object-curly-newline: off
   no-console: off
+  semi: off
+  quotes:
+    - error
+    - single
