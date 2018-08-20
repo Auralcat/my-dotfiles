@@ -26,6 +26,18 @@ has to provide several values including their password.
 
 \(fn HOST USERNAME PACKAGE)" t nil)
 
+(autoload 'ghub-clear-caches "ghub" "\
+Clear all caches that might negatively affect Ghub.
+
+If a library that is used by Ghub caches incorrect information
+such as a mistyped password, then that can prevent Ghub from
+asking the user for the correct information again.
+
+Set `url-http-real-basic-auth-storage' to nil
+and call `auth-source-forget+'.
+
+\(fn)" t nil)
+
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "ghub" '("auth-source-netrc-parse-next-interesting@save-match-data" "ghub-")))
 
 ;;;***
