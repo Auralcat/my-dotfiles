@@ -9014,12 +9014,15 @@ See URL `https://docs.python.org/3.4/library/py_compile.html'."
 
 See URL `http://mypy-lang.org/'."
   :command ("mypy"
+            "--show-column-numbers"
             (config-file "--config-file" flycheck-python-mypy-ini)
             (option "--cache-dir" flycheck-python-mypy-cache-dir)
             source-original)
   :error-patterns
-  ((error line-start (file-name) ":" line ": error:" (message) line-end)
-   (warning line-start (file-name) ":" line ": warning:" (message) line-end))
+  ((error line-start (file-name) ":" line ":" column ": error:" (message)
+          line-end)
+   (warning line-start (file-name) ":" line ":" column  ": warning:" (message)
+            line-end))
   :modes python-mode
   ;; Ensure the file is saved, to work around
   ;; https://github.com/python/mypy/issues/4746.
@@ -9878,6 +9881,11 @@ See URL `http://call-cc.org/'."
          (one-or-more (any space)) "(" (file-name) ":" line ") " (message)
          line-end)
    (warning line-start
+            "Warning: " (zero-or-more not-newline) ",\n"
+            (one-or-more (any space)) (zero-or-more not-newline) ":\n"
+            (one-or-more (any space)) "(" (file-name) ":" line ") " (message)
+            line-end)
+   (warning line-start
             "Warning: " (zero-or-more not-newline) ":\n"
             (one-or-more (any space)) "(" (file-name) ":" line ") " (message)
             line-end)
@@ -9890,10 +9898,28 @@ See URL `http://call-cc.org/'."
                                  (zero-or-more not-newline))
                    (one-or-more space) "<--")
           line-end)
+   ;; A of version 4.12.0, the chicken compiler doesn't provide a
+   ;; line number for this error.
+   (error line-start "Syntax error: "
+          (message (one-or-more not-newline)
+                   (zero-or-more "\n"
+                                 (zero-or-more space)
+                                 (zero-or-more not-newline))
+                   (one-or-more space) "<--")
+          line-end)
    (error line-start
           "Error: " (zero-or-more not-newline) ":\n"
           (one-or-more (any space)) "(" (file-name) ":" line ") " (message)
-          line-end))
+          line-end)
+   ;; A of version 4.12.0, the chicken compiler doesn't provide a
+   ;; line number for this error.
+   (error line-start "Error: "
+          (message (one-or-more not-newline)
+                   (zero-or-more "\n"
+                                 (zero-or-more space)
+                                 (zero-or-more not-newline))
+                   (one-or-more space) "<--")))
+  :error-filter flycheck-fill-empty-line-numbers
   :predicate
   (lambda ()
     ;; In `scheme-mode' we must check the current Scheme implementation

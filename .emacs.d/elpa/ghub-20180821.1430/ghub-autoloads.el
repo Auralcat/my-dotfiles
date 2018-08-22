@@ -42,6 +42,13 @@ and call `auth-source-forget+'.
 
 ;;;***
 
+;;;### (autoloads nil "glab" "glab.el" (0 0 0 0))
+;;; Generated autoloads from glab.el
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "glab" '("glab-default-host")))
+
+;;;***
+
 ;;;### (autoloads nil nil ("ghub-graphql.el" "ghub-pkg.el") (0 0
 ;;;;;;  0 0))
 
