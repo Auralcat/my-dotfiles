@@ -476,6 +476,18 @@ me, too many buffers to work with... for now.
     (use-package emojify)
     #+END_SRC
 ** Utilities
+*** Evil-numbers
+    Increment and decrement numbers like in Vim.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package evil-numbers
+    :bind ("C-c <up>" . evil-numbers/inc-at-pt)
+          ("C-c <down>" . evil-numbers/dec-at-pt))
+    #+END_SRC
+
+    #+RESULTS:
+    : evil-numbers/dec-at-pt
+
+
 *** YATemplate
     Templating in Emacs made easier. Uses auto-insert-mode too.
     #+BEGIN_SRC emacs-lisp :tangle yes
