@@ -38,6 +38,8 @@
 
 ;; Bindings go here
 (evil-leader/set-key
+    ;; Org-agenda
+    "a" 'org-agenda
     ;; Use Ace-Jump with Leader j
     "j" 'evil-ace-jump-char-mode
     ;; Call Magit with Leader g
