@@ -349,6 +349,10 @@ next-line))
 
 (use-package emojify)
 
+(use-package evil-numbers
+:bind ("C-c <up>" . evil-numbers/inc-at-pt)
+      ("C-c <down>" . evil-numbers/dec-at-pt))
+
 (use-package yatemplate
 :ensure t
 :init
@@ -548,9 +552,6 @@ eshell-prompt-function 'epe-theme-lambda))
 
 ;; Bind org-pomodoro to C-x p
 (global-set-key (kbd "\C-x p") (quote org-pomodoro))
-
-;; Open the agenda with F12
-(global-set-key [f12] (quote org-agenda))
 
 ;; Open subheading with C-c RET and invert with M-RET
 (local-set-key [27 13] (quote org-ctrl-c-ret))

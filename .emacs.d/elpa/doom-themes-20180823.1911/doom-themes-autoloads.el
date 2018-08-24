@@ -110,6 +110,14 @@
 
 ;;;***
 
+;;;### (autoloads nil "doom-sourcerer-theme" "doom-sourcerer-theme.el"
+;;;;;;  (0 0 0 0))
+;;; Generated autoloads from doom-sourcerer-theme.el
+
+(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "doom-sourcerer-theme" '("doom-sourcerer")))
+
+;;;***
+
 ;;;### (autoloads nil "doom-spacegrey-theme" "doom-spacegrey-theme.el"
 ;;;;;;  (0 0 0 0))
 ;;; Generated autoloads from doom-spacegrey-theme.el
