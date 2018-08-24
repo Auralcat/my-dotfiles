@@ -6,9 +6,12 @@
 ;;    If it is t, the completion will never be pruned from the file.
 ;;    Otherwise it is in hours since origin.
 
-("state.current" . 425896)
-("default" . 425923)
-("Auralcat" . 425762)
-("mutations.backspace" . 425922)
-("mutations.printPi" . 425922)
-("button-panel/" . 425990)
+("100DaysOfCode" . 426405)
+("100DiasDeAutoConhecimento" . 426405)
+("100DiasDeCodigo" . 426405)
+("align-cent" . 426405)
+("align-cente" . 426405)
+("align-center" . 426405)
+("space-evenly" . 426405)
+("switch-wrapper" . 426405)
+("border-radius" . 426405)
