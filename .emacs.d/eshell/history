@@ -1,0 +1,128 @@
+ls
+ssh avoqueria@162.243.175.207
+exit
+cd
+cd wp-projeto-novo/
+ls
+cp ~/Downloads/avoqueri_site.sql .
+ls
+vagrant scp acasaqueminhavoqueria:/
+vagrant scp acasaqueminhavoqueria:~/.
+vagrant scp acasaqueminhavoqueria
+vagrant scp acasaqueminhavoqueria:/backups/
+vagrant scp acasaqueminhavoqueria:/home/vagrant/backups
+vagrant scp acasaqueminhavoqueria.test:/home/vagrant/backups
+vagrant scp acasaqueminhavoqueria.test:/home/vagrant/backups/
+vagrant scp ./avoqueri_site.sql acasaqueminhavoqueria.test:/home/vagrant/backups/
+ls
+exit
+screenfetch
+update
+sudo apt-get update
+sudo apt-get upgrade -y
+sudo apt-get autoremove
+live-server
+cd ..
+cd ..
+live-server
+exit
+vagrant init vccw-test
+ls
+curl cht.sh
+curl cht.sh/ruby
+curl cht.sh/smalltalk
+curl cht.sh/list
+curl cht.sh/elisp
+curl cht.sh/elisp/
+curl cht.sh/lisp
+curl cht.sh/emacs-lisp
+curl cht.sh/emacs
+curl cht.sh/vim
+exit
+exit
+ls
+curl cht.sh
+screenfetch
+echo TERM
+echo $TERM
+export TERM=xterm-256color
+screenfetch
+exit
+echo $TERM
+exit
+echo $TERM
+curl -L git.io/unix
+ls
+ls
+screenfetch
+curl cht.sh
+curl cht.sh:/go/zip+lists
+gpg --list-keys
+seq 1 20
+seq 10 29
+factor 5432
+(print "Hey!")
+(mes)
+(message "Leave a msg")
+iex
+pry
+irb
+man ruby
+cd /tmp
+echo "loop { p eval gets }" > repl.rb
+ruby repl.rb
+cd
+curl parrot.live
+cd ..
+cd ..
+npm run test:unit
+npm run test:unit
+npm run test:unit
+npm run test:unit
+npm run test:unit
+npm run test:unit
+npm run test:unit
+npm run test:unit
+npm run test:unit
+npm run test:unit
+npm run test:unit
+npm run test:unit
+npm run test:unit
+npm run test:unit
+npm run test:unit
+npm run test:unit
+npm run test:unit
+npm run test:unit
+npm run test:unit
+npm run test:unit
+npm run test:unit
+npm run test:unit
+npm run test:unit
+npm run test:unit
+npm run test:unit
+cd ..
+cd ..
+npm run test:unit
+npm run test:unit
+npm run test:unit
+npm run test:unit
+npm run test:unit
+npm run test:unit
+npm run test:unit
+npm run test:unit
+npm run test:unit
+cd ..
+cd ..
+npm run test:unit
+npm run test:unit
+npm run test:unit
+npm run test:unit
+npm run test:unit
+npm run test:unit
+çs
+pwd
+cd /tmp
+cd example-server-testing/
+ls
+./node_modules/mocha/bin/mocha test/spec.js
+exit
