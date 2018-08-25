@@ -43,4 +43,8 @@
     ;; Use Ace-Jump with Leader j
     "j" 'evil-ace-jump-char-mode
     ;; Call Magit with Leader g
-    "g" 'magit-status)
+    "g" 'magit-status
+    ;; Helm prefix
+    "h" 'helm-command-prefix
+    ;; Projectile prefix
+    "p" 'projectile-command-map)

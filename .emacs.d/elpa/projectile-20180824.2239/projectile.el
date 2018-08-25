@@ -4,7 +4,7 @@
 
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/projectile
-;; Package-Version: 20180821.623
+;; Package-Version: 20180824.2239
 ;; Keywords: project, convenience
 ;; Version: 1.1.0-snapshot
 ;; Package-Requires: ((emacs "25.1") (pkg-info "0.4"))
@@ -2429,6 +2429,12 @@ TEST-DIR which specifies the path to the tests relative to the project root."
                                   :compile "bundle exec rails server"
                                   :src-dir "lib/"
                                   :test "bundle exec rspec"
+                                  :test-dir "spec/"
+                                  :test-suffix "_spec")
+;; Crystal
+(projectile-register-project-type 'crystal-spec '("shard.yml")
+                                  :src-dir "src/"
+                                  :test "crystal spec"
                                   :test-dir "spec/"
                                   :test-suffix "_spec")
 
