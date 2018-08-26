@@ -608,7 +608,7 @@ me, too many buffers to work with... for now.
       :ensure t
       :config
       (setq circadian-themes '((:sunrise . moe-light)
-       (:sunset . jazz)))
+                               (:sunset  . jazz)))
 
       (circadian-setup))
     #+END_SRC
@@ -662,7 +662,7 @@ me, too many buffers to work with... for now.
       (disable-theme 'moe-dark)
       (powerline-moe-theme)
       ;; Choose a color for the mode line (Default: blue)
-      (moe-theme-set-color 'magenta))
+      (moe-theme-set-color 'yellow))
    #+END_SRC
 
    #+RESULTS:
@@ -806,6 +806,9 @@ me, too many buffers to work with... for now.
   ;; Use diary entries in org-agenda
   (setq org-agenda-include-diary t)
 
+  ;; Use C-RET to complete words in Org-mode
+  (local-set-key [C-return] (quote complete))
+
   ;; Always respect the content of a heading when creating todos!
   (local-set-key [M-S-return] (quote org-insert-todo-heading-respect-content))
 
@@ -813,6 +816,10 @@ me, too many buffers to work with... for now.
   (local-set-key [C-S-return] (quote org-insert-todo-subheading))
 
 #+END_SRC
+
+#+RESULTS:
+: org-insert-todo-subheading
+
 ** Org-bullets
    Change org-mode's *s to UTF-8 chars
    #+BEGIN_SRC emacs-lisp :tangle yes

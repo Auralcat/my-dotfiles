@@ -4,11 +4,10 @@
 ;; Now I need C-e, $ is too far for me 😂
 (define-key evil-normal-state-map (kbd "C-e") 'end-of-line)
 
-;; Use Q in normal mode to kill current buffer.
-(define-key evil-normal-state-map (kbd "Q") 'kill-current-buffer)
-
 ;; Some buffers in Emacs are read-only and can be usually killed pressing
 ;; lowercase q. Much more convenient if you ask me.
+;; Use Q in normal mode to kill current buffer.
+(define-key evil-normal-state-map (kbd "Q") 'kill-current-buffer)
 
 ;; Use gb as goto-bookmark
 (define-key evil-normal-state-map (kbd "gb") 'bookmark-jump)
