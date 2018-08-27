@@ -88,7 +88,6 @@
                  ("Europe/London" "London")
                  ("Asia/Tokyo" "Tokyo"))))
  '(dynamic-completion-mode t)
- '(elcord-mode t nil (elcord))
  '(emmet-indent-after-insert t)
  '(emmet-indentation 2)
  '(emmet-preview-default t)

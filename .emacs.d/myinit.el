@@ -418,7 +418,7 @@ eshell-prompt-function 'epe-theme-lambda))
   :ensure t
   :config
   (setq circadian-themes '((:sunrise . moe-light)
-   (:sunset . jazz)))
+                           (:sunset  . jazz)))
 
   (circadian-setup))
 
@@ -448,7 +448,7 @@ eshell-prompt-function 'epe-theme-lambda))
  (disable-theme 'moe-dark)
  (powerline-moe-theme)
  ;; Choose a color for the mode line (Default: blue)
- (moe-theme-set-color 'magenta))
+ (moe-theme-set-color 'yellow))
 
 (use-package abyss-theme :ensure :defer t)
 
@@ -565,6 +565,9 @@ eshell-prompt-function 'epe-theme-lambda))
 
 ;; Use diary entries in org-agenda
 (setq org-agenda-include-diary t)
+
+;; Use C-RET to complete words in Org-mode
+(local-set-key [C-return] (quote complete))
 
 ;; Always respect the content of a heading when creating todos!
 (local-set-key [M-S-return] (quote org-insert-todo-heading-respect-content))
