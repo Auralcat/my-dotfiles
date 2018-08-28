@@ -492,8 +492,15 @@ me, too many buffers to work with... for now.
 
     #+RESULTS:
     : evil-numbers/dec-at-pt
-
-
+*** Diff-Highlight
+    Highlights the changed content in buffer.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package diff-hl
+     :ensure
+     :config (
+       (diff-hl-flydiff-mode)
+       (diff-hl-dired-mode)))
+    #+END_SRC
 *** YATemplate
     Templating in Emacs made easier. Uses auto-insert-mode too.
     #+BEGIN_SRC emacs-lisp :tangle yes

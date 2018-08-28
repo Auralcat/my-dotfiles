@@ -26,7 +26,7 @@ fooBar => FOO_BAR => FooBar => fooBar
 \(fn)" t nil)
 
 (autoload 'string-inflection-all-cycle "string-inflection" "\
-foo_bar => FOO_BAR => FooBar => fooBar => foo-bar => foo_bar
+foo_bar => FOO_BAR => FooBar => fooBar => foo-bar => Foo_Bar => foo_bar
 
 \(fn)" t nil)
 
@@ -47,6 +47,11 @@ fooBar format
 
 (autoload 'string-inflection-underscore "string-inflection" "\
 foo_bar format
+
+\(fn)" t nil)
+
+(autoload 'string-inflection-capital-underscore "string-inflection" "\
+Foo_Bar format
 
 \(fn)" t nil)
 

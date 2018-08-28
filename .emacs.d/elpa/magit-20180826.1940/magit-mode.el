@@ -250,11 +250,12 @@ then fall back to regular region highlighting."
   :type 'hook
   :options '(magit-section-update-region magit-diff-update-hunk-region))
 
-(defcustom magit-refresh-verbose nil
-  "Whether to revert Magit buffers verbosely."
-  :package-version '(magit . "2.1.0")
+(defcustom magit-create-buffer-hook '(magit-status-goto-commits)
+  "Normal hook run after creating a new `magit-mode' buffer."
+  :package-version '(magit . "2.90.0")
   :group 'magit-refresh
-  :type 'boolean)
+  :type 'hook
+  :options '(magit-status-goto-commits))
 
 (defcustom magit-refresh-buffer-hook nil
   "Normal hook for `magit-refresh-buffer' to run after refreshing."
@@ -274,6 +275,12 @@ improve performance."
   :package-version '(magit . "2.4.0")
   :group 'magit-refresh
   :group 'magit-status
+  :type 'boolean)
+
+(defcustom magit-refresh-verbose nil
+  "Whether to revert Magit buffers verbosely."
+  :package-version '(magit . "2.1.0")
+  :group 'magit-refresh
   :type 'boolean)
 
 (defcustom magit-save-repository-buffers t
@@ -607,14 +614,19 @@ Magit is documented in info node `(magit)'."
   "Setup up a MODE buffer using ARGS to generate its content.
 When optional LOCKED is non-nil, then create a buffer that is
 locked to its value, which is derived from MODE and ARGS."
-  (let ((buffer (magit-mode-get-buffer
-                 mode t nil
-                 (and locked (magit-buffer-lock-value mode args))))
-        (section (magit-current-section)))
+  (let* ((value   (and locked (magit-buffer-lock-value mode args)))
+         (buffer  (magit-mode-get-buffer mode nil nil value))
+         (section (and buffer (magit-current-section)))
+         (created (not buffer)))
+    (unless buffer
+      (setq buffer (magit-with-toplevel
+                     (magit-generate-new-buffer mode value))))
     (with-current-buffer buffer
       (setq magit-previous-section section)
       (setq magit-refresh-args args)
-      (funcall mode))
+      (funcall mode)
+      (when created
+        (run-hooks 'magit-create-buffer-hook)))
     (magit-display-buffer buffer)
     (with-current-buffer buffer
       (run-hooks 'magit-mode-setup-hook)
@@ -785,21 +797,20 @@ thinking a buffer belongs to a repo that it doesn't.")
 (put 'magit-buffer-locked-p 'permanent-local t)
 
 (defun magit-mode-get-buffer (mode &optional create frame value)
+  (when create
+    (error "`magit-mode-get-buffer's CREATE argument is obsolete"))
   (if-let ((topdir (magit-toplevel)))
-      (or (--first (with-current-buffer it
-                     (and (eq major-mode mode)
-                          (equal magit--default-directory topdir)
-                          (if value
-                              (and magit-buffer-locked-p
-                                   (equal (magit-buffer-lock-value) value))
-                            (not magit-buffer-locked-p))))
-                   (if frame
-                       (mapcar #'window-buffer
-                               (window-list (unless (eq frame t) frame)))
-                     (buffer-list)))
-          (and create
-               (let ((default-directory topdir))
-                 (magit-generate-new-buffer mode value))))
+      (--first (with-current-buffer it
+                 (and (eq major-mode mode)
+                      (equal magit--default-directory topdir)
+                      (if value
+                          (and magit-buffer-locked-p
+                               (equal (magit-buffer-lock-value) value))
+                        (not magit-buffer-locked-p))))
+               (if frame
+                   (mapcar #'window-buffer
+                           (window-list (unless (eq frame t) frame)))
+                 (buffer-list)))
     (magit--not-inside-repository-error)))
 
 (defun magit-generate-new-buffer (mode &optional value)

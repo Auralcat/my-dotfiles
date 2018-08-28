@@ -6,7 +6,7 @@
 ;; Created: 24 Aug 2011
 ;; Updated: 16 Mar 2015
 ;; Version: 1.2
-;; Package-Version: 20180403.738
+;; Package-Version: 20180827.422
 ;; Package-Requires: ((gntp "0.1") (log4e "0.3.0"))
 ;; Keywords: notification emacs message
 ;; X-URL: https://github.com/jwiegley/alert
@@ -552,12 +552,14 @@ fringe gets colored whenever people chat on BitlBee:
         (alert-legacy-log-notify mes sev len)
       ;; when we get here you better be using log4e or have your logging
       ;; functions defined
-      (if (fboundp func)
-          (apply func (list mes))
-        (when (fboundp 'log4e:deflogger)
+      (unless (fboundp func)
+	(when (fboundp 'log4e:deflogger)
           (log4e:deflogger "alert" "%t [%l] %m" "%H:%M:%S")
           (when (functionp 'alert--log-set-level)
-            (alert--log-set-level alert-log-level)))))))
+            (alert--log-set-level alert-log-level)))
+	(alert--log-enable-logging))
+      (when (fboundp func)
+        (apply func (list mes))))))
 
 (defun alert-legacy-log-notify (mes sev len)
   (with-current-buffer
