@@ -495,13 +495,14 @@ me, too many buffers to work with... for now.
 *** Diff-Highlight
     Highlights the changed content in buffer.
     #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package diff-hl
-     :ensure
-     :config
-     ((defun hl-diff-tweaks()
-       (diff-hl-mode t)
-       (diff-hl-flydiff-mode t))
-       (add-hook 'prog-mode-hook 'hl-diff-tweaks)))
+      (use-package diff-hl
+       :ensure
+       :config
+       ;; ((defun hl-diff-tweaks()
+       ;;   (diff-hl-mode t)
+       ;;   (diff-hl-flydiff-mode t))
+       ;;   (add-hook 'prog-mode-hook 'hl-diff-tweaks))
+       )
     #+END_SRC
 *** YATemplate
     Templating in Emacs made easier. Uses auto-insert-mode too.

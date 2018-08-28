@@ -23,6 +23,9 @@
 (define-key evil-insert-state-map (kbd "C-a") 'beginning-of-line)
 (define-key evil-insert-state-map (kbd "C-e") 'end-of-line)
 
+;; Use C-w to kill region. I don't use C-w to delete backward words anymore.
+(define-key evil-insert-state-map (kbd "C-w") 'completion-kill-region)
+
 ;; Use C-y to paste text, just like Emacs mode
 ;; The previous command was copy-line-from-above, not that useful IMO
 (define-key evil-insert-state-map (kbd "C-y") 'yank)

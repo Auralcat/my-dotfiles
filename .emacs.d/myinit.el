@@ -71,6 +71,10 @@
 (setq-default save-place t)
 ;; (save-place-mode 1)
 
+;; Use dired asynchronously
+(autoload 'dired-async-mode "dired-async.el" nil t)
+(dired-async-mode 1)
+
 ;; Load from external file.
 (load "~/.emacs.secrets")
 
@@ -352,6 +356,15 @@ next-line))
 (use-package evil-numbers
 :bind ("C-c <up>" . evil-numbers/inc-at-pt)
       ("C-c <down>" . evil-numbers/dec-at-pt))
+
+(use-package diff-hl
+ :ensure
+ :config
+ ;; ((defun hl-diff-tweaks()
+ ;;   (diff-hl-mode t)
+ ;;   (diff-hl-flydiff-mode t))
+ ;;   (add-hook 'prog-mode-hook 'hl-diff-tweaks))
+ )
 
 (use-package yatemplate
 :ensure t
