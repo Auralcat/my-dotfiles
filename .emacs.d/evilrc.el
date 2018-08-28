@@ -42,6 +42,8 @@
 (evil-leader/set-key
     ;; Org-agenda
     "a" 'org-agenda
+    ;; Too lazy to type C-c C-t d
+    "d" 'my-org-mark-as-done
     ;; Use Ace-Jump with Leader j
     "j" 'evil-ace-jump-char-mode
     ;; Call Magit with Leader g
