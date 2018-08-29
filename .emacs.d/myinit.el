@@ -648,19 +648,17 @@ eshell-prompt-function 'epe-theme-lambda))
 (setq python-shell-interpreter "python3")
 
 ;; To save a macro, record it with C-x ( (start) and C-x ) (stop),
-;; give it a name with C-x C-k n (C-k is for maKro) and
-;; insert it in this file with insert-kbd-macro.
-;; Then you execute it mapping it to a key! 😊
+ ;; give it a name with C-x C-k n (C-k is for maKro) and
+ ;; insert it in this file with insert-kbd-macro.
+ ;; Then you execute it mapping it to a key! 😊
 
-;; Example macro: Mark todos as done
-(fset 'org-mark-as-done
-   (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ("d" 0 "%d")) arg)))
-   (fset 'foobar-was-here
-   [?A ?  ?- ?- ?  ?f ?o ?o ?b ?a ?r ?  ?e ?a backspace backspace ?a backspace ?w ?a ?s ?  ?h ?e ?r ?e ?! escape ?\C-a])
+ ;; Example macro: Mark todos as done
+(fset 'my-org-mark-as-done
+  (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ("d]]" 0 "%d")) arg)))
 
-;; Quicker replies in Twittering-mode.
-(fset 'my-twittering-mode-reply-to-user
- (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([3 return 3 18 67] 0 "%d")) arg)))
+ ;; Quicker replies in Twittering-mode.
+ (fset 'my-twittering-mode-reply-to-user
+  (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([3 return 3 18 67] 0 "%d")) arg)))
 
 (use-package twittering-mode
 :bind (:map twittering-mode-map
