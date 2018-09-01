@@ -5,7 +5,7 @@
 ;; Author: Bharat Joshi <jbharat@outlook.com>
 ;; Maintainer: Bharat Joshi <jbharat@outlook.com>
 ;; URL: https://github.com/jbharat/zeno-theme
-;; Package-Version: 20180830.1038
+;; Package-Version: 20180901.222
 ;; Package-X-Original-Version: 20180211.1557
 ;; Created: 22th July 2017
 ;; Keywords: faces, theme, dark, blue
@@ -116,7 +116,8 @@
  `(minibuffer-prompt ((t (:foreground ,turquoise-blue))))
 
  ;; powerline/modeline
- `(mode-line ((t (:foreground ,fg :background ,mode-line-active))))
+ `(mode-line ((t (:foreground ,fg :background ,mode-line-active
+                  :box (:line-width 1 :color ,seperator :style released-button)))))
  `(mode-line-inactive ((t (:foreground ,ml-inactive-face :background ,mode-line-inactive :box nil))))
  `(powerline-active0 ((t (:inherit mode-line :background ,bg))))
  `(powerline-active1 ((t (:inherit mode-line :background ,bg))))

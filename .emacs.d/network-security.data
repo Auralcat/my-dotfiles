@@ -1,4 +1,4 @@
 (
- (:id "sha1:4d7e016b7e6ab8f2d757b1c54223bca988091e57" :fingerprint "sha1:b0:fe:39:d0:70:5d:ea:ac:30:6a:89:d0:37:09:b2:40:98:ed:98:99" :host "melpa-stable.milkbox.net:443" :conditions (:no-host-match))
+ (:id "sha1:4d7e016b7e6ab8f2d757b1c54223bca988091e57" :fingerprint "sha1:1f:8f:9d:5a:d6:fb:04:c1:1f:5d:2a:00:3c:31:90:36:9f:2a:bd:56" :host "melpa-stable.milkbox.net:443" :conditions (:no-host-match))
  (:id "sha1:85457c729378cc93c732b6a3941c8e4f9c2e60f3" :fingerprint "sha1:ab:a6:d7:6a:b3:d3:63:fa:19:0d:65:41:60:23:6e:ef:d3:2a:46:dc" :host "marmalade-repo.org:443" :conditions (:expired :unknown-ca :invalid))
 )

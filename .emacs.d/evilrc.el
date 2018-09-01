@@ -23,6 +23,9 @@
 (define-key evil-insert-state-map (kbd "C-a") 'beginning-of-line)
 (define-key evil-insert-state-map (kbd "C-e") 'end-of-line)
 
+;; Use C-t to transpose chars, I can use tab in graphical mode
+(define-key evil-insert-state-map (kbd "C-t") 'transpose-chars)
+
 ;; Use C-w to kill region. I don't use C-w to delete backward words anymore.
 (define-key evil-insert-state-map (kbd "C-w") 'completion-kill-region)
 
