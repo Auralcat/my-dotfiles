@@ -1,5 +1,3 @@
-ls
-ssh avoqueria@162.243.175.207
 exit
 cd
 cd wp-projeto-novo/
@@ -126,3 +124,5 @@ cd example-server-testing/
 ls
 ./node_modules/mocha/bin/mocha test/spec.js
 exit
+git init
+ls
