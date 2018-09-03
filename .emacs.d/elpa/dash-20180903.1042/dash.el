@@ -4,7 +4,7 @@
 
 ;; Author: Magnar Sveen <magnars@gmail.com>
 ;; Version: 2.14.1
-;; Package-Version: 20180726.1213
+;; Package-Version: 20180903.1042
 ;; Keywords: lists
 
 ;; This program is free software; you can redistribute it and/or modify
@@ -125,6 +125,49 @@ Return nil, used for side-effects only."
   (--each-while list (funcall pred it) (funcall fn it)))
 
 (put '-each-while 'lisp-indent-function 2)
+
+(defmacro --each-r (list &rest body)
+  "Anaphoric form of `-each-r'."
+  (declare (debug (form body))
+           (indent 1))
+  (let ((v (make-symbol "vector")))
+    ;; Implementation note: building vector is considerably faster
+    ;; than building a reversed list (vector takes less memory, so
+    ;; there is less GC), plus length comes naturally.  In-place
+    ;; 'nreverse' would be faster still, but BODY would be able to see
+    ;; that, even if modification was reversed before we return.
+    `(let* ((,v (vconcat ,list))
+            (it-index (length ,v))
+            it)
+       (while (> it-index 0)
+         (setq it-index (1- it-index))
+         (setq it (aref ,v it-index))
+         ,@body))))
+
+(defun -each-r (list fn)
+  "Call FN with every item in LIST in reversed order.
+ Return nil, used for side-effects only."
+  (--each-r list (funcall fn it)))
+
+(defmacro --each-r-while (list pred &rest body)
+  "Anaphoric form of `-each-r-while'."
+  (declare (debug (form form body))
+           (indent 2))
+  (let ((v (make-symbol "vector")))
+    `(let* ((,v (vconcat ,list))
+            (it-index (length ,v))
+            it)
+       (while (> it-index 0)
+         (setq it-index (1- it-index))
+         (setq it (aref ,v it-index))
+         (if (not ,pred)
+             (setq it-index -1)
+           ,@body)))))
+
+(defun -each-r-while (list pred fn)
+  "Call FN with every item in reversed LIST while (PRED item) is non-nil.
+Return nil, used for side-effects only."
+  (--each-r-while list (funcall pred it) (funcall fn it)))
 
 (defmacro --dotimes (num &rest body)
   "Repeatedly executes BODY (presumably for side-effects) with symbol `it' bound to integers from 0 through NUM-1."
