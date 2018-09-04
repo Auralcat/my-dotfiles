@@ -230,13 +230,14 @@ me, too many buffers to work with... for now.
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package web-mode :ensure t
       :bind (:map web-mode-map
-    ("C-<up>"    . web-mode-element-previous)
-    ("C-<down>"  . web-mode-element-next)
-    ("C-<left>"  . web-mode-element-beginning)
-    ("C-<right>" . web-mode-tag-match)
-    ("C-S-<up>"  . web-mode-element-parent)
-    ("M-<up>"    . web-mode-element-content-select)
-    ("C-k"       . web-mode-element-kill)))
+            ("C-<up>"    . web-mode-element-previous)
+            ("C-<down>"  . web-mode-element-next)
+            ("C-<left>"  . web-mode-element-beginning)
+            ("C-<right>" . web-mode-tag-match)
+            ("C-S-<up>"  . web-mode-element-parent)
+            ("M-<up>"    . web-mode-element-content-select)
+            ("C-k"       . web-mode-element-kill)
+            ("M-RET"     . complete)))
 
       ;; File associations
       (add-to-list 'auto-mode-alist '("\\.phtml\\'"  . web-mode))

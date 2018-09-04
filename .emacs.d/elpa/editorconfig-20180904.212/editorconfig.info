@@ -12,7 +12,7 @@ File: editorconfig.info,  Node: Top,  Next: Installation,  Up: (dir)
 1 EditorConfig Emacs Plugin
 ***************************
 
-This is an EditorConfig (http://editorconfig.org) plugin for Emacs
+This is an EditorConfig (https://editorconfig.org) plugin for Emacs
 (https://www.gnu.org/software/emacs/).
 * Menu:
 
@@ -44,8 +44,8 @@ Emacs-Lisp, and fallback to it when no core executable is found.
 (editorconfig-mode 1)
 
    Alternatively, you can find the package available on MELPA
-(http://melpa.org/#/editorconfig) and MELPA Stable
-(http://stable.melpa.org/#/editorconfig) (The Marmalade package
+(https://melpa.org/#/editorconfig) and MELPA Stable
+(https://stable.melpa.org/#/editorconfig) (The Marmalade package
 (http://marmalade-repo.org/packages/editorconfig) is deprecated).
 
    Or if you use *use-package*
@@ -63,7 +63,7 @@ File: editorconfig.info,  Node: Supported properties,  Next: Customize,  Prev: I
 ========================
 
 Current Emacs plugin coverage for EditorConfig's properties
-(http://editorconfig.org/#supported-properties):
+(https://editorconfig.org/#supported-properties):
 
    * 'indent_style'
    * 'indent_size'
@@ -235,25 +235,25 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 Tag Table:
 Node: Top208
 Ref: #editorconfig-emacs-plugin337
-Node: Installation574
-Ref: #installation708
-Node: Supported properties1610
-Ref: #supported-properties1766
-Node: Customize3424
-Ref: #customize3553
-Node: editorconfig-custom-hooks3696
-Ref: #editorconfig-custom-hooks3881
-Node: editorconfig-indentation-alist4431
-Ref: #editorconfig-indentation-alist4657
-Node: editorconfig-exec-path5212
-Ref: #editorconfig-exec-path5433
-Node: editorconfig-get-properties-function5522
-Ref: #editorconfig-get-properties-function5732
-Node: Testing6585
-Ref: #testing6726
-Node: Submitting Bugs and Feature Requests6833
-Ref: #submitting-bugs-and-feature-requests7030
-Node: License7172
-Ref: #license7295
+Node: Installation575
+Ref: #installation709
+Node: Supported properties1613
+Ref: #supported-properties1769
+Node: Customize3428
+Ref: #customize3557
+Node: editorconfig-custom-hooks3700
+Ref: #editorconfig-custom-hooks3885
+Node: editorconfig-indentation-alist4435
+Ref: #editorconfig-indentation-alist4661
+Node: editorconfig-exec-path5216
+Ref: #editorconfig-exec-path5437
+Node: editorconfig-get-properties-function5526
+Ref: #editorconfig-get-properties-function5736
+Node: Testing6589
+Ref: #testing6730
+Node: Submitting Bugs and Feature Requests6837
+Ref: #submitting-bugs-and-feature-requests7034
+Node: License7176
+Ref: #license7299
 
 End Tag Table

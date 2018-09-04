@@ -4,7 +4,7 @@
 
 ;; Author: Alf Lervåg
 ;; Keywords: literate programming, reproducible research
-;; Package-Version: 20180703.1602
+;; Package-Version: 20180904.709
 ;; Homepage: http://orgmode.org
 ;; Version: 0.02
 ;; Package-Requires: ((restclient "0"))
@@ -66,6 +66,8 @@ This function is called by `org-babel-execute-src-block'"
             (when (eql key :var)
               (insert (format ":%s = %s\n" (car value) (cdr value))))))
         (insert body)
+	(goto-char (point-min))
+	(delete-trailing-whitespace)
 	(goto-char (point-min))
         (restclient-http-parse-current-and-do 'restclient-http-do nil t))
 
