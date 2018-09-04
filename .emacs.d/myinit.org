@@ -5,14 +5,13 @@
 
 * Startup
   #+BEGIN_SRC emacs-lisp :tangle yes
-    ;; Start in scratch buffer
-
     ;; Set fallback font
     (set-face-attribute 'default nil :font "Ubuntu Mono" :height 120)
   #+END_SRC
-
 * Environment Customizations
 #+BEGIN_SRC emacs-lisp :tangle yes
+  ;; Sentences end with single spaces for me.
+  (setq sentence-end-double-space nil)
   ;; Change window title
   (setq frame-title-format '("Yes, this is Emacs!"))
 
