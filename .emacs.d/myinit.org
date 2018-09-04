@@ -932,9 +932,9 @@ me, too many buffers to work with... for now.
   #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package twittering-mode
     :bind (:map twittering-mode-map
-       ("C-c r" . my-twittering-mode-reply-to-user)
-       ("C-c f" . twittering-favorite)
-       ("C-c n" . twittering-native-retweet)))
+          ("C-c r" . my-twittering-mode-reply-to-user)
+          ("C-c f" . twittering-favorite)
+          ("C-c n" . twittering-native-retweet)))
 
     ;; WIP, needs A LOT of remapping
     ;; Use evil-mode to navigate twittering's frame
