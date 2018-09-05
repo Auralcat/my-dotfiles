@@ -1,8 +1,8 @@
-;; Start in scratch buffer
-
 ;; Set fallback font
 (set-face-attribute 'default nil :font "Ubuntu Mono" :height 120)
 
+;; Sentences end with single spaces for me.
+(setq sentence-end-double-space nil)
 ;; Change window title
 (setq frame-title-format '("Yes, this is Emacs!"))
 
@@ -174,30 +174,31 @@
 . enh-ruby-mode))
 
 (use-package web-mode :ensure t
-  :bind (:map web-mode-map
-("C-<up>"    . web-mode-element-previous)
-("C-<down>"  . web-mode-element-next)
-("C-<left>"  . web-mode-element-beginning)
-("C-<right>" . web-mode-tag-match)
-("C-S-<up>"  . web-mode-element-parent)
-("M-<up>"    . web-mode-element-content-select)
-("C-k"       . web-mode-element-kill)))
+:bind (:map web-mode-map
+      ("C-<up>"    . web-mode-element-previous)
+      ("C-<down>"  . web-mode-element-next)
+      ("C-<left>"  . web-mode-element-beginning)
+      ("C-<right>" . web-mode-tag-match)
+      ("C-S-<up>"  . web-mode-element-parent)
+      ("M-<up>"    . web-mode-element-content-select)
+      ("C-k"       . web-mode-element-kill)
+      ("M-RET"     . complete)))
 
-  ;; File associations
-  (add-to-list 'auto-mode-alist '("\\.phtml\\'"  . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.php\\'"    . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.erb\\'"    . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.html?\\'"  . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.vue?\\'"   . web-mode))
+;; File associations
+(add-to-list 'auto-mode-alist '("\\.phtml\\'"  . web-mode))
+(add-to-list 'auto-mode-alist '("\\.php\\'"    . web-mode))
+(add-to-list 'auto-mode-alist '("\\.erb\\'"    . web-mode))
+(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html?\\'"  . web-mode))
+(add-to-list 'auto-mode-alist '("\\.vue?\\'"   . web-mode))
 
-  ;; Engine associations
-  (setq web-mode-engines-alist
-  '(("php"    . "\\.phtml\\'")
-  ("blade"  . "\\.blade\\.")))
+;; Engine associations
+(setq web-mode-engines-alist
+'(("php"    . "\\.phtml\\'")
+("blade"  . "\\.blade\\.")))
 
-  ;; Highlight tag when editing
-  (setq web-mode-enable-current-element-highlight t)
+;; Highlight tag when editing
+(setq web-mode-enable-current-element-highlight t)
 
 (use-package yaml-mode :ensure t)
 
@@ -662,9 +663,9 @@ eshell-prompt-function 'epe-theme-lambda))
 
 (use-package twittering-mode
 :bind (:map twittering-mode-map
-   ("C-c r" . my-twittering-mode-reply-to-user)
-   ("C-c f" . twittering-favorite)
-   ("C-c n" . twittering-native-retweet)))
+      ("C-c r" . my-twittering-mode-reply-to-user)
+      ("C-c f" . twittering-favorite)
+      ("C-c n" . twittering-native-retweet)))
 
 ;; WIP, needs A LOT of remapping
 ;; Use evil-mode to navigate twittering's frame
