@@ -41,17 +41,21 @@
 ;; Use SPC as leader key (yah, this is the idea behind Spacemacs)
 (evil-leader/set-leader "SPC")
 
-;; Bindings go here
+;; Global bindings go here
 (evil-leader/set-key
     ;; Org-agenda
     "a" 'org-agenda
     ;; Too lazy to type C-c C-t d
     "d" 'my-org-mark-as-done
-    ;; Use Ace-Jump with Leader j
-    "j" 'evil-ace-jump-char-mode
     ;; Call Magit with Leader g
     "g" 'magit-status
+    ;; Clock in
+    "i" 'org-clock-in
     ;; Helm prefix
     "h" 'helm-command-prefix
+    ;; Use Ace-Jump with Leader j
+    "j" 'evil-ace-jump-char-mode
+    ;; Clock out
+    "o" 'org-clock-out
     ;; Projectile prefix
     "p" 'projectile-command-map)

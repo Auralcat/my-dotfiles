@@ -777,7 +777,13 @@ me, too many buffers to work with... for now.
   ;; Set C-x j to go to current clocked task in org-mode
   (global-set-key (kbd "C-x j") 'org-clock-goto)
 
+  ;; Elisp mode: use SPC SPC to eval buffer.
+  (add-hook 'emacs-lisp-mode-hook (lambda() (evil-leader/set-key "SPC" 'eval-buffer)))
 #+END_SRC
+
+#+RESULTS:
+| lambda | nil | (evil-leader/set-key SPC (quote eval-buffer)) |
+
 * Web-mode
 #+BEGIN_SRC emacs-lisp :tangle yes
 (defun web-mode-keybindings ()
