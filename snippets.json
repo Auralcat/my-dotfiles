@@ -1,0 +1,13 @@
+{
+    "variables": {
+        "lang": "en",
+        "locale": "en-US",
+        "charset": "UTF-8",
+        "indentation": "\t",
+        "newline": "\n"
+    },
+
+    "html": {
+        "a:noref": "<a href=\"http://\" target=\"_blank\" rel=\"noopener noreferrer\">"
+    }
+}
