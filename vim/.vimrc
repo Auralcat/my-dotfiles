@@ -3,6 +3,9 @@ set nocompatible              " be iMproved, required
 filetype off                  " required
 filetype plugin on
 
+"Default colorscheme
+:colorscheme elflord
+
 set laststatus=0 " I don't like the statusline
 set wildmenu " Enable wild menu
 set title " Shows title of the file
@@ -159,18 +162,6 @@ imap <C-e> <C-o>$
 
 " VimEmmet: Keep keybinding compatibility with Emacs
 let g:user_emmet_leader_key='<C-j>'
-
-" Same bindings for normal mode as well
-nnoremap <C-a> ^
-nnoremap <C-e> $
-
-" Adapting Emacs word movement to Vim:
-imap <C-b> <C-o>b
-imap <C-f> <C-o>w
-
-" I'm using C-d here because it won't terminate Vim. If I press it at the
-" wrong time, like in normal mode, it'll just scroll the page down.
-imap <C-d> <C-o>dW
 
 " Quicker window navigation:
 nnoremap <C-j> <C-w>j

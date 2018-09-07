@@ -277,17 +277,18 @@
     ("oicsa" "coisa" nil 1)
     ("ontme" "ontem" nil 0)
     ("pelna" "plena" nil 0)
-    ("pq" "porque" nil 2)
+    ("pq" "porque" nil 4)
     ("probelma" "problema " nil 1)
     ("projeots" "projetos" nil 1)
     ("qdo" "quando" nil 4)
-    ("qeu" "que" nil 20)
+    ("qeu" "que" nil 21)
     ("sla" "sei lá" nil 4)
-    ("tbm" "também" nil 21)
+    ("tbm" "também" nil 24)
     ("tepmo" "tempo" nil 1)
-    ("tÔ" "tô" nil 7)
-    ("uqe" "que" nil 3)
-    ("vc" "você" nil 7)
+    ("tÔ" "tô" nil 8)
+    ("uqe" "que" nil 4)
+    ("vc" "você" nil 10)
+    ("ñ" "não" nil 1)
    ))
 
 (define-abbrev-table 'outline-mode-abbrev-table '())
@@ -359,6 +360,8 @@
 (define-abbrev-table 'url-cookie-mode-abbrev-table '())
 
 (define-abbrev-table 'use-package-statistics-mode-abbrev-table '())
+
+(define-abbrev-table 'vc-dir-mode-abbrev-table '())
 
 (define-abbrev-table 'vc-git-log-edit-mode-abbrev-table '())
 
