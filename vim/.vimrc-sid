@@ -1,0 +1,75 @@
+"This is a .vimrc for working inside a SID cage.
+"Since it's supposed to be minimal, no plugins are used.
+"To add it to your cage, rename this file to vimrc.local (WITHOUT THE DOT IN
+"THE BEGINNING!) and put it in the /etc/vim folder.
+"Final path is /etc/vim/vimrc.local
+
+"ToggledSettings:
+set nocompatible              " be iMproved, required
+filetype off                  " required
+filetype plugin on
+
+"Default colorscheme
+:colorscheme elflord
+
+set laststatus=0 " I don't like the statusline
+set wildmenu " Enable wild menu
+set title " Shows title of the file
+syntax on " Enables syntax by default
+set incsearch " Shows search results as you type them
+
+" JuryRiggings:
+set noswapfile " Swapfiles are annoying!
+set backspace=2 " Returns common backspace function to insert mode
+
+" Default tabstop
+set tabstop=4
+" change number of space chars inserted for indentation
+set shiftwidth=4
+set expandtab
+
+" Fixes newline insertion problem in insert mode
+inoremap <CR> <CR>
+
+" Enable fuzzy finding files through the :find command
+" and provides tab completion for all file-related tasks
+set path+=**
+
+" Make tags for easier navigation inside the file with C-], gC-](that's g plus
+" C-]) and C-t (helps with completion as well)
+command! MakeTags !ctags -R .
+
+" Enable dictionary completion by pointing to the dict file
+set dictionary+=/usr/share/dict/american-english
+set dictionary+=/usr/share/dict/brazilian-portuguese
+
+" Enable omnicompletion:
+set omnifunc=syntaxcomplete#Complete
+
+" Set completion behavior to highlight longest word by default and
+" show the menu even if there's only one match
+set completeopt=menuone,preview,longest
+
+"Quick update files:
+nnoremap <F5> :update<CR>
+
+"automatically remove all trailing spaces
+autocmd BufWritePre * :%s/\s\+$//e
+
+" Quicker window navigation:
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+
+" Quicker window closing. It's OK to use C-c since if you don't bind any
+" shortcuts to it, you'll get a message saying 'please quit vim with :quit'.
+" It's also a bonus quick button if there's only one window in the session.
+nnoremap <C-c> <C-w>q
+
+" TabNavigation:
+" Create new tab
+noremap <leader>t :tabnew<CR>
+
+" Close tab
+noremap <leader>w :tabclose<CR>
