@@ -158,6 +158,20 @@ me, too many buffers to work with... for now.
 #+END_SRC
 * Packages
 ** Major Modes
+*** Elixir-mode
+    Elixir support for Emacs
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package elixir-mode)
+    #+END_SRC
+**** Credo - Syntax checker
+     #+BEGIN_SRC emacs-lisp :tangle yes
+     (use-package flycheck-credo
+      :config
+      (
+        (eval-after-load 'flycheck
+        ('flycheck-credo-setup))
+        (add-hook 'elixir-mode-hook 'flycheck-mode)))
+     #+END_SRC
 *** Sass-mode
     #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package sass-mode
