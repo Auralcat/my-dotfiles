@@ -1,3 +1,4 @@
+
 ;; Set fallback font
 (set-face-attribute 'default nil :font "Ubuntu Mono" :height 120)
 
@@ -126,6 +127,15 @@
 
 ;; This is how you define aliases for Elisp functions
 (defalias 'plp 'package-list-packages)
+
+(use-package elixir-mode)
+
+(use-package flycheck-credo
+ :config
+ (
+   (eval-after-load 'flycheck
+   ('flycheck-credo-setup))
+   (add-hook 'elixir-mode-hook 'flycheck-mode)))
 
 (use-package sass-mode
    ;; Set Sass mode for SASS files and Css mode for SCSS files.
@@ -539,6 +549,9 @@ eshell-prompt-function 'epe-theme-lambda))
 
 ;; Set C-x j to go to current clocked task in org-mode
 (global-set-key (kbd "C-x j") 'org-clock-goto)
+
+;; Elisp mode: use SPC SPC to eval buffer.
+(add-hook 'emacs-lisp-mode-hook (lambda() (evil-leader/set-key "SPC" 'eval-buffer)))
 
 (defun web-mode-keybindings ()
     "Define mode-specific keybindings like this."

@@ -1,4 +1,4 @@
-(define-package "doom-themes" "20180829.2148" "an opinionated pack of modern color-themes"
+(define-package "doom-themes" "20180909.1413" "an opinionated pack of modern color-themes"
   '((emacs "24.4")
     (all-the-icons "1.0.0")
     (cl-lib "0.5"))
