@@ -1,4 +1,3 @@
-
 ;; Set fallback font
 (set-face-attribute 'default nil :font "Ubuntu Mono" :height 120)
 
