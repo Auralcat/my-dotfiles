@@ -95,8 +95,13 @@
 (add-hook 'org-mode-hook 'auto-fill-mode)
 
 ;; Use Weechat from Emacs
-(use-package weechat)
-;; Bind M-p to switch to previous buffer
+(use-package weechat
+ :bind (:map weechat-mode-map
+       ("M-p" . previous-buffer)
+       ("<up>" . weechat-previous-input)
+       ("<down>" . weechat-next-input)
+       ("ð" . delete-other-windows)
+       ("”" . switch-to-buffer)))
 
 ;; Recreate scratch buffer
 (defun create-scratch-buffer ()
