@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: SkeletonCSS Stylesheet
+# key: skelcss
+# --
+<link href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css" rel="stylesheet"/>

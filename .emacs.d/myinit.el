@@ -9,6 +9,9 @@
 ;; A small performance improvement
 (setq redisplay-dont-pause t)
 
+;; I don't like lockfiles
+(setq create-lockfiles nil)
+
 ;; Store all backups in a specific folder:
 (setq backup-directory-alist `(("." . "~/file-bouncer/emacs-backups")))
 

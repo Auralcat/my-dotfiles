@@ -119,9 +119,15 @@ Qui Nov  2 19:57:06 BRST 2017 - Tried using IRC inside Emacs, didn't please
 me, too many buffers to work with... for now.
 #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Use Weechat from Emacs
-(use-package weechat)
-;; Bind M-p to switch to previous buffer
+(use-package weechat
+ :bind (:map weechat-mode-map
+       ("M-p" . previous-buffer)
+       ("<up>" . weechat-previous-input)
+       ("<down>" . weechat-next-input)
+       ("ð" . delete-other-windows)
+       ("”" . switch-to-buffer)))
 #+END_SRC
+
 * Custom functions
 #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Recreate scratch buffer
