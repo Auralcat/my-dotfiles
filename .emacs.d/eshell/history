@@ -1,5 +1,3 @@
-exit
-cd
 cd wp-projeto-novo/
 ls
 cp ~/Downloads/avoqueri_site.sql .
@@ -126,3 +124,5 @@ ls
 exit
 git init
 ls
+npm run serve
+exit

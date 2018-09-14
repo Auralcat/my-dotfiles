@@ -14,3 +14,4 @@ company-statistics-cache.el
 */places
 projectile-bookmarks.eld
 .session.*
+.emacs.d/eshell
