@@ -450,6 +450,7 @@ me, too many buffers to work with... for now.
     (setq keyfreq-excluded-commands
     '(self-insert-command
     org-self-insert-command
+    weechat-self-insert-command
     abort-recursive-edit
     company-ignore
     forward-char
