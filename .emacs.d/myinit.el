@@ -333,6 +333,7 @@
 (setq keyfreq-excluded-commands
 '(self-insert-command
 org-self-insert-command
+weechat-self-insert-command
 abort-recursive-edit
 company-ignore
 forward-char

@@ -1,9 +1,3 @@
-cd wp-projeto-novo/
-ls
-cp ~/Downloads/avoqueri_site.sql .
-ls
-vagrant scp acasaqueminhavoqueria:/
-vagrant scp acasaqueminhavoqueria:~/.
 vagrant scp acasaqueminhavoqueria
 vagrant scp acasaqueminhavoqueria:/backups/
 vagrant scp acasaqueminhavoqueria:/home/vagrant/backups
@@ -126,3 +120,9 @@ git init
 ls
 npm run serve
 exit
+cd ..
+rails server
+rails generate scaffold User name:string email:string
+rails server
+rails db:migrate
+rails server
