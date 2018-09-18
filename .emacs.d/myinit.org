@@ -389,8 +389,12 @@ me, too many buffers to work with... for now.
        (emmet-mode 1)
        (company-mode t))
 
+       ;; Completion for Ruby mode
+       (defun ruby-mode-tweaks ()
+       (require 'company-robe)
+       (set (make-local-variable 'company-backends) '(company-robe company-yasnippet)))
        ;; Add tweaks
-       (add-hook 'web-mode-hook 'web-mode-tweaks)
+       (add-hook 'enh-ruby-mode-hook 'ruby-mode-tweaks)
 
        ;; Autocompletion for Bootstrap/FontAwesome classes
        (use-package ac-html-bootstrap)
