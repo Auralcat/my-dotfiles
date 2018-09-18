@@ -256,7 +256,11 @@
 
 (define-abbrev-table 'org-mode-abbrev-table
   '(
-    ("WP" "WordPress" nil 15)
+    ("Dom" "Domingo" "WP" 0)
+    ("Qua" "Quarta-feira" "Qui" 0)
+    ("Seg" "Segunda-feira" "Ter" 1)
+    ("Sex" "Sexta-feira" "Sáb" 0)
+    ("acotneceram" "aconteceram" nil 0)
     ("avi" "vai" nil 2)
     ("conversda" "conversa" nil 1)
     ("cosia" "coisa" nil 0)
@@ -284,20 +288,20 @@
     ("ocmo" "como" nil 2)
     ("oicsa" "coisa" nil 1)
     ("ontme" "ontem" nil 0)
-    ("outra" "Outra" nil 2)
     ("pelna" "plena" nil 0)
-    ("poruqe" "porque" nil 0)
+    ("poruqe" "porque" nil 1)
     ("pq" "porque" nil 5)
     ("probelma" "problema " nil 1)
     ("projeots" "projetos" nil 1)
     ("qdo" "quando" nil 4)
-    ("qeu" "que" nil 22)
+    ("qeu" "que" nil 23)
     ("sla" "sei lá" nil 4)
-    ("tbm" "também" nil 26)
+    ("tbm" "também" nil 30)
     ("tepmo" "tempo" nil 1)
-    ("tÔ" "tô" nil 8)
+    ("tÔ" "tô" nil 9)
+    ("uotra" "outra" nil 4)
     ("uqe" "que" nil 5)
-    ("vc" "você" nil 10)
+    ("vc" "você" nil 12)
     ("ñ" "não" nil 1)
    ))
 
@@ -380,6 +384,8 @@
 (define-abbrev-table 'vc-git-log-view-mode-abbrev-table '())
 
 (define-abbrev-table 'vc-git-region-history-mode-abbrev-table '())
+
+(define-abbrev-table 'vc-hg-log-view-mode-abbrev-table '())
 
 (define-abbrev-table 'vue-html-mode-abbrev-table '())
 

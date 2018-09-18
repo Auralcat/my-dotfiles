@@ -1,82 +1,3 @@
-vagrant scp acasaqueminhavoqueria
-vagrant scp acasaqueminhavoqueria:/backups/
-vagrant scp acasaqueminhavoqueria:/home/vagrant/backups
-vagrant scp acasaqueminhavoqueria.test:/home/vagrant/backups
-vagrant scp acasaqueminhavoqueria.test:/home/vagrant/backups/
-vagrant scp ./avoqueri_site.sql acasaqueminhavoqueria.test:/home/vagrant/backups/
-ls
-exit
-screenfetch
-update
-sudo apt-get update
-sudo apt-get upgrade -y
-sudo apt-get autoremove
-live-server
-cd ..
-cd ..
-live-server
-exit
-vagrant init vccw-test
-ls
-curl cht.sh
-curl cht.sh/ruby
-curl cht.sh/smalltalk
-curl cht.sh/list
-curl cht.sh/elisp
-curl cht.sh/elisp/
-curl cht.sh/lisp
-curl cht.sh/emacs-lisp
-curl cht.sh/emacs
-curl cht.sh/vim
-exit
-exit
-ls
-curl cht.sh
-screenfetch
-echo TERM
-echo $TERM
-export TERM=xterm-256color
-screenfetch
-exit
-echo $TERM
-exit
-echo $TERM
-curl -L git.io/unix
-ls
-ls
-screenfetch
-curl cht.sh
-curl cht.sh:/go/zip+lists
-gpg --list-keys
-seq 1 20
-seq 10 29
-factor 5432
-(print "Hey!")
-(mes)
-(message "Leave a msg")
-iex
-pry
-irb
-man ruby
-cd /tmp
-echo "loop { p eval gets }" > repl.rb
-ruby repl.rb
-cd
-curl parrot.live
-cd ..
-cd ..
-npm run test:unit
-npm run test:unit
-npm run test:unit
-npm run test:unit
-npm run test:unit
-npm run test:unit
-npm run test:unit
-npm run test:unit
-npm run test:unit
-npm run test:unit
-npm run test:unit
-npm run test:unit
 npm run test:unit
 npm run test:unit
 npm run test:unit
@@ -126,3 +47,82 @@ rails generate scaffold User name:string email:string
 rails server
 rails db:migrate
 rails server
+rails console
+rails test
+rails g controller Foo bar baz
+rails g destroy Foo bar baz
+rails destroy controller Foo bar baz
+rails test
+rails test
+rails test
+rails test
+rails test
+rails test
+rails test
+rails test
+rails test
+rails test
+rails test
+rails test
+rails test
+rails test
+rails test
+rails test
+rails test
+rails test
+rails test
+rails test
+rails test
+rails test
+This should be Emacs mode.
+(major-mode)
+(print major-mode)
+rails test
+rails test
+rails test
+rails test
+cd ..
+cd ..
+cd ..
+bundle install
+which ruby
+bundle install
+rails test
+bundle exec guard init
+bundle install
+bundle install
+bundle exec guard init
+ps aux | grep spring
+bundle exec guard
+irb
+bundle exec guard
+sudo bundle install
+sudo bundler install
+bundle install
+bundle exec guard
+bundle install
+sudo gem install pg -v '1.1.3'
+bundle exec guard
+which ruby
+bundle install --without production
+rails test
+rails test --without production
+rails test --without production
+rails test
+rails test
+rails c
+Hash.superclass.sup
+rails test
+ls
+cd public/
+ls
+cd ..
+ls app
+cd app/assets/
+ls
+cd images/
+ls
+wget http://railstutorial.org/rails.png
+wget https://softcover.s3.amazonaws.com/636/ruby_on_rails_tutorial_4th_edition/images/figures/kitten.jpg
+bundle install
+bundle install

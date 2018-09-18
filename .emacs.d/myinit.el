@@ -401,15 +401,8 @@ next-line))
 :ensure t
 :requires (eshell)
 :config
-(;; Add filter function to pre-output
- (add-to-list 'eshell-preoutput-filter-functions 'xterm-color-filter)
- (setq eshell-output-filter-functions (remove 'eshell-handle-ansi-color eshell-output-filter-functions))
  ;; Set eshell $TERM envvar to xterm-256color
- (setenv "TERM" "xterm-256color")))
-
-  (add-hook 'eshell-before-prompt-hook
-(lambda ()
-  (setq xterm-color-preserve-properties t)))
+ (setenv "TERM" "xterm-256color"))
 
 (use-package cheat-sh :ensure t)
 
