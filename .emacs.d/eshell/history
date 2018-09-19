@@ -4,13 +4,6 @@ npm run test:unit
 npm run test:unit
 npm run test:unit
 npm run test:unit
-npm run test:unit
-npm run test:unit
-npm run test:unit
-npm run test:unit
-npm run test:unit
-npm run test:unit
-npm run test:unit
 cd ..
 cd ..
 npm run test:unit
@@ -126,3 +119,10 @@ wget http://railstutorial.org/rails.png
 wget https://softcover.s3.amazonaws.com/636/ruby_on_rails_tutorial_4th_edition/images/figures/kitten.jpg
 bundle install
 bundle install
+bundle exec guard
+guard init
+bundle exec guard
+cd ..
+cd microblogging_site/
+bundle exec guard
+exit
