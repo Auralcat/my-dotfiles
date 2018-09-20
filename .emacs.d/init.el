@@ -300,9 +300,15 @@
  '(org-bullets-bullet-list (quote ("✿" "❀" "◉" "○" "✸")))
     '(org-capture-templates
          (quote
-             (("e" "Add new Emacs task" entry
-                  (file+headline "~/file-bouncer/org-files/projetos/configuracoes-emacs.org" "Tarefas")
-                  "** TODO %^{Tarefa}" :prepend t :immediate-finish t :time-prompt t)
+             (("o" "Add item to outbox" entry
+                  (file "~/file-bouncer/outbox.org")
+                  "* %?" :prepend t)
+                 ("b" "New bookmark" entry
+                     (file+headline "~/file-bouncer/media-list.org" "Links")
+                     "** %?" :prepend t)
+                 ("e" "Add new Emacs task" entry
+                     (file+headline "~/file-bouncer/org-files/projetos/configuracoes-emacs.org" "Tarefas")
+                     "** TODO %^{Tarefa}" :prepend t :immediate-finish t :time-prompt t)
                  ("p" "Add podcast to list" entry
                      (file+headline "~/file-bouncer/media-list.org" "Podcasts")
                      "** %^{Nome do podcast}" :immediate-finish t)
@@ -506,4 +512,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((((class color) (min-colors 257)) (:background "#2b2a27" :foreground "#ede0ce")) (((class color) (min-colors 256)) (:background nil :foreground "#bfbfbf")) (((class color) (min-colors 16)) (:background nil :foreground "brightwhite"))))
+ '(org-todo ((((class color) (min-colors 257)) (:foreground "#ff5d38" :bold inherit)) (((class color) (min-colors 256)) (:foreground "#ff6655" :bold inherit)) (((class color) (min-colors 16)) (:foreground "red" :bold inherit))))
+ '(region ((((class color) (min-colors 257)) (:background "#484745" :foreground nil :distant-foreground "#bdb3a4")) (((class color) (min-colors 256)) (:background "black" :foreground nil :distant-foreground "#989898")) (((class color) (min-colors 16)) (:background "black" :foreground nil :distant-foreground "brightwhite")))))
