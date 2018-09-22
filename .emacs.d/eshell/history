@@ -2,19 +2,6 @@ npm run test:unit
 npm run test:unit
 npm run test:unit
 npm run test:unit
-npm run test:unit
-npm run test:unit
-cd ..
-cd ..
-npm run test:unit
-npm run test:unit
-npm run test:unit
-npm run test:unit
-npm run test:unit
-npm run test:unit
-npm run test:unit
-npm run test:unit
-npm run test:unit
 cd ..
 cd ..
 npm run test:unit
@@ -126,3 +113,16 @@ cd ..
 cd microblogging_site/
 bundle exec guard
 exit
+which ruby
+rvm use 2.4.1
+which rvm
+gem install minitest
+sudo gem install minitest
+ruby bank_system_sketch.rb
+ruby bank_system_sketch.rb
+ruby bank_system_sketch.rb
+ruby bank_system_sketch.rb
+ruby bank_system_sketch.rb
+ruby bank_system_sketch.rb
+ruby bank_system_sketch.rb
+ruby bank_system_sketch.rb

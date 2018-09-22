@@ -507,11 +507,3 @@
              ("~/.emacs.d/snippets" yasnippet-snippets-dir yasnippet-classic-snippets-dir))))
 (put 'narrow-to-region 'disabled nil)
 (put 'downcase-region 'disabled nil)
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(default ((((class color) (min-colors 257)) (:background "#2b2a27" :foreground "#ede0ce")) (((class color) (min-colors 256)) (:background nil :foreground "#bfbfbf")) (((class color) (min-colors 16)) (:background nil :foreground "brightwhite"))))
- '(org-todo ((((class color) (min-colors 257)) (:foreground "#ff5d38" :bold inherit)) (((class color) (min-colors 256)) (:foreground "#ff6655" :bold inherit)) (((class color) (min-colors 16)) (:foreground "red" :bold inherit))))
- '(region ((((class color) (min-colors 257)) (:background "#484745" :foreground nil :distant-foreground "#bdb3a4")) (((class color) (min-colors 256)) (:background "black" :foreground nil :distant-foreground "#989898")) (((class color) (min-colors 16)) (:background "black" :foreground nil :distant-foreground "brightwhite")))))
