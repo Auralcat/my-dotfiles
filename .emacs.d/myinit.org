@@ -664,12 +664,17 @@ me, too many buffers to work with... for now.
     Ruby's autocomplete, navigation and project tools, especially for
     Rails.
     #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package robe)
-    (add-hook 'enh-ruby-mode-hook 'robe-mode)
+      (use-package robe)
+      (add-hook 'enh-ruby-mode-hook 'robe-mode)
 
-    ;; Integrate with Company
-    (eval-after-load 'company '(push 'company-robe company-backends))
+      ;; Integrate with Company
+      (defun ruby-completion-tweaks ()
+        ;; Robe-mode must be active for this to work.
+      (set (make-local-variable 'company-backends) '(company-robe company-yasnippet company-etags company-capf))
+      (company-mode t))
+      (add-hook 'enh-ruby-mode-hook 'ruby-completion-tweaks)
     #+END_SRC
+
 *** RVM
     Ruby Version Manager. Akin to python's virtualenv.
     #+BEGIN_SRC emacs-lisp :tangle yes
