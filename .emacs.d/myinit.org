@@ -324,11 +324,19 @@ me, too many buffers to work with... for now.
 *** Flycheck
     Syntax checker, replaces flymake
     #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package flycheck
-       :config
-       ;; turn on flychecking globally
-       (add-hook 'after-init-hook #'global-flycheck-mode))
+      (use-package flycheck
+         :config
+         ;; turn on flychecking globally
+         (add-hook 'after-init-hook #'global-flycheck-mode))
+      ;; Disable rubylint on default for Ruby modes.
+      ;; If you need it, you can enable it locally using C-u C-c ! v.
+      (defun custom-disabled-ruby-checkers ()
+       (add-to-list 'flycheck-disabled-checkers 'ruby-rubylint))
+       (add-hook 'enh-ruby-mode-hook 'custom-disabled-ruby-checkers)
     #+END_SRC
+
+    #+RESULTS:
+
 *** Ruby Tools
     Goodies for Ruby programming modes.
     #+BEGIN_SRC emacs-lisp :tangle yes
