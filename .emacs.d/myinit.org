@@ -844,9 +844,6 @@ me, too many buffers to work with... for now.
   ;; Bind org-capture to C-c c
   (global-set-key (kbd "\C-c c") (quote org-capture))
 
-  ;; Bind org-pomodoro to C-x p
-  (global-set-key (kbd "\C-x p") (quote org-pomodoro))
-
   ;; Open subheading with C-c RET and invert with M-RET
   (local-set-key [27 13] (quote org-ctrl-c-ret))
   (local-set-key [3 13] (quote org-insert-subheading))
@@ -904,6 +901,28 @@ me, too many buffers to work with... for now.
     (dot . t)
      ))
    #+END_SRC
+
+** Org-pomodoro
+   #+BEGIN_SRC emacs-lisp :tangle yes
+     (use-package org-pomodoro
+       :bind ("C-x p" . org-pomodoro))
+
+     ;; Display notification when a pomodoro is completed
+     (defun pomodoro-started-notification (title body)
+       (notifications-notify :title title
+                             :body body
+                             :app-icon "~/my-dotfiles/.emacs.d/org-pomodoro/tomato.png"))
+
+     (defun pomodoro-finished-notification (title body)
+       (notifications-notify :title title
+                             :body body
+                             :app-icon "~/my-dotfiles/.emacs.d/org-pomodoro/tomato.png"))
+
+     (add-hook 'org-pomodoro-finished-hook (lambda() (pomodoro-finished-notification "Pomodoro finished" "Time to take a break!")))
+     (add-hook 'org-pomodoro-started-hook (lambda() (pomodoro-started-notification "Pomodoro started!" "Testing stuff out.")))
+   #+END_SRC
+
+   #+RESULTS:
 
 * Variables
 #+BEGIN_SRC emacs-lisp :tangle yes
