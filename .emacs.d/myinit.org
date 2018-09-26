@@ -176,11 +176,11 @@ me, too many buffers to work with... for now.
      #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package flycheck-credo
       :config
-      (
-        (eval-after-load 'flycheck
-        ('flycheck-credo-setup))
+      ((eval-after-load 'flycheck
+        '(flycheck-credo-setup))
         (add-hook 'elixir-mode-hook 'flycheck-mode)))
      #+END_SRC
+
 *** Sass-mode
     #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package sass-mode
