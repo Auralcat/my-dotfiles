@@ -565,12 +565,13 @@ me, too many buffers to work with... for now.
     mode to 'snipe' for the char you want, as well as upgrading the
     standard line char search (f and t)
     #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package evil-snipe
-     :init
-     (evil-snipe-mode +1)
-     (evil-snipe-override-mode +1)
-     ;; Currently this has a conflict with Magit
-     (add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode))
+      (use-package evil-snipe
+       :init
+       ;; I just want override-mode, I use S for substituting an entire line
+       ;; (evil-snipe-mode +1)
+       (evil-snipe-override-mode +1)
+       ;; Currently this has a conflict with Magit
+       (add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode))
     #+END_SRC
 
 
