@@ -560,6 +560,20 @@ me, too many buffers to work with... for now.
     :init
     (global-evil-matchit-mode 1))
     #+END_SRC
+*** Evil-Snipe
+    Highlights line search and allows you to use the s key in normal
+    mode to 'snipe' for the char you want, as well as upgrading the
+    standard line char search (f and t)
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package evil-snipe
+     :init
+     (evil-snipe-mode +1)
+     (evil-snipe-override-mode +1)
+     ;; Currently this has a conflict with Magit
+     (add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode))
+    #+END_SRC
+
+
 *** XTerm Color
     Better shell colorization.
     #+BEGIN_SRC emacs-lisp :tangle yes
