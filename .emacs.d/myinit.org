@@ -570,6 +570,8 @@ me, too many buffers to work with... for now.
        ;; I just want override-mode, I use S for substituting an entire line
        ;; (evil-snipe-mode +1)
        (evil-snipe-override-mode +1)
+       ;; Make search case insensitive
+       (setq evil-snipe-smart-case t)
        ;; Currently this has a conflict with Magit
        (add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode))
     #+END_SRC
