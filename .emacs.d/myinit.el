@@ -139,9 +139,8 @@
 
 (use-package flycheck-credo
  :config
- (
-   (eval-after-load 'flycheck
-   ('flycheck-credo-setup))
+ ((eval-after-load 'flycheck
+   '(flycheck-credo-setup))
    (add-hook 'elixir-mode-hook 'flycheck-mode)))
 
 (use-package sass-mode
@@ -243,6 +242,11 @@
    :config
    ;; turn on flychecking globally
    (add-hook 'after-init-hook #'global-flycheck-mode))
+;; Disable rubylint on default for Ruby modes.
+;; If you need it, you can enable it locally using C-u C-c ! v.
+(defun custom-disabled-ruby-checkers ()
+ (add-to-list 'flycheck-disabled-checkers 'ruby-rubylint))
+ (add-hook 'enh-ruby-mode-hook 'custom-disabled-ruby-checkers)
 
 (use-package ruby-tools)
 
@@ -401,6 +405,16 @@ next-line))
 :init
 (global-evil-matchit-mode 1))
 
+(use-package evil-snipe
+ :init
+ ;; I just want override-mode, I use S for substituting an entire line
+ ;; (evil-snipe-mode +1)
+ (evil-snipe-override-mode +1)
+ ;; Make search case insensitive
+ (setq evil-snipe-smart-case t)
+ ;; Currently this has a conflict with Magit
+ (add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode))
+
 (use-package xterm-color
 :ensure t
 :requires (eshell)
@@ -457,7 +471,11 @@ eshell-prompt-function 'epe-theme-lambda))
 (add-hook 'enh-ruby-mode-hook 'robe-mode)
 
 ;; Integrate with Company
-(eval-after-load 'company '(push 'company-robe company-backends))
+(defun ruby-completion-tweaks ()
+  ;; Robe-mode must be active for this to work.
+(set (make-local-variable 'company-backends) '(company-robe company-yasnippet company-etags company-capf))
+(company-mode t))
+(add-hook 'enh-ruby-mode-hook 'ruby-completion-tweaks)
 
 (use-package rvm)
 
@@ -582,9 +600,6 @@ eshell-prompt-function 'epe-theme-lambda))
 ;; Bind org-capture to C-c c
 (global-set-key (kbd "\C-c c") (quote org-capture))
 
-;; Bind org-pomodoro to C-x p
-(global-set-key (kbd "\C-x p") (quote org-pomodoro))
-
 ;; Open subheading with C-c RET and invert with M-RET
 (local-set-key [27 13] (quote org-ctrl-c-ret))
 (local-set-key [3 13] (quote org-insert-subheading))
@@ -625,6 +640,23 @@ eshell-prompt-function 'epe-theme-lambda))
 (plantuml . t)
 (dot . t)
  ))
+
+(use-package org-pomodoro
+  :bind ("C-x p" . org-pomodoro))
+
+;; Display notification when a pomodoro is completed
+(defun pomodoro-started-notification (title body)
+  (notifications-notify :title title
+                        :body body
+                        :app-icon "~/my-dotfiles/.emacs.d/org-pomodoro/tomato.png"))
+
+(defun pomodoro-finished-notification (title body)
+  (notifications-notify :title title
+                        :body body
+                        :app-icon "~/my-dotfiles/.emacs.d/org-pomodoro/tomato.png"))
+
+(add-hook 'org-pomodoro-finished-hook (lambda() (pomodoro-finished-notification "Pomodoro finished" "Time to take a break!")))
+(add-hook 'org-pomodoro-started-hook (lambda() (pomodoro-started-notification "Pomodoro started!" "Testing stuff out.")))
 
 ;; Set Org mode as default mode for new buffers:
 (setq-default major-mode 'org-mode)

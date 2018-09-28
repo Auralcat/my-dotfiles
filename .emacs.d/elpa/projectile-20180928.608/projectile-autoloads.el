@@ -208,7 +208,7 @@ With a prefix arg INVALIDATE-CACHE invalidates the cache first.
 \(fn &optional INVALIDATE-CACHE)" t nil)
 
 (autoload 'projectile-toggle-project-read-only "projectile" "\
-Toggle project read only
+Toggle project read only.
 
 \(fn)" t nil)
 

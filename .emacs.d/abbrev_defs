@@ -256,10 +256,14 @@
 
 (define-abbrev-table 'org-mode-abbrev-table
   '(
-    ("Dom" "Domingo" "WP" 0)
-    ("Qua" "Quarta-feira" "Qui" 0)
-    ("Seg" "Segunda-feira" "Ter" 1)
-    ("Sex" "Sexta-feira" "Sáb" 0)
+    ("Dom" "Domingo" nil 0)
+    ("Qua" "Quarta-feira" nil 0)
+    ("Qui" "Quinta-feira" nil 0)
+    ("Seg" "Segunda-feira" nil 1)
+    ("Sex" "Sexta-feira" nil 0)
+    ("Sáb" "Sábado" nil 0)
+    ("Ter" "Terça-feira" nil 0)
+    ("WP" "WordPress" nil 0)
     ("acotneceram" "aconteceram" nil 0)
     ("avi" "vai" nil 2)
     ("conversda" "conversa" nil 1)
@@ -290,6 +294,7 @@
     ("ontme" "ontem" nil 0)
     ("pelna" "plena" nil 0)
     ("poruqe" "porque" nil 1)
+    ("pouoc" "pouco" nil 0)
     ("pq" "porque" nil 5)
     ("probelma" "problema " nil 1)
     ("projeots" "projetos" nil 1)

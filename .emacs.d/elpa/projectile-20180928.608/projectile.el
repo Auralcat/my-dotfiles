@@ -4,7 +4,7 @@
 
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/projectile
-;; Package-Version: 20180924.1722
+;; Package-Version: 20180928.608
 ;; Keywords: project, convenience
 ;; Version: 1.1.0-snapshot
 ;; Package-Requires: ((emacs "25.1") (pkg-info "0.4"))
@@ -76,7 +76,7 @@
   :group 'tools
   :group 'convenience
   :link '(url-link :tag "GitHub" "https://github.com/bbatsov/projectile")
-  :link '(url-link :tag "Online Manual" "https://projectile.readthedocs.io/")
+  :link '(url-link :tag "Online Manual" "https://docs.projectile.mx/")
   :link '(emacs-commentary-link :tag "Commentary" "projectile"))
 
 (defcustom projectile-indexing-method (if (eq system-type 'windows-nt) 'native 'alien)
@@ -1205,13 +1205,13 @@ fallback to `shell-command-to-string'."
           (apply 'projectile-call-process-to-string binary-path args)
         (shell-command-to-string command)))))
 
-(defun projectile-check-vcs-status (&optional PROJECT-PATH)
+(defun projectile-check-vcs-status (&optional project-path)
   "Check the status of the current project.
 If PROJECT-PATH is a project, check this one instead."
-  (let* ((PROJECT-PATH (or PROJECT-PATH (projectile-project-root)))
-         (project-status nil))
+  (let ((project-path (or project-path (projectile-project-root)))
+        (project-status nil))
     (save-excursion
-      (vc-dir PROJECT-PATH)
+      (vc-dir project-path)
       ;; wait until vc-dir is done
       (while (vc-dir-busy) (sleep-for 0 100))
       ;; check for status
@@ -2096,17 +2096,17 @@ With a prefix arg INVALIDATE-CACHE invalidates the cache first."
 
 ;;;###autoload
 (defun projectile-toggle-project-read-only ()
-  "Toggle project read only"
+  "Toggle project read only."
   (interactive)
   (let ((inhibit-read-only t)
         (val (not buffer-read-only))
-        (default-directory (projectile-project-root)))
+        (default-directory (projectile-ensure-project (projectile-project-root))))
     (add-dir-local-variable nil 'buffer-read-only val)
     (save-buffer)
     (kill-buffer)
     (when buffer-file-name
       (read-only-mode (if val +1 -1))
-      (message "Projectile: project read-only-mode is %s" (if val "on" "off")))))
+      (message "[%s] read-only-mode is %s" (projectile-project-name) (if val "on" "off")))))
 
 
 ;;;; Sorting project files
@@ -3062,16 +3062,16 @@ files in the project."
 With a prefix argument ARG prompts you for a directory on which
 to run the replacement."
   (interactive "P")
-  (let* ((old-text (read-string
+  (let* ((directory (if arg
+                        (file-name-as-directory
+                         (read-directory-name "Replace in directory: "))
+                      (projectile-ensure-project (projectile-project-root))))
+         (old-text (read-string
                     (projectile-prepend-project-name "Replace: ")
                     (projectile-symbol-or-selection-at-point)))
          (new-text (read-string
                     (projectile-prepend-project-name
                      (format "Replace %s with: " old-text))))
-         (directory (if arg
-                        (file-name-as-directory
-                         (read-directory-name "Replace in directory: "))
-                      (projectile-project-root)))
          (files (projectile-files-with-string old-text directory)))
     ;; Adapted from `tags-query-replace' for literal strings (not regexp)
     (setq tags-loop-scan `(let ,(unless (equal old-text (downcase old-text))
@@ -3092,17 +3092,16 @@ to run the replacement."
 With a prefix argument ARG prompts you for a directory on which
 to run the replacement."
   (interactive "P")
-  (let* ((old-text (read-string
+  (let* ((directory (if arg
+                        (file-name-as-directory
+                         (read-directory-name "Replace regexp in directory: "))
+                      (projectile-ensure-project (projectileproject-root))))
+         (old-text (read-string
                     (projectile-prepend-project-name "Replace regexp: ")
                     (projectile-symbol-or-selection-at-point)))
          (new-text (read-string
                     (projectile-prepend-project-name
                      (format "Replace regexp %s with: " old-text))))
-         (project-root (projectile-project-root))
-         (directory (if arg
-                        (file-name-as-directory
-                         (read-directory-name "Replace regexp in directory: "))
-                      project-root))
          (files
           ;; We have to reject directories as a workaround to work with git submodules.
           ;;
@@ -3111,7 +3110,7 @@ to run the replacement."
           ;; don't support Emacs regular expressions.
           (cl-remove-if
            #'file-directory-p
-           (mapcar #'projectile-expand-root (projectile-dir-files project-root directory)))))
+           (mapcar #'projectile-expand-root (projectile-dir-files directory directory)))))
     (tags-query-replace old-text new-text nil (cons 'list files))))
 
 (defun projectile-symbol-or-selection-at-point ()
@@ -4009,6 +4008,50 @@ is chosen."
     (define-key map (kbd "x s") #'projectile-run-shell)
     (define-key map (kbd "z") #'projectile-cache-current-file)
     (define-key map (kbd "ESC") #'projectile-project-buffers-other-buffer)
+    (easy-menu-define projectile-mode-menu map
+      "Menu for Projectile"
+      '("Projectile"
+        ["Find file" projectile-find-file]
+        ["Find file in known projects" projectile-find-file-in-known-projects]
+        ["Find test file" projectile-find-test-file]
+        ["Find directory" projectile-find-dir]
+        ["Find file in directory" projectile-find-file-in-directory]
+        ["Find other file" projectile-find-other-file]
+        ["Switch to buffer" projectile-switch-to-buffer]
+        ["Jump between implementation file and test file" projectile-toggle-between-implementation-and-test]
+        ["Kill project buffers" projectile-kill-buffers]
+        ["Recent files" projectile-recentf]
+        "--"
+        ["Toggle project wide read-only" projectile-toggle-project-read-only]
+        ["Edit .dir-locals.el" projectile-edit-dir-locals]
+        "--"
+        ["Switch to project" projectile-switch-project]
+        ["Switch to open project" projectile-switch-open-project]
+        ["Discover projects in directory" projectile-discover-projects-in-directory]
+        ["Browse dirty projects" projectile-browse-dirty-projects]
+        ["Open project in dired" projectile-dired]
+        "--"
+        ["Search in project (grep)" projectile-grep]
+        ["Search in project (ag)" projectile-ag]
+        ["Replace in project" projectile-replace]
+        ["Multi-occur in project" projectile-multi-occur]
+        "--"
+        ["Run shell" projectile-run-shell]
+        ["Run eshell" projectile-run-eshell]
+        ["Run ielm" projectile-run-ielm]
+        ["Run term" projectile-run-term]
+        "--"
+        ["Cache current file" projectile-cache-current-file]
+        ["Invalidate cache" projectile-invalidate-cache]
+        ["Regenerate [e|g]tags" projectile-regenerate-tags]
+        "--"
+        ["Configure project" projectile-configure-project]
+        ["Compile project" projectile-compile-project]
+        ["Test project" projectile-test-project]
+        ["Run project" projectile-run-project]
+        "--"
+        ["Project info" projectile-project-info]
+        ["About" projectile-version]))
     map)
   "Keymap for Projectile commands after `projectile-keymap-prefix'.")
 (fset 'projectile-command-map projectile-command-map)
@@ -4019,51 +4062,6 @@ is chosen."
       (define-key map projectile-keymap-prefix 'projectile-command-map))
     map)
   "Keymap for Projectile mode.")
-
-(easy-menu-change
- '("Tools") "Projectile"
- '(["Find file" projectile-find-file]
-   ["Find file in known projects" projectile-find-file-in-known-projects]
-   ["Find test file" projectile-find-test-file]
-   ["Find directory" projectile-find-dir]
-   ["Find file in directory" projectile-find-file-in-directory]
-   ["Find other file" projectile-find-other-file]
-   ["Switch to buffer" projectile-switch-to-buffer]
-   ["Jump between implementation file and test file" projectile-toggle-between-implementation-and-test]
-   ["Kill project buffers" projectile-kill-buffers]
-   ["Recent files" projectile-recentf]
-   ["Edit .dir-locals.el" projectile-edit-dir-locals]
-   "--"
-   ["Open project in dired" projectile-dired]
-   ["Switch to project" projectile-switch-project]
-   ["Switch to open project" projectile-switch-open-project]
-   ["Discover projects in directory" projectile-discover-projects-in-directory]
-   ["Search in project (grep)" projectile-grep]
-   ["Search in project (ag)" projectile-ag]
-   ["Replace in project" projectile-replace]
-   ["Multi-occur in project" projectile-multi-occur]
-   ["Browse dirty projects" projectile-browse-dirty-projects]
-   ["Toggle project wide read-only" projectile-toggle-project-read-only]
-   "--"
-   ["Run shell" projectile-run-shell]
-   ["Run eshell" projectile-run-eshell]
-   ["Run ielm" projectile-run-ielm]
-   ["Run term" projectile-run-term]
-   "--"
-   ["Cache current file" projectile-cache-current-file]
-   ["Invalidate cache" projectile-invalidate-cache]
-   ["Regenerate [e|g]tags" projectile-regenerate-tags]
-   "--"
-   ["Configure project" projectile-configure-project]
-   ["Compile project" projectile-compile-project]
-   ["Test project" projectile-test-project]
-   ["Run project" projectile-run-project]
-   "--"
-   ["Project info" projectile-project-info]
-   ["About" projectile-version])
- "Search Files (Grep)...")
-
-(easy-menu-change '("Tools") "--" nil "Search Files (Grep)...")
 
 (defun projectile-find-file-hook-function ()
   "Called by `find-file-hook' when `projectile-mode' is on.
