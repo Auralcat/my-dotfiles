@@ -4,7 +4,7 @@
 
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/projectile
-;; Package-Version: 20180928.1418
+;; Package-Version: 20180929.1004
 ;; Keywords: project, convenience
 ;; Version: 1.1.0-snapshot
 ;; Package-Requires: ((emacs "25.1") (pkg-info "0.4"))
@@ -1061,7 +1061,7 @@ Files are returned as relative paths to the project ROOT."
         (if (eq projectile-indexing-method 'native)
             (projectile-dir-files-native root directory)
           ;; use external tools to get the project files
-          (projectile-adjust-files (projectile-dir-files-external root directory))))))
+          (projectile-adjust-files (projectile-dir-files-external directory))))))
 
 (defun projectile-dir-files-native (root directory)
   "Get the files for ROOT under DIRECTORY using just Emacs Lisp."
@@ -1074,12 +1074,10 @@ Files are returned as relative paths to the project ROOT."
             (projectile-index-directory directory (projectile-filtering-patterns)
                                         progress-reporter))))
 
-(defun projectile-dir-files-external (root directory)
-  "Get the files for ROOT under DIRECTORY using external tools."
+(defun projectile-dir-files-external (directory)
+  "Get the files for DIRECTORY using external tools."
   (let ((default-directory directory))
-    (mapcar (lambda (file)
-              (file-relative-name (expand-file-name file directory) root))
-            (projectile-get-repo-files))))
+    (projectile-get-repo-files)))
 
 (defun projectile-get-ext-command ()
   "Determine which external command to invoke based on the project's VCS."
@@ -1158,10 +1156,10 @@ they are excluded from the results of this function."
 (defun projectile-get-sub-projects-files ()
   "Get files from sub-projects recursively."
   (projectile-flatten
-   (mapcar (lambda (s)
-             (let ((default-directory s))
-               (mapcar (lambda (f)
-                         (concat s f))
+   (mapcar (lambda (sub-project)
+             (let ((default-directory sub-project))
+               (mapcar (lambda (file)
+                         (concat sub-project file))
                        (projectile-files-via-ext-command projectile-git-command))))
            (projectile-get-all-sub-projects (projectile-project-root)))))
 
@@ -2270,10 +2268,7 @@ TEST-DIR which specifies the path to the tests relative to the project root."
 
 (defun projectile-go-project-p ()
   "Check if a project contains Go source files."
-  (cl-some
-   (lambda (file)
-     (string= (file-name-extension file) "go"))
-   (projectile-current-project-files)))
+  (projectile-verify-file-wildcard "*.go"))
 
 (defcustom projectile-go-project-test-function #'projectile-go-project-p
   "Function to determine if project's type is go."
@@ -4013,6 +4008,14 @@ thing shown in the mode line otherwise."
     (define-key map (kbd "x s") #'projectile-run-shell)
     (define-key map (kbd "z") #'projectile-cache-current-file)
     (define-key map (kbd "ESC") #'projectile-project-buffers-other-buffer)
+    map)
+  "Keymap for Projectile commands after `projectile-keymap-prefix'.")
+(fset 'projectile-command-map projectile-command-map)
+
+(defvar projectile-mode-map
+  (let ((map (make-sparse-keymap)))
+    (when projectile-keymap-prefix
+      (define-key map projectile-keymap-prefix 'projectile-command-map))
     (easy-menu-define projectile-mode-menu map
       "Menu for Projectile"
       '("Projectile"
@@ -4057,14 +4060,6 @@ thing shown in the mode line otherwise."
         "--"
         ["Project info" projectile-project-info]
         ["About" projectile-version]))
-    map)
-  "Keymap for Projectile commands after `projectile-keymap-prefix'.")
-(fset 'projectile-command-map projectile-command-map)
-
-(defvar projectile-mode-map
-  (let ((map (make-sparse-keymap)))
-    (when projectile-keymap-prefix
-      (define-key map projectile-keymap-prefix 'projectile-command-map))
     map)
   "Keymap for Projectile mode.")
 

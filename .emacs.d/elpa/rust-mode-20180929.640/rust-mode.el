@@ -1,7 +1,7 @@
 ;;; rust-mode.el --- A major emacs mode for editing Rust source code -*-lexical-binding: t-*-
 
 ;; Version: 0.4.0
-;; Package-Version: 20180626.2212
+;; Package-Version: 20180929.640
 ;; Author: Mozilla
 ;; Url: https://github.com/rust-lang/rust-mode
 ;; Keywords: languages
@@ -523,7 +523,7 @@ buffer."
 
 ;; Font-locking definitions and helpers
 (defconst rust-mode-keywords
-  '("as"
+  '("as" "async"
     "box" "break"
     "const" "continue" "crate"
     "do" "dyn"
@@ -535,7 +535,7 @@ buffer."
     "priv" "pub"
     "ref" "return"
     "self" "static" "struct" "super"
-    "true" "trait" "type"
+    "true" "trait" "type" "try"
     "use"
     "virtual"
     "where" "while"

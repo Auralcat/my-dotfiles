@@ -505,6 +505,10 @@ eshell-prompt-function 'epe-theme-lambda))
 
 (use-package doom-themes :ensure :defer t)
 
+(use-package green-screen-theme)
+
+(use-package green-phosphor-theme)
+
 ;; Set font in graphical mode
 (when (display-graphic-p)
     ;; Use Fantasque Sans Mono when available
