@@ -4,7 +4,7 @@
 
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/projectile
-;; Package-Version: 20180928.608
+;; Package-Version: 20180928.1418
 ;; Keywords: project, convenience
 ;; Version: 1.1.0-snapshot
 ;; Package-Requires: ((emacs "25.1") (pkg-info "0.4"))
@@ -3095,7 +3095,7 @@ to run the replacement."
   (let* ((directory (if arg
                         (file-name-as-directory
                          (read-directory-name "Replace regexp in directory: "))
-                      (projectile-ensure-project (projectileproject-root))))
+                      (projectile-ensure-project (projectile-project-root))))
          (old-text (read-string
                     (projectile-prepend-project-name "Replace regexp: ")
                     (projectile-symbol-or-selection-at-point)))
@@ -3927,21 +3927,26 @@ is chosen."
 
 
 ;;; Projectile Minor mode
-(defcustom projectile-mode-line-lighter
+(defcustom projectile-mode-line-prefix
   " Projectile"
-  "Mode line lighter for Projectile."
+  "Mode line lighter prefix for Projectile.
+It's used by `projectile-default-mode-line'
+when using dynamic mode line lighter and is the only
+thing shown in the mode line otherwise."
   :group 'projectile
   :type 'string
   :package-version '(projectile . "0.12.0"))
 
-(defvar-local projectile--mode-line projectile-mode-line-lighter)
+(define-obsolete-variable-alias 'projectile-mode-line-lighter 'projectile-mode-line-prefix)
+
+(defvar-local projectile--mode-line projectile-mode-line-prefix)
 
 (defun projectile-default-mode-line ()
   "Report project name and type in the modeline."
   (let ((project-name (projectile-project-name))
         (project-type (projectile-project-type)))
     (format "%s[%s:%s]"
-            projectile-mode-line-lighter
+            projectile-mode-line-prefix
             project-name
             project-type)))
 
