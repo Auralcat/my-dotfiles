@@ -518,6 +518,7 @@ me, too many buffers to work with... for now.
     (use-package emojify)
     #+END_SRC
 ** Utilities
+
 *** Evil-numbers
     Increment and decrement numbers like in Vim.
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -708,6 +709,13 @@ me, too many buffers to work with... for now.
     #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package vagrant-tramp)
     #+END_SRC
+*** Carbon-now.sh
+    Share the region in carbon-now.sh
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package carbon-now-sh)
+    #+END_SRC
+
+
 * Themes
 ** Jazz
    A warm theme with dark colors.
