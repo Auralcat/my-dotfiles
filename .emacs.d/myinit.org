@@ -518,7 +518,13 @@ me, too many buffers to work with... for now.
     (use-package emojify)
     #+END_SRC
 ** Utilities
-
+*** Wakatime
+    Time tracking in Emacs.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+      (use-package wakatime-mode)
+      ;; Enable it
+      (global-wakatime-mode)
+    #+END_SRC
 *** Evil-numbers
     Increment and decrement numbers like in Vim.
     #+BEGIN_SRC emacs-lisp :tangle yes
