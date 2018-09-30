@@ -4,7 +4,7 @@
 
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/projectile
-;; Package-Version: 20180929.1004
+;; Package-Version: 20180930.815
 ;; Keywords: project, convenience
 ;; Version: 1.1.0-snapshot
 ;; Package-Requires: ((emacs "25.1") (pkg-info "0.4"))
@@ -79,10 +79,10 @@
   :link '(url-link :tag "Online Manual" "https://docs.projectile.mx/")
   :link '(emacs-commentary-link :tag "Commentary" "projectile"))
 
-(defcustom projectile-indexing-method (if (eq system-type 'windows-nt) 'native 'alien)
+(defcustom projectile-indexing-method (if (eq system-type 'windows-nt) 'native 'turbo-alien)
   "Specifies the indexing method used by Projectile.
 
-There are two indexing methods - native and alien.
+There are three indexing methods - native, alien and turbo-alien.
 
 The native method is implemented in Emacs Lisp (therefore it is
 native to Emacs).  Its advantage is that it is portable and will
@@ -94,12 +94,22 @@ The alien indexing method uses external tools (e.g. git, find,
 etc) to speed up the indexing process.  The disadvantage of this
 method is that it's not well supported on Windows systems.
 
-By default alien indexing is the default on all operating
+The turbo-alien indexing method optimizes to the limit the speed
+of the alien indexing method.  This means that Projectile will
+not do any processing of the files returned by the external
+commands and you're going to get the maximum performance
+possible.  This behaviour makes a lot of sense for most people,
+as they'd typically be putting ignores in their VCS config and
+won't care about any additional ignores/unignores/sorting that
+Projectile might also provide.
+
+By default turbo-alien indexing is the default on all operating
 systems, except Windows."
   :group 'projectile
   :type '(radio
           (const :tag "Native" native)
-          (const :tag "Alien" alien)))
+          (const :tag "Alien" alien)
+          (const :tag "Turbo Alien" turbo-alien)))
 
 (defcustom projectile-enable-caching (eq projectile-indexing-method 'native)
   "When t enables project files caching.
@@ -770,7 +780,7 @@ to invalidate."
          (if prompt
              (completing-read "Remove cache for: "
                               (projectile-hash-keys projectile-projects-cache))
-           (projectile-project-root))))
+           (projectile-ensure-project (projectile-project-root)))))
     (setq projectile-project-root-cache (make-hash-table :test 'equal))
     (remhash project-root projectile-project-type-cache)
     (remhash project-root projectile-projects-cache)
@@ -1058,10 +1068,12 @@ Files are returned as relative paths to the project ROOT."
                          (gethash directory projectile-projects-cache))))
     ;; cache disabled or cache miss
     (or files-list
-        (if (eq projectile-indexing-method 'native)
-            (projectile-dir-files-native root directory)
+        (pcase projectile-indexing-method
+          ('native (projectile-dir-files-native root directory))
           ;; use external tools to get the project files
-          (projectile-adjust-files (projectile-dir-files-external directory))))))
+          ('alien (projectile-adjust-files (projectile-dir-files-external directory)))
+          ('turbo-alien (projectile-dir-files-external directory))
+          (_ (user-error "Unsupported indexing method `%S'" projectile-indexing-method))))))
 
 (defun projectile-dir-files-native (root directory)
   "Get the files for ROOT under DIRECTORY using just Emacs Lisp."
@@ -1076,34 +1088,41 @@ Files are returned as relative paths to the project ROOT."
 
 (defun projectile-dir-files-external (directory)
   "Get the files for DIRECTORY using external tools."
-  (let ((default-directory directory))
-    (projectile-get-repo-files)))
+  (let ((vcs (projectile-project-vcs directory)))
+    (cond
+    ((eq vcs 'git)
+     (nconc (projectile-files-via-ext-command directory (projectile-get-ext-command vcs))
+            (projectile-get-sub-projects-files directory vcs)))
+    (t (projectile-files-via-ext-command directory (projectile-get-ext-command vcs))))))
 
-(defun projectile-get-ext-command ()
+(define-obsolete-variable-alias 'projectile-get-repo-files 'projectile-dir-files-external "1.1")
+
+(defun projectile-get-ext-command (vcs)
+  "Determine which external command to invoke based on the project's VCS.
+Fallback to a generic command when not in a VCS-controlled project."
+  (cond
+   ((eq vcs 'git) projectile-git-command)
+   ((eq vcs 'hg) projectile-hg-command)
+   ((eq vcs 'fossil) projectile-fossil-command)
+   ((eq vcs 'bzr) projectile-bzr-command)
+   ((eq vcs 'darcs) projectile-darcs-command)
+   ((eq vcs 'svn) projectile-svn-command)
+   (t projectile-generic-command)))
+
+(defun projectile-get-sub-projects-command (vcs)
+  "Get the sub-projects command for VCS.
+Currently that's supported just for Git (sub-projects being Git
+sub-modules there)."
+  (cond
+   ((eq vcs 'git) projectile-git-submodule-command)
+   (t "")))
+
+(defun projectile-get-ext-ignored-command (vcs)
   "Determine which external command to invoke based on the project's VCS."
-  (let ((vcs (projectile-project-vcs)))
-    (cond
-     ((eq vcs 'git) projectile-git-command)
-     ((eq vcs 'hg) projectile-hg-command)
-     ((eq vcs 'fossil) projectile-fossil-command)
-     ((eq vcs 'bzr) projectile-bzr-command)
-     ((eq vcs 'darcs) projectile-darcs-command)
-     ((eq vcs 'svn) projectile-svn-command)
-     (t projectile-generic-command))))
-
-(defun projectile-get-sub-projects-command ()
-  (let ((vcs (projectile-project-vcs)))
-    (cond
-     ((eq vcs 'git) projectile-git-submodule-command)
-     (t ""))))
-
-(defun projectile-get-ext-ignored-command ()
-  "Determine which external command to invoke based on the project's VCS."
-  (let ((vcs (projectile-project-vcs)))
-    (cond
-     ((eq vcs 'git) projectile-git-ignored-command)
-     ;; TODO: Add support for other VCS
-     (t nil))))
+  (cond
+   ((eq vcs 'git) projectile-git-ignored-command)
+   ;; TODO: Add support for other VCS
+   (t nil)))
 
 (defun projectile-flatten (lst)
   "Take a nested list LST and return its contents as a single, flat list."
@@ -1134,12 +1153,12 @@ searching, and should end with an appropriate path delimiter, such as
 
 If the vcs get-sub-projects query returns results outside of path,
 they are excluded from the results of this function."
-  (let* ((default-directory path)
+  (let* ((vcs (projectile-project-vcs path))
          ;; search for sub-projects under current project `project'
          (submodules (mapcar
                       (lambda (s)
                         (file-name-as-directory (expand-file-name s default-directory)))
-                      (projectile-files-via-ext-command (projectile-get-sub-projects-command))))
+                      (projectile-files-via-ext-command path (projectile-get-sub-projects-command vcs))))
          (project-child-folder-regex
           (concat "\\`"
                   (regexp-quote path))))
@@ -1153,35 +1172,28 @@ they are excluded from the results of this function."
                        submodule))
      submodules)))
 
-(defun projectile-get-sub-projects-files ()
-  "Get files from sub-projects recursively."
+(defun projectile-get-sub-projects-files (project-root vcs)
+  "Get files from sub-projects for PROJECT-ROOT recursively."
   (projectile-flatten
    (mapcar (lambda (sub-project)
-             (let ((default-directory sub-project))
-               (mapcar (lambda (file)
-                         (concat sub-project file))
-                       (projectile-files-via-ext-command projectile-git-command))))
-           (projectile-get-all-sub-projects (projectile-project-root)))))
+             (mapcar (lambda (file)
+                       (concat sub-project file))
+                     ;; TODO: Seems we forgot git hardcoded here
+                     (projectile-files-via-ext-command sub-project projectile-git-command)))
+           (projectile-get-all-sub-projects project-root))))
 
-(defun projectile-get-repo-files ()
-  "Get a list of the files in the project, including sub-projects."
-  (cond
-   ((eq (projectile-project-vcs) 'git)
-    (nconc (projectile-files-via-ext-command (projectile-get-ext-command))
-           (projectile-get-sub-projects-files)))
-   (t (projectile-files-via-ext-command (projectile-get-ext-command)))))
-
-(defun projectile-get-repo-ignored-files ()
-  "Get a list of the files ignored in the project."
-  (let ((cmd (projectile-get-ext-ignored-command)))
+(defun projectile-get-repo-ignored-files (project vcs)
+  "Get a list of the files ignored in the PROJECT using VCS."
+  (let ((cmd (projectile-get-ext-ignored-command vcs)))
     (when cmd
-      (projectile-files-via-ext-command cmd))))
+      (projectile-files-via-ext-command project cmd))))
 
-(defun projectile-get-repo-ignored-directory (dir)
-  "Get a list of the files ignored in the project in the directory DIR."
-  (let ((cmd (projectile-get-ext-ignored-command)))
+(defun projectile-get-repo-ignored-directory (project dir vcs)
+  "Get a list of the files ignored in the PROJECT in the directory DIR.
+VCS is the VCS of the project."
+  (let ((cmd (projectile-get-ext-ignored-command vcs)))
     (when cmd
-      (projectile-files-via-ext-command (concat cmd " " dir)))))
+      (projectile-files-via-ext-command project (concat cmd " " dir)))))
 
 (defun projectile-call-process-to-string (program &rest args)
   "Invoke the executable PROGRAM with ARGS and return the output as a string."
@@ -1258,9 +1270,10 @@ dirty project list."
     (projectile-completing-read "Select project: " mod-proj
                                 :action 'projectile-vc)))
 
-(defun projectile-files-via-ext-command (command)
-  "Get a list of relative file names in the project root by executing COMMAND."
-  (split-string (shell-command-to-string command) "\0" t))
+(defun projectile-files-via-ext-command (root command)
+  "Get a list of relative file names in the project ROOT by executing COMMAND."
+  (let ((default-directory root))
+   (split-string (shell-command-to-string command) "\0" t)))
 
 (defun projectile-index-directory (directory patterns progress-reporter)
   "Index DIRECTORY taking into account PATTERNS.
