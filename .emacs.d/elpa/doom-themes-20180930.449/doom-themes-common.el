@@ -175,7 +175,8 @@
     (ido-virtual     :foreground comments)
 
     ;; isearch
-    (isearch :background highlight :foreground base0 :weight 'bold)
+    (isearch :inherit 'lazy-highlight :weight 'bold)
+    (isearch-fail :background error :foreground base0 :weight 'bold)
 
     ;; linum
     ((linum &inherit line-number))
@@ -445,6 +446,7 @@
 
     ;; evil
     (evil-ex-info                   :foreground error :slant 'italic)
+    (evil-ex-search                 :background highlight :foreground base0 :weight 'bold)
     (evil-ex-substitute-matches     :background base0 :foreground red   :strike-through t :weight 'bold)
     (evil-ex-substitute-replacement :background base0 :foreground green :weight 'bold)
     (evil-search-highlight-persist-highlight-face :inherit 'lazy-highlight)
@@ -817,6 +819,14 @@
     (popup-face :inherit 'tooltip)
     (popup-tip-face :inherit 'popup-face :foreground violet :background base0)
     (popup-selection-face :background selection)
+
+    ;; power
+    (powerline-active0   :inherit 'mode-line :background bg)
+    (powerline-active1   :inherit 'mode-line :background (doom-lighten 'bg 0.025))
+    (powerline-active2   :inherit 'mode-line :foreground base8 :background (doom-lighten 'bg 0.08))
+    (powerline-inactive0 :inherit 'mode-line-inactive :background base2)
+    (powerline-inactive1 :inherit 'mode-line-inactive :background (doom-lighten 'base2 0.02))
+    (powerline-inactive2 :inherit 'mode-line-inactive :background (doom-lighten 'base2 0.04))
 
     ;; rainbow-delimiters
     (rainbow-delimiters-depth-1-face :foreground blue)
