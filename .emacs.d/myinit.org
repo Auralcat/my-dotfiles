@@ -395,6 +395,9 @@ me, too many buffers to work with... for now.
        ;; Add tweaks
        (add-hook 'enh-ruby-mode-hook 'ruby-mode-tweaks)
 
+       ;; Inferior Ruby: complete using capf
+       (add-hook 'inf-ruby-mode-hook (lambda() (set (make-local-variable 'company-backends) '(company-capf))))
+
        ;; Autocompletion for Bootstrap/FontAwesome classes
        (use-package ac-html-bootstrap)
 
