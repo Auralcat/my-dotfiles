@@ -17,3 +17,4 @@ persp-confs/*
 .emacs.d/eshell/*
 .emacs.d/elpa/archives/
 myinit.el
+rake.cache

@@ -509,17 +509,26 @@ me, too many buffers to work with... for now.
     (use-package emojify)
     #+END_SRC
 ** Utilities
-# *** Multi-term
-#     Use multiple terminals in Emacs.
-#     (use-package multi-term
-#      :config
-#      ())
 *** Multi-term Plus
     A newer version of Multi Term maintained by a person from Japan.
     #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package multi-term)
     (require 'multi-term-config)
-    ;; Use Emacs mode in mult-term buffers.
 
+    #+END_SRC
+*** Projectile Rails
+    Rails utilities for Projectile-mode
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package projectile-rails)
+    (projectile-rails-global-mode)
+
+    ;; Change the prefix
+
+    #+END_SRC
+*** Bundler
+    Interact with Bundler from Emacs
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package bundler)
     #+END_SRC
 *** Wakatime
     Time tracking in Emacs.
@@ -847,6 +856,7 @@ me, too many buffers to work with... for now.
       "Start in Emacs mode"
       (evil-set-initial-state 'eshell-mode 'emacs))
   (add-hook 'eshell-mode-hook 'eshell-tweaks)
+  (add-hook 'term-mode-hook 'eshell-tweaks)
 
   ;; Set C-x j to go to current clocked task in org-mode
   (global-set-key (kbd "C-x j") 'org-clock-goto)

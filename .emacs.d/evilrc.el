@@ -58,4 +58,6 @@
     ;; Clock out
     "o" 'org-clock-out
     ;; Projectile prefix
-    "p" 'projectile-command-map)
+    "p" 'projectile-command-map
+    ;; Projectile-Rails prefix
+    "r" 'projectile-rails-command-map)
