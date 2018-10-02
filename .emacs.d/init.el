@@ -32,7 +32,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
     '(ansi-color-names-vector
-         ["#5f5f5f" "#ff4b4b" "#a1db00" "#fce94f" "#5fafd7" "#d18aff" "#afd7ff" "#ffffff"])
+         ["#151515" "#953331" "#546a29" "#909737" "#385e6b" "#7f355e" "#34676f" "#c6a57b"])
  '(auto-image-file-mode t)
  '(battery-mode-line-format " 🔋 %b%p%% ")
  '(browse-url-browser-display nil)
