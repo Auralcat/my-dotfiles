@@ -380,6 +380,10 @@ next-line))
 
 (use-package emojify)
 
+(use-package wakatime-mode)
+;; Enable it
+(global-wakatime-mode)
+
 (use-package evil-numbers
 :bind ("C-c <up>" . evil-numbers/inc-at-pt)
       ("C-c <down>" . evil-numbers/dec-at-pt))
