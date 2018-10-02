@@ -1,7 +1,7 @@
 ;;; rust-mode.el --- A major emacs mode for editing Rust source code -*-lexical-binding: t-*-
 
 ;; Version: 0.4.0
-;; Package-Version: 20180929.640
+;; Package-Version: 20181001.2221
 ;; Author: Mozilla
 ;; Url: https://github.com/rust-lang/rust-mode
 ;; Keywords: languages
@@ -1556,7 +1556,8 @@ This is written mainly to be used as `end-of-defun-function' for Rust."
   (setq-local parse-sexp-lookup-properties t)
   (setq-local electric-pair-inhibit-predicate 'rust-electric-pair-inhibit-predicate-wrap)
 
-  (add-hook 'before-save-hook 'rust--before-save-hook nil t)
+  (add-hook 'before-save-hook 'rust-before-save-hook nil t)
+  (add-hook 'after-save-hook 'rust-after-save-hook nil t)
 
   (setq-local rust-buffer-project nil)
 
@@ -1572,9 +1573,17 @@ This is written mainly to be used as `end-of-defun-function' for Rust."
   (require 'rust-mode)
   (rust-mode))
 
-(defun rust--before-save-hook ()
-  (when rust-format-on-save (rust-format-buffer)))
+(defun rust-before-save-hook ()
+  (when rust-format-on-save
+    (condition-case nil
+        (rust-format-buffer)
+      (error nil))))
 
+(defun rust-after-save-hook ()
+  (when rust-format-on-save
+    (unless (executable-find rust-rustfmt-bin)
+      (error "Could not locate executable \"%s\"" rust-rustfmt-bin))))
+  
 (defvar rustc-compilation-regexps
   (let ((file "\\([^\n]+\\)")
         (start-line "\\([0-9]+\\)")
