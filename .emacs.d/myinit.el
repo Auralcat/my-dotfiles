@@ -488,6 +488,8 @@ eshell-prompt-function 'epe-theme-lambda))
 
 (use-package vagrant-tramp)
 
+(use-package carbon-now-sh)
+
 (use-package jazz-theme :ensure t
 :defer t)
 
