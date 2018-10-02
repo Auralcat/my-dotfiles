@@ -10,8 +10,10 @@ eshell/history
 .emacs.desktop.lock
 amx-items
 persp-confs/*
-company-statistics-cache.el
+.emacs.d/company-statistics-cache.el
 */places
-projectile-bookmarks.eld
+.emacs.d/projectile-bookmarks.eld
 .session.*
-.emacs.d/eshell
+.emacs.d/eshell/*
+.emacs.d/elpa/archives/
+myinit.el
