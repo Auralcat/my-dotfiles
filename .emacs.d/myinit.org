@@ -25,7 +25,7 @@
   (setq backup-directory-alist `(("." . "~/file-bouncer/emacs-backups")))
 
   ;; Manual packages load path
-  (add-to-list 'load-path "~/my-dotfiles/.emacs.d/manual-packages/emacs-solargraph/")
+  (add-to-list 'load-path "~/my-dotfiles/.emacs.d/manual-packages/multi-term-plus/")
 
   ;; Backup files by copying them
   (setq backup-by-copying t)
@@ -149,15 +149,6 @@ me, too many buffers to work with... for now.
   (interactive "*r")
     (let ((fill-column (point-max)))
       (fill-region beg end)))
-
-;; Call the live page reload script from within Emacs and bind it to a key
-;; (defun css-live-reload-current-webpage ()
-;;     (when (and (stringp buffer-file-name)
-;;       (string-match "\\.scss\\'" buffer-file-name))
-;;     (shell-command "~/my-dotfiles/bash/live-reload-firefox.sh")))
-
-;; The original idea is to call this function when saving a stylesheet
-;; (add-hook 'after-save-hook 'css-live-reload-current-webpage)
 
 #+END_SRC
 * Function Aliases
@@ -518,6 +509,18 @@ me, too many buffers to work with... for now.
     (use-package emojify)
     #+END_SRC
 ** Utilities
+# *** Multi-term
+#     Use multiple terminals in Emacs.
+#     (use-package multi-term
+#      :config
+#      ())
+*** Multi-term Plus
+    A newer version of Multi Term maintained by a person from Japan.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (require 'multi-term-config)
+    ;; Use Emacs mode in mult-term buffers.
+
+    #+END_SRC
 *** Wakatime
     Time tracking in Emacs.
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -584,19 +587,19 @@ me, too many buffers to work with... for now.
     #+END_SRC
 
 
-*** XTerm Color
-    Better shell colorization.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package xterm-color
-    :ensure t
-    :requires (eshell)
-    :config
-     ;; Set eshell $TERM envvar to xterm-256color
-     (setenv "TERM" "xterm-256color"))
-    #+END_SRC
+# *** XTerm Color
+#     Better shell colorization.
+#     #+BEGIN_SRC emacs-lisp :tangle yes
+#       (use-package xterm-color
+#     :ensure t
+#     :requires (eshell)
+#     :config
+#      ;; Set eshell $TERM envvar to xterm-256color
+#      (setenv "TERM" "xterm-256color"))
+#     #+END_SRC
 
-    #+RESULTS:
-    : t
+#     #+RESULTS:
+#     : t
 
 *** Cheat.sh client
     Access cheat.sh from Emacs

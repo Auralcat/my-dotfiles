@@ -6,8 +6,9 @@
                          (or (file-name-directory #$) (car load-path))))
 
 
-;;;### (autoloads nil "diff-hl" "diff-hl.el" (0 0 0 0))
-;;; Generated autoloads from diff-hl.el
+;;;### (autoloads nil "diff-hl" "../../../../.emacs.d/elpa/diff-hl-20180201.1155/diff-hl.el"
+;;;;;;  "e389a702c6e1bcc416c021ca12fbc475")
+;;; Generated autoloads from ../../../../.emacs.d/elpa/diff-hl-20180201.1155/diff-hl.el
 
 (autoload 'diff-hl-mode "diff-hl" "\
 Toggle VC diff highlighting.
@@ -40,13 +41,20 @@ Diff-Hl mode is enabled in all buffers where
 See `diff-hl-mode' for more information on Diff-Hl mode.
 
 \(fn &optional ARG)" t nil)
+
+;;;### (autoloads "actual autoloads are elsewhere" "diff-hl" "../../../../.emacs.d/elpa/diff-hl-20180201.1155/diff-hl.el"
+;;;;;;  (0 0 0 0))
+;;; Generated autoloads from ../../../../.emacs.d/elpa/diff-hl-20180201.1155/diff-hl.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "diff-hl" '("diff-hl-")))
 
 ;;;***
+
+;;;***
 
-;;;### (autoloads nil "diff-hl-amend" "diff-hl-amend.el" (0 0 0 0))
-;;; Generated autoloads from diff-hl-amend.el
+;;;### (autoloads nil "diff-hl-amend" "../../../../.emacs.d/elpa/diff-hl-20180201.1155/diff-hl-amend.el"
+;;;;;;  "1d6e113a9bd0373b5859246f916f9f93")
+;;; Generated autoloads from ../../../../.emacs.d/elpa/diff-hl-20180201.1155/diff-hl-amend.el
 
 (autoload 'diff-hl-amend-mode "diff-hl-amend" "\
 Show changes against the second-last revision in `diff-hl-mode'.
@@ -77,13 +85,21 @@ Diff-Hl-Amend mode is enabled in all buffers where
 See `diff-hl-amend-mode' for more information on Diff-Hl-Amend mode.
 
 \(fn &optional ARG)" t nil)
+
+;;;### (autoloads "actual autoloads are elsewhere" "diff-hl-amend"
+;;;;;;  "../../../../.emacs.d/elpa/diff-hl-20180201.1155/diff-hl-amend.el"
+;;;;;;  (0 0 0 0))
+;;; Generated autoloads from ../../../../.emacs.d/elpa/diff-hl-20180201.1155/diff-hl-amend.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "diff-hl-amend" '("turn-on-diff-hl-amend-mode" "diff-hl-amend-setup")))
 
 ;;;***
+
+;;;***
 
-;;;### (autoloads nil "diff-hl-dired" "diff-hl-dired.el" (0 0 0 0))
-;;; Generated autoloads from diff-hl-dired.el
+;;;### (autoloads nil "diff-hl-dired" "../../../../.emacs.d/elpa/diff-hl-20180201.1155/diff-hl-dired.el"
+;;;;;;  "a5f517561fc9162cbb044308275549f8")
+;;; Generated autoloads from ../../../../.emacs.d/elpa/diff-hl-20180201.1155/diff-hl-dired.el
 
 (autoload 'diff-hl-dired-mode "diff-hl-dired" "\
 Toggle VC diff highlighting on the side of a Dired window.
@@ -94,14 +110,21 @@ Toggle VC diff highlighting on the side of a Dired window.
 
 
 \(fn)" nil nil)
+
+;;;### (autoloads "actual autoloads are elsewhere" "diff-hl-dired"
+;;;;;;  "../../../../.emacs.d/elpa/diff-hl-20180201.1155/diff-hl-dired.el"
+;;;;;;  (0 0 0 0))
+;;; Generated autoloads from ../../../../.emacs.d/elpa/diff-hl-20180201.1155/diff-hl-dired.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "diff-hl-dired" '("diff-hl-dired-")))
 
 ;;;***
+
+;;;***
 
-;;;### (autoloads nil "diff-hl-flydiff" "diff-hl-flydiff.el" (0 0
-;;;;;;  0 0))
-;;; Generated autoloads from diff-hl-flydiff.el
+;;;### (autoloads nil "diff-hl-flydiff" "../../../../.emacs.d/elpa/diff-hl-20180201.1155/diff-hl-flydiff.el"
+;;;;;;  "9bbadd1dd1a7cf2ebbc176d5b4298e74")
+;;; Generated autoloads from ../../../../.emacs.d/elpa/diff-hl-20180201.1155/diff-hl-flydiff.el
 
 (defvar diff-hl-flydiff-mode nil "\
 Non-nil if Diff-Hl-Flydiff mode is enabled.
@@ -118,14 +141,21 @@ Perform highlighting on-the-fly.
 This is a global minor mode.  It alters how `diff-hl-mode' works.
 
 \(fn &optional ARG)" t nil)
+
+;;;### (autoloads "actual autoloads are elsewhere" "diff-hl-flydiff"
+;;;;;;  "../../../../.emacs.d/elpa/diff-hl-20180201.1155/diff-hl-flydiff.el"
+;;;;;;  (0 0 0 0))
+;;; Generated autoloads from ../../../../.emacs.d/elpa/diff-hl-20180201.1155/diff-hl-flydiff.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "diff-hl-flydiff" '("diff-hl-flydiff")))
 
 ;;;***
+
+;;;***
 
-;;;### (autoloads nil "diff-hl-margin" "diff-hl-margin.el" (0 0 0
-;;;;;;  0))
-;;; Generated autoloads from diff-hl-margin.el
+;;;### (autoloads nil "diff-hl-margin" "../../../../.emacs.d/elpa/diff-hl-20180201.1155/diff-hl-margin.el"
+;;;;;;  "5eeebde69878ea3a0efa7a748da419da")
+;;; Generated autoloads from ../../../../.emacs.d/elpa/diff-hl-20180201.1155/diff-hl-margin.el
 
 (defvar diff-hl-margin-mode nil "\
 Non-nil if Diff-Hl-Margin mode is enabled.
@@ -141,12 +171,26 @@ or call the function `diff-hl-margin-mode'.")
 Toggle displaying `diff-hl-mode' highlights on the margin.
 
 \(fn &optional ARG)" t nil)
+
+;;;### (autoloads "actual autoloads are elsewhere" "diff-hl-margin"
+;;;;;;  "../../../../.emacs.d/elpa/diff-hl-20180201.1155/diff-hl-margin.el"
+;;;;;;  (0 0 0 0))
+;;; Generated autoloads from ../../../../.emacs.d/elpa/diff-hl-20180201.1155/diff-hl-margin.el
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "diff-hl-margin" '("diff-hl-")))
 
 ;;;***
+
+;;;***
 
-;;;### (autoloads nil nil ("diff-hl-pkg.el") (0 0 0 0))
+;;;### (autoloads nil nil ("../../../../.emacs.d/elpa/diff-hl-20180201.1155/diff-hl-amend.el"
+;;;;;;  "../../../../.emacs.d/elpa/diff-hl-20180201.1155/diff-hl-autoloads.el"
+;;;;;;  "../../../../.emacs.d/elpa/diff-hl-20180201.1155/diff-hl-dired.el"
+;;;;;;  "../../../../.emacs.d/elpa/diff-hl-20180201.1155/diff-hl-flydiff.el"
+;;;;;;  "../../../../.emacs.d/elpa/diff-hl-20180201.1155/diff-hl-margin.el"
+;;;;;;  "../../../../.emacs.d/elpa/diff-hl-20180201.1155/diff-hl-pkg.el"
+;;;;;;  "../../../../.emacs.d/elpa/diff-hl-20180201.1155/diff-hl.el")
+;;;;;;  (0 0 0 0))
 
 ;;;***
 
