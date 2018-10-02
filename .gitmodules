@@ -1,3 +1,9 @@
 [submodule ".emacs.d/manual-packages/emacs-solargraph"]
 	path = .emacs.d/manual-packages/emacs-solargraph
 	url = https://github.com/guskovd/emacs-solargraph.git
+[submodule ".emacs.d/manual-packages/multi-term-plus"]
+	path = .emacs.d/manual-packages/multi-term-plus
+	url = https://github.com/aborn/multi-term-plus.git
+[submodule "multi-term-plus"]
+	path = .emacs.d/manual-packages/multi-term-plus
+	url = https://github.com/aborn/multi-term-plus.git

@@ -31,33 +31,31 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(ansi-color-names-vector
-   ["#f0f0f0" "#e45649" "#50a14f" "#986801" "#4078f2" "#a626a4" "#0184bc" "#1b2229"])
- '(ansi-term-color-vector
-   [unspecified "#1F1611" "#660000" "#144212" "#EFC232" "#5798AE" "#BE73FD" "#93C1BC" "#E6E1DC"] t)
+    '(ansi-color-names-vector
+         ["#5f5f5f" "#ff4b4b" "#a1db00" "#fce94f" "#5fafd7" "#d18aff" "#afd7ff" "#ffffff"])
  '(auto-image-file-mode t)
  '(battery-mode-line-format " 🔋 %b%p%% ")
  '(browse-url-browser-display nil)
  '(browse-url-browser-function (quote browse-url-default-browser))
  '(browse-url-firefox-program "firefox")
- '(camcorder-frame-parameters
-   (quote
-    ((name . "camcorder.el Recording - F12 to Stop - F11 to Pause/Resume")
-     (height . 240)
-     (width . 320)
-     (top . 80))))
+    '(camcorder-frame-parameters
+         (quote
+             ((name . "camcorder.el Recording - F12 to Stop - F11 to Pause/Resume")
+                 (height . 240)
+                 (width . 320)
+                 (top . 80))))
  '(camcorder-mode t)
  '(column-number-mode t)
  '(company-abort-manual-when-too-short nil)
  '(company-auto-complete (quote (quote company-explicit-action-p)))
  '(company-auto-complete-chars (quote (41)))
- '(company-backends
-   (quote
-    (company-yasnippet
-     (company-tern company-web-html company-css)
-     company-semantic company-capf company-files
-     (company-dabbrev-code company-gtags company-etags company-keywords)
-     company-oddmuse company-dabbrev)))
+    '(company-backends
+         (quote
+             (company-yasnippet
+                 (company-tern company-web-html company-css)
+                 company-semantic company-capf company-files
+                 (company-dabbrev-code company-gtags company-etags company-keywords)
+                 company-oddmuse company-dabbrev)))
  '(company-box-doc-enable nil)
  '(company-dabbrev-downcase nil)
  '(company-idle-delay 0.2)
