@@ -4,7 +4,7 @@
 
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/projectile
-;; Package-Version: 20181002.1605
+;; Package-Version: 20181004.949
 ;; Keywords: project, convenience
 ;; Version: 1.1.0-snapshot
 ;; Package-Requires: ((emacs "25.1") (pkg-info "0.4"))
@@ -439,12 +439,12 @@ Any function that does not take arguments will do."
 Only file buffers are affected by this, as the update happens via
 `find-file-hook'.
 
-See also `projectile-mode-line-fn' and `projectile-update-mode-line'."
+See also `projectile-mode-line-function' and `projectile-update-mode-line'."
   :group 'projectile
   :type 'boolean
   :package-version '(projectile . "1.1.0"))
 
-(defcustom projectile-mode-line-fn 'projectile-default-mode-line
+(defcustom projectile-mode-line-function 'projectile-default-mode-line
   "The function to use to generate project-specific mode-line.
 The default function adds the project name and type to the mode-line.
 See also `projectile-update-mode-line'."
@@ -670,6 +670,19 @@ It assumes the test/ folder is at the same level as src/."
   "Hooks run when right before project is switched."
   :group 'projectile
   :type 'hook)
+
+(defcustom projectile-current-project-on-switch 'remove
+  "Determines whether to display current project when switching projects.
+
+When set to 'remove current project is not included, 'move-to-end
+will display current project and the end of the list of known
+projects, 'keep will leave the current project at the default
+position."
+  :group 'projectile
+  :type '(radio
+          (const :tag "Remove" remove)
+          (const :tag "Move to end" move-to-end)
+          (const :tag "Keep" keep)))
 
 
 ;;; Version information
@@ -1362,6 +1375,7 @@ If PROJECT is not specified the command acts on the current project."
   (with-current-buffer buffer
     (and (not (string-prefix-p " " (buffer-name buffer)))
          (not (projectile-ignored-buffer-p buffer))
+         default-directory
          (string-equal (file-remote-p default-directory)
                        (file-remote-p project-root))
          (not (string-match-p "^http\\(s\\)?://" default-directory))
@@ -1507,7 +1521,7 @@ Regular expressions can be used."
 (defun projectile-ignored-file-p (file)
   "Check if FILE should be ignored.
 
-Regular expressions can be use."
+Regular expressions can be used."
   (cl-some
    (lambda (name)
      (string-match-p name file))
@@ -3088,11 +3102,18 @@ to run the replacement."
 (defun projectile-save-project-buffers ()
   "Save all project buffers."
   (interactive)
-  (let ((project (projectile-ensure-project (projectile-project-root))))
-   (dolist (buf (projectile-project-buffers project))
-     (with-current-buffer buf
-       (when buffer-file-name
-         (save-buffer))))))
+  (let* ((project (projectile-ensure-project (projectile-project-root)))
+         (project-name (projectile-project-name project))
+         (modified-buffers (cl-remove-if-not (lambda (buf)
+                                               (and (buffer-file-name buf)
+                                                    (buffer-modified-p buf)))
+                                             (projectile-project-buffers project))))
+    (if (null modified-buffers)
+        (message "[%s] No buffers need saving" project-name)
+      (dolist (buf modified-buffers)
+        (with-current-buffer buf
+          (save-buffer)))
+      (message "[%s] Saved %d buffers" project-name (length modified-buffers)))))
 
 ;;;###autoload
 (defun projectile-dired ()
@@ -3471,18 +3492,33 @@ An open project is a project with any open buffers."
 
 (defun projectile--remove-current-project (projects)
   "Remove the current project (if any) from the list of PROJECTS."
-  (if (projectile-project-p)
+  (if-let* ((project (projectile-project-root)))
       (projectile-difference projects
-                             (list (abbreviate-file-name (projectile-project-root))))
+                             (list (abbreviate-file-name project)))
+    projects))
+
+(defun projectile--move-current-project-to-end (projects)
+  "Move current project (if any) to the end of list in the list of PROJECTS."
+  (if-let* ((project (projectile-project-root)))
+      (append
+       (projectile--remove-current-project projects)
+       (list (abbreviate-file-name project)))
     projects))
 
 (defun projectile-relevant-known-projects ()
-  "Return a list of known projects except the current one (if present)."
-  (projectile--remove-current-project projectile-known-projects))
+  "Return a list of known projects."
+  (pcase projectile-current-project-on-switch
+   ('remove (projectile--remove-current-project projectile-known-projects))
+   ('move-to-end (projectile--move-current-project-to-end projectile-known-projects))
+   ('keep projectile-known-projects)))
 
 (defun projectile-relevant-open-projects ()
-  "Return a list of open projects except the current one (if present)."
-  (projectile--remove-current-project (projectile-open-projects)))
+  "Return a list of open projects."
+  (let ((open-projects (projectile-open-projects)))
+    (pcase projectile-current-project-on-switch
+     ('remove (projectile--remove-current-project open-projects))
+     ('move-to-end (projectile--move-current-project-to-end open-projects))
+     ('keep open-projects))))
 
 ;;;###autoload
 (defun projectile-switch-project (&optional arg)
@@ -3508,9 +3544,10 @@ With a prefix ARG invokes `projectile-commander' instead of
   (interactive "P")
   (let ((projects (projectile-relevant-open-projects)))
     (if projects
-        (projectile-switch-project-by-name
-         (projectile-completing-read "Switch to open project: " projects)
-         arg)
+        (projectile-completing-read
+         "Switch to open project: " projects
+         :action (lambda (project)
+                   (projectile-switch-project-by-name project arg)))
       (user-error "There are no open projects"))))
 
 (defun projectile-switch-project-by-name (project-to-switch &optional arg)
@@ -3952,14 +3989,16 @@ thing shown in the mode line otherwise."
   "Report project name and type in the modeline."
   (let ((project-name (projectile-project-name))
         (project-type (projectile-project-type)))
-    (format "%s[%s:%s]"
+    (format "%s[%s%s]"
             projectile-mode-line-prefix
-            project-name
-            project-type)))
+            (or project-name "-")
+            (if project-type
+                (format ":%s" project-type)
+              ""))))
 
 (defun projectile-update-mode-line ()
   "Update the Projectile mode-line."
-  (let ((mode-line (funcall projectile-mode-line-fn)))
+  (let ((mode-line (funcall projectile-mode-line-function)))
     (setq projectile--mode-line mode-line))
   (force-mode-line-update))
 
@@ -4019,6 +4058,8 @@ thing shown in the mode line otherwise."
     (define-key map (kbd "x t") #'projectile-run-term)
     (define-key map (kbd "x s") #'projectile-run-shell)
     (define-key map (kbd "z") #'projectile-cache-current-file)
+    (define-key map (kbd "<left>") #'projectile-previous-project-buffer)
+    (define-key map (kbd "<right>") #'projectile-next-project-buffer)
     (define-key map (kbd "ESC") #'projectile-project-buffers-other-buffer)
     map)
   "Keymap for Projectile commands after `projectile-keymap-prefix'.")
@@ -4042,6 +4083,8 @@ thing shown in the mode line otherwise."
         ["Kill project buffers" projectile-kill-buffers]
         ["Save project buffers" projectile-save-buffers]
         ["Recent files" projectile-recentf]
+        ["Previous buffer" projectile-previous-project-buffer]
+        ["Next buffer" projectile-next-project-buffer]
         "--"
         ["Toggle project wide read-only" projectile-toggle-project-read-only]
         ["Edit .dir-locals.el" projectile-edit-dir-locals]
@@ -4138,10 +4181,38 @@ Otherwise behave as if called interactively.
 ;;;###autoload
 (define-obsolete-function-alias 'projectile-global-mode 'projectile-mode "1.0")
 
-(provide 'projectile)
+(defun projectile--repeat-until-project-buffer (orig-fun &rest args)
+  "Repeat ORIG-FUN with ARGS until the current buffer is a project buffer."
+  (if (projectile-project-root)
+      (let* ((other-project-buffers (make-hash-table :test 'eq))
+             (projectile-project-buffers (projectile-project-buffers))
+             (max-iterations (length (buffer-list)))
+             (counter 0))
+        (dolist (buffer projectile-project-buffers)
+          (unless (eq buffer (current-buffer))
+            (puthash buffer t other-project-buffers)))
+        (when (cdr-safe projectile-project-buffers)
+          (while (and (< counter max-iterations)
+                      (not (gethash (current-buffer) other-project-buffers)))
+            (apply orig-fun args)
+            (incf counter))))
+    (apply orig-fun args)))
 
-;; Local Variables:
-;; indent-tabs-mode: nil
-;; End:
+(defun projectile-next-project-buffer ()
+  "In selected window switch to the next project buffer.
+
+If the current buffer does not belong to a project, call `next-buffer'."
+  (interactive)
+  (projectile--repeat-until-project-buffer #'next-buffer))
+
+(defun projectile-previous-project-buffer ()
+  "In selected window switch to the previous project buffer.
+
+If the current buffer does not belong to a project, call `previous-buffer'."
+  (interactive)
+  (projectile--repeat-until-project-buffer #'previous-buffer))
+
+
+(provide 'projectile)
 
 ;;; projectile.el ends here

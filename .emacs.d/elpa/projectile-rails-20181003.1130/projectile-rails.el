@@ -4,7 +4,7 @@
 
 ;; Author:            Adam Sokolnicki <adam.sokolnicki@gmail.com>
 ;; URL:               https://github.com/asok/projectile-rails
-;; Package-Version: 20180926.550
+;; Package-Version: 20181003.1130
 ;; Version:           0.15.0
 ;; Keywords:          rails, projectile
 ;; Package-Requires:  ((emacs "24.3") (projectile "0.12.0") (inflections "1.1") (inf-ruby "2.2.6") (f "0.13.0") (rake "0.3.2"))
@@ -376,18 +376,23 @@ Argument DIR is the directory to which the search should be narrowed."
   "Like `projectile-dir-files' but take `projectile-rails-root'."
   (--map
    (substring it (length (projectile-rails-root-relative-to-project-root)))
-   (projectile-dir-files (projectile-rails-root) directory)))
+   (projectile-dir-files directory)))
 
 (defun projectile-rails-choices (dirs)
   "Uses `projectile-rails-dir-files' function to find files in directories.
 
 The DIRS is list of lists consisting of a directory path and regexp to filter files from that directory.
-Returns a hash table with keys being short names and values being relative paths to the files."
+Optional third element can be present in the DIRS list. The third element will be a prefix to be placed before
+the filename in the resulting choice.
+Returns a hash table with keys being short names (choices) and values being relative paths to the files."
   (let ((hash (make-hash-table :test 'equal)))
-    (loop for (dir re) in dirs do
+    (loop for (dir re prefix) in dirs do
           (loop for file in (projectile-rails-dir-files (projectile-rails-expand-root dir)) do
                 (when (string-match re file)
-                  (puthash (match-string 1 file) file hash))))
+                  (puthash
+                   (concat (or prefix "") (match-string 1 file))
+                   (concat dir file)
+                   hash))))
     hash))
 
 (defun projectile-rails-hash-keys (hash)
@@ -419,7 +424,7 @@ The bound variable is \"filename\"."
   (interactive)
   (projectile-rails-find-resource
    "model: "
-   '(("app/models/" "/models/\\(.+\\)\\.rb$"))
+   '(("app/models/" "\\(.+\\)\\.rb$"))
    "app/models/${filename}.rb"))
 
 (defun projectile-rails-find-controller ()
@@ -427,7 +432,7 @@ The bound variable is \"filename\"."
   (interactive)
   (projectile-rails-find-resource
    "controller: "
-   '(("app/controllers/" "/controllers/\\(.+?\\)\\(_controller\\)?\\.rb$"))
+   '(("app/controllers/" "\\(.+?\\)\\(_controller\\)?\\.rb$"))
    "app/controllers/${filename}_controller.rb"))
 
 (defun projectile-rails-find-serializer ()
@@ -435,7 +440,7 @@ The bound variable is \"filename\"."
   (interactive)
   (projectile-rails-find-resource
    "serializer: "
-   '(("app/serializers/" "/serializers/\\(.+\\)_serializer\\.rb$"))
+   '(("app/serializers/" "\\(.+\\)_serializer\\.rb$"))
    "app/serializers/${filename}_serializer.rb"))
 
 (defun projectile-rails-find-view ()
@@ -443,7 +448,7 @@ The bound variable is \"filename\"."
   (interactive)
   (projectile-rails-find-resource
    "view: "
-   `(("app/views/" ,(concat "app/views/\\(.+\\)" projectile-rails-views-re)))
+   `(("app/views/" ,(concat "\\(.+\\)" projectile-rails-views-re)))
    "app/views/${filename}"))
 
 (defun projectile-rails-find-layout ()
@@ -451,7 +456,7 @@ The bound variable is \"filename\"."
   (interactive)
   (projectile-rails-find-resource
    "layout: "
-   `(("app/views/layouts/" ,(concat "app/views/layouts/\\(.+\\)" projectile-rails-views-re)))
+   `(("app/views/layouts/" ,(concat "\\(.+\\)" projectile-rails-views-re)))
    "app/views/layouts/${filename}"))
 
 (defun projectile-rails-find-rake-task (arg)
@@ -464,7 +469,7 @@ The bound variable is \"filename\"."
   (interactive)
   (projectile-rails-find-resource
    "helper: "
-   '(("app/helpers/" "/helpers/\\(.+\\)_helper\\.rb$"))
+   '(("app/helpers/" "\\(.+\\)_helper\\.rb$"))
    "app/helpers/${filename}_helper.rb"))
 
 (defun projectile-rails-find-lib ()
@@ -472,7 +477,7 @@ The bound variable is \"filename\"."
   (interactive)
   (projectile-rails-find-resource
    "lib: "
-   '(("lib/" "lib/\\(.+\\)\\.rb$"))
+   '(("lib/" "\\(.+\\)\\.rb$"))
    "lib/${filename}.rb"))
 
 (defun projectile-rails-find-spec ()
@@ -480,7 +485,7 @@ The bound variable is \"filename\"."
   (interactive)
   (projectile-rails-find-resource
    "spec: "
-   '(("spec/" "spec/\\(.+\\)_spec\\.rb$"))
+   '(("spec/" "\\(.+\\)_spec\\.rb$"))
    "spec/${filename}_spec.rb"))
 
 (defun projectile-rails-find-test ()
@@ -488,7 +493,7 @@ The bound variable is \"filename\"."
   (interactive)
   (projectile-rails-find-resource
    "test: "
-   '(("test/" "test/\\(.+\\)_test\\.rb$"))
+   '(("test/" "\\(.+\\)_test\\.rb$"))
    "test/${filename}_test.rb"))
 
 (defun projectile-rails-find-fixture ()
@@ -496,7 +501,7 @@ The bound variable is \"filename\"."
   (interactive)
   (projectile-rails-find-resource
    "fixture: "
-   (--map (list it (concat it "\\(.+?\\)\\(?:_fabricator\\)?\\.\\(?:rb\\|yml\\)$"))
+   (--map (list it "\\(.+?\\)\\(?:_fabricator\\)?\\.\\(?:rb\\|yml\\)$")
           projectile-rails-fixture-dirs)))
 
 (defun projectile-rails-find-feature ()
@@ -504,7 +509,7 @@ The bound variable is \"filename\"."
   (interactive)
   (projectile-rails-find-resource
    "feature: "
-   '(("features/" "features/\\(.+\\)\\.feature$"))
+   '(("features/" "\\(.+\\)\\.feature$"))
    "features/${filename}.feature"))
 
 (defun projectile-rails-find-migration ()
@@ -517,7 +522,7 @@ The bound variable is \"filename\"."
   (interactive)
   (projectile-rails-find-resource
    "javascript: "
-   (--map (list it "/\\(.+\\)\\.[^.]+$") projectile-rails-javascript-dirs)))
+   (--map (list it "\\(.+\\)\\.[^.]+$") projectile-rails-javascript-dirs)))
 
 (defun projectile-rails-find-component ()
   "Find a javascript component."
@@ -532,14 +537,14 @@ The bound variable is \"filename\"."
   (interactive)
   (projectile-rails-find-resource
    "stylesheet: "
-   (--map (list it "/\\(.+\\)\\.[^.]+$") projectile-rails-stylesheet-dirs)))
+   (--map (list it "\\(.+\\)\\.[^.]+$") projectile-rails-stylesheet-dirs)) )
 
 (defun projectile-rails-find-initializer ()
   "Find an initializer file."
   (interactive)
   (projectile-rails-find-resource
    "initializer: "
-   '(("config/initializers/" "config/initializers/\\(.+\\)\\.rb$"))
+   '(("config/initializers/" "\\(.+\\)\\.rb$"))
    "config/initializers/${filename}.rb"))
 
 (defun projectile-rails-find-environment ()
@@ -547,14 +552,15 @@ The bound variable is \"filename\"."
   (interactive)
   (projectile-rails-find-resource
    "environment: "
-   '(("config/" "/\\(application\\|environment\\)\\.rb$") ("config/environments/" "/\\([^/]+\\)\\.rb$"))))
+   '(("config/" "\\(application\\|environment\\)\\.rb$")
+     ("config/environments/" "\\(.+\\)\\.rb$" "environments/"))))
 
 (defun projectile-rails-find-webpack ()
   "Find a webpack configuration"
   (interactive)
   (projectile-rails-find-resource
    "webpack config: "
-   '(("config/webpack/" "config/webpack/\\(.+\\.[^.]+\\)$"))))
+   '(("config/webpack/" "\\(.+\\.[^.]+\\)$"))))
 
 (defun projectile-rails-find-locale ()
   "Find a locale file."
@@ -562,7 +568,7 @@ The bound variable is \"filename\"."
   (projectile-rails-find-resource
    "locale: "
    '(("config/locales/"
-      "config/locales/\\(.+\\)\\.\\(?:rb\\|yml\\)$"))
+      "\\(.+\\)\\.\\(?:rb\\|yml\\)$"))
    "config/locales/${filename}"))
 
 (defun projectile-rails-find-mailer ()
@@ -570,7 +576,7 @@ The bound variable is \"filename\"."
   (interactive)
   (projectile-rails-find-resource
    "mailer: "
-   '(("app/mailers/" "app/mailers/\\(.+\\)\\.rb$"))
+   '(("app/mailers/" "\\(.+\\)\\.rb$"))
    "app/mailer/${filename}.rb"))
 
 (defun projectile-rails-find-validator ()
@@ -578,7 +584,7 @@ The bound variable is \"filename\"."
   (interactive)
   (projectile-rails-find-resource
    "validator: "
-   '(("app/validators/" "/validators/\\(.+?\\)\\(_validator\\)?\\.rb\\'"))
+   '(("app/validators/" "\\(.+?\\)\\(_validator\\)?\\.rb\\'"))
    "app/validators/${filename}_validator.rb"))
 
 (defun projectile-rails-find-job ()
@@ -586,56 +592,56 @@ The bound variable is \"filename\"."
   (interactive)
   (projectile-rails-find-resource
    "job: "
-   '(("app/jobs/" "/jobs/\\(.+?\\)\\(_job\\)?\\.rb\\'"))
+   '(("app/jobs/" "\\(.+?\\)\\(_job\\)?\\.rb\\'"))
    "app/jobs/${filename}_job.rb"))
 
 (defun projectile-rails-find-current-model ()
   "Find a model for the current resource."
   (interactive)
   (projectile-rails-find-current-resource "app/models/"
-                                          "/${singular}\\.rb$"
+                                          "${singular}\\.rb$"
                                           'projectile-rails-find-model))
 
 (defun projectile-rails-find-current-controller ()
   "Find a controller for the current resource."
   (interactive)
   (projectile-rails-find-current-resource "app/controllers/"
-                                          "app/controllers/\\(.*${plural}\\)_controller\\.rb$"
+                                          "\\(.*${plural}\\)_controller\\.rb$"
                                           'projectile-rails-find-controller))
 
 (defun projectile-rails-find-current-serializer ()
   "Find a serializer for the current resource."
   (interactive)
   (projectile-rails-find-current-resource "app/serializers/"
-                                          "app/serializers/\\(.*${singular}\\)_serializer\\.rb$"
+                                          "\\(.*${singular}\\)_serializer\\.rb$"
                                           'projectile-rails-find-serializer))
 
 (defun projectile-rails-find-current-view ()
   "Find a template for the current resource."
   (interactive)
   (projectile-rails-find-current-resource "app/views/"
-                                          "/${plural}/\\(.+\\)$"
+                                          "${plural}/\\(.+\\)$"
                                           'projectile-rails-find-view))
 
 (defun projectile-rails-find-current-helper ()
   "Find a helper for the current resource."
   (interactive)
   (projectile-rails-find-current-resource "app/helpers/"
-                                          "/\\(${plural}_helper\\)\\.rb$"
+                                          "\\(${plural}_helper\\)\\.rb$"
                                           'projectile-rails-find-helper))
 
 (defun projectile-rails-find-current-javascript ()
   "Find a javascript for the current resource."
   (interactive)
   (projectile-rails-find-current-resource "app/assets/javascripts/"
-                                          "/\\(?:.+/\\)\\(.*${plural}\\)${projectile-rails-javascript-re}"
+                                          "\\(.*${plural}\\)${projectile-rails-javascript-re}"
                                           'projectile-rails-find-javascript))
 
 (defun projectile-rails-find-current-stylesheet ()
   "Find a stylesheet for the current resource."
   (interactive)
   (projectile-rails-find-current-resource "app/assets/stylesheets/"
-                                          "/\\(?:.+/\\)\\(.*${plural}\\)${projectile-rails-stylesheet-re}"
+                                          "\\(.*${plural}\\)${projectile-rails-stylesheet-re}"
                                           'projectile-rails-find-stylesheet))
 
 (defun projectile-rails-find-current-spec ()
@@ -662,7 +668,7 @@ The bound variable is \"filename\"."
   "Find a migration for the current resource."
   (interactive)
   (projectile-rails-find-current-resource "db/migrate/"
-                                          "/[0-9]\\{14\\}.*_\\(${plural}\\|${singular}\\).*\\.rb$"
+                                          "[0-9]\\{14\\}.*_\\(${plural}\\|${singular}\\).*\\.rb$"
                                           'projectile-rails-find-migration))
 
 (defcustom projectile-rails-resource-name-re-list
@@ -1137,11 +1143,11 @@ DIRS are directories where to look for assets."
          (projectile-rails-sanitize-name (thing-at-point 'filename))))
     (projectile-rails-ff
      (loop for dir in dirs
-           for re = (s-lex-format "${dir}${name}\\(\\..+\\)*$")
-           for files = (projectile-dir-files (projectile-rails-root) (projectile-rails-expand-root dir))
+           for re = (s-lex-format "${name}\\(\\..+\\)*$")
+           for files = (projectile-dir-files (projectile-rails-expand-root dir))
            for file = (--first (string-match-p re it) files)
            until file
-           finally return (and file (projectile-rails-expand-root file))))))
+           finally return (and file (projectile-rails-expand-root (concat dir file)))))))
 
 (defun projectile-rails-goto-constant-at-point ()
   "Try to find and go to a Ruby constant at point."
