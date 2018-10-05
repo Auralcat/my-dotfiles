@@ -4,7 +4,7 @@
 
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/projectile
-;; Package-Version: 20181004.949
+;; Package-Version: 20181005.2126
 ;; Keywords: project, convenience
 ;; Version: 1.1.0-snapshot
 ;; Package-Requires: ((emacs "25.1") (pkg-info "0.4"))
@@ -3492,14 +3492,14 @@ An open project is a project with any open buffers."
 
 (defun projectile--remove-current-project (projects)
   "Remove the current project (if any) from the list of PROJECTS."
-  (if-let* ((project (projectile-project-root)))
+  (if-let ((project (projectile-project-root)))
       (projectile-difference projects
                              (list (abbreviate-file-name project)))
     projects))
 
 (defun projectile--move-current-project-to-end (projects)
   "Move current project (if any) to the end of list in the list of PROJECTS."
-  (if-let* ((project (projectile-project-root)))
+  (if-let ((project (projectile-project-root)))
       (append
        (projectile--remove-current-project projects)
        (list (abbreviate-file-name project)))
