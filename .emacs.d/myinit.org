@@ -974,7 +974,6 @@ me, too many buffers to work with... for now.
                              :app-icon "~/my-dotfiles/.emacs.d/org-pomodoro/tomato.png"))
 
      (add-hook 'org-pomodoro-finished-hook (lambda() (pomodoro-finished-notification "Pomodoro finished" "Time to take a break!")))
-     (add-hook 'org-pomodoro-started-hook (lambda() (pomodoro-started-notification "Pomodoro started!" "Testing stuff out.")))
    #+END_SRC
 
    #+RESULTS:
