@@ -37,7 +37,7 @@ fringe gets colored whenever people chat on BitlBee:
                 :style \\='fringe
                 :continue t)
 
-\(fn &key SEVERITY STATUS MODE CATEGORY TITLE MESSAGE PREDICATE ICON (style alert-default-style) PERSISTENT CONTINUE NEVER-PERSIST APPEND)" nil nil)
+\(fn &key SEVERITY STATUS MODE CATEGORY TITLE MESSAGE PREDICATE ICON (STYLE alert-default-style) PERSISTENT CONTINUE NEVER-PERSIST APPEND)" nil nil)
 
 (autoload 'alert "alert" "\
 Alert the user that something has happened.
@@ -85,7 +85,7 @@ Here are some more typical examples of usage:
   (alert \"This is an alert\" :title \"My Alert\"
          :category \\='some-category-or-other)
 
-\(fn MESSAGE &key (severity (quote normal)) TITLE ICON CATEGORY BUFFER MODE DATA STYLE PERSISTENT NEVER-PERSIST ID)" nil nil)
+\(fn MESSAGE &key (SEVERITY \\='normal) TITLE ICON CATEGORY BUFFER MODE DATA STYLE PERSISTENT NEVER-PERSIST ID)" nil nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "alert" '("alert-" "x-urgen")))
 
