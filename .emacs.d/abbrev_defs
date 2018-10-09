@@ -90,6 +90,8 @@
 
 (define-abbrev-table 'display-time-world-mode-abbrev-table '())
 
+(define-abbrev-table 'doctex-mode-abbrev-table '())
+
 (define-abbrev-table 'edebug-eval-mode-abbrev-table '())
 
 (define-abbrev-table 'edit-abbrevs-mode-abbrev-table '())
@@ -198,6 +200,8 @@
 
 (define-abbrev-table 'js2-mode-abbrev-table '())
 
+(define-abbrev-table 'latex-mode-abbrev-table '())
+
 (define-abbrev-table 'lisp-mode-abbrev-table '())
 
 (define-abbrev-table 'locate-mode-abbrev-table '())
@@ -257,12 +261,12 @@
 (define-abbrev-table 'org-mode-abbrev-table
   '(
     ("Dom" "Domingo" nil 0)
-    ("Qua" "Quarta-feira" nil 0)
-    ("Qui" "Quinta-feira" nil 0)
-    ("Seg" "Segunda-feira" nil 1)
-    ("Sex" "Sexta-feira" nil 0)
+    ("Qua" "Quarta" nil 0)
+    ("Qui" "Quinta" nil 0)
+    ("Seg" "Segunda" nil 1)
+    ("Sex" "Sexta" nil 0)
     ("Sáb" "Sábado" nil 0)
-    ("Ter" "Terça-feira" nil 0)
+    ("Ter" "Terça" nil 0)
     ("WP" "WordPress" nil 0)
     ("acotneceram" "aconteceram" nil 0)
     ("avi" "vai" nil 2)
@@ -288,6 +292,7 @@
     ("insnegurança" "insegurança" nil 2)
     ("memso" "mesmo" nil 0)
     ("moranod" "morando" nil 1)
+    ("msg" "mensagem" nil 3)
     ("mto" "muito" nil 2)
     ("ocmo" "como" nil 2)
     ("oicsa" "coisa" nil 1)
@@ -306,7 +311,7 @@
     ("tÔ" "tô" nil 9)
     ("uotra" "outra" nil 4)
     ("uqe" "que" nil 5)
-    ("vc" "você" nil 12)
+    ("vc" "você" nil 13)
     ("ñ" "não" nil 1)
    ))
 
@@ -320,9 +325,19 @@
   '(
    ))
 
+(define-abbrev-table 'plain-tex-mode-abbrev-table '())
+
 (define-abbrev-table 'process-menu-mode-abbrev-table '())
 
 (define-abbrev-table 'prog-mode-abbrev-table '())
+
+(define-abbrev-table 'projectile-rails-compilation-mode-abbrev-table '())
+
+(define-abbrev-table 'projectile-rails-generate-mode-abbrev-table '())
+
+(define-abbrev-table 'projectile-rails-server-mode-abbrev-table '())
+
+(define-abbrev-table 'rake-compilation-mode-abbrev-table '())
 
 (define-abbrev-table 'remember-mode-abbrev-table '())
 
@@ -348,6 +363,8 @@
 
 (define-abbrev-table 'skewer-error-mode-abbrev-table '())
 
+(define-abbrev-table 'slitex-mode-abbrev-table '())
+
 (define-abbrev-table 'snippet-mode-abbrev-table '())
 
 (define-abbrev-table 'special-mode-abbrev-table '())
@@ -363,6 +380,10 @@
 (define-abbrev-table 'tar-mode-abbrev-table '())
 
 (define-abbrev-table 'term-mode-abbrev-table '())
+
+(define-abbrev-table 'tex-mode-abbrev-table '())
+
+(define-abbrev-table 'tex-shell-abbrev-table '())
 
 (define-abbrev-table 'text-mode-abbrev-table '())
 
