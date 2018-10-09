@@ -4,7 +4,7 @@
 
 ;; Author:            Adam Sokolnicki <adam.sokolnicki@gmail.com>
 ;; URL:               https://github.com/asok/projectile-rails
-;; Package-Version: 20181003.1130
+;; Package-Version: 20181009.1317
 ;; Version:           0.15.0
 ;; Keywords:          rails, projectile
 ;; Package-Requires:  ((emacs "24.3") (projectile "0.12.0") (inflections "1.1") (inf-ruby "2.2.6") (f "0.13.0") (rake "0.3.2"))
@@ -515,7 +515,7 @@ The bound variable is \"filename\"."
 (defun projectile-rails-find-migration ()
   "Find a migration."
   (interactive)
-  (projectile-rails-find-resource "migration: " '(("db/migrate/" "db/migrate/\\(.+\\)\\.rb$"))))
+  (projectile-rails-find-resource "migration: " '(("db/migrate/" "\\(.+\\)\\.rb$"))))
 
 (defun projectile-rails-find-javascript ()
   "Find a javascript file."

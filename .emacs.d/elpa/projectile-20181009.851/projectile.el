@@ -4,7 +4,7 @@
 
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/projectile
-;; Package-Version: 20181005.2126
+;; Package-Version: 20181009.851
 ;; Keywords: project, convenience
 ;; Version: 1.1.0-snapshot
 ;; Package-Requires: ((emacs "25.1") (pkg-info "0.4"))
@@ -1476,9 +1476,10 @@ Only buffers not visible in windows are returned."
   "Do a `multi-occur' in the project's buffers.
 With a prefix argument, show NLINES of context."
   (interactive "P")
-  (multi-occur (projectile-project-buffers)
-               (car (occur-read-primary-args))
-               nlines))
+  (let ((project (projectile-ensure-project (projectile-project-root))))
+    (multi-occur (projectile-project-buffers project)
+                 (car (occur-read-primary-args))
+                 nlines)))
 
 (defun projectile-normalise-paths (patterns)
   "Remove leading `/' from the elements of PATTERNS."
@@ -1783,12 +1784,16 @@ https://github.com/abo-abo/swiper")))
     (dolist (filename project-files)
       (funcall action filename))))
 
-(defun projectile-current-project-dirs ()
-  "Return a list of dirs for the current project."
+(defun projectile-project-dirs (project)
+  "Return a list of dirs for PROJECT."
   (delete-dups
    (delq nil
          (mapcar #'file-name-directory
-                 (projectile-current-project-files)))))
+                 (projectile-project-files project)))))
+
+(defun projectile-current-project-dirs ()
+  "Return a list of dirs for the current project."
+  (projectile-project-dirs (projectile-ensure-project (projectile-project-root))))
 
 ;;; Interactive commands
 
@@ -2140,9 +2145,10 @@ With INVALIDATE-CACHE invalidates the cache first.  With DIRED-VARIANT set to a
 defun, use that instead of `dired'.  A typical example of such a defun would be
 `dired-other-window' or `dired-other-frame'"
   (projectile-maybe-invalidate-cache invalidate-cache)
-  (let ((dir (projectile-complete-dir))
-        (dired-v (or dired-variant #'dired)))
-    (funcall dired-v (expand-file-name dir (projectile-project-root)))
+  (let* ((project (projectile-ensure-project (projectile-project-root)))
+         (dir (projectile-complete-dir project))
+         (dired-v (or dired-variant #'dired)))
+    (funcall dired-v (expand-file-name dir project))
     (run-hooks 'projectile-find-dir-hook)))
 
 ;;;###autoload
@@ -2169,12 +2175,13 @@ With a prefix arg INVALIDATE-CACHE invalidates the cache first."
   (interactive "P")
   (projectile--find-dir invalidate-cache #'dired-other-frame))
 
-(defun projectile-complete-dir ()
-  (projectile-completing-read
-   "Find dir: "
-   (if projectile-find-dir-includes-top-level
-       (append '("./") (projectile-current-project-dirs))
-     (projectile-current-project-dirs))))
+(defun projectile-complete-dir (project)
+  (let ((project-dirs (projectile-project-dirs project)))
+    (projectile-completing-read
+    "Find dir: "
+    (if projectile-find-dir-includes-top-level
+        (append '("./") project-dirs)
+      project-dirs))))
 
 ;;;###autoload
 (defun projectile-find-test-file (&optional invalidate-cache)
@@ -2202,8 +2209,10 @@ With a prefix arg INVALIDATE-CACHE invalidates the cache first."
   "Return a list of test files for the current project."
   (projectile-test-files (projectile-current-project-files)))
 
-(defvar projectile-project-types (make-hash-table)
-  "A hash table holding all project types that are known to Projectile.")
+(defvar projectile-project-types nil
+  "An alist holding all project types that are known to Projectile.
+The project types are symbols and they are linked to plists holding
+the properties of the various project types.")
 
 (cl-defun projectile-register-project-type
     (project-type marker-files &key compilation-dir configure compile test run test-suffix test-prefix src-dir test-dir)
@@ -2240,8 +2249,9 @@ TEST-DIR which specifies the path to the tests relative to the project root."
       (plist-put project-plist 'src-dir src-dir))
     (when test-dir
       (plist-put project-plist 'test-dir test-dir))
-    (puthash project-type project-plist
-             projectile-project-types)))
+    (setq projectile-project-types
+          (cons `(,project-type . ,project-plist)
+                projectile-project-types))))
 
 (defun projectile-cabal-project-p ()
   "Check if a project contains *.cabal files but no stack.yaml file."
@@ -2280,22 +2290,7 @@ TEST-DIR which specifies the path to the tests relative to the project root."
                                   :test "go test ./..."
                                   :test-suffix "_test")
 ;; File-based detection project types
-(projectile-register-project-type 'emacs-cask '("Cask")
-                                  :compile "cask install"
-                                  :test-prefix "test-"
-                                  :test-suffix "-test")
-(projectile-register-project-type 'r '("DESCRIPTION")
-                                  :compile "R CMD INSTALL --with-keep.source ."
-                                  :test (concat "R CMD check -o " temporary-file-directory " ."))
-(projectile-register-project-type 'haskell-stack '("stack.yaml")
-                                  :compile "stack build"
-                                  :test "stack build --test"
-                                  :test-suffix "Spec")
-(projectile-register-project-type 'rust-cargo '("Cargo.toml")
-                                  :compile "cargo build"
-                                  :test "cargo test")
-(projectile-register-project-type 'racket '("info.rkt")
-                                  :test "raco test .")
+
 ;; Universal
 (projectile-register-project-type 'scons '("SConstruct")
                                   :compile "scons"
@@ -2443,6 +2438,33 @@ TEST-DIR which specifies the path to the tests relative to the project root."
                                   :test-dir "spec/"
                                   :test-suffix "_spec")
 
+;; Emacs
+(projectile-register-project-type 'emacs-cask '("Cask")
+                                  :compile "cask install"
+                                  :test-prefix "test-"
+                                  :test-suffix "-test")
+
+;; R
+(projectile-register-project-type 'r '("DESCRIPTION")
+                                  :compile "R CMD INSTALL --with-keep.source ."
+                                  :test (concat "R CMD check -o " temporary-file-directory " ."))
+
+;; Haskell
+(projectile-register-project-type 'haskell-stack '("stack.yaml")
+                                  :compile "stack build"
+                                  :test "stack build --test"
+                                  :test-suffix "Spec")
+
+;; Rust
+(projectile-register-project-type 'rust-cargo '("Cargo.toml")
+                                  :compile "cargo build"
+                                  :test "cargo test")
+
+;; Racket
+(projectile-register-project-type 'racket '("info.rkt")
+                                  :test "raco test .")
+
+
 (defvar-local projectile-project-type nil
   "Buffer local var for overriding the auto-detected project type.
 Normally you'd set this from .dir-locals.el.")
@@ -2451,14 +2473,16 @@ Normally you'd set this from .dir-locals.el.")
 (defun projectile-detect-project-type ()
   "Detect the type of the current project.
 Fallsback to a generic project type when the type can't be determined."
-  (let ((project-type (or (cl-find-if
-                           (lambda (project-type)
-                             (let ((marker (plist-get (gethash project-type projectile-project-types) 'marker-files)))
-                               (if (listp marker)
-                                   (and (projectile-verify-files marker) project-type)
-                                 (and (funcall marker) project-type))))
-                           (hash-table-keys projectile-project-types))
-                          'generic)))
+  (let ((project-type
+         (or (car (cl-find-if
+                   (lambda (project-type-record)
+                     (let ((project-type (car project-type-record))
+                           (marker (plist-get (cdr project-type-record) 'marker-files)))
+                       (if (listp marker)
+                           (and (projectile-verify-files marker) project-type)
+                         (and (funcall marker) project-type))))
+                   projectile-project-types))
+             'generic)))
     (puthash (projectile-project-root) project-type projectile-project-type-cache)
     project-type))
 
@@ -2596,7 +2620,7 @@ test file."
 (defun projectile-project-type-attribute (project-type key &optional default-value)
   "Return the value of some PROJECT-TYPE attribute identified by KEY.
 Fallback to DEFAULT-VALUE for missing attributes."
-  (let ((project (gethash project-type projectile-project-types)))
+  (let ((project (alist-get project-type projectile-project-types)))
     (if (and project (plist-member project key))
         (plist-get project key)
       default-value)))
@@ -2900,21 +2924,21 @@ SEARCH-TERM is a regexp."
 (defun projectile-run-command-in-root ()
   "Invoke `execute-extended-command' in the project's root."
   (interactive)
-  (projectile-with-default-dir (projectile-project-root)
+  (projectile-with-default-dir (projectile-ensure-project (projectile-project-root))
     (call-interactively 'execute-extended-command)))
 
 ;;;###autoload
 (defun projectile-run-shell-command-in-root ()
   "Invoke `shell-command' in the project's root."
   (interactive)
-  (projectile-with-default-dir (projectile-project-root)
+  (projectile-with-default-dir (projectile-ensure-project (projectile-project-root))
     (call-interactively 'shell-command)))
 
 ;;;###autoload
 (defun projectile-run-async-shell-command-in-root ()
   "Invoke `async-shell-command' in the project's root."
   (interactive)
-  (projectile-with-default-dir (projectile-project-root)
+  (projectile-with-default-dir (projectile-ensure-project (projectile-project-root))
     (call-interactively 'async-shell-command)))
 
 ;;;###autoload
@@ -2923,7 +2947,7 @@ SEARCH-TERM is a regexp."
 
 Switch to the project specific shell buffer if it already exists."
   (interactive)
-  (projectile-with-default-dir (projectile-project-root)
+  (projectile-with-default-dir (projectile-ensure-project (projectile-project-root))
     (shell (concat "*shell " (projectile-project-name) "*"))))
 
 ;;;###autoload
@@ -2932,8 +2956,8 @@ Switch to the project specific shell buffer if it already exists."
 
 Switch to the project specific eshell buffer if it already exists."
   (interactive)
-  (let ((eshell-buffer-name (concat "*eshell " (projectile-project-name) "*")))
-    (projectile-with-default-dir (projectile-project-root)
+  (projectile-with-default-dir (projectile-ensure-project (projectile-project-root))
+    (let ((eshell-buffer-name (concat "*eshell " (projectile-project-name) "*")))
       (eshell))))
 
 ;;;###autoload
@@ -2942,10 +2966,11 @@ Switch to the project specific eshell buffer if it already exists."
 
 Switch to the project specific ielm buffer if it already exists."
   (interactive)
-  (let ((ielm-buffer-name (format "*ielm %s*" (projectile-project-name))))
+  (let* ((project (projectile-ensure-project (projectile-project-root)))
+         (ielm-buffer-name (format "*ielm %s*" (projectile-project-name project))))
     (if (get-buffer ielm-buffer-name)
         (switch-to-buffer ielm-buffer-name)
-      (projectile-with-default-dir (projectile-project-root)
+      (projectile-with-default-dir project
         (ielm))
       ;; ielm's buffer name is hardcoded, so we have to rename it after creation
       (rename-buffer ielm-buffer-name))))
@@ -2956,7 +2981,8 @@ Switch to the project specific ielm buffer if it already exists."
 
 Switch to the project specific term buffer if it already exists."
   (interactive (list nil))
-  (let* ((term (concat "term " (projectile-project-name)))
+  (let* ((project (projectile-ensure-project (projectile-project-root)))
+         (term (concat "term " (projectile-project-name project)))
          (buffer (concat "*" term "*")))
     (unless (get-buffer buffer)
       (require 'term)
@@ -2966,7 +2992,7 @@ Switch to the project specific term buffer if it already exists."
                                                    (getenv "ESHELL")
                                                    (getenv "SHELL")
                                                    "/bin/sh")))))
-        (projectile-with-default-dir (projectile-project-root)
+        (projectile-with-default-dir project
           (set-buffer (make-term term program))
           (term-mode)
           (term-char-mode))))
@@ -2974,11 +3000,12 @@ Switch to the project specific term buffer if it already exists."
 
 (defun projectile-files-in-project-directory (directory)
   "Return a list of files in DIRECTORY."
-  (let ((dir (file-relative-name (expand-file-name directory)
-                                 (projectile-project-root))))
+  (let* ((project (projectile-ensure-project (projectile-project-root)))
+         (dir (file-relative-name (expand-file-name directory)
+                                  project)))
     (cl-remove-if-not
      (lambda (f) (string-prefix-p dir f))
-     (projectile-current-project-files))))
+     (projectile-project-files project))))
 
 (defun projectile-files-from-cmd (cmd directory)
   "Use a grep-like CMD to search for files within DIRECTORY.
@@ -3119,19 +3146,19 @@ to run the replacement."
 (defun projectile-dired ()
   "Open `dired' at the root of the project."
   (interactive)
-  (dired (projectile-project-root)))
+  (dired (projectile-ensure-project (projectile-project-root))))
 
 ;;;###autoload
 (defun projectile-dired-other-window ()
   "Open `dired'  at the root of the project in another window."
   (interactive)
-  (dired-other-window (projectile-project-root)))
+  (dired-other-window (projectile-ensure-project (projectile-project-root))))
 
 ;;;###autoload
 (defun projectile-dired-other-frame ()
   "Open `dired' at the root of the project in another frame."
   (interactive)
-  (dired-other-frame (projectile-project-root)))
+  (dired-other-frame (projectile-ensure-project (projectile-project-root))))
 
 ;;;###autoload
 (defun projectile-vc (&optional project-root)
@@ -3179,7 +3206,7 @@ directory to open."
 (defun projectile-recentf-files ()
   "Return a list of recently visited files in a project."
   (and (boundp 'recentf-list)
-       (let ((project-root (projectile-project-root)))
+       (let ((project-root (projectile-ensure-project (projectile-project-root))))
          (mapcar
           (lambda (f) (file-relative-name f project-root))
           (cl-remove-if-not
@@ -3237,7 +3264,7 @@ Should be set via .dir-locals.el.")
 If found, checks if value is symbol or string.  In case of symbol
 resolves to function `funcall's.  Return value of function MUST
 be string to be executed as command."
-  (let ((command (plist-get (gethash project-type projectile-project-types) command-type)))
+  (let ((command (plist-get (alist-get project-type projectile-project-types) command-type)))
     (cond
      ((stringp command) command)
      ((functionp command)
@@ -4081,7 +4108,7 @@ thing shown in the mode line otherwise."
         ["Switch to buffer" projectile-switch-to-buffer]
         ["Jump between implementation file and test file" projectile-toggle-between-implementation-and-test]
         ["Kill project buffers" projectile-kill-buffers]
-        ["Save project buffers" projectile-save-buffers]
+        ["Save project buffers" projectile-save-project-buffers]
         ["Recent files" projectile-recentf]
         ["Previous buffer" projectile-previous-project-buffer]
         ["Next buffer" projectile-next-project-buffer]

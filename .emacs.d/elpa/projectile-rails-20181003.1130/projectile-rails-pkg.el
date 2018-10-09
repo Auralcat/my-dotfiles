@@ -1,2 +1,0 @@
-;;; -*- no-byte-compile: t -*-
-(define-package "projectile-rails" "20181003.1130" "Minor mode for Rails projects based on projectile-mode" '((emacs "24.3") (projectile "0.12.0") (inflections "1.1") (inf-ruby "2.2.6") (f "0.13.0") (rake "0.3.2")) :commit "af59d97623890a051c4e08a646352f5a0d769109" :keywords '("rails" "projectile") :authors '(("Adam Sokolnicki" . "adam.sokolnicki@gmail.com")) :maintainer '("Adam Sokolnicki" . "adam.sokolnicki@gmail.com") :url "https://github.com/asok/projectile-rails")
