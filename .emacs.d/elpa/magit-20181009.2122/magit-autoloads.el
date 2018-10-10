@@ -1824,7 +1824,7 @@ changes introduced by that commit (unlike 'git format-patch'
 which creates patches for all commits that are reachable from
 `HEAD' but not from the specified commit).
 
-\(fn RANGE ARGS)" t nil)
+\(fn RANGE ARGS FILES)" t nil)
 
 (autoload 'magit-request-pull "magit-remote" "\
 Request upstream to pull from you public repository.
