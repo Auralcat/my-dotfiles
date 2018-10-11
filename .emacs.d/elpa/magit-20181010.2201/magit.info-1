@@ -11,6 +11,7 @@ This is magit.info, produced by makeinfo version 6.5 from magit.texi.
      but WITHOUT ANY WARRANTY; without even the implied warranty of
      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
      General Public License for more details.
+
 INFO-DIR-SECTION Emacs
 START-INFO-DIR-ENTRY
 * Magit: (magit).       Using Git from Emacs with Magit.
@@ -30,7 +31,7 @@ to perform almost all of their daily version control tasks directly from
 within Emacs.  While many fine Git clients exist, only Magit and Git
 itself deserve to be called porcelains.
 
-This manual is for Magit version 2.13.0 (2.13.0-292-gb768542a2+1).
+This manual is for Magit version 2.13.0 (2.13.0-293-g50e05e4ac+1).
 
      Copyright (C) 2015-2018 Jonas Bernoulli <jonas@bernoul.li>
 
@@ -446,10 +447,11 @@ File: magit.info,  Node: Installing from the Git Repository,  Next: Post-Install
 2.2 Installing from the Git Repository
 ======================================
 
-Magit depends on the ‘dash’, ‘magit-popup’, ‘ghub’ and ‘with-editor’
-libraries which are available from Melpa and Melpa-Stable.  Install them
-using ‘M-x package-install RET <package> RET’.  Of course you may also
-install them manually from their development repository.
+Magit depends on the ‘dash’, ‘ghub’, ‘graphql’, ‘magit-popup’, ‘treepy’
+and ‘with-editor’ libraries which are available from Melpa and
+Melpa-Stable.  Install them using ‘M-x package-install RET <package>
+RET’.  Of course you may also install them manually from their
+development repository.
 
    (An ancient release of Magit is also available from Marmalade, but no
 new versions will be uploaded.  Marmalade is unmaintained — its
@@ -466,16 +468,18 @@ upload their packages in the first place.)
 
      $ make
 
-   If you haven’t installed ‘dash’, ‘magit-popup’, ‘ghub’ and
-‘with-editor’ from Melpa or at ‘/path/to/magit/../<package>’, then you
-have to tell ‘make’ where to find them.  To do so create the file
-‘/path/to/magit/config.mk’ with the following content before running
-‘make’:
+   If you haven’t installed ‘dash’, ‘ghub’, ‘graphql’, ‘magit-popup’,
+‘treepy’ and ‘with-editor’ from Melpa or at
+‘/path/to/magit/../<package>’, then you have to tell ‘make’ where to
+find them.  To do so create the file ‘/path/to/magit/config.mk’ with the
+following content before running ‘make’:
 
      LOAD_PATH  = -L /path/to/magit/lisp
      LOAD_PATH += -L /path/to/dash
-     LOAD_PATH += -L /path/to/magit-popup
      LOAD_PATH += -L /path/to/ghub
+     LOAD_PATH += -L /path/to/graphql
+     LOAD_PATH += -L /path/to/magit-popup
+     LOAD_PATH += -L /path/to/treepy
      LOAD_PATH += -L /path/to/with-editor
 
    Finally add this to your init file:

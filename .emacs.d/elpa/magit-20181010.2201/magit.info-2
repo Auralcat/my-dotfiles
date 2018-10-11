@@ -11,6 +11,7 @@ This is magit.info, produced by makeinfo version 6.5 from magit.texi.
      but WITHOUT ANY WARRANTY; without even the implied warranty of
      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
      General Public License for more details.
+
 INFO-DIR-SECTION Emacs
 START-INFO-DIR-ENTRY
 * Magit: (magit).       Using Git from Emacs with Magit.
