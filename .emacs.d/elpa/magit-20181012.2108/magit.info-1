@@ -31,7 +31,7 @@ to perform almost all of their daily version control tasks directly from
 within Emacs.  While many fine Git clients exist, only Magit and Git
 itself deserve to be called porcelains.
 
-This manual is for Magit version 2.13.0 (2.13.0-293-g50e05e4ac+1).
+This manual is for Magit version 2.13.0 (2.13.0-308-g728052be4+1).
 
      Copyright (C) 2015-2018 Jonas Bernoulli <jonas@bernoul.li>
 
@@ -4130,7 +4130,7 @@ popup from the file popup, which is available on ‘C-c M-g’, provided
 ‘magit-file-mode’ is enabled, see *note Minor Mode for Buffers Visiting
 Files::.
 
- -- Command: magit-blame
+ -- Command: magit-blame-addition
 
      This command augments each line or chunk of lines in the current
      file- or blob-visiting buffer with information about what commits
@@ -4147,9 +4147,9 @@ Files::.
 
  -- Command: magit-blame-echo
 
-     This command is like ‘magit-blame’ except that it doesn’t turn on
-     ‘read-only-mode’ and that it initially uses the visualization style
-     specified by option ‘magit-blame-echo-style’.
+     This command is like ‘magit-blame-addition’ except that it doesn’t
+     turn on ‘read-only-mode’ and that it initially uses the
+     visualization style specified by option ‘magit-blame-echo-style’.
 
  -- Command: magit-blame-removal
 
@@ -4157,7 +4157,7 @@ Files::.
      blob-visiting buffer with information about the revision that
      removes it.  It cannot be used in file-visiting buffers.
 
-     Like ‘magit-blame’, this command can be used recursively.
+     Like ‘magit-blame-addition’, this command can be used recursively.
 
  -- Command: magit-blame-reverse
 
@@ -4165,7 +4165,7 @@ Files::.
      file- or blob-visiting buffer with information about the last
      revision in which a line still existed.
 
-     Like ‘magit-blame’, this command can be used recursively.
+     Like ‘magit-blame-addition’, this command can be used recursively.
 
    The following key bindings are available when Magit-Blame mode is
 enabled and Read-Only mode is not enabled.  These commands are also
@@ -4977,7 +4977,7 @@ features are available from separate popups.
      else then ‘HEAD’ becomes detached.  Checkout fails if the working
      tree or the staging area contain changes.
 
-‘b n’     (‘magit-branch’)
+‘b n’     (‘magit-branch-create’)
 
      Create a new branch.  The user is asked for a branch or arbitrary
      revision to use as the starting point of the new branch.  When a
@@ -5499,7 +5499,7 @@ merge conflicts see the next section.
    When no merge is in progress, then the popup buffer features the
 following commands.
 
-‘m m’     (‘magit-merge’)
+‘m m’     (‘magit-merge-plain’)
 
      This command merges another branch or an arbitrary revision into
      the current branch.  The branch or revision to be merged is read in
@@ -5722,7 +5722,7 @@ See *note Information About In-Progress Rebase::.
 
      Rebase the current branch onto its upstream branch.
 
-‘r e’     (‘magit-rebase’)
+‘r e’     (‘magit-rebase-branch’)
 
      Rebase the current branch onto a branch read in the minibuffer.
      All commits that are reachable from head but not from the selected
@@ -6210,7 +6210,7 @@ File: magit.info,  Node: Reverting,  Up: Cherry Picking
    When no cherry-pick or revert is in progress, then the popup buffer
 features the following commands.
 
-‘V V’     (‘magit-revert’)
+‘V V’     (‘magit-revert-and-commit’)
 
      Revert a commit by creating a new commit.  Prompt for a commit,
      defaulting to the commit at point.  If the region selects multiple
@@ -6247,13 +6247,14 @@ File: magit.info,  Node: Resetting,  Next: Stashing,  Prev: Cherry Picking,  Up:
 
 Also see *note (gitman)git-reset::.
 
-‘x’     (‘magit-reset’)
+‘x’     (‘magit-reset-quickly’)
 
-     Reset the head and index to some commit read from the user and
-     defaulting to the commit at point.  The working tree is kept as-is.
-     With a prefix argument also reset the working tree.
+     Reset the ‘HEAD’ and index to some commit read from the user and
+     defaulting to the commit at point, and possibly also reset the
+     working tree.  With a prefix argument reset the working tree
+     otherwise don’t.
 
-‘X m’     (‘magit-reset-head’)
+‘X m’     (‘magit-reset-mixed’)
 
      Reset the ‘HEAD’ and index to some commit read from the user and
      defaulting to the commit at point.  The working tree is kept as-is.
@@ -6300,7 +6301,7 @@ Also see *note (gitman)git-stash::.
      This prefix command shows the following suffix commands along with
      the appropriate infix arguments in a popup buffer.
 
-‘z z’     (‘magit-stash’)
+‘z z’     (‘magit-stash-both’)
 
      Create a stash of the index and working tree.  Untracked files are
      included according to popup arguments.  One prefix argument is
@@ -6326,7 +6327,7 @@ Also see *note (gitman)git-stash::.
      prefix argument is equivalent to ‘--include-untracked’ while two
      prefix arguments are equivalent to ‘--all’.
 
-‘z Z’     (‘magit-snapshot’)
+‘z Z’     (‘magit-snapshot-both’)
 
      Create a snapshot of the index and working tree.  Untracked files
      are included according to popup arguments.  One prefix argument is
@@ -6604,7 +6605,7 @@ _push-remote_, see *note Branching::.
 
      Fetch from the upstream of the current branch.
 
-‘f e’     (‘magit-fetch’)
+‘f e’     (‘magit-fetch-other’)
 
      Fetch from another repository.
 
@@ -6655,7 +6656,7 @@ _push-remote_, see *note Branching::.
 
      Pull from the upstream of the current branch.
 
-‘F e’     (‘magit-pull’)
+‘F e’     (‘magit-pull-branch’)
 
      Pull from a branch read in the minibuffer.
 
@@ -6888,7 +6889,7 @@ Also see *note (gitman)git-tag::.
      This prefix command shows the following suffix commands along with
      the appropriate infix arguments in a popup buffer.
 
-‘t t’     (‘magit-tag’)
+‘t t’     (‘magit-tag-create’)
 
      Create a new tag with the given NAME at REV.  With a prefix
      argument annotate the tag.
@@ -7527,7 +7528,7 @@ few key bindings, but this might be extended in the future.
      appropriate infix arguments in a popup buffer.  See *note
      Blaming::.
 
-‘C-c M-g b’     (‘magit-blame’)
+‘C-c M-g b’     (‘magit-blame-addition’)
 
      This command shows for each line the revision in which it was
      added.

@@ -215,7 +215,7 @@ not turn on `read-only-mode'.
 
 \(fn)" t nil)
 
-(autoload 'magit-blame "magit-blame" "\
+(autoload 'magit-blame-addition "magit-blame" "\
 For each line show the revision in which it was added.
 
 \(fn)" t nil)
@@ -358,7 +358,7 @@ changes.
 
 \(fn REVISION)" t nil)
 
-(autoload 'magit-branch "magit-branch" "\
+(autoload 'magit-branch-create "magit-branch" "\
 Create BRANCH at branch or revision START-POINT.
 
 \(git branch [ARGS] BRANCH START-POINT).
@@ -1038,11 +1038,10 @@ with two prefix arguments remove ignored files only.
 \(fn &optional ARG)" t nil)
  (autoload 'magit-gitignore-popup "magit-extras" nil t)
 
-(autoload 'magit-gitignore "magit-extras" "\
-Instruct Git to ignore FILE-OR-PATTERN.
-With a prefix argument only ignore locally.
+(autoload 'magit-gitignore-globally "magit-extras" "\
+Instruct Git to globally ignore FILE-OR-PATTERN.
 
-\(fn FILE-OR-PATTERN &optional LOCAL)" t nil)
+\(fn FILE-OR-PATTERN)" t nil)
 
 (autoload 'magit-gitignore-locally "magit-extras" "\
 Instruct Git to locally ignore FILE-OR-PATTERN.
@@ -1444,7 +1443,7 @@ Show commits in a branch that are not merged in the upstream branch.
 ;;; Generated autoloads from magit-merge.el
  (autoload 'magit-merge-popup "magit" nil t)
 
-(autoload 'magit-merge "magit-merge" "\
+(autoload 'magit-merge-plain "magit-merge" "\
 Merge commit REV into the current branch; using default message.
 
 Unless there are conflicts or a prefix argument is used create a
@@ -1652,7 +1651,7 @@ Fetch from the upstream repository of the current branch.
 
 \(fn ARGS)" t nil)
 
-(autoload 'magit-fetch "magit-remote" "\
+(autoload 'magit-fetch-other "magit-remote" "\
 Fetch from another repository.
 
 \(fn REMOTE ARGS)" t nil)
@@ -1706,7 +1705,7 @@ Pull from the upstream of the current branch.
 
 \(fn ARGS)" t nil)
 
-(autoload 'magit-pull "magit-remote" "\
+(autoload 'magit-pull-branch "magit-remote" "\
 Pull from a branch read in the minibuffer.
 
 \(fn SOURCE ARGS)" t nil)
@@ -1859,15 +1858,7 @@ repositories are displayed.
 ;;; Generated autoloads from magit-reset.el
  (autoload 'magit-reset-popup "magit" nil t)
 
-(autoload 'magit-reset "magit-reset" "\
-Reset the `HEAD' and index to COMMIT, but not the working tree.
-With a prefix argument also reset the working tree.
-
-\(git reset --mixed|--hard COMMIT)
-
-\(fn COMMIT &optional HARD)" t nil)
-
-(autoload 'magit-reset-head "magit-reset" "\
+(autoload 'magit-reset-mixed "magit-reset" "\
 Reset the `HEAD' and index to COMMIT, but not the working tree.
 
 \(git reset --mixed COMMIT)
@@ -1902,6 +1893,14 @@ Reset the worktree to COMMIT.
 Keep the `HEAD' and index as-is.
 
 \(fn COMMIT)" t nil)
+
+(autoload 'magit-reset-quickly "magit-reset" "\
+Reset the `HEAD' and index to COMMIT, and possibly the working tree.
+With a prefix argument reset the working tree otherwise don't.
+
+\(git reset --mixed|--hard COMMIT)
+
+\(fn COMMIT &optional HARD)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-reset" '("magit-reset-")))
 
@@ -1984,7 +1983,7 @@ the process manually.
 \(fn COMMITS BRANCH START-POINT &optional ARGS)" t nil)
  (autoload 'magit-revert-popup "magit-sequence" nil t)
 
-(autoload 'magit-revert "magit-sequence" "\
+(autoload 'magit-revert-and-commit "magit-sequence" "\
 Revert COMMIT by creating a new commit.
 Prompt for a commit, defaulting to the commit at point.  If
 the region selects multiple commits, then revert all of them,
@@ -2039,7 +2038,7 @@ Rebase the current branch onto its upstream branch.
 
 \(fn ARGS)" t nil)
 
-(autoload 'magit-rebase "magit-sequence" "\
+(autoload 'magit-rebase-branch "magit-sequence" "\
 Rebase the current branch onto a branch read in the minibuffer.
 All commits that are reachable from `HEAD' but not from the
 selected branch TARGET are being rebased.
@@ -2108,7 +2107,7 @@ Abort the current rebase operation, restoring the original branch.
 ;;; Generated autoloads from magit-stash.el
  (autoload 'magit-stash-popup "magit-stash" nil t)
 
-(autoload 'magit-stash "magit-stash" "\
+(autoload 'magit-stash-both "magit-stash" "\
 Create a stash of the index and working tree.
 Untracked files are included according to popup arguments.
 One prefix argument is equivalent to `--include-untracked'
@@ -2141,7 +2140,7 @@ while two prefix arguments are equivalent to `--all'.
 
 \(fn MESSAGE &optional INCLUDE-UNTRACKED)" t nil)
 
-(autoload 'magit-snapshot "magit-stash" "\
+(autoload 'magit-snapshot-both "magit-stash" "\
 Create a snapshot of the index and working tree.
 Untracked files are included according to popup arguments.
 One prefix argument is equivalent to `--include-untracked'
@@ -2421,7 +2420,7 @@ Extract the history of the subtree PREFIX.
 ;;; Generated autoloads from magit-tag.el
  (autoload 'magit-tag-popup "magit" nil t)
 
-(autoload 'magit-tag "magit-tag" "\
+(autoload 'magit-tag-create "magit-tag" "\
 Create a new tag with the given NAME at REV.
 With a prefix argument annotate the tag.
 
