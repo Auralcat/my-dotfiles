@@ -149,7 +149,7 @@
 (define-abbrev-table 'fundamental-mode-abbrev-table
   '(
     ("WP" "WordPress" nil 3)
-    ("n" "não" nil 2)
+    ("n" "não" nil 6)
     ("pq" "porque" nil 2)
     ("vc" "você" nil 2)
    ))
@@ -188,6 +188,8 @@
 
 (define-abbrev-table 'inferior-moz-mode-abbrev-table '())
 
+(define-abbrev-table 'inferior-python-mode-abbrev-table '())
+
 (define-abbrev-table 'java-mode-abbrev-table
   '(
    ))
@@ -209,6 +211,10 @@
 (define-abbrev-table 'log-edit-mode-abbrev-table '())
 
 (define-abbrev-table 'log4e-mode-abbrev-table '())
+
+(define-abbrev-table 'lua-mode-abbrev-table
+  '(
+   ))
 
 (define-abbrev-table 'magit-cherry-mode-abbrev-table '())
 
@@ -284,6 +290,7 @@
     ("emus" "meus" nil 3)
     ("entreguar" "entregar" nil 1)
     ("eplo" "pelo" nil 1)
+    ("exp" "experiência" nil 2)
     ("hj" "hoje" nil 3)
     ("hovje" "hoje" nil 1)
     ("htat" "that" nil 2)
@@ -304,9 +311,9 @@
     ("probelma" "problema " nil 1)
     ("projeots" "projetos" nil 1)
     ("qdo" "quando" nil 4)
-    ("qeu" "que" nil 23)
+    ("qeu" "que" nil 24)
     ("sla" "sei lá" nil 4)
-    ("tbm" "também" nil 30)
+    ("tbm" "também" nil 32)
     ("tepmo" "tempo" nil 1)
     ("tÔ" "tô" nil 9)
     ("uotra" "outra" nil 4)
@@ -336,6 +343,12 @@
 (define-abbrev-table 'projectile-rails-generate-mode-abbrev-table '())
 
 (define-abbrev-table 'projectile-rails-server-mode-abbrev-table '())
+
+(define-abbrev-table 'python-mode-abbrev-table '())
+
+(define-abbrev-table 'python-mode-skeleton-abbrev-table
+  '(
+   ))
 
 (define-abbrev-table 'rake-compilation-mode-abbrev-table '())
 
