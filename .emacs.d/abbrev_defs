@@ -212,9 +212,7 @@
 
 (define-abbrev-table 'log4e-mode-abbrev-table '())
 
-(define-abbrev-table 'lua-mode-abbrev-table
-  '(
-   ))
+(define-abbrev-table 'lua-mode-abbrev-table '())
 
 (define-abbrev-table 'magit-cherry-mode-abbrev-table '())
 
@@ -275,6 +273,7 @@
     ("Ter" "Terça" nil 0)
     ("WP" "WordPress" nil 0)
     ("acotneceram" "aconteceram" nil 0)
+    ("aidna" "ainda" nil 2)
     ("avi" "vai" nil 2)
     ("conversda" "conversa" nil 1)
     ("cosia" "coisa" nil 0)
@@ -290,7 +289,7 @@
     ("emus" "meus" nil 3)
     ("entreguar" "entregar" nil 1)
     ("eplo" "pelo" nil 1)
-    ("exp" "experiência" nil 2)
+    ("exp" "experiência" nil 6)
     ("hj" "hoje" nil 3)
     ("hovje" "hoje" nil 1)
     ("htat" "that" nil 2)
@@ -311,9 +310,9 @@
     ("probelma" "problema " nil 1)
     ("projeots" "projetos" nil 1)
     ("qdo" "quando" nil 4)
-    ("qeu" "que" nil 24)
+    ("qeu" "que" nil 25)
     ("sla" "sei lá" nil 4)
-    ("tbm" "também" nil 32)
+    ("tbm" "também" nil 34)
     ("tepmo" "tempo" nil 1)
     ("tÔ" "tô" nil 9)
     ("uotra" "outra" nil 4)
@@ -346,9 +345,7 @@
 
 (define-abbrev-table 'python-mode-abbrev-table '())
 
-(define-abbrev-table 'python-mode-skeleton-abbrev-table
-  '(
-   ))
+(define-abbrev-table 'python-mode-skeleton-abbrev-table '())
 
 (define-abbrev-table 'rake-compilation-mode-abbrev-table '())
 
