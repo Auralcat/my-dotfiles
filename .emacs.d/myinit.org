@@ -738,6 +738,17 @@ me, too many buffers to work with... for now.
 
 
 * Themes
+** Gruvbox
+   gruvbox is heavily inspired by badwolf, jellybeans and solarized.
+
+   Designed as a bright theme with pastel 'retro groove' colors and
+   light/dark mode switching in the way of solarized. The main focus when
+   developing gruvbox is to keep colors easily distinguishable, contrast
+   enough and still pleasant for the eyes.
+   #+BEGIN_SRC emacs-lisp :tangle yes
+   (use-package gruvbox-theme)
+   #+END_SRC
+
 ** Jazz
    A warm theme with dark colors.
    #+BEGIN_SRC emacs-lisp :tangle yes
