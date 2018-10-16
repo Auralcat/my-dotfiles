@@ -26,6 +26,7 @@
 
   ;; Manual packages load path
   (add-to-list 'load-path "~/my-dotfiles/.emacs.d/manual-packages/multi-term-plus/")
+  (add-to-list 'load-path "~/my-dotfiles/.emacs.d/manual-themes/")
 
   ;; Backup files by copying them
   (setq backup-by-copying t)
