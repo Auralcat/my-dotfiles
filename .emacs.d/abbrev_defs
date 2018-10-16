@@ -212,9 +212,7 @@
 
 (define-abbrev-table 'log4e-mode-abbrev-table '())
 
-(define-abbrev-table 'lua-mode-abbrev-table
-  '(
-   ))
+(define-abbrev-table 'lua-mode-abbrev-table '())
 
 (define-abbrev-table 'magit-cherry-mode-abbrev-table '())
 
@@ -276,6 +274,7 @@
     ("WP" "WordPress" nil 0)
     ("acotneceram" "aconteceram" nil 0)
     ("avi" "vai" nil 2)
+    ("avvrevs" "abbrevs" nil 0)
     ("conversda" "conversa" nil 1)
     ("cosia" "coisa" nil 0)
     ("cosneguiu" "conseguiu" nil 1)
@@ -290,6 +289,7 @@
     ("emus" "meus" nil 3)
     ("entreguar" "entregar" nil 1)
     ("eplo" "pelo" nil 1)
+    ("escerve" "escreve " nil 1)
     ("exp" "experiência" nil 2)
     ("hj" "hoje" nil 3)
     ("hovje" "hoje" nil 1)
@@ -297,6 +297,7 @@
     ("hte" "the" nil 1)
     ("htem" "them" nil 1)
     ("insnegurança" "insegurança" nil 2)
+    ("jpbar" "jogar" nil 2)
     ("memso" "mesmo" nil 0)
     ("moranod" "morando" nil 1)
     ("msg" "mensagem" nil 3)
@@ -317,8 +318,8 @@
     ("tepmo" "tempo" nil 1)
     ("tÔ" "tô" nil 9)
     ("uotra" "outra" nil 4)
-    ("uqe" "que" nil 5)
-    ("vc" "você" nil 13)
+    ("uqe" "que" nil 6)
+    ("vc" "você" nil 14)
     ("ñ" "não" nil 1)
    ))
 
