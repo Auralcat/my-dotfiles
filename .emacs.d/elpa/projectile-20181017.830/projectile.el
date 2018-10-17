@@ -4,7 +4,7 @@
 
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/projectile
-;; Package-Version: 20181009.851
+;; Package-Version: 20181017.830
 ;; Keywords: project, convenience
 ;; Version: 1.1.0-snapshot
 ;; Package-Requires: ((emacs "25.1") (pkg-info "0.4"))
@@ -1100,8 +1100,8 @@ Files are returned as relative paths to DIRECTORY."
           (pcase projectile-indexing-method
            ('native (projectile-dir-files-native directory))
            ;; use external tools to get the project files
-           ('alien (projectile-adjust-files directory vcs (projectile-dir-files-external directory)))
-           ('turbo-alien (projectile-dir-files-external directory))
+           ('alien (projectile-adjust-files directory vcs (projectile-dir-files-alien directory)))
+           ('turbo-alien (projectile-dir-files-alien directory))
            (_ (user-error "Unsupported indexing method `%S'" projectile-indexing-method)))))))
 
 ;;; Native Project Indexing
@@ -1143,7 +1143,7 @@ function is executing."
 ;; This corresponds to `projectile-indexing-method' being set to alien or turbo-alien.
 ;; The only difference between the two methods is that turbo-alien doesn't do
 ;; any post-processing of the files obtained via the external command.
-(defun projectile-dir-files-external (directory)
+(defun projectile-dir-files-alien (directory)
   "Get the files for DIRECTORY using external tools."
   (let ((vcs (projectile-project-vcs directory)))
     (cond
@@ -1152,7 +1152,8 @@ function is executing."
             (projectile-get-sub-projects-files directory vcs)))
     (t (projectile-files-via-ext-command directory (projectile-get-ext-command vcs))))))
 
-(define-obsolete-variable-alias 'projectile-get-repo-files 'projectile-dir-files-external "1.1")
+(define-obsolete-function-alias 'projectile-dir-files-external 'projectile-dir-files-alien "1.1")
+(define-obsolete-function-alias 'projectile-get-repo-files 'projectile-dir-files-alien "1.1")
 
 (defun projectile-get-ext-command (vcs)
   "Determine which external command to invoke based on the project's VCS.
@@ -1756,9 +1757,26 @@ https://github.com/abo-abo/swiper")))
     (when (null files)
       (when projectile-enable-caching
         (message "Projectile is initializing cache..."))
-      (setq files (cl-mapcan
-                   (lambda (dir) (projectile-dir-files dir))
-                   (projectile-get-project-directories project-root)))
+      (setq files
+            (if (eq projectile-indexing-method 'turbo-alien)
+                ;; In turbo-alien mode we can just skip reading
+                ;; .projectile and find all files in the root dir.
+                (projectile-dir-files-alien project-root)
+              ;; If a project is defined as a list of subfolders
+              ;; then we'll have the files returned for each subfolder,
+              ;; so they are relative to the project root.
+              ;;
+              ;; TODO: That's pretty slow and we need to improve it.
+              ;; One options would be to pass explicitly the subdirs
+              ;; to commands like `git ls-files` which would return
+              ;; files paths relative to the project root.
+              (cl-mapcan
+               (lambda (dir)
+                 (mapcar (lambda (f)
+                           (file-relative-name (concat dir f)
+                                               project-root))
+                         (projectile-dir-files dir)))
+               (projectile-get-project-directories project-root))))
 
       ;; Save the cached list.
       (when projectile-enable-caching
@@ -3957,6 +3975,38 @@ dirty project list."
     (projectile-completing-read "Select project: " mod-proj
                                 :action 'projectile-vc)))
 
+
+;;; Find next/previous project buffer
+(defun projectile--repeat-until-project-buffer (orig-fun &rest args)
+  "Repeat ORIG-FUN with ARGS until the current buffer is a project buffer."
+  (if (projectile-project-root)
+      (let* ((other-project-buffers (make-hash-table :test 'eq))
+             (projectile-project-buffers (projectile-project-buffers))
+             (max-iterations (length (buffer-list)))
+             (counter 0))
+        (dolist (buffer projectile-project-buffers)
+          (unless (eq buffer (current-buffer))
+            (puthash buffer t other-project-buffers)))
+        (when (cdr-safe projectile-project-buffers)
+          (while (and (< counter max-iterations)
+                      (not (gethash (current-buffer) other-project-buffers)))
+            (apply orig-fun args)
+            (incf counter))))
+    (apply orig-fun args)))
+
+(defun projectile-next-project-buffer ()
+  "In selected window switch to the next project buffer.
+
+If the current buffer does not belong to a project, call `next-buffer'."
+  (interactive)
+  (projectile--repeat-until-project-buffer #'next-buffer))
+
+(defun projectile-previous-project-buffer ()
+  "In selected window switch to the previous project buffer.
+
+If the current buffer does not belong to a project, call `previous-buffer'."
+  (interactive)
+  (projectile--repeat-until-project-buffer #'previous-buffer))
 
 
 ;;; Editing a project's .dir-locals
@@ -4207,38 +4257,6 @@ Otherwise behave as if called interactively.
 
 ;;;###autoload
 (define-obsolete-function-alias 'projectile-global-mode 'projectile-mode "1.0")
-
-(defun projectile--repeat-until-project-buffer (orig-fun &rest args)
-  "Repeat ORIG-FUN with ARGS until the current buffer is a project buffer."
-  (if (projectile-project-root)
-      (let* ((other-project-buffers (make-hash-table :test 'eq))
-             (projectile-project-buffers (projectile-project-buffers))
-             (max-iterations (length (buffer-list)))
-             (counter 0))
-        (dolist (buffer projectile-project-buffers)
-          (unless (eq buffer (current-buffer))
-            (puthash buffer t other-project-buffers)))
-        (when (cdr-safe projectile-project-buffers)
-          (while (and (< counter max-iterations)
-                      (not (gethash (current-buffer) other-project-buffers)))
-            (apply orig-fun args)
-            (incf counter))))
-    (apply orig-fun args)))
-
-(defun projectile-next-project-buffer ()
-  "In selected window switch to the next project buffer.
-
-If the current buffer does not belong to a project, call `next-buffer'."
-  (interactive)
-  (projectile--repeat-until-project-buffer #'next-buffer))
-
-(defun projectile-previous-project-buffer ()
-  "In selected window switch to the previous project buffer.
-
-If the current buffer does not belong to a project, call `previous-buffer'."
-  (interactive)
-  (projectile--repeat-until-project-buffer #'previous-buffer))
-
 
 (provide 'projectile)
 
