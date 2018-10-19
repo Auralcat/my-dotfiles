@@ -55,6 +55,8 @@
     "h" 'helm-command-prefix
     ;; Use Ace-Jump with Leader j
     "j" 'evil-ace-jump-char-mode
+    ;; Show key frequencies
+    "k" 'keyfreq-show
     ;; Clock out
     "o" 'org-clock-out
     ;; Projectile prefix
