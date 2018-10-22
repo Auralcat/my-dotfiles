@@ -5,7 +5,7 @@
 ;; Author: Bharat Joshi <jbharat@outlook.com>
 ;; Maintainer: Bharat Joshi <jbharat@outlook.com>
 ;; URL: https://github.com/jbharat/zeno-theme
-;; Package-Version: 20180901.222
+;; Package-Version: 20181021.45
 ;; Package-X-Original-Version: 20180211.1557
 ;; Created: 22th July 2017
 ;; Keywords: faces, theme, dark, blue
@@ -162,7 +162,7 @@
  `(isearch-fail ((t (:foreground ,full-white :background ,warning-bg-face))))
  `(ahs-plugin-whole-buffer-face ((t (:foreground ,full-black :background ,maya-blue))))
  `(ahs-face ((t (:foreground ,full-black :background ,lavender-blue))))
- `(ahs-definition-face ((t (:background ,lavender-blue :foreground ,light-green-cyan))))
+ `(ahs-definition-face ((t (:background ,lavender-blue :foreground ,full-black))))
 
  ;; org
  `(outline-2 ((t (:background ,bg :foreground ,light-violet))))
