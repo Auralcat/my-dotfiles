@@ -1468,8 +1468,9 @@ This doesn't replace inside the files, only modify filenames."
 See `helm-ff-RET' for details.
 If MUST-MATCH is specified exit with
 `helm-confirm-and-exit-minibuffer' which handle must-match mechanism."
-  (let ((cands (helm-marked-candidates))
-        (sel   (helm-get-selection)))
+  (let* ((cands (helm-marked-candidates))
+         (sel   (car cands)))
+    (cl-assert sel nil "Trying to exit with no candidates")
     (if (and (not (cdr cands))
              (file-directory-p sel)
              (not (string= "." (helm-basename sel))))
@@ -3472,6 +3473,8 @@ Use it for non--interactive calls of `helm-find-files'."
     (unless helm-source-find-files
       (setq helm-source-find-files (helm-make-source
                                     "Find Files" 'helm-source-ffiles)))
+    (when (helm-attr 'follow helm-source-find-files)
+      (helm-attrset 'follow -1 helm-source-find-files))
     (helm-ff-setup-update-hook)
     (add-hook 'helm-resume-after-hook 'helm-ff--update-resume-after-hook)
     (unwind-protect
