@@ -362,7 +362,10 @@ to run the replacement.
 \(fn &optional ARG)" t nil)
 
 (autoload 'projectile-kill-buffers "projectile" "\
-Kill all project buffers.
+Kill project buffers.
+
+The buffer are killed according to the value of
+`projectile-kill-buffers-filter'.
 
 \(fn)" t nil)
 

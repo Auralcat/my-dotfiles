@@ -4,7 +4,7 @@
 
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/projectile
-;; Package-Version: 20181017.830
+;; Package-Version: 20181023.649
 ;; Keywords: project, convenience
 ;; Version: 1.1.0-snapshot
 ;; Package-Requires: ((emacs "25.1") (pkg-info "0.4"))
@@ -118,6 +118,22 @@ Project caching is automatically enabled by default if you're
 using the native indexing method."
   :group 'projectile
   :type 'boolean)
+
+(defcustom projectile-kill-buffers-filter 'kill-all
+  "Determine which buffers are killed by `projectile-kill-buffers'.
+
+When the kill-all option is selected, kills each buffer.
+
+When the kill-only-files option is selected, kill only the buffer
+associated to a file.
+
+Otherwise, it should be a predicate that takes one argument: the buffer to
+be killed."
+  :group 'projectile
+  :type '(radio
+          (const :tag "All project buffers" kill-all)
+          (const :tag "Project file buffers" kill-only-files)
+          (function :tag "Predicate")))
 
 (defcustom projectile-file-exists-local-cache-expire nil
   "Number of seconds before the local file existence cache expires.
@@ -3131,17 +3147,29 @@ to run the replacement."
 
 ;;;###autoload
 (defun projectile-kill-buffers ()
-  "Kill all project buffers."
+  "Kill project buffers.
+
+The buffer are killed according to the value of
+`projectile-kill-buffers-filter'."
   (interactive)
   (let* ((project (projectile-ensure-project (projectile-project-root)))
          (project-name (projectile-project-name project))
          (buffers (projectile-project-buffers project)))
-    (if (yes-or-no-p
-         (format "Are you sure you want to kill %d buffer(s) for '%s'? "
-                 (length buffers) project-name))
-        ;; we take care not to kill indirect buffers directly
-        ;; as we might encounter them after their base buffers are killed
-        (mapc #'kill-buffer (cl-remove-if 'buffer-base-buffer buffers)))))
+    (when (yes-or-no-p
+           (format "Are you sure you want to kill buffers for '%s'? "
+                   project-name))
+      (dolist (buffer buffers)
+        (when (and
+               ;; we take care not to kill indirect buffers directly
+               ;; as we might encounter them after their base buffers are killed
+               (not (buffer-base-buffer buffer))
+               (if (functionp projectile-kill-buffers-filter)
+                   (funcall projectile-kill-buffers-filter buffer)
+                 (case projectile-kill-buffers-filter
+                   (kill-all t)
+                   (kill-only-files (buffer-file-name buffer))
+                   (t (error "Invalid projectile-kill-buffers-filter value: %S" projectile-kill-buffers-filter)))))
+          (kill-buffer buffer))))))
 
 ;;;###autoload
 (defun projectile-save-project-buffers ()
