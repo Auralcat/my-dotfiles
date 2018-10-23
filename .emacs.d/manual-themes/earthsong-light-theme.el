@@ -3,7 +3,7 @@
 (custom-theme-set-faces
   'earthsong-light
   '(default ((t (:width normal
-                 :height 113
+               ;; height 113
                  :weight normal
                  :slant normal
                  :underline nil
@@ -16,8 +16,8 @@
                  :stipple nil
                  :inherit nil))))
 '(cursor ((t (:background "#111111"))))
-'(fixed-pitch ((t (:family "Monospace"))))
-'(variable-pitch ((t (:family "Sans Serif"))))
+;; '(fixed-pitch ((t (:family "Monospace"))))
+;; '(variable-pitch ((t (:family "Sans Serif"))))
 '(escape-glyph ((t (:foreground "brown"))))
 '(minibuffer-prompt ((t (:foreground "#95CC5E"))))
 '(highlight ((t (:background "#ffe792" :foreground "#ffffff"))))
