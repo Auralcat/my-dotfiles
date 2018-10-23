@@ -6,7 +6,7 @@
 ;; Created: 24 Aug 2011
 ;; Updated: 16 Mar 2015
 ;; Version: 1.2
-;; Package-Version: 20181005.2251
+;; Package-Version: 20181022.1742
 ;; Package-Requires: ((gntp "0.1") (log4e "0.3.0") (cl-lib "0.5"))
 ;; Keywords: notification emacs message
 ;; X-URL: https://github.com/jwiegley/alert
@@ -772,21 +772,21 @@ strings."
   :group 'alert)
 
 (when (featurep 'gntp)
-(defun alert-gntp-notify (info)
-  (gntp-notify 'alert
-               (alert-encode-string (plist-get info :title))
-               (alert-encode-string (plist-get info :message))
-                                    gntp-server nil
-                                    (number-to-string
-                                 (cdr (assq (plist-get info :severity)
-                                            alert-growl-priorities)))
-                                    (if (eq (plist-get info :icon) nil)
-                                        alert-gntp-icon
-                                      (plist-get info :icon)))
-               (alert-message-notify info))
+  (defun alert-gntp-notify (info)
+    (gntp-notify 'alert
+                 (alert-encode-string (plist-get info :title))
+                 (alert-encode-string (plist-get info :message))
+                 gntp-server nil
+                 (number-to-string
+                  (cdr (assq (plist-get info :severity)
+                             alert-growl-priorities)))
+                 (if (eq (plist-get info :icon) nil)
+                     alert-gntp-icon
+                   (plist-get info :icon)))
+    (alert-message-notify info))
 
-(alert-define-style 'gntp :title "Notify using gntp"
-                    :notifier #'alert-gntp-notify))
+  (alert-define-style 'gntp :title "Notify using gntp"
+                      :notifier #'alert-gntp-notify))
 
 
 (defcustom alert-notifications-priorities
@@ -808,29 +808,29 @@ here if there `alert' was called ith an :id keyword and handled
 by the `notifications' style.")
 
 (when (featurep 'notifications)
-(defun alert-notifications-notify (info)
-  "Show the alert defined by INFO with `notifications-notify'."
-  (let ((id (notifications-notify :title (plist-get info :title)
-                                  :body  (plist-get info :message)
-                                  :app-icon (plist-get info :icon)
-                                  :timeout (if (plist-get info :persistent) 0 -1)
-                                  :replaces-id (gethash (plist-get info :id) alert-notifications-ids)
-                                  :urgency (cdr (assq (plist-get info :severity)
-                                                      alert-notifications-priorities)))))
-    (when (plist-get info :id)
-      (puthash (plist-get info :id) id alert-notifications-ids)))
-  (alert-message-notify info))
+  (defun alert-notifications-notify (info)
+    "Show the alert defined by INFO with `notifications-notify'."
+    (let ((id (notifications-notify :title (plist-get info :title)
+                                    :body  (plist-get info :message)
+                                    :app-icon (plist-get info :icon)
+                                    :timeout (if (plist-get info :persistent) 0 -1)
+                                    :replaces-id (gethash (plist-get info :id) alert-notifications-ids)
+                                    :urgency (cdr (assq (plist-get info :severity)
+                                                        alert-notifications-priorities)))))
+      (when (plist-get info :id)
+        (puthash (plist-get info :id) id alert-notifications-ids)))
+    (alert-message-notify info))
 
-(defun alert-notifications-remove (info)
-  "Remove the `notifications-notify' message based on INFO :id."
-  (let ((id (and (plist-get info :id)
-                 (gethash (plist-get info :id) alert-notifications-ids))))
-    (when id
-      (notifications-close-notification id)
-      (remhash (plist-get info :id) alert-notifications-ids))))
+  (defun alert-notifications-remove (info)
+    "Remove the `notifications-notify' message based on INFO :id."
+    (let ((id (and (plist-get info :id)
+                   (gethash (plist-get info :id) alert-notifications-ids))))
+      (when id
+        (notifications-close-notification id)
+        (remhash (plist-get info :id) alert-notifications-ids))))
 
-(alert-define-style 'notifications :title "Notify using notifications"
-                    :notifier #'alert-notifications-notify))
+  (alert-define-style 'notifications :title "Notify using notifications"
+                      :notifier #'alert-notifications-notify))
 
 
 (defcustom alert-notifier-command (executable-find "terminal-notifier")
@@ -859,9 +859,10 @@ From https://github.com/julienXX/terminal-notifier."
                     :notifier #'alert-notifier-notify)
 
 (defun alert-osx-notifier-notify (info)
-  (apply #'call-process "osascript" nil nil nil "-e" (list (format "display notification %S with title %S"
-                (alert-encode-string (plist-get info :message))
-                (alert-encode-string (plist-get info :title)))))
+  (apply #'call-process "osascript" nil nil nil "-e"
+         (list (format "display notification %S with title %S"
+                       (alert-encode-string (plist-get info :message))
+                       (alert-encode-string (plist-get info :title)))))
   (alert-message-notify info))
 
 (alert-define-style 'osx-notifier :title "Notify using native OSX notification" :notifier #'alert-osx-notifier-notify)
@@ -892,8 +893,8 @@ From https://github.com/julienXX/terminal-notifier."
   (unless (eq this-command 'handle-switch-frame)
     (delete-frame (plist-get info :frame) t)))
 
-; This code was kindly borrowed from Arne Babenhauserheide:
-; http://www.draketo.de/proj/babcore/#sec-3-14-2
+;; This code was kindly borrowed from Arne Babenhauserheide:
+;; http://www.draketo.de/proj/babcore/#sec-3-14-2
 (defun x-urgency-hint (frame arg &optional source)
   "Set the x-urgency hint for FRAME to ARG.
 
@@ -949,9 +950,9 @@ This is found at https://github.com/nels-o/toaster."
 (defun alert-toaster-notify (info)
   (if alert-toaster-command
       (let ((args (list
-                    "-t" (alert-encode-string (plist-get info :title))
-                    "-m" (alert-encode-string (plist-get info :message))
-                    "-p" (expand-file-name (or (plist-get info :icon) alert-toaster-default-icon))
+                   "-t" (alert-encode-string (plist-get info :title))
+                   "-m" (alert-encode-string (plist-get info :message))
+                   "-p" (expand-file-name (or (plist-get info :icon) alert-toaster-default-icon))
                    )))
         (apply #'call-process alert-toaster-command nil nil nil args))
     (alert-message-notify info)))

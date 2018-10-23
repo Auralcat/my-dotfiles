@@ -511,8 +511,8 @@ which visits the thing at point using `browse-url'."
     ["Diff working tree" magit-diff-working-tree t]
     ["Diff" magit-diff t]
     ("Log"
-     ["Log" magit-log t]
-     ["Reflog" magit-reflog t]
+     ["Log" magit-log-other t]
+     ["Reflog" magit-reflog-other t]
      ["Extended..." magit-log-popup t])
     "---"
     ["Cherry pick" magit-cherry-pick t]

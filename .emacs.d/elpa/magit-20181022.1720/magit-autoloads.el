@@ -783,7 +783,7 @@ Show changes for the thing at point.
 
 \(fn &optional ARGS FILES)" t nil)
 
-(autoload 'magit-diff "magit-diff" "\
+(autoload 'magit-diff-range "magit-diff" "\
 Show differences between two commits.
 
 REV-OR-RANGE should be a range or a single revision.  If it is a
@@ -1442,7 +1442,7 @@ one or more revs read from the minibuffer.
 
 \(fn REVS &optional ARGS FILES)" t nil)
 
-(autoload 'magit-log "magit-log" "\
+(autoload 'magit-log-other "magit-log" "\
 Show log for one or more revs read from the minibuffer.
 The user can input any revision or revisions separated by a
 space, or even ranges, but only branches and tags, and a
@@ -1487,17 +1487,17 @@ Show log for the definition at point.
 (autoload 'magit-reflog-current "magit-log" "\
 Display the reflog of the current branch.
 
-\(fn)" t nil)
+\(fn ARGS)" t nil)
 
-(autoload 'magit-reflog "magit-log" "\
-Display the reflog of a branch.
+(autoload 'magit-reflog-other "magit-log" "\
+Display the reflog of a branch or another ref.
 
-\(fn REF)" t nil)
+\(fn REF ARGS)" t nil)
 
 (autoload 'magit-reflog-head "magit-log" "\
 Display the `HEAD' reflog.
 
-\(fn)" t nil)
+\(fn ARGS)" t nil)
 
 (autoload 'magit-log-move-to-parent "magit-log" "\
 Move to the Nth parent of the current commit.

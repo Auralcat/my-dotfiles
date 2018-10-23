@@ -31,7 +31,7 @@ to perform almost all of their daily version control tasks directly from
 within Emacs.  While many fine Git clients exist, only Magit and Git
 itself deserve to be called porcelains.
 
-This manual is for Magit version 2.13.0 (2.13.0-308-g728052be4+1).
+This manual is for Magit version 2.13.0 (2.13.0-333-ge9104e3f8+1).
 
      Copyright (C) 2015-2018 Jonas Bernoulli <jonas@bernoul.li>
 
@@ -2793,7 +2793,7 @@ Reflog::.
      prefix argument, show log for one or more revs read from the
      minibuffer.
 
-‘l o’     (‘magit-log’)
+‘l o’     (‘magit-log-other’)
 
      Show log for one or more revs read from the minibuffer.  The user
      can input any revision or revisions separated by a space, or even
@@ -3117,7 +3117,7 @@ Logging::.
 
 ‘l O’     (‘magit-reflog-other’)
 
-     Display the reflog of a branch.
+     Display the reflog of a branch or another ref.
 
 ‘l H’     (‘magit-reflog-head’)
 
@@ -3226,7 +3226,7 @@ Buffers and Prefix Commands::).
 
      Show changes for the thing at point.
 
-‘d r’     (‘magit-diff’)
+‘d r’     (‘magit-diff-range’)
 
      Show differences between two commits.
 
@@ -4531,7 +4531,7 @@ Also see *note (gitman)git-commit::.
      This prefix command shows the following suffix commands along with
      the appropriate infix arguments in a popup buffer.
 
-‘c c’     (‘magit-commit’)
+‘c c’     (‘magit-commit-create’)
 
      Create a new commit on ‘HEAD’.  With a prefix argument amend to the
      commit at ‘HEAD’ instead.
@@ -6106,7 +6106,7 @@ Also see *note (gitman)git-cherry-pick::.
    When no cherry-pick or revert is in progress, then the popup buffer
 features the following commands.
 
-‘A A’     (‘magit-cherry-pick’)
+‘A A’     (‘magit-cherry-copy’)
 
      This command copies COMMITS from another branch onto the current
      branch.  If the region selects multiple commits, then those are
@@ -6703,7 +6703,7 @@ _push-remote_, see *note Branching::.
 
      Push the current branch to a branch read in the minibuffer.
 
-‘P o’     (‘magit-push’)
+‘P o’     (‘magit-push-other’)
 
      Push an arbitrary branch or commit somewhere.  Both the source and
      the target are read in the minibuffer.

@@ -613,12 +613,6 @@ and `:slant'."
     (?i "Ignore submodules" "--ignore-submodules="
         magit-diff-select-ignore-submodules)))
 
-(defun magit-diff-select-ignore-submodules (&rest _ignored)
-  (magit-read-char-case "Ignore submodules " t
-    (?u "[u]ntracked" "untracked")
-    (?d "[d]irty"     "dirty")
-    (?a "[a]ll"       "all")))
-
 (defconst magit-diff-popup-common-switches
   '((?f "Show surrounding functions"     "--function-context")
     (?b "Ignore whitespace changes"      "--ignore-space-change")
@@ -633,7 +627,7 @@ and `:slant'."
     :actions  ((?d "Dwim"          magit-diff-dwim)
                (?u "Diff unstaged" magit-diff-unstaged)
                (?c "Show commit"   magit-show-commit)
-               (?r "Diff range"    magit-diff)
+               (?r "Diff range"    magit-diff-range)
                (?s "Diff staged"   magit-diff-staged)
                (?t "Show stash"    magit-stash-show)
                (?p "Diff paths"    magit-diff-paths)
@@ -668,11 +662,9 @@ and `:slant'."
 
 (defvar magit-revision-mode-refresh-popup
   `(,@magit-diff-popup-common-keywords
-    :switches ((?f "Show surrounding functions"     "--function-context")
-               (?b "Ignore whitespace changes"      "--ignore-space-change")
-               (?w "Ignore all whitespace"          "--ignore-all-space")
-               (?x "Disallow external diff drivers" "--no-ext-diff")
-               (?s "Show stats"                     "--stat"))
+    :options  ,magit-diff-popup-common-options
+    :switches (,@magit-diff-popup-common-switches
+               (?s "Show stats" "--stat"))
     :actions  ((?g "Refresh"                magit-diff-refresh)
                (?t "Toggle hunk refinement" magit-diff-toggle-refine-hunk)
                (?s "Set defaults"           magit-diff-set-default-arguments)
@@ -769,6 +761,12 @@ buffer."
     (?p "[p]atience"  "patience")
     (?h "[h]istogram" "histogram")))
 
+(defun magit-diff-select-ignore-submodules (&rest _ignored)
+  (magit-read-char-case "Ignore submodules " t
+    (?u "[u]ntracked" "untracked")
+    (?d "[d]irty"     "dirty")
+    (?a "[a]ll"       "all")))
+
 ;;;; Diff commands
 
 ;;;###autoload
@@ -785,12 +783,12 @@ buffer."
            (magit-diff-unmerged args (list file))
          (magit-diff-staged nil args files))))
     (`(commit . ,value)
-     (magit-diff (format "%s^..%s" value value) args files))
+     (magit-diff-range (format "%s^..%s" value value) args files))
     (`(stash  . ,value) (magit-stash-show value args))
     ((and range (pred stringp))
-     (magit-diff range args files))
+     (magit-diff-range range args files))
     (_
-     (call-interactively #'magit-diff))))
+     (call-interactively #'magit-diff-range))))
 
 (defun magit-diff--dwim ()
   "Return information for performing DWIM diff.
@@ -887,7 +885,7 @@ a \"revA...revB\" range.  Otherwise, always construct
   (magit-mode-setup #'magit-diff-mode rev-or-range const args files))
 
 ;;;###autoload
-(defun magit-diff (rev-or-range &optional args files)
+(defun magit-diff-range (rev-or-range &optional args files)
   "Show differences between two commits.
 
 REV-OR-RANGE should be a range or a single revision.  If it is a
