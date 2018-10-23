@@ -92,8 +92,8 @@ when `editorconfig-mode' is enabled."
   :type 'string
   :group 'editorconfig)
 
-(defcustom editorconfig-custom-hooks ()
-  "A list of custom hooks after loading common EditorConfig settings.
+(defcustom editorconfig-after-apply-functions ()
+  "A list of functions after loading common EditorConfig settings.
 
 Each element in this list is a hook function.  This hook function
 takes one parameter, which is a property hash table.  The value
@@ -104,7 +104,7 @@ whatever functionality you want.  For example, the following is
 an example to add a new property emacs_linum to decide whether to
 show line numbers on the left:
 
-  (add-hook 'editorconfig-custom-hooks
+  (add-hook 'editorconfig-after-apply-functions
     '(lambda (props)
        (let ((show-line-num (gethash 'emacs_linum props)))
          (cond ((equal show-line-num \"true\") (linum-mode 1))
@@ -113,8 +113,12 @@ show line numbers on the left:
   :group 'editorconfig)
 (define-obsolete-variable-alias
   'edconf-custom-hooks
-  'editorconfig-custom-hooks
+  'editorconfig-after-apply-functions
   "0.5")
+(define-obsolete-variable-alias
+  'editorconfig-custom-hooks
+  'editorconfig-after-apply-functions
+  "0.7.14")
 
 (defcustom editorconfig-indentation-alist
   ;; For contributors: Sort modes in alphabetical order, please :)
@@ -421,14 +425,6 @@ TRIM-TRAILING-WS."
              (> (string-to-number length) 0))
     (setq fill-column (string-to-number length))))
 
-(defun editorconfig--is-a-mode-p (current want)
-  "Return non-nil if major mode CURRENT is a major mode WANT."
-  (or (eq current
-          want)
-      (let ((parent (get current 'derived-mode-parent)))
-        (and parent
-             (editorconfig--is-a-mode-p parent want)))))
-
 (defun editorconfig-set-major-mode-from-name (filetype)
   "Set buffer `major-mode' by FILETYPE.
 
@@ -467,8 +463,7 @@ different from MODE value (for example, `conf-mode' will set `major-mode' to
                       editorconfig--apply-major-mode-currently))
              (not (eq mode
                       major-mode))
-             (not (editorconfig--is-a-mode-p major-mode
-                                             mode)))
+             (not (derived-mode-p mode)))
     (unwind-protect
         (progn
           (setq editorconfig--apply-major-mode-currently
@@ -606,9 +601,9 @@ applies available properties."
               (editorconfig-set-major-mode-from-name (gethash 'file_type_emacs props))
               (editorconfig-set-major-mode-from-ext (gethash 'file_type_ext props))
               (condition-case err
-                  (run-hook-with-args 'editorconfig-custom-hooks props)
+                  (run-hook-with-args 'editorconfig-after-apply-functions props)
                 (error
-                 (display-warning 'editorconfig-custom-hooks
+                 (display-warning 'editorconfig-after-apply-functions
                                   (concat (error-message-string err)
                                           ". Stop running hook.")
                                   :warning))))))

@@ -125,18 +125,20 @@ File: editorconfig.info,  Node: Customize,  Next: Testing,  Prev: Supported prop
 
 * Menu:
 
-* editorconfig-custom-hooks::
+* editorconfig-after-apply-functions::
 * editorconfig-indentation-alist::
 * editorconfig-exec-path::
 * editorconfig-get-properties-function::
 
 
-File: editorconfig.info,  Node: editorconfig-custom-hooks,  Next: editorconfig-indentation-alist,  Up: Customize
+File: editorconfig.info,  Node: editorconfig-after-apply-functions,  Next: editorconfig-indentation-alist,  Up: Customize
 
-1.3.1 'editorconfig-custom-hooks'
----------------------------------
+1.3.1 'editorconfig-after-apply-functions'
+------------------------------------------
 
-A list of custom hooks after loading common EditorConfig settings, where
+(Formerly 'editorconfig-custom-hooks')
+
+   A list of functions after loading common EditorConfig settings, where
 you can set some custom variables or overwrite existing properties.
 
    For example, 'web-mode' has several variables for indentation offset
@@ -144,13 +146,13 @@ size and EditorConfig sets them at once by 'indent_size'.  You may want
 to stop indenting only blocks of 'web-mode': it can be achieved by
 adding following to your init.el:
 
-(add-hook 'editorconfig-custom-hooks
+(add-hook 'editorconfig-after-apply-functions
   (lambda (hash) (setq web-mode-block-padding 0)))
 
    You can also define your own custom properties and enable them here.
 
 
-File: editorconfig.info,  Node: editorconfig-indentation-alist,  Next: editorconfig-exec-path,  Prev: editorconfig-custom-hooks,  Up: Customize
+File: editorconfig.info,  Node: editorconfig-indentation-alist,  Next: editorconfig-exec-path,  Prev: editorconfig-after-apply-functions,  Up: Customize
 
 1.3.2 'editorconfig-indentation-alist'
 --------------------------------------
@@ -261,19 +263,19 @@ Node: File Type3113
 Ref: #file-type3218
 Node: Customize3848
 Ref: #customize3977
-Node: editorconfig-custom-hooks4120
-Ref: #editorconfig-custom-hooks4305
-Node: editorconfig-indentation-alist4855
-Ref: #editorconfig-indentation-alist5081
-Node: editorconfig-exec-path5636
-Ref: #editorconfig-exec-path5857
-Node: editorconfig-get-properties-function5946
-Ref: #editorconfig-get-properties-function6156
-Node: Testing7009
-Ref: #testing7150
-Node: Submitting Bugs and Feature Requests7257
-Ref: #submitting-bugs-and-feature-requests7454
-Node: License7596
-Ref: #license7719
+Node: editorconfig-after-apply-functions4129
+Ref: #editorconfig-after-apply-functions4341
+Node: editorconfig-indentation-alist4940
+Ref: #editorconfig-indentation-alist5175
+Node: editorconfig-exec-path5730
+Ref: #editorconfig-exec-path5951
+Node: editorconfig-get-properties-function6040
+Ref: #editorconfig-get-properties-function6250
+Node: Testing7103
+Ref: #testing7244
+Node: Submitting Bugs and Feature Requests7351
+Ref: #submitting-bugs-and-feature-requests7548
+Node: License7690
+Ref: #license7813
 
 End Tag Table
