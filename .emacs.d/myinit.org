@@ -857,12 +857,13 @@ me, too many buffers to work with... for now.
   ;; Set C-x j to go to current clocked task in org-mode
   (global-set-key (kbd "C-x j") 'org-clock-goto)
 
-  ;; Elisp mode: use SPC SPC to eval buffer.
-  (add-hook 'emacs-lisp-mode-hook (lambda() (evil-leader/set-key "SPC" 'eval-buffer)))
+  ;; Evaluate buffer using SPC SPC, depending on major mode.
+  (evil-leader/set-key-for-mode 'emacs-lisp-mode "SPC" 'eval-buffer)
+  (evil-leader/set-key-for-mode 'enh-ruby-mode "SPC" 'ruby-send-buffer-and-go)
+  (evil-leader/set-key-for-mode 'python-mode "SPC" 'python-shell-send-buffer)
 #+END_SRC
 
 #+RESULTS:
-| lambda | nil | (evil-leader/set-key SPC (quote eval-buffer)) |
 
 * Web-mode
 #+BEGIN_SRC emacs-lisp :tangle yes
