@@ -443,6 +443,17 @@ with a prefix ARG.
 
 \(fn ARG)" t nil)
 
+(autoload 'projectile-repeat-last-command "projectile" "\
+Run last projectile external command.
+
+External commands are: `projectile-configure-project',
+`projectile-compile-project', `projectile-test-project' and
+`projectile-run-project'.
+
+If the prefix argument SHOW_PROMPT is non nil, the command can be edited.
+
+\(fn SHOW-PROMPT)" t nil)
+
 (autoload 'projectile-switch-project "projectile" "\
 Switch to a project we have visited before.
 Invokes the command referenced by `projectile-switch-project-action' on switch.
