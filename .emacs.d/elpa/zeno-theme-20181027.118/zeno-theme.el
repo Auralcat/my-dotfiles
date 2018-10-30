@@ -5,7 +5,7 @@
 ;; Author: Bharat Joshi <jbharat@outlook.com>
 ;; Maintainer: Bharat Joshi <jbharat@outlook.com>
 ;; URL: https://github.com/jbharat/zeno-theme
-;; Package-Version: 20181021.45
+;; Package-Version: 20181027.118
 ;; Package-X-Original-Version: 20180211.1557
 ;; Created: 22th July 2017
 ;; Keywords: faces, theme, dark, blue
@@ -102,14 +102,19 @@
  `(underline ((t (:underline t))))
 
  ;; diff
- `(diff-added ((t (:foreground ,light-violet :weight bold))))
  `(diff-context ((t (:foreground ,fg))))
  `(diff-file-header ((t (:foreground ,turquoise-blue :background nil))))
- `(diff-indicator-added ((t (:foreground ,light-violet))))
- `(diff-indicator-removed ((t (:foreground ,lime-green))))
  `(diff-header ((t (:foreground ,fg :background ,diff1))))
  `(diff-hunk-header ((t (:foreground ,atlantis-green :background ,diff1))))
- `(diff-removed ((t (:foreground ,lime-green :weight bold))))
+ `(diff-refine-added ((t (:foreground ,atlantis-green))))
+ `(diff-refine-changed ((t (:foreground ,lime-green))))
+ `(diff-refine-removed ((t (:foreground ,cranberry))))
+ `(diff-added ((t (:foreground ,atlantis-green))))
+ `(diff-changed ((t (:foreground ,lime-green))))
+ `(diff-removed ((t (:foreground ,cranberry))))
+ `(diff-indicator-added ((t (:foreground ,atlantis-green))))
+ `(diff-indicator-changed ((t (:foreground ,lime-green))))
+ `(diff-indicator-removed ((t (:foreground ,cranberry))))
 
 
  `(escape-glyph ((t (:foreground ,lavender-blue))))
