@@ -2458,7 +2458,7 @@ transformer."
         (save-excursion
           (while (re-search-forward "[*=@|/>]$" nil t)
             ;; A line looks like /home/you/"foo"@
-            (pcase (match-string 0)
+            (helm-acase (match-string 0)
               ("*" (replace-match "")
                    (put-text-property
                     (point-at-bol) (point-at-eol) 'helm-ff-exe t))
@@ -2468,7 +2468,7 @@ transformer."
               ("/" (replace-match "")
                    (put-text-property
                     (point-at-bol) (point-at-eol) 'helm-ff-dir t))
-              ((or "=" "|" ">") (replace-match "")))))
+              (("=" "|" ">") (replace-match "")))))
         (while (re-search-forward "[\"]" nil t)
           (replace-match ""))
         (add-text-properties (point-min) (point-max) '(helm-ff-file t))
@@ -2522,8 +2522,9 @@ If PATTERN is an url returns it unmodified.
 When PATTERN contain a space fallback to multi-match.
 If basename contain one or more space fallback to multi-match.
 If PATTERN is a valid directory name,return PATTERN unchanged."
-  ;; handle bad filenames containing a backslash.
-  (setq pattern (helm-ff-handle-backslash pattern))
+  ;; handle bad filenames containing a backslash (no more needed in
+  ;; emacs-26, also prevent regexp matching with e.g. "\|").
+  ;; (setq pattern (helm-ff-handle-backslash pattern))
   (let ((bn      (helm-basename pattern))
         (bd      (or (helm-basedir pattern) ""))
         ;; Trigger tramp connection with file-directory-p.
@@ -3885,9 +3886,9 @@ is nil."
                ;; is a bug).
                (if (or helm-ff-allow-recursive-deletes trash)
                    (delete-directory file 'recursive trash)
-                 (pcase (helm-read-answer (format "Recursive delete of `%s'? [y,n,!,q]"
-                                                 (abbreviate-file-name file))
-                                         '("y" "n" "!" "q"))
+                 (helm-acase (helm-read-answer (format "Recursive delete of `%s'? [y,n,!,q]"
+                                                      (abbreviate-file-name file))
+                                              '("y" "n" "!" "q"))
                    ("y" (delete-directory file 'recursive trash))
                    ("!" (setq helm-ff-allow-recursive-deletes t)
                          (delete-directory file 'recursive trash))
