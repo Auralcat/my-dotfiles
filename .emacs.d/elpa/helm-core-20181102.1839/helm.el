@@ -2418,6 +2418,9 @@ ANY-KEYMAP ANY-DEFAULT ANY-HISTORY See `helm'."
       (helm-log "helm-alive-p = %S" (setq helm-alive-p nil))
       (helm--remap-mouse-mode -1)       ; Reenable mouse bindings.
       (setq helm-alive-p nil)
+      ;; Prevent error "No buffer named *helm*" triggered by
+      ;; `helm-set-local-variable'.
+      (setq helm--force-updating-p nil)
       (setq helm--buffer-in-new-frame-p nil)
       ;; Reset helm-pattern so that lambda's using it
       ;; before running helm will not start with its old value.
@@ -3384,6 +3387,9 @@ WARNING: Do not use this mode yourself, it is internal to helm."
   ;; be a helm buffer.
   (replace-buffer-in-windows helm-buffer)
   (setq helm-alive-p nil)
+  ;; Prevent error "No buffer named *helm*" triggered by
+  ;; `helm-set-local-variable'.
+  (setq helm--force-updating-p nil)
   (setq helm--buffer-in-new-frame-p nil)
   ;; This is needed in some cases where last input
   ;; is yielded infinitely in minibuffer after helm session.
@@ -4833,18 +4839,8 @@ It has no effect if `helm-echo-input-in-header-line' is nil."
   (when (with-helm-buffer helm-echo-input-in-header-line)
     (let ((ov (make-overlay (point-min) (point-max) nil nil t)))
       (overlay-put ov 'window (selected-window))
-      (helm-aif (and helm-display-header-line
-                     (helm-attr 'persistent-help))
-          (progn
-            (overlay-put ov 'display
-                         (truncate-string-to-width
-                          (substitute-command-keys
-                           (concat "\\<helm-map>\\[helm-execute-persistent-action]: "
-                                   (format "%s (keeping session)" it)))
-                          (- (window-width) 1)))
-            (overlay-put ov 'face 'helm-header))
-        (overlay-put ov 'face (let ((bg-color (face-background 'default nil)))
-                                  `(:background ,bg-color :foreground ,bg-color))))
+      (overlay-put ov 'face (let ((bg-color (face-background 'default nil)))
+                              `(:background ,bg-color :foreground ,bg-color)))
       (setq cursor-type nil))))
 
 (defun helm-show-candidate-number (&optional name)
