@@ -264,13 +264,13 @@
 
 (define-abbrev-table 'org-mode-abbrev-table
   '(
-    ("Dom" "domingo" nil 0)
-    ("Qua" "quarta" nil 1)
-    ("Qui" "quinta" nil 0)
-    ("Seg" "segunda" nil 1)
-    ("Sex" "sexta" nil 0)
-    ("Sáb" "sábado" nil 2)
-    ("Ter" "terça" nil 0)
+    ("Dom" "Domingo" nil 0)
+    ("Qua" "Quarta" nil 1)
+    ("Qui" "Quinta" nil 0)
+    ("Seg" "Segunda" nil 1)
+    ("Sex" "Sexta" nil 0)
+    ("Sáb" "Sábado" nil 2)
+    ("Ter" "Terça" nil 1)
     ("WP" "WordPress" nil 0)
     ("acotneceram" "aconteceram" nil 0)
     ("amis" "mais" nil 0)
