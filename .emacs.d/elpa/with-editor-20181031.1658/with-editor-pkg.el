@@ -1,4 +1,4 @@
-(define-package "with-editor" "20181029.1010" "Use the Emacsclient as $EDITOR"
+(define-package "with-editor" "20181031.1658" "Use the Emacsclient as $EDITOR"
   '((emacs "24.4")
     (async "1.9"))
   :keywords
