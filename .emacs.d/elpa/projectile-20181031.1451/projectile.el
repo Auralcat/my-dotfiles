@@ -4,7 +4,7 @@
 
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/projectile
-;; Package-Version: 20181028.838
+;; Package-Version: 20181031.1451
 ;; Keywords: project, convenience
 ;; Version: 1.1.0-snapshot
 ;; Package-Requires: ((emacs "25.1") (pkg-info "0.4"))
@@ -43,7 +43,8 @@
 (require 'ibuf-ext)
 (require 'compile)
 (require 'grep)
-(require 'subr-x)
+(eval-when-compile
+  (require 'subr-x))
 
 (eval-when-compile
   (defvar ag-ignore-list)
@@ -64,6 +65,8 @@
 (declare-function eshell-search-path "esh-ext")
 (declare-function vc-dir "vc-dir")
 (declare-function vc-dir-busy "vc-dir")
+(declare-function ripgrep-regexp "ripgrep")
+(declare-function string-trim "subr-x")
 
 (defvar grep-files-aliases)
 (defvar grep-find-ignored-directories)
@@ -2299,12 +2302,11 @@ TEST-DIR which specifies the path to the tests relative to the project root."
   "Check if a project contains Go source files."
   (projectile-verify-file-wildcard "*.go"))
 
+(define-obsolete-variable-alias 'projectile-go-function 'projectile-go-project-test-function "1.0.0")
 (defcustom projectile-go-project-test-function #'projectile-go-project-p
   "Function to determine if project's type is go."
   :group 'projectile
   :type 'function)
-
-(define-obsolete-variable-alias 'projectile-go-function 'projectile-go-project-test-function "1.0.0")
 
 ;;; Project type registration
 ;;
@@ -4064,7 +4066,7 @@ dirty project list."
           (while (and (< counter max-iterations)
                       (not (gethash (current-buffer) other-project-buffers)))
             (apply orig-fun args)
-            (incf counter))))
+            (cl-incf counter))))
     (apply orig-fun args)))
 
 (defun projectile-next-project-buffer ()
@@ -4121,6 +4123,7 @@ If the current buffer does not belong to a project, call `previous-buffer'."
 
 
 ;;; Projectile Minor mode
+(define-obsolete-variable-alias 'projectile-mode-line-lighter 'projectile-mode-line-prefix)
 (defcustom projectile-mode-line-prefix
   " Projectile"
   "Mode line lighter prefix for Projectile.
@@ -4130,8 +4133,6 @@ thing shown in the mode line otherwise."
   :group 'projectile
   :type 'string
   :package-version '(projectile . "0.12.0"))
-
-(define-obsolete-variable-alias 'projectile-mode-line-lighter 'projectile-mode-line-prefix)
 
 (defvar-local projectile--mode-line projectile-mode-line-prefix)
 
