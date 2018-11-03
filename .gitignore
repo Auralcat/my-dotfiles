@@ -18,3 +18,5 @@ persp-confs/*
 .emacs.d/elpa/archives/
 myinit.el
 rake.cache
+.emacs.d/completions
+.emacs.d/network-security.data

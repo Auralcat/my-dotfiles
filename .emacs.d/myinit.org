@@ -26,6 +26,7 @@
 
   ;; Manual packages load path
   (add-to-list 'load-path "~/my-dotfiles/.emacs.d/manual-packages/multi-term-plus/")
+  (add-to-list 'custom-theme-load-path "~/my-dotfiles/.emacs.d/manual-themes/")
 
   ;; Backup files by copying them
   (setq backup-by-copying t)
@@ -780,14 +781,6 @@ me, too many buffers to work with... for now.
    #+BEGIN_SRC emacs-lisp :tangle yes
    (use-package doom-themes :ensure :defer t)
    #+END_SRC
-** Green Screen
-   #+BEGIN_SRC emacs-lisp :tangle yes
-   (use-package green-screen-theme)
-   #+END_SRC
-** Green Phosphor
-   #+BEGIN_SRC emacs-lisp :tangle yes
-   (use-package green-phosphor-theme)
-   #+END_SRC
 * Graphical
 #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Set font in graphical mode
@@ -864,12 +857,13 @@ me, too many buffers to work with... for now.
   ;; Set C-x j to go to current clocked task in org-mode
   (global-set-key (kbd "C-x j") 'org-clock-goto)
 
-  ;; Elisp mode: use SPC SPC to eval buffer.
-  (add-hook 'emacs-lisp-mode-hook (lambda() (evil-leader/set-key "SPC" 'eval-buffer)))
+  ;; Evaluate buffer using SPC SPC, depending on major mode.
+  (evil-leader/set-key-for-mode 'emacs-lisp-mode "SPC" 'eval-buffer)
+  (evil-leader/set-key-for-mode 'enh-ruby-mode "SPC" 'ruby-send-buffer-and-go)
+  (evil-leader/set-key-for-mode 'python-mode "SPC" 'python-shell-send-buffer)
 #+END_SRC
 
 #+RESULTS:
-| lambda | nil | (evil-leader/set-key SPC (quote eval-buffer)) |
 
 * Web-mode
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1071,3 +1065,13 @@ me, too many buffers to work with... for now.
 #    (use-package perspective)
 #    (persp-mode)
 #    #+END_SRC
+** Gruvbox
+   # gruvbox is heavily inspired by badwolf, jellybeans and solarized.
+
+   # Designed as a bright theme with pastel 'retro groove' colors and
+   # light/dark mode switching in the way of solarized. The main focus when
+   # developing gruvbox is to keep colors easily distinguishable, contrast
+   # enough and still pleasant for the eyes.
+   # #+BEGIN_SRC emacs-lisp :tangle yes
+   # (use-package gruvbox-theme)
+   # #+END_SRC
