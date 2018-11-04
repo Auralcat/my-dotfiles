@@ -12,7 +12,7 @@
 ;; Maintainer: Jonas Bernoulli <jonas@bernoul.li>
 
 ;; Package-Requires: ((emacs "25.1") (dash "20180413") (with-editor "20180414"))
-;; Package-Version: 20181029.947
+;; Package-Version: 20181103.2145
 ;; Keywords: git tools vc
 ;; Homepage: https://github.com/magit/magit
 
@@ -196,6 +196,12 @@ The major mode configured here is turned on by the minor mode
 This hook is only run after pressing \\[with-editor-finish] in a buffer used
 to edit a commit message.  If a commit is created without the
 user typing a message into a buffer, then this hook is not run.
+
+This hook is not run until the new commit has been created.  If
+doing so takes Git longer than one second, then this hook isn't
+run at all.  For certain commands such as `magit-rebase-continue'
+this hook is never run because doing so would lead to a race
+condition.
 
 Also see `magit-post-commit-hook'."
   :group 'git-commit
@@ -436,8 +442,9 @@ This is only used if Magit is available."
   ;; try to handle this in window-nt Emacs.
   (--when-let
       (and (or (string-match-p git-commit-filename-regexp buffer-file-name)
-               (if (boundp 'git-rebase-filename-regexp)
-                   (string-match-p git-rebase-filename-regexp buffer-file-name)))
+               (and (boundp 'git-rebase-filename-regexp)
+                    (string-match-p git-rebase-filename-regexp
+                                    buffer-file-name)))
            (not (file-accessible-directory-p
                  (file-name-directory buffer-file-name)))
            (if (require 'magit-git nil t)
@@ -496,12 +503,20 @@ This is only used if Magit is available."
             'git-commit-save-message nil t)
   (add-hook 'with-editor-pre-cancel-hook
             'git-commit-save-message nil t)
-  (add-hook 'with-editor-post-finish-hook 'git-commit-run-post-finish-hook)
-  (when (and (bound-and-true-p magit-wip-merge-branch)
-             (fboundp 'magit-wip-any-enabled-p)
-             (magit-wip-any-enabled-p))
+  (when (and (fboundp 'magit-rev-parse)
+             (not (memq last-command
+                        '(magit-sequencer-continue
+                          magit-sequencer-skip
+                          magit-am-continue
+                          magit-am-skip
+                          magit-rebase-continue
+                          magit-rebase-skip))))
     (add-hook 'with-editor-post-finish-hook
-              'magit-wip-commit nil t))
+              (apply-partially 'git-commit-run-post-finish-hook
+                               (magit-rev-parse "HEAD"))
+              nil t)
+    (when (fboundp 'magit-wip-maybe-add-commit-hook)
+      (magit-wip-maybe-add-commit-hook)))
   (setq with-editor-cancel-message
         'git-commit-cancel-message)
   (make-local-variable 'log-edit-comment-ring-index)
@@ -516,8 +531,17 @@ This is only used if Magit is available."
   (run-hooks 'git-commit-setup-hook)
   (set-buffer-modified-p nil))
 
-(defun git-commit-run-post-finish-hook ()
-  (run-hooks 'git-commit-post-finish-hook))
+(defun git-commit-run-post-finish-hook (previous)
+  (when git-commit-post-finish-hook
+    (cl-block nil
+      (let ((start (current-time)))
+        (while (equal (magit-rev-parse "HEAD") previous)
+          (when (> (float-time (time-subtract (current-time) start)) 1)
+            (message "No commit created after 1 second.  Not running %s."
+                     'git-commit-post-finish-hook)
+            (cl-return))
+          (sit-for 0.1))))
+    (run-hooks 'git-commit-post-finish-hook)))
 
 (define-minor-mode git-commit-mode
   "Auxiliary minor mode used when editing Git commit messages.
