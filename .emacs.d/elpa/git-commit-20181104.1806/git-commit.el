@@ -12,7 +12,7 @@
 ;; Maintainer: Jonas Bernoulli <jonas@bernoul.li>
 
 ;; Package-Requires: ((emacs "25.1") (dash "20180413") (with-editor "20180414"))
-;; Package-Version: 20181103.2145
+;; Package-Version: 20181104.1806
 ;; Keywords: git tools vc
 ;; Homepage: https://github.com/magit/magit
 
@@ -534,14 +534,15 @@ This is only used if Magit is available."
 (defun git-commit-run-post-finish-hook (previous)
   (when git-commit-post-finish-hook
     (cl-block nil
-      (let ((start (current-time)))
+      (let ((break (time-add (current-time)
+                             (seconds-to-time 1))))
         (while (equal (magit-rev-parse "HEAD") previous)
-          (when (> (float-time (time-subtract (current-time) start)) 1)
+          (if (time-less-p (current-time) break)
+              (sit-for 0.01)
             (message "No commit created after 1 second.  Not running %s."
                      'git-commit-post-finish-hook)
-            (cl-return))
-          (sit-for 0.1))))
-    (run-hooks 'git-commit-post-finish-hook)))
+            (cl-return))))
+      (run-hooks 'git-commit-post-finish-hook))))
 
 (define-minor-mode git-commit-mode
   "Auxiliary minor mode used when editing Git commit messages.
