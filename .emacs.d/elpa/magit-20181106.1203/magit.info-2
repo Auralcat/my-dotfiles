@@ -1422,7 +1422,7 @@ Appendix C Keystroke Index
 * C-c C-d:                               Refreshing Diffs.    (line  80)
 * C-c C-d <1>:                           Editing Commit Messages.
                                                               (line  57)
-* C-c C-e:                               Diff Buffer.         (line  74)
+* C-c C-e:                               Diff Buffer.         (line  80)
 * C-c C-f:                               Log Buffer.          (line  23)
 * C-c C-f <1>:                           Refreshing Diffs.    (line  94)
 * C-c C-i:                               Editing Commit Messages.
@@ -1500,7 +1500,7 @@ Appendix C Keystroke Index
 * d w:                                   Diffing.             (line  43)
 * D w:                                   Refreshing Diffs.    (line  28)
 * DEL:                                   Log Buffer.          (line  43)
-* DEL <1>:                               Diff Buffer.         (line 103)
+* DEL <1>:                               Diff Buffer.         (line 109)
 * DEL <2>:                               Blaming.             (line  73)
 * DEL <3>:                               Editing Rebase Sequences.
                                                               (line  28)
@@ -1534,7 +1534,7 @@ Appendix C Keystroke Index
                                                               (line  22)
 * G:                                     Automatic Refreshing of Magit Buffers.
                                                               (line  31)
-* j:                                     Diff Buffer.         (line  93)
+* j:                                     Diff Buffer.         (line  99)
 * k:                                     Viewing Git Output.  (line  24)
 * k <1>:                                 Applying.            (line  40)
 * k <2>:                                 Editing Rebase Sequences.
@@ -1616,7 +1616,7 @@ Appendix C Keystroke Index
                                                               (line  18)
 * M-x magit-version:                     Git Executable.      (line  17)
 * M-x magit-version <1>:                 Debugging Tools.     (line  10)
-* M-x magit-wip-commit:                  Wip Modes.           (line 111)
+* M-x magit-wip-commit:                  Wip Modes.           (line  88)
 * M-x with-editor-debug:                 Debugging Tools.     (line  38)
 * n:                                     Section Movement.    (line  16)
 * n <1>:                                 Blaming.             (line  91)
@@ -1691,7 +1691,7 @@ Appendix C Keystroke Index
                                                               (line  59)
 * S-<tab>:                               Section Visibility.  (line  22)
 * SPC:                                   Log Buffer.          (line  33)
-* SPC <1>:                               Diff Buffer.         (line  99)
+* SPC <1>:                               Diff Buffer.         (line 105)
 * SPC <2>:                               Blaming.             (line  63)
 * SPC <3>:                               Editing Rebase Sequences.
                                                               (line  21)
@@ -1741,7 +1741,7 @@ Appendix C Keystroke Index
 * X m:                                   Resetting.           (line  15)
 * X s:                                   Resetting.           (line  20)
 * X w:                                   Resetting.           (line  38)
-* X w <1>:                               Wip Modes.           (line  89)
+* X w <1>:                               Wip Modes.           (line  66)
 * Y:                                     Cherries.            (line  17)
 * y:                                     References Buffer.   (line   6)
 * y <1>:                                 Editing Rebase Sequences.
@@ -1925,7 +1925,7 @@ Appendix D Command Index
                                                               (line  39)
 * magit-diff-default-context:            Refreshing Diffs.    (line  72)
 * magit-diff-dwim:                       Diffing.             (line  25)
-* magit-diff-edit-hunk-commit:           Diff Buffer.         (line  74)
+* magit-diff-edit-hunk-commit:           Diff Buffer.         (line  80)
 * magit-diff-flip-revs:                  Refreshing Diffs.    (line  45)
 * magit-diff-less-context:               Refreshing Diffs.    (line  64)
 * magit-diff-more-context:               Refreshing Diffs.    (line  68)
@@ -2001,7 +2001,7 @@ Appendix D Command Index
 * magit-go-forward:                      Log Buffer.          (line  23)
 * magit-go-forward <1>:                  Refreshing Diffs.    (line  94)
 * magit-init:                            Repository Setup.    (line   6)
-* magit-jump-to-diffstat-or-diff:        Diff Buffer.         (line  93)
+* magit-jump-to-diffstat-or-diff:        Diff Buffer.         (line  99)
 * magit-kill-this-buffer:                Minor Mode for Buffers Visiting Blobs.
                                                               (line  20)
 * magit-list-repositories:               Repository List.     (line   6)
@@ -2115,7 +2115,7 @@ Appendix D Command Index
 * magit-reset-quickly:                   Resetting.           (line   8)
 * magit-reset-soft:                      Resetting.           (line  20)
 * magit-reset-worktree:                  Resetting.           (line  38)
-* magit-reset-worktree <1>:              Wip Modes.           (line  89)
+* magit-reset-worktree <1>:              Wip Modes.           (line  66)
 * magit-reverse:                         Applying.            (line  44)
 * magit-reverse-in-index:                Staging and Unstaging.
                                                               (line  62)
@@ -2233,17 +2233,17 @@ Appendix D Command Index
 * magit-version:                         Git Executable.      (line  17)
 * magit-version <1>:                     Debugging Tools.     (line  10)
 * magit-visit-ref:                       References Buffer.   (line 166)
-* magit-wip-commit:                      Wip Modes.           (line 111)
-* magit-wip-log:                         Wip Modes.           (line  71)
-* magit-wip-log-current:                 Wip Modes.           (line  80)
+* magit-wip-commit:                      Wip Modes.           (line  88)
+* magit-wip-log:                         Wip Modes.           (line  48)
+* magit-wip-log-current:                 Wip Modes.           (line  57)
 * magit-worktree-branch:                 Worktree.            (line  17)
 * magit-worktree-checkout:               Worktree.            (line  13)
 * magit-worktree-checkout-pull-request:  Worktree.            (line  21)
 * magit-worktree-delete:                 Worktree.            (line  28)
 * magit-worktree-popup:                  Worktree.            (line   8)
 * magit-worktree-status:                 Worktree.            (line  33)
-* scroll-down:                           Diff Buffer.         (line 103)
-* scroll-up:                             Diff Buffer.         (line  99)
+* scroll-down:                           Diff Buffer.         (line 109)
+* scroll-up:                             Diff Buffer.         (line 105)
 * with-editor-cancel:                    Editing Commit Messages.
                                                               (line  24)
 * with-editor-cancel <1>:                Editing Rebase Sequences.
@@ -2472,8 +2472,8 @@ Appendix E Function Index
 * magit-status-maybe-update-revision-buffer: Section Movement.
                                                               (line  77)
 * magit-tag-release:                     Tagging.             (line  28)
-* magit-wip-log:                         Wip Modes.           (line  71)
-* magit-wip-log-current:                 Wip Modes.           (line  80)
+* magit-wip-log:                         Wip Modes.           (line  48)
+* magit-wip-log-current:                 Wip Modes.           (line  57)
 * with-editor-usage-message:             Editing Commit Messages.
                                                               (line 215)
 
@@ -2597,6 +2597,7 @@ Appendix F Variable Index
 * magit-log-section-commit-count:        Status Sections.     (line 120)
 * magit-log-select-margin:               Select from Log.     (line  30)
 * magit-log-show-refname-after-summary:  Log Buffer.          (line  73)
+* magit-log-trace-definition-function:   Diff Buffer.         (line  74)
 * magit-module-sections-hook:            Status Module Sections.
                                                               (line  20)
 * magit-module-sections-nested:          Status Module Sections.
@@ -2664,15 +2665,15 @@ Appendix F Variable Index
 * magit-wip-after-apply-mode:            Legacy Wip Modes.    (line  19)
 * magit-wip-after-apply-mode-lighter:    Legacy Wip Modes.    (line  59)
 * magit-wip-after-save-local-mode-lighter: Legacy Wip Modes.  (line  55)
-* magit-wip-after-save-mode:             Wip Modes.           (line  30)
-* magit-wip-after-save-mode <1>:         Legacy Wip Modes.    (line  13)
+* magit-wip-after-save-mode:             Legacy Wip Modes.    (line  13)
 * magit-wip-before-change-mode:          Legacy Wip Modes.    (line  33)
 * magit-wip-before-change-mode-lighter:  Legacy Wip Modes.    (line  63)
 * magit-wip-initial-backup-mode:         Legacy Wip Modes.    (line  38)
 * magit-wip-initial-backup-mode-lighter: Legacy Wip Modes.    (line  67)
-* magit-wip-merge-branch:                Wip Modes.           (line  44)
-* magit-wip-mode-lighter:                Wip Modes.           (line 127)
-* magit-wip-namespace:                   Wip Modes.           (line 119)
+* magit-wip-merge-branch:                Wip Graph.           (line   6)
+* magit-wip-mode:                        Wip Modes.           (line  30)
+* magit-wip-mode-lighter:                Wip Modes.           (line 104)
+* magit-wip-namespace:                   Wip Modes.           (line  96)
 * notes.displayRef:                      Notes.               (line  64)
 * pull.rebase:                           The Branch Config Popup.
                                                               (line  70)
