@@ -513,6 +513,12 @@ me, too many buffers to work with... for now.
     (use-package emojify)
     #+END_SRC
 ** Utilities
+*** Docker
+    A Docker command wrapper for Emacs
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package docker)
+    #+END_SRC
+
 *** Multi-term Plus
     A newer version of Multi Term maintained by a person from Japan.
     #+BEGIN_SRC emacs-lisp :tangle yes
