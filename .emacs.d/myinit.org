@@ -513,6 +513,11 @@ me, too many buffers to work with... for now.
     (use-package emojify)
     #+END_SRC
 ** Utilities
+*** Helm-Ag
+    Silver Searcher support for Helm.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package helm-ag)
+    #+END_SRC
 *** Docker
     A Docker command wrapper for Emacs
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -742,7 +747,6 @@ me, too many buffers to work with... for now.
     #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package carbon-now-sh)
     #+END_SRC
-
 
 * Themes
 ** Jazz
