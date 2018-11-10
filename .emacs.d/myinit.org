@@ -473,7 +473,8 @@ me, too many buffers to work with... for now.
     Free some space in the mode line removing superfluous mode indications.
     #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package diminish :ensure t
-       ;; These are loaded at startup
+       ;; These are loaded at startup, I prefer declaring everything here.
+       :diminish golden-ratio-mode
        :diminish helm-mode
        :diminish company-mode
        :diminish undo-tree-mode
@@ -513,6 +514,15 @@ me, too many buffers to work with... for now.
     (use-package emojify)
     #+END_SRC
 ** Utilities
+*** Golden Ratio Mode
+    Splits windows using the [[https://en.wikipedia.org/wiki/Golden_ratio][Golden Ratio]].
+    This makes the focused window a bit larger than usual and the
+    smaller ones are easier to read. It makes the multi-window
+    experience more pleasing to the eye. Yeah, nature!
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package golden-ratio)
+    (golden-ratio-mode 1)
+    #+END_SRC
 *** Helm-Ag
     Silver Searcher support for Helm.
     #+BEGIN_SRC emacs-lisp :tangle yes
