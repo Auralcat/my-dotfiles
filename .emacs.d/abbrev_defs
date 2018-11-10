@@ -90,6 +90,16 @@
 
 (define-abbrev-table 'display-time-world-mode-abbrev-table '())
 
+(define-abbrev-table 'docker-container-mode-abbrev-table '())
+
+(define-abbrev-table 'docker-image-mode-abbrev-table '())
+
+(define-abbrev-table 'docker-machine-mode-abbrev-table '())
+
+(define-abbrev-table 'docker-network-mode-abbrev-table '())
+
+(define-abbrev-table 'docker-volume-mode-abbrev-table '())
+
 (define-abbrev-table 'doctex-mode-abbrev-table '())
 
 (define-abbrev-table 'edebug-eval-mode-abbrev-table '())
@@ -165,6 +175,8 @@
 (define-abbrev-table 'grep-mode-abbrev-table '())
 
 (define-abbrev-table 'haml-mode-abbrev-table '())
+
+(define-abbrev-table 'helm-ag-mode-abbrev-table '())
 
 (define-abbrev-table 'helm-grep-mode-abbrev-table '())
 
@@ -265,27 +277,30 @@
 (define-abbrev-table 'org-mode-abbrev-table
   '(
     ("Dom" "Domingo" nil 0)
-    ("Qua" "Quarta" nil 1)
-    ("Qui" "Quinta" nil 0)
+    ("Qua" "Quarta" nil 3)
+    ("Qui" "Quinta" nil 2)
     ("Seg" "Segunda" nil 1)
     ("Sex" "Sexta" nil 0)
     ("Sáb" "Sábado" nil 2)
     ("Ter" "Terça" nil 1)
     ("WP" "WordPress" nil 0)
     ("acotneceram" "aconteceram" nil 0)
-    ("amis" "mais" nil 0)
     ("aidna" "ainda" nil 2)
+    ("amis" "mais" nil 0)
+    ("andma" "Ainda" nil 0)
     ("avi" "vai" nil 2)
     ("avvrevs" "abbrevs" nil 0)
+    ("cmaa" "cama" nil 0)
     ("conversda" "conversa" nil 1)
     ("cosia" "coisa" nil 0)
     ("cosneguiu" "conseguiu" nil 1)
     ("cpoisa" "coisa" nil 0)
     ("cudiar" "cuidar" nil 1)
     ("cwb" "curitiba" nil 1)
-    ("deposi" "depois" nil 2)
+    ("deposi" "depois" nil 3)
     ("digitgar" "digitar" nil 0)
     ("ecnhendo" "enchendo" nil 0)
+    ("edpois" "depois" nil 0)
     ("ehre" "here" nil 1)
     ("ejito" "jeito" nil 0)
     ("elqa" "ela" nil 1)
@@ -296,6 +311,7 @@
     ("eplo" "pelo" nil 1)
     ("escaziar" "esvaziar" nil 1)
     ("escerve" "escreve" nil 1)
+    ("etnaõ" "Então" nil 0)
     ("exp" "experiência" nil 2)
     ("hj" "hoje" nil 4)
     ("hovje" "hoje" nil 1)
@@ -303,8 +319,10 @@
     ("hte" "the" nil 1)
     ("htem" "them" nil 1)
     ("insnegurança" "insegurança" nil 2)
+    ("jieto" "jeito" nil 0)
     ("jpbar" "jogar" nil 2)
     ("memso" "mesmo" nil 0)
+    ("mias" "Mais" nil 0)
     ("moranod" "morando" nil 1)
     ("msg" "mensagem" nil 3)
     ("mto" "muito" nil 2)
@@ -317,20 +335,22 @@
     ("pontem" "Ontem" nil 0)
     ("poruqe" "porque" nil 1)
     ("pouoc" "pouco" nil 0)
-    ("pq" "porque" nil 9)
+    ("pq" "porque" nil 10)
     ("prblema" "problema" nil 0)
     ("probelma" "problema" nil 1)
     ("projeots" "projetos" nil 1)
+    ("qaundo" "Quando" nil 0)
     ("qdo" "quando" nil 5)
-    ("qeu" "que" nil 29)
+    ("qeu" "que" nil 30)
     ("receebi" "recebi" "sbae" 0)
     ("rpoblema" "problema" nil 2)
     ("sla" "sei lá" nil 4)
-    ("tbm" "também" nil 37)
+    ("tbm" "também" nil 39)
+    ("temrinal" "terminal" nil 0)
     ("tepmo" "tempo" nil 1)
     ("tinhan " "tinham" nil 0)
     ("transfordando " "transbordando" nil 0)
-    ("tÔ" "tô" nil 10)
+    ("tÔ" "tô" nil 13)
     ("umportava " "importava" nil 0)
     ("uotra" "outra" nil 4)
     ("uqe" "que" nil 6)
@@ -361,7 +381,9 @@
 
 (define-abbrev-table 'python-mode-abbrev-table '())
 
-(define-abbrev-table 'python-mode-skeleton-abbrev-table '())
+(define-abbrev-table 'python-mode-skeleton-abbrev-table
+  '(
+   ))
 
 (define-abbrev-table 'rake-compilation-mode-abbrev-table '())
 
@@ -400,6 +422,8 @@
 (define-abbrev-table 'sql-mode-abbrev-table '())
 
 (define-abbrev-table 'ssass-mode-abbrev-table '())
+
+(define-abbrev-table 'tablist-mode-abbrev-table '())
 
 (define-abbrev-table 'tabulated-list-mode-abbrev-table '())
 
