@@ -1,2 +1,0 @@
-;;; -*- no-byte-compile: t -*-
-(define-package "company-php" "20181020.1026" "company completion source for php" '((cl-lib "0.5") (ac-php-core "1") (company "0.9")) :commit "440e4e63f88d2087305e738d0dae8edddfdcfb04" :keywords '("completion" "convenience" "intellisense") :authors '((nil . "xcwenn@qq.com [https://github.com/xcwen]")) :maintainer '(nil . "xcwenn@qq.com [https://github.com/xcwen]") :url "https://github.com/xcwen/ac-php")
