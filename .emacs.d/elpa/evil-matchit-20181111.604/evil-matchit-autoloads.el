@@ -9,6 +9,16 @@
 ;;;### (autoloads nil "evil-matchit" "evil-matchit.el" (0 0 0 0))
 ;;; Generated autoloads from evil-matchit.el
 
+(autoload 'evilmi-load-plugin-rules "evil-matchit" "\
+Load MODES's plugin RULES.
+
+\(fn MODES RULES)" nil nil)
+
+(autoload 'evilmi-init-plugins "evil-matchit" "\
+Load plugins.
+
+\(fn)" t nil)
+
 (autoload 'evilmi-select-items "evil-matchit" "\
 Select items/tags and the region between them.
 
@@ -371,6 +381,11 @@ Check character at POS is comment by comparing font face.
 Check character at POS is string or document by comparing font face.
 
 \(fn POS)" nil nil)
+
+(autoload 'evilmi-evenp "evil-matchit-sdk" "\
+
+
+\(fn NUM)" nil nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "evil-matchit-sdk" '("evilmi-")))
 
