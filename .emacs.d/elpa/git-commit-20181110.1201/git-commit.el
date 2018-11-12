@@ -12,7 +12,7 @@
 ;; Maintainer: Jonas Bernoulli <jonas@bernoul.li>
 
 ;; Package-Requires: ((emacs "25.1") (dash "20180910") (with-editor "20181103"))
-;; Package-Version: 20181108.1523
+;; Package-Version: 20181110.1201
 ;; Keywords: git tools vc
 ;; Homepage: https://github.com/magit/magit
 
@@ -176,6 +176,7 @@ The major mode configured here is turned on by the minor mode
     git-commit-setup-changelog-support
     git-commit-turn-on-auto-fill
     git-commit-propertize-diff
+    bug-reference-mode
     with-editor-usage-message)
   "Hook run at the end of `git-commit-setup'."
   :group 'git-commit
