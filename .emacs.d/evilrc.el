@@ -1,5 +1,20 @@
 ;; Porting my .vimrc to Emacs
 
+;; Colorize the cursor depending on current mode.
+;; It's one of those small things that you can't live without once you get it.
+
+;; ADDENDUM: You can get the color of a face like this:
+;; (color-values (face-foreground 'face-name))
+;; Setting the color through faces blends well with each theme, but if you hover over the
+;; face it gets the color from, it defeats the whole purpose of this.
+(setq evil-emacs-state-cursor '("purple" box))
+(setq evil-normal-state-cursor '("green" box))
+(setq evil-visual-state-cursor '("orange" box))
+(setq evil-insert-state-cursor '("red" bar))
+(setq evil-replace-state-cursor '("gold" hbar))
+;; This is when you use commands such as c,d,y in normal mode, for example.
+(setq evil-operator-state-cursor '("red" hollow))
+
 ;; I have bound C-a to back-to-indentation-or-beginning in another config,
 ;; Now I need C-e, $ is too far for me 😂
 (define-key evil-normal-state-map (kbd "C-e") 'end-of-line)
