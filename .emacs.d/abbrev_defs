@@ -313,7 +313,7 @@
     ("escerve" "escreve" nil 1)
     ("etnaõ" "Então" nil 0)
     ("exp" "experiência" nil 2)
-    ("hj" "hoje" nil 4)
+    ("hj" "hoje" nil 5)
     ("hovje" "hoje" nil 1)
     ("htat" "that" nil 2)
     ("hte" "the" nil 1)
@@ -321,9 +321,10 @@
     ("insnegurança" "insegurança" nil 2)
     ("jieto" "jeito" nil 0)
     ("jpbar" "jogar" nil 2)
-    ("memso" "mesmo" nil 0)
-    ("mias" "Mais" nil 0)
+    ("memso" "mesmo" nil 1)
+    ("mias" "mais" nil 1)
     ("moranod" "morando" nil 1)
+    ("motnar" "montar" nil 0)
     ("msg" "mensagem" nil 3)
     ("mto" "muito" nil 2)
     ("ocmo" "como" nil 2)
@@ -339,13 +340,13 @@
     ("prblema" "problema" nil 0)
     ("probelma" "problema" nil 1)
     ("projeots" "projetos" nil 1)
-    ("qaundo" "Quando" nil 0)
+    ("qaundo" "quando" nil 0)
     ("qdo" "quando" nil 5)
-    ("qeu" "que" nil 30)
+    ("qeu" "que" nil 32)
     ("receebi" "recebi" "sbae" 0)
     ("rpoblema" "problema" nil 2)
     ("sla" "sei lá" nil 4)
-    ("tbm" "também" nil 39)
+    ("tbm" "também" nil 41)
     ("temrinal" "terminal" nil 0)
     ("tepmo" "tempo" nil 1)
     ("tinhan " "tinham" nil 0)
@@ -354,7 +355,8 @@
     ("umportava " "importava" nil 0)
     ("uotra" "outra" nil 4)
     ("uqe" "que" nil 6)
-    ("vc" "você" nil 14)
+    ("vc" "você" nil 17)
+    ("vieo" "veio" nil 0)
    ))
 
 (define-abbrev-table 'outline-mode-abbrev-table '())
@@ -381,9 +383,7 @@
 
 (define-abbrev-table 'python-mode-abbrev-table '())
 
-(define-abbrev-table 'python-mode-skeleton-abbrev-table
-  '(
-   ))
+(define-abbrev-table 'python-mode-skeleton-abbrev-table '())
 
 (define-abbrev-table 'rake-compilation-mode-abbrev-table '())
 
