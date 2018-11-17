@@ -343,10 +343,11 @@
     ("qaundo" "quando" nil 0)
     ("qdo" "quando" nil 5)
     ("qeu" "que" nil 32)
+    ("realemnte" "realmente" nil 1)
     ("receebi" "recebi" "sbae" 0)
     ("rpoblema" "problema" nil 2)
     ("sla" "sei lá" nil 4)
-    ("tbm" "também" nil 41)
+    ("tbm" "também" nil 43)
     ("temrinal" "terminal" nil 0)
     ("tepmo" "tempo" nil 1)
     ("tinhan " "tinham" nil 0)
@@ -383,7 +384,9 @@
 
 (define-abbrev-table 'python-mode-abbrev-table '())
 
-(define-abbrev-table 'python-mode-skeleton-abbrev-table '())
+(define-abbrev-table 'python-mode-skeleton-abbrev-table
+  '(
+   ))
 
 (define-abbrev-table 'rake-compilation-mode-abbrev-table '())
 
