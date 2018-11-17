@@ -720,11 +720,6 @@ me, too many buffers to work with... for now.
 
       (circadian-setup))
     #+END_SRC
-*** Ace Jump Mode
-    Move to any word with 2 keypresses.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package ace-jump-mode)
-    #+END_SRC
 *** Robe
     Ruby's autocomplete, navigation and project tools, especially for
     Rails.
