@@ -26,6 +26,10 @@ alias vimconfig='vim ~/.vimrc'
 alias startupconfig='vim ~/.bash_startup'
 alias aliasconfig='vim ~/.bash_aliases'
 
+# Move quickly to common places
+alias mdf='cd ~/my-dotfiles/'
+alias fb='cd ~/file-bouncer/'
+
 # Reload audio and network adapter:
 alias audioreload='pulseaudio --kill'
 alias wifireload='sudo killall NetworkManager; sudo NetworkManager &'
