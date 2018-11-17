@@ -60,16 +60,14 @@
 (evil-leader/set-key
     ;; Org-agenda
     "a" 'org-agenda
-    ;; Too lazy to type C-c C-t d
-    "d" 'my-org-mark-as-done
     ;; Call Magit with Leader g
     "g" 'magit-status
     ;; Clock in
     "i" 'org-clock-in
     ;; Helm prefix
     "h" 'helm-command-prefix
-    ;; Use Ace-Jump with Leader j
-    "j" 'evil-ace-jump-char-mode
+    ;; Go to current or last task
+    "j" 'org-clock-goto
     ;; Show key frequencies
     "k" 'keyfreq-show
     ;; Clock out
@@ -77,4 +75,6 @@
     ;; Projectile prefix
     "p" 'projectile-command-map
     ;; Projectile-Rails prefix
-    "r" 'projectile-rails-command-map)
+    "r" 'projectile-rails-command-map
+    ;; TODO: map this to org-mode locally.
+    "t" 'org-todo)
