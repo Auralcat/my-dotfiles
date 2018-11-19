@@ -105,7 +105,6 @@
 ;; Prog-mode is from where all the programming modes are derived from.
 ;; This means that if you call prog-mode-hook, the settings will be
 ;; applied to ALL programming modes in Emacs.
-(add-hook 'prog-mode-hook 'display-line-numbers-mode)
 (add-hook 'text-mode-hook 'column-number-mode)
 
 ;; Ruby
@@ -756,7 +755,14 @@ me, too many buffers to work with... for now.
     #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package carbon-now-sh)
     #+END_SRC
-
+*** Linum-relative
+    Show relative line numbers. Stacks with linum or
+    display-line-numbers-mode, so disable it before using this one.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package linum-relative)
+    ;; Activate it
+    (add-hook 'prog-mode-hook 'linum-relative-mode)
+    #+END_SRC
 * Themes
 ** Jazz
    A warm theme with dark colors.
