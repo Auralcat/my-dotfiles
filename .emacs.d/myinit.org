@@ -13,7 +13,7 @@
   ;; Sentences end with single spaces for me.
   (setq sentence-end-double-space nil)
   ;; Change window title
-  (setq frame-title-format '("Yes, this is Emacs!"))
+  (setq frame-title-format '("Emacs 26"))
 
   ;; A small performance improvement
   (setq redisplay-dont-pause t)
