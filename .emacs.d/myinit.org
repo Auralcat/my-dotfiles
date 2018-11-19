@@ -925,6 +925,9 @@ me, too many buffers to work with... for now.
   ;; Use diary entries in org-agenda
   (setq org-agenda-include-diary t)
 
+  ;; When TODOs are ordered, enforce task dependencies
+  (setq org-enforce-todo-dependencies t)
+
   ;; Use C-RET to complete words in Org-mode
   (local-set-key [C-return] (quote complete))
 
@@ -933,12 +936,7 @@ me, too many buffers to work with... for now.
 
   ;; Map C-S-enter to org-insert-todo-subheading
   (local-set-key [C-S-return] (quote org-insert-todo-subheading))
-
 #+END_SRC
-
-#+RESULTS:
-: org-insert-todo-subheading
-
 ** Org-bullets
    Change org-mode's *s to UTF-8 chars
    #+BEGIN_SRC emacs-lisp :tangle yes
