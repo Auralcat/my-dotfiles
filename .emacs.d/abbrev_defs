@@ -258,6 +258,8 @@
 
 (define-abbrev-table 'magit-submodule-list-mode-abbrev-table '())
 
+(define-abbrev-table 'mark-mode-abbrev-table '())
+
 (define-abbrev-table 'markdown-mode-abbrev-table '())
 
 (define-abbrev-table 'message-mode-abbrev-table '())
@@ -276,7 +278,7 @@
 
 (define-abbrev-table 'org-mode-abbrev-table
   '(
-    ("Dom" "Domingo" nil 0)
+    ("Dom" "Domingo" nil 1)
     ("Qua" "Quarta" nil 3)
     ("Qui" "Quinta" nil 2)
     ("Seg" "Segunda" nil 1)
@@ -285,6 +287,7 @@
     ("Ter" "Terça" nil 1)
     ("WP" "WordPress" nil 0)
     ("acotneceram" "aconteceram" nil 0)
+    ("agluma" "alguma" nil 0)
     ("aidna" "ainda" nil 2)
     ("amis" "mais" nil 0)
     ("andma" "Ainda" nil 0)
