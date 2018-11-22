@@ -1910,11 +1910,12 @@ i.e functions called with RET."
   (let ((actions (helm-get-actions-from-current-source)))
     (when actions
       (cl-assert (or (eq action actions)
-                     (rassq action actions)
                      ;; Compiled lambda
                      (byte-code-function-p action)
                      ;; Lambdas
-                     (and (listp action) (functionp action)))
+                     (and (listp action) (functionp action))
+                     ;; One of current actions.
+                     (rassq action actions))
                  nil "No such action `%s' for this source" action)))
   (setq helm-saved-action action)
   (setq helm-saved-selection (or (helm-get-selection) ""))
@@ -3488,6 +3489,7 @@ WARNING: Do not use this mode yourself, it is internal to helm."
   "Retrieve and return the list of candidates from SOURCE."
   (let* ((candidate-fn (assoc-default 'candidates source))
          (candidate-proc (assoc-default 'candidates-process source))
+         ;; See comment in helm-get-cached-candidates (Issue 2113).
          (inhibit-quit candidate-proc)
          cfn-error
          (notify-error
@@ -3550,6 +3552,9 @@ WARNING: Do not use this mode yourself, it is internal to helm."
 Cache the candidates if there is no cached value yet."
   (let* ((name (assoc-default 'name source))
          (candidate-cache (gethash name helm-candidate-cache))
+         ;; Bind inhibit-quit to ensure function terminate in case of
+         ;; quit from helm-while-no-input and processes are added to
+         ;; helm-async-processes for further deletion (Issue 2113).
          (inhibit-quit (assoc-default 'candidates-process source)))
     (helm-aif candidate-cache
         (prog1 it (helm-log "Use cached candidates"))
