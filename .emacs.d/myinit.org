@@ -575,6 +575,12 @@ me, too many buffers to work with... for now.
 
     #+RESULTS:
     : evil-numbers/dec-at-pt
+*** Evil's syntax text object
+    Adds a text object defined by same syntax highlight, you can
+    operate on it as with any other text objects.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package evil-textobj-syntax)
+    #+END_SRC
 *** Diff-Highlight
     Highlights the changed content in buffer.
     #+BEGIN_SRC emacs-lisp :tangle yes
