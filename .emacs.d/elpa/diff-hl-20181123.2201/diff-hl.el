@@ -1,6 +1,6 @@
 ;;; diff-hl.el --- Highlight uncommitted changes using VC -*- lexical-binding: t -*-
 
-;; Copyright (C) 2012-2016  Free Software Foundation, Inc.
+;; Copyright (C) 2012-2018  Free Software Foundation, Inc.
 
 ;; Author:   Dmitry Gutov <dgutov@yandex.ru>
 ;; URL:      https://github.com/dgutov/diff-hl
@@ -127,6 +127,15 @@
            (set-default var value)
            (when on (global-diff-hl-mode 1)))))
 
+(defcustom diff-hl-highlight-revert-hunk-function
+  #'diff-hl-revert-highlight-first-column
+  "Function to highlight the current hunk in `diff-hl-revert-hunk'.
+The function is called at the beginning of the hunk and passed
+the end position as its only argument."
+  :type '(choice (const :tag "Do nothing" ignore)
+                 (const :tag "Highlight the first column"
+                        diff-hl-revert-highlight-first-column)))
+
 (defvar diff-hl-reference-revision nil
   "Revision to diff against.  nil means the most recent one.")
 
@@ -237,6 +246,7 @@
 (defun diff-hl-changes-buffer (file backend)
   (let ((buf-name " *diff-hl* "))
     (diff-hl-with-diff-switches
+     ;; FIXME: To diff against the staging area, call 'git diff-files -p'.
      (vc-call-backend backend 'diff (list file)
                       diff-hl-reference-revision nil
                       buf-name))
@@ -380,6 +390,18 @@ in the source file, or the last line of the hunk above it."
                 (unless (looking-at "^-")
                   (cl-decf to-go))))))))))
 
+(defface diff-hl-reverted-hunk-highlight
+  '((default :inverse-video t))
+  "Face used to highlight the first column of the hunk to be reverted.")
+
+(defun diff-hl-revert-highlight-first-column (end)
+  (let ((inhibit-read-only t))
+    (save-excursion
+      (while (< (point) end)
+        (font-lock-prepend-text-property (point) (1+ (point)) 'font-lock-face
+                                         'diff-hl-reverted-hunk-highlight)
+        (forward-line 1)))))
+
 (defun diff-hl-revert-hunk ()
   "Revert the diff hunk with changes at or above the point."
   (interactive)
@@ -396,7 +418,7 @@ in the source file, or the last line of the hunk above it."
           (vc-diff-internal nil fileset diff-hl-reference-revision nil
                             nil diff-buffer)
           (vc-exec-after
-           `(let (beg-line end-line)
+           `(let (beg-line end-line m-end)
               (when (eobp)
                 (with-current-buffer ,buffer (diff-hl-remove-overlays))
                 (user-error "Buffer is up-to-date"))
@@ -405,6 +427,7 @@ in the source file, or the last line of the hunk above it."
               (save-excursion
                 (while (looking-at "[-+]") (forward-line 1))
                 (setq end-line (line-number-at-pos (point)))
+                (setq m-end (point-marker))
                 (unless (eobp) (diff-split-hunk)))
               (unless (looking-at "[-+]") (forward-line -1))
               (while (looking-at "[-+]") (forward-line -1))
@@ -412,6 +435,7 @@ in the source file, or the last line of the hunk above it."
               (unless (looking-at "@")
                 (forward-line 1)
                 (diff-split-hunk))
+              (funcall diff-hl-highlight-revert-hunk-function m-end)
               (let ((wbh (window-body-height)))
                 (if (>= wbh (- end-line beg-line))
                     (recenter (/ (+ wbh (- beg-line end-line) 2) 2))
