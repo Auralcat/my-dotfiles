@@ -1,4 +1,4 @@
-(define-package "ac-php-core" "20181115.1442" "gen tags for php"
+(define-package "ac-php-core" "20181125.1307" "gen tags for php"
   '((emacs "24")
     (dash "1")
     (php-mode "1")
