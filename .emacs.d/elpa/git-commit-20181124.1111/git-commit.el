@@ -12,7 +12,7 @@
 ;; Maintainer: Jonas Bernoulli <jonas@bernoul.li>
 
 ;; Package-Requires: ((emacs "25.1") (dash "20180910") (with-editor "20181103"))
-;; Package-Version: 20181116.1408
+;; Package-Version: 20181124.1111
 ;; Keywords: git tools vc
 ;; Homepage: https://github.com/magit/magit
 
@@ -297,10 +297,14 @@ already using it, then you probably shouldn't start doing so."
   "Face used for non-whitespace on the second line of commit messages."
   :group 'git-commit-faces)
 
-(defface git-commit-note
+(defface git-commit-keyword
   '((t :inherit font-lock-string-face))
-  "Face used for notes in commit messages."
+  "Face used for keywords in commit messages.
+In this context a \"keyword\" is text surrounded be brackets."
   :group 'git-commit-faces)
+
+(define-obsolete-face-alias 'git-commit-note
+  'git-commit-keyword "Git-Commit 2.91.0")
 
 (defface git-commit-pseudo-header
   '((t :inherit font-lock-string-face))
@@ -796,9 +800,9 @@ Added to `font-lock-extend-region-functions'."
     ;; Summary
     (eval . `(,(git-commit-summary-regexp)
               (1 'git-commit-summary)))
-    ;; - Note (overrides summary)
+    ;; - Keyword [aka "text in brackets"] (overrides summary)
     ("\\[.+?\\]"
-     (0 'git-commit-note t))
+     (0 'git-commit-keyword t))
     ;; - Non-empty second line (overrides summary and note)
     (eval . `(,(git-commit-summary-regexp)
               (2 'git-commit-overlong-summary t t)
@@ -935,8 +939,7 @@ Elisp doc-strings, including this one.  Unlike in doc-strings,
   (setq font-lock-defaults '(git-commit-elisp-text-mode-keywords)))
 
 (defvar git-commit-elisp-text-mode-keywords
-  `((,(concat "[`‘]\\(\\(?:\\sw\\|\\s_\\|\\\\.\\)"
-              lisp-mode-symbol-regexp "\\)['’]")
+  `((,(concat "[`‘]\\(" lisp-mode-symbol-regexp "\\)['’]")
      (1 font-lock-constant-face prepend))
     ("\"[^\"]*\"" (0 font-lock-string-face prepend))))
 

@@ -1988,7 +1988,7 @@ Appendix D Command Index
                                                               (line  59)
 * git-rebase-undo:                       Editing Rebase Sequences.
                                                               (line  89)
-* ido-enter-magit-status:                Status Buffer.       (line  47)
+* ido-enter-magit-status:                Status Buffer.       (line  72)
 * magit-am-abort:                        Applying Patches.    (line  34)
 * magit-am-apply-maildir:                Applying Patches.    (line  19)
 * magit-am-apply-patches:                Applying Patches.    (line  13)
@@ -2436,7 +2436,7 @@ Appendix E Function Index
                                                               (line 196)
 * git-commit-turn-on-flyspell:           Editing Commit Messages.
                                                               (line 201)
-* ido-enter-magit-status:                Status Buffer.       (line  47)
+* ido-enter-magit-status:                Status Buffer.       (line  72)
 * magit-add-section-hook:                Section Hooks.       (line  20)
 * magit-after-save-refresh-status:       Automatic Refreshing of Magit Buffers.
                                                               (line  56)
@@ -2792,8 +2792,7 @@ Appendix F Variable Index
 * magit-remote-add-set-remote.pushDefault: The Remote Popup.  (line  77)
 * magit-remote-popup-show-variables:     The Remote Popup.    (line  18)
 * magit-repolist-columns:                Repository List.     (line  14)
-* magit-repository-directories:          Status Buffer.       (line  30)
-* magit-repository-directories-depth:    Status Buffer.       (line  40)
+* magit-repository-directories:          Status Buffer.       (line  58)
 * magit-revision-insert-related-refs:    Revision Buffer.     (line   6)
 * magit-revision-show-gravatars:         Revision Buffer.     (line  19)
 * magit-revision-use-hash-sections:      Revision Buffer.     (line  36)
