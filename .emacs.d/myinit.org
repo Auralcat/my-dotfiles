@@ -85,8 +85,6 @@
   ;; (save-place-mode 1)
 #+END_SRC
 
-#+RESULTS:
-: t
 
 * Dired
   #+BEGIN_SRC emacs-lisp :tangle yes
@@ -219,8 +217,6 @@ me, too many buffers to work with... for now.
       (setq js2-highlight-level 3)
     #+END_SRC
 
-    #+RESULTS:
-    : 3
 
 *** PHP-mode
     PHP support for Emacs.
@@ -330,8 +326,6 @@ me, too many buffers to work with... for now.
        (add-hook 'enh-ruby-mode-hook 'custom-disabled-ruby-checkers)
     #+END_SRC
 
-    #+RESULTS:
-
 *** Ruby Tools
     Goodies for Ruby programming modes.
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -420,8 +414,6 @@ me, too many buffers to work with... for now.
        (company-prescient-mode)
      #+END_SRC
 
-     #+RESULTS:
-     : t
 
 **** Front-ends
 ***** Company-box
@@ -475,20 +467,22 @@ me, too many buffers to work with... for now.
 *** Diminish
     Free some space in the mode line removing superfluous mode indications.
     #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package diminish :ensure t
-       ;; These are loaded at startup, I prefer declaring everything here.
-       :diminish golden-ratio-mode
-       :diminish helm-mode
-       :diminish company-mode
-       :diminish undo-tree-mode
-       :diminish auto-revert-mode
-       :diminish auto-fill-function
-       :diminish abbrev-mode
-       :diminish autopair-mode)
-    ;; These are loaded at other moments
-    (eval-after-load "editorconfig" '(diminish 'editorconfig-mode))
-    (eval-after-load "yasnippet" '(diminish 'yas-minor-mode))
+      (use-package diminish :ensure t
+         ;; These are loaded at startup, I prefer declaring everything here.
+         :diminish helm-mode
+         :diminish company-mode
+         :diminish undo-tree-mode
+         :diminish auto-revert-mode
+         :diminish auto-fill-function
+         :diminish wakatime-mode
+         :diminish abbrev-mode
+         :diminish autopair-mode)
+      ;; These are loaded in other moments
+      (eval-after-load "editorconfig" '(diminish 'editorconfig-mode))
+      (eval-after-load "yasnippet" '(diminish 'yas-minor-mode))
     #+END_SRC
+
+
 *** Editorconfig
     Helps developers define and maintain consistent coding styles
     between different editors and IDEs.
@@ -523,9 +517,11 @@ me, too many buffers to work with... for now.
     smaller ones are easier to read. It makes the multi-window
     experience more pleasing to the eye. Yeah, nature!
     #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package golden-ratio)
+    (use-package golden-ratio
+         :diminish golden-ratio-mode)
     (golden-ratio-mode 1)
     #+END_SRC
+
 *** Helm-Ag
     Silver Searcher support for Helm.
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -573,8 +569,6 @@ me, too many buffers to work with... for now.
           ("C-c <down>" . evil-numbers/dec-at-pt))
     #+END_SRC
 
-    #+RESULTS:
-    : evil-numbers/dec-at-pt
 *** Evil's syntax text object
     Adds a text object defined by same syntax highlight, you can
     operate on it as with any other text objects.
@@ -641,8 +635,6 @@ me, too many buffers to work with... for now.
 #      (setenv "TERM" "xterm-256color"))
 #     #+END_SRC
 
-#     #+RESULTS:
-#     : t
 
 *** Cheat.sh client
     Access cheat.sh from Emacs
@@ -791,8 +783,6 @@ me, too many buffers to work with... for now.
       (moe-theme-set-color 'yellow))
    #+END_SRC
 
-   #+RESULTS:
-   : t
 
 ** Abyss
    Dark contrast theme
@@ -832,8 +822,6 @@ me, too many buffers to work with... for now.
     ;; Maximize frame on startup
     (toggle-frame-maximized))
 #+END_SRC
-
-#+RESULTS:
 
 * Keybindings
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -893,8 +881,6 @@ me, too many buffers to work with... for now.
   (evil-leader/set-key-for-mode 'enh-ruby-mode "SPC" 'ruby-send-buffer-and-go)
   (evil-leader/set-key-for-mode 'python-mode "SPC" 'python-shell-send-buffer)
 #+END_SRC
-
-#+RESULTS:
 
 * Web-mode
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -999,8 +985,6 @@ me, too many buffers to work with... for now.
      (add-hook 'org-pomodoro-finished-hook (lambda() (pomodoro-finished-notification "Pomodoro finished" "Time to take a break!")))
    #+END_SRC
 
-   #+RESULTS:
-
 * Variables
 #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Set Org mode as default mode for new buffers:
@@ -1083,8 +1067,6 @@ me, too many buffers to work with... for now.
     (setq twittering-use-master-password t)
   #+END_SRC
 
-  #+RESULTS:
-  : t
 
 * Packages saved for later need
 ** Perspective
