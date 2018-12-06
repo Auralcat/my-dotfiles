@@ -34,6 +34,9 @@
 (define-key evil-normal-state-map (kbd "gs") 'bookmark-set)
 
 ;; INSERT MODE
+;; Use C-g to exit from Normal mode as well.
+(define-key evil-insert-state-map (kbd "C-g") 'evil-force-normal-state)
+
 ;; Add C-a and C-e to insert mode
 (define-key evil-insert-state-map (kbd "C-a") 'beginning-of-line)
 (define-key evil-insert-state-map (kbd "C-e") 'end-of-line)
