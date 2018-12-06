@@ -25,7 +25,6 @@
   (setq backup-directory-alist `(("." . "~/file-bouncer/emacs-backups")))
 
   ;; Manual packages load path
-  (add-to-list 'load-path "~/my-dotfiles/.emacs.d/manual-packages/multi-term-plus/")
   (add-to-list 'custom-theme-load-path "~/my-dotfiles/.emacs.d/manual-themes/")
 
   ;; Backup files by copying them
@@ -166,8 +165,8 @@ me, too many buffers to work with... for now.
      (use-package flycheck-credo
       :config
       ((eval-after-load 'flycheck
-        '(flycheck-credo-setup))
-        (add-hook 'elixir-mode-hook 'flycheck-mode)))
+    '(flycheck-credo-setup))
+    (add-hook 'elixir-mode-hook 'flycheck-mode)))
      #+END_SRC
 
 *** Sass-mode
@@ -199,8 +198,8 @@ me, too many buffers to work with... for now.
 
       (defun js2-mode-tweaks ()
       ;; Use company-yas as main backend
-        (set (make-local-variable 'company-backends) '(company-yasnippet company-etags company-capf))
-        (company-mode t))
+    (set (make-local-variable 'company-backends) '(company-yasnippet company-etags company-capf))
+    (company-mode t))
 
       (add-hook 'js2-mode-hook 'js2-mode-tweaks)
 
@@ -243,14 +242,14 @@ me, too many buffers to work with... for now.
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package web-mode :ensure t
       :bind (:map web-mode-map
-            ("C-<up>"    . web-mode-element-previous)
-            ("C-<down>"  . web-mode-element-next)
-            ("C-<left>"  . web-mode-element-beginning)
-            ("C-<right>" . web-mode-tag-match)
-            ("C-S-<up>"  . web-mode-element-parent)
-            ("M-<up>"    . web-mode-element-content-select)
-            ("C-k"       . web-mode-element-kill)
-            ("M-RET"     . complete)))
+        ("C-<up>"    . web-mode-element-previous)
+        ("C-<down>"  . web-mode-element-next)
+        ("C-<left>"  . web-mode-element-beginning)
+        ("C-<right>" . web-mode-tag-match)
+        ("C-S-<up>"  . web-mode-element-parent)
+        ("M-<up>"    . web-mode-element-content-select)
+        ("C-k"       . web-mode-element-kill)
+        ("M-RET"     . complete)))
 
       ;; File associations
       (add-to-list 'auto-mode-alist '("\\.phtml\\'"  . web-mode))
@@ -316,9 +315,9 @@ me, too many buffers to work with... for now.
     Syntax checker, replaces flymake
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package flycheck
-         :config
-         ;; turn on flychecking globally
-         (add-hook 'after-init-hook #'global-flycheck-mode))
+     :config
+     ;; turn on flychecking globally
+     (add-hook 'after-init-hook #'global-flycheck-mode))
       ;; Disable rubylint on default for Ruby modes.
       ;; If you need it, you can enable it locally using C-u C-c ! v.
       (defun custom-disabled-ruby-checkers ()
@@ -430,7 +429,7 @@ me, too many buffers to work with... for now.
     ;; Temporary fix
     (add-to-list 'load-path "~/.emacs.d/manual-packages/font-lock+/")
     (require 'font-lock+)
-    (require 'icons-in-terminal)
+    ;; (require 'icons-in-terminal)
 
     (setq company-box-icons-unknown 'fa_question_circle)
 
@@ -468,15 +467,15 @@ me, too many buffers to work with... for now.
     Free some space in the mode line removing superfluous mode indications.
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package diminish :ensure t
-         ;; These are loaded at startup, I prefer declaring everything here.
-         :diminish helm-mode
-         :diminish company-mode
-         :diminish undo-tree-mode
-         :diminish auto-revert-mode
-         :diminish auto-fill-function
-         :diminish wakatime-mode
-         :diminish abbrev-mode
-         :diminish autopair-mode)
+     ;; These are loaded at startup, I prefer declaring everything here.
+     :diminish helm-mode
+     :diminish company-mode
+     :diminish undo-tree-mode
+     :diminish auto-revert-mode
+     :diminish auto-fill-function
+     :diminish wakatime-mode
+     :diminish abbrev-mode
+     :diminish autopair-mode)
       ;; These are loaded in other moments
       (eval-after-load "editorconfig" '(diminish 'editorconfig-mode))
       (eval-after-load "yasnippet" '(diminish 'yas-minor-mode))
@@ -518,7 +517,7 @@ me, too many buffers to work with... for now.
     experience more pleasing to the eye. Yeah, nature!
     #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package golden-ratio
-         :diminish golden-ratio-mode)
+     :diminish golden-ratio-mode)
     (golden-ratio-mode 1)
     #+END_SRC
 
@@ -533,13 +532,6 @@ me, too many buffers to work with... for now.
     (use-package docker)
     #+END_SRC
 
-*** Multi-term Plus
-    A newer version of Multi Term maintained by a person from Japan.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package multi-term)
-    (require 'multi-term-config)
-
-    #+END_SRC
 *** Projectile Rails
     Rails utilities for Projectile-mode
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -566,7 +558,7 @@ me, too many buffers to work with... for now.
     #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package evil-numbers
     :bind ("C-c <up>" . evil-numbers/inc-at-pt)
-          ("C-c <down>" . evil-numbers/dec-at-pt))
+      ("C-c <down>" . evil-numbers/dec-at-pt))
     #+END_SRC
 
 *** Evil's syntax text object
@@ -713,7 +705,7 @@ me, too many buffers to work with... for now.
       :ensure t
       :config
       (setq circadian-themes '((:sunrise . moe-light)
-                               (:sunset  . jazz)))
+                   (:sunset  . jazz)))
 
       (circadian-setup))
     #+END_SRC
@@ -726,7 +718,7 @@ me, too many buffers to work with... for now.
 
       ;; Integrate with Company
       (defun ruby-completion-tweaks ()
-        ;; Robe-mode must be active for this to work.
+    ;; Robe-mode must be active for this to work.
       (set (make-local-variable 'company-backends) '(company-robe company-yasnippet company-etags company-capf))
       (company-mode t))
       (add-hook 'enh-ruby-mode-hook 'ruby-completion-tweaks)
@@ -974,13 +966,13 @@ me, too many buffers to work with... for now.
      ;; Display notification when a pomodoro is completed
      (defun pomodoro-started-notification (title body)
        (notifications-notify :title title
-                             :body body
-                             :app-icon "~/my-dotfiles/.emacs.d/org-pomodoro/tomato.png"))
+                 :body body
+                 :app-icon "~/my-dotfiles/.emacs.d/org-pomodoro/tomato.png"))
 
      (defun pomodoro-finished-notification (title body)
        (notifications-notify :title title
-                             :body body
-                             :app-icon "~/my-dotfiles/.emacs.d/org-pomodoro/tomato.png"))
+                 :body body
+                 :app-icon "~/my-dotfiles/.emacs.d/org-pomodoro/tomato.png"))
 
      (add-hook 'org-pomodoro-finished-hook (lambda() (pomodoro-finished-notification "Pomodoro finished" "Time to take a break!")))
    #+END_SRC
@@ -1049,9 +1041,9 @@ me, too many buffers to work with... for now.
   #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package twittering-mode
     :bind (:map twittering-mode-map
-          ("C-c r" . my-twittering-mode-reply-to-user)
-          ("C-c f" . twittering-favorite)
-          ("C-c n" . twittering-native-retweet)))
+      ("C-c r" . my-twittering-mode-reply-to-user)
+      ("C-c f" . twittering-favorite)
+      ("C-c n" . twittering-native-retweet)))
 
     ;; WIP, needs A LOT of remapping
     ;; Use evil-mode to navigate twittering's frame
