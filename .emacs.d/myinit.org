@@ -8,6 +8,14 @@
     ;; Set fallback font
     (set-face-attribute 'default nil :font "Ubuntu Mono" :height 120)
   #+END_SRC
+* Mac OS
+  #+BEGIN_SRC emacs-lisp :tangle yes
+    ;; Map Command to Meta
+    (setq mac-command-modifier 'meta)
+    ;; Map Option to Control (I know, smaller key, that's what we have for now. :(
+    (setq mac-option-modifier 'control)
+  #+END_SRC
+
 * Environment Customizations
 #+BEGIN_SRC emacs-lisp :tangle yes
   ;; Sentences end with single spaces for me.
