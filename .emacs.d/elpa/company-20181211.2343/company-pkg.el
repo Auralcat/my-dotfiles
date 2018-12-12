@@ -1,4 +1,4 @@
-(define-package "company" "20181209.6" "Modular text completion framework"
+(define-package "company" "20181211.2343" "Modular text completion framework"
   '((emacs "24.3"))
   :keywords
   '("abbrev" "convenience" "matching")
