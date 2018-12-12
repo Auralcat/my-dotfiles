@@ -1,7 +1,7 @@
 ;;; evil-textobj-syntax.el --- Provides syntax text objects. -*- lexical-binding: t; -*-
 
 ;; URL: https://github.com/laishulu/evil-textobj-syntax
-;; Package-Version: 20181101.1404
+;; Package-Version: 20181210.1213
 ;; Created: November 1, 2018
 ;; Keywords: evil, syntax, highlight, text-object
 ;; Package-Requires: ((names "0.5") (emacs "24") (evil "0"))
