@@ -10,12 +10,14 @@
   #+END_SRC
 * Mac OS
   #+BEGIN_SRC emacs-lisp :tangle yes
-    ;; Map Command to Meta
-    (setq mac-command-modifier 'meta)
-    ;; Map Option to Control (I know, smaller key, that's what we have for now. :(
-    (setq mac-option-modifier 'control)
+    (when (eq system-type 'darwin) ;; mac specific settings
+      ;; Map Command to Meta
+      (setq mac-command-modifier 'meta)
+      ;; Map Option to Control (I know, smaller key, that's what we have for now. :(
+      (setq mac-option-modifier 'control)
+      ;; Increase the font size.
+      (set-default-font "Fantasque Sans Mono 14"))
   #+END_SRC
-
 * Environment Customizations
 #+BEGIN_SRC emacs-lisp :tangle yes
   ;; Sentences end with single spaces for me.
@@ -985,6 +987,15 @@ me, too many buffers to work with... for now.
      (add-hook 'org-pomodoro-finished-hook (lambda() (pomodoro-finished-notification "Pomodoro finished" "Time to take a break!")))
    #+END_SRC
 
+** Org-notify
+   Desktop notifications for Org-mode.
+   #+BEGIN_SRC emacs-lisp :tangle yes
+     (use-package 'org-alert)
+     ;; Use libnotify to display the alerts in Linux
+     (setq alert-default-style 'libnotify))
+    (when (eq 'system-type darwin)
+     (setq alert-default-style 'osx-notifier))
+   #+END_SRC
 * Variables
 #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Set Org mode as default mode for new buffers:
