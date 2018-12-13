@@ -337,6 +337,7 @@
     ("motnar" "montar" nil 0)
     ("msg" "mensagem" nil 3)
     ("mto" "muito" nil 2)
+    ("oa" "Open Account" nil 1)
     ("ocmo" "como" nil 2)
     ("oicsa" "coisa" nil 1)
     ("ontme" "ontem" nil 0)
@@ -346,12 +347,12 @@
     ("pontem" "Ontem" nil 0)
     ("poruqe" "porque" nil 1)
     ("pouoc" "pouco" nil 0)
-    ("pq" "porque" nil 10)
+    ("pq" "porque" nil 11)
     ("prblema" "problema" nil 0)
     ("probelma" "problema" nil 1)
     ("projeots" "projetos" nil 1)
     ("qaundo" "quando" nil 0)
-    ("qdo" "quando" nil 7)
+    ("qdo" "quando" nil 8)
     ("qeu" "que" nil 34)
     ("realemnte" "realmente" nil 1)
     ("receebi" "recebi" "sbae" 0)
@@ -369,6 +370,7 @@
     ("uqe" "que" nil 6)
     ("vc" "você" nil 18)
     ("vieo" "veio" nil 0)
+    ("wa" "Waiting Approval" nil 0)
    ))
 
 (define-abbrev-table 'outline-mode-abbrev-table '())
@@ -395,9 +397,7 @@
 
 (define-abbrev-table 'python-mode-abbrev-table '())
 
-(define-abbrev-table 'python-mode-skeleton-abbrev-table
-  '(
-   ))
+(define-abbrev-table 'python-mode-skeleton-abbrev-table '())
 
 (define-abbrev-table 'rake-compilation-mode-abbrev-table '())
 
