@@ -17,7 +17,12 @@
       (setq mac-option-modifier 'control)
       ;; Increase the font size.
       (set-default-font "Fantasque Sans Mono 14"))
+      ;; Enable EPA
+      (custom-set-variables '(epg-gpg-program  "/usr/local/bin/gpg"))
   #+END_SRC
+
+  #+RESULTS:
+
 * Environment Customizations
 #+BEGIN_SRC emacs-lisp :tangle yes
   ;; Sentences end with single spaces for me.
@@ -990,7 +995,7 @@ me, too many buffers to work with... for now.
 ** Org-notify
    Desktop notifications for Org-mode.
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (use-package 'org-alert)
+     (use-package org-alert)
      ;; Use libnotify to display the alerts in Linux
      (setq alert-default-style 'libnotify))
     (when (eq 'system-type darwin)
