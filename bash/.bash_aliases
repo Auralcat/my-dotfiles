@@ -53,6 +53,7 @@ alias ta='tmux attach'
 # Git aliases
 alias gp='git pull'
 alias gs='git status'
+alias gl='git log'
 
 # Specific vim text files:
 
