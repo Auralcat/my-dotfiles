@@ -51,7 +51,6 @@ alias peek='apt show'
 alias ta='tmux attach'
 
 # Git aliases
-alias commit='git add --all; git commit; git push'
 alias gp='git pull'
 alias gs='git status'
 
@@ -62,7 +61,6 @@ alias journal='vim ~/diario.txt'
 alias draft='vim /tmp/scratch.md'
 
 # Misc stuff
-alias briefme='less ~/.briefing.txt'
 alias budget='libreoffice --calc ~/Documentos/Controle\ financeiro.ods'
 alias lynx='lynx -nofilereferer -noreferer -anonymous -cookies -vikeys'
 alias oblique='python3 ~/oblique-strategies/oblique.py'
@@ -70,11 +68,9 @@ alias tuxsay='cowsay -f tux'
 alias unix='curl -L git.io/unix'
 alias weather='echo -e "--------------------------------------------------------------------------------\n ** If you want the full weather report, type weather_full. **\n--------------------------------------------------------------------------------\n"; weather_full | head -17'
 alias weather_full='curl -s wttr.in/Ponta_grossa'
-alias xcopy='python3 ~/Python\ Scripts/custom_xclip.py'
 alias clearswap='sudo swapoff -a && sudo swapon -a'
 
 # Read books in the terminal with less!
-
 alias neuromancer='curl http://www.lib.ru/GIBSON/neuromancer.txt | less'
 alias count_zero='curl https://www.kataan.org/public/ebook/countzero.txt | less'
 
