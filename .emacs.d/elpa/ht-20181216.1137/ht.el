@@ -4,7 +4,7 @@
 
 ;; Author: Wilfred Hughes <me@wilfred.me.uk>
 ;; Version: 2.3
-;; Package-Version: 20181211.2049
+;; Package-Version: 20181216.1137
 ;; Keywords: hash table, hash map, hash
 ;; Package-Requires: ((dash "2.12.0"))
 
@@ -104,7 +104,9 @@ The lookup for each key should return another hash table, except
 for the final key, which may return any value."
   (if (cdr keys)
       (apply #'ht-get* (ht-get table (car keys)) (cdr keys))
-    (ht-get table (car keys))))
+    (if keys
+        (ht-get table (car keys))
+      table)))
 
 (gv-define-setter ht-get* (value table &rest keys)
   `(if (cdr ',keys)
