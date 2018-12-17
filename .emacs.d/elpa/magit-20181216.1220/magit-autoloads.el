@@ -1450,6 +1450,11 @@ beginning of the line.
 ;;;### (autoloads nil "magit-log" "magit-log.el" (0 0 0 0))
 ;;; Generated autoloads from magit-log.el
 
+(autoload 'magit-log-popup "magit-log" "\
+Popup console for log commands.
+
+\(fn ARG)" t nil)
+
 (autoload 'magit-log-buffer-file-popup "magit-log" "\
 Popup console for log commands.
 
