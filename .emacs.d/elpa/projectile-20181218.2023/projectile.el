@@ -4,7 +4,7 @@
 
 ;; Author: Bozhidar Batsov <bozhidar@batsov.com>
 ;; URL: https://github.com/bbatsov/projectile
-;; Package-Version: 20181217.801
+;; Package-Version: 20181218.2023
 ;; Keywords: project, convenience
 ;; Version: 1.1.0-snapshot
 ;; Package-Requires: ((emacs "25.1") (pkg-info "0.4"))
@@ -3604,7 +3604,7 @@ fallback to the original function."
       (when new-filename
         (setq filename new-filename))))
 
-  (funcall #'orig-fun marker filename directory formats))
+  (apply orig-fun `(,marker ,filename ,directory ,@formats)))
 
 (defun projectile-open-projects ()
   "Return a list of all open projects.
