@@ -216,6 +216,17 @@
     (term-color-cyan    :background cyan    :foreground cyan)
     (term-color-white   :background base8   :foreground base8)
 
+    ;; vterm
+    (vterm               :foreground fg)
+    (vterm-color-black   :background base0   :foreground base0)
+    (vterm-color-red     :background red     :foreground red)
+    (vterm-color-green   :background green   :foreground green)
+    (vterm-color-yellow  :background yellow  :foreground yellow)
+    (vterm-color-blue    :background blue    :foreground blue)
+    (vterm-color-magenta :background magenta :foreground magenta)
+    (vterm-color-cyan    :background cyan    :foreground cyan)
+    (vterm-color-white   :background base8   :foreground base8)
+
     ;; window-divider
     (window-divider :inherit 'vertical-border)
     (window-divider-first-pixel :inherit 'window-divider)
@@ -499,7 +510,7 @@
     (git-commit-summary :foreground strings)
     (git-commit-overlong-summary :inherit 'error :background base0 :slant 'italic :weight 'bold)
     (git-commit-nonempty-second-line :inherit 'git-commit-overlong-summary)
-    (git-commit-note :foreground cyan :slant 'italic)
+    (git-commit-keyword :foreground cyan :slant 'italic)
     (git-commit-pseudo-header :foreground doc-comments :slant 'italic)
     (git-commit-known-pseudo-header :foreground doc-comments :weight 'bold :slant 'italic)
     (git-commit-comment-branch-local :foreground magenta)
@@ -819,6 +830,10 @@
     ;; parenface
     (paren-face :foreground comments)
 
+    ;; parinfer
+    (parinfer-pretty-parens:dim-paren-face :foreground base5)
+    (parinfer-smart-tab:indicator-face :foreground base5)
+
     ;; perspective
     (persp-selected-face :foreground blue :weight 'bold)
 
@@ -1123,7 +1138,7 @@
     (notmuch-wash-toggle-button :foreground fg)
 
     ;; outline
-    (outline-1 :foreground blue     :background base3  :weight 'bold :height 1.25)
+    (outline-1 :foreground blue     :background base3  :weight 'bold)
     (outline-2 :foreground magenta                     :weight 'bold)
     (outline-3 :foreground violet                      :weight 'bold)
     (outline-4 :foreground (doom-lighten blue 0.25)    :weight 'bold)
