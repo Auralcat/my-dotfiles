@@ -62,6 +62,16 @@
 ;; C-x C-l completes a line.
 (define-key evil-insert-state-map (kbd "C-x C-l") 'evil-complete-previous-line)
 
+;; C-x C-o: syntax completion, depending on mode.
+(add-hook 'enh-ruby-mode-hook #'(lambda () (define-key evil-insert-state-map (kbd "C-x C-o") 'company-robe)))
+(add-hook 'emacs-lisp-mode-hook #'(lambda () (define-key evil-insert-state-map (kbd "C-x C-o") 'company-elisp)))
+
+;; C-x C-p: Yasnippet template completion.
+(define-key evil-insert-state-map (kbd "C-x C-p") 'company-yasnippet)
+
+;; C-x C-]: Tag completion.
+(define-key evil-insert-state-map (kbd "C-x C-]") 'company-etags)
+
 ;; Evil Leader configs
 ;; Use SPC as leader key (yah, this is the idea behind Spacemacs)
 (evil-leader/set-leader "SPC")
