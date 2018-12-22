@@ -80,6 +80,8 @@
 (evil-leader/set-key
     ;; Org-agenda
     "a" 'org-agenda
+    ;; Org-capture
+    "c" 'org-capture
     ;; Call Magit with Leader g
     "g" 'magit-status
     ;; Clock in
