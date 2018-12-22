@@ -5,7 +5,7 @@
 ;; Author: Radon Rosborough <radon.neon@gmail.com>
 ;; Homepage: https://github.com/raxod502/prescient.el
 ;; Keywords: extensions
-;; Package-Version: 20181022.2256
+;; Package-Version: 20181221.24
 ;; Created: 7 Aug 2017
 ;; Package-Requires: ((emacs "25.1"))
 ;; Version: 2.2.1
@@ -199,6 +199,7 @@ Usually this variable is dynamically bound to another value while
 (define-minor-mode prescient-persist-mode
   "Minor mode to persist prescient.el statistics to `prescient-save-file'."
   :global t
+  :group 'prescient
   (if prescient-persist-mode
       (add-hook 'kill-emacs-hook #'prescient--save)
     (remove-hook 'kill-emacs-hook #'prescient--save)))

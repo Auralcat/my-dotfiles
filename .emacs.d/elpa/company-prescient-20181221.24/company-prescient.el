@@ -5,7 +5,7 @@
 ;; Author: Radon Rosborough <radon.neon@gmail.com>
 ;; Homepage: https://github.com/raxod502/prescient.el
 ;; Keywords: extensions
-;; Package-Version: 20181022.2256
+;; Package-Version: 20181221.24
 ;; Created: 7 Aug 2017
 ;; Package-Requires: ((emacs "25.1") (prescient "2.2.1") (company "0.9.6"))
 ;; Version: 2.2.1
@@ -41,6 +41,7 @@ This is for use on `company-completion-finished-hook'.")
 (define-minor-mode company-prescient-mode
   "Minor mode to use prescient.el in Company completions."
   :global t
+  :group 'prescient
   (if company-prescient-mode
       (progn
         (add-to-list 'company-transformers #'company-prescient-transformer)
