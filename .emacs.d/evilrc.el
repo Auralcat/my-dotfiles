@@ -55,6 +55,13 @@
 ;; This command is originally bound to C-a, but I overrode it.
 (define-key evil-insert-state-map (kbd "C-.") 'evil-paste-last-insertion)
 
+;; COMPLETIONS
+;; C-x C-f completes a file path in insert mode.
+(define-key evil-insert-state-map (kbd "C-x C-f") 'company-files)
+
+;; C-x C-l completes a line.
+(define-key evil-insert-state-map (kbd "C-x C-l") 'evil-complete-previous-line)
+
 ;; Evil Leader configs
 ;; Use SPC as leader key (yah, this is the idea behind Spacemacs)
 (evil-leader/set-leader "SPC")

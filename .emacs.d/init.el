@@ -29,31 +29,31 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
-    '(ansi-color-names-vector
-         ["#151515" "#953331" "#546a29" "#909737" "#385e6b" "#7f355e" "#34676f" "#c6a57b"])
+ '(ansi-color-names-vector
+   ["#151515" "#953331" "#546a29" "#909737" "#385e6b" "#7f355e" "#34676f" "#c6a57b"])
  '(auto-image-file-mode t)
  '(battery-mode-line-format " 🔋 %b%p%% ")
  '(browse-url-browser-display nil)
  '(browse-url-browser-function (quote browse-url-default-browser))
  '(browse-url-firefox-program "firefox")
-    '(camcorder-frame-parameters
-         (quote
-             ((name . "camcorder.el Recording - F12 to Stop - F11 to Pause/Resume")
-                 (height . 240)
-                 (width . 320)
-                 (top . 80))))
+ '(camcorder-frame-parameters
+   (quote
+    ((name . "camcorder.el Recording - F12 to Stop - F11 to Pause/Resume")
+     (height . 240)
+     (width . 320)
+     (top . 80))))
  '(camcorder-mode t)
  '(column-number-mode t)
  '(company-abort-manual-when-too-short nil)
  '(company-auto-complete (quote (quote company-explicit-action-p)))
  '(company-auto-complete-chars (quote (41)))
-    '(company-backends
-         (quote
-             (company-yasnippet
-                 (company-tern company-web-html company-css)
-                 company-semantic company-capf company-files
-                 (company-dabbrev-code company-gtags company-etags company-keywords)
-                 company-oddmuse company-dabbrev)))
+ '(company-backends
+   (quote
+    (company-yasnippet
+     (company-tern company-web-html company-css)
+     company-semantic company-capf company-files
+     (company-dabbrev-code company-gtags company-etags company-keywords)
+     company-oddmuse company-dabbrev)))
  '(company-box-doc-enable nil)
  '(company-dabbrev-downcase nil)
  '(company-idle-delay 0.2)
