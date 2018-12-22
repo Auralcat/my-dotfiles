@@ -16,11 +16,11 @@
       ;; Map Option to Control (I know, smaller key, that's what we have for now. :(
       (setq mac-option-modifier 'control)
       ;; Increase the font size.
-      (set-default-font "Fantasque Sans Mono 14"))
+      (set-default-font "Fantasque Sans Mono 14")
       ;; Point the executables in Mac OS to Emacs.
       (add-to-list 'exec-path "/usr/local/bin/")
       ;; Enable EPA
-      (custom-set-variables '(epg-gpg-program  "/usr/local/bin/gpg"))
+      (custom-set-variables '(epg-gpg-program  "/usr/local/bin/gpg")))
   #+END_SRC
 * Environment Customizations
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -96,6 +96,10 @@
   (require 'saveplace)
   (setq-default save-place t)
   ;; (save-place-mode 1)
+
+  ;; I need a bigger kill ring.
+  (setq kill-ring-max 180)
+(setq kill-ring-max 180)
 #+END_SRC
 
 
@@ -1001,9 +1005,9 @@ me, too many buffers to work with... for now.
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package org-alert)
      ;; Use libnotify to display the alerts in Linux
-     (setq alert-default-style 'libnotify))
-    (when (eq 'system-type darwin)
-     (setq alert-default-style 'osx-notifier))
+     (setq alert-default-style 'libnotify)
+     (when (eq 'system-type 'darwin)
+       (setq alert-default-style 'osx-notifier))
    #+END_SRC
 * Variables
 #+BEGIN_SRC emacs-lisp :tangle yes
