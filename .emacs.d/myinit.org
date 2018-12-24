@@ -297,6 +297,18 @@ me, too many buffers to work with... for now.
     (use-package csv-mode)
     #+END_SRC
 ** Minor Modes
+*** Ruby-electric
+    Auto-close do-end blocks, as well as braces and parens.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+      (use-package ruby-electric
+       :diminish ruby-electric-mode)
+      (add-hook 'enh-ruby-mode-hook
+           #'(lambda ()
+               (setq autopair-dont-activate t) ;; for emacsen < 24
+               (autopair-mode -1))             ;; for emacsen >= 24
+               )
+      (add-hook 'enh-ruby-mode-hook 'ruby-electric-mode)
+    #+END_SRC
 *** Alchemist
     Elixir helper package integration for Emacs.
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -498,6 +510,13 @@ me, too many buffers to work with... for now.
       ;; These are loaded in other moments
       (eval-after-load "editorconfig" '(diminish 'editorconfig-mode))
       (eval-after-load "yasnippet" '(diminish 'yas-minor-mode))
+    #+END_SRC
+*** Ace Jump
+    Allows you to move anywhere in the visible portion of the buffer
+    using 2 keystrokes.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+      (use-package ace-jump-mode
+        :bind ("C-x j" . ace-jump-mode))
     #+END_SRC
 
 
@@ -884,9 +903,6 @@ me, too many buffers to work with... for now.
   (add-hook 'eshell-mode-hook 'eshell-tweaks)
   (add-hook 'term-mode-hook 'eshell-tweaks)
 
-  ;; Set C-x j to go to current clocked task in org-mode
-  (global-set-key (kbd "C-x j") 'org-clock-goto)
-
   ;; Evaluate buffer using SPC SPC, depending on major mode.
   (evil-leader/set-key-for-mode 'emacs-lisp-mode "SPC" 'eval-buffer)
   (evil-leader/set-key-for-mode 'enh-ruby-mode "SPC" 'ruby-send-buffer-and-go)
@@ -917,9 +933,6 @@ me, too many buffers to work with... for now.
   ;; DO NOT use C-c [ or C-c ] to add/remove files to the agenda otherwise
   ;; Emacs will write the var to init.el
   (setq org-agenda-files "~/file-bouncer/org-agenda-file-list.org")
-
-  ;; Bind org-capture to C-c c
-  (global-set-key (kbd "\C-c c") (quote org-capture))
 
   ;; Open subheading with C-c RET and invert with M-RET
   (local-set-key [27 13] (quote org-ctrl-c-ret))
