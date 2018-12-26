@@ -297,6 +297,12 @@ me, too many buffers to work with... for now.
     (use-package csv-mode)
     #+END_SRC
 ** Minor Modes
+*** Ruby-extra-highlight
+    Highlight function arguments in Ruby.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+      (use-package ruby-extra-highlight)
+      (add-hook 'enh-ruby-mode-hook #'ruby-extra-highlight-mode)
+    #+END_SRC
 *** Ruby-electric
     Auto-close do-end blocks, as well as braces and parens.
     #+BEGIN_SRC emacs-lisp :tangle yes
