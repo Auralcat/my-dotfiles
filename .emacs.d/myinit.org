@@ -388,6 +388,40 @@ me, too many buffers to work with... for now.
      (use-package evil-surround)
      (global-evil-surround-mode)
      #+END_SRC
+**** Custom text objects
+***** Ruby Block
+      Defines a text object for Ruby blocks.
+      Credits: [[https://github.com/env0der][@env0der's dotfiles]]
+      My modification is just the ~ruby-block-beg-re~ variable.
+      #+BEGIN_SRC emacs-lisp :tangle yes
+        (evil-define-text-object evil-textobj-outer-ruby-block
+          (count &optional beg end type)
+          (evil-ruby-block-range beg end type count t))
+
+        (evil-define-text-object evil-textobj-inner-ruby-block
+          (count &optional beg end type)
+          (evil-ruby-block-range beg end type count nil))
+
+        (defun evil-ruby-block-range (count beg end type &optional inclusive)
+          (let ((current-point (point))
+                (block-begin (progn (evil-end-of-line) (re-search-backward ruby-block-beg-re nil t)))
+                (block-end (progn (evilmi-jump-items) (point))))
+            (if inclusive
+                (let ((begin (progn (goto-char block-begin) (evil-beginning-of-line) (point)))
+                      (end (progn (goto-char block-end) (evil-next-line) (evil-beginning-of-line) (if (looking-at "^$") (+ (point) 1) (point)))))
+                  (progn
+                    (goto-char current-point)
+                    (evil-range begin end)))
+              (let ((begin (progn (goto-char block-begin) (evil-next-line) (evil-first-non-blank) (point)))
+                    (end (progn (goto-char block-end) (evil-previous-line) (evil-end-of-line) (+ (point) 1))))
+                (progn
+                  (goto-char current-point)
+                  (evil-range begin end))))))
+
+      (define-key evil-inner-text-objects-map "r" 'evil-textobj-inner-ruby-block)
+      (define-key evil-outer-text-objects-map "r" 'evil-textobj-outer-ruby-block)
+      #+END_SRC
+
 *** Helm
      Incremental completion and selection narrowing framework
      #+BEGIN_SRC emacs-lisp :tangle yes
