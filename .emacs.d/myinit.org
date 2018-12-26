@@ -877,7 +877,7 @@ me, too many buffers to work with... for now.
   (global-set-key [240] (quote delete-other-windows))
 
   ;; Access buffers with Alt-Gr b
-  (global-set-key [8221] (quote ido-switch-buffer))
+  (global-set-key [8221] (quote helm-buffers-list))
 
   ;; Map the Home and End keys to go to the beginning and end of the buffer
   (global-set-key [home] (quote beginning-of-buffer))
@@ -888,6 +888,7 @@ me, too many buffers to work with... for now.
     (if (= (point) (progn (back-to-indentation) (point)))
     (beginning-of-line)))
 
+  ;; We need this to get back to the beginning of the indentation or first word of the line.
   (global-set-key (kbd "C-a") (quote back-to-indentation-or-beginning))
 
   ;; Hippie-Expand: change key to M-SPC; Replace dabbrev-expand
@@ -1000,27 +1001,26 @@ me, too many buffers to work with... for now.
        :bind ("C-x p" . org-pomodoro))
 
      ;; Display notification when a pomodoro is completed
-     (defun pomodoro-started-notification (title body)
-       (notifications-notify :title title
+     (defun pomodoro-display-notification (title body)
+         (if (eq system-type 'darwin)
+           (ns-do-applescript (format "display notification \"%s\" with title \"%s\" sound name \"Glass\"" body title))
+           (notifications-notify :title title
                  :body body
-                 :app-icon "~/my-dotfiles/.emacs.d/org-pomodoro/tomato.png"))
+                 :app-icon "~/my-dotfiles/.emacs.d/org-pomodoro/tomato.png")))
 
-     (defun pomodoro-finished-notification (title body)
-       (notifications-notify :title title
-                 :body body
-                 :app-icon "~/my-dotfiles/.emacs.d/org-pomodoro/tomato.png"))
-
-     (add-hook 'org-pomodoro-finished-hook (lambda() (pomodoro-finished-notification "Pomodoro finished" "Time to take a break!")))
+     (add-hook 'org-pomodoro-started-hook (lambda() (pomodoro-display-notification "Pomodoro started!" "Concentrate on your work!")))
+     (add-hook 'org-pomodoro-finished-hook (lambda() (pomodoro-display-notification "Pomodoro finished" "Time to take a break!")))
    #+END_SRC
 
 ** Org-notify
    Desktop notifications for Org-mode.
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package org-alert)
-     ;; Use libnotify to display the alerts in Linux
-     (setq alert-default-style 'libnotify)
-     (when (eq 'system-type 'darwin)
-       (setq alert-default-style 'osx-notifier))
+     ;; Use native notifications in Mac.
+     (if (eq 'system-type 'darwin)
+       (setq alert-default-style 'osx-notifier)
+       ;; Use libnotify to display the alerts in Linux
+       (setq alert-default-style 'libnotify))
    #+END_SRC
 * Variables
 #+BEGIN_SRC emacs-lisp :tangle yes
