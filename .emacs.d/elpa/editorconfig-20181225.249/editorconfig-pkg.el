@@ -1,4 +1,4 @@
-(define-package "editorconfig" "20181217.724" "EditorConfig Emacs Plugin"
+(define-package "editorconfig" "20181225.249" "EditorConfig Emacs Plugin"
   '((cl-lib "0.5"))
   :authors
   '(("EditorConfig Team" . "editorconfig@googlegroups.com"))
