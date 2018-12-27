@@ -12,7 +12,7 @@
 ;; Maintainer: Jonas Bernoulli <jonas@bernoul.li>
 
 ;; Package-Requires: ((emacs "25.1") (dash "20180910") (with-editor "20181103"))
-;; Package-Version: 20181219.1846
+;; Package-Version: 20181226.831
 ;; Keywords: git tools vc
 ;; Homepage: https://github.com/magit/magit
 
@@ -474,6 +474,11 @@ This is only used if Magit is available."
 (defun git-commit-setup ()
   ;; Pretend that git-commit-mode is a major-mode,
   ;; so that directory-local settings can be used.
+  (when (fboundp 'magit-toplevel)
+    ;; `magit-toplevel' is autoloaded and defined in magit-git.el,
+    ;; That library declares this functions without loading
+    ;; magit-process.el, which defines it.
+    (require 'magit-process nil t))
   (let ((default-directory
           (if (or (file-exists-p ".dir-locals.el")
                   (not (fboundp 'magit-toplevel)))

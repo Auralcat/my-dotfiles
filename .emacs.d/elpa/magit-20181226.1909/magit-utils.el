@@ -56,6 +56,9 @@
 (eval-when-compile (require 'vc-git))
 (declare-function vc-git--run-command-string "vc-git" (file &rest args))
 
+(eval-when-compile (require 'which-func))
+(declare-function which-function "which-func" ())
+
 (defvar magit-wip-before-change-mode)
 
 (require 'magit-popup)
@@ -740,12 +743,9 @@ See info node `(magit)Debugging Tools' for more information."
                            (error "Cannot find mandatory dependency %s" lib)))))
                      '(;; Like `LOAD_PATH' in `default.mk'.
                        "dash"
-                       "ghub"
-                       "graphql"
                        "lv"
                        "magit-popup"
                        "transient"
-                       "treepy"
                        "with-editor"
                        ;; Obviously `magit' itself is needed too.
                        "magit"

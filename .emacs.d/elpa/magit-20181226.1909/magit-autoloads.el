@@ -419,12 +419,6 @@ Create and checkout an orphan BRANCH with contents from revision START-POINT.
 
 \(fn BRANCH START-POINT &optional ARGS)" t nil)
 
-(autoload 'magit-branch-pull-request "magit-branch" "\
-Create and configure a new branch from a pull-request.
-Please see the manual for more information.
-
-\(fn PR)" t nil)
-
 (autoload 'magit-branch-spinoff "magit-branch" "\
 Create new branch from the unpushed commits.
 
@@ -647,21 +641,6 @@ Then show the status buffer for the new repository.
 \(fn REPOSITORY DIRECTORY)" t nil)
 
 (if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-clone" '("magit-clone-")))
-
-;;;***
-
-;;;### (autoloads nil "magit-collab" "magit-collab.el" (0 0 0 0))
-;;; Generated autoloads from magit-collab.el
-
-(autoload 'magit-browse-pull-request "magit-collab" "\
-Visit pull-request PR using `browse-url'.
-
-Currently this only supports Github, but that restriction will
-be lifted eventually to support other Git forges.
-
-\(fn PR)" t nil)
-
-(if (fboundp 'register-definition-prefixes) (register-definition-prefixes "magit-collab" '("magit-")))
 
 ;;;***
 
@@ -1600,7 +1579,7 @@ Before merging, force push the source branch to its push-remote,
 provided the respective remote branch already exists, ensuring
 that the respective pull-request (if any) won't get stuck on some
 obsolete version of the commits that are being merged.  Finally
-if `magit-branch-pull-request' was used to create the merged
+if `forge-branch-pullreq' was used to create the merged branch,
 branch, then also remove the respective remote branch.
 
 \(fn BRANCH &optional ARGS)" t nil)
@@ -1612,8 +1591,8 @@ Before merging, force push the source branch to its push-remote,
 provided the respective remote branch already exists, ensuring
 that the respective pull-request (if any) won't get stuck on some
 obsolete version of the commits that are being merged.  Finally
-if `magit-branch-pull-request' was used to create the merged
-branch, then also remove the respective remote branch.
+if `forge-branch-pullreq' was used to create the merged branch,
+then also remove the respective remote branch.
 
 \(fn BRANCH &optional ARGS)" t nil)
 

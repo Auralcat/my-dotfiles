@@ -1,4 +1,4 @@
-(define-package "ghub" "20181220.1406" "Minuscule client libraries for Git forge APIs."
+(define-package "ghub" "20181227.1039" "Minuscule client libraries for Git forge APIs."
   '((emacs "25.1")
     (dash "2.14.1")
     (graphql "0.1.1")
