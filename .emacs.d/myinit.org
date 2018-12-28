@@ -956,6 +956,8 @@ me, too many buffers to work with... for now.
   ;; We don't need Flycheck in org-mode buffers. Usually.
   (add-hook 'org-mode-hook '(lambda() (flycheck-mode 0)))
 
+  ;; Change the end of collapsed headings to an arrow.
+  (setq org-ellipsis "⤵")
   ;; Keep agenda file list in a single file so I can publish my config.
   ;; DO NOT use C-c [ or C-c ] to add/remove files to the agenda otherwise
   ;; Emacs will write the var to init.el
