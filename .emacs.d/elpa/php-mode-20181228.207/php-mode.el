@@ -123,7 +123,7 @@
 
 ;; Local variables
 ;;;###autoload
-(defgroup php-mode nil
+(defgroup php nil
   "Language support for PHP."
   :tag "PHP"
   :group 'languages
@@ -418,6 +418,11 @@ This function may interfere with other hooks and other behaviors.
 In that case set to `NIL'."
   :type 'boolean)
 
+(defcustom php-mode-disable-parent-mode-hooks t
+  "When set to `T', do not run hooks of parent modes (`java-mode', `c-mode')."
+  :type 'boolean
+  :group 'php-mode)
+
 (defun php-mode-version ()
   "Display string describing the version of PHP Mode."
   (interactive)
@@ -429,9 +434,9 @@ In that case set to `NIL'."
 (define-obsolete-variable-alias 'php-available-project-root-files 'php-project-available-root-files "1.19.0")
 
 (defvar php-mode-map
-  (let ((map (make-sparse-keymap)))
-    ;; (define-key map [menu-bar php]
-    ;;   (cons "PHP" (make-sparse-keymap "PHP")))
+  (let ((map (make-sparse-keymap "PHP Mode")))
+    ;; Remove menu item for c-mode
+    (define-key map [menu-bar C] nil)
 
     ;; (define-key map [menu-bar php complete-function]
     ;;   '("Complete function name" . php-complete-function))
@@ -1258,7 +1263,9 @@ After setting the stylevars run hooks according to STYLENAME
   "Major mode for editing PHP code.
 
 \\{php-mode-map}"
-
+  (when php-mode-disable-parent-mode-hooks
+    (setq-local c-mode-hook nil)
+    (setq-local java-mode-hook nil))
   (c-initialize-cc-mode t)
   (c-init-language-vars php-mode)
   (c-common-init 'php-mode)
@@ -1333,7 +1340,6 @@ After setting the stylevars run hooks according to STYLENAME
     (with-silent-modifications
       (save-excursion
         (php-syntax-propertize-function (point-min) (point-max))))))
-
 
 (declare-function semantic-create-imenu-index "semantic/imenu" (&optional stream))
 
