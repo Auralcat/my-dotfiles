@@ -38,7 +38,7 @@
 (define-key evil-insert-state-map (kbd "C-g") 'evil-force-normal-state)
 
 ;; Add C-a and C-e to insert mode
-(define-key evil-insert-state-map (kbd "C-a") 'beginning-of-line)
+(define-key evil-insert-state-map (kbd "C-a") 'back-to-indentation-or-beginning)
 (define-key evil-insert-state-map (kbd "C-e") 'end-of-line)
 
 ;; Use C-t to transpose chars, I can use tab in graphical mode
