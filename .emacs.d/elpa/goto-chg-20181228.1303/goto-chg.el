@@ -24,7 +24,7 @@
 ;; Maintainer: Vasilij Schneidermann <v.schneidermann@github.com>
 ;; Created: 16 May 2002
 ;; Version: 1.7.2
-;; Package-Version: 20181208.2300
+;; Package-Version: 20181228.1303
 ;; Keywords: convenience, matching
 ;; URL: https://github.com/emacs-evil/goto-chg
 ;;
@@ -215,7 +215,7 @@ that is, it was previously saved or unchanged. Nil otherwise."
 (defvar buffer-undo-tree)
 (declare-function undo-list-transfer-to-tree "undo-tree.el")
 (declare-function undo-tree-current "undo-tree.el")
-(declare-function undo-tree-node-p"undo-tree.el")
+(declare-function undo-tree-node-p "undo-tree.el")
 (declare-function undo-tree-node-undo "undo-tree.el")
 (declare-function undo-tree-node-previous "undo-tree.el")
 
