@@ -775,8 +775,8 @@ me, too many buffers to work with... for now.
     (use-package circadian
       :ensure t
       :config
-      (setq circadian-themes '((:sunrise . moe-light)
-                   (:sunset  . jazz)))
+      (setq circadian-themes '((:sunrise . doom-solarized-light)
+                               (:sunset  . hemisu-dark)))
 
       (circadian-setup))
     #+END_SRC
@@ -1043,7 +1043,7 @@ me, too many buffers to work with... for now.
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package org-alert)
      ;; Use native notifications in Mac.
-     (if (eq 'system-type 'darwin)
+     (if (eq system-type 'darwin)
        (setq alert-default-style 'osx-notifier)
        ;; Use libnotify to display the alerts in Linux
        (setq alert-default-style 'libnotify))
