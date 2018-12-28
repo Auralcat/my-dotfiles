@@ -832,45 +832,38 @@ me, too many buffers to work with... for now.
     (add-hook 'prog-mode-hook 'linum-relative-mode)
     #+END_SRC
 * Themes
+  Remember to _defer_ the loading of the theme packages, otherwise the
+  faces might get mixed up and look ugly.
 ** Jazz
    A warm theme with dark colors.
    #+BEGIN_SRC emacs-lisp :tangle yes
    (use-package jazz-theme :ensure t
    :defer t)
    #+END_SRC
-** Moe
-   Light and dark theme, with some extra stuff.
-   Comes with support for smart-mode-line.
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     (use-package moe-theme
-      :ensure t
-      :config
-      ;; I just want to touch the theme, don't use it
-      (moe-dark)
-      (disable-theme 'moe-dark)
-      (powerline-moe-theme)
-      ;; Choose a color for the mode line (Default: blue)
-      (moe-theme-set-color 'yellow))
-   #+END_SRC
-
-
 ** Abyss
    Dark contrast theme
    #+BEGIN_SRC emacs-lisp :tangle yes
    (use-package abyss-theme :ensure :defer t)
    #+END_SRC
-** Github Modern
-   #+BEGIN_SRC emacs-lisp :tangle yes
-   (use-package github-modern-theme :ensure :defer t)
-   #+END_SRC
-** IntelliJ
-   #+BEGIN_SRC emacs-lisp :tangle yes
-   (use-package intellij-theme :ensure :defer t)
-   #+END_SRC
 ** Doom Themes
    A collection of themes from the Doom package
    #+BEGIN_SRC emacs-lisp :tangle yes
    (use-package doom-themes :ensure :defer t)
+   #+END_SRC
+** Twilight Bright
+   A port of the theme from TextMate.
+   #+BEGIN_SRC emacs-lisp :tangle yes
+   (use-package twilight-bright-theme :defer t)
+   #+END_SRC
+** Organic Green
+   A light theme with a light-green background, looks real nice!
+   #+BEGIN_SRC emacs-lisp :tangle yes
+   (use-package organic-green-theme :defer t)
+   #+END_SRC
+** Flat UI
+   Flat colors which blend nicely.
+   #+BEGIN_SRC emacs-lisp :tangle yes
+   (use-package flatui-theme :defer t)
    #+END_SRC
 * Graphical
 #+BEGIN_SRC emacs-lisp :tangle yes
