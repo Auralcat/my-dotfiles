@@ -540,6 +540,8 @@ me, too many buffers to work with... for now.
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package diminish :ensure t
      ;; These are loaded at startup, I prefer declaring everything here.
+     :diminish flycheck-mode
+     :diminish projectile-mode
      :diminish helm-mode
      :diminish company-mode
      :diminish undo-tree-mode
