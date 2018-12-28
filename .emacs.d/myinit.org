@@ -743,14 +743,6 @@ me, too many buffers to work with... for now.
     ;; Add this to prog-mode
     (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
     #+END_SRC
-*** Smart Mode Line
-    Prettier mode line.
-    You can activate it with M-x sml/setup.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-    ;; Smart-mode-line depends on powerline
-    (use-package powerline :ensure t)
-
-    #+END_SRC
 *** Web-beautify
     Format HTML/CSS and JS code with js-beautify
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1138,7 +1130,48 @@ me, too many buffers to work with... for now.
     (setq twittering-use-master-password t)
   #+END_SRC
 
+* Mode Line
+** Telephone Line
+   Prettier mode line.
+   *To ensure that nothing gets in the way of loading it, leave this*
+   *last in your config file*
+  #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package telephone-line :ensure t)
 
+    ;; Mac workaround to render separators correctly.
+    (when (eq system-type 'darwin)
+    (setq ns-use-srgb-colorspace nil))
+
+    ;; Set separator styles
+    (setq telephone-line-primary-left-separator 'telephone-line-cubed-left
+          telephone-line-secondary-left-separator 'telephone-line-cubed-hollow-left
+          telephone-line-primary-right-separator 'telephone-line-cubed-right
+          telephone-line-secondary-right-separator 'telephone-line-cubed-hollow-right)
+    ;; Configure the segments
+    ;; Left hand side
+    (setq telephone-line-lhs
+          '((evil   . (telephone-line-evil-tag-segment))
+            (accent . (telephone-line-buffer-modified-segment
+                       telephone-line-vc-segment
+                       telephone-line-projectile-segment
+                       telephone-line-buffer-name-segment))
+            (evil   . (telephone-line-airline-position-segment))
+            (accent . (telephone-line-major-mode-segment))
+            (nil    . (telephone-line-simple-minor-mode-segment
+                       telephone-line-flycheck-segment
+                       telephone-line-nyan-segment))))
+    ;; Right hand side
+    (setq telephone-line-rhs
+          '((accent . (telephone-line-misc-info-segment))
+            (accent . nil)))
+
+    (setq telephone-line-height 24
+          telephone-line-evil-use-short-tag t)
+
+    ;; Call the mode last!
+    (telephone-line-mode t)
+
+  #+END_SRC
 * Packages saved for later need
 ** Perspective
 # ** Perspective
