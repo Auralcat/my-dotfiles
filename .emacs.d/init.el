@@ -297,178 +297,109 @@
  '(org-agenda-skip-scheduled-if-done t)
  '(org-agenda-start-on-weekday 0)
  '(org-bullets-bullet-list (quote ("✿" "❀" "◉" "○" "✸")))
-    '(org-capture-templates
-         (quote
-             (("b" "Budget logging templates")
-                 ("bi" "Add income item in budget" table-line
-                     (file+headline "~/file-bouncer/org-files/finances.org" "Caixa geral")
-                     "| %t | %^{Descrição} | %^{Valor} |" :immediate-finish t :table-line-pos "II-1")
-                 ("bm" "Meal card expense" table-line
-                     (file+headline "~/file-bouncer/org-files/finances.org" "Vale-refeição")
-                     "| %t | %^{Descrição} | -%^{Valor} |" :immediate-finish t :table-line-pos "II-1")
-                 ("bk" "Market card expense" table-line
-                     (file+headline "~/file-bouncer/org-files/finances.org" "Vale-alimentação")
-                     "| %t | %^{Descrição} | -%^{Valor} |" :immediate-finish t :table-line-pos "II-1")
-                 ("be" "Education/Event budget expense" table-line
-                     (file+headline "~/file-bouncer/org-files/finances.org" "Orçamento educação/eventos")
-                     "| %t | %^{Descrição} | -%^{Valor} |" :immediate-finish t :table-line-pos "II-1")
-                 ("bo" "Add expense item in budget" table-line
-                     (file+headline "~/file-bouncer/org-files/finances.org" "Caixa geral")
-                     "| %t | %^{Descrição} | -%^{Valor} |" :immediate-finish t :table-line-pos "II-1")
-                 ("o" "Add item to outbox" entry
-                     (file "~/file-bouncer/outbox.org")
-                     "* %?" :prepend t)
-                 ("e" "Add new Emacs task" entry
-                     (file+headline "~/file-bouncer/org-files/projetos/configuracoes-emacs.org" "Tarefas")
-                     "** BACKLOG %^{Tarefa}" :prepend t :immediate-finish t :time-prompt t)
-                 ("m" "Media list capture templates")
-                 ("mb" "New bookmark" entry
-                     (file+headline "~/file-bouncer/media-list.org" "Links")
-                     "** %?" :prepend t)
-                 ("mp" "Add podcast to list" entry
-                     (file+headline "~/file-bouncer/media-list.org" "Podcasts")
-                     "** %^{Nome do podcast}" :immediate-finish t)
-                 ("mm" "Add movie to list" entry
-                     (file+headline "~/file-bouncer/media-list.org" "Filmes")
-                     "** %^{Nome do filme}" :immediate-finish t)
-                 ("ma" "Add music album to list" entry
-                     (file+headline "~/file-bouncer/media-list.org" "Álbuns musicais")
-                     "** %^{Nome do álbum}" :immediate-finish t)
-                 ("mb" "Add book to list" entry
-                     (file+headline "~/file-bouncer/media-list.org" "Livros")
-                     "** %^{Nome do livro}" :immediate-finish t)
-                 ("T" "Tarefa extra do stand-up (Agendar imediatamente)" entry
-                     (file+headline "~/file-bouncer/org-files/contact-based-system/eu.org" "Tarefas extras do stand-up (organizar depois)")
-                     "** TODO %?" :prepend t)
-                 ("t" "Tarefa extra do stand-up (pra não colocar direto na lista do dia, organizar depois)" entry
-                     (file+headline "~/file-bouncer/org-files/contact-based-system/eu.org" "Tarefas extras do stand-up (organizar depois)")
-                     "** BACKLOG %?" :prepend t))))
+ '(org-capture-templates
+   (quote
+    (("b" "Budget logging templates")
+     ("bi" "Add income item in budget" table-line
+      (file+headline "~/file-bouncer/org-files/finances.org" "Caixa geral")
+      "| %t | %^{Descrição} | %^{Valor} |" :immediate-finish t :table-line-pos "II-1")
+     ("bm" "Meal card expense" table-line
+      (file+headline "~/file-bouncer/org-files/finances.org" "Vale-refeição")
+      "| %t | %^{Descrição} | -%^{Valor} |" :immediate-finish t :table-line-pos "II-1")
+     ("bk" "Market card expense" table-line
+      (file+headline "~/file-bouncer/org-files/finances.org" "Vale-alimentação")
+      "| %t | %^{Descrição} | -%^{Valor} |" :immediate-finish t :table-line-pos "II-1")
+     ("be" "Education/Event budget expense" table-line
+      (file+headline "~/file-bouncer/org-files/finances.org" "Orçamento educação/eventos")
+      "| %t | %^{Descrição} | -%^{Valor} |" :immediate-finish t :table-line-pos "II-1")
+     ("bo" "Add expense item in budget" table-line
+      (file+headline "~/file-bouncer/org-files/finances.org" "Caixa geral")
+      "| %t | %^{Descrição} | -%^{Valor} |" :immediate-finish t :table-line-pos "II-1")
+     ("br" "Add reward fund expense item in budget" table-line
+      (file+headline "~/file-bouncer/org-files/finances.org" "Fundo recompensa")
+      "| %t | %^{Descrição} | -%^{Valor} |" :immediate-finish t :table-line-pos "II-1")
+     ("m" "Media list capture templates")
+     ("mb" "New bookmark" entry
+      (file+headline "~/file-bouncer/media-list.org" "Links")
+      "** %?" :prepend t)
+     ("mp" "Add podcast to list" entry
+      (file+headline "~/file-bouncer/media-list.org" "Podcasts")
+      "** %^{Nome do podcast}" :immediate-finish t)
+     ("mm" "Add movie to list" entry
+      (file+headline "~/file-bouncer/media-list.org" "Filmes")
+      "** %^{Nome do filme}" :immediate-finish t)
+     ("ma" "Add music album to list" entry
+      (file+headline "~/file-bouncer/media-list.org" "Álbuns musicais")
+      "** %^{Nome do álbum}" :immediate-finish t)
+     ("mb" "Add book to list" entry
+      (file+headline "~/file-bouncer/media-list.org" "Livros")
+      "** %^{Nome do livro}" :immediate-finish t)
+     ("o" "Add item to outbox" entry
+      (file "~/file-bouncer/outbox.org")
+      "* %?" :prepend t)
+     ("e" "Add new Emacs task" entry
+      (file+headline "~/file-bouncer/org-files/projetos/configuracoes-emacs.org" "Tarefas")
+      "** BACKLOG %^{Tarefa}" :prepend t :immediate-finish t :time-prompt t)
+     ("T" "Tarefa extra do stand-up (Agendar imediatamente)" entry
+      (file+headline "~/file-bouncer/org-files/contact-based-system/eu.org" "Tarefas extras do stand-up (organizar depois)")
+      "** TODO %?" :prepend t)
+     ("t" "Tarefa extra do stand-up (pra não colocar direto na lista do dia, organizar depois)" entry
+      (file+headline "~/file-bouncer/org-files/contact-based-system/eu.org" "Tarefas extras do stand-up (organizar depois)")
+      "** BACKLOG %?" :prepend t))))
  '(org-default-notes-file "~/file-bouncer/everything-bucket")
  '(org-plantuml-jar-path "~/file-bouncer/plantuml.jar")
  '(org-pomodoro-audio-player "/usr/bin/mpv")
-    '(org-pomodoro-finished-sound
-         "~/.emacs.d/pomodoro-sounds/Librem-5-power-on-by-Antonio-Paternina-Alvarez.ogg")
+ '(org-pomodoro-finished-sound
+   "~/.emacs.d/pomodoro-sounds/Librem-5-power-on-by-Antonio-Paternina-Alvarez.ogg")
  '(org-pomodoro-finished-sound-p t)
  '(org-pomodoro-format "Focus!~%s")
-    '(org-pomodoro-long-break-sound
-         "~/.emacs.d/pomodoro-sounds/Librem-5-phone-call-3-by-Nohumanconcept.ogg")
+ '(org-pomodoro-long-break-sound
+   "~/.emacs.d/pomodoro-sounds/Librem-5-phone-call-3-by-Nohumanconcept.ogg")
  '(org-pomodoro-long-break-sound-p t)
-    '(org-pomodoro-short-break-sound
-         "~/.emacs.d/pomodoro-sounds/Librem-5-email-notification-2-by-Pablo-Somonte.ogg")
+ '(org-pomodoro-short-break-sound
+   "~/.emacs.d/pomodoro-sounds/Librem-5-email-notification-2-by-Pablo-Somonte.ogg")
  '(org-pomodoro-short-break-sound-p t)
-    '(org-pomodoro-start-sound
-         "~/.emacs.d/elpa/org-pomodoro-20171108.1314/resources/bell.wav")
+ '(org-pomodoro-start-sound
+   "~/.emacs.d/elpa/org-pomodoro-20171108.1314/resources/bell.wav")
  '(org-pomodoro-start-sound-p nil)
  '(org-refile-targets (quote ((org-agenda-files :maxlevel . 3))))
+ '(org-src-block-faces (quote (("emacs-lisp" (:background "#F0FFF0")))))
  '(org-src-fontify-natively t)
-    '(org-stuck-projects
-         (quote
-             ("+LEVEL=2/-DONE"
-                 ("TODO" "NEXT" "NEXTACTION" "CANCELLED")
-                 nil "")))
+ '(org-stuck-projects
+   (quote
+    ("+LEVEL=2/-DONE"
+     ("TODO" "NEXT" "NEXTACTION" "CANCELLED")
+     nil "")))
  '(org-todo-keyword-faces (quote (("CURRENT" . "#ffcc11") ("NEXT" . "#6666ff"))))
  '(org-todo-keywords (quote ((sequence "TODO" "DONE"))))
-    '(package-selected-packages
-         (quote
-             (selectric-mode org-alert bundler projectile-rails cl-lib multi-term term+ wakatime-mode carbon-now-sh evil-snipe lua-mode yasnippet-snippets react-snippets nvm flycheck-credo zeno-theme rjsx-mode evil-numbers zeal-at-point js2-refactor ac-js2 edit-indirect yatemplate cheat-sh yaml-mode company-box evil-matchit evil-string-inflection circadian diminish alchemist sublimity writeroom-mode electric-operator jazz-theme highlight-indentation smartparens company-tern restart-emacs ob-restclient doom-themes intellij-theme github-modern-theme restclient helm-projectile ibuffer-projectile yasnippet-classic-snippets vagrant-tramp ob-elixir company-prescient weechat web-mode web-beautify vagrant use-package twittering-mode scss-mode sass-mode rvm rust-mode ruby-tools robe rich-minority request rainbow-mode rainbow-delimiters projectile powerline org-pomodoro org-bullets nyan-mode moe-theme mode-icons memoize makey magit keyfreq js2-mode htmlize highlight-sexp highlight-numbers helm-tramp flymake-phpcs flymake-php flymake-elixir flycheck-mix evil-surround evil-leader evil-anzu eshell-prompt-extras eruby-mode enh-ruby-mode emojify emmet-mode electric-spacing editorconfig csv-mode company-web company-statistics company-php cl-generic autopair ace-jump-mode ac-html-bootstrap abyss-theme)))
+ '(package-selected-packages
+   (quote
+    (telephone-line organic-green-theme flatui-theme twilight-bright-theme hemisu-theme ruby-extra-highlight ace-jump org-beautify-theme ruby-electric selectric-mode org-alert bundler projectile-rails cl-lib multi-term term+ wakatime-mode carbon-now-sh evil-snipe lua-mode yasnippet-snippets react-snippets nvm flycheck-credo zeno-theme rjsx-mode evil-numbers zeal-at-point js2-refactor ac-js2 edit-indirect yatemplate cheat-sh yaml-mode company-box evil-matchit evil-string-inflection circadian diminish alchemist sublimity writeroom-mode electric-operator jazz-theme highlight-indentation company-tern restart-emacs ob-restclient doom-themes restclient helm-projectile ibuffer-projectile yasnippet-classic-snippets vagrant-tramp ob-elixir company-prescient weechat web-mode web-beautify vagrant use-package twittering-mode scss-mode sass-mode rvm rust-mode ruby-tools robe rich-minority request rainbow-mode rainbow-delimiters projectile org-pomodoro org-bullets nyan-mode mode-icons memoize makey magit keyfreq js2-mode htmlize highlight-sexp highlight-numbers helm-tramp flymake-phpcs flymake-php flymake-elixir flycheck-mix evil-surround evil-leader evil-anzu eshell-prompt-extras eruby-mode enh-ruby-mode emojify emmet-mode electric-spacing editorconfig csv-mode company-web company-statistics company-php cl-generic autopair ace-jump-mode ac-html-bootstrap abyss-theme)))
  '(pdf-view-midnight-colors (quote ("#6a737d" . "#fffbdd")))
  '(persp-show-modestring (quote (quote header)))
  '(pos-tip-background-color "#073642")
  '(pos-tip-foreground-color "#93a1a1")
- '(powerline-buffer-size-suffix t)
- '(powerline-color1 "#3d3d68")
- '(powerline-color2 "#292945")
- '(powerline-default-separator (quote arrow-fade))
- '(powerline-display-buffer-size nil)
- '(powerline-gui-use-vcs-glyph t)
  '(projectile-mode t nil (projectile))
-    '(projectile-mode-line
-         (quote
-             (:eval
-                 (if
-                     (file-remote-p default-directory)
-                     " Projectile"
-                     (format " [%s] "
-                         (projectile-project-name))))))
+ '(projectile-mode-line
+   (quote
+    (:eval
+     (if
+         (file-remote-p default-directory)
+         " Projectile"
+       (format " [%s] "
+               (projectile-project-name))))))
  '(reb-re-syntax (quote string))
  '(remember-data-file "~/file-bouncer/everything-bucket")
  '(save-place-mode t nil (saveplace))
  '(scss-compile-at-save nil)
+ '(selectric-mode nil)
  '(send-mail-function (quote smtpmail-send-it))
  '(shell-file-name "/bin/bash")
  '(show-paren-mode t)
- '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#073642" 0.2))
-    '(sml/mode-width
-         (if
-             (eq
-                 (powerline-current-separator)
-                 (quote arrow))
-             (quote right)
-             (quote full)))
-    '(sml/pos-id-separator
-         (quote
-             (""
-                 (:propertize " " face powerline-active1)
-                 (:eval
-                     (propertize " "
-                         (quote display)
-                         (funcall
-                             (intern
-                                 (format "powerline-%s-%s"
-                                     (powerline-current-separator)
-                                     (car powerline-default-separator-dir)))
-                             (quote powerline-active1)
-                             (quote powerline-active2))))
-                 (:propertize " " face powerline-active2))))
-    '(sml/pos-minor-modes-separator
-         (quote
-             (""
-                 (:propertize " " face powerline-active1)
-                 (:eval
-                     (propertize " "
-                         (quote display)
-                         (funcall
-                             (intern
-                                 (format "powerline-%s-%s"
-                                     (powerline-current-separator)
-                                     (cdr powerline-default-separator-dir)))
-                             (quote powerline-active1)
-                             (quote sml/global))))
-                 (:propertize " " face sml/global))))
-    '(sml/pre-id-separator
-         (quote
-             (""
-                 (:propertize " " face sml/global)
-                 (:eval
-                     (propertize " "
-                         (quote display)
-                         (funcall
-                             (intern
-                                 (format "powerline-%s-%s"
-                                     (powerline-current-separator)
-                                     (car powerline-default-separator-dir)))
-                             (quote sml/global)
-                             (quote powerline-active1))))
-                 (:propertize " " face powerline-active1))))
-    '(sml/pre-minor-modes-separator
-         (quote
-             (""
-                 (:propertize " " face powerline-active2)
-                 (:eval
-                     (propertize " "
-                         (quote display)
-                         (funcall
-                             (intern
-                                 (format "powerline-%s-%s"
-                                     (powerline-current-separator)
-                                     (cdr powerline-default-separator-dir)))
-                             (quote powerline-active2)
-                             (quote powerline-active1))))
-                 (:propertize " " face powerline-active1))))
- '(sml/pre-modes-separator (propertize " " (quote face) (quote sml/modes)))
  '(smtpmail-smtp-server "smtp.yandex.com")
  '(smtpmail-smtp-service 25)
  '(sublimity-mode nil)
+ '(tabbar-background-color "#ffffffffffff")
  '(tags-tag-face (quote default))
  '(tool-bar-mode nil)
  '(tooltip-mode nil)
