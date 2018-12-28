@@ -369,6 +369,7 @@ me, too many buffers to work with... for now.
 *** Evil Mode
     Yes, I'm committing this heresy
     #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package evil)
     #+END_SRC
 **** Evil-leader
      Add a prefix key to Evil mode, like the Leader key in Vim.
