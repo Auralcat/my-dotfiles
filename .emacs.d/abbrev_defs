@@ -201,6 +201,8 @@
 
 (define-abbrev-table 'inf-ruby-mode-abbrev-table '())
 
+(define-abbrev-table 'inferior-emacs-lisp-mode-abbrev-table '())
+
 (define-abbrev-table 'inferior-moz-mode-abbrev-table '())
 
 (define-abbrev-table 'inferior-python-mode-abbrev-table '())
@@ -322,6 +324,7 @@
     ("escerve" "escreve" nil 1)
     ("etnaõ" "Então" nil 0)
     ("exp" "experiência" nil 2)
+    ("fn" "função" nil 1)
     ("hj" "hoje" nil 5)
     ("hovje" "hoje" nil 1)
     ("htat" "that" nil 2)
@@ -360,6 +363,7 @@
     ("rpoblema" "problema" nil 2)
     ("sla" "sei lá" nil 4)
     ("tbm" "também" nil 48)
+    ("td" "tudo" nil 1)
     ("temrinal" "terminal" nil 0)
     ("tepmo" "tempo" nil 1)
     ("tinhan " "tinham" nil 0)
