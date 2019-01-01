@@ -46,7 +46,7 @@ adoption would make life easier for users and maintainers alike, because
 then all packages that talk to forge APIs could be configured the same
 way.
 
-This manual is for Ghub version 3.0.0 (v3.0.0-11-gca1982d+1).
+This manual is for Ghub version 3.2.0 (v3.2.0+1).
 
      Copyright (C) 2017-2018 Jonas Bernoulli <jonas@bernoul.li>
 
@@ -398,8 +398,8 @@ figure out what scopes a package wants, (2) create such a token using
 the web interface and (3) store the token where Ghub expects to find it.
 
    A package named ‘PACKAGE’ has to specify the scopes that it wants in
-the variable named ‘PACKAGE-ghub-token-scopes’.  The doc-string of such
-variables should document what the various scopes are needed for.
+the variable named ‘PACKAGE-github-token-scopes’.  The doc-string of
+such variables should document what the various scopes are needed for.
 
    To create or edit a token go to <https://github.com/settings/tokens>.
 For Gitlab.com use <https://gitlab.com/profile/personal_access_tokens>.
@@ -1290,22 +1290,22 @@ File: ghub.info,  Node: Forge Limitations and Notes,  Prev: Forge Functions and 
 
 Tag Table:
 Node: Top764
-Node: Introduction3280
-Node: Getting Started6322
-Node: Setting the Username10056
-Node: Interactively Creating and Storing a Token11481
-Node: Manually Creating and Storing a Token17132
-Node: How Ghub uses Auth-Source18355
-Node: Using Ghub in Personal Scripts20288
-Node: Using Ghub in a Package21744
-Node: API24362
-Node: Making Requests25159
-Node: Authentication39258
-Node: Configuration Variables41103
-Node: GraphQL Support44823
-Node: Support for Other Forges51488
-Node: Forge Functions and Variables51705
-Node: Forge Limitations and Notes56224
+Node: Introduction3268
+Node: Getting Started6310
+Node: Setting the Username10044
+Node: Interactively Creating and Storing a Token11469
+Node: Manually Creating and Storing a Token17120
+Node: How Ghub uses Auth-Source18345
+Node: Using Ghub in Personal Scripts20278
+Node: Using Ghub in a Package21734
+Node: API24352
+Node: Making Requests25149
+Node: Authentication39248
+Node: Configuration Variables41093
+Node: GraphQL Support44813
+Node: Support for Other Forges51478
+Node: Forge Functions and Variables51695
+Node: Forge Limitations and Notes56214
 
 End Tag Table
 
