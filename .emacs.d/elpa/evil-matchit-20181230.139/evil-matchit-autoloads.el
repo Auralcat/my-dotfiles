@@ -33,8 +33,7 @@ Delete items/tags and the region between them.
 Like Vim %.
 
 \(fn NUM)" t nil)
-
-(evil-define-command evilmi-jump-items (&optional num) "Jump between items." :repeat nil (interactive "P") (cond ((and evilmi-may-jump-by-percentage num) (evilmi-jump-to-percentage num)) (t (evilmi--operate-on-item num))))
+ (autoload 'evilmi-jump-items "evil-matchit" nil t)
 
 (autoload 'evilmi-version "evil-matchit" "\
 
