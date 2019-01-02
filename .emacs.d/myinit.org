@@ -24,82 +24,81 @@
   #+END_SRC
 * Environment Customizations
 #+BEGIN_SRC emacs-lisp :tangle yes
-  ;; Sentences end with single spaces for me.
-  (setq sentence-end-double-space nil)
-  ;; Change window title
-  (setq frame-title-format '("Emacs 26"))
+    ;; Sentences end with single spaces for me.
+    (setq sentence-end-double-space nil)
+    ;; Change window title
+    (setq frame-title-format '("Emacs 26"))
 
-  ;; A small performance improvement
-  (setq redisplay-dont-pause t)
+    ;; A small performance improvement
+    (setq redisplay-dont-pause t)
 
-  ;; I don't like lockfiles
-  (setq create-lockfiles nil)
+    ;; I don't like lockfiles
+    (setq create-lockfiles nil)
 
-  ;; Store all backups in a specific folder:
-  (setq backup-directory-alist `(("." . "~/file-bouncer/emacs-backups")))
+    ;; Store all backups in a specific folder:
+    (setq backup-directory-alist `(("." . "~/file-bouncer/emacs-backups")))
 
-  ;; Manual packages load path
-  (add-to-list 'custom-theme-load-path "~/my-dotfiles/.emacs.d/manual-themes/")
+    ;; Manual packages load path
+    (add-to-list 'custom-theme-load-path "~/my-dotfiles/.emacs.d/manual-themes/")
 
-  ;; Backup files by copying them
-  (setq backup-by-copying t)
+    ;; Backup files by copying them
+    (setq backup-by-copying t)
 
-  ;; I'm too lazy to type "yes" or "no"
-  (fset 'yes-or-no-p 'y-or-n-p)
+    ;; I'm too lazy to type "yes" or "no"
+    (fset 'yes-or-no-p 'y-or-n-p)
 
-  ;; Clean whitespace before saving a file
-  (add-hook 'before-save-hook (quote whitespace-cleanup))
+    ;; Clean whitespace before saving a file
+    (add-hook 'before-save-hook (quote whitespace-cleanup))
 
-  ;; Allow only one theme at a time
-  (setq custom-theme-allow-multiple-selections nil)
+    ;; Allow only one theme at a time
+    (setq custom-theme-allow-multiple-selections nil)
 
-  ;; Enable ido-mode (fewer keystrokes to switch buffers!)
-  (ido-mode 1)
+    ;; Enable ido-mode (fewer keystrokes to switch buffers!)
+    (ido-mode 1)
 
-  ;; Easier mark cycling, both local and global
-  (setq set-mark-command-repeat-pop t)
+    ;; Easier mark cycling, both local and global
+    (setq set-mark-command-repeat-pop t)
 
-  ;; ido-mode in the minibuffer
-  (icomplete-mode 1)
+    ;; ido-mode in the minibuffer
+    (icomplete-mode 1)
 
-  ;; Enable windmove (switch windows with Shift+Arrow keys)
-  (when (fboundp 'windmove-default-keybindings)
-      (windmove-default-keybindings))
+    ;; Enable windmove (switch windows with Shift+Arrow keys)
+    (when (fboundp 'windmove-default-keybindings)
+        (windmove-default-keybindings))
 
-  ;; Replace the built-in buffer menu with ibuffer
-  (global-set-key [24 2] (quote ibuffer))
+    ;; Replace the built-in buffer menu with ibuffer
+    (global-set-key [24 2] (quote ibuffer))
 
-  ;; Prevent the scratch buffer from being killed
-  (with-current-buffer "*scratch*"
-      (emacs-lock-mode 'kill))
+    ;; Prevent the scratch buffer from being killed
+    (with-current-buffer "*scratch*"
+        (emacs-lock-mode 'kill))
 
-  ;; Enable auto-revert-mode
-  (global-auto-revert-mode t)
+    ;; Enable auto-revert-mode
+    (global-auto-revert-mode t)
 
-  ;; Remove the menu bar in terminal mode
-  (when (not (display-graphic-p))
-    (menu-bar-mode -1))
+    ;; Remove the menu bar in terminal mode
+    (when (not (display-graphic-p))
+      (menu-bar-mode -1))
 
-  ;; ;; Use alternate icon fonts when available
-  ;; (add-to-list 'load-path "~/.local/share/icons-in-terminal/")
+    ;; ;; Use alternate icon fonts when available
+    ;; (add-to-list 'load-path "~/.local/share/icons-in-terminal/")
 
-  ;; Use Bash as default shell interpreter
-  (setq org-babel-sh-command "/bin/bash")
+    ;; Use Bash as default shell interpreter
+    (setq org-babel-sh-command "/bin/bash")
 
-  ;; Activate Company mode
-  (add-hook 'after-init-hook 'global-company-mode)
+    ;; Activate Company mode
+    (add-hook 'after-init-hook 'global-company-mode)
 
-  ;; Enable global Abbrev mode
-  (setq-default abbrev-mode t)
+    ;; Enable global Abbrev mode
+    (setq-default abbrev-mode t)
 
-  ;; Save last edited place in files
-  (require 'saveplace)
-  (setq-default save-place t)
-  ;; (save-place-mode 1)
+    ;; Save last edited place in files
+    (require 'saveplace)
+    (setq-default save-place t)
+    ;; (save-place-mode 1)
 
-  ;; I need a bigger kill ring.
-  (setq kill-ring-max 180)
-(setq kill-ring-max 180)
+    ;; I need a bigger kill ring.
+    (setq kill-ring-max 180)
 #+END_SRC
 
 
@@ -461,8 +460,16 @@ me, too many buffers to work with... for now.
        (defun ruby-mode-tweaks ()
        (require 'company-robe)
        (set (make-local-variable 'company-backends) '(company-robe company-yasnippet)))
+
+       ;; Org-mode completion (uses dabbrev and filename completion)
+       (defun org-mode-tweaks ()
+       (set (make-local-variable 'company-backends) '(company-dabbrev company-capf company-files))
+       ;; This doesn't get in the way in Org buffers.
+       (set (make-local-variable 'company-minimum-prefix-length) 2))
+
        ;; Add tweaks
        (add-hook 'enh-ruby-mode-hook 'ruby-mode-tweaks)
+       (add-hook 'org-mode-hook 'org-mode-tweaks)
 
        ;; Inferior Ruby: complete using capf
        (add-hook 'inf-ruby-mode-hook (lambda() (set (make-local-variable 'company-backends) '(company-capf))))
@@ -484,8 +491,6 @@ me, too many buffers to work with... for now.
        ;; Activate it
        (company-prescient-mode)
      #+END_SRC
-
-
 **** Front-ends
 ***** Company-box
       Show icons in Company tooltip and different backends.
@@ -993,7 +998,6 @@ me, too many buffers to work with... for now.
   ;; Use Emacs mode in Org-capture buffers and notes buffer
   (add-hook 'org-capture-mode-hook 'evil-emacs-state)
 #+END_SRC
-
 ** Org-bullets
    Change org-mode's *s to UTF-8 chars
    #+BEGIN_SRC emacs-lisp :tangle yes
