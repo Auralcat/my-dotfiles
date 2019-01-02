@@ -1170,7 +1170,7 @@ me, too many buffers to work with... for now.
                        telephone-line-nyan-segment))))
     ;; Right hand side
     (setq telephone-line-rhs
-          '((accent . (telephone-line-misc-info-segment))
+          '((nil    . (telephone-line-misc-info-segment))
             (accent . nil)))
 
     (setq telephone-line-height 24
