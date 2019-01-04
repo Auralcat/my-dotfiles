@@ -82,6 +82,8 @@
     "a" 'org-agenda
     ;; Org-capture
     "c" 'org-capture
+    ;; Get the relative file name of current buffer. I pass that to rspec.
+    "f" 'auralcat-kill-relative-file-name
     ;; Call Magit with Leader g
     "g" 'magit-status
     ;; Clock in

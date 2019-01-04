@@ -1115,6 +1115,25 @@ me, too many buffers to work with... for now.
    (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([3 return 3 18 67] 0 "%d")) arg)))
 
 #+END_SRC
+* Custom functions
+** Kill relative file name
+   I use that to work with rspec. Projectile has the ~C-c C-k~
+   keybinding to kill the file name in a Helm session, when I realize
+   I need to get that, I'm in the buffer already.
+
+   #+BEGIN_SRC emacs-lisp :tangle yes
+   ;; The custom function needs an argument for some reason, even though I'm not using it.
+     (defun auralcat-kill-relative-file-name (args)
+       (interactive "P")
+       "Adds the file name relative to the project's root to the kill ring."
+       (let ((relative-file-name (magit-file-relative-name buffer-file-name)))
+         (kill-new relative-file-name)
+         (message "Current buffer's relative file name copied to kill ring: %s" relative-file-name)))
+   #+END_SRC
+
+   #+RESULTS:
+   : auralcat-kill-relative-file-name
+
 * Twittering mode
   Use Twitter from within Emacs!
   #+BEGIN_SRC emacs-lisp :tangle yes
