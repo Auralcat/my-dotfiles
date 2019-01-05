@@ -977,12 +977,6 @@ me, too many buffers to work with... for now.
   ;; Org-agenda: point the files you want it to read
   ;; (setq org-agenda-files (list "~/file-bouncer/org-files/contact-based-system/"))
 
-  ;; Change default diary location
-  (setq diary-file "~/emacs-diary")
-
-  ;; Use diary entries in org-agenda
-  (setq org-agenda-include-diary t)
-
   ;; When TODOs are ordered, enforce task dependencies
   (setq org-enforce-todo-dependencies t)
 
