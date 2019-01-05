@@ -1127,6 +1127,19 @@ me, too many buffers to work with... for now.
 
    #+RESULTS:
    : auralcat-kill-relative-file-name
+** Calculate leap year
+   #+BEGIN_SRC emacs-lisp :tangle yes
+     (defun is-leap-year (year)
+       "Checks if the given YEAR is a leap year"
+       (interactive "P")
+       (or
+        (and (not (eq (% year 100) 0))
+             (eq (% year 4) 0))
+        (eq (% year 400) 0))
+       )
+
+   #+END_SRC
+
 
 * Twittering mode
   Use Twitter from within Emacs!
