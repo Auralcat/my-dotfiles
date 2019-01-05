@@ -1164,6 +1164,15 @@ me, too many buffers to work with... for now.
   #+END_SRC
 
 * Mode Line
+
+** Custom segments
+   #+BEGIN_SRC emacs-lisp :tangle yes
+     ;; I just want a different indicator in my mode line.
+     (telephone-line-defsegment* auralcat-telephone-line-buffer-modified-segment ()
+       (if (buffer-modified-p)
+           (telephone-line-raw "💾")
+         (telephone-line-raw "👍")))
+   #+END_SRC
 ** Telephone Line
    Prettier mode line.
    *To ensure that nothing gets in the way of loading it, leave this*
@@ -1184,7 +1193,7 @@ me, too many buffers to work with... for now.
     ;; Left hand side
     (setq telephone-line-lhs
           '((evil   . (telephone-line-evil-tag-segment))
-            (accent . (telephone-line-buffer-modified-segment
+            (accent . (auralcat-telephone-line-buffer-modified-segment
                        telephone-line-vc-segment
                        telephone-line-projectile-segment
                        telephone-line-buffer-name-segment))
