@@ -394,32 +394,32 @@ me, too many buffers to work with... for now.
       Credits: [[https://github.com/env0der][@env0der's dotfiles]]
       My modification is just the ~ruby-block-beg-re~ variable.
       #+BEGIN_SRC emacs-lisp :tangle yes
-        (evil-define-text-object evil-textobj-outer-ruby-block
-          (count &optional beg end type)
-          (evil-ruby-block-range beg end type count t))
+          (evil-define-text-object evil-textobj-outer-ruby-block
+            (count &optional beg end type)
+            (evil-ruby-block-range beg end type count t))
 
-        (evil-define-text-object evil-textobj-inner-ruby-block
-          (count &optional beg end type)
-          (evil-ruby-block-range beg end type count nil))
+          (evil-define-text-object evil-textobj-inner-ruby-block
+            (count &optional beg end type)
+            (evil-ruby-block-range beg end type count nil))
 
-        (defun evil-ruby-block-range (count beg end type &optional inclusive)
-          (let ((current-point (point))
-                (block-begin (progn (evil-end-of-line) (re-search-backward ruby-block-beg-re nil t)))
-                (block-end (progn (evilmi-jump-items) (point))))
-            (if inclusive
-                (let ((begin (progn (goto-char block-begin) (evil-beginning-of-line) (point)))
-                      (end (progn (goto-char block-end) (evil-next-line) (evil-beginning-of-line) (if (looking-at "^$") (+ (point) 1) (point)))))
+          (defun evil-ruby-block-range (count beg end type &optional inclusive)
+            (let ((current-point (point))
+                  (block-begin (progn (evil-end-of-line) (re-search-backward ruby-block-beg-re nil t)))
+                  (block-end (progn (evilmi-jump-items) (point))))
+              (if inclusive
+                  (let ((begin (progn (goto-char block-begin) (evil-beginning-of-line) (point)))
+                        (end (progn (goto-char block-end) (evil-next-line) (evil-beginning-of-line) (if (looking-at "^$") (+ (point) 1) (point)))))
+                    (progn
+                      (goto-char current-point)
+                      (evil-range begin end)))
+                (let ((begin (progn (goto-char block-begin) (evil-next-line) (evil-first-non-blank) (point)))
+                      (end (progn (goto-char block-end) (evil-previous-line) (evil-end-of-line) (+ (point) 1))))
                   (progn
                     (goto-char current-point)
-                    (evil-range begin end)))
-              (let ((begin (progn (goto-char block-begin) (evil-next-line) (evil-first-non-blank) (point)))
-                    (end (progn (goto-char block-end) (evil-previous-line) (evil-end-of-line) (+ (point) 1))))
-                (progn
-                  (goto-char current-point)
-                  (evil-range begin end))))))
+                    (evil-range begin end))))))
 
-      (define-key evil-inner-text-objects-map "r" 'evil-textobj-inner-ruby-block)
-      (define-key evil-outer-text-objects-map "r" 'evil-textobj-outer-ruby-block)
+        (define-key evil-inner-text-objects-map "r" 'evil-textobj-inner-ruby-block)
+        (define-key evil-outer-text-objects-map "r" 'evil-textobj-outer-ruby-block)
       #+END_SRC
 
 *** Helm
@@ -801,7 +801,6 @@ me, too many buffers to work with... for now.
       (company-mode t))
       (add-hook 'enh-ruby-mode-hook 'ruby-completion-tweaks)
     #+END_SRC
-
 *** RVM
     Ruby Version Manager. Akin to python's virtualenv.
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1275,21 +1274,3 @@ me, too many buffers to work with... for now.
              ;; Else, check if it's the first weekday of the month.
              (diary-first-weekday-of-month date))))
    #+END_SRC
-* Packages saved for later need
-** Perspective
-# ** Perspective
-#    Switch between named "perspectives" of the editor.
-#    #+BEGIN_SRC emacs-lisp :tangle yes
-#    (use-package perspective)
-#    (persp-mode)
-#    #+END_SRC
-** Gruvbox
-   # gruvbox is heavily inspired by badwolf, jellybeans and solarized.
-
-   # Designed as a bright theme with pastel 'retro groove' colors and
-   # light/dark mode switching in the way of solarized. The main focus when
-   # developing gruvbox is to keep colors easily distinguishable, contrast
-   # enough and still pleasant for the eyes.
-   # #+BEGIN_SRC emacs-lisp :tangle yes
-   # (use-package gruvbox-theme)
-   # #+END_SRC
