@@ -304,7 +304,10 @@
  '(org-bullets-bullet-list (quote ("✿" "❀" "◉" "○" "✸")))
     '(org-capture-templates
          (quote
-             (("b" "Budget logging templates")
+             (("a" "Add birthday to diary" entry
+                  (file+headline "~/file-bouncer/emacs-diary" "Aniversários")
+                  "Is this working?" :immediate-finish t)
+                 ("b" "Budget logging templates")
                  ("bi" "Add income item in budget" table-line
                      (file+headline "~/file-bouncer/org-files/finances.org" "Caixa geral")
                      "| %t | %^{Descrição} | %^{Valor} |" :immediate-finish t :table-line-pos "II-1")
