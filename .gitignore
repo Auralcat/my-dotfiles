@@ -21,3 +21,4 @@ rake.cache
 .emacs.d/completions
 .emacs.d/network-security.data
 .emacs.d/elpa
+.emacs.d/tramp
