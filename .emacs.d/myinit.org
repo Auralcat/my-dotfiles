@@ -775,6 +775,7 @@ me, too many buffers to work with... for now.
     It originally came with company-mode, it's handy to write faster
     #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package yasnippet-snippets)
+    (use-package yasnippet-classic-snippets)
     #+END_SRC
 *** Circadian
     Theme changer for Emacs.
