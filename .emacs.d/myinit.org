@@ -101,13 +101,6 @@
     (setq kill-ring-max 180)
 #+END_SRC
 
-
-* Dired
-  #+BEGIN_SRC emacs-lisp :tangle yes
-  ;; Use dired asynchronously
-  (autoload 'dired-async-mode "dired-async.el" nil t)
-  (dired-async-mode 1)
-  #+END_SRC
 * Personal info
   #+BEGIN_SRC emacs-lisp :tangle yes
     ;; Load from external file.
@@ -144,17 +137,6 @@ me, too many buffers to work with... for now.
 
 * Custom functions
 #+BEGIN_SRC emacs-lisp :tangle yes
-;; Recreate scratch buffer
-(defun create-scratch-buffer ()
-  "create a scratch buffer"
-  (interactive)
-  (switch-to-buffer (get-buffer-create "*scratch*"))
-  (org-mode)
-  (insert initial-scratch-message)
-  ;; Prevent the scratch buffer from being killed
-  (with-current-buffer "*scratch*"
-      (emacs-lock-mode 'kill)))
-
 ;; Unfill region, AKA leave single huge line
 (defun unfill-region (beg end)
   "Unfill the region, joining text paragraphs into a single
