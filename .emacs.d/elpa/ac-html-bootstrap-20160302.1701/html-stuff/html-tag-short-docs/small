@@ -1,3 +1,0 @@
-For de-emphasizing inline or blocks of text, use the <small> tag to set text at 85% the size of the parent.
-
-Heading elements receive their own font-size for nested <small> elements.
