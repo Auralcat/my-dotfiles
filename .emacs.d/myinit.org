@@ -769,7 +769,7 @@ me, too many buffers to work with... for now.
     (with-eval-after-load "esh-opt"
     (autoload 'epe-theme-lambda "eshell-prompt-extras")
     (setq eshell-highlight-prompt t
-    eshell-prompt-function 'epe-theme-lambda))
+    eshell-prompt-function 'epe-theme-dakrone))
     #+END_SRC
 *** Yasnippets
     It originally came with company-mode, it's handy to write faster
@@ -1035,7 +1035,7 @@ me, too many buffers to work with... for now.
                  :body body
                  :app-icon "~/my-dotfiles/.emacs.d/org-pomodoro/tomato.png")))
 
-     (add-hook 'org-pomodoro-started-hook (lambda() (pomodoro-display-notification "Pomodoro started!" "Concentrate on your work!")))
+     (add-hook 'org-pomodoro-started-hook (lambda() (pomodoro-display-notification "Pomodoro started!" "Concentrate on your task!")))
      (add-hook 'org-pomodoro-finished-hook (lambda() (pomodoro-display-notification "Pomodoro finished" "Time to take a break!")))
    #+END_SRC
 
