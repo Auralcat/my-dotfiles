@@ -12,13 +12,15 @@
                             ("melpa" . "https://melpa.org/packages/")))
 (package-initialize)
 
+;; Bootstrap use-package
+(unless (package-installed-p 'use-package)
+  (package-refresh-contents)
+  (package-install 'use-package))
+(require 'use-package)
+
 ;; This replaces the old require-package.
 ;; If package isn't installed, fetch it.
 (setq use-package-always-ensure t)
-
-;; Use-package
-(eval-when-compile
-    (require 'use-package))
 
 ;; Load the Org file containing the customizations!
 (org-babel-load-file (expand-file-name "~/my-dotfiles/.emacs.d/myinit.org"))
