@@ -342,7 +342,7 @@
                      "* %?" :prepend t)
                  ("e" "Add new Emacs task" entry
                      (file+headline "~/file-bouncer/org-files/projetos/configuracoes-emacs.org" "Tarefas")
-                     "** BACKLOG %^{Tarefa}" :prepend t :immediate-finish t :time-prompt t)
+                     "** BACKLOG %^{Tarefa}" :prepend t )
                  ("t" "Tarefa extra do stand-up (pra não colocar direto na lista do dia, organizar depois)" entry
                      (file+headline "~/file-bouncer/org-files/contact-based-system/eu.org" "Tarefas extras do stand-up (organizar depois)")
                      "** BACKLOG %?" :prepend t))))
