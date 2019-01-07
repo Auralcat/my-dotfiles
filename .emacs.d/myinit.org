@@ -847,6 +847,11 @@ me, too many buffers to work with... for now.
    #+BEGIN_SRC emacs-lisp :tangle yes
    (use-package flatui-theme :defer t)
    #+END_SRC
+** Hemisu
+   I like the dark theme from here.
+   #+BEGIN_SRC emacs-lisp :tangle yes
+   (use-package hemisu-theme :defer t)
+   #+END_SRC
 * Graphical
 #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Set font in graphical mode
