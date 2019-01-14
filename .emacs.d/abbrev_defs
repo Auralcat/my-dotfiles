@@ -47,6 +47,16 @@
 
 (define-abbrev-table 'checkdoc-output-mode-abbrev-table '())
 
+(define-abbrev-table 'circe-channel-mode-abbrev-table '())
+
+(define-abbrev-table 'circe-chat-mode-abbrev-table '())
+
+(define-abbrev-table 'circe-mode-abbrev-table '())
+
+(define-abbrev-table 'circe-query-mode-abbrev-table '())
+
+(define-abbrev-table 'circe-server-mode-abbrev-table '())
+
 (define-abbrev-table 'comint-mode-abbrev-table '())
 
 (define-abbrev-table 'completion-list-mode-abbrev-table '())
@@ -239,6 +249,8 @@
 
 (define-abbrev-table 'lua-mode-abbrev-table '())
 
+(define-abbrev-table 'lui-mode-abbrev-table '())
+
 (define-abbrev-table 'magit-cherry-mode-abbrev-table '())
 
 (define-abbrev-table 'magit-diff-mode-abbrev-table '())
@@ -298,7 +310,7 @@
     ("Seg" "Segunda" nil 2)
     ("Sex" "Sexta" nil 0)
     ("Sáb" "Sábado" nil 2)
-    ("Ter" "Terça" nil 1)
+    ("Ter" "Terça" nil 2)
     ("WP" "WordPress" nil 0)
     ("acotneceram" "aconteceram" nil 0)
     ("agluma" "alguma" nil 0)
@@ -333,7 +345,8 @@
     ("etnaõ" "Então" nil 0)
     ("exp" "experiência" nil 3)
     ("fn" "função" nil 1)
-    ("hj" "hoje" nil 5)
+    ("gov" "governo" nil 1)
+    ("hj" "hoje" nil 8)
     ("hovje" "hoje" nil 1)
     ("htat" "that" nil 2)
     ("hte" "the" nil 1)
@@ -341,12 +354,13 @@
     ("insnegurança" "insegurança" nil 2)
     ("jieto" "jeito" nil 0)
     ("jpbar" "jogar" nil 2)
-    ("masi" "mais" nil 2)
+    ("masi" "mais" nil 7)
     ("memso" "mesmo" nil 1)
     ("mias" "mais" nil 1)
     ("moranod" "morando" nil 1)
     ("motnar" "montar" nil 1)
     ("msg" "mensagem" nil 3)
+    ("msm" "mesmo" nil 1)
     ("mto" "muito" nil 3)
     ("oa" "Open Account" nil 1)
     ("ocmo" "como" nil 2)
@@ -358,20 +372,20 @@
     ("pontem" "Ontem" nil 0)
     ("poruqe" "porque" nil 1)
     ("pouoc" "pouco" nil 0)
-    ("pq" "porque" nil 19)
+    ("pq" "porque" nil 29)
     ("prblema" "problema" nil 0)
     ("probelma" "problema" nil 1)
     ("projeots" "projetos" nil 1)
-    ("q" "que" nil 3)
+    ("q" "que" nil 6)
     ("qaundo" "quando" nil 0)
-    ("qdo" "quando" nil 8)
+    ("qdo" "quando" nil 9)
     ("qeu" "que" nil 39)
     ("realemnte" "realmente" nil 1)
     ("receebi" "recebi" "sbae" 0)
     ("rpa" "pra" nil 0)
     ("rpoblema" "problema" nil 2)
     ("sla" "sei lá" nil 4)
-    ("tbm" "também" nil 58)
+    ("tbm" "também" nil 69)
     ("td" "tudo" nil 2)
     ("temrinal" "terminal" nil 0)
     ("tepmo" "tempo" nil 1)
@@ -380,8 +394,8 @@
     ("tÔ" "tô" nil 13)
     ("umportava " "importava" nil 0)
     ("uotra" "outra" nil 4)
-    ("uqe" "que" nil 6)
-    ("vc" "você" nil 39)
+    ("uqe" "que" nil 7)
+    ("vc" "você" nil 48)
     ("vieo" "veio" nil 0)
     ("wa" "Waiting Approval" nil 0)
    ))
@@ -397,6 +411,8 @@
    ))
 
 (define-abbrev-table 'plain-tex-mode-abbrev-table '())
+
+(define-abbrev-table 'plstore-mode-abbrev-table '())
 
 (define-abbrev-table 'process-menu-mode-abbrev-table '())
 
@@ -437,6 +453,46 @@
 (define-abbrev-table 'skewer-clients-mode-abbrev-table '())
 
 (define-abbrev-table 'skewer-error-mode-abbrev-table '())
+
+(define-abbrev-table 'slack-all-threads-buffer-mode-abbrev-table '())
+
+(define-abbrev-table 'slack-buffer-mode-abbrev-table '())
+
+(define-abbrev-table 'slack-dialog-buffer-mode-abbrev-table '())
+
+(define-abbrev-table 'slack-dialog-edit-element-buffer-mode-abbrev-table '())
+
+(define-abbrev-table 'slack-edit-message-mode-abbrev-table '())
+
+(define-abbrev-table 'slack-file-info-buffer-mode-abbrev-table '())
+
+(define-abbrev-table 'slack-file-info-mode-abbrev-table '())
+
+(define-abbrev-table 'slack-file-list-buffer-mode-abbrev-table '())
+
+(define-abbrev-table 'slack-info-mode-abbrev-table '())
+
+(define-abbrev-table 'slack-message-buffer-mode-abbrev-table '())
+
+(define-abbrev-table 'slack-message-compose-buffer-mode-abbrev-table '())
+
+(define-abbrev-table 'slack-message-edit-buffer-mode-abbrev-table '())
+
+(define-abbrev-table 'slack-message-share-buffer-mode-abbrev-table '())
+
+(define-abbrev-table 'slack-mode-abbrev-table '())
+
+(define-abbrev-table 'slack-pinned-items-buffer-mode-abbrev-table '())
+
+(define-abbrev-table 'slack-room-info-buffer-mode-abbrev-table '())
+
+(define-abbrev-table 'slack-search-result-buffer-mode-abbrev-table '())
+
+(define-abbrev-table 'slack-stars-buffer-mode-abbrev-table '())
+
+(define-abbrev-table 'slack-thread-message-buffer-mode-abbrev-table '())
+
+(define-abbrev-table 'slack-user-profile-buffer-mode-abbrev-table '())
 
 (define-abbrev-table 'slitex-mode-abbrev-table '())
 
