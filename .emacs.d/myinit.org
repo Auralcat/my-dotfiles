@@ -805,14 +805,6 @@ me, too many buffers to work with... for now.
     #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package carbon-now-sh)
     #+END_SRC
-*** Linum-relative
-    Show relative line numbers. Stacks with linum or
-    display-line-numbers-mode, so disable it before using this one.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package linum-relative)
-    ;; Activate it
-    (add-hook 'prog-mode-hook 'linum-relative-mode)
-    #+END_SRC
 * Themes
   Remember to _defer_ the loading of the theme packages, otherwise the
   faces might get mixed up and look ugly.
