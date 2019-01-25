@@ -112,6 +112,14 @@
   ;; Prog-mode is from where all the programming modes are derived from.
   ;; This means that if you call prog-mode-hook, the settings will be
   ;; applied to ALL programming modes in Emacs.
+
+  (defun prog-mode-tweaks ()
+    ;; Set line number mode and column number mode for code files
+    (if (< (string-to-number emacs-version) 24)
+        (line-number-mode 1)
+      (display-line-numbers-mode))
+    )
+  (add-hook 'prog-mode-hook 'prog-mode-tweaks)
   (add-hook 'text-mode-hook 'column-number-mode)
 
   ;; Ruby
