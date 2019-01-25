@@ -286,6 +286,13 @@ me, too many buffers to work with... for now.
     (use-package csv-mode)
     #+END_SRC
 ** Minor Modes
+*** Flycheck Inline
+    Shows the error when leaving the point over the place where it occurs.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+      (use-package flycheck-inline
+        :config
+        (add-hook 'flycheck-mode-hook #'flycheck-inline-mode))
+    #+END_SRC
 *** Ruby-extra-highlight
     Highlight function arguments in Ruby.
     #+BEGIN_SRC emacs-lisp :tangle yes
