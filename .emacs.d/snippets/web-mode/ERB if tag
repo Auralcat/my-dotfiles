@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: ERB if tag
+# key: if
+# --
+<% if ${condition} %>
+  $0
+<% end %>

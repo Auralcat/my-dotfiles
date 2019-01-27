@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: ERB each tag
+# key: each
+# --
+<% @${variable}.${method}.each do |${item}| %>
+  $0
+<% end %>

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: ERB printed Ruby code
+# key: rbp
+# --
+<%= ${# Your printed ruby code here} %>

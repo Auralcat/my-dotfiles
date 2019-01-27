@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: ERB if tag
+# key: ife
+# --
+<% if ${condition} %>
+  ${<!-- HTML code goes here -->}
+<% else %>
+  $0
+<% end %>
