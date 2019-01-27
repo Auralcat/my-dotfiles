@@ -612,7 +612,12 @@ me, too many buffers to work with... for now.
 *** Docker
     A Docker command wrapper for Emacs
     #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package docker)
+      (use-package docker)
+
+      ;; Extra stuff Docker needs on Mac OS X
+      (when (eq system-type 'darwin)
+          (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+           (setq exec-path (append exec-path '("/usr/local/bin"))))
     #+END_SRC
 
 *** Projectile Rails
