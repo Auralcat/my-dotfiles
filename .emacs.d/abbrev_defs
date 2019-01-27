@@ -82,7 +82,7 @@
 (define-abbrev-table 'css-mode-abbrev-table
   '(
     ("aic" "align-items: center;" nil 4)
-    ("df" "display: flex;" nil 13)
+    ("df" "display: flex;" nil 15)
     ("ma" "margin: auto;" nil 4)
    ))
 
@@ -171,6 +171,8 @@
 
 (define-abbrev-table 'eww-mode-abbrev-table '())
 
+(define-abbrev-table 'finder-mode-abbrev-table '())
+
 (define-abbrev-table 'flycheck-error-list-mode-abbrev-table '())
 
 (define-abbrev-table 'flymake-diagnostics-buffer-mode-abbrev-table '())
@@ -178,7 +180,7 @@
 (define-abbrev-table 'fundamental-mode-abbrev-table
   '(
     ("WP" "WordPress" nil 3)
-    ("n" "não" nil 9)
+    ("n" "não" nil 11)
     ("pq" "porque" nil 2)
     ("vc" "você" nil 2)
    ))
@@ -222,6 +224,8 @@
 (define-abbrev-table 'inferior-moz-mode-abbrev-table '())
 
 (define-abbrev-table 'inferior-python-mode-abbrev-table '())
+
+(define-abbrev-table 'internal-ange-ftp-mode-abbrev-table '())
 
 (define-abbrev-table 'java-mode-abbrev-table
   '(
@@ -303,7 +307,6 @@
 
 (define-abbrev-table 'org-mode-abbrev-table
   '(
-    (" rpobelma" "problema" nil 0)
     ("Dom" "Domingo" nil 1)
     ("Qua" "Quarta" nil 3)
     ("Qui" "Quinta" nil 2)
@@ -331,6 +334,7 @@
     ("dps" "depois" nil 2)
     ("ecnhendo" "enchendo" nil 0)
     ("edpois" "depois" nil 0)
+    ("eh" "é" nil 3)
     ("ehre" "here" nil 1)
     ("ejito" "jeito" nil 0)
     ("elqa" "ela" nil 1)
@@ -346,11 +350,12 @@
     ("exp" "experiência" nil 3)
     ("fn" "função" nil 1)
     ("gov" "governo" nil 1)
-    ("hj" "hoje" nil 8)
+    ("hj" "hoje" nil 9)
     ("hovje" "hoje" nil 1)
     ("htat" "that" nil 2)
     ("hte" "the" nil 1)
     ("htem" "them" nil 1)
+    ("ingles" "inglês" nil 2)
     ("insnegurança" "insegurança" nil 2)
     ("jieto" "jeito" nil 0)
     ("jpbar" "jogar" nil 2)
@@ -360,8 +365,10 @@
     ("moranod" "morando" nil 1)
     ("motnar" "montar" nil 1)
     ("msg" "mensagem" nil 3)
-    ("msm" "mesmo" nil 1)
+    ("msm" "mesmo" nil 3)
     ("mto" "muito" nil 3)
+    ("nao" "não" nil 2)
+    ("neh" "né" nil 2)
     ("oa" "Open Account" nil 1)
     ("ocmo" "como" nil 2)
     ("oicsa" "coisa" nil 1)
@@ -370,21 +377,24 @@
     ("permaneeu" "permaneceu" nil 0)
     ("poer " "poder" nil 0)
     ("pontem" "Ontem" nil 0)
+    ("portugues" "português" nil 1)
     ("poruqe" "porque" nil 1)
     ("pouoc" "pouco" nil 0)
     ("pq" "porque" nil 29)
     ("prblema" "problema" nil 0)
     ("probelma" "problema" nil 1)
     ("projeots" "projetos" nil 1)
-    ("q" "que" nil 6)
+    ("q" "que" nil 8)
     ("qaundo" "quando" nil 0)
     ("qdo" "quando" nil 9)
-    ("qeu" "que" nil 39)
+    ("qeu" "que" nil 40)
     ("realemnte" "realmente" nil 1)
     ("receebi" "recebi" "sbae" 0)
     ("rpa" "pra" nil 0)
+    ("rpobelma" "problema" nil 0)
     ("rpoblema" "problema" nil 2)
     ("sla" "sei lá" nil 4)
+    ("soh" "só" nil 0)
     ("tbm" "também" nil 69)
     ("td" "tudo" nil 2)
     ("temrinal" "terminal" nil 0)
@@ -395,7 +405,7 @@
     ("umportava " "importava" nil 0)
     ("uotra" "outra" nil 4)
     ("uqe" "que" nil 7)
-    ("vc" "você" nil 48)
+    ("vc" "você" nil 51)
     ("vieo" "veio" nil 0)
     ("wa" "Waiting Approval" nil 0)
    ))
