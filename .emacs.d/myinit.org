@@ -991,6 +991,73 @@ me, too many buffers to work with... for now.
   ;; Use Emacs mode in Org-capture buffers and notes buffer
   (add-hook 'org-capture-mode-hook 'evil-emacs-state)
 #+END_SRC
+** Capture templates
+   #+BEGIN_SRC emacs-lisp :tangle yes
+     ;; Initialize me.
+     (setq org-capture-templates nil)
+   #+END_SRC
+*** Budget Logging
+    #+BEGIN_SRC emacs-lisp :tangle yes
+      (add-to-list 'org-capture-templates '("b" "Budget logging templates"))
+
+      (add-to-list 'org-capture-templates '("bi" "Add income item in budget" table-line
+                                           (file+headline "~/file-bouncer/org-files/finances.org" "Caixa geral")
+                                           "| %t | %^{Descrição} | %^{Valor} |" :immediate-finish t :table-line-pos "II-1"))
+
+      (add-to-list 'org-capture-templates '("bm" "Meal card expense" table-line
+                                           (file+headline "~/file-bouncer/org-files/finances.org" "Vale-refeição")
+                                           "| %t | %^{Descrição} | -%^{Valor} |" :immediate-finish t :table-line-pos "II-1"))
+
+      (add-to-list 'org-capture-templates '("bk" "Market card expense" table-line
+                                           (file+headline "~/file-bouncer/org-files/finances.org" "Vale-alimentação")
+                                           "| %t | %^{Descrição} | -%^{Valor} |" :immediate-finish t :table-line-pos "II-1"))
+
+      (add-to-list 'org-capture-templates '("be" "Education/Event budget expense" table-line
+                                           (file+headline "~/file-bouncer/org-files/finances.org" "Orçamento educação/eventos")
+                                           "| %t | %^{Descrição} | -%^{Valor} |" :immediate-finish t :table-line-pos "II-1"))
+
+      (add-to-list 'org-capture-templates '("bo" "Add expense item in budget" table-line
+                                           (file+headline "~/file-bouncer/org-files/finances.org" "Caixa geral")
+                                           "| %t | %^{Descrição} | -%^{Valor} |" :immediate-finish t :table-line-pos "II-1"))
+
+      (add-to-list 'org-capture-templates '("br" "Add reward fund expense item in budget" table-line
+                                           (file+headline "~/file-bouncer/org-files/finances.org" "Fundo recompensa")
+                                           "| %t | %^{Descrição} | -%^{Valor} |" :immediate-finish t :table-line-pos "II-1"))
+    #+END_SRC
+*** Media List captures
+    #+BEGIN_SRC emacs-lisp :tangle yes
+      (add-to-list 'org-capture-templates '("m" "Media list capture templates"))
+
+      (add-to-list 'org-capture-templates '("mb" "New bookmark" entry
+                                           (file+headline "~/file-bouncer/media-list.org" "Links")
+                                           "** %?" :prepend t))
+
+      (add-to-list 'org-capture-templates '("mp" "Add podcast to list" entry
+                                           (file+headline "~/file-bouncer/media-list.org" "Podcasts")
+                                           "** %^{Nome do podcast}" :immediate-finish t))
+
+      (add-to-list 'org-capture-templates '("mm" "Add movie to list" entry
+                                           (file+headline "~/file-bouncer/media-list.org" "Filmes")
+                                           "** %^{Nome do filme}" :immediate-finish t))
+
+      (add-to-list 'org-capture-templates '("ma" "Add music album to list" entry
+                                           (file+headline "~/file-bouncer/media-list.org" "Álbuns musicais")
+                                           "** %^{Nome do álbum}" :immediate-finish t))
+
+      (add-to-list 'org-capture-templates '("mb" "Add book to list" entry
+                                           (file+headline "~/file-bouncer/media-list.org" "Livros")
+                                           "** %^{Nome do livro}" :immediate-finish t))
+    #+END_SRC
+*** General templates
+    #+BEGIN_SRC emacs-lisp :tangle yes
+      (add-to-list 'org-capture-templates '("e" "Add new Emacs task" entry
+                                           (file+headline "~/file-bouncer/org-files/projetos/configuracoes-emacs.org" "Tarefas")
+                                           "** BACKLOG %^{Tarefa}" :prepend t :immediate-finish t :time-prompt t))
+
+      (add-to-list 'org-capture-templates '("t" "New task" entry
+                                           (file+headline "~/file-bouncer/org-files/contact-based-system/eu.org" "Tarefas extras")
+                                           "** TODO %?" :prepend t))
+    #+END_SRC
 ** Org-bullets
    Change org-mode's *s to UTF-8 chars
    #+BEGIN_SRC emacs-lisp :tangle yes

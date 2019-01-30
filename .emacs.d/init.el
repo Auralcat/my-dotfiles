@@ -68,7 +68,7 @@
  '(cua-read-only-cursor-color "#859900")
     '(custom-safe-themes
          (quote
-             ("8aca557e9a17174d8f847fb02870cb2bb67f3b6e808e46c0e54a44e3e18e1020" "0eccc893d77f889322d6299bec0f2263bffb6d3ecc79ccef76f1a2988859419e" "02199888a97767d7779269a39ba2e641d77661b31b3b8dd494b1a7250d1c8dc1" "7feeed063855b06836e0262f77f5c6d3f415159a98a9676d549bfeb6c49637c4" "7e78a1030293619094ea6ae80a7579a562068087080e01c2b8b503b27900165c" "946e871c780b159c4bb9f580537e5d2f7dba1411143194447604ecbaf01bd90c" "73a13a70fd111a6cd47f3d4be2260b1e4b717dbf635a9caee6442c949fad41cd" "b59d7adea7873d58160d368d42828e7ac670340f11f36f67fa8071dbf957236a" "392395ee6e6844aec5a76ca4f5c820b97119ddc5290f4e0f58b38c9748181e8d" "87a431903d22fa1cbb2becd88572e7d985e28c2253935448d0d754c13e85a980" "8dce5b23232d0a490f16d62112d3abff6babeef86ae3853241a85856f9b0a6e7" "450f3382907de50be905ae8a242ecede05ea9b858a8ed3cc8d1fbdf2d57090af" "c3e6b52caa77cb09c049d3c973798bc64b5c43cc437d449eacf35b3e776bf85c" "40343730a29b0c3fd97bd86cd5b05ed4124f1f3aeabe623cf1c1c9e9fb8ef2e5" "c1fb68aa00235766461c7e31ecfc759aa2dd905899ae6d95097061faeb72f9ee" "4639288d273cbd3dc880992e6032f9c817f17c4a91f00f3872009a099f5b3f84" "14680231a7917bf5109d535ae11e40365debf31a544d86e60a6764e1309bd16c" "2a9039b093df61e4517302f40ebaf2d3e95215cb2f9684c8c1a446659ee226b9" "6d589ac0e52375d311afaa745205abb6ccb3b21f6ba037104d71111e7e76a3fc" "60948671aeed6450faa8f28978a09586f142af6eb0b59e70848fcc32b9d36fd1" "fbacfa15b88adfd13d09903739db2db29a4b6813d5e61472fe24af2bf4e9faae" "03805593893aa4f82003efe5913d1bb6140805ad7c63d75ff459d6a51bb27d3d" "ecba61c2239fbef776a72b65295b88e5534e458dfe3e6d7d9f9cb353448a569e" "3e83abe75cebf5621e34ce1cbe6e12e4d80766bed0755033febed5794d0c69bf" "a3b9c613ca9beaae6539fd76ce09c78baed7700a7f513dc33a1069592f8bbe07" "ae3a3bed17b28585ce84266893fa3a4ef0d7d721451c887df5ef3e24a9efef8c" "08a89acffece58825e75479333109e01438650d27661b29212e6560070b156cf" "0d5f2910bee90a86523eddc3fba78efe33a45a51d0e3db76aba6f287ef1ffa7c" "0e89bf7a9d5d2a327b291d5e646f58362b2386f948a594ca993e7b0016b8425a" "28fa7536c8f563c6d6296989937a8e87a2dc6477fd7b366e0336a8997a521094" "c9b89349d269af4ac5d832759df2f142ae50b0bbbabcce9c0dd53f79008443c9" "6b2636879127bf6124ce541b1b2824800afc49c6ccd65439d6eb987dbf200c36" "d2e9c7e31e574bf38f4b0fb927aaff20c1e5f92f72001102758005e53d77b8c9" "0daf22a3438a9c0998c777a771f23435c12a1d8844969a28f75820dd71ff64e1" "edea0b35681cb05d1cffe47f7eae912aa8a930fa330f8c4aeb032118a5d0aabf" "84488351928a5ea92546c89ff71cc79d3bb880ffac6172229b2302549c9dc4e7" "75d3dde259ce79660bac8e9e237b55674b910b470f313cdf4b019230d01a982a" "b54826e5d9978d59f9e0a169bbd4739dd927eead3ef65f56786621b53c031a7c" "4697a2d4afca3f5ed4fdf5f715e36a6cac5c6154e105f3596b44a4874ae52c45" "4b19d61c560a93ef90767abe513c11f236caec2864617d718aa366618133704c" "d1b4990bd599f5e2186c3f75769a2c5334063e9e541e37514942c27975700370" "f146e316858ae534bb5c6db452a527f4bc735b0af46fd659f8b13ff274aa8375" "a63355b90843b228925ce8b96f88c587087c3ee4f428838716505fd01cf741c8" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "d8dc153c58354d612b2576fea87fe676a3a5d43bcc71170c62ddde4a1ad9e1fb" "eb7be1648009af366d83f855191057bdc09348a2d9353db31da03b1cdec50cc5" "26d49386a2036df7ccbe802a06a759031e4455f07bda559dcf221f53e8850e69" "13d20048c12826c7ea636fbe513d6f24c0d43709a761052adbca052708798ce3" "551596f9165514c617c99ad6ce13196d6e7caa7035cea92a0e143dbe7b28be0e" "1c082c9b84449e54af757bcae23617d11f563fc9f33a832a8a2813c4d7dfb652" "cd736a63aa586be066d5a1f0e51179239fe70e16a9f18991f6f5d99732cabb32" "ab0950f92dc5e6b667276888cb0cdbc35fd1c16f667170a62c15bd3ed5ae5c5a" "d3a7eea7ebc9a82b42c47e49517f7a1454116487f6907cf2f5c2df4b09b50fc1" "44eec3c3e6e673c0d41b523a67b64c43b6e38f8879a7969f306604dcf908832c" "93a0885d5f46d2aeac12bf6be1754faa7d5e28b27926b8aa812840fe7d0b7983" "151bde695af0b0e69c3846500f58d9a0ca8cb2d447da68d7fbf4154dcf818ebc" "2c88b703cbe7ce802bf6f0bffe3edbb8d9ec68fc7557089d4eaa1e29f7529fe1" "6b289bab28a7e511f9c54496be647dc60f5bd8f9917c9495978762b99d8c96a0" "9d9fda57c476672acd8c6efeb9dc801abea906634575ad2c7688d055878e69d6" "a3fa4abaf08cc169b61dea8f6df1bbe4123ec1d2afeb01c17e11fdc31fc66379" "b35a14c7d94c1f411890d45edfb9dc1bd61c5becd5c326790b51df6ebf60f402" "f0dc4ddca147f3c7b1c7397141b888562a48d9888f1595d69572db73be99a024" "b4c13d25b1f9f66eb769e05889ee000f89d64b089f96851b6da643cee4fdab08" "fe666e5ac37c2dfcf80074e88b9252c71a22b6f5d2f566df9a7aa4f9bea55ef8" "234455c4073e7007f7f0a0a7e74dd03f8495b09540f467993c5cb847cfb600e1" "a566448baba25f48e1833d86807b77876a899fc0c3d33394094cf267c970749f" "3a3de615f80a0e8706208f0a71bbcc7cc3816988f971b6d237223b6731f91605" "e3fc83cdb5f9db0d0df205f5da89af76feda8c56d79a653a5d092c82c7447e02" "6ffef0161169e444b514a0f7f0cb7eac09d11c396cdc99bf85360a361c427886" "2cfc1cab46c0f5bae8017d3603ea1197be4f4fff8b9750d026d19f0b9e606fae" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "dd2346baba899fa7eee2bba4936cfcdf30ca55cdc2df0a1a4c9808320c4d4b22" "b9a06c75084a7744b8a38cb48bc987de10d68f0317697ccbd894b2d0aca06d2b" "ea63cede1b158a5d1bda96d46b3d84ab72600282cf8b4c2f77383983c225fe2c" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "a19265ef7ecc16ac4579abb1635fd4e3e1185dcacbc01b7a43cf7ad107c27ced" "aad2caf3759b343577768009f89d1a4cbfcea2c4f49331be753c397532250dae" default)))
+             ("623840788f10b194da7d90b62b103f6967486ab0f2f45c93123eecd9ddefd766" "de215e4b3bc10015a29238e597dfa9516c54d1648469588a4221ee006d382532" "8e9c1f068e8edb3b3ee60444fc87082a72f38b9c3a75d445d65c911c7c75240e" "100e7c5956d7bb3fd0eebff57fde6de8f3b9fafa056a2519f169f85199cc1c96" "8aca557e9a17174d8f847fb02870cb2bb67f3b6e808e46c0e54a44e3e18e1020" "0eccc893d77f889322d6299bec0f2263bffb6d3ecc79ccef76f1a2988859419e" "02199888a97767d7779269a39ba2e641d77661b31b3b8dd494b1a7250d1c8dc1" "7feeed063855b06836e0262f77f5c6d3f415159a98a9676d549bfeb6c49637c4" "7e78a1030293619094ea6ae80a7579a562068087080e01c2b8b503b27900165c" "946e871c780b159c4bb9f580537e5d2f7dba1411143194447604ecbaf01bd90c" "73a13a70fd111a6cd47f3d4be2260b1e4b717dbf635a9caee6442c949fad41cd" "b59d7adea7873d58160d368d42828e7ac670340f11f36f67fa8071dbf957236a" "392395ee6e6844aec5a76ca4f5c820b97119ddc5290f4e0f58b38c9748181e8d" "87a431903d22fa1cbb2becd88572e7d985e28c2253935448d0d754c13e85a980" "8dce5b23232d0a490f16d62112d3abff6babeef86ae3853241a85856f9b0a6e7" "450f3382907de50be905ae8a242ecede05ea9b858a8ed3cc8d1fbdf2d57090af" "c3e6b52caa77cb09c049d3c973798bc64b5c43cc437d449eacf35b3e776bf85c" "40343730a29b0c3fd97bd86cd5b05ed4124f1f3aeabe623cf1c1c9e9fb8ef2e5" "c1fb68aa00235766461c7e31ecfc759aa2dd905899ae6d95097061faeb72f9ee" "4639288d273cbd3dc880992e6032f9c817f17c4a91f00f3872009a099f5b3f84" "14680231a7917bf5109d535ae11e40365debf31a544d86e60a6764e1309bd16c" "2a9039b093df61e4517302f40ebaf2d3e95215cb2f9684c8c1a446659ee226b9" "6d589ac0e52375d311afaa745205abb6ccb3b21f6ba037104d71111e7e76a3fc" "60948671aeed6450faa8f28978a09586f142af6eb0b59e70848fcc32b9d36fd1" "fbacfa15b88adfd13d09903739db2db29a4b6813d5e61472fe24af2bf4e9faae" "03805593893aa4f82003efe5913d1bb6140805ad7c63d75ff459d6a51bb27d3d" "ecba61c2239fbef776a72b65295b88e5534e458dfe3e6d7d9f9cb353448a569e" "3e83abe75cebf5621e34ce1cbe6e12e4d80766bed0755033febed5794d0c69bf" "a3b9c613ca9beaae6539fd76ce09c78baed7700a7f513dc33a1069592f8bbe07" "ae3a3bed17b28585ce84266893fa3a4ef0d7d721451c887df5ef3e24a9efef8c" "08a89acffece58825e75479333109e01438650d27661b29212e6560070b156cf" "0d5f2910bee90a86523eddc3fba78efe33a45a51d0e3db76aba6f287ef1ffa7c" "0e89bf7a9d5d2a327b291d5e646f58362b2386f948a594ca993e7b0016b8425a" "28fa7536c8f563c6d6296989937a8e87a2dc6477fd7b366e0336a8997a521094" "c9b89349d269af4ac5d832759df2f142ae50b0bbbabcce9c0dd53f79008443c9" "6b2636879127bf6124ce541b1b2824800afc49c6ccd65439d6eb987dbf200c36" "d2e9c7e31e574bf38f4b0fb927aaff20c1e5f92f72001102758005e53d77b8c9" "0daf22a3438a9c0998c777a771f23435c12a1d8844969a28f75820dd71ff64e1" "edea0b35681cb05d1cffe47f7eae912aa8a930fa330f8c4aeb032118a5d0aabf" "84488351928a5ea92546c89ff71cc79d3bb880ffac6172229b2302549c9dc4e7" "75d3dde259ce79660bac8e9e237b55674b910b470f313cdf4b019230d01a982a" "b54826e5d9978d59f9e0a169bbd4739dd927eead3ef65f56786621b53c031a7c" "4697a2d4afca3f5ed4fdf5f715e36a6cac5c6154e105f3596b44a4874ae52c45" "4b19d61c560a93ef90767abe513c11f236caec2864617d718aa366618133704c" "d1b4990bd599f5e2186c3f75769a2c5334063e9e541e37514942c27975700370" "f146e316858ae534bb5c6db452a527f4bc735b0af46fd659f8b13ff274aa8375" "a63355b90843b228925ce8b96f88c587087c3ee4f428838716505fd01cf741c8" "a8245b7cc985a0610d71f9852e9f2767ad1b852c2bdea6f4aadc12cce9c4d6d0" "d8dc153c58354d612b2576fea87fe676a3a5d43bcc71170c62ddde4a1ad9e1fb" "eb7be1648009af366d83f855191057bdc09348a2d9353db31da03b1cdec50cc5" "26d49386a2036df7ccbe802a06a759031e4455f07bda559dcf221f53e8850e69" "13d20048c12826c7ea636fbe513d6f24c0d43709a761052adbca052708798ce3" "551596f9165514c617c99ad6ce13196d6e7caa7035cea92a0e143dbe7b28be0e" "1c082c9b84449e54af757bcae23617d11f563fc9f33a832a8a2813c4d7dfb652" "cd736a63aa586be066d5a1f0e51179239fe70e16a9f18991f6f5d99732cabb32" "ab0950f92dc5e6b667276888cb0cdbc35fd1c16f667170a62c15bd3ed5ae5c5a" "d3a7eea7ebc9a82b42c47e49517f7a1454116487f6907cf2f5c2df4b09b50fc1" "44eec3c3e6e673c0d41b523a67b64c43b6e38f8879a7969f306604dcf908832c" "93a0885d5f46d2aeac12bf6be1754faa7d5e28b27926b8aa812840fe7d0b7983" "151bde695af0b0e69c3846500f58d9a0ca8cb2d447da68d7fbf4154dcf818ebc" "2c88b703cbe7ce802bf6f0bffe3edbb8d9ec68fc7557089d4eaa1e29f7529fe1" "6b289bab28a7e511f9c54496be647dc60f5bd8f9917c9495978762b99d8c96a0" "9d9fda57c476672acd8c6efeb9dc801abea906634575ad2c7688d055878e69d6" "a3fa4abaf08cc169b61dea8f6df1bbe4123ec1d2afeb01c17e11fdc31fc66379" "b35a14c7d94c1f411890d45edfb9dc1bd61c5becd5c326790b51df6ebf60f402" "f0dc4ddca147f3c7b1c7397141b888562a48d9888f1595d69572db73be99a024" "b4c13d25b1f9f66eb769e05889ee000f89d64b089f96851b6da643cee4fdab08" "fe666e5ac37c2dfcf80074e88b9252c71a22b6f5d2f566df9a7aa4f9bea55ef8" "234455c4073e7007f7f0a0a7e74dd03f8495b09540f467993c5cb847cfb600e1" "a566448baba25f48e1833d86807b77876a899fc0c3d33394094cf267c970749f" "3a3de615f80a0e8706208f0a71bbcc7cc3816988f971b6d237223b6731f91605" "e3fc83cdb5f9db0d0df205f5da89af76feda8c56d79a653a5d092c82c7447e02" "6ffef0161169e444b514a0f7f0cb7eac09d11c396cdc99bf85360a361c427886" "2cfc1cab46c0f5bae8017d3603ea1197be4f4fff8b9750d026d19f0b9e606fae" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "dd2346baba899fa7eee2bba4936cfcdf30ca55cdc2df0a1a4c9808320c4d4b22" "b9a06c75084a7744b8a38cb48bc987de10d68f0317697ccbd894b2d0aca06d2b" "ea63cede1b158a5d1bda96d46b3d84ab72600282cf8b4c2f77383983c225fe2c" "d677ef584c6dfc0697901a44b885cc18e206f05114c8a3b7fde674fce6180879" "a19265ef7ecc16ac4579abb1635fd4e3e1185dcacbc01b7a43cf7ad107c27ced" "aad2caf3759b343577768009f89d1a4cbfcea2c4f49331be753c397532250dae" default)))
  '(display-battery-mode t)
  '(display-default-load-average nil)
  '(display-time-24hr-format t)
@@ -86,6 +86,7 @@
                  ("America/New_York" "Boston")
                  ("Europe/London" "London")
                  ("Asia/Tokyo" "Tokyo"))))
+ '(docker-command "/usr/local/bin/docker")
  '(dynamic-completion-mode t)
  '(emmet-indent-after-insert t)
  '(emmet-indentation 2)
@@ -160,6 +161,7 @@
     '(hl-fg-colors
          (quote
              ("#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36")))
+ '(hl-paren-background-colors (quote ("#2492db" "#95a5a6" nil)))
  '(hl-paren-colors (quote ("#2aa198" "#b58900" "#268bd2" "#6c71c4" "#859900")))
  '(ido-enable-flex-matching nil)
  '(image-animate-loop t)
@@ -297,55 +299,6 @@
  '(org-agenda-skip-scheduled-if-done t)
  '(org-agenda-start-on-weekday 0)
  '(org-bullets-bullet-list (quote ("✿" "❀" "◉" "○" "✸")))
-    '(org-capture-templates
-         (quote
-             (("a" "Add birthday to diary" entry
-                  (file+headline "~/file-bouncer/emacs-diary" "Aniversários")
-                  "Is this working?" :immediate-finish t)
-                 ("b" "Budget logging templates")
-                 ("bi" "Add income item in budget" table-line
-                     (file+headline "~/file-bouncer/org-files/finances.org" "Caixa geral")
-                     "| %t | %^{Descrição} | %^{Valor} |" :immediate-finish t :table-line-pos "II-1")
-                 ("bm" "Meal card expense" table-line
-                     (file+headline "~/file-bouncer/org-files/finances.org" "Vale-refeição")
-                     "| %t | %^{Descrição} | -%^{Valor} |" :immediate-finish t :table-line-pos "II-1")
-                 ("bk" "Market card expense" table-line
-                     (file+headline "~/file-bouncer/org-files/finances.org" "Vale-alimentação")
-                     "| %t | %^{Descrição} | -%^{Valor} |" :immediate-finish t :table-line-pos "II-1")
-                 ("be" "Education/Event budget expense" table-line
-                     (file+headline "~/file-bouncer/org-files/finances.org" "Orçamento educação/eventos")
-                     "| %t | %^{Descrição} | -%^{Valor} |" :immediate-finish t :table-line-pos "II-1")
-                 ("bo" "Add expense item in budget" table-line
-                     (file+headline "~/file-bouncer/org-files/finances.org" "Caixa geral")
-                     "| %t | %^{Descrição} | -%^{Valor} |" :immediate-finish t :table-line-pos "II-1")
-                 ("br" "Add reward fund expense item in budget" table-line
-                     (file+headline "~/file-bouncer/org-files/finances.org" "Fundo recompensa")
-                     "| %t | %^{Descrição} | -%^{Valor} |" :immediate-finish t :table-line-pos "II-1")
-                 ("m" "Media list capture templates")
-                 ("mb" "New bookmark" entry
-                     (file+headline "~/file-bouncer/media-list.org" "Links")
-                     "** %?" :prepend t)
-                 ("mp" "Add podcast to list" entry
-                     (file+headline "~/file-bouncer/media-list.org" "Podcasts")
-                     "** %^{Nome do podcast}" :immediate-finish t)
-                 ("mm" "Add movie to list" entry
-                     (file+headline "~/file-bouncer/media-list.org" "Filmes")
-                     "** %^{Nome do filme}" :immediate-finish t)
-                 ("ma" "Add music album to list" entry
-                     (file+headline "~/file-bouncer/media-list.org" "Álbuns musicais")
-                     "** %^{Nome do álbum}" :immediate-finish t)
-                 ("mb" "Add book to list" entry
-                     (file+headline "~/file-bouncer/media-list.org" "Livros")
-                     "** %^{Nome do livro}" :immediate-finish t)
-                 ("o" "Add item to outbox" entry
-                     (file "~/file-bouncer/outbox.org")
-                     "* %?" :prepend t)
-                 ("e" "Add new Emacs task" entry
-                     (file+headline "~/file-bouncer/org-files/projetos/configuracoes-emacs.org" "Tarefas")
-                     "** BACKLOG %^{Tarefa}" :prepend t )
-                 ("t" "Tarefa extra do stand-up (pra não colocar direto na lista do dia, organizar depois)" entry
-                     (file+headline "~/file-bouncer/org-files/contact-based-system/eu.org" "Tarefas extras do stand-up (organizar depois)")
-                     "** BACKLOG %?" :prepend t))))
  '(org-default-notes-file "~/file-bouncer/everything-bucket")
  '(org-plantuml-jar-path "~/file-bouncer/plantuml.jar")
  '(org-pomodoro-audio-player "/usr/bin/mpv")
@@ -373,7 +326,7 @@
  '(org-todo-keywords (quote ((sequence "TODO" "DONE"))))
     '(package-selected-packages
          (quote
-             (telephone-line organic-green-theme flatui-theme twilight-bright-theme hemisu-theme ruby-extra-highlight ace-jump org-beautify-theme ruby-electric selectric-mode org-alert bundler projectile-rails cl-lib multi-term term+ wakatime-mode carbon-now-sh evil-snipe lua-mode yasnippet-snippets react-snippets nvm flycheck-credo zeno-theme rjsx-mode evil-numbers zeal-at-point js2-refactor ac-js2 edit-indirect yatemplate cheat-sh yaml-mode company-box evil-matchit evil-string-inflection circadian diminish alchemist sublimity writeroom-mode electric-operator jazz-theme highlight-indentation company-tern restart-emacs ob-restclient doom-themes restclient helm-projectile ibuffer-projectile yasnippet-classic-snippets vagrant-tramp ob-elixir company-prescient weechat web-mode web-beautify vagrant use-package twittering-mode scss-mode sass-mode rvm rust-mode ruby-tools robe rich-minority request rainbow-mode rainbow-delimiters projectile org-pomodoro org-bullets nyan-mode mode-icons memoize makey magit keyfreq js2-mode htmlize highlight-sexp highlight-numbers helm-tramp flymake-phpcs flymake-php flymake-elixir flycheck-mix evil-surround evil-leader evil-anzu eshell-prompt-extras eruby-mode enh-ruby-mode emojify emmet-mode electric-spacing editorconfig csv-mode company-web company-statistics company-php cl-generic autopair ace-jump-mode ac-html-bootstrap abyss-theme)))
+             (flycheck-inline font-lock+ elm-mode slack telephone-line organic-green-theme flatui-theme twilight-bright-theme hemisu-theme ruby-extra-highlight ace-jump org-beautify-theme ruby-electric selectric-mode org-alert bundler projectile-rails cl-lib multi-term term+ wakatime-mode carbon-now-sh evil-snipe lua-mode yasnippet-snippets react-snippets nvm flycheck-credo zeno-theme rjsx-mode evil-numbers zeal-at-point js2-refactor ac-js2 edit-indirect yatemplate cheat-sh yaml-mode company-box evil-matchit evil-string-inflection circadian diminish alchemist sublimity writeroom-mode electric-operator jazz-theme highlight-indentation company-tern restart-emacs ob-restclient doom-themes restclient helm-projectile ibuffer-projectile yasnippet-classic-snippets vagrant-tramp ob-elixir company-prescient weechat web-mode web-beautify vagrant use-package twittering-mode scss-mode sass-mode rvm rust-mode ruby-tools robe rich-minority request rainbow-mode rainbow-delimiters projectile org-pomodoro org-bullets nyan-mode mode-icons memoize makey magit keyfreq js2-mode htmlize highlight-sexp highlight-numbers helm-tramp flymake-phpcs flymake-php flymake-elixir flycheck-mix evil-surround evil-leader evil-anzu eshell-prompt-extras eruby-mode enh-ruby-mode emojify emmet-mode electric-spacing editorconfig csv-mode company-web company-statistics company-php cl-generic autopair ace-jump-mode ac-html-bootstrap abyss-theme)))
  '(pdf-view-midnight-colors (quote ("#6a737d" . "#fffbdd")))
  '(persp-show-modestring (quote (quote header)))
  '(pos-tip-background-color "#073642")
@@ -395,6 +348,10 @@
  '(send-mail-function (quote smtpmail-send-it))
  '(shell-file-name "/bin/bash")
  '(show-paren-mode t)
+ '(sml/active-background-color "#34495e")
+ '(sml/active-foreground-color "#ecf0f1")
+ '(sml/inactive-background-color "#dfe4ea")
+ '(sml/inactive-foreground-color "#34495e")
  '(smtpmail-smtp-server "smtp.yandex.com")
  '(smtpmail-smtp-service 25)
  '(sublimity-mode nil)
