@@ -80,9 +80,6 @@
     (when (not (display-graphic-p))
       (menu-bar-mode -1))
 
-    ;; ;; Use alternate icon fonts when available
-    ;; (add-to-list 'load-path "~/.local/share/icons-in-terminal/")
-
     ;; Use Bash as default shell interpreter
     (setq org-babel-sh-command "/bin/bash")
 
@@ -1118,45 +1115,42 @@ me, too many buffers to work with... for now.
    #+END_SRC
 * Variables
 #+BEGIN_SRC emacs-lisp :tangle yes
-;; Set Org mode as default mode for new buffers:
-(setq-default major-mode 'org-mode)
+  ;; Set Org mode as default mode for new buffers:
+  (setq-default major-mode 'org-mode)
 
-;; Enable auto-fill mode by default
-(auto-fill-mode 1)
+  ;; Enable auto-fill mode by default
+  (auto-fill-mode 1)
 
-;; Set default fill to 79
-(set-fill-column 79)
+  ;; Set default fill to 79
+  (set-fill-column 79)
 
-;; Set line number mode and column number mode for code files
-(line-number-mode 1)
+  ;; Change tab width and change tabs to spaces
+  (setq-default tab-width 4)
+  (setq-default indent-tabs-mode nil)
 
-;; Change tab width and change tabs to spaces
-(setq-default tab-width 4)
-(setq-default indent-tabs-mode nil)
+  ;; Making Emacs auto-indent
+  (define-key global-map (kbd "RET") 'newline-and-indent)
 
-;; Making Emacs auto-indent
-(define-key global-map (kbd "RET") 'newline-and-indent)
+  ;; Shows trailing whitespace, if any:
+  (setq-default show-trailing-whitespace t)
+  ;; Don't do that for terminal mode!
+  (add-hook 'multi-term-mode-hook (setq-default show-trailing-whitespace nil))
 
-;; Shows trailing whitespace, if any:
-(setq-default show-trailing-whitespace t)
-;; Don't do that for terminal mode!
-(add-hook 'multi-term-mode-hook (setq-default show-trailing-whitespace nil))
+  (defun css-mode-tweaks()
+    (emmet-mode 1)
+    (rainbow-mode 1))
 
-(defun css-mode-tweaks()
-  (emmet-mode 1)
-  (rainbow-mode 1))
+  ;; Emmet-mode: activate for html-mode, sgml-mode,
+  ;; css-mode, web-mode and sass-mode
+  (add-hook 'sgml-mode-hook 'emmet-mode)
+  (add-hook 'sass-mode-hook 'css-mode-tweaks)
+  (add-hook 'web-mode-hook 'emmet-mode)
 
-;; Emmet-mode: activate for html-mode, sgml-mode,
-;; css-mode, web-mode and sass-mode
-(add-hook 'sgml-mode-hook 'emmet-mode)
-(add-hook 'sass-mode-hook 'css-mode-tweaks)
-(add-hook 'web-mode-hook 'emmet-mode)
+  ;; By the way, it's nice to add rainbow-mode for CSS
+  (add-hook 'css-mode-hook 'css-mode-tweaks)
 
-;; By the way, it's nice to add rainbow-mode for CSS
-(add-hook 'css-mode-hook 'css-mode-tweaks)
-
-;; Python: use python3 as default shell interpreter
-(setq python-shell-interpreter "python3")
+  ;; Python: use python3 as default shell interpreter
+  (setq python-shell-interpreter "python3")
 
 #+END_SRC
 * Macros
