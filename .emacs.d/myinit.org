@@ -20,7 +20,12 @@
       ;; Point the executables in Mac OS to Emacs.
       (add-to-list 'exec-path "/usr/local/bin/")
       ;; Enable EPA
-      (custom-set-variables '(epg-gpg-program  "/usr/local/bin/gpg")))
+      (custom-set-variables '(epg-gpg-program  "/usr/local/bin/gpg"))
+
+      ;; Exec path from shell - Replicates terminal env vars in graphical Emacs
+      (use-package exec-path-from-shell
+        :init
+        (exec-path-from-shell-initialize)))
   #+END_SRC
 * Environment Customizations
 #+BEGIN_SRC emacs-lisp :tangle yes
