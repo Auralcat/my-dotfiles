@@ -7,13 +7,13 @@
 ;; (color-values (face-foreground 'face-name))
 ;; Setting the color through faces blends well with each theme, but if you hover over the
 ;; face it gets the color from, it defeats the whole purpose of this.
-(setq evil-emacs-state-cursor '("purple" box))
-(setq evil-normal-state-cursor '("green" box))
-(setq evil-visual-state-cursor '("orange" box))
-(setq evil-insert-state-cursor '("red" bar))
-(setq evil-replace-state-cursor '("gold" hbar))
-;; This is when you use commands such as c,d,y in normal mode, for example.
-(setq evil-operator-state-cursor '("red" hollow))
+;; Evil-mode cursor colors
+(setq evil-emacs-state-cursor '("#e078d6" box))
+(setq evil-normal-state-cursor '("#74e24a" box))
+(setq evil-visual-state-cursor '("#dd676b" box))
+(setq evil-insert-state-cursor '("#9a3135" bar))
+(setq evil-replace-state-cursor '("#f7e05b" hbar))
+(setq evil-operator-state-cursor '("#9a3135" hollow))
 
 ;; I have bound C-a to back-to-indentation-or-beginning in another config,
 ;; Now I need C-e, $ is too far for me 😂
