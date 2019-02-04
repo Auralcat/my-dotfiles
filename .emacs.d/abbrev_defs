@@ -179,6 +179,8 @@
 
 (define-abbrev-table 'fundamental-mode-abbrev-table '())
 
+(define-abbrev-table 'gdb-script-mode-abbrev-table '())
+
 (define-abbrev-table 'gfm-mode-abbrev-table '())
 
 (define-abbrev-table 'git-commit-elisp-text-mode-abbrev-table '())
@@ -188,6 +190,8 @@
 (define-abbrev-table 'gnus-group-mode-abbrev-table '())
 
 (define-abbrev-table 'grep-mode-abbrev-table '())
+
+(define-abbrev-table 'gud-mode-abbrev-table '())
 
 (define-abbrev-table 'haml-mode-abbrev-table '())
 
@@ -343,7 +347,7 @@
     ("cpoisa" "coisa" nil 0)
     ("cudiar" "cuidar" nil 1)
     ("cwb" "curitiba" nil 1)
-    ("dah" "dá" nil 6)
+    ("dah" "dá" nil 7)
     ("deposi" "depois" nil 3)
     ("desconfortavel" "desconfortável" nil 0)
     ("dificil" "Difícil" nil 0)
@@ -353,7 +357,7 @@
     ("dps" "depois" nil 3)
     ("ecnhendo" "enchendo" nil 0)
     ("edpois" "depois" nil 0)
-    ("eh" "é" nil 47)
+    ("eh" "é" nil 48)
     ("ehre" "here" nil 1)
     ("ejito" "jeito" nil 0)
     ("elqa" "ela" nil 1)
@@ -362,7 +366,7 @@
     ("emsmo" "mesmo" nil 0)
     ("emu" "meu" nil 1)
     ("emus" "meus" nil 3)
-    ("entao" "então" nil 1)
+    ("entao" "então" nil 2)
     ("entreguar" "entregar" nil 1)
     ("eplo" "pelo" nil 1)
     ("epoca" "época" nil 0)
@@ -378,6 +382,7 @@
     ("facil" "fácil" nil 4)
     ("faco" "faço" nil 0)
     ("fds" "fim de semana" nil 0)
+    ("ferias" "férias" nil 0)
     ("fn" "função" nil 3)
     ("fns" "funções" nil 0)
     ("ft" "FeatureToggle" nil 3)
@@ -407,7 +412,7 @@
     ("msg" "mensagem" nil 3)
     ("msm" "mesmo" nil 4)
     ("mto" "muito" nil 5)
-    ("nao" "não" nil 54)
+    ("nao" "não" nil 56)
     ("necessario" "necessário" nil 1)
     ("negocio" "negócio" nil 1)
     ("neh" "né" nil 2)
@@ -422,6 +427,7 @@
     ("opcoes" "opções" nil 0)
     ("orcamento" "orçamento" nil 0)
     ("organizacao" "organização" nil 0)
+    ("padrao" "padrão" nil 0)
     ("pelna" "plena" nil 0)
     ("periodo" "período" nil 0)
     ("permaneeu" "permaneceu" nil 0)
@@ -429,6 +435,7 @@
     ("pontem" "Ontem" nil 0)
     ("portugues" "português" nil 1)
     ("poruqe" "porque" nil 1)
+    ("possiveis" "possíveis" nil 0)
     ("pouoc" "pouco" nil 0)
     ("pq" "porque" nil 34)
     ("prblema" "problema" nil 0)
@@ -437,7 +444,7 @@
     ("probelma" "problema" nil 1)
     ("projeots" "projetos" nil 1)
     ("proprias" "próprias" nil 0)
-    ("proxima" "próxima" nil 1)
+    ("proxima" "próxima" nil 2)
     ("q" "que" nil 16)
     ("qaundo" "quando" nil 0)
     ("qdo" "quando" nil 11)
@@ -449,6 +456,7 @@
     ("remedio" "Remédio" nil 1)
     ("restituicao" "Restituição" nil 0)
     ("reuniao" "reunião" nil 0)
+    ("revisao" "revisão" nil 0)
     ("rpa" "pra" nil 0)
     ("rpobelma" "problema" nil 0)
     ("rpoblema" "problema" nil 2)
@@ -459,9 +467,9 @@
     ("situacao" "situação" nil 0)
     ("sla" "sei lá" nil 4)
     ("soh" "só" nil 6)
-    ("tah" "tá" nil 6)
+    ("tah" "tá" nil 7)
     ("tao" "tão" nil 1)
-    ("tbm" "também" nil 76)
+    ("tbm" "também" nil 77)
     ("td" "tudo" nil 2)
     ("temrinal" "terminal" nil 0)
     ("tepmo" "tempo" nil 1)
@@ -506,11 +514,11 @@
 
 (define-abbrev-table 'python-mode-abbrev-table '())
 
-(define-abbrev-table 'python-mode-skeleton-abbrev-table
-  '(
-   ))
+(define-abbrev-table 'python-mode-skeleton-abbrev-table '())
 
 (define-abbrev-table 'rake-compilation-mode-abbrev-table '())
+
+(define-abbrev-table 'realgud:info-mode-abbrev-table '())
 
 (define-abbrev-table 'reb-lisp-mode-abbrev-table '())
 
