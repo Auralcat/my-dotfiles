@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: Code in Text
+# key: ~
+# --
+~${code goes here}~

@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: Italic Text
+# key: i
+# --
+/${italicized text goes here}/

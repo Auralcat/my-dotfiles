@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: Underlined Text
+# key: _
+# --
+_${underlined text goes here}_
