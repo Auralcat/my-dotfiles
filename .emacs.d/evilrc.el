@@ -82,8 +82,6 @@
     "$" 'eshell
     ;; Org-agenda
     "a" 'org-agenda
-    ;; Org-capture
-    "c" 'org-capture
     ;; Get the relative file name of current buffer. I pass that to rspec.
     "f" 'auralcat-kill-relative-file-name
     ;; Call Magit with Leader g
@@ -94,8 +92,8 @@
     "h" 'helm-command-prefix
     ;; Go to current or last task
     "j" 'org-clock-goto
-    ;; Show key frequencies
-    "k" 'keyfreq-show
+    ;; Org-capture. Keeping consistency with org-agenda's binding.
+    "k" 'org-capture
     ;; Clock out
     "o" 'org-clock-out
     ;; Projectile prefix
