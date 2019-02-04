@@ -78,6 +78,8 @@
 
 ;; Global bindings go here
 (evil-leader/set-key
+    ;; Eshell
+    "$" 'eshell
     ;; Org-agenda
     "a" 'org-agenda
     ;; Org-capture
