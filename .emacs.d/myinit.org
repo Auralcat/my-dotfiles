@@ -1204,8 +1204,27 @@ me, too many buffers to work with... for now.
        )
 
    #+END_SRC
-
-
+** Quick Docker-compose terminal
+   I use this a lot at work, takes too much time to type the commands,
+   even calling them from M-x.
+   #+BEGIN_SRC emacs-lisp :tangle yes
+     (defun auralcat-run-bash-in-docker-container (args)
+       (interactive "P")
+       "Opens a single buffer with a terminal inside a Docker container."
+       (docker-compose-run "web" "bash" (quote ())))
+   #+END_SRC
+** Quick Rails console inside a Docker container
+   Sometimes I need that to debug stuff.
+   #+BEGIN_SRC emacs-lisp :tangle yes
+     ;; This can be refactored. But it does the job for now.
+     (defun auralcat-run-rails-console-in-docker-container ()
+       "Opens a Rails console inside the Docker container.
+        With C-u prefix, opens console in sandbox mode."
+       (interactive)
+       (if (eq current-prefix-arg '(4))
+         (run-ruby "docker-compose run web rails console" "Docker Rails Console")
+       (run-ruby "docker-compose run web rails console --sandbox" "Docker Rails Console")))
+   #+END_SRC
 * Twittering mode
   Use Twitter from within Emacs!
   #+BEGIN_SRC emacs-lisp :tangle yes
