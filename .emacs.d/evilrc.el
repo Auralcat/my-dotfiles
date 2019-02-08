@@ -82,10 +82,14 @@
     "$" 'eshell
     ;; Org-agenda
     "a" 'org-agenda
+    ;; Docker-compose work-related stuff
+    "db" 'auralcat-run-bash-in-docker-container
+    "dr" 'auralcat-run-rails-console-in-docker-container
     ;; Get the relative file name of current buffer. I pass that to rspec.
     "f" 'auralcat-kill-relative-file-name
-    ;; Call Magit with Leader g
-    "g" 'magit-status
+    ;; Magit stuff
+    "gs" 'magit-status
+    "gb" 'magit-blame
     ;; Clock in
     "i" 'org-clock-in
     ;; Helm prefix
