@@ -67,10 +67,6 @@
     ;; ido-mode in the minibuffer
     (icomplete-mode 1)
 
-    ;; Enable windmove (switch windows with Shift+Arrow keys)
-    (when (fboundp 'windmove-default-keybindings)
-        (windmove-default-keybindings))
-
     ;; Replace the built-in buffer menu with ibuffer
     (global-set-key [24 2] (quote ibuffer))
 
@@ -438,6 +434,17 @@ me, too many buffers to work with... for now.
      ;; Enable fuzzy matching
      (setq helm-M-x-fuzzy-match t)
      #+END_SRC
+
+
+*** Ace Window
+    Switch between more than 3 windows (and act on them!) with ease.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+      (use-package ace-window
+        :init
+        ;; All you need to do is just give a keybinding to the main command.
+        (global-set-key (kbd "M-o") 'ace-window))
+    #+END_SRC
+
 
 *** Company
 **** Main Config
