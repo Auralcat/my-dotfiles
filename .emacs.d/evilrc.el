@@ -88,12 +88,12 @@
     "db" 'auralcat-run-bash-in-docker-container
     "dr" 'auralcat-run-rails-console-in-docker-container
     ;; Open frequently visited files
-    "fb" #'(find-file "~/file-bouncer/org-files/finances-budget.org")
-    "ff" #'(find-file "~/file-bouncer/org-files/finances.org")
-    "fi" #'(find-file "~/.emacs.d/init.el")
-    "fo" #'(find-file "~/.emacs.d/myinit.org")
-    "fe" #'(find-file "~/.emacs.d/evilrc.el")
-    "fs" #'(switch-to-buffer "*scratch*")
+    "fb" '(lambda() (interactive) (find-file "~/file-bouncer/org-files/finances-budget.org"))
+    "ff" '(lambda() (interactive) (find-file "~/file-bouncer/org-files/finances.org"))
+    "fi" '(lambda() (interactive) (find-file "~/.emacs.d/init.el"))
+    "fo" '(lambda() (interactive) (find-file "~/.emacs.d/myinit.org"))
+    "fe" '(lambda() (interactive) (find-file "~/.emacs.d/evilrc.el"))
+    "fs" '(lambda() (interactive) (switch-to-buffer "*scratch*"))
     ;; Magit stuff
     "gs" 'magit-status
     "gb" 'magit-blame
