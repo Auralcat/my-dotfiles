@@ -82,11 +82,18 @@
     "$" 'eshell
     ;; Org-agenda
     "a" 'org-agenda
+    ;; Get the relative file name of current buffer. I pass that to rspec.
+    "b" 'auralcat-kill-relative-file-name
     ;; Docker-compose work-related stuff
     "db" 'auralcat-run-bash-in-docker-container
     "dr" 'auralcat-run-rails-console-in-docker-container
-    ;; Get the relative file name of current buffer. I pass that to rspec.
-    "f" 'auralcat-kill-relative-file-name
+    ;; Open frequently visited files
+    "fb" #'(find-file "~/file-bouncer/org-files/finances-budget.org")
+    "ff" #'(find-file "~/file-bouncer/org-files/finances.org")
+    "fi" #'(find-file "~/.emacs.d/init.el")
+    "fo" #'(find-file "~/.emacs.d/myinit.org")
+    "fe" #'(find-file "~/.emacs.d/evilrc.el")
+    "fs" #'(switch-to-buffer "*scratch*")
     ;; Magit stuff
     "gs" 'magit-status
     "gb" 'magit-blame
