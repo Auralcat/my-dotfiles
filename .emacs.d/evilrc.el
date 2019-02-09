@@ -87,6 +87,15 @@
     ;; Docker-compose work-related stuff
     "db" 'auralcat-run-bash-in-docker-container
     "dr" 'auralcat-run-rails-console-in-docker-container
+    ;; Org-clock functions. It makes sense to group them here.
+    ;; For example, you can choose which clock funct
+    "ci" 'org-clock-in
+    "co" 'org-clock-out
+    "cj" 'org-clock-goto
+    "cp" 'org-pomodoro
+    ;; Work-related stuff
+    "mb" 'auralcat-run-bash-in-docker-container
+    "mr" 'auralcat-run-rails-console-in-docker-container
     ;; Open frequently visited files
     "fb" '(lambda() (interactive) (find-file "~/file-bouncer/org-files/finances-budget.org"))
     "ff" '(lambda() (interactive) (find-file "~/file-bouncer/org-files/finances.org"))
@@ -97,16 +106,10 @@
     ;; Magit stuff
     "gs" 'magit-status
     "gb" 'magit-blame
-    ;; Clock in
-    "i" 'org-clock-in
     ;; Helm prefix
     "h" 'helm-command-prefix
-    ;; Go to current or last task
-    "j" 'org-clock-goto
     ;; Org-capture. Keeping consistency with org-agenda's binding.
     "k" 'org-capture
-    ;; Clock out
-    "o" 'org-clock-out
     ;; Projectile prefix
     "p" 'projectile-command-map
     ;; Projectile-Rails prefix
