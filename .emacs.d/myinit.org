@@ -29,74 +29,80 @@
   #+END_SRC
 * Environment Customizations
 #+BEGIN_SRC emacs-lisp :tangle yes
-    ;; Sentences end with single spaces for me.
-    (setq sentence-end-double-space nil)
-    ;; Change window title
-    (setq frame-title-format '("Emacs 26"))
+  ;; Sentences end with single spaces for me.
+  (setq sentence-end-double-space nil)
+  ;; Change window title
+  (setq frame-title-format '("Emacs 26"))
 
-    ;; A small performance improvement
-    (setq redisplay-dont-pause t)
+  ;; A small performance improvement
+  (setq redisplay-dont-pause t)
 
-    ;; I don't like lockfiles
-    (setq create-lockfiles nil)
+  ;; I don't like lockfiles
+  (setq create-lockfiles nil)
 
-    ;; Store all backups in a specific folder:
-    (setq backup-directory-alist `(("." . "~/file-bouncer/emacs-backups")))
+  ;; Store all backups in a specific folder:
+  (setq backup-directory-alist `(("." . "~/file-bouncer/emacs-backups")))
 
-    ;; Manual packages load path
-    (add-to-list 'custom-theme-load-path "~/my-dotfiles/.emacs.d/manual-themes/")
+  ;; Manual packages load path
+  (add-to-list 'custom-theme-load-path "~/my-dotfiles/.emacs.d/manual-themes/")
 
-    ;; Backup files by copying them
-    (setq backup-by-copying t)
+  ;; Backup files by copying them
+  (setq backup-by-copying t)
 
-    ;; I'm too lazy to type "yes" or "no"
-    (fset 'yes-or-no-p 'y-or-n-p)
+  ;; I'm too lazy to type "yes" or "no"
+  (fset 'yes-or-no-p 'y-or-n-p)
 
-    ;; Clean whitespace before saving a file
-    (add-hook 'before-save-hook (quote whitespace-cleanup))
+  ;; Clean whitespace before saving a file
+  (add-hook 'before-save-hook (quote whitespace-cleanup))
 
-    ;; Allow only one theme at a time
-    (setq custom-theme-allow-multiple-selections nil)
+  ;; While you're at it, save automatically when visiting files.
+  ;; It's surprisingly useful. The only caveat is when you got an
+  ;; open comment like this. It will remove all the whitespace.
+  ;; It saves the file after 5 seconds of inactivity.
+  (auto-save-visited-mode t)
 
-    ;; Enable ido-mode (fewer keystrokes to switch buffers!)
-    (ido-mode 1)
+  ;; Allow only one theme at a time
+  (setq custom-theme-allow-multiple-selections nil)
 
-    ;; Easier mark cycling, both local and global
-    (setq set-mark-command-repeat-pop t)
+  ;; Enable ido-mode (fewer keystrokes to switch buffers!)
+  (ido-mode 1)
 
-    ;; ido-mode in the minibuffer
-    (icomplete-mode 1)
+  ;; Easier mark cycling, both local and global
+  (setq set-mark-command-repeat-pop t)
 
-    ;; Replace the built-in buffer menu with ibuffer
-    (global-set-key [24 2] (quote ibuffer))
+  ;; ido-mode in the minibuffer
+  (icomplete-mode 1)
 
-    ;; Prevent the scratch buffer from being killed
-    (with-current-buffer "*scratch*"
-        (emacs-lock-mode 'kill))
+  ;; Replace the built-in buffer menu with ibuffer
+  (global-set-key [24 2] (quote ibuffer))
 
-    ;; Enable auto-revert-mode
-    (global-auto-revert-mode t)
+  ;; Prevent the scratch buffer from being killed
+  (with-current-buffer "*scratch*"
+      (emacs-lock-mode 'kill))
 
-    ;; Remove the menu bar in terminal mode
-    (when (not (display-graphic-p))
-      (menu-bar-mode -1))
+  ;; Enable auto-revert-mode
+  (global-auto-revert-mode t)
 
-    ;; Use Bash as default shell interpreter
-    (setq org-babel-sh-command "/bin/bash")
+  ;; Remove the menu bar in terminal mode
+  (when (not (display-graphic-p))
+    (menu-bar-mode -1))
 
-    ;; Activate Company mode
-    (add-hook 'after-init-hook 'global-company-mode)
+  ;; Use Bash as default shell interpreter
+  (setq org-babel-sh-command "/bin/bash")
 
-    ;; Enable global Abbrev mode
-    (setq-default abbrev-mode t)
+  ;; Activate Company mode
+  (add-hook 'after-init-hook 'global-company-mode)
 
-    ;; Save last edited place in files
-    (require 'saveplace)
-    (setq-default save-place t)
-    ;; (save-place-mode 1)
+  ;; Enable global Abbrev mode
+  (setq-default abbrev-mode t)
 
-    ;; I need a bigger kill ring.
-    (setq kill-ring-max 180)
+  ;; Save last edited place in files
+  (require 'saveplace)
+  (setq-default save-place t)
+  ;; (save-place-mode 1)
+
+  ;; I need a bigger kill ring.
+  (setq kill-ring-max 180)
 #+END_SRC
 
 * Personal info
