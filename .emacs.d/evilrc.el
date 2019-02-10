@@ -98,6 +98,7 @@
     ;; Magit stuff
     "gs" 'magit-status
     "gb" 'magit-blame
+    "gf" 'magit-fetch-all-prune
     ;; Helm prefix
     "h" 'helm-command-prefix
     ;; Org-capture. Keeping consistency with org-agenda's binding.
