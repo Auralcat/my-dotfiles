@@ -179,11 +179,25 @@
 
 (define-abbrev-table 'flymake-diagnostics-buffer-mode-abbrev-table '())
 
+(define-abbrev-table 'forge-issue-list-mode-abbrev-table '())
+
+(define-abbrev-table 'forge-notifications-mode-abbrev-table '())
+
+(define-abbrev-table 'forge-post-mode-abbrev-table '())
+
+(define-abbrev-table 'forge-pullreq-list-mode-abbrev-table '())
+
+(define-abbrev-table 'forge-topic-list-mode-abbrev-table '())
+
+(define-abbrev-table 'forge-topic-mode-abbrev-table '())
+
 (define-abbrev-table 'fundamental-mode-abbrev-table '())
 
 (define-abbrev-table 'gdb-script-mode-abbrev-table '())
 
 (define-abbrev-table 'gfm-mode-abbrev-table '())
+
+(define-abbrev-table 'gfm-view-mode-abbrev-table '())
 
 (define-abbrev-table 'git-commit-elisp-text-mode-abbrev-table '())
 
@@ -305,6 +319,8 @@
 
 (define-abbrev-table 'markdown-mode-abbrev-table '())
 
+(define-abbrev-table 'markdown-view-mode-abbrev-table '())
+
 (define-abbrev-table 'message-mode-abbrev-table '())
 
 (define-abbrev-table 'messages-buffer-mode-abbrev-table '())
@@ -383,7 +399,7 @@
     ("cwb" "curitiba" nil 1)
     ("dah" "dá" nil 15)
     ("decisao" "decisão" nil 0)
-    ("definicao" "definição" nil 0)
+    ("definicao" "definição" nil 1)
     ("definicoes" "definições" nil 0)
     ("deh" "dê" nil 0)
     ("deposi" "depois" nil 3)
@@ -466,7 +482,8 @@
     ("msgs" "mensagens" nil 0)
     ("msm" "mesmo" nil 5)
     ("mto" "muito" nil 8)
-    ("nao" "não" nil 105)
+    ("nao" "não" nil 107)
+    ("navegacao" "navegação" nil 0)
     ("necessario" "necessário" nil 4)
     ("negocio" "negócio" nil 6)
     ("neh" "né" nil 2)
@@ -501,7 +518,7 @@
     ("possiveis" "possíveis" nil 1)
     ("pouoc" "pouco" nil 0)
     ("poupanca" "poupança" nil 1)
-    ("pq" "porque" nil 37)
+    ("pq" "porque" nil 38)
     ("prblema" "problema" nil 0)
     ("preco" "preço" nil 0)
     ("precos" "preços" nil 1)
@@ -513,7 +530,7 @@
     ("proxima" "próxima" nil 3)
     ("pto" "ponto" nil 1)
     ("ptos" "pontos" nil 0)
-    ("q" "que" nil 28)
+    ("q" "que" nil 30)
     ("qaundo" "quando" nil 0)
     ("qdo" "quando" nil 14)
     ("qeu" "que" nil 49)
@@ -531,9 +548,9 @@
     ("rpoblema" "problema" nil 2)
     ("saida" "saída" nil 0)
     ("salario" "Salário" nil 0)
-    ("sao" "são" nil 7)
+    ("sao" "são" nil 9)
     ("saude" "saúde" nil 3)
-    ("sera" "será" nil 0)
+    ("sera" "será" nil 1)
     ("serio" "sério" nil 0)
     ("servicos" "serviços" nil 0)
     ("sessao" "sessão" nil 2)
@@ -542,11 +559,11 @@
     ("situacoes" "situações" nil 0)
     ("sla" "sei lá" nil 4)
     ("soa" "são" nil 1)
-    ("soh" "só" nil 15)
+    ("soh" "só" nil 16)
     ("sumario" "Sumário" nil 0)
     ("tah" "tá" nil 13)
     ("tao" "tão" nil 1)
-    ("tbm" "também" nil 84)
+    ("tbm" "também" nil 85)
     ("td" "tudo" nil 3)
     ("temrinal" "terminal" nil 0)
     ("tepmo" "tempo" nil 1)
