@@ -85,6 +85,7 @@
     ;; Org-clock functions. It makes sense to group them here.
     ;; For example, you can choose which clock funct
     "ci" 'org-clock-in
+    "cl" 'org-clock-in-last
     "co" 'org-clock-out
     "cj" 'org-clock-goto
     "cp" 'org-pomodoro
