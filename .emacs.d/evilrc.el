@@ -95,6 +95,7 @@
     "fo" '(lambda() (interactive) (find-file "~/.emacs.d/myinit.org"))
     "fe" '(lambda() (interactive) (find-file "~/.emacs.d/evilrc.el"))
     "fs" '(lambda() (interactive) (switch-to-buffer "*scratch*"))
+    "fm" '(lambda() (interactive) (switch-to-buffer "*Messages*"))
     ;; Magit stuff
     "gs" 'magit-status
     "gb" 'magit-blame
