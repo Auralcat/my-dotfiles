@@ -1,8 +1,7 @@
-# IRB config file.
+#!/usr/bin/env ruby
 
+# IRB config file.
 require 'rubygems'
-require 'interactive_editor'
-require 'method_source'
 
 # Credits: https://gist.github.com/jimweirich/4950443
 def edit(file, line)
