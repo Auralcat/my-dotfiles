@@ -82,6 +82,9 @@
     "$" 'eshell
     ;; Org-agenda
     "a" 'org-agenda
+    ;; Frequently visited bookmarks
+    "bk" '(lambda() (interactive) (bookmark-jump "org-capture-last-stored"))
+    "br" '(lambda() (interactive) (bookmark-jump "org-refile-last-stored"))
     ;; Org-clock functions. It makes sense to group them here.
     ;; For example, you can choose which clock funct
     "ci" 'org-clock-in
