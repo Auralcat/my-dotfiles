@@ -628,6 +628,17 @@ me, too many buffers to work with... for now.
         (abbrev-table-put slack-mode-abbrev-table
                           :parents (list org-mode-abbrev-table))
 
+      (abbrev-table-put slack-thread-message-buffer-mode-abbrev-table
+                          :parents (list org-mode-abbrev-table))
+
+      (abbrev-table-put slack-message-compose-buffer-mode-abbrev-table
+                          :parents (list org-mode-abbrev-table))
+
+        ;; Expand abbrevs when pressing Enter in slack-modes (it's derived from lui-mode)
+        (advice-add #'lui-send-input :before
+                    (lambda (&rest _)
+                      (ignore-errors (expand-abbrev))))
+
         (evil-define-key 'normal slack-info-mode-map
           ",u" 'slack-room-update-messages)
         (evil-define-key 'normal slack-mode-map
