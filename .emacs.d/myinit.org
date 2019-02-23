@@ -761,17 +761,6 @@ me, too many buffers to work with... for now.
        ;;   (add-hook 'prog-mode-hook 'hl-diff-tweaks))
        )
     #+END_SRC
-*** YATemplate
-    Templating in Emacs made easier. Uses auto-insert-mode too.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package yatemplate
-    :ensure t
-    :init
-    (setq yatemplate-dir "~/.emacs.d/templates")
-    (yatemplate-fill-alist)
-    (auto-insert-mode 1))
-    #+END_SRC
-
 *** Evil-Matchit
     Adds more matching objects for the % operator in evil, such as
     def-end in Ruby/Python and HTML tags.
