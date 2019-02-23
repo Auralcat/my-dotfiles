@@ -129,6 +129,7 @@
     (if (< (string-to-number emacs-version) 24)
         (line-number-mode 1)
       (display-line-numbers-mode))
+      (setq fill-column 80)
     )
   (add-hook 'prog-mode-hook 'prog-mode-tweaks)
   (add-hook 'text-mode-hook 'column-number-mode)
@@ -1160,8 +1161,8 @@ me, too many buffers to work with... for now.
   ;; Enable auto-fill mode by default
   (auto-fill-mode 1)
 
-  ;; Set default fill to 79
-  (set-fill-column 79)
+  ;; Set default fill to 119
+  (set-fill-column 119)
 
   ;; Change tab width and change tabs to spaces
   (setq-default tab-width 4)
