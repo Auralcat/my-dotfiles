@@ -31,6 +31,10 @@
 #+BEGIN_SRC emacs-lisp :tangle yes
   ;; Sentences end with single spaces for me.
   (setq sentence-end-double-space nil)
+
+  ;; Set locale to Brazilian Portuguese
+  (set-locale-environment "pt_BR.UTF-8")
+
   ;; Change window title
   (setq frame-title-format '("Emacs 26"))
 
