@@ -694,7 +694,7 @@ me, too many buffers to work with... for now.
        :diminish golden-ratio-mode)
 
       ;; Get golden-ratio to work with ace-window
-      (add-to-list 'golden-ratio-extra-commands 'ace-window)
+      (add-to-list 'golden-ratio-extra-commands 'ace-window 'magit-status)
       (golden-ratio-mode 1)
     #+END_SRC
 
