@@ -3,6 +3,11 @@
 # IRB config file.
 require 'rubygems'
 
+# Rails goodies
+require 'pp'
+require 'psych'
+require 'method_source'
+
 # Credits: https://gist.github.com/jimweirich/4950443
 def edit(file, line)
   `emacsclient -n +#{line} #{file}`
@@ -39,4 +44,9 @@ class Object
       public_methods.sort - Object.new.public_methods
     end
   end
+end
+
+# Display source code quickly in IRB.
+def srd(method)
+   method.source.display
 end
