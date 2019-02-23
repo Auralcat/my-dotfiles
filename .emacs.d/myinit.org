@@ -607,15 +607,91 @@ me, too many buffers to work with... for now.
     (use-package emojify)
     #+END_SRC
 ** Utilities
+*** Slack Client
+    Run a Slack client inside Emacs. Surprisingly useful at work!
+    Credits for the customizations below: [[http://endlessparentheses.com/mold-slack-entirely-to-your-liking-with-emacs.html][Endless Parentheses]]
+    #+BEGIN_SRC emacs-lisp :tangle yes
+      (use-package slack
+        :commands (slack-start)
+        :init
+        (setq slack-buffer-emojify t) ;; if you want to enable emoji, default nil
+        (setq slack-prefer-current-team t)
+        :config
+        ;; Get my teams.
+        (load "~/.slack-teams.el")
+
+        ;; Set abbrevs from org-mode
+        (abbrev-table-put slack-mode-abbrev-table
+                          :parents (list org-mode-abbrev-table))
+
+        (evil-define-key 'normal slack-info-mode-map
+          ",u" 'slack-room-update-messages)
+        (evil-define-key 'normal slack-mode-map
+          ",c" 'slack-buffer-kill
+          ",ra" 'slack-message-add-reaction
+          ",rr" 'slack-message-remove-reaction
+          ",rs" 'slack-message-show-reaction-users
+          ",pl" 'slack-room-pins-list
+          ",pa" 'slack-message-pins-add
+          ",pr" 'slack-message-pins-remove
+          ",mm" 'slack-message-write-another-buffer
+          ",me" 'slack-message-edit
+          ",md" 'slack-message-delete
+          ",u" 'slack-room-update-messages
+          ",2" 'slack-message-embed-mention
+          ",3" 'slack-message-embed-channel
+          "\C-n" 'slack-buffer-goto-next-message
+          "\C-p" 'slack-buffer-goto-prev-message)
+        (evil-define-key 'normal slack-edit-message-mode-map
+          ",k" 'slack-message-cancel-edit
+          ",s" 'slack-message-send-from-buffer
+          ",2" 'slack-message-embed-mention
+          ",3" 'slack-message-embed-channel))
+    #+END_SRC
+**** Notifications customization
+     #+BEGIN_SRC emacs-lisp :tangle yes
+       ;; Channels
+       (setq slack-message-notification-title-format-function
+             (lambda (_team room threadp)
+               (concat (if threadp "Thread in #%s") room)))
+
+       (defun endless/-cleanup-room-name (room-name)
+         "Make group-chat names a bit more human-readable."
+         (replace-regexp-in-string
+          "--" " "
+          (replace-regexp-in-string "#mpdm-" "" room-name)))
+
+       ;;; Private messages and group chats
+       (setq slack-message-im-notification-title-format-function
+             (lambda (_team room threadp)
+               (concat (if threadp "Thread in %s")
+                       (endless/-cleanup-room-name room))))
+
+       ;; Custom notifications
+       (load "~/.slack-custom-notifications.el")
+     #+END_SRC
+**** Autocompletion
+     #+BEGIN_SRC emacs-lisp :tangle yes
+       (defun slack-mode-tweaks ()
+         ;; Company-slack adds username completion.
+              (set (make-local-variable 'company-backends) '(company-dabbrev company-slack company-files))
+              ;; Start earlier than in other modes.
+              (set (make-local-variable 'company-minimum-prefix-length) 2))
+
+       (add-hook 'slack-mode-hook 'slack-mode-tweaks)
+     #+END_SRC
 *** Golden Ratio Mode
     Splits windows using the [[https://en.wikipedia.org/wiki/Golden_ratio][Golden Ratio]].
     This makes the focused window a bit larger than usual and the
     smaller ones are easier to read. It makes the multi-window
     experience more pleasing to the eye. Yeah, nature!
     #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package golden-ratio
-     :diminish golden-ratio-mode)
-    (golden-ratio-mode 1)
+      (use-package golden-ratio
+       :diminish golden-ratio-mode)
+
+      ;; Get golden-ratio to work with ace-window
+      (add-to-list 'golden-ratio-extra-commands 'ace-window)
+      (golden-ratio-mode 1)
     #+END_SRC
 
 *** Helm-Ag
