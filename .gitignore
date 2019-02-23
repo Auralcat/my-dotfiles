@@ -17,7 +17,7 @@ persp-confs/*
 .emacs.d/eshell/*
 .emacs.d/elpa/archives/
 .emacs.d/url/cache/
-.emacs.d/url/cookies/
+.emacs.d/url/cookies
 .emacs.d/forge-database.sqlite
 myinit.el
 rake.cache
