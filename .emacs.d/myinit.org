@@ -110,6 +110,10 @@
     ;; Load from external file.
     (load "~/.emacs.secrets")
   #+END_SRC
+* Abbreviations
+  #+BEGIN_SRC emacs-lisp :tangle yes
+  (setq abbrev-file-name "~/.abbrev_defs")
+  #+END_SRC
 * Hooks
 #+BEGIN_SRC emacs-lisp :tangle yes
   ;; Prog-mode is from where all the programming modes are derived from.
