@@ -643,6 +643,7 @@ me, too many buffers to work with... for now.
         (evil-define-key 'normal slack-info-mode-map
           ",u" 'slack-room-update-messages)
         (evil-define-key 'normal slack-mode-map
+          "Q" 'bury-buffer
           ",c" 'slack-buffer-kill
           ",ra" 'slack-message-add-reaction
           ",rr" 'slack-message-remove-reaction
@@ -690,7 +691,7 @@ me, too many buffers to work with... for now.
      #+BEGIN_SRC emacs-lisp :tangle yes
        (defun slack-mode-tweaks ()
          ;; Company-slack adds username completion.
-              (set (make-local-variable 'company-backends) '(company-dabbrev company-slack company-files))
+              (set (make-local-variable 'company-backends) '(company-dabbrev company-slack-backend company-files))
               ;; Start earlier than in other modes.
               (set (make-local-variable 'company-minimum-prefix-length) 2))
 
