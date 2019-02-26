@@ -100,6 +100,7 @@
     "fe" '(lambda() (interactive) (find-file "~/.emacs.d/evilrc.el"))
     "fs" '(lambda() (interactive) (switch-to-buffer "*scratch*"))
     "fg" '(lambda() (interactive) (switch-to-buffer "*Messages*"))
+    "fw" '(lambda() (interactive) (find-file auralcat-org-work-file-path))
     ;; Magit stuff
     "gs" 'magit-status
     "gb" 'magit-blame
