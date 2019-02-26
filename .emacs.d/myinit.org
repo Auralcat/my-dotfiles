@@ -294,6 +294,17 @@ me, too many buffers to work with... for now.
     (use-package csv-mode)
     #+END_SRC
 ** Minor Modes
+*** JS-comint
+    Open a REPL using Node.js in another buffer.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+      (use-package js-comint)
+
+      ;; Call the REPL with C-c C-s in js2-mode
+      (define-key js2-mode-map (kbd "C-c C-s") 'run-js)
+
+      ;; Send last JS expression to REPL
+      (define-key js2-mode-map (kbd "C-x C-e") 'js-send-last-sexp)
+    #+END_SRC
 *** Flycheck Inline
     Shows the error when leaving the point over the place where it occurs.
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1036,6 +1047,7 @@ me, too many buffers to work with... for now.
   (evil-leader/set-key-for-mode 'emacs-lisp-mode "SPC" 'eval-buffer)
   (evil-leader/set-key-for-mode 'enh-ruby-mode "SPC" 'ruby-send-buffer-and-go)
   (evil-leader/set-key-for-mode 'python-mode "SPC" 'python-shell-send-buffer)
+  (evil-leader/set-key-for-mode 'js2-mode "SPC" 'js-comint-send-buffer)
 #+END_SRC
 
 * Web-mode
