@@ -104,6 +104,7 @@
     ;; Magit stuff
     "gs" 'magit-status
     "gb" 'magit-blame
+    "gc" 'magit-checkout
     "gf" 'magit-fetch-all-prune
     ;; Helm prefix
     "h" 'helm-command-prefix
