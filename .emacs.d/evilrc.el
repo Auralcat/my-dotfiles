@@ -118,5 +118,9 @@
     "p" 'projectile-command-map
     ;; Projectile-Rails prefix
     "r" 'projectile-rails-command-map
+    ;; Slack bindings
+    "smi" 'slack-im-select
+    "smg" 'slack-group-select
+    "smc" 'slack-channel-select
     ;; TODO: map this to org-mode locally.
     "t" 'org-todo)
