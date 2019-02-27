@@ -108,6 +108,8 @@
     "gf" 'magit-fetch-all-prune
     ;; Helm prefix
     "h" 'helm-command-prefix
+    ;; Quick ace-jump in evil-mode.
+    "j" 'ace-jump-mode
     ;; Org-capture. Keeping consistency with org-agenda's binding.
     "k" 'org-capture
     ;; Work-related stuff
