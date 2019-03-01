@@ -715,6 +715,9 @@ me, too many buffers to work with... for now.
               (set (make-local-variable 'company-minimum-prefix-length) 2))
 
        (add-hook 'slack-mode-hook 'slack-mode-tweaks)
+       (add-hook 'slack-message-compose-buffer-mode-hook 'slack-mode-tweaks)
+       (add-hook 'slack-message-edit-buffer-mode-hook 'slack-mode-tweaks)
+       (add-hook 'slack-thread-message-buffer-mode-hook 'slack-mode-tweaks)
      #+END_SRC
 *** Golden Ratio Mode
     Splits windows using the [[https://en.wikipedia.org/wiki/Golden_ratio][Golden Ratio]].
