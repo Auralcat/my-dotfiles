@@ -623,6 +623,14 @@ me, too many buffers to work with... for now.
     (use-package emojify)
     #+END_SRC
 ** Utilities
+*** Origami-mode
+    Code folding in Emacs. You can use this with Evil by pressing z a
+    in normal-mode.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+      (use-package origami)
+      ;; Activate it
+      (global-origami-mode)
+    #+END_SRC
 *** Slack Client
     Run a Slack client inside Emacs. Surprisingly useful at work!
     Credits for the customizations below: [[http://endlessparentheses.com/mold-slack-entirely-to-your-liking-with-emacs.html][Endless Parentheses]]
