@@ -1197,6 +1197,7 @@ me, too many buffers to work with... for now.
   (add-hook 'multi-term-mode-hook (setq-default show-trailing-whitespace nil))
 
   (defun css-mode-tweaks()
+    (set (make-local-variable 'company-backends) '(company-css company-yasnippet company-etags))
     (emmet-mode 1)
     (rainbow-mode 1))
 
