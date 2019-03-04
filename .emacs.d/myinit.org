@@ -456,7 +456,6 @@ me, too many buffers to work with... for now.
      (setq helm-M-x-fuzzy-match t)
      #+END_SRC
 
-
 *** Ace Window
     Switch between more than 3 windows (and act on them!) with ease.
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -465,7 +464,6 @@ me, too many buffers to work with... for now.
         ;; All you need to do is just give a keybinding to the main command.
         (global-set-key (kbd "M-o") 'ace-window))
     #+END_SRC
-
 
 *** Company
 **** Main Config
@@ -486,7 +484,7 @@ me, too many buffers to work with... for now.
        ;; Completion for Ruby mode
        (defun ruby-mode-tweaks ()
        (require 'company-robe)
-       (set (make-local-variable 'company-backends) '(company-robe company-yasnippet)))
+       (set (make-local-variable 'company-backends) '(company-robe company-etags company-yasnippet)))
 
        ;; Org-mode completion (uses dabbrev and filename completion)
        (defun org-mode-tweaks ()
@@ -593,7 +591,6 @@ me, too many buffers to work with... for now.
       (use-package ace-jump-mode
         :bind ("C-x j" . ace-jump-mode))
     #+END_SRC
-
 
 *** Editorconfig
     Helps developers define and maintain consistent coding styles
@@ -820,20 +817,6 @@ me, too many buffers to work with... for now.
        ;; Currently this has a conflict with Magit
        (add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode))
     #+END_SRC
-
-
-# *** XTerm Color
-#     Better shell colorization.
-#     #+BEGIN_SRC emacs-lisp :tangle yes
-#       (use-package xterm-color
-#     :ensure t
-#     :requires (eshell)
-#     :config
-#      ;; Set eshell $TERM envvar to xterm-256color
-#      (setenv "TERM" "xterm-256color"))
-#     #+END_SRC
-
-
 *** Cheat.sh client
     Access cheat.sh from Emacs
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1245,9 +1228,6 @@ me, too many buffers to work with... for now.
          (kill-new relative-file-name)
          (message "Current buffer's relative file name copied to kill ring: %s" relative-file-name)))
    #+END_SRC
-
-   #+RESULTS:
-   : auralcat-kill-relative-file-name
 ** Calculate leap year
    #+BEGIN_SRC emacs-lisp :tangle yes
      (defun is-leap-year (year)
