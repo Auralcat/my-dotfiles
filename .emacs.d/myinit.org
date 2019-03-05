@@ -908,7 +908,13 @@ me, too many buffers to work with... for now.
 *** RVM
     Ruby Version Manager. Akin to python's virtualenv.
     #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package rvm)
+      (use-package rvm)
+
+      (rvm-use-default)
+      (rvm-activate-corresponding-ruby)
+      ;; Activate RVM for inf-ruby sessions.
+      (defadvice inf-ruby-console-auto (before activate-rvm-for-robe activate)
+      (rvm-activate-corresponding-ruby))
     #+END_SRC
 *** Anzu
     Show search result count in the mode line.
