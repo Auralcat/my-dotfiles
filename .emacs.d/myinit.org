@@ -8,6 +8,100 @@
     ;; Set fallback font
     (set-face-attribute 'default nil :font "Ubuntu Mono" :height 120)
   #+END_SRC
+* Evil Mode
+  Yes, I'm committing this heresy
+  #+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package evil)
+  #+END_SRC
+**** Evil-leader
+     Add a prefix key to Evil mode, like the Leader key in Vim.
+     #+BEGIN_SRC emacs-lisp :tangle yes
+     (use-package evil-leader)
+     (global-evil-leader-mode)
+     ;; Evil mode needs to be loaded after evil-leader
+     (use-package evil)
+     (evil-mode 1)
+
+     ;; Load configs
+     (load "~/my-dotfiles/.emacs.d/evilrc")
+     #+END_SRC
+**** Evil Surround
+     Easier manipulation of delimiters, emulation of vim.surround
+     #+BEGIN_SRC emacs-lisp :tangle yes
+     (use-package evil-surround)
+     (global-evil-surround-mode)
+     #+END_SRC
+**** Custom text objects
+***** Ruby Block
+      Defines a text object for Ruby blocks.
+      Credits: [[https://github.com/env0der][@env0der's dotfiles]]
+      My modification is just the ~ruby-block-beg-re~ variable.
+      #+BEGIN_SRC emacs-lisp :tangle yes
+      (evil-define-text-object evil-textobj-outer-ruby-block
+        (count &optional beg end type)
+        (evil-ruby-block-range beg end type count t))
+
+      (evil-define-text-object evil-textobj-inner-ruby-block
+        (count &optional beg end type)
+        (evil-ruby-block-range beg end type count nil))
+
+      (defun evil-ruby-block-range (count beg end type &optional inclusive)
+        (let ((current-point (point))
+          (block-begin (progn (evil-end-of-line) (re-search-backward ruby-block-beg-re nil t)))
+          (block-end (progn (evilmi-jump-items) (point))))
+          (if inclusive
+          (let ((begin (progn (goto-char block-begin) (evil-beginning-of-line) (point)))
+            (end (progn (goto-char block-end) (evil-next-line) (evil-beginning-of-line) (if (looking-at "^$") (+ (point) 1) (point)))))
+            (progn
+              (goto-char current-point)
+              (evil-range begin end)))
+        (let ((begin (progn (goto-char block-begin) (evil-next-line) (evil-first-non-blank) (point)))
+              (end (progn (goto-char block-end) (evil-previous-line) (evil-end-of-line) (+ (point) 1))))
+          (progn
+            (goto-char current-point)
+            (evil-range begin end))))))
+
+    (define-key evil-inner-text-objects-map "r" 'evil-textobj-inner-ruby-block)
+    (define-key evil-outer-text-objects-map "r" 'evil-textobj-outer-ruby-block)
+      #+END_SRC
+
+* Macros
+#+BEGIN_SRC emacs-lisp :tangle yes
+   ;; To save a macro, record it with C-x ( (start) and C-x ) (stop),
+   ;; give it a name with C-x C-k n (C-k is for maKro) and
+   ;; insert it in this file with insert-kbd-macro.
+   ;; Then you execute it mapping it to a key! 😊
+
+   ;; Example macro: Mark todos as done
+  (fset 'my-org-mark-as-done
+    (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ("d]]" 0 "%d")) arg)))
+
+  ;; Enh-ruby-mode movements, to mimic Vim's ruby plugin movements
+  (fset 'enh-ruby-next-beginning-of-defun
+     (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([47 100 101 102 return] 0 "%d")) arg)))
+
+  (fset 'enh-ruby-next-end-of-defun
+     (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([47 100 101 102 return 37] 0 "%d")) arg)))
+
+(fset 'enh-ruby-previous-end-of-defun
+   (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([63 100 101 102 return 110 37] 0 "%d")) arg)))
+
+(fset 'enh-ruby-previous-beginning-of-defun
+   (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([63 100 101 102 return 24 40] 0 "%d")) arg)))
+
+     (fset 'enh-ruby-next-beginning-of-class-or-module
+   (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([47 99 108 97 115 115 92 124 109 111 100 117 108 101 return] 0 "%d")) arg)))
+
+   (fset 'enh-ruby-previous-beginning-of-class-or-module
+   (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([63 99 108 97 115 115 92 124 109 111 100 117 108 101 return] 0 "%d")) arg)))
+
+   (fset 'enh-ruby-next-end-of-class-or-module
+   (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([47 99 108 97 115 115 92 124 109 111 100 117 108 101 return 37 1] 0 "%d")) arg)))
+
+   (fset 'enh-ruby-previous-end-of-class-or-module
+   (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([63 99 108 97 115 115 92 124 109 111 100 117 108 101 return 37 48] 0 "%d")) arg)))
+
+#+END_SRC
 * Mac OS
   #+BEGIN_SRC emacs-lisp :tangle yes
     (when (eq system-type 'darwin) ;; mac specific settings
@@ -251,20 +345,31 @@ me, too many buffers to work with... for now.
       (add-to-list 'auto-mode-alist
       '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'"
       . enh-ruby-mode))
+
+      ;; Map evil's ]m and [m keys to a couple functions
+      (evil-define-key 'normal enh-ruby-mode-map
+      "[m" 'enh-ruby-previous-beginning-of-defun
+      "[M" 'enh-ruby-previous-end-of-defun
+      "[[" 'enh-ruby-previous-beginning-of-class-or-module
+      "]m" 'enh-ruby-next-beginning-of-defun
+      "]M" 'enh-ruby-next-end-of-defun
+      "][" 'enh-ruby-next-beginning-of-class-or-module
+      "[s" 'enh-ruby-backward-sexp
+      "]s" 'enh-ruby-forward-sexp)
     #+END_SRC
 *** Web Mode
     I use this for HTML files mostly, works good for PHP too.
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package web-mode :ensure t
       :bind (:map web-mode-map
-        ("C-<up>"    . web-mode-element-previous)
-        ("C-<down>"  . web-mode-element-next)
-        ("C-<left>"  . web-mode-element-beginning)
-        ("C-<right>" . web-mode-tag-match)
-        ("C-S-<up>"  . web-mode-element-parent)
-        ("M-<up>"    . web-mode-element-content-select)
-        ("C-k"       . web-mode-element-kill)
-        ("M-RET"     . complete)))
+    ("C-<up>"    . web-mode-element-previous)
+    ("C-<down>"  . web-mode-element-next)
+    ("C-<left>"  . web-mode-element-beginning)
+    ("C-<right>" . web-mode-tag-match)
+    ("C-S-<up>"  . web-mode-element-parent)
+    ("M-<up>"    . web-mode-element-content-select)
+    ("C-k"       . web-mode-element-kill)
+    ("M-RET"     . complete)))
 
       ;; File associations
       (add-to-list 'auto-mode-alist '("\\.phtml\\'"  . web-mode))
@@ -381,63 +486,6 @@ me, too many buffers to work with... for now.
     #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package ruby-tools)
     #+END_SRC
-*** Evil Mode
-    Yes, I'm committing this heresy
-    #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package evil)
-    #+END_SRC
-**** Evil-leader
-     Add a prefix key to Evil mode, like the Leader key in Vim.
-     #+BEGIN_SRC emacs-lisp :tangle yes
-     (use-package evil-leader)
-     (global-evil-leader-mode)
-     ;; Evil mode needs to be loaded after evil-leader
-     (use-package evil)
-     (evil-mode 1)
-
-     ;; Load configs
-     (load "~/my-dotfiles/.emacs.d/evilrc")
-     #+END_SRC
-**** Evil Surround
-     Easier manipulation of delimiters, emulation of vim.surround
-     #+BEGIN_SRC emacs-lisp :tangle yes
-     (use-package evil-surround)
-     (global-evil-surround-mode)
-     #+END_SRC
-**** Custom text objects
-***** Ruby Block
-      Defines a text object for Ruby blocks.
-      Credits: [[https://github.com/env0der][@env0der's dotfiles]]
-      My modification is just the ~ruby-block-beg-re~ variable.
-      #+BEGIN_SRC emacs-lisp :tangle yes
-          (evil-define-text-object evil-textobj-outer-ruby-block
-            (count &optional beg end type)
-            (evil-ruby-block-range beg end type count t))
-
-          (evil-define-text-object evil-textobj-inner-ruby-block
-            (count &optional beg end type)
-            (evil-ruby-block-range beg end type count nil))
-
-          (defun evil-ruby-block-range (count beg end type &optional inclusive)
-            (let ((current-point (point))
-                  (block-begin (progn (evil-end-of-line) (re-search-backward ruby-block-beg-re nil t)))
-                  (block-end (progn (evilmi-jump-items) (point))))
-              (if inclusive
-                  (let ((begin (progn (goto-char block-begin) (evil-beginning-of-line) (point)))
-                        (end (progn (goto-char block-end) (evil-next-line) (evil-beginning-of-line) (if (looking-at "^$") (+ (point) 1) (point)))))
-                    (progn
-                      (goto-char current-point)
-                      (evil-range begin end)))
-                (let ((begin (progn (goto-char block-begin) (evil-next-line) (evil-first-non-blank) (point)))
-                      (end (progn (goto-char block-end) (evil-previous-line) (evil-end-of-line) (+ (point) 1))))
-                  (progn
-                    (goto-char current-point)
-                    (evil-range begin end))))))
-
-        (define-key evil-inner-text-objects-map "r" 'evil-textobj-inner-ruby-block)
-        (define-key evil-outer-text-objects-map "r" 'evil-textobj-outer-ruby-block)
-      #+END_SRC
-
 *** Helm
      Incremental completion and selection narrowing framework
      #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1201,22 +1249,6 @@ me, too many buffers to work with... for now.
 
   ;; Python: use python3 as default shell interpreter
   (setq python-shell-interpreter "python3")
-
-#+END_SRC
-* Macros
-#+BEGIN_SRC emacs-lisp :tangle yes
-  ;; To save a macro, record it with C-x ( (start) and C-x ) (stop),
-  ;; give it a name with C-x C-k n (C-k is for maKro) and
-  ;; insert it in this file with insert-kbd-macro.
-  ;; Then you execute it mapping it to a key! 😊
-
-  ;; Example macro: Mark todos as done
- (fset 'my-org-mark-as-done
-   (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ("d]]" 0 "%d")) arg)))
-
-  ;; Quicker replies in Twittering-mode.
-  (fset 'my-twittering-mode-reply-to-user
-   (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([3 return 3 18 67] 0 "%d")) arg)))
 
 #+END_SRC
 * Custom functions
