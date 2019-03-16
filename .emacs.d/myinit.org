@@ -1114,39 +1114,46 @@ me, too many buffers to work with... for now.
 (add-hook 'web-mode-hook 'web-mode-company-load-backends)
 #+END_SRC
 * Org-mode
-#+BEGIN_SRC emacs-lisp :tangle yes
-  ;; We don't need Flycheck in org-mode buffers. Usually.
-  (add-hook 'org-mode-hook '(lambda() (flycheck-mode 0)))
+  #+BEGIN_SRC emacs-lisp :tangle yes
+    ;; We don't need Flycheck in org-mode buffers. Usually.
+    (add-hook 'org-mode-hook '(lambda() (flycheck-mode 0)))
 
-  ;; Change the end of collapsed headings to an arrow.
-  (setq org-ellipsis "⤵")
-  ;; Keep agenda file list in a single file so I can publish my config.
-  ;; DO NOT use C-c [ or C-c ] to add/remove files to the agenda otherwise
-  ;; Emacs will write the var to init.el
-  (setq org-agenda-files "~/file-bouncer/org-agenda-file-list.org")
+    ;; Change the end of collapsed headings to an arrow.
+    (setq org-ellipsis "⤵")
 
-  ;; Open subheading with C-c RET and invert with M-RET
-  (local-set-key [27 13] (quote org-ctrl-c-ret))
-  (local-set-key [3 13] (quote org-insert-subheading))
+    ;; Keep agenda file list in a single file so I can publish my config.
+    ;; DO NOT use C-c [ or C-c ] to add/remove files to the agenda otherwise
+    ;; Emacs will write the var to init.el
+    (setq org-agenda-files "~/file-bouncer/org-agenda-file-list.org")
 
-  ;; Org-agenda: point the files you want it to read
-  ;; (setq org-agenda-files (list "~/file-bouncer/org-files/contact-based-system/"))
+    ;; When TODOs are ordered, enforce task dependencies
+    (setq org-enforce-todo-dependencies t)
 
-  ;; When TODOs are ordered, enforce task dependencies
-  (setq org-enforce-todo-dependencies t)
+    ;; Organize the bindings
+    ;; Use helm-org-in-buffer-headings instead of imenu; it has more actions and
+    ;; shows the exact heading you want.
+    (evil-leader/set-key-for-mode 'org-mode "h i" 'helm-org-in-buffer-headings)
 
-  ;; Use C-RET to complete words in Org-mode
-  (local-set-key [C-return] (quote complete))
+    ;; Open subheading with C-c RET and invert with M-RET
+    (define-key org-mode-map (kbd "C-c RET") 'org-ctrl-c-ret)
+    (define-key org-mode-map (kbd "M-RET") 'org-insert-subheading)
 
-  ;; Always respect the content of a heading when creating todos!
-  (local-set-key [M-S-return] (quote org-insert-todo-heading-respect-content))
+    ;; Use C-RET to complete words in Org-mode
+    (define-key org-mode-map (kbd "C-RET") 'complete)
 
-  ;; Map C-S-enter to org-insert-todo-subheading
-  (local-set-key [C-S-return] (quote org-insert-todo-subheading))
+    ;; Always respect the content of a heading when creating todos!
+    (define-key org-mode-map (kbd "M-S-RET") 'org-insert-todo-heading-respect-content)
 
-  ;; Use Emacs mode in Org-capture buffers and notes buffer
-  (add-hook 'org-capture-mode-hook 'evil-emacs-state)
-#+END_SRC
+    ;; Map C-S-enter to org-insert-todo-subheading
+    (define-key org-mode-map (kbd "C-S-RET") 'org-insert-todo-subheading)
+
+    ;; Use Emacs mode in Org-capture buffers and notes buffer
+    (add-hook 'org-capture-mode-hook 'evil-emacs-state)
+
+    ;; Idiot-proofing my configs
+    (define-key org-mode-map (kbd "C-c ]") nil)
+    (define-key org-mode-map (kbd "C-c [") nil)
+  #+END_SRC
 ** Capture templates
    #+BEGIN_SRC emacs-lisp :tangle yes
      ;; Load them from a separate file.
