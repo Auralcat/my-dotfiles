@@ -104,9 +104,9 @@
     ;; Magit stuff
     "gs" 'magit-status
     "gb" 'magit-blame
-    "gk" 'magit-branch-or-checkout
+    "gc" 'magit-branch-or-checkout
     "gf" 'magit-fetch-all-prune
-    "gc" 'magit-commit
+    "gm" 'magit-commit
     "g!" 'magit-git-command
     "gz" 'magit-stash
     "gl" 'magit-log
