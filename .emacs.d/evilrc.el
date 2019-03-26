@@ -104,8 +104,14 @@
     ;; Magit stuff
     "gs" 'magit-status
     "gb" 'magit-blame
-    "gc" 'magit-checkout
+    "gk" 'magit-branch-or-checkout
     "gf" 'magit-fetch-all-prune
+    "gc" 'magit-commit
+    "g!" 'magit-git-command
+    "gz" 'magit-stash
+    "gl" 'magit-log
+    "gp" 'magit-push
+    "gx" 'magit-reset
     ;; Helm prefix
     "h" 'helm-command-prefix
     ;; Quick ace-jump in evil-mode.
