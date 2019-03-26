@@ -108,6 +108,7 @@
     "gf" 'magit-fetch-all-prune
     "gm" 'magit-commit
     "g!" 'magit-git-command
+    "g$" 'magit-process-buffer
     "gz" 'magit-stash
     "gl" 'magit-log
     "gp" 'magit-push
