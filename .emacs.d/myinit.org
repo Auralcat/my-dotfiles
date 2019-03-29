@@ -1133,16 +1133,16 @@ me, too many buffers to work with... for now.
 
     ;; Open subheading with C-c RET and invert with M-RET
     (define-key org-mode-map (kbd "C-c RET") 'org-ctrl-c-ret)
-    (define-key org-mode-map (kbd "M-RET") 'org-insert-subheading)
+    (define-key org-mode-map (kbd "<C-M-return>") 'org-insert-subheading)
 
     ;; Use C-RET to complete words in Org-mode
     (define-key org-mode-map (kbd "C-RET") 'complete)
 
     ;; Always respect the content of a heading when creating todos!
-    (define-key org-mode-map (kbd "M-S-RET") 'org-insert-todo-heading-respect-content)
+    (define-key org-mode-map (kbd "<M-S-return>") 'org-insert-todo-heading-respect-content)
 
     ;; Map C-S-enter to org-insert-todo-subheading
-    (define-key org-mode-map (kbd "C-S-RET") 'org-insert-todo-subheading)
+    (define-key org-mode-map (kbd "<C-S-return>") 'org-insert-todo-subheading)
 
     ;; Use Emacs mode in Org-capture buffers and notes buffer
     (add-hook 'org-capture-mode-hook 'evil-emacs-state)
