@@ -20,8 +20,9 @@ persp-confs/*
 .emacs.d/url/cookies
 .emacs.d/forge-database.sqlite
 myinit.el
-rake.cache
+*.cache
 .emacs.d/completions
 .emacs.d/network-security.data
 .emacs.d/elpa
 .emacs.d/tramp
+tetris-scores
