@@ -762,7 +762,7 @@ me, too many buffers to work with... for now.
        :diminish golden-ratio-mode)
 
       ;; Get golden-ratio to work with ace-window
-      (add-to-list 'golden-ratio-extra-commands 'ace-window 'magit-status 'aw-flip-window)
+      (add-to-list 'golden-ratio-extra-commands '(ace-window magit-status aw-flip-window))
       (golden-ratio-mode 1)
     #+END_SRC
 
