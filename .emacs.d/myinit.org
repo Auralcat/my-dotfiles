@@ -922,8 +922,8 @@ me, too many buffers to work with... for now.
     (use-package circadian
       :ensure t
       :config
-      (setq circadian-themes '((:sunrise . doom-solarized-light)
-                               (:sunset  . hemisu-dark)))
+      (setq circadian-themes '((:sunrise . cosmos)
+                               (:sunset  . fairyfloss)))
 
       (circadian-setup))
     #+END_SRC
