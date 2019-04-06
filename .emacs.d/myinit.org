@@ -1117,6 +1117,9 @@ me, too many buffers to work with... for now.
     ;; When TODOs are ordered, enforce task dependencies
     (setq org-enforce-todo-dependencies t)
 
+    ;; Don't split my lines, thx.
+    (setq org-M-RET-may-split-line nil)
+
     ;; Organize the bindings
     ;; Use helm-org-in-buffer-headings instead of imenu; it has more actions and
     ;; shows the exact heading you want.
