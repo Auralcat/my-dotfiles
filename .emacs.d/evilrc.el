@@ -133,4 +133,4 @@
     "smg" 'slack-group-select
     "smc" 'slack-channel-select
     ;; TODO: map this to org-mode locally.
-    "t" 'org-todo)
+    "t" 'my-org-remote-todo)

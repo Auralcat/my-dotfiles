@@ -1294,6 +1294,16 @@ me, too many buffers to work with... for now.
          (run-ruby "docker-compose run web rails console" "Docker Rails Console")
        (run-ruby "docker-compose run web rails console --sandbox" "Docker Rails Console")))
    #+END_SRC
+** Quick org-todo without leaving current buffer
+   #+BEGIN_SRC emacs-lisp :tangle yes
+     (defun my-org-remote-todo ()
+       "Changes the TODO state of the currently clocked heading remotely."
+       (interactive)
+       (org-clock-goto)
+       (org-todo)
+       (mode-line-other-buffer)
+       )
+   #+END_SRC
 * Twittering mode
   Use Twitter from within Emacs!
   #+BEGIN_SRC emacs-lisp :tangle yes
