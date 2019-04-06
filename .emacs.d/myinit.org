@@ -762,7 +762,8 @@ me, too many buffers to work with... for now.
        :diminish golden-ratio-mode)
 
       ;; Get golden-ratio to work with ace-window
-      (add-to-list 'golden-ratio-extra-commands '(ace-window magit-status aw-flip-window))
+      (setq golden-ratio-extra-commands
+             (append golden-ratio-extra-commands '(magit-status ace-window aw-flip-window)))
       (golden-ratio-mode 1)
     #+END_SRC
 
@@ -1144,6 +1145,10 @@ me, too many buffers to work with... for now.
     ;; Idiot-proofing my configs
     (define-key org-mode-map (kbd "C-c ]") nil)
     (define-key org-mode-map (kbd "C-c [") nil)
+
+    ;; Simplify org-todo in org-mode buffers with <leader> t
+    (evil-leader/set-key-for-mode 'org-mode "t" 'org-todo)
+
   #+END_SRC
 ** Capture templates
    #+BEGIN_SRC emacs-lisp :tangle yes
