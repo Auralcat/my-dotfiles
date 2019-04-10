@@ -1103,53 +1103,54 @@ me, too many buffers to work with... for now.
 (add-hook 'web-mode-hook 'web-mode-company-load-backends)
 #+END_SRC
 * Org-mode
-  #+BEGIN_SRC emacs-lisp :tangle yes
-    ;; We don't need Flycheck in org-mode buffers. Usually.
-    (add-hook 'org-mode-hook '(lambda() (flycheck-mode 0)))
+** Main configuration
+   #+BEGIN_SRC emacs-lisp :tangle yes
+     ;; We don't need Flycheck in org-mode buffers. Usually.
+     (add-hook 'org-mode-hook '(lambda() (flycheck-mode 0)))
 
-    ;; Change the end of collapsed headings to an arrow.
-    (setq org-ellipsis "⤵")
+     ;; Change the end of collapsed headings to an arrow.
+     (setq org-ellipsis "⤵")
 
-    ;; Keep agenda file list in a single file so I can publish my config.
-    ;; DO NOT use C-c [ or C-c ] to add/remove files to the agenda otherwise
-    ;; Emacs will write the var to init.el
-    (setq org-agenda-files "~/file-bouncer/org-agenda-file-list.org")
+     ;; Keep agenda file list in a single file so I can publish my config.
+     ;; DO NOT use C-c [ or C-c ] to add/remove files to the agenda otherwise
+     ;; Emacs will write the var to init.el
+     (setq org-agenda-files "~/file-bouncer/org-agenda-file-list.org")
 
-    ;; When TODOs are ordered, enforce task dependencies
-    (setq org-enforce-todo-dependencies t)
+     ;; When TODOs are ordered, enforce task dependencies
+     (setq org-enforce-todo-dependencies t)
 
-    ;; Don't split my lines, thx.
-    (setq org-M-RET-may-split-line nil)
+     ;; Don't split my lines, thx.
+     (setq org-M-RET-may-split-line nil)
 
-    ;; Organize the bindings
-    ;; Use helm-org-in-buffer-headings instead of imenu; it has more actions and
-    ;; shows the exact heading you want.
-    (evil-leader/set-key-for-mode 'org-mode "h i" 'helm-org-in-buffer-headings)
+     ;; Organize the bindings
+     ;; Use helm-org-in-buffer-headings instead of imenu; it has more actions and
+     ;; shows the exact heading you want.
+     (evil-leader/set-key-for-mode 'org-mode "h i" 'helm-org-in-buffer-headings)
 
-    ;; Open subheading with C-c RET and invert with M-RET
-    (define-key org-mode-map (kbd "C-c RET") 'org-ctrl-c-ret)
-    (define-key org-mode-map (kbd "<C-M-return>") 'org-insert-subheading)
+     ;; Open subheading with C-c RET and invert with M-RET
+     (define-key org-mode-map (kbd "C-c RET") 'org-ctrl-c-ret)
+     (define-key org-mode-map (kbd "<C-M-return>") 'org-insert-subheading)
 
-    ;; Use C-RET to complete words in Org-mode
-    (define-key org-mode-map (kbd "C-RET") 'complete)
+     ;; Use C-RET to complete words in Org-mode
+     (define-key org-mode-map (kbd "C-RET") 'complete)
 
-    ;; Always respect the content of a heading when creating todos!
-    (define-key org-mode-map (kbd "<M-S-return>") 'org-insert-todo-heading-respect-content)
+     ;; Always respect the content of a heading when creating todos!
+     (define-key org-mode-map (kbd "<M-S-return>") 'org-insert-todo-heading-respect-content)
 
-    ;; Map C-S-enter to org-insert-todo-subheading
-    (define-key org-mode-map (kbd "<C-S-return>") 'org-insert-todo-subheading)
+     ;; Map C-S-enter to org-insert-todo-subheading
+     (define-key org-mode-map (kbd "<C-S-return>") 'org-insert-todo-subheading)
 
-    ;; Use Emacs mode in Org-capture buffers and notes buffer
-    (add-hook 'org-capture-mode-hook 'evil-emacs-state)
+     ;; Use Emacs mode in Org-capture buffers and notes buffer
+     (add-hook 'org-capture-mode-hook 'evil-emacs-state)
 
-    ;; Idiot-proofing my configs
-    (define-key org-mode-map (kbd "C-c ]") nil)
-    (define-key org-mode-map (kbd "C-c [") nil)
+     ;; Idiot-proofing my configs
+     (define-key org-mode-map (kbd "C-c ]") nil)
+     (define-key org-mode-map (kbd "C-c [") nil)
 
-    ;; Simplify org-todo in org-mode buffers with <leader> t
-    (evil-leader/set-key-for-mode 'org-mode "t" 'org-todo)
+     ;; Simplify org-todo in org-mode buffers with <leader> t
+     (evil-leader/set-key-for-mode 'org-mode "t" 'org-todo)
 
-  #+END_SRC
+   #+END_SRC
 ** Capture templates
    #+BEGIN_SRC emacs-lisp :tangle yes
      ;; Load them from a separate file.
