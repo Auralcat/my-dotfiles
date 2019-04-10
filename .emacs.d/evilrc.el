@@ -24,15 +24,6 @@
 ;; Use Q in normal mode to kill current buffer.
 (define-key evil-normal-state-map (kbd "Q") 'kill-current-buffer)
 
-;; Use gb as goto-bookmark
-(define-key evil-normal-state-map (kbd "gb") 'bookmark-jump)
-
-;; Use gl as list-bookmarks
-(define-key evil-normal-state-map (kbd "gl") 'list-bookmarks)
-
-;; Use gs to set bookmarks
-(define-key evil-normal-state-map (kbd "gs") 'bookmark-set)
-
 ;; INSERT MODE
 ;; Use C-g to exit from Normal mode as well.
 (define-key evil-insert-state-map (kbd "C-g") 'evil-force-normal-state)
@@ -85,6 +76,10 @@
     ;; Frequently visited bookmarks
     "bk" '(lambda() (interactive) (bookmark-jump "org-capture-last-stored"))
     "br" '(lambda() (interactive) (bookmark-jump "org-refile-last-stored"))
+    ;; Bookmark shortcuts
+    "bb" 'bookmark-jump
+    "bl" 'list-bookmarks
+    "bs" 'bookmark-set
     ;; Org-clock functions. It makes sense to group them here.
     ;; For example, you can choose which clock funct
     "ci" 'org-clock-in

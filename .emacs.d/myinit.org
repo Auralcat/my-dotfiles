@@ -151,7 +151,7 @@
   (fset 'yes-or-no-p 'y-or-n-p)
 
   ;; Clean whitespace before saving a file
-  (add-hook 'before-save-hook (quote whitespace-cleanup))
+  (add-hook 'before-save-hook '(whitespace-cleanup))
 
   ;; While you're at it, save automatically when visiting files.
   ;; It's surprisingly useful. The only caveat is when you got an
@@ -1213,6 +1213,13 @@ me, too many buffers to work with... for now.
        ;; Use libnotify to display the alerts in Linux
        (setq alert-default-style 'libnotify))
    #+END_SRC
+** Evil-org
+   Evil-mode keybindings for org-mode.
+   #+BEGIN_SRC emacs-lisp :tangle yes
+     (use-package evil-org
+       :hook (org-mode . evil-org-mode)
+       )
+   #+END_SRC
 * Variables
 #+BEGIN_SRC emacs-lisp :tangle yes
   ;; Set Org mode as default mode for new buffers:
@@ -1336,7 +1343,6 @@ me, too many buffers to work with... for now.
   #+END_SRC
 
 * Mode Line
-
 ** Telephone Line
    Prettier mode line.
    *To ensure that nothing gets in the way of loading it, leave this*
