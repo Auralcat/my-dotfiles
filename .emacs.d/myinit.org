@@ -656,6 +656,22 @@ me, too many buffers to work with... for now.
     (use-package emojify)
     #+END_SRC
 ** Utilities
+*** Prettier.js
+    Prettier.js integration for Emacs.
+    I want to run this thing when saving .js and web-related files.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+      (use-package prettier-js
+        :hook ((js2-mode sass-mode scss-mode web-mode css-mode) . 'prettier-js-mode))
+
+      (setq prettier-js-allowed-modes '(js2-mode web-mode sass-mode css-mode scss-mode))
+
+      (defun toggle-prettier-js-save-hook ()
+        "Toggles Prettier.js hook when you're working with a mode that supports it. Removes the hook otherwise."
+        (if (member major-mode prettier-js-allowed-modes)
+        (add-hook 'before-save-hook 'prettier-js)
+        (remove-hook 'before-save-hook 'prettier-js)))
+      (add-hook 'change-major-mode-hook 'toggle-prettier-js-save-hook)
+    #+END_SRC
 *** Origami-mode
     Code folding in Emacs. You can use this with Evil by pressing z a
     in normal-mode.
