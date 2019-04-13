@@ -1177,6 +1177,10 @@ me, too many buffers to work with... for now.
      ;; Simplify org-todo in org-mode buffers with <leader> t
      (evil-leader/set-key-for-mode 'org-mode "t" 'org-todo)
 
+     ;; Log when a task was done and when it was rescheduled.
+     (setq org-log-done 'time)
+     (setq org-log-rescheduled 'time)
+
    #+END_SRC
 ** Capture templates
    #+BEGIN_SRC emacs-lisp :tangle yes
