@@ -5,14 +5,11 @@
 
 * Startup
   #+BEGIN_SRC emacs-lisp :tangle yes
-    ;; Set fallback font
+   ;; Set fallback font
     (set-face-attribute 'default nil :font "Ubuntu Mono" :height 120)
   #+END_SRC
 * Evil Mode
   Yes, I'm committing this heresy
-  #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package evil)
-  #+END_SRC
 **** Evil-leader
      Add a prefix key to Evil mode, like the Leader key in Vim.
      #+BEGIN_SRC emacs-lisp :tangle yes
@@ -66,7 +63,7 @@
       #+END_SRC
 
 * Macros
-#+BEGIN_SRC emacs-lisp :tangle yes
+  #+BEGIN_SRC emacs-lisp :tangle yes
    ;; To save a macro, record it with C-x ( (start) and C-x ) (stop),
    ;; give it a name with C-x C-k n (C-k is for maKro) and
    ;; insert it in this file with insert-kbd-macro.
@@ -101,7 +98,7 @@
    (fset 'enh-ruby-previous-end-of-class-or-module
    (lambda (&optional arg) "Keyboard macro." (interactive "p") (kmacro-exec-ring-item (quote ([63 99 108 97 115 115 92 124 109 111 100 117 108 101 return 37 48] 0 "%d")) arg)))
 
-#+END_SRC
+  #+END_SRC
 * Mac OS
   #+BEGIN_SRC emacs-lisp :tangle yes
     (when (eq system-type 'darwin) ;; mac specific settings
@@ -122,7 +119,7 @@
         (exec-path-from-shell-initialize)))
   #+END_SRC
 * Environment Customizations
-#+BEGIN_SRC emacs-lisp :tangle yes
+  #+BEGIN_SRC emacs-lisp :tangle yes
   ;; Sentences end with single spaces for me.
   (setq sentence-end-double-space nil)
 
@@ -151,7 +148,7 @@
   (fset 'yes-or-no-p 'y-or-n-p)
 
   ;; Clean whitespace before saving a file
-  (add-hook 'before-save-hook '(whitespace-cleanup))
+  (add-hook 'before-save-hook 'whitespace-cleanup)
 
   ;; While you're at it, save automatically when visiting files.
   ;; It's surprisingly useful. The only caveat is when you got an
@@ -201,7 +198,7 @@
 
   ;; I need a bigger kill ring.
   (setq kill-ring-max 180)
-#+END_SRC
+  #+END_SRC
 
 * Personal info
   #+BEGIN_SRC emacs-lisp :tangle yes
@@ -213,7 +210,7 @@
   (setq abbrev-file-name "~/.abbrev_defs")
   #+END_SRC
 * Hooks
-#+BEGIN_SRC emacs-lisp :tangle yes
+  #+BEGIN_SRC emacs-lisp :tangle yes
   ;; Prog-mode is from where all the programming modes are derived from.
   ;; This means that if you call prog-mode-hook, the settings will be
   ;; applied to ALL programming modes in Emacs.
@@ -234,11 +231,11 @@
 
   ;; Create filling for org-mode
   (add-hook 'org-mode-hook 'auto-fill-mode)
-#+END_SRC
+  #+END_SRC
 * IRC
-Qui Nov  2 19:57:06 BRST 2017 - Tried using IRC inside Emacs, didn't please
-me, too many buffers to work with... for now.
-#+BEGIN_SRC emacs-lisp :tangle yes
+  Qui Nov  2 19:57:06 BRST 2017 - Tried using IRC inside Emacs, didn't please
+  me, too many buffers to work with... for now.
+  #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Use Weechat from Emacs
 (use-package weechat
  :bind (:map weechat-mode-map
@@ -247,10 +244,10 @@ me, too many buffers to work with... for now.
        ("<down>" . weechat-next-input)
        ("ð" . delete-other-windows)
        ("”" . switch-to-buffer)))
-#+END_SRC
+  #+END_SRC
 
 * Custom functions
-#+BEGIN_SRC emacs-lisp :tangle yes
+  #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Unfill region, AKA leave single huge line
 (defun unfill-region (beg end)
   "Unfill the region, joining text paragraphs into a single
@@ -260,12 +257,12 @@ me, too many buffers to work with... for now.
     (let ((fill-column (point-max)))
       (fill-region beg end)))
 
-#+END_SRC
+  #+END_SRC
 * Function Aliases
-#+BEGIN_SRC emacs-lisp :tangle yes
+  #+BEGIN_SRC emacs-lisp :tangle yes
 ;; This is how you define aliases for Elisp functions
 (defalias 'plp 'package-list-packages)
-#+END_SRC
+  #+END_SRC
 * Packages
 ** Major Modes
 *** Elixir-mode
@@ -443,11 +440,11 @@ me, too many buffers to work with... for now.
        (add-hook 'after-init-hook #'projectile-global-mode)
     #+END_SRC
 *** Autopair
-   Automatically pair braces and quotes like in TextMate
-   #+BEGIN_SRC emacs-lisp :tangle yes
+    Automatically pair braces and quotes like in TextMate
+    #+BEGIN_SRC emacs-lisp :tangle yes
    (use-package autopair
       :init (autopair-global-mode))
-   #+END_SRC
+    #+END_SRC
 *** Emmet-mode
     #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package emmet-mode)
@@ -478,8 +475,8 @@ me, too many buffers to work with... for now.
     (use-package ruby-tools)
     #+END_SRC
 *** Helm
-     Incremental completion and selection narrowing framework
-     #+BEGIN_SRC emacs-lisp :tangle yes
+    Incremental completion and selection narrowing framework
+    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package helm)
      (require 'helm-config)
      (helm-mode 1)
@@ -493,7 +490,7 @@ me, too many buffers to work with... for now.
 
      ;; Enable fuzzy matching
      (setq helm-M-x-fuzzy-match t)
-     #+END_SRC
+    #+END_SRC
 
 *** Ace Window
     Switch between more than 3 windows (and act on them!) with ease.
@@ -660,7 +657,7 @@ me, too many buffers to work with... for now.
     Simple window configuration management in Emacs.
     #+BEGIN_SRC emacs-lisp :tangle yes
       ;; The custom prefix needs to be evaluated _before_ loading eyebrowse. Go figure.
-      (setq eyebrowse-keymap-prefix nil)
+      (setq eyebrowse-keymap-prefix "")
 
       (use-package eyebrowse
         :diminish eyebrowse-mode
@@ -827,7 +824,8 @@ me, too many buffers to work with... for now.
 *** Wakatime
     Time tracking in Emacs.
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package wakatime-mode)
+      (use-package wakatime-mode
+        :diminish wakatime-mode)
       ;; Enable it
       (global-wakatime-mode)
     #+END_SRC
@@ -1036,7 +1034,7 @@ me, too many buffers to work with... for now.
    (use-package hemisu-theme :defer t)
    #+END_SRC
 * Graphical
-#+BEGIN_SRC emacs-lisp :tangle yes
+  #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Set font in graphical mode
 (when (display-graphic-p)
     ;; Use Fantasque Sans Mono when available
@@ -1054,10 +1052,10 @@ me, too many buffers to work with... for now.
     (global-emojify-mode-line-mode)
     ;; Maximize frame on startup
     (toggle-frame-maximized))
-#+END_SRC
+  #+END_SRC
 
 * Keybindings
-#+BEGIN_SRC emacs-lisp :tangle yes
+  #+BEGIN_SRC emacs-lisp :tangle yes
   ;; Remapping the help hotkey so it doesn't clash with Unix backspace.
   ;; Whenever you want to call help you can use M-x help as well. F1
   ;; works too.
@@ -1112,10 +1110,10 @@ me, too many buffers to work with... for now.
   (evil-leader/set-key-for-mode 'enh-ruby-mode "SPC" 'ruby-send-buffer-and-go)
   (evil-leader/set-key-for-mode 'python-mode "SPC" 'python-shell-send-buffer)
   (evil-leader/set-key-for-mode 'js2-mode "SPC" 'js-comint-send-buffer)
-#+END_SRC
+  #+END_SRC
 
 * Web-mode
-#+BEGIN_SRC emacs-lisp :tangle yes
+  #+BEGIN_SRC emacs-lisp :tangle yes
 (defun web-mode-keybindings ()
     "Define mode-specific keybindings like this."
     (local-set-key (kbd "C-c C-v") 'browse-url-of-buffer)
@@ -1128,7 +1126,7 @@ me, too many buffers to work with... for now.
 
 (add-hook 'web-mode-hook 'web-mode-keybindings)
 (add-hook 'web-mode-hook 'web-mode-company-load-backends)
-#+END_SRC
+  #+END_SRC
 * Org-mode
 ** Main configuration
    #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1183,7 +1181,7 @@ me, too many buffers to work with... for now.
 
    #+END_SRC
 ** Auto-mark TODO entries as DONE
-   #+begin_src emacs-lisp
+   #+BEGIN_SRC emacs-lisp :tangle yes
      ;; see http://thread.gmane.org/gmane.emacs.orgmode/42715
      (eval-after-load 'org-list
        '(add-hook 'org-checkbox-statistics-hook (function ndk/checkbox-list-complete)))
@@ -1238,7 +1236,7 @@ me, too many buffers to work with... for now.
     #+END_SRC
 
 *** Load languages
-   #+BEGIN_SRC emacs-lisp :tangle yes
+    #+BEGIN_SRC emacs-lisp :tangle yes
      (org-babel-do-load-languages
      'org-babel-load-languages
      '(
@@ -1249,7 +1247,7 @@ me, too many buffers to work with... for now.
     (plantuml . t)
     (dot . t)
      ))
-   #+END_SRC
+    #+END_SRC
 
 ** Org-pomodoro
    #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1282,11 +1280,12 @@ me, too many buffers to work with... for now.
    Evil-mode keybindings for org-mode.
    #+BEGIN_SRC emacs-lisp :tangle yes
      (use-package evil-org
+       :diminish evil-org-mode
        :hook (org-mode . evil-org-mode)
        )
    #+END_SRC
 * Variables
-#+BEGIN_SRC emacs-lisp :tangle yes
+  #+BEGIN_SRC emacs-lisp :tangle yes
   ;; Set Org mode as default mode for new buffers:
   (setq-default major-mode 'org-mode)
 
@@ -1325,7 +1324,7 @@ me, too many buffers to work with... for now.
   ;; Python: use python3 as default shell interpreter
   (setq python-shell-interpreter "python3")
 
-#+END_SRC
+  #+END_SRC
 * Custom functions
 ** Kill relative file name
    I use that to work with rspec. Projectile has the ~C-c C-k~
@@ -1412,7 +1411,7 @@ me, too many buffers to work with... for now.
    Prettier mode line.
    *To ensure that nothing gets in the way of loading it, leave this*
    *last in your config file*
-  #+BEGIN_SRC emacs-lisp :tangle yes
+   #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package telephone-line :ensure t)
 
     ;; Mac workaround to render separators correctly.
@@ -1454,7 +1453,7 @@ me, too many buffers to work with... for now.
     ;; Call the mode last!
     (telephone-line-mode t)
 
-  #+END_SRC
+   #+END_SRC
 * Diary
 ** Last day of month
    #+BEGIN_SRC emacs-lisp :tangle yes
