@@ -1114,18 +1114,22 @@
 
 * Web-mode
   #+BEGIN_SRC emacs-lisp :tangle yes
-(defun web-mode-keybindings ()
-    "Define mode-specific keybindings like this."
-    (local-set-key (kbd "C-c C-v") 'browse-url-of-buffer)
-    (local-set-key (kbd "C-c /") 'sgml-close-tag))
+    (defun web-mode-keybindings ()
+        "Define mode-specific keybindings like this."
+        (local-set-key (kbd "C-c C-v") 'browse-url-of-buffer)
+        (local-set-key (kbd "C-c /") 'sgml-close-tag))
 
-;; Add company backends when loading web-mode.
-(defun web-mode-company-load-backends ()
-    (company-web-bootstrap+)
-    (company-web-fa+))
+    ;; Add company backends when loading web-mode.
+    (defun web-mode-company-load-backends ()
+        (company-web-bootstrap+)
+        (company-web-fa+))
 
-(add-hook 'web-mode-hook 'web-mode-keybindings)
-(add-hook 'web-mode-hook 'web-mode-company-load-backends)
+    (add-hook 'web-mode-hook 'web-mode-keybindings)
+    (add-hook 'web-mode-hook 'web-mode-company-load-backends)
+
+    ;; Use tidy to check HTML buffers with web-mode.
+    (eval-after-load 'flycheck
+       '(flycheck-add-mode 'html-tidy 'web-mode))
   #+END_SRC
 * Org-mode
 ** Main configuration
