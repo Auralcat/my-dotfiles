@@ -1151,6 +1151,13 @@
      ;; Don't split my lines, thx.
      (setq org-M-RET-may-split-line nil)
 
+     ;; Truncate long task names
+     (setq org-clock-heading-function
+           (lambda ()
+             (let ((str (nth 4 (org-heading-components))))
+               (concat (truncate-string-to-width str 27) "...")
+               )))
+
      ;; Organize the bindings
      ;; Use helm-org-in-buffer-headings instead of imenu; it has more actions and
      ;; shows the exact heading you want.
@@ -1432,8 +1439,13 @@
      (telephone-line-defsegment* auralcat-docker-sync-segment ()
        (if (file-exists-p (projectile-with-default-dir (projectile-ensure-project (projectile-project-root))
                             (expand-file-name ".docker-sync/daemon.pid")))
-           (telephone-line-raw "💚")
-         (telephone-line-raw "❤")))
+           (telephone-line-raw "💚" t)
+         (telephone-line-raw "❤" t)))
+
+     ;; Custom VC segment
+     (telephone-line-defsegment* auralcat-vc-segment ()
+       (concat (truncate-string-to-width (telephone-line-raw vc-mode t) 17) "...")
+       )
 
      ;; Set separator styles
      (setq telephone-line-primary-left-separator 'telephone-line-cubed-left
@@ -1445,14 +1457,13 @@
      (setq telephone-line-lhs
            '((evil   . (telephone-line-evil-tag-segment))
              (accent . (auralcat-telephone-line-buffer-modified-segment
-                        telephone-line-vc-segment
+                        auralcat-vc-segment
                         telephone-line-projectile-segment
                         telephone-line-buffer-name-segment))
              (evil   . (telephone-line-airline-position-segment))
              (accent . (telephone-line-major-mode-segment))
              (nil    . (telephone-line-simple-minor-mode-segment
                         telephone-line-flycheck-segment
-                        auralcat-docker-sync-segment
                         telephone-line-nyan-segment))))
      ;; Right hand side
      (setq telephone-line-rhs
