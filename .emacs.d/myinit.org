@@ -141,6 +141,9 @@
   ;; Manual packages load path
   (add-to-list 'custom-theme-load-path "~/my-dotfiles/.emacs.d/manual-themes/")
 
+  ;; Manual Elisp scripts load path
+  (add-to-list 'load-path "~/my-dotfiles/.emacs.d/elisp-custom")
+
   ;; Backup files by copying them
   (setq backup-by-copying t)
 
@@ -1337,16 +1340,20 @@
 
   #+END_SRC
 * Custom functions
+** Main
+   #+BEGIN_SRC emacs-lisp :tangle yes
+   (require 'rails-docker-utils)
+   #+END_SRC
 ** Kill relative file name
    I use that to work with rspec. Projectile has the ~C-c C-k~
    keybinding to kill the file name in a Helm session, when I realize
    I need to get that, I'm in the buffer already.
 
    #+BEGIN_SRC emacs-lisp :tangle yes
-   ;; The custom function needs an argument for some reason, even though I'm not using it.
+     ;; The custom function needs an argument to be invoked through a keybinding, even though it has no practical use.
      (defun auralcat-kill-relative-file-name (args)
-       (interactive "P")
-       "Adds the file name relative to the project's root to the kill ring."
+       "Add the file name relative to the project's root to the kill ring."
+       (interactive)
        (let ((relative-file-name (magit-file-relative-name buffer-file-name)))
          (kill-new relative-file-name)
          (message "Current buffer's relative file name copied to kill ring: %s" relative-file-name)))
@@ -1362,27 +1369,6 @@
         (eq (% year 400) 0))
        )
 
-   #+END_SRC
-** Quick Docker-compose terminal
-   I use this a lot at work, takes too much time to type the commands,
-   even calling them from M-x.
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     (defun auralcat-run-bash-in-docker-container (args)
-       (interactive "P")
-       "Opens a single buffer with a terminal inside a Docker container."
-       (docker-compose-run "web" "bash" (quote ())))
-   #+END_SRC
-** Quick Rails console inside a Docker container
-   Sometimes I need that to debug stuff.
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     ;; This can be refactored. But it does the job for now.
-     (defun auralcat-run-rails-console-in-docker-container ()
-       "Opens a Rails console inside the Docker container.
-        With C-u prefix, opens console in sandbox mode."
-       (interactive)
-       (if (eq current-prefix-arg '(4))
-         (run-ruby "docker-compose run web rails console" "Docker Rails Console")
-       (run-ruby "docker-compose run web rails console --sandbox" "Docker Rails Console")))
    #+END_SRC
 ** Quick org-todo without leaving current buffer
    #+BEGIN_SRC emacs-lisp :tangle yes
