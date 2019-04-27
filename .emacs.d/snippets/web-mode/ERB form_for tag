@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: ERB form_for tag
+# key: form_for
+# --
+<%= form_for(${form}, ${url: your_url_here}, html: { class: '${your-class-here}' }) do |f| %>
+  ${<!-- your code here -->}
+<% end %>

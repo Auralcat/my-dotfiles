@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: RSpec describe block
+# key: desc
+# --
+describe '${your method/block description here}' do
+  ${# your test cases here}
+end
+$0

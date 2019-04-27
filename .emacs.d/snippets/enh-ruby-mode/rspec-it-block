@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: RSpec it block
+# key: it
+# --
+it '${should do something that you specify here}' do
+  ${# your test case setup here}
+
+  expect(${what_to_test}).to ${eq}(${result})
+end
+$0
