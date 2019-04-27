@@ -89,12 +89,12 @@
     "cp" 'org-pomodoro
     ;; Open frequently visited files
     "fb" '(lambda() (interactive) (find-file "~/file-bouncer/org-files/finances-budget.org"))
+    "fe" '(lambda() (interactive) (find-file "~/.emacs.d/evilrc.el"))
     "ff" '(lambda() (interactive) (find-file "~/file-bouncer/org-files/finances.org"))
+    "fm" '(lambda() (interactive) (switch-to-buffer "*Messages*"))
     "fi" '(lambda() (interactive) (find-file "~/.emacs.d/init.el"))
     "fo" '(lambda() (interactive) (find-file "~/.emacs.d/myinit.org"))
-    "fe" '(lambda() (interactive) (find-file "~/.emacs.d/evilrc.el"))
     "fs" '(lambda() (interactive) (switch-to-buffer "*scratch*"))
-    "fg" '(lambda() (interactive) (switch-to-buffer "*Messages*"))
     "fw" '(lambda() (interactive) (find-file auralcat-org-work-file-path))
     ;; Magit stuff
     "gs" 'magit-status
@@ -116,9 +116,16 @@
     "k" 'org-capture
     ;; Work-related stuff
     "mb" 'auralcat-run-bash-in-docker-container
+    "mc" '(lambda() (interactive) (find-file auralcat-org-board-cards-file-path))
     "mr" 'auralcat-run-rails-console-in-docker-container
+    "ms" '(lambda() (interactive) (browse-url auralcat-work-staging-server-url))
+    "ml" '(lambda() (interactive) (browse-url "http://localhost:3000"))
+    "mg" '(lambda() (interactive) (browse-url auralcat-work-github-main-repo))
     ;; Get the relative file name of current buffer. I pass that to rspec.
     "mf" 'auralcat-kill-relative-file-name
+    "mt" 'auralcat-run-local-rails-test-inside-docker-container
+    ;; Flip window with ace-window.
+    "o" 'aw-flip-window
     ;; Projectile prefix
     "p" 'projectile-command-map
     ;; Projectile-Rails prefix
