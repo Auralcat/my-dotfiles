@@ -2,8 +2,9 @@
 # name: ERB if tag
 # key: ife
 # --
-<% if ${condition} %>
-  ${<!-- HTML code goes here -->}
+<% if ${1:condition} %>
+  `yas-selected-text`$2
 <% else %>
-  $0
+  $3
 <% end %>
+$0

@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: ERB each block
+# key: each
+# binding: C-c C-r C-e
+# --
+<%= ${1:@collection}.each do |${2:item}| %>
+  ${3:`yas-selected-text`}
+<% end %>
+$0

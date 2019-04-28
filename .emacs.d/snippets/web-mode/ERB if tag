@@ -2,6 +2,7 @@
 # name: ERB if tag
 # key: if
 # --
-<% if ${condition} %>
-  $0
+<% if ${1:condition} %>
+  `yas-selected-text`$2
 <% end %>
+$0

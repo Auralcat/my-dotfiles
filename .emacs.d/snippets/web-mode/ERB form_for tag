@@ -1,7 +1,9 @@
 # -*- mode: snippet -*-
 # name: ERB form_for tag
 # key: form_for
+# binding: C-c C-r C-f
 # --
-<%= form_for(${form}, ${url: your_url_here}, html: { class: '${your-class-here}' }) do |f| %>
-  ${<!-- your code here -->}
+<%= form_for(${1:form}, ${2:url: your_url_here}, html: { class: '${3:your-class-here}' }) do |f| %>
+  ${4:`yas-selected-text`}
 <% end %>
+$0
