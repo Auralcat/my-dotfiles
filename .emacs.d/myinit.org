@@ -13,14 +13,15 @@
 **** Evil-leader
      Add a prefix key to Evil mode, like the Leader key in Vim.
      #+BEGIN_SRC emacs-lisp :tangle yes
-     (use-package evil-leader)
-     (global-evil-leader-mode)
-     ;; Evil mode needs to be loaded after evil-leader
-     (use-package evil)
-     (evil-mode 1)
+       (use-package evil-leader)
+       (load "~/my-dotfiles/.emacs.d/elisp-custom/evil-leader-custom-functions.el")
+       (global-evil-leader-mode)
+       ;; Evil mode needs to be loaded after evil-leader
+       (use-package evil)
+       (evil-mode 1)
 
-     ;; Load configs
-     (load "~/my-dotfiles/.emacs.d/evilrc")
+       ;; Load configs
+       (load "~/my-dotfiles/.emacs.d/evilrc")
      #+END_SRC
 **** Evil Surround
      Easier manipulation of delimiters, emulation of vim.surround

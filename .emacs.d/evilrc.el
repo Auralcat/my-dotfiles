@@ -90,14 +90,14 @@
     "cj" 'org-clock-goto
     "cp" 'org-pomodoro
     ;; Open frequently visited files
-    "fb" '(lambda() (interactive) (find-file "~/file-bouncer/org-files/finances-budget.org"))
-    "fe" '(lambda() (interactive) (find-file "~/.emacs.d/evilrc.el"))
-    "ff" '(lambda() (interactive) (find-file "~/file-bouncer/org-files/finances.org"))
-    "fm" '(lambda() (interactive) (switch-to-buffer "*Messages*"))
-    "fi" '(lambda() (interactive) (find-file "~/.emacs.d/init.el"))
-    "fo" '(lambda() (interactive) (find-file "~/.emacs.d/myinit.org"))
-    "fs" '(lambda() (interactive) (switch-to-buffer "*scratch*"))
-    "fw" '(lambda() (interactive) (find-file auralcat-org-work-file-path))
+    "fb" 'my-find-budget-file
+    "fe" 'my-find-evilrc-file
+    "ff" 'my-find-finances-log-file
+    "fm" 'jump-to-messages-buffer
+    "fi" 'my-find-init-el-file
+    "fo" 'my-find-init-org-file
+    "fs" 'jump-to-scratch-buffer
+    "fw" 'my-find-work-org-file
     ;; Magit stuff
     "gs" 'magit-status
     "gb" 'magit-blame
@@ -118,11 +118,12 @@
     "k" 'org-capture
     ;; Work-related stuff
     "mb" 'auralcat-run-bash-in-docker-container
-    "mc" '(lambda() (interactive) (find-file auralcat-org-board-cards-file-path))
+    "mp" 'my-open-ci-current-build
+    "mc" 'my-find-work-board-org-file
     "mr" 'auralcat-run-rails-console-in-docker-container
-    "ms" '(lambda() (interactive) (browse-url auralcat-work-staging-server-url))
-    "ml" '(lambda() (interactive) (browse-url "http://localhost:3000"))
-    "mg" '(lambda() (interactive) (browse-url auralcat-work-github-main-repo))
+    "ms" 'my-goto-staging-server-url
+    "ml" 'my-goto-local-server-url
+    "mg" 'my-goto-work-github-repo-url
     ;; Get the relative file name of current buffer. I pass that to rspec.
     "mf" 'auralcat-kill-relative-file-name
     "mt" 'auralcat-run-local-rails-test-inside-docker-container
