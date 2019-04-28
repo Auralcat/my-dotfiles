@@ -32,7 +32,9 @@
 (define-key evil-insert-state-map (kbd "C-a") 'back-to-indentation-or-beginning)
 (define-key evil-insert-state-map (kbd "C-e") 'end-of-line)
 
-;; Use C-t to transpose chars, I can use tab in graphical mode
+;; Use C-t to transpose chars, I can use tab in graphical mode,
+;; and I don't use the pop-mark command from normal mode.
+(define-key evil-normal-state-map (kbd "C-t") 'transpose-chars)
 (define-key evil-insert-state-map (kbd "C-t") 'transpose-chars)
 
 ;; Use C-w to kill region. I don't use C-w to delete backward words anymore.
