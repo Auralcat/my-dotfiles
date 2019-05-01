@@ -1436,13 +1436,6 @@
            (telephone-line-raw "💾")
          (telephone-line-raw "👍")))
 
-     ;; Docker-sync status indicator
-     (telephone-line-defsegment* auralcat-docker-sync-segment ()
-       (if (file-exists-p (projectile-with-default-dir (projectile-ensure-project (projectile-project-root))
-                            (expand-file-name ".docker-sync/daemon.pid")))
-           (telephone-line-raw "💚" t)
-         (telephone-line-raw "❤" t)))
-
      ;; Custom VC segment
      (telephone-line-defsegment* auralcat-vc-segment ()
        (concat (truncate-string-to-width (telephone-line-raw vc-mode t) 17) "...")
