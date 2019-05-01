@@ -105,7 +105,7 @@
     (when (eq system-type 'darwin) ;; mac specific settings
       ;; Map Command to Meta
       (setq mac-command-modifier 'meta)
-      ;; Map Option to Control (I know, smaller key, that's what we have for now. :(
+      ;; Map Option to Control (I know, smaller key, that's what we have for now. :/)
       (setq mac-option-modifier 'control)
       ;; Increase the font size.
       (set-default-font "Fantasque Sans Mono 14")
@@ -252,15 +252,16 @@
 
 * Custom functions
   #+BEGIN_SRC emacs-lisp :tangle yes
-;; Unfill region, AKA leave single huge line
-(defun unfill-region (beg end)
-  "Unfill the region, joining text paragraphs into a single
-  logical line.  This is useful, e.g., for use with
-  `visual-line-mode'."
-  (interactive "*r")
-    (let ((fill-column (point-max)))
-      (fill-region beg end)))
+    ;; Unfill region, AKA leave single huge line
+    (defun unfill-region (beg end)
+      "Unfill the region, joining text paragraphs into a single
+      logical line.  This is useful, e.g., for use with
+      `visual-line-mode'."
+      (interactive "*r")
+      (let ((fill-column (point-max)))
+        (fill-region beg end)))
 
+    (load "~/my-dotfiles/.emacs.d/elisp-custom/docker-sync-utils.el")
   #+END_SRC
 * Function Aliases
   #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1060,60 +1061,63 @@
 
 * Keybindings
   #+BEGIN_SRC emacs-lisp :tangle yes
-  ;; Remapping the help hotkey so it doesn't clash with Unix backspace.
-  ;; Whenever you want to call help you can use M-x help as well. F1
-  ;; works too.
-  ;; (define-key key-translation-map [?\C-h] [?\C-?])
+    ;; Remapping the help hotkey so it doesn't clash with Unix backspace.
+    ;; Whenever you want to call help you can use M-x help as well. F1
+    ;; works too.
+    ;; (define-key key-translation-map [?\C-h] [?\C-?])
 
-  ;; Use the menu key for helm-m-x
-  (global-set-key [menu] (quote helm-M-x))
+    ;; Use the menu key for helm-m-x
+    (global-set-key [menu] (quote helm-M-x))
 
-  ;; Unfill region
-  (define-key global-map "\C-\M-q" 'unfill-region)
+    ;; Unfill region
+    (define-key global-map "\C-\M-q" 'unfill-region)
 
-  ;; Switch to last buffer - I do it all the time
-  (global-set-key [27 112] (quote mode-line-other-buffer))
+    ;; Switch to last buffer - I do it all the time
+    (global-set-key [27 112] (quote mode-line-other-buffer))
 
-  ;; Save buffer with F5
-  (global-set-key [f5] (quote save-buffer))
+    ;; Save buffer with F5
+    (global-set-key [f5] (quote save-buffer))
 
-  ;; Mapping AltGr-d to delete-other-windows,
-  ;; Another symbol I don't use often.
-  (global-set-key [240] (quote delete-other-windows))
+    ;; Mapping AltGr-d to delete-other-windows,
+    ;; Another symbol I don't use often.
+    (global-set-key [240] (quote delete-other-windows))
 
-  ;; Access buffers with Alt-Gr b
-  (global-set-key [8221] (quote helm-buffers-list))
+    ;; Access buffers with Alt-Gr b
+    (global-set-key [8221] (quote helm-buffers-list))
 
-  ;; Map the Home and End keys to go to the beginning and end of the buffer
-  (global-set-key [home] (quote beginning-of-buffer))
-  (global-set-key [end] (quote end-of-buffer))
+    ;; Map the Home and End keys to go to the beginning and end of the buffer
+    (global-set-key [home] (quote beginning-of-buffer))
+    (global-set-key [end] (quote end-of-buffer))
 
-  ;; Move to beginning of line or indentation
-  (defun back-to-indentation-or-beginning () (interactive)
-    (if (= (point) (progn (back-to-indentation) (point)))
-    (beginning-of-line)))
+    ;; Move to beginning of line or indentation
+    (defun back-to-indentation-or-beginning () (interactive)
+      (if (= (point) (progn (back-to-indentation) (point)))
+      (beginning-of-line)))
 
-  ;; We need this to get back to the beginning of the indentation or first word of the line.
-  (global-set-key (kbd "C-a") (quote back-to-indentation-or-beginning))
+    ;; We need this to get back to the beginning of the indentation or first word of the line.
+    (global-set-key (kbd "C-a") (quote back-to-indentation-or-beginning))
 
-  ;; Hippie-Expand: change key to M-SPC; Replace dabbrev-expand
-  (global-set-key "\M- " 'hippie-expand)
-  (global-set-key "\M-/" 'hippie-expand)
+    ;; Quick theme changer
+    (global-set-key (kbd "M-`") (quote customize-themes))
 
-  ;; Eshell - bind M-p to go back to previous buffer
-  (defun eshell-tweaks ()
-      "Keybindings for the Emacs shell"
-      (local-set-key (kbd "M-p") 'switch-to-prev-buffer)
-      "Start in Emacs mode"
-      (evil-set-initial-state 'eshell-mode 'emacs))
-  (add-hook 'eshell-mode-hook 'eshell-tweaks)
-  (add-hook 'term-mode-hook 'eshell-tweaks)
+    ;; Hippie-Expand: change key to M-SPC; Replace dabbrev-expand
+    (global-set-key "\M- " 'hippie-expand)
+    (global-set-key "\M-/" 'hippie-expand)
 
-  ;; Evaluate buffer using SPC SPC, depending on major mode.
-  (evil-leader/set-key-for-mode 'emacs-lisp-mode "SPC" 'eval-buffer)
-  (evil-leader/set-key-for-mode 'enh-ruby-mode "SPC" 'ruby-send-buffer-and-go)
-  (evil-leader/set-key-for-mode 'python-mode "SPC" 'python-shell-send-buffer)
-  (evil-leader/set-key-for-mode 'js2-mode "SPC" 'js-comint-send-buffer)
+    ;; Eshell - bind M-p to go back to previous buffer
+    (defun eshell-tweaks ()
+        "Keybindings for the Emacs shell"
+        (local-set-key (kbd "M-p") 'switch-to-prev-buffer)
+        "Start in Emacs mode"
+        (evil-set-initial-state 'eshell-mode 'emacs))
+    (add-hook 'eshell-mode-hook 'eshell-tweaks)
+    (add-hook 'term-mode-hook 'eshell-tweaks)
+
+    ;; Evaluate buffer using SPC SPC, depending on major mode.
+    (evil-leader/set-key-for-mode 'emacs-lisp-mode "SPC" 'eval-buffer)
+    (evil-leader/set-key-for-mode 'enh-ruby-mode "SPC" 'ruby-send-buffer-and-go)
+    (evil-leader/set-key-for-mode 'python-mode "SPC" 'python-shell-send-buffer)
+    (evil-leader/set-key-for-mode 'js2-mode "SPC" 'js-comint-send-buffer)
   #+END_SRC
 
 * Web-mode
@@ -1410,11 +1414,11 @@
    *To ensure that nothing gets in the way of loading it, leave this*
    *last in your config file*
    #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package telephone-line :ensure t)
+     (use-package telephone-line :ensure t)
 
-    ;; Mac workaround to render separators correctly.
-    (when (eq system-type 'darwin)
-    (setq ns-use-srgb-colorspace nil))
+     ;; Mac workaround to render separators correctly.
+     (when (eq system-type 'darwin)
+       (setq ns-use-srgb-colorspace nil))
 
      ;; I just want a different indicator in my mode line.
      (telephone-line-defsegment* auralcat-telephone-line-buffer-modified-segment ()
