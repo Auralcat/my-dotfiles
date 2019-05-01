@@ -10,15 +10,13 @@ trim_trailing_whitespace = true
 [*]
 end_of_line = lf
 insert_final_newline = true
-
-# Always indent with 4 spaces!
-indent_style = space
-indent_size = 4
-
 # Default charset
-[*.{html,css,js,py,rb,erb,pas,exs,java,cpp,rs}]
 charset = utf-8
 
+# Always indent with 2 spaces!
+indent_style = space
+indent_size = 2
+
 # 2 space indentation
-[*.{rb,css,exs,ex,jsx,js,html,vue}]
+[*.{rb,css,scss,exs,ex,jsx,js,html,vue}]
 indent_size = 2

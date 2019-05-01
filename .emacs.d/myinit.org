@@ -635,8 +635,8 @@
     between different editors and IDEs.
     #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package editorconfig
-       :init
-       ;; Activate it.
+       :ensure t
+       :config
        (editorconfig-mode 1))
     #+END_SRC
 *** Nyan-mode
@@ -674,9 +674,9 @@
     I want to run this thing when saving .js and web-related files.
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package prettier-js
-        :hook ((js2-mode sass-mode scss-mode web-mode css-mode) . 'prettier-js-mode))
+        :hook ((js2-mode sass-mode scss-mode css-mode) . 'prettier-js-mode))
 
-      (setq prettier-js-allowed-modes '(js2-mode web-mode sass-mode css-mode scss-mode))
+      (setq prettier-js-allowed-modes '(js2-mode sass-mode css-mode scss-mode))
 
       (defun toggle-prettier-js-save-hook ()
         "Toggles Prettier.js hook when you're working with a mode that supports it. Removes the hook otherwise."
@@ -923,7 +923,17 @@
 *** Web-beautify
     Format HTML/CSS and JS code with js-beautify
     #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package web-beautify)
+      (use-package web-beautify)
+
+      ;; Format web-mode buffer automatically on save
+      (defun format-web-mode-buffer-on-save ()
+        ""
+        (if (eq major-mode 'web-mode)
+            (add-hook 'before-save-hook 'web-beautify-html)
+          (remove-hook 'before-save-hook 'web-beautify-html))
+        )
+
+      (add-hook 'change-major-mode-hook 'format-web-mode-buffer-on-save)
     #+END_SRC
 *** Magit
     How to win at Git from Emacs.
