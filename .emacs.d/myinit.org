@@ -1212,7 +1212,7 @@
 
      ;; Log when a task was done and when it was rescheduled.
      (setq org-log-done 'time)
-     (setq org-log-rescheduled 'time)
+     (setq org-log-reschedule 'time)
 
    #+END_SRC
 ** Auto-mark TODO entries as DONE
@@ -1375,8 +1375,7 @@
    I need to get that, I'm in the buffer already.
 
    #+BEGIN_SRC emacs-lisp :tangle yes
-     ;; The custom function needs an argument to be invoked through a keybinding, even though it has no practical use.
-     (defun auralcat-kill-relative-file-name (args)
+     (defun auralcat-kill-relative-file-name ()
        "Add the file name relative to the project's root to the kill ring."
        (interactive)
        (let ((relative-file-name (magit-file-relative-name buffer-file-name)))
