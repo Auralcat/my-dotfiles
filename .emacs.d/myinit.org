@@ -1297,6 +1297,10 @@
                  :body body
                  :app-icon "~/my-dotfiles/.emacs.d/org-pomodoro/tomato.png")))
 
+     ;; Use mpv in OS X
+     (when (eq system-type 'darwin)
+         (setq org-pomodoro-audio-player "/usr/local/bin/mpv"))
+
      (add-hook 'org-pomodoro-started-hook (lambda() (pomodoro-display-notification "Pomodoro started!" "Concentrate on your task!")))
      (add-hook 'org-pomodoro-finished-hook (lambda() (pomodoro-display-notification "Pomodoro finished" "Time to take a break!")))
    #+END_SRC
