@@ -533,9 +533,15 @@
        ;; This doesn't get in the way in Org buffers.
        (set (make-local-variable 'company-minimum-prefix-length) 2))
 
+       ;; Markdown completion
+       (defun markdown-mode-tweaks ()
+       (set (make-local-variable 'company-backends) '(company-dabbrev company-capf company-files))
+       (set (make-local-variable 'company-minimum-prefix-length) 2))
+
        ;; Add tweaks
        (add-hook 'enh-ruby-mode-hook 'ruby-mode-tweaks)
        (add-hook 'org-mode-hook 'org-mode-tweaks)
+       (add-hook 'markdown-mode-hook 'markdown-mode-tweaks)
 
        ;; Autocompletion for Bootstrap/FontAwesome classes
        (use-package ac-html-bootstrap)
