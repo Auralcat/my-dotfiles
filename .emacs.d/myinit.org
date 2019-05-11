@@ -243,7 +243,6 @@
 ;; Use Weechat from Emacs
 (use-package weechat
  :bind (:map weechat-mode-map
-       ("M-p" . previous-buffer)
        ("<up>" . weechat-previous-input)
        ("<down>" . weechat-next-input)
        ("ð" . delete-other-windows)
@@ -1085,12 +1084,6 @@
     ;; Unfill region
     (define-key global-map "\C-\M-q" 'unfill-region)
 
-    ;; Switch to last buffer - I do it all the time
-    (global-set-key [27 112] (quote mode-line-other-buffer))
-
-    ;; Save buffer with F5
-    (global-set-key [f5] (quote save-buffer))
-
     ;; Mapping AltGr-d to delete-other-windows,
     ;; Another symbol I don't use often.
     (global-set-key [240] (quote delete-other-windows))
@@ -1117,11 +1110,9 @@
     (global-set-key "\M- " 'hippie-expand)
     (global-set-key "\M-/" 'hippie-expand)
 
-    ;; Eshell - bind M-p to go back to previous buffer
+    ;; Eshell configuration
     (defun eshell-tweaks ()
-        "Keybindings for the Emacs shell"
-        (local-set-key (kbd "M-p") 'switch-to-prev-buffer)
-        "Start in Emacs mode"
+        "Tweaks for the Emacs shell"
         (evil-set-initial-state 'eshell-mode 'emacs))
     (add-hook 'eshell-mode-hook 'eshell-tweaks)
     (add-hook 'term-mode-hook 'eshell-tweaks)
