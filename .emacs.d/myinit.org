@@ -1214,6 +1214,8 @@
      (setq org-log-done 'time)
      (setq org-log-reschedule 'time)
 
+     ;; Don't write inside invisible area when collapsing headings!
+     (setq org-catch-invisible-edits 'error)
    #+END_SRC
 ** Auto-mark TODO entries as DONE
    #+BEGIN_SRC emacs-lisp :tangle yes
