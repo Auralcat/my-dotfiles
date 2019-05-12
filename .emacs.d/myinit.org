@@ -17,7 +17,7 @@
     (use-package midnight
       :init
       ;; A good time for my "midnight" is 11:45am.
-      (midnight-delay-set midnight-delay "11:45am")
+      (midnight-delay-set 'midnight-delay "11:45am")
       )
   #+END_SRC
 * Evil Mode
@@ -129,7 +129,10 @@
       ;; Exec path from shell - Replicates terminal env vars in graphical Emacs
       (use-package exec-path-from-shell
         :init
-        (exec-path-from-shell-initialize)))
+        (exec-path-from-shell-initialize))
+
+      ;; Use Emacsclient in OS X
+      (setq server-socket-dir (format "/tmp/emacs%d" (user-uid))))
   #+END_SRC
 * Environment Customizations
   #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1276,15 +1279,7 @@
                           (equal (match-string 2) (match-string 3)))
                      (org-todo 'done)
                    (org-todo 'todo)))))))
-
-     ;; Mark a parent entry as DONE when its child TODO entries are DONE
-     (defun org-summary-todo (n-done n-not-done)
-       "Switch entry to DONE when all subentries are done, to TODO otherwise."
-       (let (org-log-done org-log-states)   ; turn off logging
-         (org-todo (if (= n-not-done 0) "DONE" "TODO"))))
-
-     (add-hook 'org-after-todo-statistics-hook 'org-summary-todo)
-   #+end_src
+   #+END_SRC
 ** Capture templates
    #+BEGIN_SRC emacs-lisp :tangle yes
      ;; Load them from a separate file.
