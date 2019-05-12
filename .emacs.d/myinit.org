@@ -8,6 +8,18 @@
    ;; Set fallback font
     (set-face-attribute 'default nil :font "Ubuntu Mono" :height 120)
   #+END_SRC
+* Midnight mode
+  Think of this as a kind of cron for Emacs. It runs a list of
+  specified commands every "midnight". What constitutes a "midnight"
+  can be defined by the user.
+  The default action for ~midnight-hook~ is ~clean-buffer-list~
+  #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package midnight
+      :init
+      ;; A good time for my "midnight" is 11:45am.
+      (midnight-delay-set midnight-delay "11:45am")
+      )
+  #+END_SRC
 * Evil Mode
   Yes, I'm committing this heresy
 **** Evil-leader
