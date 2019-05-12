@@ -949,6 +949,41 @@
 
       (add-hook 'change-major-mode-hook 'format-web-mode-buffer-on-save)
     #+END_SRC
+*** Git Gutter
+    Shows (and enables you to navigate between) parts of the code
+    which where changed comparing to the current revision in a
+    version-controlled project.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+      (use-package git-gutter
+        :when window-system
+        :defer t
+        :hook ((prog-mode text-mode) . 'git-gutter-mode)
+        :diminish ""
+        :config
+        (use-package git-gutter-fringe
+          :ensure t
+          :init
+          (require 'git-gutter-fringe)
+          (when (fboundp 'define-fringe-bitmap)
+            (define-fringe-bitmap 'git-gutter-fr:added
+              [224 224 224 224 224 224 224 224 224 224 224 224 224
+                   224 224 224 224 224 224 224 224 224 224 224 224]
+              nil nil 'center)
+            (define-fringe-bitmap 'git-gutter-fr:modified
+              [224 224 224 224 224 224 224 224 224 224 224 224 224
+                   224 224 224 224 224 224 224 224 224 224 224 224]
+              nil nil 'center)
+            (define-fringe-bitmap 'git-gutter-fr:deleted
+              [0 0 0 0 0 0 0 0 0 0 0 0 0 128 192 224 240 248]
+              nil nil 'center)))
+        ;; Adding evil-mode bindings
+        (define-key evil-normal-state-map (kbd "g h") 'git-gutter:previous-hunk)
+        (define-key evil-normal-state-map (kbd "g H") 'git-gutter:next-hunk)
+        (define-key evil-normal-state-map (kbd "g @") 'git-gutter:popup-hunk)
+        )
+    #+END_SRC
+
+
 *** Magit
     How to win at Git from Emacs.
     #+BEGIN_SRC emacs-lisp :tangle yes
