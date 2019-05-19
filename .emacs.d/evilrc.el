@@ -48,6 +48,16 @@
 ;; This command is originally bound to C-a, but I overrode it.
 (define-key evil-insert-state-map (kbd "C-.") 'evil-paste-last-insertion)
 
+(defun evil-control-at ()
+  "Paste last insertion and exit insert mode."
+  (interactive)
+  (evil-paste-last-insertion)
+  (evil-normal-state)
+  )
+;; Use C-@ in insert mode to paste the last insertion and quit insert mode.
+;; This is present in Vim, but not in Evil for some reason.
+(define-key evil-insert-state-map (kbd "C-@") 'evil-control-at)
+
 ;; COMPLETIONS
 ;; C-x C-f completes a file path in insert mode.
 (define-key evil-insert-state-map (kbd "C-x C-f") 'company-files)
