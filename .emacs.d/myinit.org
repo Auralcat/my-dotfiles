@@ -675,6 +675,14 @@
     (use-package emojify)
     #+END_SRC
 ** Utilities
+*** Beacon
+    Blinks when you move the cursor over long distances.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+      (use-package beacon
+        :config
+        (beacon-mode 1)
+        (setq beacon-blink-when-point-moves-vertically 10))
+    #+END_SRC
 *** Eyebrowse
     Simple window configuration management in Emacs.
     #+BEGIN_SRC emacs-lisp :tangle yes
