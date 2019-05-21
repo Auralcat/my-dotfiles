@@ -147,6 +147,7 @@
     "smi" 'slack-im-select
     "smg" 'slack-group-select
     "smc" 'slack-channel-select
+    "sus" 'slack-user-set-status
     ;; TODO: map this to org-mode locally.
     "t" 'my-org-remote-todo
     ;; Eyebrowse configuration
