@@ -333,12 +333,11 @@
 
       ;; Map evil's ]m and [m keys to a couple functions
       (evil-define-key 'normal enh-ruby-mode-map
-      "[m" 'enh-ruby-previous-beginning-of-defun
-      "[M" 'enh-ruby-previous-end-of-defun
-      "[[" 'enh-ruby-previous-beginning-of-class-or-module
-      "]m" 'enh-ruby-next-beginning-of-defun
-      "]M" 'enh-ruby-next-end-of-defun
-      "][" 'enh-ruby-next-beginning-of-class-or-module
+      "[m" 'enh-ruby-beginning-of-defun
+      "]m" 'enh-ruby-end-of-defun
+      "[b" 'enh-ruby-beginning-of-block
+      "]b" 'enh-ruby-end-of-block
+      "[u" 'enh-ruby-up-sexp
       "[s" 'enh-ruby-backward-sexp
       "]s" 'enh-ruby-forward-sexp)
     #+END_SRC
@@ -1001,7 +1000,7 @@
       :ensure t
       :config
       (setq circadian-themes '((:sunrise . cosmos)
-                               (:sunset  . fairyfloss)))
+                               (:sunset  . jazz)))
 
       (circadian-setup))
     #+END_SRC
