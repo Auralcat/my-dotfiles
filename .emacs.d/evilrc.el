@@ -81,91 +81,94 @@
 
 ;; Global bindings go here
 (evil-leader/set-key
-    ;; Eshell
-    "$" 'eshell
-    ;; Org-agenda
-    "a" 'org-agenda
-    ;; Frequently visited bookmarks
-    "bk" '(lambda() (interactive) (bookmark-jump "org-capture-last-stored"))
-    "br" '(lambda() (interactive) (bookmark-jump "org-refile-last-stored"))
-    ;; Bookmark shortcuts
-    "bb" 'bookmark-jump
-    "bl" 'list-bookmarks
-    "bs" 'bookmark-set
-    ;; Org-clock functions. It makes sense to group them here.
-    ;; For example, you can choose which clock funct
-    "ci" 'org-clock-in
-    "cl" 'org-clock-in-last
-    "co" 'org-clock-out
-    "cj" 'org-clock-goto
-    "cp" 'org-pomodoro
-    ;; Open frequently visited files
-    "fb" 'my-find-budget-file
-    "fe" 'my-find-evilrc-file
-    "ff" 'my-find-finances-log-file
-    "fm" 'jump-to-messages-buffer
-    "fi" 'my-find-init-el-file
-    "fo" 'my-find-init-org-file
-    "fs" 'jump-to-scratch-buffer
-    "fw" 'my-find-work-org-file
-    ;; Magit stuff
-    "gs" 'magit-status
-    "gb" 'magit-blame
-    "gc" 'magit-branch-or-checkout
-    "gf" 'magit-fetch-all-prune
-    "gm" 'magit-commit
-    "g!" 'magit-git-command
-    "g$" 'magit-process-buffer
-    "gz" 'magit-stash
-    "gl" 'magit-log
-    "gp" 'magit-push
-    "gx" 'magit-reset
-    ;; Helm prefix
-    "h" 'helm-command-prefix
-    ;; Quick ace-jump in evil-mode.
-    "j" 'ace-jump-mode
-    ;; Org-capture. Keeping consistency with org-agenda's binding.
-    "k" 'org-capture
-    ;; Work-related stuff
-    "mb" 'auralcat-run-bash-in-docker-container
-    "mp" 'my-open-ci-current-build
-    "mc" 'my-find-work-board-org-file
-    "mr" 'auralcat-run-rails-console-in-docker-container
-    "ms" 'my-goto-staging-server-url
-    "ml" 'my-goto-local-server-url
-    "mg" 'my-goto-work-github-repo-url
-    ;; Get the relative file name of current buffer. I pass that to rspec.
-    "mf" 'auralcat-kill-relative-file-name
-    "mt" 'auralcat-run-local-rails-test-inside-docker-container
-    ;; Flip window with ace-window.
-    "o" 'aw-flip-window
-    ;; Projectile prefix
-    "p" 'projectile-command-map
-    ;; Projectile-Rails prefix
-    "r" 'projectile-rails-command-map
-    ;; Slack bindings
-    "smi" 'slack-im-select
-    "smg" 'slack-group-select
-    "smc" 'slack-channel-select
-    "sus" 'slack-user-set-status
-    ;; TODO: map this to org-mode locally.
-    "t" 'my-org-remote-todo
-    ;; Eyebrowse configuration
-    "w\""  'eyebrowse-close-window-config
-    "w\'"  'eyebrowse-last-window-config
-    "w,"   'eyebrowse-rename-window-config
-    "w."   'eyebrowse-switch-to-window-config
-    "w0"   'eyebrowse-switch-to-window-config-0
-    "w1"   'eyebrowse-switch-to-window-config-1
-    "w2"   'eyebrowse-switch-to-window-config-2
-    "w3"   'eyebrowse-switch-to-window-config-3
-    "w4"   'eyebrowse-switch-to-window-config-4
-    "w5"   'eyebrowse-switch-to-window-config-5
-    "w6"   'eyebrowse-switch-to-window-config-6
-    "w7"   'eyebrowse-switch-to-window-config-7
-    "w8"   'eyebrowse-switch-to-window-config-8
-    "w9"   'eyebrowse-switch-to-window-config-9
-    "w<"   'eyebrowse-prev-window-config
-    "w>"   'eyebrowse-next-window-config
-    "wc"   'eyebrowse-create-window-config
-)
+  ;; Eshell
+  "$" 'eshell
+  ;; Org-agenda
+  "a" 'org-agenda
+  ;; Frequently visited bookmarks
+  "bk" '(lambda() (interactive) (bookmark-jump "org-capture-last-stored"))
+  "br" '(lambda() (interactive) (bookmark-jump "org-refile-last-stored"))
+  ;; Bookmark shortcuts
+  "bb" 'bookmark-jump
+  "bl" 'list-bookmarks
+  "bs" 'bookmark-set
+  ;; Org-clock functions. It makes sense to group them here.
+  ;; For example, you can choose which clock funct
+  "ci" 'org-clock-in
+  "cl" 'org-clock-in-last
+  "co" 'org-clock-out
+  "cj" 'org-clock-goto
+  "cp" 'org-pomodoro
+  ;; Dired stuff
+  "dj" 'dired-jump
+  "d4j" 'dired-jump-other-window
+  ;; Open frequently visited files
+  "fb" 'my-find-budget-file
+  "fe" 'my-find-evilrc-file
+  "ff" 'my-find-finances-log-file
+  "fm" 'jump-to-messages-buffer
+  "fi" 'my-find-init-el-file
+  "fo" 'my-find-init-org-file
+  "fs" 'jump-to-scratch-buffer
+  "fw" 'my-find-work-org-file
+  ;; Magit stuff
+  "gs" 'magit-status
+  "gb" 'magit-blame
+  "gc" 'magit-branch-or-checkout
+  "gf" 'magit-fetch-all-prune
+  "gm" 'magit-commit
+  "g!" 'magit-git-command
+  "g$" 'magit-process-buffer
+  "gz" 'magit-stash
+  "gl" 'magit-log
+  "gp" 'magit-push
+  "gx" 'magit-reset
+  ;; Helm prefix
+  "h" 'helm-command-prefix
+  ;; Quick ace-jump in evil-mode.
+  "j" 'ace-jump-mode
+  ;; Org-capture. Keeping consistency with org-agenda's binding.
+  "k" 'org-capture
+  ;; Work-related stuff
+  "mb" 'auralcat-run-bash-in-docker-container
+  "mp" 'my-open-ci-current-build
+  "mc" 'my-find-work-board-org-file
+  "mr" 'auralcat-run-rails-console-in-docker-container
+  "ms" 'my-goto-staging-server-url
+  "ml" 'my-goto-local-server-url
+  "mg" 'my-goto-work-github-repo-url
+  ;; Get the relative file name of current buffer. I pass that to rspec.
+  "mf" 'auralcat-kill-relative-file-name
+  "mt" 'auralcat-run-local-rails-test-inside-docker-container
+  ;; Flip window with ace-window.
+  "o" 'aw-flip-window
+  ;; Projectile prefix
+  "p" 'projectile-command-map
+  ;; Projectile-Rails prefix
+  "r" 'projectile-rails-command-map
+  ;; Slack bindings
+  "smi" 'slack-im-select
+  "smg" 'slack-group-select
+  "smc" 'slack-channel-select
+  "sus" 'slack-user-set-status
+  ;; TODO: map this to org-mode locally.
+  "t" 'my-org-remote-todo
+  ;; Eyebrowse configuration
+  "w\""  'eyebrowse-close-window-config
+  "w\'"  'eyebrowse-last-window-config
+  "w,"   'eyebrowse-rename-window-config
+  "w."   'eyebrowse-switch-to-window-config
+  "w0"   'eyebrowse-switch-to-window-config-0
+  "w1"   'eyebrowse-switch-to-window-config-1
+  "w2"   'eyebrowse-switch-to-window-config-2
+  "w3"   'eyebrowse-switch-to-window-config-3
+  "w4"   'eyebrowse-switch-to-window-config-4
+  "w5"   'eyebrowse-switch-to-window-config-5
+  "w6"   'eyebrowse-switch-to-window-config-6
+  "w7"   'eyebrowse-switch-to-window-config-7
+  "w8"   'eyebrowse-switch-to-window-config-8
+  "w9"   'eyebrowse-switch-to-window-config-9
+  "w<"   'eyebrowse-prev-window-config
+  "w>"   'eyebrowse-next-window-config
+  "wc"   'eyebrowse-create-window-config
+  )
