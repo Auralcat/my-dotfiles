@@ -1099,25 +1099,29 @@
    #+END_SRC
 * Graphical
   #+BEGIN_SRC emacs-lisp :tangle yes
-;; Set font in graphical mode
-(when (display-graphic-p)
-    ;; Use Fantasque Sans Mono when available
-    (if (member "Fantasque Sans Mono" (font-family-list))
-    (set-face-attribute (quote default) nil :font "Fantasque Sans Mono" :height 120)
-    '(set-face-attribute (quote default) nil :font "Ubuntu Mono" :height 120))
+    ;; Set font in graphical mode
+    (when (display-graphic-p)
+        ;; Use Fantasque Sans Mono when available
+        (if (member "Fantasque Sans Mono" (font-family-list))
+        (set-face-attribute (quote default) nil :font "Fantasque Sans Mono" :height 120)
+        '(set-face-attribute (quote default) nil :font "Ubuntu Mono" :height 120))
 
-    ;; Remove menu and scroll bars in graphical mode
-    (menu-bar-mode 0)
-    (tool-bar-mode 0)
-    (scroll-bar-mode 0)
-    ;; Enable emoji images
-    (global-emojify-mode)
-    ;; Enable them in the mode line as well.
-    (global-emojify-mode-line-mode)
-    ;; Maximize frame on startup
-    (toggle-frame-maximized))
+        ;; Remove menu and scroll bars in graphical mode
+        (menu-bar-mode 0)
+        (tool-bar-mode 0)
+        (scroll-bar-mode 0)
+        ;; Enable emoji images
+        (global-emojify-mode)
+        ;; Enable them in the mode line as well.
+        (global-emojify-mode-line-mode)
+        ;; Maximize frame on startup
+        (toggle-frame-maximized)
+        ;; Space lines and bask in the gloriousness of graphical mode.
+        ;; 0.4 feels better for prose, and 0.2 is fine for code.
+        (add-hook 'prog-mode-hook (lambda () (setq line-spacing 0.2)))
+        (add-hook 'comint-mode-hook (lambda () (setq line-spacing 0.2)))
+        (add-hook 'text-mode-hook (lambda () (setq line-spacing 0.4))))
   #+END_SRC
-
 * Keybindings
   #+BEGIN_SRC emacs-lisp :tangle yes
     ;; Remapping the help hotkey so it doesn't clash with Unix backspace.
