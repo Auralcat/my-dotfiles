@@ -89,7 +89,7 @@
   "bk" '(lambda() (interactive) (bookmark-jump "org-capture-last-stored"))
   "br" '(lambda() (interactive) (bookmark-jump "org-refile-last-stored"))
   ;; Bookmark shortcuts
-  "bb" 'bookmark-jump
+  "bb" 'helm-bookmarks
   "bl" 'list-bookmarks
   "bs" 'bookmark-set
   ;; Org-clock functions. It makes sense to group them here.
