@@ -534,7 +534,8 @@
        ;; General text writing completion (uses dabbrev and filename completion)
        (defun human-language-mode-tweaks ()
        (set (make-local-variable 'company-backends) '(company-dabbrev company-capf company-files))
-       (set (make-local-variable 'company-minimum-prefix-length) 2))
+       (set (make-local-variable 'company-minimum-prefix-length) 2)
+       (set (make-local-variable 'fill-column 120)))
 
        ;; Add tweaks
        (add-hook 'enh-ruby-mode-hook 'ruby-mode-tweaks)
@@ -543,6 +544,10 @@
        (add-hook 'org-mode-hook 'human-language-mode-tweaks)
        (add-hook 'markdown-mode-hook 'human-language-mode-tweaks)
        (add-hook 'git-commit-setup-hook 'human-language-mode-tweaks)
+
+       (add-hook 'org-mode-hook 'variable-pitch-mode)
+       (add-hook 'markdown-mode-hook 'variable-pitch-mode)
+       (add-hook 'git-commit-setup-hook 'variable-pitch-mode)
 
        ;; Autocompletion for Bootstrap/FontAwesome classes
        (use-package ac-html-bootstrap)
@@ -1202,6 +1207,9 @@
 
      ;; Change the end of collapsed headings to an arrow.
      (setq org-ellipsis "⤵")
+
+     ;; Use fixed-pitch fonts inside org-src blocks.
+     (set-face-attribute 'org-block nil :inherit 'fixed-pitch :height 120)
 
      ;; Keep agenda file list in a single file so I can publish my config.
      ;; DO NOT use C-c [ or C-c ] to add/remove files to the agenda otherwise
