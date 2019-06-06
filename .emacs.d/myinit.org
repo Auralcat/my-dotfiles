@@ -1179,18 +1179,30 @@
     (evil-leader/set-key-for-mode 'python-mode "SPC" 'python-shell-send-buffer)
     (evil-leader/set-key-for-mode 'js2-mode "SPC" 'js-comint-send-buffer)
   #+END_SRC
-
+* Guess Language Mode
+  This is a helper mode which changes the current ~flyspell~ dictionary depending on the language you're typing in the
+  current line. Quite useful when you write text in more than one language often. That way you're not bound to a
+  specific mode to work with.
+  #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package guess-language
+      :config
+      (setq guess-language-languages '(pt en))
+      (setq guess-language-langcodes
+      '((en . ("en_US" "English"))
+        (pt . ("pt_BR" "Brasileiro"))))
+      (setq guess-language-min-paragraph-length 35))
+  #+END_SRC
 * Web-mode
   #+BEGIN_SRC emacs-lisp :tangle yes
     (defun web-mode-keybindings ()
-        "Define mode-specific keybindings like this."
-        (local-set-key (kbd "C-c C-v") 'browse-url-of-buffer)
-        (local-set-key (kbd "C-c /") 'sgml-close-tag))
+  "Define mode-specific keybindings like this."
+  (local-set-key (kbd "C-c C-v") 'browse-url-of-buffer)
+  (local-set-key (kbd "C-c /") 'sgml-close-tag))
 
     ;; Add company backends when loading web-mode.
     (defun web-mode-company-load-backends ()
-        (company-web-bootstrap+)
-        (company-web-fa+))
+  (company-web-bootstrap+)
+  (company-web-fa+))
 
     (add-hook 'web-mode-hook 'web-mode-keybindings)
     (add-hook 'web-mode-hook 'web-mode-company-load-backends)
