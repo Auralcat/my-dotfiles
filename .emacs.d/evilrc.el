@@ -90,6 +90,7 @@
   "br" '(lambda() (interactive) (bookmark-jump "org-refile-last-stored"))
   ;; Bookmark shortcuts
   "bb" 'helm-bookmarks
+  "b4b" 'bookmark-jump-other-window
   "bl" 'list-bookmarks
   "bs" 'bookmark-set
   ;; Org-clock functions. It makes sense to group them here.
