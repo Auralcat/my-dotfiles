@@ -535,7 +535,7 @@
        (defun human-language-mode-tweaks ()
        (set (make-local-variable 'company-backends) '(company-dabbrev company-capf company-files))
        (set (make-local-variable 'company-minimum-prefix-length) 2)
-       (set (make-local-variable 'fill-column 120)))
+       (setq fill-column 120))
 
        ;; Add tweaks
        (add-hook 'enh-ruby-mode-hook 'ruby-mode-tweaks)
@@ -1364,6 +1364,21 @@
        :hook (org-mode . evil-org-mode)
        )
    #+END_SRC
+* Markdown-mode
+  A couple tweaks to make it more Org-like.
+  #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package markdown-mode
+      :bind
+      ("M-<right>" . 'markdown-demote)
+      ("M-<left>" . 'markdown-promote)
+      ("M-<up>" . 'markdown-move-up)
+      ("M-<down>" . 'markdown-move-down)
+      ("C-c 1" . 'markdown-insert-header-atx-1)
+      ("C-c 2" . 'markdown-insert-header-atx-2)
+      ("C-c 3" . 'markdown-insert-header-atx-3)
+      :config
+      (setq markdown-asymmetric-header t))
+  #+END_SRC
 * Variables
   #+BEGIN_SRC emacs-lisp :tangle yes
   ;; Set Org mode as default mode for new buffers:
@@ -1371,9 +1386,6 @@
 
   ;; Enable auto-fill mode by default
   (auto-fill-mode 1)
-
-  ;; Set default fill to 119
-  (set-fill-column 119)
 
   ;; Change tab width and change tabs to spaces
   (setq-default tab-width 4)
