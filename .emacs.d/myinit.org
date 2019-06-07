@@ -91,11 +91,17 @@
     ;; insert it in this file with insert-kbd-macro.
     ;; Then you execute it mapping it to a key! 😊
 
+    (fset 'auralcat/ruby-extract-var-declaration-to-method
+    (lambda (&optional arg) "Takes a variable declaration out of a method and makes a new method for it. " (interactive "p") (kmacro-exec-ring-item (quote ([109 109 100 69 134217733 111 return 100 101 102 32 15 112 return escape 39 109 74 50 88 100 106 134217733 134217733 80 98 74 105 tab escape 39 109 100 100] 0 "%d")) arg)))
+
+    (fset 'auralcat/ruby-extract-var-declaration-to-let
+    (lambda (&optional arg) "Extracts a variable from an it clause and puts in a let statement." (interactive "p") (kmacro-exec-ring-item (quote ([100 100 134217745 134217729 112 99 87 108 101 116 40 58 25 escape 102 61 50 120 67 123 25 escape 86 61 15 15 48 119] 0 "%d")) argumento)))
+
     (fset 'auralcat/ruby-clone-method
-          (lambda (&optional arg) "Clones a def method in Ruby." (interactive "p") (kmacro-exec-ring-item (quote ([86 125 121 103 118 escape 112] 0 "%d")) arg)))
+    (lambda (&optional arg) "Clones a def method in Ruby." (interactive "p") (kmacro-exec-ring-item (quote ([86 125 121 103 118 escape 112] 0 "%d")) arg)))
 
     (fset 'auralcat/search-git-conflict-string
-          (lambda (&optional arg) "Searches for a Git conflict string." (interactive "p") (kmacro-exec-ring-item (quote ([134217747 94 91 60 61 62 93 13] 0 "%d")) arg)))
+    (lambda (&optional arg) "Searches for a Git conflict string." (interactive "p") (kmacro-exec-ring-item (quote ([134217747 94 91 60 61 62 93 13] 0 "%d")) arg)))
   #+END_SRC
 * Mac OS
   #+BEGIN_SRC emacs-lisp :tangle yes
@@ -504,7 +510,7 @@
      (global-set-key (kbd "M-x") 'helm-M-x)
      (global-set-key (kbd "»") 'helm-M-x)
      (global-set-key (kbd "C-x C-f") 'helm-find-files)
-     (global-set-key (kbd "C-x b") 'helm-buffers-list)
+     (global-set-key (kbd "C-x b") 'helm-mini)
 
      ;; Enable fuzzy matching
      (setq helm-M-x-fuzzy-match t)
