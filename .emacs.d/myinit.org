@@ -75,6 +75,15 @@
     (define-key evil-outer-text-objects-map "r" 'evil-textobj-outer-ruby-block)
       #+END_SRC
 
+* Dired
+  A couple customizations.
+  #+BEGIN_SRC emacs-lisp :tangle yes
+    (setq dired-listing-switches "-alh")
+    (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
+    (define-key dired-mode-map (kbd "^") (lambda () (interactive) (find-alternate-file "..")))
+    ;; Use Emacs mode in Dired.
+    (add-hook 'dired-mode-hook 'evil-emacs-state)
+  #+END_SRC
 * Macros
   #+BEGIN_SRC emacs-lisp :tangle yes
     ;; To save a macro, record it with C-x ( (start) and C-x ) (stop),
