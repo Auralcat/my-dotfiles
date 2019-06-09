@@ -75,6 +75,9 @@
 ;; C-x C-]: Tag completion.
 (define-key evil-insert-state-map (kbd "C-x C-]") 'company-etags)
 
+;; Delete previous word with C-w in insert mode. Just like Vim.
+(define-key evil-insert-state-map (kbd "C-w") 'backward-kill-word)
+
 ;; Evil Leader configs
 ;; Use SPC as leader key (yah, this is the idea behind Spacemacs)
 (evil-leader/set-leader "SPC")
