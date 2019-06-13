@@ -24,5 +24,6 @@ myinit.el
 .emacs.d/completions
 .emacs.d/network-security.data
 .emacs.d/elpa
+.emacs.d/manual-themes
 .emacs.d/tramp
 tetris-scores

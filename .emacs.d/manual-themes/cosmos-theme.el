@@ -1,1 +1,0 @@
-/Users/miriamretka/cosmos-theme/cosmos-theme.el
