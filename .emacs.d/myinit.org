@@ -80,7 +80,7 @@
   #+BEGIN_SRC emacs-lisp :tangle yes
     (setq dired-listing-switches "-alh")
     (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
-    (define-key dired-mode-map (kbd "^") (lambda () (interactive) (find-alternate-file "..")))
+    (define-key dired-mode-map (kbd "^") (lambda () (find-alternate-file "..")))
     ;; Use Emacs mode in Dired.
     (add-hook 'dired-mode-hook 'evil-emacs-state)
   #+END_SRC
@@ -812,6 +812,8 @@
               (set (make-local-variable 'company-minimum-prefix-length) 2))
 
        (add-hook 'slack-mode-hook 'slack-mode-tweaks)
+       ;; Disable auto-fill-mode
+       (add-hook 'slack-mode-hook 'turn-off-auto-fill)
        (add-hook 'slack-message-compose-buffer-mode-hook 'slack-mode-tweaks)
        (add-hook 'slack-message-edit-buffer-mode-hook 'slack-mode-tweaks)
        (add-hook 'slack-thread-message-buffer-mode-hook 'slack-mode-tweaks)
