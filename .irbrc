@@ -3,10 +3,19 @@
 # IRB config file.
 require 'rubygems'
 
-# Rails goodies
-require 'pp'
-require 'psych'
-require 'method_source'
+# Persist history in my personal repo.
+IRB.conf[:SAVEHISTORY] = 1024
+IRB.conf[:HISTORYFILE] = File.expand_path(File.expand_path('~/file-bouncer/.irb_history'))
+IRB.conf[:EVAL_HISTORY] = 512
+
+# Easy history lookup
+def history_array
+  Readline::HISTORY.to_a
+end
+
+def history
+  print history_array.join("\n")
+end
 
 # Credits: https://gist.github.com/jimweirich/4950443
 def edit(file, line)

@@ -8,6 +8,19 @@
    ;; Set fallback font
     (set-face-attribute 'default nil :font "Ubuntu Mono" :height 120)
   #+END_SRC
+* Command history
+  It's a good idea to save the previous commands' history, for a couple reasons:
+  - Check the complex commands you use most often and improve your workflow
+    based on that
+  - Store cumbersome commands for specific situations that don't
+    appear too often, but where this command saves your back (example
+    in Ruby: extracting a variable inside "it" clause to a "let" block)
+    #+BEGIN_SRC emacs-lisp :tangle yes
+      (savehist-mode 1)
+      (setq savehist-additional-variables '(kill-ring search-ring regexp-search-ring))
+      (setq savehist-file "~/file-bouncer/emacs-savehist")
+      (setq history-length 1024)
+    #+END_SRC
 * Midnight mode
   Think of this as a kind of cron for Emacs. It runs a list of
   specified commands every "midnight". What constitutes a "midnight"
