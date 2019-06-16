@@ -21,6 +21,13 @@
       (setq savehist-file "~/file-bouncer/emacs-savehist")
       (setq history-length 1024)
     #+END_SRC
+* Bookmarks
+  It's a quicker way to navigate through files you visit often.
+  #+BEGIN_SRC emacs-lisp :tangle yes
+    (setq bookmark-default-file "~/file-bouncer/bookmarks")
+    ;; Every time bookmarks are changed, save them
+    (setq bookmark-save-flag 1)
+  #+END_SRC
 * Midnight mode
   Think of this as a kind of cron for Emacs. It runs a list of
   specified commands every "midnight". What constitutes a "midnight"
