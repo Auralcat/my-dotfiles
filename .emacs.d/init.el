@@ -71,7 +71,7 @@
  '(display-time-format " 📅 %a, %d %b 🕙 %R ")
  '(display-time-mail-face (quote change-log-email))
  '(display-time-mail-string "✉")
- '(display-time-mode t)
+ '(display-time-mode nil)
   '(display-time-world-list
      (quote
        (("Europe/Stockholm" "TalonRO Server Time")
@@ -289,13 +289,14 @@
  '(nyan-animation-frame-interval 0.2)
  '(nyan-bar-length 16)
  '(nyan-mode t)
+ '(objed-cursor-color "#ff5555")
  '(org-agenda-scheduled-leaders (quote ("Scheduled: " "Sched. previously %2dx: ")))
  '(org-agenda-skip-scheduled-if-done t)
  '(org-agenda-start-on-weekday 0)
  '(org-bullets-bullet-list (quote ("✿" "❀" "◉" "○" "✸")))
  '(org-default-notes-file "~/file-bouncer/everything-bucket")
  '(org-plantuml-jar-path "~/file-bouncer/plantuml.jar")
- '(org-pomodoro-audio-player "/usr/bin/mpv" t)
+ '(org-pomodoro-audio-player "/usr/bin/mpv")
   '(org-pomodoro-finished-sound
      "~/.emacs.d/pomodoro-sounds/Librem-5-power-on-by-Antonio-Paternina-Alvarez.ogg")
  '(org-pomodoro-finished-sound-p t)
