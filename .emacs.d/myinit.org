@@ -1177,6 +1177,10 @@
     ;; works too.
     ;; (define-key key-translation-map [?\C-h] [?\C-?])
 
+    ;; Resize the frame with ease
+    (global-set-key [M-f11] (quote toggle-frame-fullscreen))
+    (global-set-key [M-f10] (quote toggle-frame-maximized))
+
     ;; Use the menu key for helm-m-x
     (global-set-key [menu] (quote helm-M-x))
 
