@@ -281,19 +281,6 @@
        ("”" . switch-to-buffer)))
   #+END_SRC
 
-* Custom functions
-  #+BEGIN_SRC emacs-lisp :tangle yes
-    ;; Unfill region, AKA leave single huge line
-    (defun unfill-region (beg end)
-      "Unfill the region, joining text paragraphs into a single
-      logical line.  This is useful, e.g., for use with
-      `visual-line-mode'."
-      (interactive "*r")
-      (let ((fill-column (point-max)))
-        (fill-region beg end)))
-
-    (load "~/my-dotfiles/.emacs.d/elisp-custom/docker-sync-utils.el")
-  #+END_SRC
 * Function Aliases
   #+BEGIN_SRC emacs-lisp :tangle yes
 ;; This is how you define aliases for Elisp functions
@@ -1489,7 +1476,7 @@
 
   #+END_SRC
 * Custom functions
-** Main
+** Rails Docker utils
    #+BEGIN_SRC emacs-lisp :tangle yes
    (require 'rails-docker-utils)
    #+END_SRC
@@ -1527,6 +1514,19 @@
        (org-todo)
        (mode-line-other-buffer)
        )
+   #+END_SRC
+** Unfill region
+   #+BEGIN_SRC emacs-lisp :tangle yes
+     ;; Unfill region, AKA leave single huge line
+     (defun unfill-region (beg end)
+       "Unfill the region, joining text paragraphs into a single
+       logical line.  This is useful, e.g., for use with
+       `visual-line-mode'."
+       (interactive "*r")
+       (let ((fill-column (point-max)))
+         (fill-region beg end)))
+
+     (load "~/my-dotfiles/.emacs.d/elisp-custom/docker-sync-utils.el")
    #+END_SRC
 * Twittering mode
   Use Twitter from within Emacs!
