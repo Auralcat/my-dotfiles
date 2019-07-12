@@ -104,12 +104,16 @@
     ;; Use Emacs mode in Dired.
     (add-hook 'dired-mode-hook 'evil-emacs-state)
   #+END_SRC
+
 * Macros
   #+BEGIN_SRC emacs-lisp :tangle yes
     ;; To save a macro, record it with C-x ( (start) and C-x ) (stop),
     ;; give it a name with C-x C-k n (C-k is for maKro) and
     ;; insert it in this file with insert-kbd-macro.
     ;; Then you execute it mapping it to a key! 😊
+
+    (fset 'auralcat/ruby-extract-variable-to-private-method
+   (lambda (&optional arg) "Extracts a variable declaration to a private method." (interactive "p") (kmacro-exec-ring-item (quote ([121 69 47 112 114 105 return 111 return 100 101 102 32 25 return escape 109 109 15 50 87 68 39 109 112 73 tab escape 15 100 100] 0 "%d")) argumento)))
 
     (fset 'auralcat/ruby-extract-var-declaration-to-method
     (lambda (&optional arg) "Takes a variable declaration out of a method and makes a new method for it. " (interactive "p") (kmacro-exec-ring-item (quote ([109 109 100 69 134217733 111 return 100 101 102 32 15 112 return escape 39 109 74 50 88 100 106 134217733 134217733 80 98 74 105 tab escape 39 109 100 100] 0 "%d")) arg)))
