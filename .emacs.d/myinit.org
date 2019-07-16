@@ -591,33 +591,6 @@
        ;; Activate it
        (company-prescient-mode)
      #+END_SRC
-**** Front-ends
-***** Company-box
-      Show icons in Company tooltip and different backends.
-      #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package company-box
-    :diminish company-box-mode
-    :if window-system
-    :hook (company-mode . company-box-mode))
-
-    ;; Add alternate icon font
-    (add-to-list 'load-path "~/.local/share/icons-in-terminal/")
-
-    ;; Temporary fix
-    (add-to-list 'load-path "~/.emacs.d/manual-packages/font-lock+/")
-    (require 'font-lock+)
-    ;; (require 'icons-in-terminal)
-
-    (setq company-box-icons-unknown 'fa_question_circle)
-
-    (setq company-box-icons-elisp
-    '((fa_tag :face font-lock-function-name-face) ;; Function
-    (fa_cog :face font-lock-variable-name-face) ;; Variable
-    (fa_cube :face font-lock-constant-face) ;; Feature
-    (md_color_lens :face font-lock-doc-face))) ;; Face
-
-    (setq company-box-icons-yasnippet 'fa_bookmark)
-      #+END_SRC
 *** Keyfreq
     Shows most used commands in editing session.
     To see the data, run (keyfreq-show) with M-:
@@ -932,11 +905,6 @@
        ;; Currently this has a conflict with Magit
        (add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode))
     #+END_SRC
-*** Cheat.sh client
-    Access cheat.sh from Emacs
-    #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package cheat-sh :ensure t)
-    #+END_SRC
 *** Writeroom Mode
     Dims the modeline, perfect for focusing on writing text/code
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -967,21 +935,6 @@
     (use-package rainbow-delimiters)
     ;; Add this to prog-mode
     (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
-    #+END_SRC
-*** Web-beautify
-    Format HTML/CSS and JS code with js-beautify
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package web-beautify)
-
-      ;; Format web-mode buffer automatically on save
-      (defun format-web-mode-buffer-on-save ()
-        ""
-        (if (eq major-mode 'web-mode)
-            (add-hook 'before-save-hook 'web-beautify-html)
-          (remove-hook 'before-save-hook 'web-beautify-html))
-        )
-
-      (add-hook 'change-major-mode-hook 'format-web-mode-buffer-on-save)
     #+END_SRC
 *** Git Gutter
     Shows (and enables you to navigate between) parts of the code
@@ -1096,16 +1049,6 @@
     #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package evil-anzu)
     (global-anzu-mode)
-    #+END_SRC
-*** Vagrant TRAMP
-    Open files in running Vagrant box using TRAMP
-    #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package vagrant-tramp)
-    #+END_SRC
-*** Carbon-now.sh
-    Share the region in carbon-now.sh
-    #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package carbon-now-sh)
     #+END_SRC
 * Themes
   Remember to _defer_ the loading of the theme packages, otherwise the
