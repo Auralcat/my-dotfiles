@@ -1064,11 +1064,6 @@
    #+BEGIN_SRC emacs-lisp :tangle yes
    (use-package abyss-theme :ensure :defer t)
    #+END_SRC
-** Doom Themes
-   A collection of themes from the Doom package
-   #+BEGIN_SRC emacs-lisp :tangle yes
-   (use-package doom-themes :ensure :defer t)
-   #+END_SRC
 ** Twilight Bright
    A port of the theme from TextMate.
    #+BEGIN_SRC emacs-lisp :tangle yes
