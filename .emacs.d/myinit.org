@@ -112,24 +112,48 @@
     ;; insert it in this file with insert-kbd-macro.
     ;; Then you execute it mapping it to a key! 😊
 
-    (fset 'auralcat/indent-whole-buffer
-          (lambda (&optional arg) "Indents the whole buffer." (interactive "p") (kmacro-exec-ring-item (quote ("h=" 0 "%d")) arg)))
-
-    (fset 'auralcat/ruby-extract-variable-to-private-method
-          (lambda (&optional arg) "Extracts a variable declaration to a private method." (interactive "p") (kmacro-exec-ring-item (quote ([121 69 47 112 114 105 return 111 return 100 101 102 32 25 return escape 109 109 15 50 87 68 39 109 112 73 tab escape 15 100 100] 0 "%d")) argumento)))
-
-    (fset 'auralcat/ruby-extract-var-declaration-to-method
-          (lambda (&optional arg) "Takes a variable declaration out of a method and makes a new method for it. " (interactive "p") (kmacro-exec-ring-item (quote ([109 109 100 69 134217733 111 return 100 101 102 32 15 112 return escape 39 109 74 50 88 100 106 134217733 134217733 80 98 74 105 tab escape 39 109 100 100] 0 "%d")) arg)))
-
-    (fset 'auralcat/ruby-extract-var-declaration-to-let
-          (lambda (&optional arg) "Extracts a variable from an it clause and puts in a let statement." (interactive "p") (kmacro-exec-ring-item (quote ([100 100 134217745 134217729 112 99 87 108 101 116 40 58 25 escape 102 61 50 120 67 123 25 escape 86 61 15 15 48 119] 0 "%d")) argumento)))
+    ;; This package allows you to override a couple functions.
+    (use-package noflet)
+    (lambda (&optional arg) "Extracts a variable from an it clause and puts in a let statement." (interactive "p") (kmacro-exec-ring-item (quote ([100 100 134217745 134217729 112 99 87 108 101 116 40 58 25 escape 102 61 50 120 67 123 25 escape 86 61 15 15 48 119] 0 "%d")) arg))
 
     (fset 'auralcat/ruby-clone-method
           (lambda (&optional arg) "Clones a def method in Ruby." (interactive "p") (kmacro-exec-ring-item (quote ([86 125 121 103 118 escape 112] 0 "%d")) arg)))
 
     (fset 'auralcat/search-git-conflict-string
-          (lambda (&optional arg) "Searches for a Git conflict string." (interactive "p") (kmacro-exec-ring-item (quote ([134217747 94 91 60 61 62 93 13] 0 "%d")) arg)))
+          (lambda (&optional arg) "Searches for a Git conflict string." (interactive "p") (kmacro-exec-ring-item (quote ([134217747 94 91 60 61 62 93 13] 0 "%d")) argumento)))
+
+      (fset (quote sample-macro)
+          (lambda (&optional arg) "Sample description" (interactive "p")
+            (undo-boundary)
+            (noflet ((undo-boundary ()))
+              (kmacro-exec-ring-item (quote ([100 87 65 32 35 32 65 110 111 116 104 101 114 32 109 97 99 114 111 32 99 97 108 108 46 escape 134217730 return 112 45] 0 "%d")) arg)
+              )
+            (undo-boundary)
+            ))
+
+    ;; Some macros to adjust Ruby def's
+    (fset 'auralcat/enh-ruby-move-defun-forward
+          (lambda (&optional arg) "Moves a DEF block further ahead in the class definition." (interactive "p")
+            (undo-boundary)
+            (noflet ((undo-boundary ()))
+              (kmacro-exec-ring-item (quote ([26 167772166 23 4 134217820 4 134217830 134217826 134217734 return return 25 134217730 26] 0 "%d")) arg)
+              )
+            (undo-boundary)
+            ))
+
+    (fset 'auralcat/enh-ruby-move-defun-backward
+          (lambda (&optional arg) "Moves a DEF block backwards in the class definition." (interactive "p")
+            (undo-boundary)
+            (noflet ((undo-boundary ()))
+              (kmacro-exec-ring-item (quote ([26 167772166 23 134217820 16 4 134217820 4 2 134217730 16 return 25 return 134217730 26] 0 "%d")) arg)
+              )
+            (undo-boundary)
+            ))
   #+END_SRC
+
+  #+RESULTS:
+  | lambda | (&optional arg) | Moves a DEF block backwards in the class definition. | (interactive p) | (undo-boundary) | (noflet ((undo-boundary nil)) (kmacro-exec-ring-item (quote ([26 167772166 23 134217820 16 4 134217820 4 2 134217730 16 return 25 return 134217730 26] 0 %d)) arg)) | (undo-boundary) |
+
 * Mac OS
   #+BEGIN_SRC emacs-lisp :tangle yes
     (when (eq system-type 'darwin) ;; mac specific settings
@@ -369,6 +393,9 @@
       "[u" 'enh-ruby-up-sexp
       "[s" 'enh-ruby-backward-sexp
       "]s" 'enh-ruby-forward-sexp)
+
+      (define-key enh-ruby-mode-map (kbd "M-<down>") 'auralcat/enh-ruby-move-defun-forward)
+      (define-key enh-ruby-mode-map (kbd "M-<up>") 'auralcat/enh-ruby-move-defun-backward)
     #+END_SRC
 *** Web Mode
     I use this for HTML files mostly, works good for PHP too.
