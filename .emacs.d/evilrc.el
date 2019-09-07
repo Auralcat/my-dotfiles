@@ -136,7 +136,7 @@
   ;; Work-related stuff
   "mb" 'auralcat-run-bash-in-docker-container
   "mp" 'my-open-ci-current-build
-  "mc" 'my-find-work-board-org-file
+  "mc" 'my-find-daily-todos-org-file
   "mr" 'auralcat-run-rails-console-in-docker-container
   "ms" 'my-goto-staging-server-url
   "ml" 'my-goto-local-server-url

@@ -32,10 +32,10 @@
     (interactive)
     (find-file "~/.emacs.d/myinit.org"))
 
-(defun my-find-work-org-file ()
-    "Jump to my work's Org file."
+(defun my-find-daily-todos-org-file ()
+    "Jump to my daily TODO's Org file."
     (interactive)
-    (find-file auralcat-org-work-file-path))
+    (find-file auralcat-org-daily-todos-file-path))
 
 (defun jump-to-messages-buffer ()
     "Jump to Emacs message buffer."
@@ -64,10 +64,10 @@
                         (s-trim (shell-command-to-string "git rev-parse --abbrev-ref HEAD")))))
     )
 
-(defun my-find-work-board-org-file ()
+(defun my-find-work-org-file ()
     "Open the kanban Org file for work."
     (interactive)
-    (find-file auralcat-org-board-cards-file-path)
+    (find-file auralcat-org-work-file-path)
     )
 
 (defun my-goto-staging-server-url ()
