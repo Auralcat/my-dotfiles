@@ -593,7 +593,7 @@
        (defun human-language-mode-tweaks ()
        (set (make-local-variable 'company-backends) '(company-dabbrev company-capf company-files))
        (set (make-local-variable 'company-minimum-prefix-length) 2)
-       (setq fill-column 120))
+       (setq fill-column 80))
 
        ;; Add tweaks
        (add-hook 'enh-ruby-mode-hook 'ruby-mode-tweaks)
@@ -761,10 +761,10 @@
                           :parents (list org-mode-abbrev-table))
 
       (abbrev-table-put slack-thread-message-buffer-mode-abbrev-table
-                          :parents (list org-mode-abbrev-table))
+                          :parents (list slack-mode-abbrev-table))
 
       (abbrev-table-put slack-message-compose-buffer-mode-abbrev-table
-                          :parents (list org-mode-abbrev-table))
+                          :parents (list slack-mode-abbrev-table))
 
         ;; Expand abbrevs when pressing Enter in slack-modes (it's derived from lui-mode)
         (advice-add #'lui-send-input :before
@@ -1139,7 +1139,7 @@
         ;; 0.4 feels better for prose, and 0.2 is fine for code.
         (add-hook 'prog-mode-hook (lambda () (setq line-spacing 0.2)))
         (add-hook 'comint-mode-hook (lambda () (setq line-spacing 0.2)))
-        (add-hook 'text-mode-hook (lambda () (setq line-spacing 0.4))))
+        (add-hook 'text-mode-hook (lambda () (setq line-spacing 0.6))))
   #+END_SRC
 * Keybindings
   #+BEGIN_SRC emacs-lisp :tangle yes

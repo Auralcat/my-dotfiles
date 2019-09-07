@@ -5,8 +5,8 @@
 
 (custom-theme-set-faces
  'reading-specs
- '(variable-pitch ((t (:family "Ubuntu"))))
- '(fixed-pitch ((t (:family "Inconsolata"))))
+ '(variable-pitch ((t (:family "IBM Plex Sans"))))
+ '(default ((t (:family "Inconsolata"))))
  '(org-date ((t (:inherit fixed-pitch))))
  '(org-table ((t (:inherit fixed-pitch)))))
 
