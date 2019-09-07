@@ -99,8 +99,8 @@
   A couple customizations.
   #+BEGIN_SRC emacs-lisp :tangle yes
     (setq dired-listing-switches "-alh")
-    (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
-    (define-key dired-mode-map (kbd "^") (lambda () (find-alternate-file "..")))
+    ;; (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
+    ;; (define-key dired-mode-map (kbd "^") (lambda () (find-alternate-file "..")))
     ;; Use Emacs mode in Dired.
     (add-hook 'dired-mode-hook 'evil-emacs-state)
   #+END_SRC
@@ -1019,8 +1019,8 @@
     (use-package circadian
       :ensure t
       :config
-      (setq circadian-themes '((:sunrise . cosmos)
-                               (:sunset  . jazz)))
+      (setq circadian-themes '((:sunrise . cosmos-light)
+                               (:sunset  . cosmos-dark)))
 
       (circadian-setup))
     #+END_SRC

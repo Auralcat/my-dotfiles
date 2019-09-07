@@ -24,6 +24,11 @@
 ;; Use Q in normal mode to kill current buffer.
 (define-key evil-normal-state-map (kbd "Q") 'kill-current-buffer)
 
+;; Evil-snipe: use s and S for sniping, transfer the command from S to K
+(define-key evil-normal-state-map (kbd "s") 'evil-snipe-s)
+(define-key evil-normal-state-map (kbd "S") 'evil-snipe-S)
+(define-key evil-normal-state-map (kbd "K") 'evil-change-whole-line)
+
 ;; INSERT MODE
 ;; Use C-g to exit from Normal mode as well.
 (define-key evil-insert-state-map (kbd "C-g") 'evil-force-normal-state)
