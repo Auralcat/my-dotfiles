@@ -5,9 +5,10 @@
 
 (custom-theme-set-faces
  'reading-specs
- '(variable-pitch ((t (:family "IBM Plex Sans"))))
+ '(variable-pitch ((t (:family "IBM Plex Sans" :height 140))))
  '(default ((t (:family "Inconsolata"))))
  '(org-date ((t (:inherit fixed-pitch))))
- '(org-table ((t (:inherit fixed-pitch)))))
+ '(org-table ((t (:inherit fixed-pitch))))
+ '(org-src ((t (:inherit fixed-pitch)))))
 
 (provide-theme 'reading-specs)
