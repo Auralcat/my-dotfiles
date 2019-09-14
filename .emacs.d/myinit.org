@@ -295,19 +295,6 @@
   ;; Create filling for org-mode
   (add-hook 'org-mode-hook 'auto-fill-mode)
   #+END_SRC
-* IRC
-  Qui Nov  2 19:57:06 BRST 2017 - Tried using IRC inside Emacs, didn't please
-  me, too many buffers to work with... for now.
-  #+BEGIN_SRC emacs-lisp :tangle yes
-;; Use Weechat from Emacs
-(use-package weechat
- :bind (:map weechat-mode-map
-       ("<up>" . weechat-previous-input)
-       ("<down>" . weechat-next-input)
-       ("ð" . delete-other-windows)
-       ("”" . switch-to-buffer)))
-  #+END_SRC
-
 * Function Aliases
   #+BEGIN_SRC emacs-lisp :tangle yes
 ;; This is how you define aliases for Elisp functions
@@ -1380,17 +1367,6 @@
 
      (add-hook 'org-pomodoro-started-hook (lambda() (pomodoro-display-notification "Pomodoro started!" "Concentrate on your task!")))
      (add-hook 'org-pomodoro-finished-hook (lambda() (pomodoro-display-notification "Pomodoro finished" "Time to take a break!")))
-   #+END_SRC
-
-** Org-notify
-   Desktop notifications for Org-mode.
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     (use-package org-alert)
-     ;; Use native notifications in Mac.
-     (if (eq system-type 'darwin)
-       (setq alert-default-style 'osx-notifier)
-       ;; Use libnotify to display the alerts in Linux
-       (setq alert-default-style 'libnotify))
    #+END_SRC
 ** Evil-org
    Evil-mode keybindings for org-mode.
