@@ -1292,6 +1292,10 @@
 
      ;; Define a standard format for Org's column view
      (setq org-columns-default-format "%50ITEM(Item) %EFFORT(Effort) %CLOCK(Time Spent)")
+
+     ;; Set agenda as sticky. This makes the buffers persistent, and load faster if
+     ;; you open them all the time.
+     (setq org-agenda-sticky t)
    #+END_SRC
 ** Auto-mark TODO entries as DONE
    #+BEGIN_SRC emacs-lisp :tangle yes
