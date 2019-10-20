@@ -157,6 +157,10 @@
       (setq mac-command-modifier 'meta)
       ;; Map Option to Control (I know, smaller key, that's what we have for now. :/)
       (setq mac-option-modifier 'control)
+      ;; Map Control key in OS X to Super
+      (setq mac-control-modifier 'super)
+      ;; Map Fn key in OS X to Hyper
+      (setq ns-function-modifier 'hyper)
       ;; Increase the font size.
       (set-default-font "Fantasque Sans Mono 14")
       ;; Point the executables in Mac OS to Emacs.
