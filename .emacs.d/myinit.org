@@ -1232,74 +1232,79 @@
 * Org-mode
 ** Main configuration
    #+BEGIN_SRC emacs-lisp :tangle yes
-     ;; We don't need Flycheck in org-mode buffers. Usually.
-     (add-hook 'org-mode-hook '(lambda() (flycheck-mode 0)))
+;; Start indented, with inline images, and don't show emphasis markers.
+(setq org-startup-indented t
+      org-startup-with-inline-images t
+      org-hide-emphasis-markers t)
 
-     ;; Change the end of collapsed headings to an arrow.
-     (setq org-ellipsis "⤵")
+;; We don't need Flycheck in org-mode buffers. Usually.
+(add-hook 'org-mode-hook '(lambda() (flycheck-mode 0)))
 
-     ;; Use fixed-pitch fonts inside org-src blocks.
-     (set-face-attribute 'org-block nil :inherit 'fixed-pitch :height 120)
+;; Change the end of collapsed headings to an arrow.
+(setq org-ellipsis "⤵")
 
-     ;; Keep agenda file list in a single file so I can publish my config.
-     ;; DO NOT use C-c [ or C-c ] to add/remove files to the agenda otherwise
-     ;; Emacs will write the var to init.el
-     (setq org-agenda-files "~/file-bouncer/org-agenda-file-list.org")
+;; Use fixed-pitch fonts inside org-src blocks.
+(set-face-attribute 'org-block nil :inherit 'fixed-pitch :height 120)
 
-     ;; When TODOs are ordered, enforce task dependencies
-     (setq org-enforce-todo-dependencies t)
+;; Keep agenda file list in a single file so I can publish my config.
+;; DO NOT use C-c [ or C-c ] to add/remove files to the agenda otherwise
+;; Emacs will write the var to init.el
+(setq org-agenda-files "~/file-bouncer/org-agenda-file-list.org")
 
-     ;; Don't split my lines, thx.
-     (setq org-M-RET-may-split-line nil)
+;; When TODOs are ordered, enforce task dependencies
+(setq org-enforce-todo-dependencies t)
 
-     ;; Truncate long task names
-     (setq org-clock-heading-function
-           (lambda ()
-             (let ((str (nth 4 (org-heading-components))))
-               (concat (truncate-string-to-width str 27) "...")
-               )))
+;; Don't split my lines, thx.
+(setq org-M-RET-may-split-line nil)
 
-     ;; Organize the bindings
-     ;; Use helm-org-in-buffer-headings instead of imenu; it has more actions and
-     ;; shows the exact heading you want.
-     (evil-leader/set-key-for-mode 'org-mode "h i" 'helm-org-in-buffer-headings)
+;; Truncate long task names
+(setq org-clock-heading-function
+      (lambda ()
+        (let ((str (nth 4 (org-heading-components))))
+          (concat (truncate-string-to-width str 27) "...")
+          )))
 
-     ;; Open subheading with C-c RET and invert with M-RET
-     (define-key org-mode-map (kbd "C-c RET") 'org-ctrl-c-ret)
-     (define-key org-mode-map (kbd "<C-M-return>") 'org-insert-subheading)
+;; Organize the bindings
+;; Use helm-org-in-buffer-headings instead of imenu; it has more actions and
+;; shows the exact heading you want.
+(evil-leader/set-key-for-mode 'org-mode "h i" 'helm-org-in-buffer-headings)
 
-     ;; Use C-RET to complete words in Org-mode
-     (define-key org-mode-map (kbd "C-RET") 'complete)
+;; Open subheading with C-c RET and invert with M-RET
+(define-key org-mode-map (kbd "C-c RET") 'org-ctrl-c-ret)
+(define-key org-mode-map (kbd "<C-M-return>") 'org-insert-subheading)
 
-     ;; Always respect the content of a heading when creating todos!
-     (define-key org-mode-map (kbd "<M-S-return>") 'org-insert-todo-heading-respect-content)
+;; Use C-RET to complete words in Org-mode
+(define-key org-mode-map (kbd "C-RET") 'complete)
 
-     ;; Map C-S-enter to org-insert-todo-subheading
-     (define-key org-mode-map (kbd "<C-S-return>") 'org-insert-todo-subheading)
+;; Always respect the content of a heading when creating todos!
+(define-key org-mode-map (kbd "<M-S-return>") 'org-insert-todo-heading-respect-content)
 
-     ;; Use Emacs mode in Org-capture buffers and notes buffer
-     (add-hook 'org-capture-mode-hook 'evil-emacs-state)
+;; Map C-S-enter to org-insert-todo-subheading
+(define-key org-mode-map (kbd "<C-S-return>") 'org-insert-todo-subheading)
 
-     ;; Idiot-proofing my configs
-     (define-key org-mode-map (kbd "C-c ]") nil)
-     (define-key org-mode-map (kbd "C-c [") nil)
+;; Use Emacs mode in Org-capture buffers and notes buffer
+(add-hook 'org-capture-mode-hook 'evil-emacs-state)
 
-     ;; Simplify org-todo in org-mode buffers with <leader> t
-     (evil-leader/set-key-for-mode 'org-mode "t" 'org-todo)
+;; Idiot-proofing my configs
+(define-key org-mode-map (kbd "C-c ]") nil)
+(define-key org-mode-map (kbd "C-c [") nil)
 
-     ;; Log when a task was done and when it was rescheduled.
-     (setq org-log-done 'time)
-     (setq org-log-reschedule 'time)
+;; Simplify org-todo in org-mode buffers with <leader> t
+(evil-leader/set-key-for-mode 'org-mode "t" 'org-todo)
 
-     ;; Don't write inside invisible area when collapsing headings!
-     (setq org-catch-invisible-edits 'error)
+;; Log when a task was done and when it was rescheduled.
+(setq org-log-done 'time)
+(setq org-log-reschedule 'time)
 
-     ;; Define a standard format for Org's column view
-     (setq org-columns-default-format "%50ITEM(Item) %EFFORT(Effort) %CLOCK(Time Spent)")
+;; Don't write inside invisible area when collapsing headings!
+(setq org-catch-invisible-edits 'error)
 
-     ;; Set agenda as sticky. This makes the buffers persistent, and load faster if
-     ;; you open them all the time.
-     (setq org-agenda-sticky t)
+;; Define a standard format for Org's column view
+(setq org-columns-default-format "%50ITEM(Item) %EFFORT(Effort) %CLOCK(Time Spent)")
+
+;; Set agenda as sticky. This makes the buffers persistent, and load faster if
+;; you open them all the time.
+(setq org-agenda-sticky t)
    #+END_SRC
 ** Auto-mark TODO entries as DONE
    #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1342,6 +1347,34 @@
 )
    #+END_SRC
 ** Org-babel
+*** General settings
+- Do not ask me if I want ot run the source block
+- Output the results in _scripting_ mode, instead of eval mode.
+- Wrap them in an example block (for exporting)
+
+  Important: the default header args will be:
+  =:noweb :results output verbatim replace :exports both=
+#+BEGIN_SRC emacs-lisp :tangle yes
+(defun my-org-confirm-babel-evaluate (lang body)
+    "Don't confirm squat."
+    (not (member lang '("sh" "elisp" "ruby" "elixir" "shell"))))
+
+;; A few more tweaks for org-babel.
+(setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate
+      org-src-preserve-indentation t
+      org-babel-min-lines-for-block-output 1
+      org-babel-default-header-args
+      (cons '(:noweb . "yes")
+            (assq-delete-all :noweb org-babel-default-header-args))
+      org-babel-default-header-args
+      (cons '(:exports . "both")
+            (assq-delete-all :exports org-babel-default-header-args))
+      org-babel-default-header-args
+      (cons '(:results . "output verbatim replace")
+            (assq-delete-all :results org-babel-default-header-args)))
+
+#+END_SRC
+
 *** Elixir
     #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package ob-elixir)
