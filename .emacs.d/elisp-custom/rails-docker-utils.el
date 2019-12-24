@@ -15,14 +15,15 @@
     "Open a Rails console inside the Docker container. With C-u prefix, open console in sandbox mode."
     (interactive)
     (if (eq current-prefix-arg '(4))
-        (run-ruby "docker-compose run web rails console" "Docker Rails Console")
-        (run-ruby "docker-compose run web rails console --sandbox" "Docker Rails Console")))
+      (run-ruby "docker-compose run web rails console --sandbox" "Docker Rails Console")
+      (run-ruby "docker-compose run web rails console" "Docker Rails Console")
+      ))
 
 ;; Open a terminal buffer inside the Docker container of the project.
 (defun auralcat-run-bash-in-docker-container (args)
     "Open a single buffer with a terminal inside a Docker container."
     (interactive "P")
-    (docker-compose-run "web" "bash" (quote ())))
+    (docker-compose-run-action-with-command "run" (quote ("--rm")) "web" "bash"))
 
 ;; Run test inside the Docker container in the Rails project using a shell
 ;; script. I use the rerun gem to keep that process alive.
@@ -37,7 +38,7 @@
 ;; Utility functions
 (defun auralcat-create-docker-compose-test-shell-command ()
     "Return the shell command for running the test related to the current file you're working in."
-    (let ((shell-command-template (concat "rerun -x -b --no-notify -- docker-compose run --rm web bash "
+    (let ((shell-command-template (concat "rerun -x -b --no-notify -- docker-compose run web bash "
                                       (auralcat-get-test-shell-script-file-path) " %s" " %s")))
         (if (string-equal (auralcat-get-rails-engine-path) (auralcat-get-test-file-path))
             (format shell-command-template (auralcat-get-test-file-path) "")
