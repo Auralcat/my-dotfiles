@@ -662,8 +662,15 @@
     Allows you to move anywhere in the visible portion of the buffer
     using 2 keystrokes.
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package ace-jump-mode
-        :bind ("C-x j" . ace-jump-mode))
+(use-package ace-jump-mode
+  :bind ("C-x j" . ace-jump-mode))
+
+;; Save the position of the previous mark as a jump position for Evil.
+;; With that, we can cycle through where ace-jump was called from using C-i and C-o.
+(defadvice ace-jump-mode (before ace-jump-mode-advice)
+  (evil--jumps-push))
+(ad-activate 'ace-jump-mode)
+
     #+END_SRC
 
 *** Editorconfig
