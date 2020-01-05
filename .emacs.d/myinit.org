@@ -714,17 +714,6 @@
         (beacon-mode 1)
         (setq beacon-blink-when-point-moves-vertically 10))
     #+END_SRC
-*** Eyebrowse
-    Simple window configuration management in Emacs.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      ;; The custom prefix needs to be evaluated _before_ loading eyebrowse. Go figure.
-      (setq eyebrowse-keymap-prefix "")
-
-      (use-package eyebrowse
-        :diminish eyebrowse-mode
-        :config
-        (eyebrowse-mode))
-    #+END_SRC
 *** Prettier.js
     Prettier.js integration for Emacs.
     I want to run this thing when saving .js and web-related files.
