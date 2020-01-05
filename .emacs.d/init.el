@@ -28,12 +28,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
-  '(ansi-color-faces-vector
-     [default default default italic underline success warning error])
   '(ansi-color-names-vector
-     ["#151515" "#953331" "#546a29" "#909737" "#385e6b" "#7f355e" "#34676f" "#c6a57b"])
-  '(ansi-term-color-vector
-     [unspecified "#FFFFFF" "#d15120" "#5f9411" "#d2ad00" "#6b82a7" "#a66bab" "#6b82a7" "#505050"] t)
+     ["#1d1f21" "#cc6666" "#b5bd68" "#f0c674" "#81a2be" "#c9b4cf" "#8abeb7" "#c5c8c6"])
  '(auto-image-file-mode t)
  '(battery-mode-line-format " 🔋 %b%p%% ")
  '(beacon-color "#F8BBD0")
