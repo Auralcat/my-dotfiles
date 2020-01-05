@@ -588,9 +588,14 @@
        (set (make-local-variable 'company-minimum-prefix-length) 2)
        (setq fill-column 80))
 
+       ;; Shell completion
+       (defun shell-mode-tweaks ()
+       (set (make-local-variable 'company-backends) '(company-capf company-files)))
+
        ;; Add tweaks
        (add-hook 'enh-ruby-mode-hook 'ruby-mode-tweaks)
        (add-hook 'ruby-mode-hook 'ruby-mode-tweaks)
+       (add-hook 'shell-mode-hook 'shell-mode-tweaks)
 
        ;; Human language writing hooks
        (add-hook 'org-mode-hook 'human-language-mode-tweaks)
@@ -1023,6 +1028,13 @@
            (set (make-local-variable 'company-minimum-prefix-length) 2)
            (setq-local comment-auto-fill-only-comments nil)))
      #+END_SRC
+
+*** Bash completion
+We need this for tab completion inside shell-mode buffers in Docker containers.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package bash-completion)
+(bash-completion-setup)
+#+END_SRC
 
 *** Eshell configurations
     #+BEGIN_SRC emacs-lisp :tangle yes
