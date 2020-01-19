@@ -4,10 +4,15 @@
 
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
+alias rs='bundle exec rspec'
+alias rdbm='bundle exec rake db:migrate'
+alias rdbs='bundle exec rake db:drop db:create db:migrate'
+
+alias t='cd /tmp'
 alias l='ls -CF'
 alias la='ls -A'
 alias ll='ls -alF'
-alias ls='ls --color=auto'
+alias ls="TERM=ansi ls --color=always"
 
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
