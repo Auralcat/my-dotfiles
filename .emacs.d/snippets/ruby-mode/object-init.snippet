@@ -1,0 +1,9 @@
+# -*- mode: snippet -*-
+# name: Object initializer with keyword args.
+# Should replicate the objects it receives as instance vars.
+# key: inita
+# --
+def initialize(${1:var1}:, ${2:var2}:)
+  @$1 = $1
+  @$2 = $2
+end
