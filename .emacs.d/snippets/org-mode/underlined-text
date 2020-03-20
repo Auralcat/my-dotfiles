@@ -2,4 +2,4 @@
 # name: Underlined Text
 # key: _
 # --
-_${underlined text goes here}_
+_${underlined text goes here}_$0

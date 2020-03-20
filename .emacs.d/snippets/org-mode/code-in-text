@@ -1,5 +1,5 @@
 # -*- mode: snippet -*-
 # name: Code in Text
-# key: ~
+# key: c
 # --
-~${code goes here}~
+${code text$(when yas-moving-away-p (concat "~" yas-text "~"))}$0

@@ -2,4 +2,4 @@
 # name: Verbatim Text
 # key: =
 # --
-=${verbatim text goes here}=
+${verbatim text$(when yas-moving-away-p (concat "=" yas-text "="))}$0

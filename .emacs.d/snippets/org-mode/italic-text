@@ -2,4 +2,4 @@
 # name: Italic Text
 # key: i
 # --
-/${italicized text goes here}/
+${italicized text$(when yas-moving-away-p (concat "/" yas-text "/"))}$0

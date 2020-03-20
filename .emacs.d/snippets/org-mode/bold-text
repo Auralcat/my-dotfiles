@@ -1,5 +1,5 @@
-# -*- mode: snippet -*-
+# -*- mode: snippet; require-final-newline: nil; backup-inhibited: t -*
 # name: bold-text
 # key: b
 # --
-*${bold text goes here}*
+${bold text$(when yas-moving-away-p (concat "*" yas-text "*"))}$0
