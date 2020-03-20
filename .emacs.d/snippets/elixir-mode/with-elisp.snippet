@@ -1,0 +1,17 @@
+# -*- mode: snippet -*-
+# name: Elixir with-else statement
+# key: with
+# --
+with ${1:$(mapconcat
+ #'(lambda (x)
+     (let
+       ((foo (car (split-string x)))
+       (bar (string-join (cdr (split-string x)) " ")))
+       (concat "{:ok, " foo "} <- " bar)))
+ (split-string yas-text "; ")
+ (concat ",\n" (make-string (current-column) 32)))
+} do
+$1
+else
+  $2
+end

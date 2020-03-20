@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: last record in Ecto database
+# key: last
+# --
+${1:$$(capitalize yas-text)} |> Ecto.Query.last |> Repo.one
