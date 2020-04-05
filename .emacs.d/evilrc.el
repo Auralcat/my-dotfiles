@@ -83,7 +83,7 @@
 ;; Global bindings go here
 (evil-leader/set-key
   ;; Eshell
-  "$" 'eshell
+  "$" 'shell
   ;; Org-agenda
   "a" 'org-agenda
   ;; Frequently visited bookmarks
@@ -104,6 +104,9 @@
   ;; Dired stuff
   "dj" 'dired-jump
   "d4j" 'dired-jump-other-window
+  ;; Docker
+  "dd" 'docker
+  "dcl" 'docker-compose-logs
   ;; Open frequently visited files
   "fb" 'my-find-budget-file
   "fe" 'my-find-evilrc-file
@@ -159,3 +162,8 @@
   ","   'org-mark-ring-push
   "."   'org-mark-ring-goto
   )
+;; Set Emacs state as initial state for a handful of modes.
+;; This includes Dired, Xref, shell-related modes and list modes.
+(evil-set-initial-state 'tabulated-list-mode 'emacs)
+(evil-set-initial-state 'comint-mode 'emacs)
+(evil-set-initial-state 'compilation-mode 'emacs)
