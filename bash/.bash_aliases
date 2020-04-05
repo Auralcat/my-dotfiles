@@ -4,9 +4,11 @@
 
 alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
 
+# Rails development stuff
 alias rs='bundle exec rspec'
 alias rdbm='bundle exec rake db:migrate'
 alias rdbs='bundle exec rake db:drop db:create db:migrate'
+alias b='bundle'
 
 alias t='cd /tmp'
 alias l='ls -CF'
@@ -56,20 +58,25 @@ alias peek='apt show'
 alias ta='tmux attach'
 
 # Git aliases
-alias gp='git pull'
+alias g='git'
+alias gc='git checkout'
+alias gp='git pull origin'
 alias gs='git status'
 alias gl='git log'
+# This could be a complex function, I think.
+alias grm='git fetch origin && git rebase origin/master --autosquash'
 
 # Specific vim text files:
 
 alias editalbumlist='vim ~/file-bouncer/ListaAlbums'
-alias journal='vim ~/diario.txt'
 alias draft='vim /tmp/scratch.md'
+
+# Check most used commands in bash history
+alias freq="history | awk '{a[$2]++} END {for(i in a) { print a[i] \" \" i}}' | sort -rn | head -20"
 
 # Misc stuff
 alias budget='libreoffice --calc ~/Documentos/Controle\ financeiro.ods'
 alias lynx='lynx -nofilereferer -noreferer -anonymous -cookies -vikeys'
-alias oblique='python3 ~/oblique-strategies/oblique.py'
 alias tuxsay='cowsay -f tux'
 alias unix='curl -L git.io/unix'
 alias weather='echo -e "--------------------------------------------------------------------------------\n ** If you want the full weather report, type weather_full. **\n--------------------------------------------------------------------------------\n"; weather_full | head -17'
@@ -79,6 +86,22 @@ alias clearswap='sudo swapoff -a && sudo swapon -a'
 # Read books in the terminal with less!
 alias neuromancer='curl http://www.lib.ru/GIBSON/neuromancer.txt | less'
 alias count_zero='curl https://www.kataan.org/public/ebook/countzero.txt | less'
+
+# Elixir stuff
+alias md='mix deps.get'
+# We can improve this one. The idea is to run mix ecto.setup when available.
+alias mes='mix ecto.setup || mix ecto.create && mix ecto.migrate && mix run priv/repo/seeds.exs'
+alias med='mix ecto.drop'
+alias mt='mix test'
+alias mts='mix test --stale'
+alias mtf='mix test --failed'
+alias mf='mix format'
+alias mfc='mix format --check-formatted .'
+
+# Docker aliases
+alias dcrb='docker-compose run broker bash'
+alias dcu='docker-compose up'
+alias dcd='docker-compose down'
 
 # Launch XAMPP for PHP practice
 alias xampp='sudo /opt/lampp/xampp'
