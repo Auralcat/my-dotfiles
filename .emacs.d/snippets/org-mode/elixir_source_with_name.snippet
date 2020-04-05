@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Elixir source code block with name
+# key: exn
+# --
+#+NAME: ${1:$$(replace-regexp-in-string " " "-" yas-text)}
+#+begin_src elixir
+${2:# Your code here}
+#+end_src

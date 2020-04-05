@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Short story specification - actor
+# key: storydev
+# --
+
+Como uma ${persona/papel}
+Eu quero ${ação}
+De forma que ${resultado/benefício}
+
+$0

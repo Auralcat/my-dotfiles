@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Sample yasnippet witchcraft
+# key: sorcery
+# --
+${1:$(make-string (string-width yas-text) ?\=)}
+${1:Title}
+${1:$(make-string (string-width yas-text) ?\=)}
+
+"${2:$$(yas-choose-value '("right" "center" "left"))}"
+$0

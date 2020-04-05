@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: User Story
+# key: ustory
+# --
+Como um ${usuário}
+Eu gostaria de ${ação}
+Assim posso ${resultado da ação anterior}.

@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: POST request
+# key: post
+# --
+\# ${1:Your request description here}
+POST ${2:endpoint}
+Content-Type: application/json
+${3:Authorization: Bearer :auth_token}
+${4:Accept: ${5:application/json}}
+
+{
+  $0
+}

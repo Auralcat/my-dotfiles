@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: Shell Script source code block with name
+# key: shn
+# --
+#+NAME: ${1:$$(replace-regexp-in-string " " "-" yas-text)}
+#+begin_src shell
+${2:# Your code here}
+#+end_src

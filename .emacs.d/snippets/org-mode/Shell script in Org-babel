@@ -1,8 +1,7 @@
 # -*- mode: snippet -*-
 # name: Shell script in Org-babel
-# key: shsrc
+# key: sh
 # --
-#+BEGIN_SRC sh
+#+BEGIN_SRC shell
 $1
 #+END_SRC
-$0
