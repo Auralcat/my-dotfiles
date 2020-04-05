@@ -8,12 +8,6 @@
 ;; Setting the color through faces blends well with each theme, but if you hover over the
 ;; face it gets the color from, it defeats the whole purpose of this.
 ;; Evil-mode cursor colors
-(setq evil-emacs-state-cursor '("#e078d6" box))
-(setq evil-normal-state-cursor '("#74e24a" box))
-(setq evil-visual-state-cursor '("#dd676b" box))
-(setq evil-insert-state-cursor '("#9a3135" bar))
-(setq evil-replace-state-cursor '("#f7e05b" hbar))
-(setq evil-operator-state-cursor '("#9a3135" hollow))
 
 ;; I have bound C-a to back-to-indentation-or-beginning in another config,
 ;; Now I need C-e, $ is too far for me 😂
@@ -48,10 +42,6 @@
 ;; Use C-y to paste text, just like Emacs mode
 ;; The previous command was copy-line-from-above, not that useful IMO
 (define-key evil-insert-state-map (kbd "C-y") 'yank)
-
-;; Use C-. to paste last insertion.
-;; This command is originally bound to C-a, but I overrode it.
-(define-key evil-insert-state-map (kbd "C-.") 'evil-paste-last-insertion)
 
 (defun evil-control-at ()
   "Paste last insertion and exit insert mode."
