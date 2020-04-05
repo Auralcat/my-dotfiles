@@ -53,6 +53,9 @@
 ;; This is present in Vim, but not in Evil for some reason.
 (define-key evil-insert-state-map (kbd "C-@") 'evil-control-at)
 
+;; Mimic the behavior of C-o from insert-mode in emacs-mode
+(define-key evil-emacs-state-map (kbd "C-o") 'evil-execute-in-normal-state)
+
 ;; COMPLETIONS
 ;; C-x C-f completes a file path in insert mode.
 (define-key evil-insert-state-map (kbd "C-x C-f") 'company-files)
