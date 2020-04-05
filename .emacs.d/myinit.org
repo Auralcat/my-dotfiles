@@ -917,21 +917,6 @@
     :init
     (global-evil-matchit-mode 1))
     #+END_SRC
-*** Evil-Snipe
-    Highlights line search and allows you to use the s key in normal
-    mode to 'snipe' for the char you want, as well as upgrading the
-    standard line char search (f and t)
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package evil-snipe
-       :init
-       ;; I just want override-mode, I use S for substituting an entire line
-       ;; (evil-snipe-mode +1)
-       (evil-snipe-override-mode +1)
-       ;; Make search case insensitive
-       (setq evil-snipe-smart-case t)
-       ;; Currently this has a conflict with Magit
-       (add-hook 'magit-mode-hook 'turn-off-evil-snipe-override-mode))
-    #+END_SRC
 *** Writeroom Mode
     Dims the modeline, perfect for focusing on writing text/code
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1049,25 +1034,9 @@ We need this for tab completion inside shell-mode buffers in Docker containers.
       :ensure t
       :config
       (setq circadian-themes '((:sunrise . cosmos-light)
-                               (:sunset  . cosmos-dark)))
+             (:sunset  . cosmos-dark)))
 
       (circadian-setup))
-    #+END_SRC
-*** Robe
-    Ruby's autocomplete, navigation and project tools, especially for
-    Rails.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package robe)
-      (add-hook 'enh-ruby-mode-hook 'robe-mode)
-      (add-hook 'ruby-mode-hook 'robe-mode)
-
-      ;; Integrate with Company
-      (defun ruby-completion-tweaks ()
-    ;; Robe-mode must be active for this to work.
-      (set (make-local-variable 'company-backends) '(company-robe company-yasnippet company-etags company-capf))
-      (company-mode t))
-      (add-hook 'enh-ruby-mode-hook 'ruby-completion-tweaks)
-      (add-hook 'ruby-mode-hook 'ruby-completion-tweaks)
     #+END_SRC
 *** RVM
     Ruby Version Manager. Akin to python's virtualenv.
@@ -1471,16 +1440,13 @@ We need this for tab completion inside shell-mode buffers in Docker containers.
 
   (defun css-mode-tweaks()
     (set (make-local-variable 'company-backends) '(company-css company-yasnippet company-etags))
-    (emmet-mode 1)
-    (rainbow-mode 1))
+    (emmet-mode 1))
 
   ;; Emmet-mode: activate for html-mode, sgml-mode,
   ;; css-mode, web-mode and sass-mode
   (add-hook 'sgml-mode-hook 'emmet-mode)
   (add-hook 'sass-mode-hook 'css-mode-tweaks)
   (add-hook 'web-mode-hook 'emmet-mode)
-
-  ;; By the way, it's nice to add rainbow-mode for CSS
   (add-hook 'css-mode-hook 'css-mode-tweaks)
 
   ;; Python: use python3 as default shell interpreter
