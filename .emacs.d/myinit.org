@@ -1018,8 +1018,15 @@ We need this for tab completion inside shell-mode buffers in Docker containers.
 *** Yasnippets
     It originally came with company-mode, it's handy to write faster
     #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package yasnippet-snippets)
-    (use-package yasnippet-classic-snippets)
+(use-package yasnippet-snippets)
+(use-package yasnippet-classic-snippets)
+
+(defun do-not-add-newline-for-snippets ()
+  "What is says on the tin."
+  (setq-local require-final-newline nil)
+  )
+
+(add-hook 'snippet-mode-hook 'do-not-add-newline-for-snippets)
     #+END_SRC
 *** Circadian
     Theme changer for Emacs.
