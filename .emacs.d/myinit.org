@@ -171,6 +171,14 @@ This is quite useful to navigate through code faster.
 ;; Sends the whole buffer to an Alchemist-IEx buffer.
 (fset 'auralcat/alchemist-iex-send-buffer
    (kmacro-lambda-form [?\C-x ?h ?\C-c ?a ?i ?r escape] 0 "%d"))
+
+;; Sends a region to the *shell* buffer
+(fset 'auralcat/sh-send-region
+   (kmacro-lambda-form [?\M-w ?  ?$ ?\C-y return ?\M-o] 0 "%d"))
+
+;; Sends a line to the *shell* buffer
+(fset 'auralcat/sh-send-line
+   (kmacro-lambda-form [?\C-z ?\C-a ?\S-\C-e ?\M-w ?\C-z ?  ?$ ?\C-y return ?\M-o] 0 "%d"))
   #+END_SRC
 * Mac OS
   #+BEGIN_SRC emacs-lisp :tangle yes
