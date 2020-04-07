@@ -421,6 +421,12 @@
     #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package csv-mode)
     #+END_SRC
+*** APIB-mode
+Necessary for parsing apib files (API Blueprint)
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package apib-mode)
+(add-to-list 'auto-mode-alist '("\\.apib?\\'"   . apib-mode))
+#+END_SRC
 ** Minor Modes
 *** JS-comint
     Open a REPL using Node.js in another buffer.
