@@ -1530,79 +1530,11 @@ We need this for tab completion inside shell-mode buffers in Docker containers.
   #+END_SRC
 
 * Mode Line
-** Telephone Line
-   Prettier mode line.
-   *To ensure that nothing gets in the way of loading it, leave this*
-   *last in your config file*
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     (use-package telephone-line :ensure t)
-
-     ;; Mac workaround to render separators correctly.
-     (when (eq system-type 'darwin)
-       (setq ns-use-srgb-colorspace nil))
-
-     ;; I just want a different indicator in my mode line.
-     (telephone-line-defsegment* auralcat-telephone-line-buffer-modified-segment ()
-       (if (buffer-modified-p)
-           (telephone-line-raw "💾")
-         (telephone-line-raw "👍")))
-
-     ;; Custom VC segment
-     (telephone-line-defsegment* auralcat-vc-segment ()
-       (concat (truncate-string-to-width (telephone-line-raw vc-mode t) 17) "...")
-       )
-
-     ;; CI build status indicator.
-     (defun auralcat-print-ci-status ()
-       "Return the CI status, if any."
-       (let ((result (projectile-with-default-dir (projectile-ensure-project (projectile-project-root))
-                       (shell-command-to-string "cat .test-result"))))
-         (unless (or (string-equal (s-trim result) "null") (s-blank? result))
-           (if (string-equal (s-trim result) "passed")
-               (telephone-line-raw "🎉" t)
-             (telephone-line-raw "💥" t)))
-         )
-       )
-
-     (telephone-line-defsegment* auralcat-ci-build-status-segment ()
-       "Indicates the build status for the current branch in the project."
-       (if (and (projectile-project-p)
-                (file-exists-p (projectile-with-default-dir (projectile-ensure-project (projectile-project-root))
-                                 (expand-file-name ".test-result"))))
-           (auralcat-print-ci-status)
-         )
-       )
-
-     ;; Set separator styles
-     (setq telephone-line-primary-left-separator 'telephone-line-cubed-left
-           telephone-line-secondary-left-separator 'telephone-line-cubed-hollow-left
-           telephone-line-primary-right-separator 'telephone-line-cubed-right
-           telephone-line-secondary-right-separator 'telephone-line-cubed-hollow-right)
-     ;; Configure the segments
-     ;; Left hand side
-     (setq telephone-line-lhs
-           '((evil   . (telephone-line-evil-tag-segment))
-             (accent . (auralcat-telephone-line-buffer-modified-segment
-                        auralcat-vc-segment
-                        telephone-line-projectile-segment
-                        telephone-line-buffer-name-segment))
-             (evil   . (telephone-line-airline-position-segment))
-             (accent . (telephone-line-major-mode-segment auralcat-ci-build-status-segment))
-             (nil    . (telephone-line-simple-minor-mode-segment
-                        telephone-line-flycheck-segment
-                        telephone-line-nyan-segment))))
-     ;; Right hand side
-     (setq telephone-line-rhs
-           '((nil    . (telephone-line-misc-info-segment))
-             (accent . nil)))
-
-     (setq telephone-line-height 24
-           telephone-line-evil-use-short-tag t)
-
-     ;; Call the mode last!
-     (telephone-line-mode t)
-
-   #+END_SRC
+** Mini mode line
+This gets out of the way nicely and cleans up the view.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package mini-modeline)
+#+END_SRC
 * Diary
 ** Last day of month
    #+BEGIN_SRC emacs-lisp :tangle yes
