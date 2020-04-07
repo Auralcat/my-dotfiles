@@ -68,32 +68,37 @@
       My modification is just the ~ruby-block-beg-re~ variable.
       #+BEGIN_SRC emacs-lisp :tangle yes
       (evil-define-text-object evil-textobj-outer-ruby-block
-        (count &optional beg end type)
-        (evil-ruby-block-range beg end type count t))
+  (count &optional beg end type)
+  (evil-ruby-block-range beg end type count t))
 
       (evil-define-text-object evil-textobj-inner-ruby-block
-        (count &optional beg end type)
-        (evil-ruby-block-range beg end type count nil))
+  (count &optional beg end type)
+  (evil-ruby-block-range beg end type count nil))
 
       (defun evil-ruby-block-range (count beg end type &optional inclusive)
-        (let ((current-point (point))
-          (block-begin (progn (evil-end-of-line) (re-search-backward ruby-block-beg-re nil t)))
-          (block-end (progn (evilmi-jump-items) (point))))
-          (if inclusive
-          (let ((begin (progn (goto-char block-begin) (evil-beginning-of-line) (point)))
-            (end (progn (goto-char block-end) (evil-next-line) (evil-beginning-of-line) (if (looking-at "^$") (+ (point) 1) (point)))))
-            (progn
-              (goto-char current-point)
-              (evil-range begin end)))
-        (let ((begin (progn (goto-char block-begin) (evil-next-line) (evil-first-non-blank) (point)))
-              (end (progn (goto-char block-end) (evil-previous-line) (evil-end-of-line) (+ (point) 1))))
-          (progn
-            (goto-char current-point)
-            (evil-range begin end))))))
+  (let ((current-point (point))
+    (block-begin (progn (evil-end-of-line) (re-search-backward ruby-block-beg-re nil t)))
+    (block-end (progn (evilmi-jump-items) (point))))
+    (if inclusive
+    (let ((begin (progn (goto-char block-begin) (evil-beginning-of-line) (point)))
+      (end (progn (goto-char block-end) (evil-next-line) (evil-beginning-of-line) (if (looking-at "^$") (+ (point) 1) (point)))))
+      (progn
+        (goto-char current-point)
+        (evil-range begin end)))
+  (let ((begin (progn (goto-char block-begin) (evil-next-line) (evil-first-non-blank) (point)))
+        (end (progn (goto-char block-end) (evil-previous-line) (evil-end-of-line) (+ (point) 1))))
+    (progn
+      (goto-char current-point)
+      (evil-range begin end))))))
 
     (define-key evil-inner-text-objects-map "r" 'evil-textobj-inner-ruby-block)
     (define-key evil-outer-text-objects-map "r" 'evil-textobj-outer-ruby-block)
       #+END_SRC
+* Xref
+This is quite useful to navigate through code faster.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(evil-set-initial-state 'xref--xref-buffer-mode 'emacs)
+#+END_SRC
 
 * Dired
   A couple customizations.
@@ -279,24 +284,23 @@
   (defun prog-mode-tweaks ()
     ;; Set line number mode and column number mode for code files
     (if (< (string-to-number emacs-version) 24)
-        (line-number-mode 1)
+  (line-number-mode 1)
       (display-line-numbers-mode))
       (setq fill-column 80)
     )
   (add-hook 'prog-mode-hook 'prog-mode-tweaks)
   (add-hook 'text-mode-hook 'column-number-mode)
 
-  ;; Ruby
-  ;; Activate ruby-tools
-  (add-hook 'enh-ruby-mode-hook (quote ruby-tools-mode))
-
   ;; Create filling for org-mode
   (add-hook 'org-mode-hook 'auto-fill-mode)
   #+END_SRC
 * Function Aliases
   #+BEGIN_SRC emacs-lisp :tangle yes
-;; This is how you define aliases for Elisp functions
+;; This is how you define aliases for Elisp functions. These are useful for when
+;; you don't need to bind a command to a specific key, but you call that
+;; function through M-x often.
 (defalias 'plp 'package-list-packages)
+(defalias 'kfs 'keyfreq-show)
   #+END_SRC
 * Packages
 ** Major Modes
