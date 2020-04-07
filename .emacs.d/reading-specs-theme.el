@@ -5,8 +5,8 @@
 
 (custom-theme-set-faces
   'reading-specs
-  '(variable-pitch ((t (:weight normal :height 160 :family "Helvetica"))))
-  '(default ((t (:family "Inconsolata" :height 120))))
+  '(variable-pitch ((t (:weight normal :height 160 :family "Helvetica Neue"))))
+  ;; '(default ((t (:family "Inconsolata" :height 140))))
   '(org-date ((t (:inherit fixed-pitch))))
   '(org-table ((t (:inherit fixed-pitch))))
   '(org-src ((t (:inherit fixed-pitch))))
