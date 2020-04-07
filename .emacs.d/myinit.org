@@ -161,8 +161,6 @@
       (setq mac-control-modifier 'super)
       ;; Map Fn key in OS X to Hyper
       (setq ns-function-modifier 'hyper)
-      ;; Increase the font size.
-      (set-default-font "Fantasque Sans Mono 14")
       ;; Point the executables in Mac OS to Emacs.
       (add-to-list 'exec-path "/usr/local/bin/")
       ;; Enable EPA
@@ -439,15 +437,8 @@
     Shows the error when leaving the point over the place where it occurs.
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package flycheck-inline
-        :config
-        (add-hook 'flycheck-mode-hook #'flycheck-inline-mode))
-    #+END_SRC
-*** Ruby-extra-highlight
-    Highlight function arguments in Ruby.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package ruby-extra-highlight)
-      (add-hook 'enh-ruby-mode-hook #'ruby-extra-highlight-mode)
-      (add-hook 'ruby-mode-hook #'ruby-extra-highlight-mode)
+  :config
+  (add-hook 'flycheck-mode-hook #'flycheck-inline-mode))
     #+END_SRC
 *** Ruby-electric
     Auto-close do-end blocks, as well as braces and parens.
@@ -577,10 +568,9 @@
 
        ;; Completion for Ruby mode
        (defun ruby-mode-tweaks ()
-       (require 'company-robe)
        ;; Increase the min prefix length so it doesn't clash with most used keywords, like def.
        (set (make-local-variable 'company-minimum-prefix-length) 4)
-       (set (make-local-variable 'company-backends) '(company-robe company-etags company-yasnippet)))
+       (set (make-local-variable 'company-backends) '(company-etags company-yasnippet)))
 
        ;; General text writing completion (uses dabbrev and filename completion)
        (defun human-language-mode-tweaks ()
@@ -653,9 +643,8 @@
      :diminish projectile-mode
      :diminish helm-mode
      :diminish company-mode
-     :diminish undo-tree-mode
      :diminish auto-revert-mode
-     :diminish auto-fill-function
+     :diminish auto-fill-mode
      :diminish wakatime-mode
      :diminish abbrev-mode
      :diminish autopair-mode)
@@ -743,72 +732,72 @@
     Credits for the customizations below: [[http://endlessparentheses.com/mold-slack-entirely-to-your-liking-with-emacs.html][Endless Parentheses]]
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package slack
-        :commands (slack-start)
-        :init
-        (setq slack-buffer-emojify t) ;; if you want to enable emoji, default nil
-        (setq slack-prefer-current-team t)
-        :config
-        ;; Get my teams.
-        (load "~/.slack-teams.el")
+  :commands (slack-start)
+  :init
+  (setq slack-buffer-emojify t) ;; if you want to enable emoji, default nil
+  (setq slack-prefer-current-team t)
+  :config
+  ;; Get my teams.
+  (load "~/.slack-teams.el")
 
-        ;; Set abbrevs from org-mode
-        (abbrev-table-put slack-mode-abbrev-table
-                          :parents (list org-mode-abbrev-table))
+  ;; Set abbrevs from org-mode
+  (abbrev-table-put slack-mode-abbrev-table
+        :parents (list org-mode-abbrev-table))
 
       (abbrev-table-put slack-thread-message-buffer-mode-abbrev-table
-                          :parents (list slack-mode-abbrev-table))
+        :parents (list slack-mode-abbrev-table))
 
       (abbrev-table-put slack-message-compose-buffer-mode-abbrev-table
-                          :parents (list slack-mode-abbrev-table))
+        :parents (list slack-mode-abbrev-table))
 
-        ;; Expand abbrevs when pressing Enter in slack-modes (it's derived from lui-mode)
-        (advice-add #'lui-send-input :before
-                    (lambda (&rest _)
-                      (ignore-errors (expand-abbrev))))
+  ;; Expand abbrevs when pressing Enter in slack-modes (it's derived from lui-mode)
+  (advice-add #'lui-send-input :before
+        (lambda (&rest _)
+          (ignore-errors (expand-abbrev))))
 
-        (evil-define-key 'normal slack-info-mode-map
-          ",u" 'slack-room-update-messages)
-        (evil-define-key 'normal slack-mode-map
-          "Q" 'bury-buffer
-          ",c" 'slack-buffer-kill
-          ",ra" 'slack-message-add-reaction
-          ",rr" 'slack-message-remove-reaction
-          ",rs" 'slack-message-show-reaction-users
-          ",pl" 'slack-room-pins-list
-          ",pa" 'slack-message-pins-add
-          ",pr" 'slack-message-pins-remove
-          ",mm" 'slack-message-write-another-buffer
-          ",me" 'slack-message-edit
-          ",md" 'slack-message-delete
-          ",u" 'slack-room-update-messages
-          ",2" 'slack-message-embed-mention
-          ",3" 'slack-message-embed-channel
-          "\C-n" 'slack-buffer-goto-next-message
-          "\C-p" 'slack-buffer-goto-prev-message)
-        (evil-define-key 'normal slack-edit-message-mode-map
-          ",k" 'slack-message-cancel-edit
-          ",s" 'slack-message-send-from-buffer
-          ",2" 'slack-message-embed-mention
-          ",3" 'slack-message-embed-channel))
+  (evil-define-key 'normal slack-info-mode-map
+    ",u" 'slack-room-update-messages)
+  (evil-define-key 'normal slack-mode-map
+    "Q" 'bury-buffer
+    ",c" 'slack-buffer-kill
+    ",ra" 'slack-message-add-reaction
+    ",rr" 'slack-message-remove-reaction
+    ",rs" 'slack-message-show-reaction-users
+    ",pl" 'slack-room-pins-list
+    ",pa" 'slack-message-pins-add
+    ",pr" 'slack-message-pins-remove
+    ",mm" 'slack-message-write-another-buffer
+    ",me" 'slack-message-edit
+    ",md" 'slack-message-delete
+    ",u" 'slack-room-update-messages
+    ",2" 'slack-message-embed-mention
+    ",3" 'slack-message-embed-channel
+    "\C-n" 'slack-buffer-goto-next-message
+    "\C-p" 'slack-buffer-goto-prev-message)
+  (evil-define-key 'normal slack-edit-message-mode-map
+    ",k" 'slack-message-cancel-edit
+    ",s" 'slack-message-send-from-buffer
+    ",2" 'slack-message-embed-mention
+    ",3" 'slack-message-embed-channel))
     #+END_SRC
 **** Notifications customization
      #+BEGIN_SRC emacs-lisp :tangle yes
        ;; Channels
        (setq slack-message-notification-title-format-function
-             (lambda (_team room threadp)
-               (concat (if threadp "Thread in #%s") room)))
+       (lambda (_team room threadp)
+         (concat (if threadp "Thread in #%s") room)))
 
        (defun endless/-cleanup-room-name (room-name)
-         "Make group-chat names a bit more human-readable."
-         (replace-regexp-in-string
-          "--" " "
-          (replace-regexp-in-string "#mpdm-" "" room-name)))
+   "Make group-chat names a bit more human-readable."
+   (replace-regexp-in-string
+    "--" " "
+    (replace-regexp-in-string "#mpdm-" "" room-name)))
 
        ;;; Private messages and group chats
        (setq slack-message-im-notification-title-format-function
-             (lambda (_team room threadp)
-               (concat (if threadp "Thread in %s")
-                       (endless/-cleanup-room-name room))))
+       (lambda (_team room threadp)
+         (concat (if threadp "Thread in %s")
+           (endless/-cleanup-room-name room))))
 
        ;; Custom notifications
        (load "~/.slack-custom-notifications.el")
@@ -816,10 +805,10 @@
 **** Autocompletion
      #+BEGIN_SRC emacs-lisp :tangle yes
        (defun slack-mode-tweaks ()
-         ;; Company-slack adds username completion.
-              (set (make-local-variable 'company-backends) '(company-dabbrev company-slack-backend company-files))
-              ;; Start earlier than in other modes.
-              (set (make-local-variable 'company-minimum-prefix-length) 2))
+   ;; Company-slack adds username completion.
+        (set (make-local-variable 'company-backends) '(company-dabbrev company-slack-backend company-files))
+        ;; Start earlier than in other modes.
+        (set (make-local-variable 'company-minimum-prefix-length) 2))
 
        (add-hook 'slack-mode-hook 'slack-mode-tweaks)
        ;; Disable auto-fill-mode
@@ -839,7 +828,7 @@
 
       ;; Get golden-ratio to work with ace-window
       (setq golden-ratio-extra-commands
-             (append golden-ratio-extra-commands '(magit-status ace-window aw-flip-window)))
+       (append golden-ratio-extra-commands '(magit-status ace-window aw-flip-window)))
       (golden-ratio-mode 1)
     #+END_SRC
 
@@ -851,21 +840,23 @@
 *** Docker
     A Docker command wrapper for Emacs
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package docker)
+(use-package docker)
 
-      ;; Extra stuff Docker needs on Mac OS X
-      (when (eq system-type 'darwin)
-          (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
-           (setq exec-path (append exec-path '("/usr/local/bin"))))
+;; Extra stuff Docker needs on Mac OS X
+(when (eq system-type 'darwin)
+  (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+  (setq exec-path (append exec-path '("/usr/local/bin"))))
+
     #+END_SRC
 
 *** Projectile Rails
     Rails utilities for Projectile-mode
     #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package projectile-rails)
-    (projectile-rails-global-mode)
+(use-package projectile-rails)
+(add-hook 'ruby-mode-hook 'projectile-rails-mode)
+(add-hook 'enh-ruby-mode-hook 'projectile-rails-mode)
 
-    ;; Change the prefix
+;; Change the prefix
 
     #+END_SRC
 *** Bundler
@@ -877,7 +868,7 @@
     Time tracking in Emacs.
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package wakatime-mode
-        :diminish wakatime-mode)
+  :diminish wakatime-mode)
       ;; Enable it
       (global-wakatime-mode)
     #+END_SRC
@@ -954,53 +945,56 @@
     version-controlled project.
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package git-gutter
-        :when window-system
-        :defer t
-        :hook ((prog-mode text-mode) . 'git-gutter-mode)
-        :diminish ""
-        :config
-        (use-package git-gutter-fringe
-          :ensure t
-          :init
-          (require 'git-gutter-fringe)
-          (when (fboundp 'define-fringe-bitmap)
-            (define-fringe-bitmap 'git-gutter-fr:added
-              [224 224 224 224 224 224 224 224 224 224 224 224 224
-                   224 224 224 224 224 224 224 224 224 224 224 224]
-              nil nil 'center)
-            (define-fringe-bitmap 'git-gutter-fr:modified
-              [224 224 224 224 224 224 224 224 224 224 224 224 224
-                   224 224 224 224 224 224 224 224 224 224 224 224]
-              nil nil 'center)
-            (define-fringe-bitmap 'git-gutter-fr:deleted
-              [0 0 0 0 0 0 0 0 0 0 0 0 0 128 192 224 240 248]
-              nil nil 'center)))
-        ;; Adding evil-mode bindings
-        (define-key evil-normal-state-map (kbd "g h") 'git-gutter:previous-hunk)
-        (define-key evil-normal-state-map (kbd "g H") 'git-gutter:next-hunk)
-        (define-key evil-normal-state-map (kbd "g @") 'git-gutter:popup-hunk)
-        )
+  :when window-system
+  :defer t
+  :hook ((prog-mode text-mode) . 'git-gutter-mode)
+  :diminish ""
+  :config
+  (use-package git-gutter-fringe
+    :ensure t
+    :init
+    (require 'git-gutter-fringe)
+    (when (fboundp 'define-fringe-bitmap)
+      (define-fringe-bitmap 'git-gutter-fr:added
+        [224 224 224 224 224 224 224 224 224 224 224 224 224
+       224 224 224 224 224 224 224 224 224 224 224 224]
+        nil nil 'center)
+      (define-fringe-bitmap 'git-gutter-fr:modified
+        [224 224 224 224 224 224 224 224 224 224 224 224 224
+       224 224 224 224 224 224 224 224 224 224 224 224]
+        nil nil 'center)
+      (define-fringe-bitmap 'git-gutter-fr:deleted
+        [0 0 0 0 0 0 0 0 0 0 0 0 0 128 192 224 240 248]
+        nil nil 'center)))
+  ;; Adding evil-mode bindings
+  (define-key evil-normal-state-map (kbd "g h") 'git-gutter:previous-hunk)
+  (define-key evil-normal-state-map (kbd "g H") 'git-gutter:next-hunk)
+  (define-key evil-normal-state-map (kbd "g @") 'git-gutter:popup-hunk)
+  )
     #+END_SRC
 
 *** Magit
     How to win at Git from Emacs.
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package magit)
-    #+END_SRC
+(use-package magit)
 
+
+    #+END_SRC
 **** Commit configuration
      #+BEGIN_SRC emacs-lisp :tangle yes
-       (use-package git-commit
-         :after magit
-         :hook (git-commit-mode . git-commit-tweaks)
-         :custom (git-commit-summary-max-length 50)
-         :preface
-         (defun git-commit-tweaks ()
-           "Ensures that the commit body does not exceed 72 characters."
-           (setq fill-column 72)
-           (set (make-local-variable 'company-backends) '(company-dabbrev company-capf company-files))
-           (set (make-local-variable 'company-minimum-prefix-length) 2)
-           (setq-local comment-auto-fill-only-comments nil)))
+(use-package git-commit
+  :after magit
+  :hook (git-commit-mode . git-commit-tweaks)
+  :custom (git-commit-summary-max-length 50)
+  :preface
+  (defun git-commit-tweaks ()
+    "Ensures that the commit body does not exceed 72 characters."
+    (setq fill-column 72)
+    (set (make-local-variable 'company-backends) '(company-dabbrev company-capf company-files))
+    (set (make-local-variable 'company-minimum-prefix-length) 2)
+    (setq-local comment-auto-fill-only-comments nil)
+    (evil-set-initial-state 'git-commit-mode 'emacs)
+    ))
      #+END_SRC
 
 *** Bash completion
@@ -1045,9 +1039,6 @@ We need this for tab completion inside shell-mode buffers in Docker containers.
 
       (rvm-use-default)
       (rvm-activate-corresponding-ruby)
-      ;; Activate RVM for inf-ruby sessions.
-      (defadvice inf-ruby-console-auto (before activate-rvm-for-robe activate)
-      (rvm-activate-corresponding-ruby))
     #+END_SRC
 *** Anzu
     Show search result count in the mode line.
