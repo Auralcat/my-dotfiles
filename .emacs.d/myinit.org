@@ -1093,86 +1093,104 @@ We need this for tab completion inside shell-mode buffers in Docker containers.
   #+BEGIN_SRC emacs-lisp :tangle yes
     ;; Set font in graphical mode
     (when (display-graphic-p)
-        ;; Use Fantasque Sans Mono when available
-        (if (member "Fantasque Sans Mono" (font-family-list))
-        (set-face-attribute (quote default) nil :font "Fantasque Sans Mono" :height 120)
-        '(set-face-attribute (quote default) nil :font "Ubuntu Mono" :height 120))
+  ;; Use Fantasque Sans Mono when available
+  (if (member "Fantasque Sans Mono" (font-family-list))
+  (set-face-attribute (quote default) nil :font "Fantasque Sans Mono" :height 140)
+  '(set-face-attribute (quote default) nil :font "Ubuntu Mono" :height 140))
 
-        ;; Remove menu and scroll bars in graphical mode
-        (menu-bar-mode 0)
-        (tool-bar-mode 0)
-        (scroll-bar-mode 0)
-        ;; Enable emoji images
-        (global-emojify-mode)
-        ;; Enable them in the mode line as well.
-        (global-emojify-mode-line-mode)
-        ;; Maximize frame on startup
-        (toggle-frame-maximized)
-        ;; Space lines and bask in the gloriousness of graphical mode.
-        ;; 0.4 feels better for prose, and 0.2 is fine for code.
-        (add-hook 'prog-mode-hook (lambda () (setq line-spacing 0.2)))
-        (add-hook 'comint-mode-hook (lambda () (setq line-spacing 0.2)))
-        (add-hook 'text-mode-hook (lambda () (setq line-spacing 0.6))))
+  ;; Remove menu and scroll bars in graphical mode
+  (menu-bar-mode 0)
+  (tool-bar-mode 0)
+  (scroll-bar-mode 0)
+  ;; Global emoji in the mode line exclusively
+  (global-emojify-mode-line-mode)
+  ;; Maximize frame on startup
+  (toggle-frame-maximized)
+  ;; Space lines and bask in the gloriousness of graphical mode.
+  ;; 0.4 feels better for prose, and 0.2 is fine for code.
+  (add-hook 'prog-mode-hook (lambda () (setq line-spacing 0.2)))
+  (add-hook 'comint-mode-hook (lambda () (setq line-spacing 0.2)))
+  (add-hook 'text-mode-hook (lambda () (setq line-spacing 0.6))))
   #+END_SRC
 * Keybindings
-  #+BEGIN_SRC emacs-lisp :tangle yes
-    ;; Remapping the help hotkey so it doesn't clash with Unix backspace.
-    ;; Whenever you want to call help you can use M-x help as well. F1
-    ;; works too.
-    ;; (define-key key-translation-map [?\C-h] [?\C-?])
+*   #+BEGIN_SRC emacs-lisp :tangle yes
+;; Indent whole buffer using C-c TAB
+(define-key prog-mode-map (kbd "C-c TAB") 'auralcat/indent-whole-buffer)
 
-    ;; Indent whole buffer using C-c TAB
-    (define-key prog-mode-map (kbd "C-c TAB") 'auralcat/indent-whole-buffer)
+;; Some speed commands
+(global-set-key (kbd "M-1") 'delete-other-windows)
+(global-set-key (kbd "M-2") 'helm-mini)
+(global-set-key (kbd "M-3") 'ace-jump-mode)
+(global-set-key (kbd "M-4") 'switch-to-buffer-other-window)
 
-    ;; Resize the frame with ease
-    (global-set-key [M-f11] (quote toggle-frame-fullscreen))
-    (global-set-key [M-f10] (quote toggle-frame-maximized))
+(use-package org :ensure t
+  :bind (:map org-mode-map
+              ("M-1". delete-other-windows)
+              ("M-2". helm-mini)
+              ("M-3". ace-jump-mode)
+              ("M-4". switch-to-buffer-other-window)
+              ))
 
-    ;; Use the menu key for helm-m-x
-    (global-set-key [menu] (quote helm-M-x))
+(define-key comint-mode-map (kbd "M-1") 'delete-other-windows)
+(define-key comint-mode-map (kbd "M-2") 'helm-mini)
+(define-key comint-mode-map (kbd "M-3") 'ace-jump-mode)
+(define-key comint-mode-map (kbd "M-4") 'switch-to-buffer-other-window)
 
-    ;; Unfill region
-    (define-key global-map "\C-\M-q" 'unfill-region)
+;; Resize the frame with ease
+(global-set-key [M-f11] (quote toggle-frame-fullscreen))
+(global-set-key [M-f10] (quote toggle-frame-maximized))
 
-    ;; Mapping AltGr-d to delete-other-windows,
-    ;; Another symbol I don't use often.
-    (global-set-key [240] (quote delete-other-windows))
+;; Jump to previous window using M-'
+(global-set-key (kbd "M-'") (quote evil-switch-to-windows-last-buffer))
+(global-set-key (kbd "M-\"") (quote abbrev-prefix-mark))
 
-    ;; Access buffers with Alt-Gr b
-    (global-set-key [8221] (quote helm-buffers-list))
+;; Use the menu key for helm-m-x
+(global-set-key [menu] (quote helm-M-x))
 
-    ;; Map the Home and End keys to go to the beginning and end of the buffer
-    (global-set-key [home] (quote beginning-of-buffer))
-    (global-set-key [end] (quote end-of-buffer))
+;; Unfill region
+(define-key global-map "\C-\M-q" 'unfill-region)
 
-    ;; Move to beginning of line or indentation
-    (defun back-to-indentation-or-beginning () (interactive)
-      (if (= (point) (progn (back-to-indentation) (point)))
-      (beginning-of-line)))
+;; Mapping AltGr-d to delete-other-windows,
+;; Another symbol I don't use often.
+(global-set-key [240] (quote delete-other-windows))
 
-    ;; We need this to get back to the beginning of the indentation or first word of the line.
-    (global-set-key (kbd "C-a") (quote back-to-indentation-or-beginning))
+;; Access buffers with Alt-Gr b
+(global-set-key [8221] (quote helm-buffers-list))
 
-    ;; Quick theme changer
-    (global-set-key (kbd "M-`") (quote customize-themes))
+;; Map the Home and End keys to go to the beginning and end of the buffer
+(global-set-key [home] (quote beginning-of-buffer))
+(global-set-key [end] (quote end-of-buffer))
 
-    ;; Hippie-Expand: change key to M-SPC; Replace dabbrev-expand
-    (global-set-key "\M- " 'hippie-expand)
-    (global-set-key "\M-/" 'hippie-expand)
+;; Move to beginning of line or indentation
+(defun back-to-indentation-or-beginning () (interactive)
+       (if (= (point) (progn (back-to-indentation) (point)))
+           (beginning-of-line)))
 
-    ;; Eshell configuration
-    (defun eshell-tweaks ()
-        "Tweaks for the Emacs shell"
-        (evil-set-initial-state 'eshell-mode 'emacs))
-    (add-hook 'eshell-mode-hook 'eshell-tweaks)
-    (add-hook 'term-mode-hook 'eshell-tweaks)
+;; We need this to get back to the beginning of the indentation or first word of the line.
+(global-set-key (kbd "C-a") (quote back-to-indentation-or-beginning))
 
-    ;; Evaluate buffer using SPC SPC, depending on major mode.
-    (evil-leader/set-key-for-mode 'emacs-lisp-mode "SPC" 'eval-buffer)
-    (evil-leader/set-key-for-mode 'enh-ruby-mode "SPC" 'ruby-send-buffer-and-go)
-    (evil-leader/set-key-for-mode 'ruby-mode "SPC" 'ruby-send-buffer-and-go)
-    (evil-leader/set-key-for-mode 'python-mode "SPC" 'python-shell-send-buffer)
-    (evil-leader/set-key-for-mode 'js2-mode "SPC" 'js-comint-send-buffer)
+;; Quick theme changer
+(global-set-key (kbd "M-`") (quote customize-themes))
+
+;; Hippie-Expand: change key to M-SPC; Replace dabbrev-expand
+(global-set-key "\M- " 'hippie-expand)
+(global-set-key "\M-/" 'hippie-expand)
+
+;; Eshell configuration
+(defun eshell-tweaks ()
+  "Tweaks for the Emacs shell"
+  (evil-set-initial-state 'shell-mode 'emacs))
+(add-hook 'shell-mode-hook 'eshell-tweaks)
+
+;; Evaluate buffer using SPC SPC, depending on major mode.
+(evil-leader/set-key-for-mode 'emacs-lisp-mode "SPC" 'eval-buffer)
+(evil-leader/set-key-for-mode 'enh-ruby-mode "SPC" 'ruby-send-buffer-and-go)
+(evil-leader/set-key-for-mode 'ruby-mode "!" 'auralcat/ruby/add-byebug-line)
+(evil-leader/set-key-for-mode 'ruby-mode "SPC" 'ruby-send-buffer-and-go)
+(evil-leader/set-key-for-mode 'python-mode "SPC" 'python-shell-send-buffer)
+(evil-leader/set-key-for-mode 'js2-mode "SPC" 'js-comint-send-buffer)
+(evil-leader/set-key-for-mode 'elixir-mode "!" 'auralcat/elixir-iex-pry)
+(evil-leader/set-key-for-mode 'elixir-mode "SPC" 'auralcat/alchemist-iex-send-buffer)
   #+END_SRC
 * Guess Language Mode
   This is a helper mode which changes the current ~flyspell~ dictionary depending on the language you're typing in the
