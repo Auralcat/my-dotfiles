@@ -158,12 +158,11 @@
   "sus" 'slack-user-set-status
   ;; TODO: map this to org-mode locally.
   "t" 'my-org-remote-todo
-  ;; Org mark ring. I use it a lot.
-  ","   'org-mark-ring-push
-  "."   'org-mark-ring-goto
   )
+
 ;; Set Emacs state as initial state for a handful of modes.
 ;; This includes Dired, Xref, shell-related modes and list modes.
 (evil-set-initial-state 'tabulated-list-mode 'emacs)
 (evil-set-initial-state 'comint-mode 'emacs)
 (evil-set-initial-state 'compilation-mode 'emacs)
+(evil-set-initial-state 'special-mode 'emacs)
