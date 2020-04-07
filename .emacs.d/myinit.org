@@ -692,31 +692,46 @@
 *** Emojify
     Add emoji support for Emacs
     #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package emojify)
+(use-package emojify
+  :hook ((org-mode org-agenda-mode) . 'emojify-mode))
     #+END_SRC
 ** Utilities
-*** Beacon
-    Blinks when you move the cursor over long distances.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package beacon
-        :config
-        (beacon-mode 1)
-        (setq beacon-blink-when-point-moves-vertically 10))
-    #+END_SRC
+*** Smartparens
+This works better than Autopair for Elixir mode.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package smartparens)
+(require 'smartparens-config)
+
+;; Do not activate autopair for Elixir-related modes if we're using smartparens.
+(add-hook 'elixir-mode-hook
+          #'(lambda ()
+              (setq autopair-dont-activate t) ;; for emacsen < 24
+              (autopair-mode -1))             ;; for emacsen >= 24
+          )
+(add-hook 'elixir-mode-hook #'smartparens-mode)
+
+(add-hook 'alchemist-iex-mode-hook
+          #'(lambda ()
+              (setq autopair-dont-activate t) ;; for emacsen < 24
+              (autopair-mode -1))             ;; for emacsen >= 24
+          )
+(add-hook 'alchemist-iex-mode-hook #'smartparens-mode)
+#+END_SRC
+
 *** Prettier.js
     Prettier.js integration for Emacs.
     I want to run this thing when saving .js and web-related files.
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package prettier-js
-        :hook ((js2-mode sass-mode scss-mode css-mode) . 'prettier-js-mode))
+  :hook ((js2-mode sass-mode scss-mode css-mode) . 'prettier-js-mode))
 
       (setq prettier-js-allowed-modes '(js2-mode sass-mode css-mode scss-mode))
 
       (defun toggle-prettier-js-save-hook ()
-        "Toggles Prettier.js hook when you're working with a mode that supports it. Removes the hook otherwise."
-        (if (member major-mode prettier-js-allowed-modes)
-        (add-hook 'before-save-hook 'prettier-js)
-        (remove-hook 'before-save-hook 'prettier-js)))
+  "Toggles Prettier.js hook when you're working with a mode that supports it. Removes the hook otherwise."
+  (if (member major-mode prettier-js-allowed-modes)
+  (add-hook 'before-save-hook 'prettier-js)
+  (remove-hook 'before-save-hook 'prettier-js)))
       (add-hook 'change-major-mode-hook 'toggle-prettier-js-save-hook)
     #+END_SRC
 *** Origami-mode
