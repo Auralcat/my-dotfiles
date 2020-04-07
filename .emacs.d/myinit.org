@@ -112,48 +112,65 @@ This is quite useful to navigate through code faster.
 
 * Macros
   #+BEGIN_SRC emacs-lisp :tangle yes
-    ;; To save a macro, record it with C-x ( (start) and C-x ) (stop),
-    ;; give it a name with C-x C-k n (C-k is for maKro) and
-    ;; insert it in this file with insert-kbd-macro.
-    ;; Then you execute it mapping it to a key! 😊
+;; To save a macro, record it with C-x ( (start) and C-x ) (stop),
+;; give it a name with C-x C-k n (C-k is for maKro) and
+;; insert it in this file with insert-kbd-macro.
+;; Then you execute it mapping it to a key! ð
 
-    ;; This package allows you to override a couple functions.
-    (use-package noflet)
-    (lambda (&optional arg) "Extracts a variable from an it clause and puts in a let statement." (interactive "p") (kmacro-exec-ring-item (quote ([100 100 134217745 134217729 112 99 87 108 101 116 40 58 25 escape 102 61 50 120 67 123 25 escape 86 61 15 15 48 119] 0 "%d")) arg))
+;; This package allows you to override a couple functions.
+(use-package noflet)
+(lambda (&optional arg) "Extracts a variable from an it clause and puts in a let statement." (interactive "p") (kmacro-exec-ring-item (quote ([100 100 134217745 134217729 112 99 87 108 101 116 40 58 25 escape 102 61 50 120 67 123 25 escape 86 61 15 15 48 119] 0 "%d")) arg))
 
-    (fset 'auralcat/ruby-clone-method
-          (lambda (&optional arg) "Clones a def method in Ruby." (interactive "p") (kmacro-exec-ring-item (quote ([86 125 121 103 118 escape 112] 0 "%d")) arg)))
+;; Adds a byebug line to Ruby code
+(fset 'auralcat/ruby/add-byebug-line
+      (kmacro-lambda-form [?O ?b ?y ?e ?b ?u ?g escape return] 0 "%d"))
 
-    (fset 'auralcat/search-git-conflict-string
-          (lambda (&optional arg) "Searches for a Git conflict string." (interactive "p") (kmacro-exec-ring-item (quote ([134217747 94 91 60 61 62 93 13] 0 "%d")) argumento)))
+(fset 'auralcat/ruby-clone-method
+      (lambda (&optional arg) "Clones a def method in Ruby." (interactive "p") (kmacro-exec-ring-item (quote ([86 125 121 103 118 escape 112] 0 "%d")) arg)))
 
-      (fset (quote sample-macro)
-          (lambda (&optional arg) "Sample description" (interactive "p")
-            (undo-boundary)
-            (noflet ((undo-boundary ()))
-              (kmacro-exec-ring-item (quote ([100 87 65 32 35 32 65 110 111 116 104 101 114 32 109 97 99 114 111 32 99 97 108 108 46 escape 134217730 return 112 45] 0 "%d")) arg)
-              )
-            (undo-boundary)
-            ))
+(fset 'auralcat/search-git-conflict-string
+      (lambda (&optional arg) "Searches for a Git conflict string." (interactive "p") (kmacro-exec-ring-item (quote ([134217747 94 91 60 61 62 93 13] 0 "%d")) argumento)))
 
-    ;; Some macros to adjust Ruby def's
-    (fset 'auralcat/ruby-move-defun-forward
-          (lambda (&optional arg) "Moves a DEF block further ahead in the class definition." (interactive "p")
-            (undo-boundary)
-            (noflet ((undo-boundary ()))
-              (kmacro-exec-ring-item (quote ([26 167772166 23 4 134217820 4 134217830 134217826 134217734 return return 25 134217730 26] 0 "%d")) arg)
-              )
-            (undo-boundary)
-            ))
+(fset (quote sample-macro)
+      (lambda (&optional arg) "Sample description" (interactive "p")
+        (undo-boundary)
+        (noflet ((undo-boundary ()))
+          (kmacro-exec-ring-item (quote ([100 87 65 32 35 32 65 110 111 116 104 101 114 32 109 97 99 114 111 32 99 97 108 108 46 escape 134217730 return 112 45] 0 "%d")) arg)
+          )
+        (undo-boundary)
+        ))
 
-    (fset 'auralcat/ruby-move-defun-backward
-          (lambda (&optional arg) "Moves a DEF block backwards in the class definition." (interactive "p")
-            (undo-boundary)
-            (noflet ((undo-boundary ()))
-              (kmacro-exec-ring-item (quote ([26 167772166 23 134217820 16 4 134217820 4 2 134217730 16 return 25 return 134217730 26] 0 "%d")) arg)
-              )
-            (undo-boundary)
-            ))
+;; Some macros to adjust Ruby blocks
+(fset 'auralcat/ruby-move-defun-backward
+      (lambda (&optional arg) "Moves a DEF block backwards in the class definition." (interactive "p")
+        (undo-boundary)
+        (noflet ((undo-boundary ()))
+          (kmacro-exec-ring-item (quote ([26 167772166 23 134217820 16 4 134217820 4 2 134217730 16 return 25 return 134217730 26] 0 "%d")) arg)
+          )
+        (undo-boundary)
+        ))
+
+(fset 'auralcat/ruby-move-block-forward
+      (lambda (&optional arg) "Moves a Ruby block forward in the current nesting level." (interactive "p")
+        (undo-boundary)
+        (noflet ((undo-boundary ()))
+             (kmacro-lambda-form [?\C-z ?\C-  ?\C-\M-n ?\C-e ?\C-w ?\C-\M-n ?\C-m ?\C-/ ?\C-e ?\C-m ?\C-m ?\C-y ?\C-u ?\C-  ?\C-  ?\C-k ?\C-k ?\C-i ?\C-z] 0 "%d")
+          )
+        (undo-boundary)
+        )
+)
+
+;; Removes a Ruby block wrapping another block.
+(fset 'auralcat/ruby-block-vanish
+   (kmacro-lambda-form [?m ?m ?% ?d ?d ?\' ?m ?d ?d ?\C-x ?\C-x ?=] 0 "%d"))
+
+;; Calls IEx.pry in the line above the cursor.
+(fset 'auralcat/elixir-iex-pry
+   (kmacro-lambda-form [?O ?r ?e ?q ?u ?i ?r ?e ?  ?I ?E ?x ?\; ?  ?I ?E ?x ?. ?p ?r ?y escape] 0 "%d"))
+
+;; Sends the whole buffer to an Alchemist-IEx buffer.
+(fset 'auralcat/alchemist-iex-send-buffer
+   (kmacro-lambda-form [?\C-x ?h ?\C-c ?a ?i ?r escape] 0 "%d"))
   #+END_SRC
 * Mac OS
   #+BEGIN_SRC emacs-lisp :tangle yes
@@ -456,24 +473,29 @@ Necessary for parsing apib files (API Blueprint)
       (use-package ruby-electric
        :diminish ruby-electric-mode)
       (add-hook 'enh-ruby-mode-hook
-           #'(lambda ()
-               (setq autopair-dont-activate t) ;; for emacsen < 24
-               (autopair-mode -1))             ;; for emacsen >= 24
-               )
+     #'(lambda ()
+         (setq autopair-dont-activate t) ;; for emacsen < 24
+         (autopair-mode -1))             ;; for emacsen >= 24
+         )
       (add-hook 'ruby-mode-hook
-           #'(lambda ()
-               (setq autopair-dont-activate t) ;; for emacsen < 24
-               (autopair-mode -1))             ;; for emacsen >= 24
-               )
+     #'(lambda ()
+         (setq autopair-dont-activate t) ;; for emacsen < 24
+         (autopair-mode -1))             ;; for emacsen >= 24
+         )
       (add-hook 'enh-ruby-mode-hook 'ruby-electric-mode)
       (add-hook 'ruby-mode-hook 'ruby-electric-mode)
     #+END_SRC
 *** Alchemist
     Elixir helper package integration for Emacs.
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package alchemist :ensure t)
-      ;; Activate it in Elixir mode
-      (add-hook 'elixir-mode-hook 'alchemist-mode)
+(use-package alchemist :ensure t)
+;; Activate it in Elixir mode
+(add-hook 'elixir-mode-hook 'alchemist-mode)
+(add-hook 'elixir-mode-hook 'alchemist-phoenix-mode)
+
+;; Use Emacs mode in IEx and Alchemist Test window
+(add-hook 'alchemist-iex-mode-hook 'evil-emacs-state)
+(evil-set-initial-state 'alchemist-test-report-mode' emacs)
     #+END_SRC
 *** Projectile
     Manage projects in Emacs.
