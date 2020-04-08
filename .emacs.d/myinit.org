@@ -736,6 +736,15 @@ Necessary for parsing apib files (API Blueprint)
   :hook ((org-mode org-agenda-mode) . 'emojify-mode))
     #+END_SRC
 ** Utilities
+*** IEdit
+*I* nteractive *Edit*. This helps with interactive search and replace in a file.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package iedit
+  :ensure t)
+
+(define-key prog-mode-map (kbd "C-;") 'iedit-mode)
+#+END_SRC
+
 *** Smartparens
 This works better than Autopair for Elixir mode.
 #+BEGIN_SRC emacs-lisp :tangle yes
