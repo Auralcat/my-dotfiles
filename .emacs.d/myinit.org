@@ -329,6 +329,8 @@ This is quite useful to navigate through code faster.
   #+END_SRC
 * Packages
 ** Major Modes
+*** Emacs Lisp
+Some goodies to make editing Elisp easier.
 *** Elixir-mode
     Elixir support for Emacs
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -595,62 +597,69 @@ Necessary for parsing apib files (API Blueprint)
      *COMPlete ANYthing* inside Emacs.
      I switched to it because it works in GUI Emacs and auto-complete doesn't.
      #+BEGIN_SRC emacs-lisp :tangle yes
-       (use-package company)
+(use-package company)
 
-       ;; Web-mode needs HTML and CSS completions.
-       ;; JS is not satisfactory at this point IMO
+;; Web-mode needs HTML and CSS completions.
+;; JS is not satisfactory at this point IMO
 
-       (defun web-mode-tweaks ()
-       (require 'company-web-html)
-       (set (make-local-variable 'company-backends) '(company-web-html company-css))
-       (emmet-mode 1)
-       (company-mode t))
+(defun web-mode-tweaks ()
+  (require 'company-web-html)
+  (set (make-local-variable 'company-backends) '(company-web-html company-css))
+  (emmet-mode 1)
+  (company-mode t))
 
-       ;; Completion for Ruby mode
-       (defun ruby-mode-tweaks ()
-       ;; Increase the min prefix length so it doesn't clash with most used keywords, like def.
-       (set (make-local-variable 'company-minimum-prefix-length) 4)
-       (set (make-local-variable 'company-backends) '(company-etags company-yasnippet)))
+;; Completion for Ruby mode
+(defun ruby-mode-tweaks ()
+  ;; Increase the min prefix length so it doesn't clash with most used keywords, like def.
+  (set (make-local-variable 'company-minimum-prefix-length) 4)
+  (set (make-local-variable 'company-backends) '(company-etags company-yasnippet)))
 
-       ;; General text writing completion (uses dabbrev and filename completion)
-       (defun human-language-mode-tweaks ()
-       (set (make-local-variable 'company-backends) '(company-dabbrev company-capf company-files))
-       (set (make-local-variable 'company-minimum-prefix-length) 2)
-       (setq fill-column 80))
+;; General text writing completion (uses dabbrev and filename completion)
+(defun human-language-mode-tweaks ()
+  (set (make-local-variable 'company-backends) '(company-dabbrev company-capf company-files))
+  (set (make-local-variable 'company-minimum-prefix-length) 2)
+  (setq fill-column 80))
 
-       ;; Shell completion
-       (defun shell-mode-tweaks ()
-       (set (make-local-variable 'company-backends) '(company-capf company-files)))
+;; Shell completion
+(defun shell-mode-tweaks ()
+  (set (make-local-variable 'company-backends) '(company-capf company-files)))
 
-       ;; Add tweaks
-       (add-hook 'enh-ruby-mode-hook 'ruby-mode-tweaks)
-       (add-hook 'ruby-mode-hook 'ruby-mode-tweaks)
-       (add-hook 'shell-mode-hook 'shell-mode-tweaks)
+;; Elisp completion
+(defun elisp-tweaks ()
+  (set (make-local-variable 'company-backends) '(company-elisp company-yasnippet company-etags))
+  )
 
-       ;; Human language writing hooks
-       (add-hook 'org-mode-hook 'human-language-mode-tweaks)
-       (add-hook 'markdown-mode-hook 'human-language-mode-tweaks)
+;; Add tweaks
+(add-hook 'enh-ruby-mode-hook 'ruby-mode-tweaks)
+(add-hook 'ruby-mode-hook 'ruby-mode-tweaks)
+(add-hook 'shell-mode-hook 'shell-mode-tweaks)
+(add-hook 'emacs-lisp-mode-hook 'elisp-tweaks)
+(add-hook 'ielm-mode-hook 'elisp-tweaks)
 
-       (add-hook 'org-mode-hook 'variable-pitch-mode)
-       (add-hook 'markdown-mode-hook 'variable-pitch-mode)
-       (add-hook 'git-commit-setup-hook 'variable-pitch-mode)
+;; Human language writing hooks
+(add-hook 'org-mode-hook 'human-language-mode-tweaks)
+(add-hook 'markdown-mode-hook 'human-language-mode-tweaks)
 
-       ;; Autocompletion for Bootstrap/FontAwesome classes
-       (use-package ac-html-bootstrap)
+(add-hook 'org-mode-hook 'variable-pitch-mode)
+(add-hook 'markdown-mode-hook 'variable-pitch-mode)
+(add-hook 'git-commit-setup-hook 'variable-pitch-mode)
 
-       ;; Web-mode completions
-       (use-package company-web)
+;; Autocompletion for Bootstrap/FontAwesome classes
+(use-package ac-html-bootstrap)
 
-       ;; Company statistics package
-       (use-package company-statistics)
-       (company-statistics-mode)
+;; Web-mode completions
+(use-package company-web)
 
-       ;; Company with prescient.el offers better sorting of completion candidates.
-       ;; I don't know if it clashes with company-statistics.
-       (use-package company-prescient)
+;; Company statistics package
+(use-package company-statistics)
+(company-statistics-mode)
 
-       ;; Activate it
-       (company-prescient-mode)
+;; Company with prescient.el offers better sorting of completion candidates.
+;; I don't know if it clashes with company-statistics.
+(use-package company-prescient)
+
+;; Activate it
+(company-prescient-mode)
      #+END_SRC
 *** Keyfreq
     Shows most used commands in editing session.
@@ -1003,6 +1012,8 @@ This works better than Autopair for Elixir mode.
     (use-package rainbow-delimiters)
     ;; Add this to prog-mode
     (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+    (add-hook 'ielm-mode-hook #'rainbow-delimiters-mode)
+    (add-hook 'slime-repl-mode-hook #'rainbow-delimiters-mode)
     #+END_SRC
 *** Git Gutter
     Shows (and enables you to navigate between) parts of the code

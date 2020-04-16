@@ -18,5 +18,5 @@ indent_style = space
 indent_size = 2
 
 # 2 space indentation
-[*.{rb,css,scss,exs,ex,jsx,js,html,vue}]
+[*.{rb,css,scss,exs,ex,jsx,js,html,vue,el}]
 indent_size = 2
