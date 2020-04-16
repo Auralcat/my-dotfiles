@@ -1,6 +1,11 @@
 (require 'package)
 (setq package-enable-at-startup nil)
 
+;; Bootstrap use-package
+(eval-when-compile
+  (require 'use-package))
+(require 'diminish)
+
 ;; Package repositories
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
           ("org" . "https://orgmode.org/elpa/")
@@ -8,12 +13,6 @@
           ;; Use it when you can't find what you want in other repos
           ("melpa" . "https://melpa.org/packages/")))
 (package-initialize)
-
-;; Bootstrap use-package
-(unless (package-installed-p 'use-package)
-    (package-refresh-contents)
-    (package-install 'use-package))
-(require 'use-package)
 
 ;; This replaces the old require-package.
 ;; If package isn't installed, fetch it.
