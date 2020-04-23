@@ -14,10 +14,14 @@
 (defun auralcat-run-rails-console-in-docker-container ()
     "Open a Rails console inside the Docker container. With C-u prefix, open console in sandbox mode."
     (interactive)
-    (if (eq current-prefix-arg '(4))
-      (run-ruby "docker-compose run web rails console --sandbox" "Docker Rails Console")
+  (cond
+    ((eq (projectile-project-type 'ruby))
       (run-ruby "docker-compose run web rails console" "Docker Rails Console")
-      ))
+      )
+    ((eq (projectile-project-type 'elixir))
+      (alchemist-iex-run "docker-compose run broker"))
+    )
+    )
 
 ;; Open a terminal buffer inside the Docker container of the project.
 (defun auralcat-run-bash-in-docker-container (args)

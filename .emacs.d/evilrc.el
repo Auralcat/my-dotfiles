@@ -19,8 +19,6 @@
 (define-key evil-normal-state-map (kbd "Q") 'kill-current-buffer)
 
 ;; Evil-snipe: use s and S for sniping, transfer the command from S to K
-(define-key evil-normal-state-map (kbd "s") 'evil-snipe-s)
-(define-key evil-normal-state-map (kbd "S") 'evil-snipe-S)
 (define-key evil-normal-state-map (kbd "K") 'evil-change-whole-line)
 
 ;; INSERT MODE
@@ -149,8 +147,6 @@
   "o" 'aw-flip-window
   ;; Projectile prefix
   "p" 'projectile-command-map
-  ;; Projectile-Rails prefix
-  "r" 'projectile-rails-command-map
   ;; Slack bindings
   "smi" 'slack-im-select
   "smg" 'slack-group-select

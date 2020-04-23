@@ -59,7 +59,7 @@
     "Return the generated CI build url."
     (concat auralcat-work-project-ci-url
         (s-join "/" (list auralcat-work-organization-name
-                        auralcat-work-project-name
+                      (projectile-project-name)
                         "branches"
                         (s-trim (shell-command-to-string "git rev-parse --abbrev-ref HEAD")))))
     )
@@ -85,7 +85,7 @@
 (defun my-goto-work-github-repo-url ()
     "Open the project's GitHub repo page in the browser."
     (interactive)
-    (browse-url auralcat-work-github-project-repo)
+    (browse-url (concat "https://github.com/magnetis/" (projectile-project-name)))
     )
 
 (provide 'evil-leader-custom-functions)
