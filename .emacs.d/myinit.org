@@ -164,14 +164,6 @@ This is quite useful to navigate through code faster.
 (fset 'auralcat/ruby-block-vanish
    (kmacro-lambda-form [?m ?m ?% ?d ?d ?\' ?m ?d ?d ?\C-x ?\C-x ?=] 0 "%d"))
 
-;; Calls IEx.pry in the line above the cursor.
-(fset 'auralcat/elixir-iex-pry
-   (kmacro-lambda-form [?O ?r ?e ?q ?u ?i ?r ?e ?  ?I ?E ?x ?\; ?  ?I ?E ?x ?. ?p ?r ?y escape] 0 "%d"))
-
-;; Sends the whole buffer to an Alchemist-IEx buffer.
-(fset 'auralcat/alchemist-iex-send-buffer
-   (kmacro-lambda-form [?\C-x ?h ?\C-c ?a ?i ?r escape] 0 "%d"))
-
 ;; Sends a region to the *shell* buffer
 (fset 'auralcat/sh-send-region
    (kmacro-lambda-form [?\M-w ?  ?$ ?\C-y return ?\M-o] 0 "%d"))
@@ -180,6 +172,30 @@ This is quite useful to navigate through code faster.
 (fset 'auralcat/sh-send-line
    (kmacro-lambda-form [?\C-z ?\C-a ?\S-\C-e ?\M-w ?\C-z ?  ?$ ?\C-y return ?\M-o] 0 "%d"))
   #+END_SRC
+
+** Elixir
+#+BEGIN_SRC emacs-lisp :tangle yes
+;; Changes a one-line function like:
+;; def something(foo), do: "yay!"
+;;
+;; to:
+;;
+;; def something(foo) do
+;;   "yay!"
+;; end
+(fset 'auralcat/elixir-change-one-line-function-to-multiline
+   (kmacro-lambda-form [?f ?: ?F ?, ?x ?E ?x ?i return escape ?o ?e ?n ?d return escape ?\M-a return] 0 "%d"))
+
+;; Calls IEx.pry in the line above the cursor.
+(fset 'auralcat/elixir-iex-pry
+   (kmacro-lambda-form [?O ?r ?e ?q ?u ?i ?r ?e ?  ?I ?E ?x ?\; ?  ?I ?E ?x ?. ?p ?r ?y escape] 0 "%d"))
+
+;; Sends the whole buffer to an Alchemist-IEx buffer.
+(fset 'auralcat/alchemist-iex-send-buffer
+   (kmacro-lambda-form [?\C-x ?h ?\C-c ?a ?i ?r escape] 0 "%d"))
+#+END_SRC
+
+
 * Mac OS
   #+BEGIN_SRC emacs-lisp :tangle yes
     (when (eq system-type 'darwin) ;; mac specific settings
