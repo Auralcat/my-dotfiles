@@ -151,6 +151,7 @@
   "smi" 'slack-im-select
   "smg" 'slack-group-select
   "smc" 'slack-channel-select
+  "s'" 'slack-select-unread-rooms
   "sus" 'slack-user-set-status
   ;; TODO: map this to org-mode locally.
   "t" 'my-org-remote-todo
