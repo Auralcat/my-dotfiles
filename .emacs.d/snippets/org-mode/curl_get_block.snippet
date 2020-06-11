@@ -1,0 +1,11 @@
+# -*- mode: snippet -*-
+# name: cURL GET request block
+# key: get
+# Creates a cURL GET request source block.
+# --
+#+BEGIN_SRC shell :results code :eval never-export
+BASE_URL="https://${1:example.com/api}"
+ENDPOINT="$0"
+
+curl -s --config ~/.curlrc "$BASE_URL$ENDPOINT" | jq
+#+END_SRC

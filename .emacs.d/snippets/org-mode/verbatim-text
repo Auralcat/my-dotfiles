@@ -1,4 +1,4 @@
-# -*- mode: snippet -*-
+# -*- mode: snippet; require-final-newline: nil; backup-inhibited: t -*
 # name: Verbatim Text
 # key: =
 # --

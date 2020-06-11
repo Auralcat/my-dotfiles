@@ -1,0 +1,21 @@
+# -*- mode: snippet -*-
+# name: cURL POST request block
+# key: post
+# Creates a cURL POST request source block with placeholders for the base_url, endpoint and auth token.
+# --
+#+BEGIN_SRC shell :results code :eval never-export
+AUTH_TOKEN="$0"
+BASE_URL="https://${1:example.com/api}"
+# Coloque as variaveis pra compor dentro do endpoint _antes_ de definir $ENDPOINT!
+ENDPOINT="${2:/sample/endpoint}"
+
+curl -s --config ~/.curlrc \
+  -X POST \
+  --header "Content-Type: application/json" \
+  --header "Authorization: Bearer #{AUTH_TOKEN}" \
+  "$BASE_URL$ENDPOINT" \
+  -d '{
+"key": "value",
+"another_key": "another_value"
+}' | jq
+#+END_SRC

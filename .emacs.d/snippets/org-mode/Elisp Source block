@@ -1,3 +1,4 @@
+# -*- mode: snippet; require-final-newline: nil; backup-inhibited: t -*
 # key: esrc
 # name: Elisp Source block
 # --
