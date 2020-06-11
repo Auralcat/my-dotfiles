@@ -1418,6 +1418,12 @@ We need this for tab completion inside shell-mode buffers in Docker containers.
 ;; you open them all the time.
 (setq org-agenda-sticky t)
    #+END_SRC
+** Org-English mode
+This is a derived mode to hold English abbrevs.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(define-derived-mode org-english-mode org-mode "Org-EN"
+  "Org-mode used to hold English abbrevs. Does everything that plain org-mode does.")
+#+END_SRC
 ** Auto-mark TODO entries as DONE
    #+BEGIN_SRC emacs-lisp :tangle yes
      ;; see http://thread.gmane.org/gmane.emacs.orgmode/42715
