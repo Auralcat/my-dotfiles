@@ -219,10 +219,6 @@ Plugin 'jiangmiao/auto-pairs'
 " a front end to Org-mode itself. Do Org in Vim.
 Plugin 'hsitz/vimorganizer'
 
-" MultipleCursors: Creates multiple cursors where you can type
-" at the same time. Replicates the feature from Sublime Text/Atom.
-Plugin 'terryma/vim-multiple-cursors'
-
 " Syntastic: Checks syntax of source code.
 Plugin 'scrooloose/syntastic'
 
@@ -235,9 +231,6 @@ Plugin 'junegunn/rainbow_parentheses.vim'
 " VimColorSchemes: plugin to manage colorschemes
 Plugin 'flazz/vim-colorschemes'
 
-" VimWiki: Use Vim as your personal wiki
-Plugin 'vimwiki/vimwiki'
-
 " VimSurround: Better bracket/surround symbol control in Vim
 Plugin 'tpope/vim-surround'
 
@@ -246,6 +239,9 @@ Plugin 'mattn/emmet-vim'
 
 " EditorConfig: Keep standard configurations between editors and projects
 Plugin 'editorconfig/editorconfig-vim'
+
+" VimElixir: Vim support for Elixir
+Plugin 'elixir-editors/vim-elixir'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
