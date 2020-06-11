@@ -1189,6 +1189,30 @@ We need this for tab completion inside shell-mode buffers in Docker containers.
 * Themes
   Remember to _defer_ the loading of the theme packages, otherwise the
   faces might get mixed up and look ugly.
+
+  This function makes it easier to change themes quickly. You can bind it to a
+  keychord or whatnot and use it as you wish.
+  #+BEGIN_SRC emacs-lisp :tangle yes
+(defun auralcat/change-theme (new-theme)
+  "Disables the current theme in the session, loads and enables the NEW-THEME."
+  ;; This is the code Emacs uses to load themes in custom.el
+  (interactive
+   (list
+    (intern (completing-read "Change tô theme: "
+                             (mapcar #'symbol-name
+                     (custom-available-themes))))
+    ))
+  (let* (
+         (current-theme (car custom-enabled-themes))
+         (new-theme-loaded-p (memq new-theme custom-enabled-themes))
+         )
+    (disable-theme current-theme)
+    (if new-theme-loaded-p
+        (enable-theme new-theme)
+      (load-theme new-theme)
+      )
+    ))
+  #+END_SRC
 ** Jazz
    A warm theme with dark colors.
    #+BEGIN_SRC emacs-lisp :tangle yes
