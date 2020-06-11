@@ -62,7 +62,6 @@
 (define-key evil-insert-state-map (kbd "C-x C-l") 'evil-complete-previous-line)
 
 ;; C-x C-o: syntax completion, depending on mode.
-(add-hook 'enh-ruby-mode-hook #'(lambda () (define-key evil-insert-state-map (kbd "C-x C-o") 'company-robe)))
 (add-hook 'emacs-lisp-mode-hook #'(lambda () (define-key evil-insert-state-map (kbd "C-x C-o") 'company-elisp)))
 
 ;; C-x C-p: Yasnippet template completion.

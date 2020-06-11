@@ -1,4 +1,5 @@
 #+TITLE: Emacs configuration file
+
 #+AUTHOR: Auralcat
 #+DATE: 2017:05:17
 #+LANGUAGE: en
@@ -8,6 +9,7 @@
    ;; Set fallback font
     (set-face-attribute 'default nil :font "Ubuntu Mono" :height 120)
   #+END_SRC
+
 * Command history
   It's a good idea to save the previous commands' history, for a couple reasons:
   - Check the complex commands you use most often and improve your workflow
@@ -466,7 +468,8 @@ Some goodies to make editing Elisp easier.
 *** CSV-mode
     CSV support for Emacs.
     #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package csv-mode)
+(use-package csv-mode
+  :defer t)
     #+END_SRC
 *** APIB-mode
 Necessary for parsing apib files (API Blueprint)
@@ -627,7 +630,9 @@ Necessary for parsing apib files (API Blueprint)
 (defun ruby-mode-tweaks ()
   ;; Increase the min prefix length so it doesn't clash with most used keywords, like def.
   (set (make-local-variable 'company-minimum-prefix-length) 4)
-  (set (make-local-variable 'company-backends) '(company-etags company-yasnippet)))
+  (set (make-local-variable 'company-backends) '(company-etags company-capf company-dabbrev company-yasnippet))
+  (subword-mode 1)
+)
 
 ;; General text writing completion (uses dabbrev and filename completion)
 (defun human-language-mode-tweaks ()
@@ -641,12 +646,14 @@ Necessary for parsing apib files (API Blueprint)
 
 ;; Elisp completion
 (defun elisp-tweaks ()
+  (set (make-local-variable 'company-minimum-prefix-length) 5)
   (set (make-local-variable 'company-backends) '(company-elisp company-yasnippet company-etags))
   )
 
 ;; Add tweaks
 (add-hook 'enh-ruby-mode-hook 'ruby-mode-tweaks)
 (add-hook 'ruby-mode-hook 'ruby-mode-tweaks)
+(add-hook 'elixir-mode-hook 'ruby-mode-tweaks)
 (add-hook 'shell-mode-hook 'shell-mode-tweaks)
 (add-hook 'emacs-lisp-mode-hook 'elisp-tweaks)
 (add-hook 'ielm-mode-hook 'elisp-tweaks)
@@ -819,7 +826,7 @@ This works better than Autopair for Elixir mode.
     Run a Slack client inside Emacs. Surprisingly useful at work!
     Credits for the customizations below: [[http://endlessparentheses.com/mold-slack-entirely-to-your-liking-with-emacs.html][Endless Parentheses]]
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package slack
+(use-package slack
   :commands (slack-start)
   :init
   (setq slack-buffer-emojify t) ;; if you want to enable emoji, default nil
@@ -830,19 +837,20 @@ This works better than Autopair for Elixir mode.
 
   ;; Set abbrevs from org-mode
   (abbrev-table-put slack-mode-abbrev-table
-        :parents (list org-mode-abbrev-table))
+                    :parents (list org-mode-abbrev-table))
 
-      (abbrev-table-put slack-thread-message-buffer-mode-abbrev-table
-        :parents (list slack-mode-abbrev-table))
+  (abbrev-table-put slack-thread-message-buffer-mode-abbrev-table
+                    :parents (list slack-mode-abbrev-table))
 
-      (abbrev-table-put slack-message-compose-buffer-mode-abbrev-table
-        :parents (list slack-mode-abbrev-table))
+  (abbrev-table-put slack-message-compose-buffer-mode-abbrev-table
+                    :parents (list slack-mode-abbrev-table))
 
-  ;; Expand abbrevs when pressing Enter in slack-modes (it's derived from lui-mode)
+  ;; Expand abbrevs when pressing Enter in Slack modes (it's derived from lui-mode)
   (advice-add #'lui-send-input :before
-        (lambda (&rest _)
-          (ignore-errors (expand-abbrev))))
+              (lambda (&rest _)
+                (ignore-errors (expand-abbrev))))
 
+  ;; Define the keybindings for Slack-related modes.
   (evil-define-key 'normal slack-info-mode-map
     ",u" 'slack-room-update-messages)
   (evil-define-key 'normal slack-mode-map
@@ -866,8 +874,16 @@ This works better than Autopair for Elixir mode.
     ",k" 'slack-message-cancel-edit
     ",s" 'slack-message-send-from-buffer
     ",2" 'slack-message-embed-mention
-    ",3" 'slack-message-embed-channel))
+    ",3" 'slack-message-embed-channel)
+  (evil-define-key 'normal slack-thread-message-buffer-mode-map
+    "Q" 'bury-buffer))
     #+END_SRC
+
+    #+RESULTS:
+    #+begin_example
+    ""
+    #+end_example
+
 **** Notifications customization
      #+BEGIN_SRC emacs-lisp :tangle yes
        ;; Channels
@@ -892,18 +908,19 @@ This works better than Autopair for Elixir mode.
      #+END_SRC
 **** Autocompletion
      #+BEGIN_SRC emacs-lisp :tangle yes
-       (defun slack-mode-tweaks ()
-   ;; Company-slack adds username completion.
-        (set (make-local-variable 'company-backends) '(company-dabbrev company-slack-backend company-files))
-        ;; Start earlier than in other modes.
-        (set (make-local-variable 'company-minimum-prefix-length) 2))
+;; Use company-slack to complete usernames in Slack modes
+(defun slack-mode-tweaks ()
+  (set (make-local-variable 'company-backends) '(company-slack-backend company-dabbrev company-files))
+  (set (make-local-variable 'company-minimum-prefix-length) 3)
+  )
 
-       (add-hook 'slack-mode-hook 'slack-mode-tweaks)
-       ;; Disable auto-fill-mode
-       (add-hook 'slack-mode-hook 'turn-off-auto-fill)
-       (add-hook 'slack-message-compose-buffer-mode-hook 'slack-mode-tweaks)
-       (add-hook 'slack-message-edit-buffer-mode-hook 'slack-mode-tweaks)
-       (add-hook 'slack-thread-message-buffer-mode-hook 'slack-mode-tweaks)
+(add-hook 'slack-message-buffer-mode-hook 'slack-mode-tweaks)
+(add-hook 'slack-message-compose-buffer-mode-hook 'slack-mode-tweaks)
+(add-hook 'slack-message-edit-buffer-mode-hook 'slack-mode-tweaks)
+(add-hook 'slack-thread-message-buffer-mode-hook 'slack-mode-tweaks)
+
+;; Disable auto-fill-mode
+(add-hook 'slack-mode-hook 'turn-off-auto-fill)
      #+END_SRC
 *** Golden Ratio Mode
     Splits windows using the [[https://en.wikipedia.org/wiki/Golden_ratio][Golden Ratio]].
@@ -1443,7 +1460,7 @@ We need this for tab completion inside shell-mode buffers in Docker containers.
    #+END_SRC
 ** Org-babel
 *** General settings
-- Do not ask me if I want ot run the source block
+- Do not ask me if I want to run the source block
 - Output the results in _scripting_ mode, instead of eval mode.
 - Wrap them in an example block (for exporting)
 
