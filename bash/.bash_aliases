@@ -75,7 +75,6 @@ alias draft='vim /tmp/scratch.md'
 alias freq="history | awk '{a[$2]++} END {for(i in a) { print a[i] \" \" i}}' | sort -rn | head -20"
 
 # Misc stuff
-alias budget='libreoffice --calc ~/Documentos/Controle\ financeiro.ods'
 alias lynx='lynx -nofilereferer -noreferer -anonymous -cookies -vikeys'
 alias tuxsay='cowsay -f tux'
 alias unix='curl -L git.io/unix'
@@ -89,6 +88,7 @@ alias count_zero='curl https://www.kataan.org/public/ebook/countzero.txt | less'
 
 # Elixir stuff
 alias md='mix deps.get'
+
 # We can improve this one. The idea is to run mix ecto.setup when available.
 alias mes='mix ecto.setup || mix ecto.create && mix ecto.migrate && mix run priv/repo/seeds.exs'
 alias med='mix ecto.drop'
@@ -97,7 +97,11 @@ alias mts='mix test --stale'
 alias mtf='mix test --failed'
 alias mf='mix format'
 alias mfc='mix format --check-formatted .'
+# This aint working right because of double quotes and stuff.
+# alias mfd='git status --porcelain | awk 'match($1, "M"){print $2}' | xargs docker-compose run --rm broker mix format'
 
+# Lua stuff
+alias love="/Applications/love.app/Contents/MacOS/love"
 # Docker aliases
 alias dcrb='docker-compose run broker bash'
 alias dcu='docker-compose up'
