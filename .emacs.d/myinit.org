@@ -767,6 +767,20 @@ Necessary for parsing apib files (API Blueprint)
   :hook ((org-mode org-agenda-mode) . 'emojify-mode))
     #+END_SRC
 ** Utilities
+*** Git-Link
+Create links to Github/GitLab files from the comfort of your Emacs buffer.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package git-link)
+#+END_SRC
+*** Lispyville
+Lispy + Evil
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package lispyville
+  :init
+  (general-add-hook '(emacs-lisp-mode-hook lisp-mode-hook) #'lispyville-mode)
+  :config
+  (lispyville-set-key-theme '(operators c-w additional)))
+#+END_SRC
 *** IEdit
 *I* nteractive *Edit*. This helps with interactive search and replace in a file.
 #+BEGIN_SRC emacs-lisp :tangle yes
