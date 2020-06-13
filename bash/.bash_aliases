@@ -98,7 +98,7 @@ alias mtf='mix test --failed'
 alias mf='mix format'
 alias mfc='mix format --check-formatted .'
 # This aint working right because of double quotes and stuff.
-# alias mfd='git status --porcelain | awk 'match($1, "M"){print $2}' | xargs docker-compose run --rm broker mix format'
+# alias mfd='git status --porcelain | awk 'match($1, "M"){print $2}' | xargs docker-compose run --rm web mix format'
 
 # Lua stuff
 alias love="/Applications/love.app/Contents/MacOS/love"
