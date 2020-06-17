@@ -666,6 +666,15 @@ Necessary for parsing apib files (API Blueprint)
 (add-hook 'markdown-mode-hook 'variable-pitch-mode)
 (add-hook 'git-commit-setup-hook 'variable-pitch-mode)
 
+;; Apib mode should come with its own customizations:
+;; - Monospace fonts
+;; - No auto-fill
+;; - Line numbers on the side
+(add-hook 'apib-mode-hook #'(lambda ()
+                              (variable-pitch-mode 0)
+                              (auto-fill-mode 0)
+                              (display-line-numbers-mode 0)))
+
 ;; Autocompletion for Bootstrap/FontAwesome classes
 (use-package ac-html-bootstrap)
 
