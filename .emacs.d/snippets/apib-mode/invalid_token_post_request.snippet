@@ -1,0 +1,31 @@
+# -*- mode: snippet -*-
+# name: POST request with an invalid token
+# key: pit
+# --
+
++ Request with an invalid token (application/vnd.api+json)
+
+  + Headers
+
+            Accept: application/vnd.api+json
+            Authorization: Bearer <invalid token>
+
+  + Body
+
+            {
+              $0
+            }
+
++ Response 401 (application/vnd.api+json)
+
++ Body
+
+            {
+              "errors": [
+                {
+                  "code": "unauthorized",
+                  "status": "401",
+                  "title": "signature_error"
+                }
+              ]
+            }

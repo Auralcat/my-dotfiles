@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Response heading
+# key: res
+# --
++ Response ${1:status_code} (application/vnd.api+json)
+
+    + Body
+
+            {
+              "errors": [
+                $0
+              ]
+            }

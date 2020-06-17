@@ -1,0 +1,24 @@
+# -*- mode: snippet -*-
+# name: Invalid auth token in GET request
+# key: itg
+# --
++ Request with an invalid token (application/vnd.api+json)
+
+    + Headers
+
+              Accept: application/vnd.api+json
+              Authorization: Bearer <invalid token>
+
++ Response 401 (application/vnd.api+json)
+
+    + Body
+
+            {
+              "errors": [
+                {
+                  "code": "unauthorized",
+                  "status": "401",
+                  "title": "signature_error"
+                }
+              ]
+            }
