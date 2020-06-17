@@ -1207,7 +1207,7 @@ We need this for tab completion inside shell-mode buffers in Docker containers.
   ;; This is the code Emacs uses to load themes in custom.el
   (interactive
    (list
-    (intern (completing-read "Change tô theme: "
+    (intern (completing-read "Change to theme: "
                              (mapcar #'symbol-name
                      (custom-available-themes))))
     ))
@@ -1221,7 +1221,16 @@ We need this for tab completion inside shell-mode buffers in Docker containers.
       (load-theme new-theme)
       )
     ))
+
+;; Bind it to a keychord.
+(global-set-key (kbd "M-`") 'auralcat/change-theme)
   #+END_SRC
+
+  #+RESULTS:
+  #+begin_example
+  ""
+  #+end_example
+
 ** Jazz
    A warm theme with dark colors.
    #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1332,9 +1341,6 @@ We need this for tab completion inside shell-mode buffers in Docker containers.
 
 ;; We need this to get back to the beginning of the indentation or first word of the line.
 (global-set-key (kbd "C-a") (quote back-to-indentation-or-beginning))
-
-;; Quick theme changer
-(global-set-key (kbd "M-`") (quote customize-themes))
 
 ;; Hippie-Expand: change key to M-SPC; Replace dabbrev-expand
 (global-set-key "\M- " 'hippie-expand)
