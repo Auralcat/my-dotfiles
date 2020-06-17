@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: first record in Ecto database with preloading
+# key: fp
+# --
+${1:ModuleName} |> Ecto.Query.first |> Repo.one |> Repo.preload([:${2:assocs}])

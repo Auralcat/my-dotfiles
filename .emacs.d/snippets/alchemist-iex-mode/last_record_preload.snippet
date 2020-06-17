@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: last record in Ecto database with preloading
+# key: lp
+# --
+${1:ModuleName} |> Ecto.Query.last |> Repo.one |> Repo.preload([:${2:assocs}])
