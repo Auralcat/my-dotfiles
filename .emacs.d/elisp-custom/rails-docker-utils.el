@@ -23,6 +23,16 @@
     )
     )
 
+(defun auralcat-docker-compose-up (args)
+    "Bring up all the services for the current project."
+    (interactive "P")
+  (docker-compose-run-action-for-all-services "up" nil))
+
+(defun auralcat-docker-compose-down (args)
+    "Tear down all the services for the current project."
+    (interactive "P")
+    (docker-compose-run-action-for-all-services "down" nil))
+
 ;; Open a terminal buffer inside the Docker container of the project.
 (defun auralcat-run-bash-in-docker-container (args)
     "Open a single buffer with a terminal inside a Docker container."

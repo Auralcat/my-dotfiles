@@ -103,6 +103,8 @@
   "d4j" 'dired-jump-other-window
   ;; Docker
   "dd" 'docker
+  "dcu" 'auralcat-docker-compose-up
+  "dcd" 'auralcat-docker-compose-down
   "dcl" 'docker-compose-logs
   ;; Open frequently visited files
   "fb" 'my-find-budget-file
