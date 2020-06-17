@@ -1,0 +1,18 @@
+# -*- mode: snippet -*-
+# name: cURL post request
+# key: post
+# --
+AUTH_TOKEN=""
+BASE_URL="https://example.com/api"
+# Coloque as variaveis pra compor dentro do endpoint _antes_ de definir $ENDPOINT!
+ENDPOINT="/sample/endpoint"
+
+curl -s --config ~/.curlrc \
+-X POST \
+--header "Content-Type: application/json" \
+--header "Authorization: Bearer #{AUTH_TOKEN}" \
+"$BASE_URL$ENDPOINT" \
+-d '{
+"key": "value",
+"another_key": "another_value"
+}' | jq

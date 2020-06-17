@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Test if file does not exist
+# key: exn
+# More info: https://linuxize.com/post/bash-check-if-file-exists/
+# --
+if [ ! -f ${1:file} ]; then
+    ${2:# successful action}
+else
+    $0
+fi

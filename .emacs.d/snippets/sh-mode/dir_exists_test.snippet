@@ -1,0 +1,10 @@
+# -*- mode: snippet -*-
+# name: Test if directory exists
+# key: ed
+# More info: https://linuxize.com/post/bash-check-if-file-exists/
+# --
+if [ -d ${1:directory} ]; then
+    ${2:# successful action}
+else
+    $0
+fi
