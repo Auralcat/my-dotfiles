@@ -997,7 +997,11 @@ repository.
 (load "projectile-phoenix")
 
 (projectile-phoenix-global-mode)
-(evil-leader/set-key-for-mode 'elixir-mode "r" 'projectile-phoenix-command-map)
+
+;; Configure the binding for Phoenix project buffers
+(add-hook 'find-file-hook #'(lambda ()
+                              (when (projectile-phoenix-project-p)
+                                (evil-leader/set-key "r" 'projectile-phoenix-command-map))))
 #+END_SRC
 *** Bundler
     Interact with Bundler from Emacs
