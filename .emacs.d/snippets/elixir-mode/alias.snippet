@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: Elixir alias statement
+# key: al
+# --
+alias `(string-join (mapcar (lambda (w) (capitalize w)) (split-string (projectile-project-name) "[-_]")))`.${1:ModuleNameLikeThis}
