@@ -99,6 +99,7 @@ alias mf='mix format'
 alias mfc='mix format --check-formatted .'
 # This aint working right because of double quotes and stuff.
 # alias mfd='git status --porcelain | awk 'match($1, "M"){print $2}' | xargs docker-compose run --rm web mix format'
+# alias mff='mix format --check-formatted | awk 'match($1, "*"){print $2}' | mix format'
 
 # Lua stuff
 alias love="/Applications/love.app/Contents/MacOS/love"
@@ -109,3 +110,12 @@ alias dcd='docker-compose down'
 
 # Launch XAMPP for PHP practice
 alias xampp='sudo /opt/lampp/xampp'
+
+# Batch rename files with the 'rename' script
+# FIXME: get this to work with an alias.
+# The command below works, but it's quite a lot to remember.
+function batch_rename() {
+  find . -name $1 | rename 's/$2/$3/'
+}
+
+alias rnm='batch_rename()'
