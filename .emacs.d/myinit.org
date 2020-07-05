@@ -85,10 +85,10 @@
     (let ((begin (progn (goto-char block-begin) (evil-beginning-of-line) (point)))
       (end (progn (goto-char block-end) (evil-next-line) (evil-beginning-of-line) (if (looking-at "^$") (+ (point) 1) (point)))))
       (progn
-        (goto-char current-point)
-        (evil-range begin end)))
+  (goto-char current-point)
+  (evil-range begin end)))
   (let ((begin (progn (goto-char block-begin) (evil-next-line) (evil-first-non-blank) (point)))
-        (end (progn (goto-char block-end) (evil-previous-line) (evil-end-of-line) (+ (point) 1))))
+  (end (progn (goto-char block-end) (evil-previous-line) (evil-end-of-line) (+ (point) 1))))
     (progn
       (goto-char current-point)
       (evil-range begin end))))))
@@ -135,31 +135,31 @@ This is quite useful to navigate through code faster.
 
 (fset (quote sample-macro)
       (lambda (&optional arg) "Sample description" (interactive "p")
-        (undo-boundary)
-        (noflet ((undo-boundary ()))
-          (kmacro-exec-ring-item (quote ([100 87 65 32 35 32 65 110 111 116 104 101 114 32 109 97 99 114 111 32 99 97 108 108 46 escape 134217730 return 112 45] 0 "%d")) arg)
-          )
-        (undo-boundary)
-        ))
+  (undo-boundary)
+  (noflet ((undo-boundary ()))
+    (kmacro-exec-ring-item (quote ([100 87 65 32 35 32 65 110 111 116 104 101 114 32 109 97 99 114 111 32 99 97 108 108 46 escape 134217730 return 112 45] 0 "%d")) arg)
+    )
+  (undo-boundary)
+  ))
 
 ;; Some macros to adjust Ruby blocks
 (fset 'auralcat/ruby-move-defun-backward
       (lambda (&optional arg) "Moves a DEF block backwards in the class definition." (interactive "p")
-        (undo-boundary)
-        (noflet ((undo-boundary ()))
-          (kmacro-exec-ring-item (quote ([26 167772166 23 134217820 16 4 134217820 4 2 134217730 16 return 25 return 134217730 26] 0 "%d")) arg)
-          )
-        (undo-boundary)
-        ))
+  (undo-boundary)
+  (noflet ((undo-boundary ()))
+    (kmacro-exec-ring-item (quote ([26 167772166 23 134217820 16 4 134217820 4 2 134217730 16 return 25 return 134217730 26] 0 "%d")) arg)
+    )
+  (undo-boundary)
+  ))
 
 (fset 'auralcat/ruby-move-block-forward
       (lambda (&optional arg) "Moves a Ruby block forward in the current nesting level." (interactive "p")
-        (undo-boundary)
-        (noflet ((undo-boundary ()))
-             (kmacro-lambda-form [?\C-z ?\C-  ?\C-\M-n ?\C-e ?\C-w ?\C-\M-n ?\C-m ?\C-/ ?\C-e ?\C-m ?\C-m ?\C-y ?\C-u ?\C-  ?\C-  ?\C-k ?\C-k ?\C-i ?\C-z] 0 "%d")
-          )
-        (undo-boundary)
-        )
+  (undo-boundary)
+  (noflet ((undo-boundary ()))
+       (kmacro-lambda-form [?\C-z ?\C-  ?\C-\M-n ?\C-e ?\C-w ?\C-\M-n ?\C-m ?\C-/ ?\C-e ?\C-m ?\C-m ?\C-y ?\C-u ?\C-  ?\C-  ?\C-k ?\C-k ?\C-i ?\C-z] 0 "%d")
+    )
+  (undo-boundary)
+  )
 )
 
 ;; Removes a Ruby block wrapping another block.
@@ -207,6 +207,10 @@ This is quite useful to navigate through code faster.
 * Mac OS
   #+BEGIN_SRC emacs-lisp :tangle yes
     (when (eq system-type 'darwin) ;; mac specific settings
+    ;; Use bigger fonts because of that Retina display
+      (if (member "Fantasque Sans Mono" (font-family-list))
+          (set-face-attribute (quote default) nil :font "Fantasque Sans Mono" :height 140)
+        '(set-face-attribute (quote default) nil :font "Ubuntu Mono" :height 140))
       ;; Map Command to Meta
       (setq mac-command-modifier 'meta)
       ;; Map Option to Control (I know, smaller key, that's what we have for now. :/)
@@ -222,8 +226,8 @@ This is quite useful to navigate through code faster.
 
       ;; Exec path from shell - Replicates terminal env vars in graphical Emacs
       (use-package exec-path-from-shell
-        :init
-        (exec-path-from-shell-initialize))
+  :init
+  (exec-path-from-shell-initialize))
 
       ;; Use Emacsclient in OS X
       (setq server-socket-dir (format "/tmp/emacs%d" (user-uid))))
@@ -389,21 +393,18 @@ Some goodies to make editing Elisp easier.
 *** Js2-mode
     A better default Javascript mode
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package js2-mode)
+      (use-package js2-mode
+       :defer nil)
 
       ;; Set js2-mode as default mode for JS files
       (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
 
-      ;; Use Tern for completions. Nowadays it got better and I can configure
-      ;; it further.
-      (use-package company-tern)
-
+      ;; TODO: Look for a better completion for JS modes in Company.
       (defun js2-mode-tweaks ()
-        ;; Use company-yas as main backend
-        (set (make-local-variable 'company-backends) '(company-tern company-yasnippet company-etags))
-        (tern-mode t)
-        (company-mode t))
+  ;; Use company-yas as main backend
+  (set (make-local-variable 'company-backends) '(company-yasnippet company-etags))
+  (company-mode t))
 
       (add-hook 'js2-mode-hook 'js2-mode-tweaks)
 
@@ -420,7 +421,8 @@ Some goodies to make editing Elisp easier.
 *** Enhanced-ruby-mode
     A better ruby-mode.
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package enh-ruby-mode)
+      (use-package enh-ruby-mode
+      :defer nil)
 
       ;; No magic comments, please.
       (setq enh-ruby-add-encoding-comment-on-save nil)
@@ -436,11 +438,11 @@ Some goodies to make editing Elisp easier.
       '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'"
       . ruby-mode))
 
-      (define-key enh-ruby-mode-map (kbd "M-<down>") 'auralcat/ruby-move-defun-forward)
-      (define-key enh-ruby-mode-map (kbd "M-<up>") 'auralcat/ruby-move-defun-backward)
+      ;; (define-key enh-ruby-mode-map (kbd "M-<down>") 'auralcat/ruby-move-defun-forward)
+      ;; (define-key enh-ruby-mode-map (kbd "M-<up>") 'auralcat/ruby-move-defun-backward)
 
-      (define-key ruby-mode-map (kbd "M-<down>") 'auralcat/ruby-move-defun-forward)
-      (define-key ruby-mode-map (kbd "M-<up>") 'auralcat/ruby-move-defun-backward)
+      ;; (define-key ruby-mode-map (kbd "M-<down>") 'auralcat/ruby-move-defun-forward)
+      ;; (define-key ruby-mode-map (kbd "M-<up>") 'auralcat/ruby-move-defun-backward)
     #+END_SRC
 *** Web Mode
     I use this for HTML files mostly, works good for PHP too.
@@ -498,10 +500,10 @@ Necessary for parsing apib files (API Blueprint)
       (use-package js-comint)
 
       ;; Call the REPL with C-c C-s in js2-mode
-      (define-key js2-mode-map (kbd "C-c C-s") 'run-js)
+      ;; (define-key js2-mode-map (kbd "C-c C-s") 'run-js)
 
       ;; Send last JS expression to REPL
-      (define-key js2-mode-map (kbd "C-x C-e") 'js-send-last-sexp)
+      ;; (define-key js2-mode-map (kbd "C-x C-e") 'js-send-last-sexp)
     #+END_SRC
 *** Flycheck Inline
     Shows the error when leaving the point over the place where it occurs.
@@ -517,14 +519,14 @@ Necessary for parsing apib files (API Blueprint)
        :diminish ruby-electric-mode)
       (add-hook 'enh-ruby-mode-hook
      #'(lambda ()
-         (setq autopair-dont-activate t) ;; for emacsen < 24
-         (autopair-mode -1))             ;; for emacsen >= 24
-         )
+   (setq autopair-dont-activate t) ;; for emacsen < 24
+   (autopair-mode -1))             ;; for emacsen >= 24
+   )
       (add-hook 'ruby-mode-hook
      #'(lambda ()
-         (setq autopair-dont-activate t) ;; for emacsen < 24
-         (autopair-mode -1))             ;; for emacsen >= 24
-         )
+   (setq autopair-dont-activate t) ;; for emacsen < 24
+   (autopair-mode -1))             ;; for emacsen >= 24
+   )
       (add-hook 'enh-ruby-mode-hook 'ruby-electric-mode)
       (add-hook 'ruby-mode-hook 'ruby-electric-mode)
     #+END_SRC
@@ -569,12 +571,12 @@ Necessary for parsing apib files (API Blueprint)
     I use Markdown to write stuff in English.
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package flyspell
-        :config
-        (add-hook 'text-mode-hook 'turn-on-auto-fill)
-        (add-hook 'gfm-mode-hook 'flyspell-mode)
-        (add-hook 'markdown-mode-hook 'flyspell-mode)
+  :config
+  (add-hook 'text-mode-hook 'turn-on-auto-fill)
+  (add-hook 'gfm-mode-hook 'flyspell-mode)
+  (add-hook 'markdown-mode-hook 'flyspell-mode)
 
-        (add-hook 'git-commit-mode-hook 'flyspell-mode))
+  (add-hook 'git-commit-mode-hook 'flyspell-mode))
     #+END_SRC
 
 *** Flycheck
@@ -619,9 +621,9 @@ Necessary for parsing apib files (API Blueprint)
     Switch between more than 3 windows (and act on them!) with ease.
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package ace-window
-        :init
-        ;; All you need to do is just give a keybinding to the main command.
-        (global-set-key (kbd "M-o") 'ace-window))
+  :init
+  ;; All you need to do is just give a keybinding to the main command.
+  (global-set-key (kbd "M-o") 'ace-window))
     #+END_SRC
 
 *** Company
@@ -693,9 +695,9 @@ Necessary for parsing apib files (API Blueprint)
 ;; - No auto-fill
 ;; - Line numbers on the side
 (add-hook 'apib-mode-hook #'(lambda ()
-                              (variable-pitch-mode 0)
-                              (auto-fill-mode 0)
-                              (display-line-numbers-mode 0)))
+            (variable-pitch-mode 0)
+            (auto-fill-mode 0)
+            (display-line-numbers-mode 0)))
 
 ;; Autocompletion for Bootstrap/FontAwesome classes
 (use-package ac-html-bootstrap)
@@ -804,15 +806,6 @@ Create links to Github/GitLab files from the comfort of your Emacs buffer.
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package git-link)
 #+END_SRC
-*** Lispyville
-Lispy + Evil
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package lispyville
-  :init
-  (general-add-hook '(emacs-lisp-mode-hook lisp-mode-hook) #'lispyville-mode)
-  :config
-  (lispyville-set-key-theme '(operators c-w additional)))
-#+END_SRC
 *** IEdit
 *I* nteractive *Edit*. This helps with interactive search and replace in a file.
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -830,17 +823,17 @@ This works better than Autopair for Elixir mode.
 
 ;; Do not activate autopair for Elixir-related modes if we're using smartparens.
 (add-hook 'elixir-mode-hook
-          #'(lambda ()
-              (setq autopair-dont-activate t) ;; for emacsen < 24
-              (autopair-mode -1))             ;; for emacsen >= 24
-          )
+    #'(lambda ()
+        (setq autopair-dont-activate t) ;; for emacsen < 24
+        (autopair-mode -1))             ;; for emacsen >= 24
+    )
 (add-hook 'elixir-mode-hook #'smartparens-mode)
 
 (add-hook 'alchemist-iex-mode-hook
-          #'(lambda ()
-              (setq autopair-dont-activate t) ;; for emacsen < 24
-              (autopair-mode -1))             ;; for emacsen >= 24
-          )
+    #'(lambda ()
+        (setq autopair-dont-activate t) ;; for emacsen < 24
+        (autopair-mode -1))             ;; for emacsen >= 24
+    )
 (add-hook 'alchemist-iex-mode-hook #'smartparens-mode)
 #+END_SRC
 
@@ -883,18 +876,18 @@ This works better than Autopair for Elixir mode.
 
   ;; Set abbrevs from org-mode
   (abbrev-table-put slack-mode-abbrev-table
-                    :parents (list org-mode-abbrev-table))
+        :parents (list org-mode-abbrev-table))
 
   (abbrev-table-put slack-thread-message-buffer-mode-abbrev-table
-                    :parents (list slack-mode-abbrev-table))
+        :parents (list slack-mode-abbrev-table))
 
   (abbrev-table-put slack-message-compose-buffer-mode-abbrev-table
-                    :parents (list slack-mode-abbrev-table))
+        :parents (list slack-mode-abbrev-table))
 
   ;; Expand abbrevs when pressing Enter in Slack modes (it's derived from lui-mode)
   (advice-add #'lui-send-input :before
-              (lambda (&rest _)
-                (ignore-errors (expand-abbrev))))
+        (lambda (&rest _)
+    (ignore-errors (expand-abbrev))))
 
   ;; Define the keybindings for Slack-related modes.
   (evil-define-key 'normal slack-info-mode-map
@@ -942,7 +935,7 @@ This works better than Autopair for Elixir mode.
        ;; Channels
        (setq slack-message-notification-title-format-function
        (lambda (_team room threadp)
-         (concat (if threadp "Thread in #%s") room)))
+   (concat (if threadp "Thread in #%s") room)))
 
        (defun endless/-cleanup-room-name (room-name)
    "Make group-chat names a bit more human-readable."
@@ -953,8 +946,8 @@ This works better than Autopair for Elixir mode.
        ;;; Private messages and group chats
        (setq slack-message-im-notification-title-format-function
        (lambda (_team room threadp)
-         (concat (if threadp "Thread in %s")
-           (endless/-cleanup-room-name room))))
+   (concat (if threadp "Thread in %s")
+     (endless/-cleanup-room-name room))))
 
        ;; Custom notifications
        (load "~/.slack-custom-notifications.el")
@@ -1029,8 +1022,8 @@ repository.
 
 ;; Configure the binding for Phoenix project buffers
 (add-hook 'find-file-hook #'(lambda ()
-                              (when (projectile-phoenix-project-p)
-                                (evil-leader/set-key "r" 'projectile-phoenix-command-map))))
+            (when (projectile-phoenix-project-p)
+        (evil-leader/set-key "r" 'projectile-phoenix-command-map))))
 #+END_SRC
 *** Bundler
     Interact with Bundler from Emacs
@@ -1049,9 +1042,9 @@ repository.
     Increment and decrement numbers like in Vim.
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package evil-numbers
-        :config
-        (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
-        (define-key evil-normal-state-map (kbd "C-e") 'evil-numbers/dec-at-pt))
+  :config
+  (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
+  (define-key evil-normal-state-map (kbd "C-e") 'evil-numbers/dec-at-pt))
     #+END_SRC
 
 *** Evil's syntax text object
@@ -1132,16 +1125,16 @@ repository.
     (require 'git-gutter-fringe)
     (when (fboundp 'define-fringe-bitmap)
       (define-fringe-bitmap 'git-gutter-fr:added
-        [224 224 224 224 224 224 224 224 224 224 224 224 224
+  [224 224 224 224 224 224 224 224 224 224 224 224 224
        224 224 224 224 224 224 224 224 224 224 224 224]
-        nil nil 'center)
+  nil nil 'center)
       (define-fringe-bitmap 'git-gutter-fr:modified
-        [224 224 224 224 224 224 224 224 224 224 224 224 224
+  [224 224 224 224 224 224 224 224 224 224 224 224 224
        224 224 224 224 224 224 224 224 224 224 224 224]
-        nil nil 'center)
+  nil nil 'center)
       (define-fringe-bitmap 'git-gutter-fr:deleted
-        [0 0 0 0 0 0 0 0 0 0 0 0 0 128 192 224 240 248]
-        nil nil 'center)))
+  [0 0 0 0 0 0 0 0 0 0 0 0 0 128 192 224 240 248]
+  nil nil 'center)))
   ;; Adding evil-mode bindings
   (define-key evil-normal-state-map (kbd "g h") 'git-gutter:previous-hunk)
   (define-key evil-normal-state-map (kbd "g H") 'git-gutter:next-hunk)
@@ -1211,7 +1204,7 @@ We need this for tab completion inside shell-mode buffers in Docker containers.
       :ensure t
       :config
       (setq circadian-themes '((:sunrise . cosmos-light)
-             (:sunset  . cosmos-dark)))
+       (:sunset  . cosmos-dark)))
 
       (circadian-setup))
     #+END_SRC
@@ -1229,6 +1222,12 @@ We need this for tab completion inside shell-mode buffers in Docker containers.
     (use-package evil-anzu)
     (global-anzu-mode)
     #+END_SRC
+*** The S library
+This is a string manipulation library that Emacs uses for stuff.
+I have to call it here because I use it in my scripts.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+    (use-package s)
+    #+END_SRC
 * Themes
   Remember to _defer_ the loading of the theme packages, otherwise the
   faces might get mixed up and look ugly.
@@ -1242,16 +1241,16 @@ We need this for tab completion inside shell-mode buffers in Docker containers.
   (interactive
    (list
     (intern (completing-read "Change to theme: "
-                             (mapcar #'symbol-name
-                     (custom-available-themes))))
+           (mapcar #'symbol-name
+         (custom-available-themes))))
     ))
   (let* (
-         (current-theme (car custom-enabled-themes))
-         (new-theme-loaded-p (memq new-theme custom-enabled-themes))
-         )
+   (current-theme (car custom-enabled-themes))
+   (new-theme-loaded-p (memq new-theme custom-enabled-themes))
+   )
     (disable-theme current-theme)
     (if new-theme-loaded-p
-        (enable-theme new-theme)
+  (enable-theme new-theme)
       (load-theme new-theme)
       )
     ))
@@ -1296,14 +1295,24 @@ We need this for tab completion inside shell-mode buffers in Docker containers.
    #+BEGIN_SRC emacs-lisp :tangle yes
    (use-package hemisu-theme :defer t)
    #+END_SRC
+** Gruvbox
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package gruvbox-theme)
+#+END_SRC
+** Solarized themes
+These are the official ones.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package solarized-theme)
+#+END_SRC
+
 * Graphical
   #+BEGIN_SRC emacs-lisp :tangle yes
     ;; Set font in graphical mode
     (when (display-graphic-p)
   ;; Use Fantasque Sans Mono when available
   (if (member "Fantasque Sans Mono" (font-family-list))
-  (set-face-attribute (quote default) nil :font "Fantasque Sans Mono" :height 140)
-  '(set-face-attribute (quote default) nil :font "Ubuntu Mono" :height 140))
+  (set-face-attribute (quote default) nil :font "Fantasque Sans Mono" :height 100)
+  '(set-face-attribute (quote default) nil :font "Ubuntu Mono" :height 100))
 
   ;; Remove menu and scroll bars in graphical mode
   (menu-bar-mode 0)
@@ -1332,11 +1341,11 @@ We need this for tab completion inside shell-mode buffers in Docker containers.
 
 (use-package org :ensure t
   :bind (:map org-mode-map
-              ("M-1". delete-other-windows)
-              ("M-2". helm-mini)
-              ("M-3". ace-jump-mode)
-              ("M-4". switch-to-buffer-other-window)
-              ))
+        ("M-1". delete-other-windows)
+        ("M-2". helm-mini)
+        ("M-3". ace-jump-mode)
+        ("M-4". switch-to-buffer-other-window)
+        ))
 
 (define-key comint-mode-map (kbd "M-1") 'delete-other-windows)
 (define-key comint-mode-map (kbd "M-2") 'helm-mini)
@@ -1371,7 +1380,7 @@ We need this for tab completion inside shell-mode buffers in Docker containers.
 ;; Move to beginning of line or indentation
 (defun back-to-indentation-or-beginning () (interactive)
        (if (= (point) (progn (back-to-indentation) (point)))
-           (beginning-of-line)))
+     (beginning-of-line)))
 
 ;; We need this to get back to the beginning of the indentation or first word of the line.
 (global-set-key (kbd "C-a") (quote back-to-indentation-or-beginning))
@@ -1406,7 +1415,7 @@ We need this for tab completion inside shell-mode buffers in Docker containers.
       (setq guess-language-languages '(pt en))
       (setq guess-language-langcodes
       '((en . ("en_US" "English"))
-        (pt . ("pt_BR" "Brasileiro"))))
+  (pt . ("pt_BR" "Brasileiro"))))
       (setq guess-language-min-paragraph-length 35))
   #+END_SRC
 * Web-mode
@@ -1459,9 +1468,9 @@ We need this for tab completion inside shell-mode buffers in Docker containers.
 ;; Truncate long task names
 (setq org-clock-heading-function
       (lambda ()
-        (let ((str (nth 4 (org-heading-components))))
-          (concat (truncate-string-to-width str 27) "...")
-          )))
+  (let ((str (nth 4 (org-heading-components))))
+    (concat (truncate-string-to-width str 27) "...")
+    )))
 
 ;; Organize the bindings
 ;; Use helm-org-in-buffer-headings instead of imenu; it has more actions and
@@ -1520,21 +1529,21 @@ This is a derived mode to hold English abbrevs.
      ;; Mark a parent TODO entry as DONE when its checkboxes are all ticked
      (defun ndk/checkbox-list-complete ()
        (save-excursion
-         (org-back-to-heading t)
-         (let ((beg (point)) end)
-           (end-of-line)
-           (setq end (point))
-           (goto-char beg)
-           (if (re-search-forward "\\[\\([0-9]*%\\)\\]\\|\\[\\([0-9]*\\)/\\([0-9]*\\)\\]" end t)
-               (if (match-end 1)
-                   (if (equal (match-string 1) "100%")
-                       ;; all done - do the state change
-                       (org-todo 'done)
-                     (org-todo 'todo))
-                 (if (and (> (match-end 2) (match-beginning 2))
-                          (equal (match-string 2) (match-string 3)))
-                     (org-todo 'done)
-                   (org-todo 'todo)))))))
+   (org-back-to-heading t)
+   (let ((beg (point)) end)
+     (end-of-line)
+     (setq end (point))
+     (goto-char beg)
+     (if (re-search-forward "\\[\\([0-9]*%\\)\\]\\|\\[\\([0-9]*\\)/\\([0-9]*\\)\\]" end t)
+         (if (match-end 1)
+       (if (equal (match-string 1) "100%")
+           ;; all done - do the state change
+           (org-todo 'done)
+         (org-todo 'todo))
+     (if (and (> (match-end 2) (match-beginning 2))
+        (equal (match-string 2) (match-string 3)))
+         (org-todo 'done)
+       (org-todo 'todo)))))))
    #+END_SRC
 ** Capture templates
    #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1570,13 +1579,13 @@ This is a derived mode to hold English abbrevs.
       org-babel-min-lines-for-block-output 1
       org-babel-default-header-args
       (cons '(:noweb . "yes")
-            (assq-delete-all :noweb org-babel-default-header-args))
+      (assq-delete-all :noweb org-babel-default-header-args))
       org-babel-default-header-args
       (cons '(:exports . "both")
-            (assq-delete-all :exports org-babel-default-header-args))
+      (assq-delete-all :exports org-babel-default-header-args))
       org-babel-default-header-args
       (cons '(:results . "output verbatim replace")
-            (assq-delete-all :results org-babel-default-header-args)))
+      (assq-delete-all :results org-babel-default-header-args)))
 
 #+END_SRC
 
@@ -1610,15 +1619,15 @@ This is a derived mode to hold English abbrevs.
 
      ;; Display notification when a pomodoro is completed
      (defun pomodoro-display-notification (title body)
-         (if (eq system-type 'darwin)
-           (ns-do-applescript (format "display notification \"%s\" with title \"%s\" sound name \"Glass\"" body title))
-           (notifications-notify :title title
-                 :body body
-                 :app-icon "~/my-dotfiles/.emacs.d/org-pomodoro/tomato.png")))
+   (if (eq system-type 'darwin)
+     (ns-do-applescript (format "display notification \"%s\" with title \"%s\" sound name \"Glass\"" body title))
+     (notifications-notify :title title
+     :body body
+     :app-icon "~/my-dotfiles/.emacs.d/org-pomodoro/tomato.png")))
 
      ;; Use mpv in OS X
      (when (eq system-type 'darwin)
-         (setq org-pomodoro-audio-player "/usr/local/bin/mpv"))
+   (setq org-pomodoro-audio-player "/usr/local/bin/mpv"))
 
      (add-hook 'org-pomodoro-started-hook (lambda() (pomodoro-display-notification "Pomodoro started!" "Concentrate on your task!")))
      (add-hook 'org-pomodoro-finished-hook (lambda() (pomodoro-display-notification "Pomodoro finished" "Time to take a break!")))
@@ -1696,8 +1705,8 @@ This is a derived mode to hold English abbrevs.
        "Add the file name relative to the project's root to the kill ring."
        (interactive)
        (let ((relative-file-name (magit-file-relative-name buffer-file-name)))
-         (kill-new relative-file-name)
-         (message "Current buffer's relative file name copied to kill ring: %s" relative-file-name)))
+   (kill-new relative-file-name)
+   (message "Current buffer's relative file name copied to kill ring: %s" relative-file-name)))
    #+END_SRC
 ** Calculate leap year
    #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1705,9 +1714,9 @@ This is a derived mode to hold English abbrevs.
        "Checks if the given YEAR is a leap year"
        (interactive "P")
        (or
-        (and (not (eq (% year 100) 0))
-             (eq (% year 4) 0))
-        (eq (% year 400) 0))
+  (and (not (eq (% year 100) 0))
+       (eq (% year 4) 0))
+  (eq (% year 400) 0))
        )
 
    #+END_SRC
@@ -1730,7 +1739,7 @@ This is a derived mode to hold English abbrevs.
        `visual-line-mode'."
        (interactive "*r")
        (let ((fill-column (point-max)))
-         (fill-region beg end)))
+   (fill-region beg end)))
 
      (load "~/my-dotfiles/.emacs.d/elisp-custom/docker-sync-utils.el")
    #+END_SRC
@@ -1766,7 +1775,7 @@ This gets out of the way nicely and cleans up the view.
 * Diary
 ** Last day of month
    #+BEGIN_SRC emacs-lisp :tangle yes
-        ;;; ORG-MODE:  * My Task
+  ;;; ORG-MODE:  * My Task
      ;              SCHEDULED: <%%(diary-last-day-of-month date)>
      ;;; DIARY:  %%(diary-last-day-of-month date) Last Day of the Month
      ;;; See also:  (setq org-agenda-include-diary t)
@@ -1774,61 +1783,61 @@ This gets out of the way nicely and cleans up the view.
      (defun diary-last-day-of-month (date)
        "Return `t` if DATE is the last day of the month."
        (let* ((day (calendar-extract-day date))
-              (month (calendar-extract-month date))
-              (year (calendar-extract-year date))
-              (last-day-of-month
-               (calendar-last-day-of-month month year)))
-         (= day last-day-of-month)))
+        (month (calendar-extract-month date))
+        (year (calendar-extract-year date))
+        (last-day-of-month
+         (calendar-last-day-of-month month year)))
+   (= day last-day-of-month)))
 
      (defun diary-first-weekday-of-month (date)
        (let* ((day (calendar-extract-day date))
-              (month (calendar-extract-month date))
-              (year (calendar-extract-year date))
-              (first-day-date (list month 1 year))
-              (first-absolute-day-weekday (calendar-day-of-week first-day-date)))
+        (month (calendar-extract-month date))
+        (year (calendar-extract-year date))
+        (first-day-date (list month 1 year))
+        (first-absolute-day-weekday (calendar-day-of-week first-day-date)))
 
-         (or
-          ;; When the first day is Sunday, it's day 2.
-          (and (eq first-absolute-day-weekday 0)
-               (eq day 2))
+   (or
+    ;; When the first day is Sunday, it's day 2.
+    (and (eq first-absolute-day-weekday 0)
+         (eq day 2))
 
-          ;; When the first day is Saturday, it's day 3.
-          (and (eq first-absolute-day-weekday 6)
-               (eq day 3))
+    ;; When the first day is Saturday, it's day 3.
+    (and (eq first-absolute-day-weekday 6)
+         (eq day 3))
 
-          ;; Else, it's day 1 and a weekday.
-          (and (memq (calendar-day-of-week date) '(1 2 3 4 5))
-               (eq day 1))
-          )
-          ))
+    ;; Else, it's day 1 and a weekday.
+    (and (memq (calendar-day-of-week date) '(1 2 3 4 5))
+         (eq day 1))
+    )
+    ))
 
      (defun diary-last-weekday-of-month (date)
        (let* ((day-of-week (calendar-day-of-week date))
-              (month (calendar-extract-month date))
-              (year (calendar-extract-year date))
-              (last-month-day (calendar-last-day-of-month month year))
-              (month-day (cadr date)))
+        (month (calendar-extract-month date))
+        (year (calendar-extract-year date))
+        (last-month-day (calendar-last-day-of-month month year))
+        (month-day (cadr date)))
 
-         (or
-          ;; it's the last day of the month & it is a weekday
-          (and (eq month-day last-month-day)
-               (memq day-of-week '(1 2 3 4 5)))
+   (or
+    ;; it's the last day of the month & it is a weekday
+    (and (eq month-day last-month-day)
+         (memq day-of-week '(1 2 3 4 5)))
 
-          ;; it's a friday, and it's the last-but-one or last-but-two day
-          ;; of the month
-          (and (eq day-of-week 5)
-               (or (eq month-day (1- last-month-day))
-                   (eq month-day (1- (1- last-month-day))))))))
+    ;; it's a friday, and it's the last-but-one or last-but-two day
+    ;; of the month
+    (and (eq day-of-week 5)
+         (or (eq month-day (1- last-month-day))
+       (eq month-day (1- (1- last-month-day))))))))
 
      (defun diary-first-working-day-of-month (date)
        "Returns `t` if DATE is the first working day of the month.
-        This is defined as the first weekday of the month which is not a holiday."
-         (let* ((day (calendar-extract-day date))
-              (month (calendar-extract-month date)))
-           (if
-             ;; If it's May or Jan, check if day 2 is a weekday.
-               (and (or (= month 5) (= month 1)))
-               (and (= day 2) (memq (calendar-day-of-week date) '(1 2 3 4 5)))
-             ;; Else, check if it's the first weekday of the month.
-             (diary-first-weekday-of-month date))))
+  This is defined as the first weekday of the month which is not a holiday."
+   (let* ((day (calendar-extract-day date))
+        (month (calendar-extract-month date)))
+     (if
+       ;; If it's May or Jan, check if day 2 is a weekday.
+         (and (or (= month 5) (= month 1)))
+         (and (= day 2) (memq (calendar-day-of-week date) '(1 2 3 4 5)))
+       ;; Else, check if it's the first weekday of the month.
+       (diary-first-weekday-of-month date))))
    #+END_SRC
