@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: Mix format unformatted files
+# key: mff
+# This is set as a snippet because I haven't found a way to load bash aliases on
+# Docker projects that I don't own.
+# --
+mix format --check-formatted | awk 'match(\$1, "*"){print \$2}' | mix format
