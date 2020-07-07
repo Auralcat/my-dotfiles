@@ -173,6 +173,12 @@ This is quite useful to navigate through code faster.
 ;; Sends a line to the *shell* buffer
 (fset 'auralcat/sh-send-line
    (kmacro-lambda-form [?\C-z ?\C-a ?\S-\C-e ?\M-w ?\C-z ?  ?$ ?\C-y return ?\M-o] 0 "%d"))
+
+;; Filter news with deceased or age headlines in Gnus feed.
+;; It inserts the "[Aa]os [[:digit:]]+ anos" regexp in the filter minibuffer.
+(fset 'auralcat/gnus-limit-to-age-headlines
+   (kmacro-lambda-form [?/ ?/ ?\[ ?A ?a ?\C-e ?o ?s ?  ?\[ ?\[ ?: ?d ?i ?g ?i ?t ?: ?\C-e ?+ ?  ?a ?n ?o ?s return] 0 "%d"))
+
   #+END_SRC
 
 ** Elixir
@@ -224,89 +230,96 @@ This is quite useful to navigate through code faster.
   #+END_SRC
 * Environment Customizations
   #+BEGIN_SRC emacs-lisp :tangle yes
-    ;; Sentences end with single spaces for me.
-    (setq sentence-end-double-space nil)
+;; Make startup faster by reducing the frequency of garbage
+;; collection.  The default is 0.8MB.  Measured in bytes.
+(setq gc-cons-threshold (* 50 1000 1000))
+;; Portion of heap used for allocation.  Defaults to 0.1.
+(setq gc-cons-percentage 0.6)
 
-    ;; Set locale to Brazilian Portuguese
-    (set-locale-environment "pt_BR.UTF-8")
+;; Sentences end with single spaces for me.
+(setq sentence-end-double-space nil)
 
-    ;; Change window title
-    (setq frame-title-format '("Emacs 26"))
+;; Set locale to Brazilian Portuguese
+(set-locale-environment "pt_BR.UTF-8")
 
-    ;; A small performance improvement
-    (setq redisplay-dont-pause t)
+;; Change window title
+(setq frame-title-format '("Emacs 26"))
 
-    ;; I don't like lockfiles
-    (setq create-lockfiles nil)
+;; A small performance improvement
+(setq redisplay-dont-pause t)
 
-    ;; Store all backups in a specific folder:
-    (setq backup-directory-alist `(("." . "~/file-bouncer/emacs-backups")))
+;; I don't like lockfiles
+(setq create-lockfiles nil)
 
-    ;; Manual packages load path
-    (add-to-list 'custom-theme-load-path "~/my-dotfiles/.emacs.d/manual-themes/")
+;; Store all backups in a specific folder:
+(setq backup-directory-alist `(("." . "~/file-bouncer/emacs-backups")))
 
-    ;; Manual Elisp scripts load path
-    (add-to-list 'load-path "~/my-dotfiles/.emacs.d/elisp-custom")
+;; Manual packages load path
+(add-to-list 'custom-theme-load-path "~/my-dotfiles/.emacs.d/manual-themes/")
+(add-to-list 'custom-theme-load-path "~/my-dotfiles/.emacs.d/manual-packages/")
 
-    ;; Backup files by copying them
-    (setq backup-by-copying t)
+;; Manual Elisp scripts load path
+(add-to-list 'load-path "~/my-dotfiles/.emacs.d/elisp-custom")
 
-    ;; I'm too lazy to type "yes" or "no"
-    (fset 'yes-or-no-p 'y-or-n-p)
+;; Backup files by copying them
+(setq backup-by-copying t)
 
-    ;; Clean whitespace before saving a file
-    (add-hook 'before-save-hook 'whitespace-cleanup)
+;; I'm too lazy to type "yes" or "no"
+(fset 'yes-or-no-p 'y-or-n-p)
 
-    ;; While you're at it, save automatically when visiting files.
-    ;; It's surprisingly useful. The only caveat is when you got an
-    ;; open comment like this. It will remove all the whitespace.
-    ;; It saves the file after 5 seconds of inactivity.
-    (auto-save-visited-mode t)
+;; Clean whitespace before saving a file
+(add-hook 'before-save-hook 'whitespace-cleanup)
 
-    ;; Allow only one theme at a time
-    (setq custom-theme-allow-multiple-selections nil)
+;; While you're at it, save automatically when visiting files.
+;; It's surprisingly useful. The only caveat is when you got an
+;; open comment like this. It will remove all the whitespace.
+;; It saves the file after 5 seconds of inactivity.
+(auto-save-visited-mode t)
 
-    ;; Enable ido-mode (fewer keystrokes to switch buffers!)
-    (ido-mode 1)
+;; Allow only one theme at a time
+(setq custom-theme-allow-multiple-selections nil)
 
-    ;; Easier mark cycling, both local and global
-    (setq set-mark-command-repeat-pop t)
+;; Enable ido-mode (fewer keystrokes to switch buffers!)
+(ido-mode 1)
 
-    ;; ido-mode in the minibuffer
-    (icomplete-mode 1)
+;; Easier mark cycling, both local and global
+(setq set-mark-command-repeat-pop t)
 
-    ;; Replace the built-in buffer menu with ibuffer
-    (global-set-key [24 2] (quote ibuffer))
+;; ido-mode in the minibuffer
+(icomplete-mode 1)
 
-    ;; Prevent the scratch buffer from being killed
-    (with-current-buffer "*scratch*"
-      (emacs-lock-mode 'kill))
+;; Replace the built-in buffer menu with ibuffer
+(global-set-key [24 2] (quote ibuffer))
 
-    ;; Enable auto-revert-mode
-    (global-auto-revert-mode t)
+;; Prevent the scratch buffer from being killed
+(with-current-buffer "*scratch*"
+  (emacs-lock-mode 'kill))
 
-    ;; Remove the menu bar in terminal mode
-    (when (not (display-graphic-p))
-      (menu-bar-mode -1))
+;; Enable auto-revert-mode
+(global-auto-revert-mode t)
 
-    ;; Use Bash as default shell interpreter
-    (setq org-babel-sh-command "/bin/bash")
+;; Remove the menu bar in terminal mode
+(when (not (display-graphic-p))
+  (menu-bar-mode -1))
 
-    ;; Activate Company mode
-    (add-hook 'after-init-hook 'global-company-mode)
+;; Use Bash as default shell interpreter
+(setq org-babel-sh-command "/bin/bash")
 
-    ;; Enable global Abbrev mode
-    (setq-default abbrev-mode t)
+;; Activate Company mode
+(add-hook 'after-init-hook 'global-company-mode)
 
-    ;; Save last edited place in files
-    (require 'saveplace)
-    (setq-default save-place t)
+;; Enable global Abbrev mode
+(setq-default abbrev-mode t)
 
-    ;; I need a bigger kill ring.
-    (setq kill-ring-max 180)
+;; Save last edited place in files
+(require 'saveplace)
+(setq-default save-place t)
 
-    ;; Use recentf-mode
-    (recentf-mode)
+;; I need a bigger kill ring.
+(setq kill-ring-max 180)
+
+;; Use recentf-mode
+(recentf-mode)
   #+END_SRC
 
 * Personal info
@@ -635,6 +648,13 @@ Necessary for parsing apib files (API Blueprint)
   (subword-mode 1)
 )
 
+;; Completion for Ruby mode
+(defun inf-ruby-mode-tweaks ()
+  (set (make-local-variable 'company-minimum-prefix-length) 2)
+  (set (make-local-variable 'company-backends) '(company-capf company-etags company-dabbrev company-yasnippet))
+  (subword-mode 1)
+)
+
 ;; General text writing completion (uses dabbrev and filename completion)
 (defun human-language-mode-tweaks ()
   (set (make-local-variable 'company-backends) '(company-dabbrev company-capf company-files))
@@ -653,6 +673,7 @@ Necessary for parsing apib files (API Blueprint)
 
 ;; Add tweaks
 (add-hook 'enh-ruby-mode-hook 'ruby-mode-tweaks)
+(add-hook 'inf-ruby-mode-hook 'inf-ruby-mode-tweaks)
 (add-hook 'ruby-mode-hook 'ruby-mode-tweaks)
 (add-hook 'elixir-mode-hook 'ruby-mode-tweaks)
 (add-hook 'shell-mode-hook 'shell-mode-tweaks)
@@ -697,7 +718,8 @@ Necessary for parsing apib files (API Blueprint)
     Shows most used commands in editing session.
     To see the data, run (keyfreq-show) with M-:
     #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package keyfreq)
+    (use-package keyfreq
+    :defer t)
 
     ;; Ignore arrow commands and self-insert-commands
     (setq keyfreq-excluded-commands
@@ -901,6 +923,13 @@ This works better than Autopair for Elixir mode.
     ",3" 'slack-message-embed-channel)
   (evil-define-key 'normal slack-thread-message-buffer-mode-map
     "Q" 'bury-buffer))
+
+;; Shorten room names
+(cl-defmethod slack-buffer-name ((this slack-message-buffer))
+    (slack-if-let* ((team (slack-buffer-team this))
+                    (room (slack-buffer-room this))
+                    (room-name (slack-room-name room team)))
+        room-name))
     #+END_SRC
 
     #+RESULTS:
