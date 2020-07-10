@@ -156,6 +156,7 @@
   "sus" 'slack-user-set-status
   ;; TODO: map this to org-mode locally.
   "t" 'my-org-remote-todo
+  "/" 'git-link
   )
 
 ;; Set Emacs state as initial state for a handful of modes.
