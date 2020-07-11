@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: Formatted time string
+# key: ftime
+# We can't use "time" as an abbreviation for this because yasnippet-snippets already uses this key.
+# --
+`(string-join
+ (mapcar
+  (lambda (w)
+    (if (equal w "de")
+        (identity w)
+      (capitalize w)))
+  (split-string
+   (format-time-string "%A,%e de %B de %Y - %R"))) " ")`
