@@ -6,8 +6,21 @@
 
 * Startup
   #+BEGIN_SRC emacs-lisp :tangle yes
-   ;; Set fallback font
+;; Set fonts for each system if the extra ones are installed.
+;; Otherwise use the system's default fonts.
+(cond
+ ((eq 'system-type 'darwin)
+  (if (font-info "Fantasque Sans Mono")
+      (set-face-attribute 'default nil :font "Fantasque Sans Mono" :height 140)
+    (set-face-attribute 'default nil :font "Monaco" :height 120))
+  )
+ ((eq 'system-type 'gnu/linux)
+  (if (font-info "B612 Mono")
+      (set-face-attribute 'default nil :font "B612 Mono" :height 120)
     (set-face-attribute 'default nil :font "Ubuntu Mono" :height 120)
+    ))
+  )
+
   #+END_SRC
 
 * Command history
