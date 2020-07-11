@@ -917,18 +917,19 @@ This works better than Autopair for Elixir mode.
   (evil-define-key 'normal slack-thread-message-buffer-mode-map
     "Q" 'bury-buffer))
 
-;; Shorten room names
-(cl-defmethod slack-buffer-name ((this slack-message-buffer))
+;; We need to define a hook for this thin
+
+(defun auralcat/slack-shorten-room-names ()
+  "Shortens the room name in Slack buffers."
+  (cl-defmethod slack-buffer-name ((this slack-message-buffer))
     (slack-if-let* ((team (slack-buffer-team this))
                     (room (slack-buffer-room this))
                     (room-name (slack-room-name room team)))
-        room-name))
-    #+END_SRC
+                   room-name))
+  )
 
-    #+RESULTS:
-    #+begin_example
-    ""
-    #+end_example
+(add-hook 'slack-mode-hook 'auralcat/slack-shorten-room-names)
+    #+END_SRC
 
 **** Notifications customization
      #+BEGIN_SRC emacs-lisp :tangle yes
