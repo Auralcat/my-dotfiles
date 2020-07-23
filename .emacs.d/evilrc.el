@@ -7,7 +7,9 @@
 ;; (color-values (face-foreground 'face-name))
 ;; Setting the color through faces blends well with each theme, but if you hover over the
 ;; face it gets the color from, it defeats the whole purpose of this.
-;; Evil-mode cursor colors
+
+;; I like to differentiate the Emacs state cursor with a box
+(setq evil-emacs-state-cursor '("goldenrod" box))
 
 ;; I have bound C-a to back-to-indentation-or-beginning in another config,
 ;; Now I need C-e, $ is too far for me 😂
