@@ -4,8 +4,6 @@
 ;; Package repositories
 (setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
           ("org" . "https://orgmode.org/elpa/")
-          ("melpa-stable" . "https://melpa-stable.milkbox.net/packages/")
-          ;; Use it when you can't find what you want in other repos
           ("melpa" . "https://melpa.org/packages/")))
 (package-initialize)
 
