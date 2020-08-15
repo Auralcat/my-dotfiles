@@ -47,12 +47,12 @@ esac
 
 if [ -n "$force_color_prompt" ]; then
     if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-	# We have color support; assume it's compliant with Ecma-48
-	# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-	# a case would tend to support setf rather than setaf.)
-	color_prompt=yes
+  # We have color support; assume it's compliant with Ecma-48
+  # (ISO/IEC-6429). (Lack of such support is extremely rare, and such
+  # a case would tend to support setf rather than setaf.)
+  color_prompt=yes
     else
-	color_prompt=
+  color_prompt=
     fi
 fi
 
@@ -151,6 +151,23 @@ PERL5LIB="/home/lucas/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB
 PERL_LOCAL_LIB_ROOT="/home/lucas/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
 PERL_MB_OPT="--install_base \"/home/lucas/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/lucas/perl5"; export PERL_MM_OPT;
+
+# Another RVM hack. This is necessary to make dumb shells, like inside Emacs, recognize RVM.
+if [[ "${TERM}" == "dumb" ]]; then
+    source $(rvm default do rvm env --path)
+fi
+
+# or
+
+case $TERM in
+  dumb*)
+    # Emacs inferior shell is dumb
+    source $(rvm default do rvm env --path)
+    ;;
+  xterm*)
+    # ... handle xterm* here ...
+    ;;
+esac
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
