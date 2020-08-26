@@ -1353,6 +1353,14 @@ These are the official ones.
 ;; Indent whole buffer using C-c TAB
 (define-key prog-mode-map (kbd "C-c TAB") 'auralcat/indent-whole-buffer)
 
+;; Translate the compose keys
+(define-key key-translation-map (kbd "¹") (kbd "M-1"))
+(define-key key-translation-map (kbd "²") (kbd "M-2"))
+(define-key key-translation-map (kbd "³") (kbd "M-3"))
+(define-key key-translation-map (kbd "£") (kbd "M-4"))
+(define-key key-translation-map (kbd "ð") (kbd "M-d"))
+(define-key key-translation-map (kbd "ŋ") (kbd "M-g"))
+
 ;; Some speed commands
 (global-set-key (kbd "M-1") 'delete-other-windows)
 (global-set-key (kbd "M-2") 'helm-mini)
@@ -1460,6 +1468,11 @@ These are the official ones.
 * Org-mode
 ** Main configuration
    #+BEGIN_SRC emacs-lisp :tangle yes
+;; Some bindings for Emacs mode.
+;; I've noticed that Org seems easier to navigate with Emacs bindings instead of Evil.
+(define-key global-map (kbd "C-c a") 'org-agenda)
+(define-key global-map (kbd "C-c k") 'org-capture)
+
 ;; Start indented, with inline images, and don't show emphasis markers.
 (setq org-startup-indented t
       org-startup-with-inline-images t
