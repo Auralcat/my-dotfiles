@@ -1278,12 +1278,6 @@ I have to call it here because I use it in my scripts.
 ;; Bind it to a keychord.
 (global-set-key (kbd "M-`") 'auralcat/change-theme)
   #+END_SRC
-
-  #+RESULTS:
-  #+begin_example
-  ""
-  #+end_example
-
 ** Jazz
    A warm theme with dark colors.
    #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1317,12 +1311,12 @@ I have to call it here because I use it in my scripts.
    #+END_SRC
 ** Gruvbox
 #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package gruvbox-theme)
+(use-package gruvbox-theme :defer t)
 #+END_SRC
 ** Solarized themes
 These are the official ones.
 #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package solarized-theme)
+(use-package solarized-theme :defer t)
 #+END_SRC
 
 * Graphical
