@@ -615,19 +615,22 @@ Necessary for parsing apib files (API Blueprint)
 *** Helm
     Incremental completion and selection narrowing framework
     #+BEGIN_SRC emacs-lisp :tangle yes
-     (use-package helm)
-     (require 'helm-config)
-     (helm-mode 1)
+(use-package helm)
+(require 'helm-config)
+(helm-mode 1)
 
-     ;; Bind the keys I want:
-     (global-set-key (kbd "M-y") 'helm-show-kill-ring)
-     (global-set-key (kbd "M-x") 'helm-M-x)
-     (global-set-key (kbd "»") 'helm-M-x)
-     (global-set-key (kbd "C-x C-f") 'helm-find-files)
-     (global-set-key (kbd "C-x b") 'helm-mini)
+;; Bind the keys I want:
+(global-set-key (kbd "M-y") 'helm-show-kill-ring)
+(global-set-key (kbd "M-x") 'helm-M-x)
+(global-set-key (kbd "»") 'helm-M-x)
+(global-set-key (kbd "C-x C-f") 'helm-find-files)
+(global-set-key (kbd "C-x b") 'helm-mini)
 
-     ;; Enable fuzzy matching
-     (setq helm-M-x-fuzzy-match t)
+;; Enable fuzzy matching
+(setq helm-M-x-fuzzy-match t)
+
+;; Use Helm for Projectile completion
+(setq projectile-completion-system 'helm)
     #+END_SRC
 
 *** Ace Window
@@ -1012,6 +1015,8 @@ This works better than Autopair for Elixir mode.
   (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
   (setq exec-path (append exec-path '("/usr/local/bin"))))
 
+;; Set the Docker command for me, please.
+(setq docker-command (string-trim (shell-command-to-string "command -v docker")))
     #+END_SRC
 
 *** Projectile Rails

@@ -82,7 +82,6 @@
          ("America/New_York" "Boston")
          ("Europe/London" "London")
          ("Asia/Tokyo" "Tokyo"))))
- '(docker-command "/usr/local/bin/docker")
  '(dynamic-completion-mode t)
  '(emmet-indent-after-insert t)
  '(emmet-indentation 2)
