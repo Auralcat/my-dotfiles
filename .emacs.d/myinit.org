@@ -1553,6 +1553,45 @@ These are the official ones.
 ;; you open them all the time.
 (setq org-agenda-sticky t)
    #+END_SRC
+** Org-agenda configuration
+Colorize the agenda: https://llazarek.com/2018/07/improving-the-agenda.html
+#+BEGIN_SRC emacs-lisp :tangle yes
+(defun ll/org/agenda/color-headers-with (tag fg-col bg-col)
+  "Color agenda lines matching TAG with color FG-COL."
+  (interactive)
+  (goto-char (point-min))
+  (while (re-search-forward tag nil t)
+    (unless (find-in-line "\\[#[A-Z]\\]")
+      (let ((todo-end (or (ll/org/agenda/find-todo-word-end)
+                          (point-at-bol)))
+            (tags-beginning (or (find-in-line " :" t)
+                                (point-at-eol))))
+        (add-text-properties todo-end
+                             tags-beginning
+                             `(face (:foreground ,fg-col :background ,bg-col)))))))
+
+;; Helper definitions
+(setq ll/org/agenda-todo-words
+      '("TODO" "GOAL" "NEXT" "STARTED" "WAITING" "REVIEW" "SUBMIT"
+        "DONE" "DEFERRED" "CANCELLED"))
+(defun find-in-line (needle &optional beginning count)
+  "Find the position of the start of NEEDLE in the current line.
+  If BEGINNING is non-nil, find the beginning of NEEDLE in the current
+  line. If COUNT is non-nil, find the COUNT'th occurrence from the left."
+  (save-excursion
+    (beginning-of-line)
+    (let ((found (re-search-forward needle (point-at-eol) t count)))
+      (if beginning
+          (match-beginning 0)
+        found))))
+(defun ll/org/agenda/find-todo-word-end ()
+  (reduce (lambda (a b) (or a b))
+          (mapcar #'find-in-line ll/org/agenda-todo-words)))
+
+;; Load my tag colors
+(load "~/.agenda-colors")
+#+END_SRC
+
 ** Org-English mode
 This is a derived mode to hold English abbrevs.
 #+BEGIN_SRC emacs-lisp :tangle yes
