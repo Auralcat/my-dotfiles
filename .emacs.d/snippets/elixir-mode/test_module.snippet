@@ -1,0 +1,16 @@
+# -*- mode: snippet -*-
+# name: ExUnit test module
+# key: tm
+# --
+ExUnit.start()
+
+defmodule ${1:`(mapconcat 'capitalize (split-string (file-name-base) "_") "")`}Test do
+  use ExUnit.Case, async: true
+
+  test "my fancy test" do
+    $0
+  end
+end
+
+ExUnit.Server.modules_loaded()
+ExUnit.run()

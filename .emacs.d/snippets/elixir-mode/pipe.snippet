@@ -1,0 +1,14 @@
+# -*- mode: snippet -*-
+# name: Pipe operator
+# key: p
+# --
+$1
+${1:$
+(mapconcat
+ '(lambda (x)
+    (let
+      ((var (car (split-string x "[[:space:]]*=")))) (concat "|> " var)))
+ (split-string yas-text " ")
+ (concat "\n" (make-string (current-column) 32)))
+}
+$0
