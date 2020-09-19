@@ -1850,6 +1850,25 @@ This gets out of the way nicely and cleans up the view.
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package mini-modeline)
 #+END_SRC
+** Custom code
+[[https://github.com/rnkn/olivetti/issues/39#issuecomment-660606677][Source]]
+#+BEGIN_SRC emacs-lisp :tangle yes
+(defun mode-line-align (left right)
+  "Return a string with LEFT and RIGHT at the edges of the
+current window."
+  (format (format "%%s %%%ds" (- (window-total-width) (length left) 2))
+          left right))
+
+(setq default-frame-alist '((internal-border-width . 20)))
+
+(setq-default mode-line-format
+'(:eval (mode-line-align
+  (format-mode-line
+   (list " " mode-line-buffer-identification " " mode-line-modified " " mode-name))
+  (format-mode-line
+   (list minor-mode-alist " " mode-line-misc-informação)))))
+#+END_SRC
+
 * Diary
 ** Last day of month
    #+BEGIN_SRC emacs-lisp :tangle yes
