@@ -1866,7 +1866,7 @@ current window."
   (format-mode-line
    (list " " mode-line-buffer-identification " " mode-line-modified " " mode-name))
   (format-mode-line
-   (list minor-mode-alist " " mode-line-misc-informação)))))
+   (list minor-mode-alist " " mode-line-misc-info)))))
 #+END_SRC
 
 * Diary
