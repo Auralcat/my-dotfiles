@@ -1868,7 +1868,12 @@ current window."
   (format-mode-line
    (list minor-mode-alist " " mode-line-misc-info)))))
 #+END_SRC
-
+* Cursor
+#+BEGIN_SRC emacs-lisp :tangle yes
+(setq-default blink-cursor-blinks 0)
+(setq-default blink-cursor-interval 0.6)
+(setq-default blink-cursor-delay 0.2)
+#+END_SRC
 * Diary
 ** Last day of month
    #+BEGIN_SRC emacs-lisp :tangle yes
