@@ -5,6 +5,7 @@
 *type-break
 
 # Emacs stuff
+.emacs.d/snippets/*/private
 .emacs.d/company-statistics-cache.el
 .emacs.d/completions
 .emacs.d/elpa
