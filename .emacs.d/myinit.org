@@ -1231,11 +1231,11 @@ We need this for tab completion inside shell-mode buffers in Docker containers.
       :config
       (cond
        ((eq system-type 'darwin)
-        (setq circadian-themes '((:sunrise . cosmos-light)
-                                 (:sunset  . cosmos-dark))))
+  (setq circadian-themes '((:sunrise . cosmos-light)
+         (:sunset  . cosmos-dark))))
        ((eq system-type 'gnu/linux)
-        (setq circadian-themes '((:sunrise . solarized-gruvbox-light)
-                                 (:sunset  . hemisu-dark))))
+  (setq circadian-themes '((:sunrise . solarized-gruvbox-light)
+         (:sunset  . doom-old-hope))))
        )
 
       (circadian-setup))
