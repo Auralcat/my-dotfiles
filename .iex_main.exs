@@ -1,10 +1,13 @@
 # This is a configuration file for IEx, the Elixir REPL.
 # We can load this main file into other project-specific .iex.exs
-# with Code.eval_file("~/.iex_main.exs"), for example.
-welcome_message = "(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ Loading personal configuration..."
-|> String.pad_leading(50)
+# with the following snippet:
+# if File.exists?(Path.expand("~/.iex_main.exs")), do: import_file("~/.iex_main.exs")
 
-IO.puts(welcome_message)
+blue_ansi = IO.ANSI.blue()
+reset_ansi = IO.ANSI.reset()
+welcome_message = blue_ansi <> "(ﾉ◕ヮ◕)ﾉ*:･ﾟ✧ Loading personal configuration..." <> reset_ansi
+
+IO.puts(String.pad_leading(welcome_message, 50))
 
 IEx.configure(
     colors: [
@@ -13,7 +16,7 @@ IEx.configure(
         atom: :cyan,
         string: :green,
         boolean: :magenta,
-        nil: :read
+        nil: :red
       ],
       eval_result: [:green, :bright],
       eval_error: [[:red, :bright, "✘ \n"]],
