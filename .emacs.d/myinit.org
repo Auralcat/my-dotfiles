@@ -1857,16 +1857,21 @@ This gets out of the way nicely and cleans up the view.
   "Return a string with LEFT and RIGHT at the edges of the
 current window."
   (format (format "%%s %%%ds" (- (window-total-width) (length left) 2))
-          left right))
+    left right))
 
 (setq default-frame-alist '((internal-border-width . 20)))
+
+(setq auralcat/mode-line-left-side
+      (list " " evil-mode-line-tag " " mode-line-buffer-identification " " mode-line-modified " " mode-name " "'(vc-mode vc-mode)))
+(setq auralcat/mode-line-right-side
+      (list  minor-mode-alist " " mode-line-misc-info " " mode-line-end-spaces))
 
 (setq-default mode-line-format
 '(:eval (mode-line-align
   (format-mode-line
-   (list " " mode-line-buffer-identification " " mode-line-modified " " mode-name))
+   auralcat/mode-line-left-side)
   (format-mode-line
-   (list minor-mode-alist " " mode-line-misc-info)))))
+   auralcat/mode-line-right-side))))
 #+END_SRC
 * Cursor
 #+BEGIN_SRC emacs-lisp :tangle yes
