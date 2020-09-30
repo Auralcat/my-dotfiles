@@ -1439,6 +1439,19 @@ These are the official ones.
 (evil-leader/set-key-for-mode 'elixir-mode "!" 'auralcat/elixir-iex-pry)
 (evil-leader/set-key-for-mode 'elixir-mode "SPC" 'auralcat/alchemist-iex-send-buffer)
   #+END_SRC
+** Elixir
+#+begin_src emacs-lisp :tangle yes
+(evil-leader/set-key-for-mode 'elixir-mode
+  "t." 'alchemist-mix-test-at-point
+  "tf" 'alchemist-mix-test-file
+  "ts" 'alchemist-mix-test-stale
+  "tt" 'alchemist-mix-rerun-last-test
+  "tb" 'alchemist-mix-test-this-buffer
+  "mc" 'alchemist-mix-compile
+  "mm" 'alchemist-mix-rerun-last-task
+  "mx" 'alchemist-mix
+  )
+#+end_src
 * Guess Language Mode
   This is a helper mode which changes the current ~flyspell~ dictionary depending on the language you're typing in the
   current line. Quite useful when you write text in more than one language often. That way you're not bound to a
@@ -1845,11 +1858,6 @@ This is a derived mode to hold English abbrevs.
   #+END_SRC
 
 * Mode Line
-** Mini mode line
-This gets out of the way nicely and cleans up the view.
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package mini-modeline)
-#+END_SRC
 ** Custom code
 [[https://github.com/rnkn/olivetti/issues/39#issuecomment-660606677][Source]]
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1862,16 +1870,25 @@ current window."
 (setq default-frame-alist '((internal-border-width . 20)))
 
 (setq auralcat/mode-line-left-side
-      (list " " evil-mode-line-tag " " mode-line-buffer-identification " " mode-line-modified " " mode-name " "'(vc-mode vc-mode)))
+      (list " " evil-mode-line-tag
+            " " mode-line-buffer-identification
+            " " mode-line-modified
+            " " mode-name
+            " " mode-line-position
+            " " '(vc-mode vc-mode)))
+
 (setq auralcat/mode-line-right-side
-      (list  minor-mode-alist " " mode-line-misc-info " " mode-line-end-spaces))
+      (list minor-mode-alist
+            " " mode-line-misc-info
+            " " mode-line-end-spaces))
 
 (setq-default mode-line-format
-'(:eval (mode-line-align
+'("%e" (:eval (mode-line-align
   (format-mode-line
    auralcat/mode-line-left-side)
   (format-mode-line
-   auralcat/mode-line-right-side))))
+   auralcat/mode-line-right-side)))))
+
 #+END_SRC
 * Cursor
 #+BEGIN_SRC emacs-lisp :tangle yes
