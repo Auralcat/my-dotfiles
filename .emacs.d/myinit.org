@@ -265,6 +265,11 @@ This is quite useful to navigate through code faster.
 ;; A small performance improvement
 (setq redisplay-dont-pause t)
 
+;; Since I work only with left-to-right languages, we can set it like this.
+(setq bidi-paragraph-direction 'left-to-right)
+(if (version<= "27.1" emacs-version)
+    (setq bidi-inhibit-bpa t))
+
 ;; I don't like lockfiles
 (setq create-lockfiles nil)
 
@@ -344,6 +349,21 @@ This is quite useful to navigate through code faster.
     ;; Load from external file.
     (load "~/.emacs.secrets")
   #+END_SRC
+* REPL
+We need to do some customizations to comint-related buffers to improve performance.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(defun comint-mode-tweaks ()
+  ;; Font-lock is the one that takes the biggest toll on performance.
+  (font-lock-mode -1)
+  (auto-composition-mode -1)
+  (auto-compression-mode -1)
+  (column-number-mode -1)
+  (auto-save-visited-mode -1)
+  )
+
+(add-hook 'comint-mode-hook 'comint-mode-tweaks)
+#+END_SRC
+
 * Abbreviations
   #+BEGIN_SRC emacs-lisp :tangle yes
   (setq abbrev-file-name "~/.abbrev_defs")
