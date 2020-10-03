@@ -4,25 +4,6 @@
 #+DATE: 2017:05:17
 #+LANGUAGE: en
 
-* Startup
-  #+BEGIN_SRC emacs-lisp :tangle yes
-;; Set fonts for each system if the extra ones are installed.
-;; Otherwise use the system's default fonts.
-(cond
- ((eq 'system-type 'darwin)
-  (if (font-info "Fantasque Sans Mono")
-      (set-face-attribute 'default nil :font "Fantasque Sans Mono" :height 140)
-    (set-face-attribute 'default nil :font "Monaco" :height 120))
-  )
- ((eq 'system-type 'gnu/linux)
-  (if (font-info "B612 Mono")
-      (set-face-attribute 'default nil :font "B612 Mono" :height 120)
-    (set-face-attribute 'default nil :font "Ubuntu Mono" :height 120)
-    ))
-  )
-
-  #+END_SRC
-
 * Command history
   It's a good idea to save the previous commands' history, for a couple reasons:
   - Check the complex commands you use most often and improve your workflow
@@ -219,31 +200,31 @@ This is quite useful to navigate through code faster.
 
 * Mac OS
   #+BEGIN_SRC emacs-lisp :tangle yes
-    (when (eq system-type 'darwin) ;; mac specific settings
-    ;; Use bigger fonts because of that Retina display
-      (if (member "Fantasque Sans Mono" (font-family-list))
-          (set-face-attribute (quote default) nil :font "Fantasque Sans Mono" :height 140)
-        '(set-face-attribute (quote default) nil :font "Ubuntu Mono" :height 140))
-      ;; Map Command to Meta
-      (setq mac-command-modifier 'meta)
-      ;; Map Option to Control (I know, smaller key, that's what we have for now. :/)
-      (setq mac-option-modifier 'control)
-      ;; Map Control key in OS X to Super
-      (setq mac-control-modifier 'super)
-      ;; Map Fn key in OS X to Hyper
-      (setq ns-function-modifier 'hyper)
-      ;; Point the executables in Mac OS to Emacs.
-      (add-to-list 'exec-path "/usr/local/bin/")
-      ;; Enable EPA
-      (custom-set-variables '(epg-gpg-program  "/usr/local/bin/gpg"))
+(when (eq system-type 'darwin) ;; mac specific settings
+  ;; Use bigger fonts because of that Retina display
+  (if (member "Fantasque Sans Mono" (font-family-list))
+      (set-face-attribute (quote default) nil :font "Fantasque Sans Mono" :height 140)
+    (set-face-attribute (quote default) nil :font "Monaco" :height 120))
+  ;; Map Command to Meta
+  (setq mac-command-modifier 'meta)
+  ;; Map Option to Control (I know, smaller key, that's what we have for now. :/)
+  (setq mac-option-modifier 'control)
+  ;; Map Control key in OS X to Super
+  (setq mac-control-modifier 'super)
+  ;; Map Fn key in OS X to Hyper
+  (setq ns-function-modifier 'hyper)
+  ;; Point the executables in Mac OS to Emacs.
+  (add-to-list 'exec-path "/usr/local/bin/")
+  ;; Enable EPA
+  (custom-set-variables '(epg-gpg-program  "/usr/local/bin/gpg"))
 
-      ;; Exec path from shell - Replicates terminal env vars in graphical Emacs
-      (use-package exec-path-from-shell
-  :init
-  (exec-path-from-shell-initialize))
+  ;; Exec path from shell - Replicates terminal env vars in graphical Emacs
+  (use-package exec-path-from-shell
+    :init
+    (exec-path-from-shell-initialize))
 
-      ;; Use Emacsclient in OS X
-      (setq server-socket-dir (format "/tmp/emacs%d" (user-uid))))
+  ;; Use Emacsclient in OS X
+  (setq server-socket-dir (format "/tmp/emacs%d" (user-uid))))
   #+END_SRC
 * Environment Customizations
   #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1351,15 +1332,27 @@ These are the official ones.
 (use-package solarized-theme :defer t)
 #+END_SRC
 
+* Fonts
+  #+BEGIN_SRC emacs-lisp :tangle yes
+;; Set fonts for each system if the extra ones are installed.
+;; Otherwise use the system's default fonts.
+(cond
+ ((eq system-type 'darwin)
+  (if (font-info "Fantasque Sans Mono")
+      (set-face-attribute 'default nil :font "Fantasque Sans Mono" :height 140)
+    (set-face-attribute 'default nil :font "Monaco" :height 120))
+  )
+ ((eq system-type 'gnu/linux)
+  (if (font-info "B612 Mono")
+      (set-face-attribute 'default nil :font "B612 Mono" :height 100)
+    (set-face-attribute 'default nil :font "Ubuntu Mono" :height 120)
+    ))
+  )
+  #+END_SRC
 * Graphical
   #+BEGIN_SRC emacs-lisp :tangle yes
-    ;; Set font in graphical mode
-    (when (display-graphic-p)
-  ;; Use Fantasque Sans Mono when available
-  (if (member "Fantasque Sans Mono" (font-family-list))
-  (set-face-attribute (quote default) nil :font "Fantasque Sans Mono" :height 100)
-  '(set-face-attribute (quote default) nil :font "Ubuntu Mono" :height 100))
-
+;; Set font in graphical mode
+(when (display-graphic-p)
   ;; Remove menu and scroll bars in graphical mode
   (menu-bar-mode 0)
   (tool-bar-mode 0)
