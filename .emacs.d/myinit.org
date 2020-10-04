@@ -1608,11 +1608,11 @@ Colorize the agenda: https://llazarek.com/2018/07/improving-the-agenda.html
     (beginning-of-line)
     (let ((found (re-search-forward needle (point-at-eol) t count)))
       (if beginning
-          (match-beginning 0)
-        found))))
+    (match-beginning 0)
+  found))))
 (defun ll/org/agenda/find-todo-word-end ()
   (reduce (lambda (a b) (or a b))
-          (mapcar #'find-in-line ll/org/agenda-todo-words)))
+    (mapcar #'find-in-line ll/org/agenda-todo-words)))
 
 ;; Load my tag colors
 (load "~/.agenda-colors")
@@ -1747,17 +1747,24 @@ This is a derived mode to hold English abbrevs.
 * Markdown-mode
   A couple tweaks to make it more Org-like.
   #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package markdown-mode
-      :bind
-      ("M-<right>" . 'markdown-demote)
-      ("M-<left>" . 'markdown-promote)
-      ("M-<up>" . 'markdown-move-up)
-      ("M-<down>" . 'markdown-move-down)
-      ("C-c 1" . 'markdown-insert-header-atx-1)
-      ("C-c 2" . 'markdown-insert-header-atx-2)
-      ("C-c 3" . 'markdown-insert-header-atx-3)
-      :config
-      (setq markdown-asymmetric-header t))
+(defun markdown-mode-tweaks ()
+  (visual-fill-column-mode 1)
+  (auto-fill-mode -1)
+  )
+
+(use-package markdown-mode
+  :hook ((markdown-mode . markdown-mode-tweaks)
+         (gfm-mode . markdown-mode-tweaks))
+  :bind
+  ("M-<right>" . 'markdown-demote)
+  ("M-<left>" . 'markdown-promote)
+  ("M-<up>" . 'markdown-move-up)
+  ("M-<down>" . 'markdown-move-down)
+  ("C-c 1" . 'markdown-insert-header-atx-1)
+  ("C-c 2" . 'markdown-insert-header-atx-2)
+  ("C-c 3" . 'markdown-insert-header-atx-3)
+  :config
+  (setq markdown-asymmetric-header t))
   #+END_SRC
 * Variables
   #+BEGIN_SRC emacs-lisp :tangle yes
