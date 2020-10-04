@@ -1,8 +1,6 @@
 #+TITLE: Emacs configuration file
-
 #+AUTHOR: Auralcat
 #+DATE: 2017:05:17
-#+LANGUAGE: en
 
 * Command history
   It's a good idea to save the previous commands' history, for a couple reasons:
@@ -197,7 +195,6 @@ This is quite useful to navigate through code faster.
    (kmacro-lambda-form [?\C-x ?h ?\C-c ?a ?i ?r escape] 0 "%d"))
 #+END_SRC
 
-
 * Mac OS
   #+BEGIN_SRC emacs-lisp :tangle yes
 (when (eq system-type 'darwin) ;; mac specific settings
@@ -217,11 +214,6 @@ This is quite useful to navigate through code faster.
   (add-to-list 'exec-path "/usr/local/bin/")
   ;; Enable EPA
   (custom-set-variables '(epg-gpg-program  "/usr/local/bin/gpg"))
-
-  ;; Exec path from shell - Replicates terminal env vars in graphical Emacs
-  (use-package exec-path-from-shell
-    :init
-    (exec-path-from-shell-initialize))
 
   ;; Use Emacsclient in OS X
   (setq server-socket-dir (format "/tmp/emacs%d" (user-uid))))
@@ -825,6 +817,13 @@ Necessary for parsing apib files (API Blueprint)
   :hook ((org-mode org-agenda-mode) . 'emojify-mode))
     #+END_SRC
 ** Utilities
+*** Exec path from shell
+  Replicates terminal env vars in graphical Emacs.
+  #+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package exec-path-from-shell
+    :init
+    (exec-path-from-shell-initialize))
+  #+END_SRC
 *** Git-Link
 Create links to Github/GitLab files from the comfort of your Emacs buffer.
 #+BEGIN_SRC emacs-lisp :tangle yes
