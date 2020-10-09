@@ -1204,10 +1204,9 @@ repository.
 
 *** Magit
     How to win at Git from Emacs.
+    The configuration for each part is below in separate headings.
     #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package magit)
-
-
     #+END_SRC
 **** Commit configuration
      #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1225,7 +1224,11 @@ repository.
     (evil-set-initial-state 'git-commit-mode 'emacs)
     ))
      #+END_SRC
-
+**** Viewing diffs
+#+BEGIN_SRC emacs-lisp :tangle yes
+;; Wrap those long lines.
+(add-hook 'magit-diff-mode-hook 'visual-line-mode)
+#+END_SRC
 *** Bash completion
 We need this for tab completion inside shell-mode buffers in Docker containers.
 #+BEGIN_SRC emacs-lisp :tangle yes
