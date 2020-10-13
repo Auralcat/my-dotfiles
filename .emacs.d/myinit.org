@@ -557,7 +557,6 @@ Necessary for parsing apib files (API Blueprint)
 ;; Bindings for alchemist-iex
 (define-key elixir-mode-map (kbd "C-c C-l") 'alchemist-iex-send-current-line)
 (define-key elixir-mode-map (kbd "C-c C-r") 'alchemist-iex-send-region)
-(define-key elixir-mode-map (kbd "C-c C-r") 'alchemist-iex-send)
     #+END_SRC
 *** Projectile
     Manage projects in Emacs.
