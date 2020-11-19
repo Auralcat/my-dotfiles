@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: Ecto Schema field types
+# key: flt
+# --
+${1:ModuleName}.__schema__(:fields) |> Enum.map(fn field -> {field, $1.__schema__(:type, field)} end) $0

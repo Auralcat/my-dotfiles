@@ -1,0 +1,5 @@
+# -*- mode: snippet -*-
+# name: Ecto Schema assoc types
+# key: fla
+# --
+${1:ModuleName}.__schema__(:associations) |> Enum.map(fn assoc -> {assoc, $1.__schema__(:type, assoc)} end) $0
