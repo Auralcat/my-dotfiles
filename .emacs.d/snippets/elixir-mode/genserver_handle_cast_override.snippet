@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: GenServer handle_cast override
+# key: handle_cast
+# --
+@impl GenServer
+def handle_cast(${1:message}, state) do
+  {:noreply, ${2:state}}
+end

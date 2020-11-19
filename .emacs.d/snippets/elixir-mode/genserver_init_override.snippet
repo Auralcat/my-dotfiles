@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: GenServer init override
+# key: init
+# --
+@impl GenServer
+def init(_) do
+  {:ok, ${1:%{}}}
+end

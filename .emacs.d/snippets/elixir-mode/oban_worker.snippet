@@ -1,0 +1,19 @@
+# -*- mode: snippet -*-
+# name: Oban worker
+# key: wk
+# --
+defmodule ${1:ModuleName}Worker do
+  use Oban.Worker, queue: :queries, max_attempts: 3
+
+  @base_backoff_seconds 60
+
+  @impl Oban.Worker
+  def perform(%Job{args: %{"${2:key}" => ${3:value}}}) do
+    $0
+  end
+
+  @impl Oban.Worker
+  def backoff(%Job{attempt: attempt}) do
+    trunc(:math.pow(2, attempt) + @base_backoff_seconds)
+  end
+end

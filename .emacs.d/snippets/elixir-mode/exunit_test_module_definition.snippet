@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: ExUnit test module definition in a project
+# key: td
+# --
+defmodule `(replace-regexp-in-string "_" "" (concat (capitalize (projectile-project-name)) "."))`${2:`(mapconcat 'capitalize (split-string (file-name-base) "_") "")`} do
+  use ExUnit.Case, async: true
+
+  alias `(replace-regexp-in-string "_" "" (concat (capitalize (projectile-project-name)) "."))`${2:$(replace-regexp-in-string "Test" "" yas-text)}
+
+  test "my fancy test" do
+    $0
+  end
+end
