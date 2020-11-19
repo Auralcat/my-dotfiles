@@ -1371,6 +1371,9 @@ These are the official ones.
 #+END_SRC
 
 * Fonts
+It's better to set the fonts here instead of hard-coding them in init.el or in
+the themes themselves.
+** Default
   #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Set fonts for each system if the extra ones are installed.
 ;; Otherwise use the system's default fonts.
@@ -1381,12 +1384,33 @@ These are the official ones.
     (set-face-attribute 'default nil :font "Monaco" :height 120))
   )
  ((eq system-type 'gnu/linux)
-  (if (font-info "B612 Mono")
-      (set-face-attribute 'default nil :font "B612 Mono" :height 100)
+  (if (font-info "Terminus")
+      (set-face-attribute 'default nil :font "Terminus" :height 100)
     (set-face-attribute 'default nil :font "Ubuntu Mono" :height 120)
     ))
   )
   #+END_SRC
+** Variable Pitch
+  #+BEGIN_SRC emacs-lisp :tangle yes
+(cond
+ ((eq system-type 'darwin)
+  (if (font-info "Avenir")
+      (set-face-attribute 'variable-pitch nil :font "Avenir" :height 120)
+    (set-face-attribute 'variable-pitch nil :font "Helvetica" :height 120))
+  )
+ ((eq system-type 'gnu/linux)
+  (if (font-info "Liberation Sans")
+      (set-face-attribute 'variable-pitch nil :font "Liberation Sans" :height 120)
+    (set-face-attribute 'variable-pitch nil :font "Open Sans" :height 120)
+    ))
+  )
+  #+END_SRC
+
+  #+RESULTS:
+  #+begin_example
+  ""
+  #+end_example
+
 * Graphical
   #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Set font in graphical mode
