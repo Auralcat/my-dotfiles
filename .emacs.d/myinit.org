@@ -171,6 +171,9 @@ This is quite useful to navigate through code faster.
 (fset 'auralcat/gnus-limit-to-age-headlines
    (kmacro-lambda-form [?/ ?/ ?\[ ?A ?a ?\C-e ?o ?s ?  ?\[ ?\[ ?: ?d ?i ?g ?i ?t ?: ?\C-e ?+ ?  ?a ?n ?o ?s return] 0 "%d"))
 
+;; Remove links in an Org entry
+(fset 'auralcat/org-remove-link
+   (kmacro-lambda-form [?d ?s ?\] ?d ?f ?\] ?d ?s ?\]] 0 "%d"))
   #+END_SRC
 
 ** Elixir
