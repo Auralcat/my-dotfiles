@@ -3,5 +3,5 @@
 # key: sh
 # --
 #+BEGIN_SRC shell
-$1
+$0
 #+END_SRC

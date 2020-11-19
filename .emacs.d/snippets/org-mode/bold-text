@@ -2,4 +2,4 @@
 # name: bold-text
 # key: b
 # --
-${bold text$(when yas-moving-away-p (concat "*" yas-text "*"))}$0
+*$0*
