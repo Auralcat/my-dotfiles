@@ -302,6 +302,9 @@ This is quite useful to navigate through code faster.
 
 ;; Use Bash as default shell interpreter
 (setq org-babel-sh-command "/bin/bash")
+;; Get Emacs to understand your aliases
+(setq shell-file-name "bash")
+(setq shell-command-switch "-ic")
 
 ;; Activate Company mode
 (add-hook 'after-init-hook 'global-company-mode)
