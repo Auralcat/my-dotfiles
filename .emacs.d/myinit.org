@@ -376,8 +376,6 @@ We need to do some customizations to comint-related buffers to improve performan
   #+END_SRC
 * Packages
 ** Major Modes
-*** Emacs Lisp
-Some goodies to make editing Elisp easier.
 *** Elixir-mode
     Elixir support for Emacs
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -617,11 +615,6 @@ Necessary for parsing apib files (API Blueprint)
        (add-hook 'ruby-mode-hook 'custom-disabled-ruby-checkers)
     #+END_SRC
 
-*** Ruby Tools
-    Goodies for Ruby programming modes.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package ruby-tools)
-    #+END_SRC
 *** Helm
     Incremental completion and selection narrowing framework
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1112,12 +1105,6 @@ repository.
   (define-key evil-normal-state-map (kbd "C-e") 'evil-numbers/dec-at-pt))
     #+END_SRC
 
-*** Evil's syntax text object
-    Adds a text object defined by same syntax highlight, you can
-    operate on it as with any other text objects.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package evil-textobj-syntax)
-    #+END_SRC
 *** Diff-Highlight
     Highlights the changed content in buffer.
     #+BEGIN_SRC emacs-lisp :tangle yes
