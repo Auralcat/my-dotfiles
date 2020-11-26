@@ -1255,27 +1255,22 @@ We need this for tab completion inside shell-mode buffers in Docker containers.
 *** Circadian
     Theme changer for Emacs.
     #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package circadian
-      :ensure t
-      :config
-      (cond
-       ((eq system-type 'darwin)
-  (setq circadian-themes '((:sunrise . cosmos-light)
-         (:sunset  . cosmos-dark))))
-       ((eq system-type 'gnu/linux)
-  (setq circadian-themes '((:sunrise . solarized-gruvbox-light)
-         (:sunset  . doom-old-hope))))
-       )
-
-      (circadian-setup))
-    #+END_SRC
-*** RVM
-    Ruby Version Manager. Akin to python's virtualenv.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package rvm)
-
-      (rvm-use-default)
-      (rvm-activate-corresponding-ruby)
+(use-package circadian
+  :ensure t
+  :config
+  (cond
+   ((eq system-type 'darwin)
+    (setq circadian-themes '((:sunrise . cosmos-light)
+                             (:sunset  . cosmos-dark))))
+   ;; Personal Linux machine
+   ((and (string-equal system-name auralcat/personal-system-name) (eq system-type 'gnu/linux))
+    (setq circadian-themes '((:sunrise . solarized-light)
+                             (:sunset  . solarized-dark))))
+   ;; Work Linux machine
+   ((and (string-equal system-name auralcat/work-system-name) (eq system-type 'gnu/linux))
+    (setq circadian-themes '((:sunrise . modus-operandi)
+                             (:sunset  . modus-vivendi)))))
+  (circadian-setup))
     #+END_SRC
 *** Anzu
     Show search result count in the mode line.
