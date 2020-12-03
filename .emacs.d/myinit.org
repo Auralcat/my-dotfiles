@@ -1672,6 +1672,8 @@ This is a derived mode to hold English abbrevs.
 #+BEGIN_SRC emacs-lisp :tangle yes
 (define-derived-mode org-english-mode org-mode "Org-EN"
   "Org-mode used to hold English abbrevs. Does everything that plain org-mode does.")
+
+(add-to-list 'auto-mode-alist '("\\.org\\.en?\\'" . org-english-mode))
 #+END_SRC
 ** Auto-mark TODO entries as DONE
    #+BEGIN_SRC emacs-lisp :tangle yes
