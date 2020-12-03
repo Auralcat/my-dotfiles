@@ -1797,7 +1797,7 @@ This is a derived mode to hold English abbrevs.
   A couple tweaks to make it more Org-like.
   #+BEGIN_SRC emacs-lisp :tangle yes
 (defun markdown-mode-tweaks ()
-  (visual-fill-column-mode 1)
+  (visual-line-mode 1)
   (auto-fill-mode -1)
   )
 
