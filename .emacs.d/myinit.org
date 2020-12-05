@@ -1286,6 +1286,13 @@ I have to call it here because I use it in my scripts.
     #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package s)
     #+END_SRC
+*** Swiper-helm
+[[http://pragmaticemacs.com/emacs/dont-search-swipe/][Don't search, swipe]].
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package swiper-helm)
+(global-set-key (kbd "C-s") 'swiper-helm)
+(global-set-key (kbd "C-r") 'swiper-helm)
+#+END_SRC
 * Themes
   Remember to _defer_ the loading of the theme packages, otherwise the
   faces might get mixed up and look ugly.
