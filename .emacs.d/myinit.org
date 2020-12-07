@@ -401,7 +401,12 @@ We need to do some customizations to comint-related buffers to improve performan
        (add-to-list 'auto-mode-alist
       '("\\.scss\\'" . scss-mode)))
     #+END_SRC
-
+*** Makefile-mode
+I'm working with Makefiles now, so this is useful.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package makefile-mode)
+(add-hook 'makefile-mode-hook #'(lambda () (setq-local indent-tabs-mode t)))
+#+END_SRC
 *** Js2-mode
     A better default Javascript mode
     #+BEGIN_SRC emacs-lisp :tangle yes
