@@ -36,6 +36,7 @@ miriamretka.el
 # This is the file generated when starting Emacs, we don't need to send it to
 # version control
 myinit.el
+*.elc
 
 persp-confs/*
 tetris-scores
