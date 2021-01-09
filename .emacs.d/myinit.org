@@ -10,17 +10,17 @@
     appear too often, but where this command saves your back (example
     in Ruby: extracting a variable inside "it" clause to a "let" block)
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (savehist-mode 1)
-      (setq savehist-additional-variables '(kill-ring search-ring regexp-search-ring))
-      (setq savehist-file "~/file-bouncer/emacs-savehist")
-      (setq history-length 1024)
+(savehist-mode 1)
+(setq savehist-additional-variables '(kill-ring search-ring regexp-search-ring))
+(setq savehist-file "~/file-bouncer/emacs-savehist")
+(setq history-length 1024)
     #+END_SRC
 * Bookmarks
   It's a quicker way to navigate through files you visit often.
   #+BEGIN_SRC emacs-lisp :tangle yes
-    (setq bookmark-default-file "~/file-bouncer/bookmarks")
-    ;; Every time bookmarks are changed, save them
-    (setq bookmark-save-flag 1)
+(setq bookmark-default-file "~/file-bouncer/bookmarks")
+;; Every time bookmarks are changed, save them
+(setq bookmark-save-flag 1)
   #+END_SRC
 * Midnight mode
   Think of this as a kind of cron for Emacs. It runs a list of
@@ -28,32 +28,32 @@
   can be defined by the user.
   The default action for ~midnight-hook~ is ~clean-buffer-list~
   #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package midnight
-      :init
-      ;; A good time for my "midnight" is 11:45am.
-      (midnight-delay-set 'midnight-delay "11:45am")
-      )
+(use-package midnight
+  :init
+  ;; A good time for my "midnight" is 11:45am.
+  (midnight-delay-set 'midnight-delay "11:45am")
+  )
   #+END_SRC
 * Evil Mode
   Yes, I'm committing this heresy
 **** Evil-leader
      Add a prefix key to Evil mode, like the Leader key in Vim.
      #+BEGIN_SRC emacs-lisp :tangle yes
-       (use-package evil-leader)
-       (load "~/my-dotfiles/.emacs.d/elisp-custom/evil-leader-custom-functions.el")
-       (global-evil-leader-mode)
-       ;; Evil mode needs to be loaded after evil-leader
-       (use-package evil)
-       (evil-mode 1)
+(use-package evil-leader)
+(load "~/my-dotfiles/.emacs.d/elisp-custom/evil-leader-custom-functions.el")
+(global-evil-leader-mode)
+;; Evil mode needs to be loaded after evil-leader
+(use-package evil)
+(evil-mode 1)
 
-       ;; Load configs
-       (load "~/my-dotfiles/.emacs.d/evilrc")
+;; Load configs
+(load "~/my-dotfiles/.emacs.d/evilrc")
      #+END_SRC
 **** Evil Surround
      Easier manipulation of delimiters, emulation of vim.surround
      #+BEGIN_SRC emacs-lisp :tangle yes
-     (use-package evil-surround)
-     (global-evil-surround-mode)
+(use-package evil-surround)
+(global-evil-surround-mode)
      #+END_SRC
 **** Custom text objects
 ***** Ruby Block
@@ -61,32 +61,32 @@
       Credits: [[https://github.com/env0der][@env0der's dotfiles]]
       My modification is just the ~ruby-block-beg-re~ variable.
       #+BEGIN_SRC emacs-lisp :tangle yes
-      (evil-define-text-object evil-textobj-outer-ruby-block
+(evil-define-text-object evil-textobj-outer-ruby-block
   (count &optional beg end type)
   (evil-ruby-block-range beg end type count t))
 
-      (evil-define-text-object evil-textobj-inner-ruby-block
+(evil-define-text-object evil-textobj-inner-ruby-block
   (count &optional beg end type)
   (evil-ruby-block-range beg end type count nil))
 
-      (defun evil-ruby-block-range (count beg end type &optional inclusive)
+(defun evil-ruby-block-range (count beg end type &optional inclusive)
   (let ((current-point (point))
-    (block-begin (progn (evil-end-of-line) (re-search-backward ruby-block-beg-re nil t)))
-    (block-end (progn (evilmi-jump-items) (point))))
+        (block-begin (progn (evil-end-of-line) (re-search-backward ruby-block-beg-re nil t)))
+        (block-end (progn (evilmi-jump-items) (point))))
     (if inclusive
-    (let ((begin (progn (goto-char block-begin) (evil-beginning-of-line) (point)))
-      (end (progn (goto-char block-end) (evil-next-line) (evil-beginning-of-line) (if (looking-at "^$") (+ (point) 1) (point)))))
-      (progn
-  (goto-char current-point)
-  (evil-range begin end)))
-  (let ((begin (progn (goto-char block-begin) (evil-next-line) (evil-first-non-blank) (point)))
-  (end (progn (goto-char block-end) (evil-previous-line) (evil-end-of-line) (+ (point) 1))))
-    (progn
-      (goto-char current-point)
-      (evil-range begin end))))))
+        (let ((begin (progn (goto-char block-begin) (evil-beginning-of-line) (point)))
+              (end (progn (goto-char block-end) (evil-next-line) (evil-beginning-of-line) (if (looking-at "^$") (+ (point) 1) (point)))))
+          (progn
+            (goto-char current-point)
+            (evil-range begin end)))
+      (let ((begin (progn (goto-char block-begin) (evil-next-line) (evil-first-non-blank) (point)))
+            (end (progn (goto-char block-end) (evil-previous-line) (evil-end-of-line) (+ (point) 1))))
+        (progn
+          (goto-char current-point)
+          (evil-range begin end))))))
 
-    (define-key evil-inner-text-objects-map "r" 'evil-textobj-inner-ruby-block)
-    (define-key evil-outer-text-objects-map "r" 'evil-textobj-outer-ruby-block)
+(define-key evil-inner-text-objects-map "r" 'evil-textobj-inner-ruby-block)
+(define-key evil-outer-text-objects-map "r" 'evil-textobj-outer-ruby-block)
       #+END_SRC
 * Xref
 This is quite useful to navigate through code faster.
@@ -97,11 +97,11 @@ This is quite useful to navigate through code faster.
 * Dired
   A couple customizations.
   #+BEGIN_SRC emacs-lisp :tangle yes
-    (setq dired-listing-switches "-alh")
-    ;; (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
-    ;; (define-key dired-mode-map (kbd "^") (lambda () (find-alternate-file "..")))
-    ;; Use Emacs mode in Dired.
-    (add-hook 'dired-mode-hook 'evil-emacs-state)
+(setq dired-listing-switches "-alh")
+;; (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
+;; (define-key dired-mode-map (kbd "^") (lambda () (find-alternate-file "..")))
+;; Use Emacs mode in Dired.
+(add-hook 'dired-mode-hook 'evil-emacs-state)
   #+END_SRC
 
 * Macros
@@ -127,53 +127,53 @@ This is quite useful to navigate through code faster.
 
 (fset (quote sample-macro)
       (lambda (&optional arg) "Sample description" (interactive "p")
-  (undo-boundary)
-  (noflet ((undo-boundary ()))
-    (kmacro-exec-ring-item (quote ([100 87 65 32 35 32 65 110 111 116 104 101 114 32 109 97 99 114 111 32 99 97 108 108 46 escape 134217730 return 112 45] 0 "%d")) arg)
-    )
-  (undo-boundary)
-  ))
+        (undo-boundary)
+        (noflet ((undo-boundary ()))
+          (kmacro-exec-ring-item (quote ([100 87 65 32 35 32 65 110 111 116 104 101 114 32 109 97 99 114 111 32 99 97 108 108 46 escape 134217730 return 112 45] 0 "%d")) arg)
+          )
+        (undo-boundary)
+        ))
 
 ;; Some macros to adjust Ruby blocks
 (fset 'auralcat/ruby-move-defun-backward
       (lambda (&optional arg) "Moves a DEF block backwards in the class definition." (interactive "p")
-  (undo-boundary)
-  (noflet ((undo-boundary ()))
-    (kmacro-exec-ring-item (quote ([26 167772166 23 134217820 16 4 134217820 4 2 134217730 16 return 25 return 134217730 26] 0 "%d")) arg)
-    )
-  (undo-boundary)
-  ))
+        (undo-boundary)
+        (noflet ((undo-boundary ()))
+          (kmacro-exec-ring-item (quote ([26 167772166 23 134217820 16 4 134217820 4 2 134217730 16 return 25 return 134217730 26] 0 "%d")) arg)
+          )
+        (undo-boundary)
+        ))
 
 (fset 'auralcat/ruby-move-block-forward
       (lambda (&optional arg) "Moves a Ruby block forward in the current nesting level." (interactive "p")
-  (undo-boundary)
-  (noflet ((undo-boundary ()))
-       (kmacro-lambda-form [?\C-z ?\C-  ?\C-\M-n ?\C-e ?\C-w ?\C-\M-n ?\C-m ?\C-/ ?\C-e ?\C-m ?\C-m ?\C-y ?\C-u ?\C-  ?\C-  ?\C-k ?\C-k ?\C-i ?\C-z] 0 "%d")
-    )
-  (undo-boundary)
-  )
-)
+        (undo-boundary)
+        (noflet ((undo-boundary ()))
+          (kmacro-lambda-form [?\C-z ?\C-  ?\C-\M-n ?\C-e ?\C-w ?\C-\M-n ?\C-m ?\C-/ ?\C-e ?\C-m ?\C-m ?\C-y ?\C-u ?\C-  ?\C-  ?\C-k ?\C-k ?\C-i ?\C-z] 0 "%d")
+          )
+        (undo-boundary)
+        )
+      )
 
 ;; Removes a Ruby block wrapping another block.
 (fset 'auralcat/ruby-block-vanish
-   (kmacro-lambda-form [?m ?m ?% ?d ?d ?\' ?m ?d ?d ?\C-x ?\C-x ?=] 0 "%d"))
+      (kmacro-lambda-form [?m ?m ?% ?d ?d ?\' ?m ?d ?d ?\C-x ?\C-x ?=] 0 "%d"))
 
 ;; Sends a region to the *shell* buffer
 (fset 'auralcat/sh-send-region
-   (kmacro-lambda-form [?\M-w ?  ?$ ?\C-y return ?\M-o] 0 "%d"))
+      (kmacro-lambda-form [?\M-w ?  ?$ ?\C-y return ?\M-o] 0 "%d"))
 
 ;; Sends a line to the *shell* buffer
 (fset 'auralcat/sh-send-line
-   (kmacro-lambda-form [?\C-z ?\C-a ?\S-\C-e ?\M-w ?\C-z ?  ?$ ?\C-y return ?\M-o] 0 "%d"))
+      (kmacro-lambda-form [?\C-z ?\C-a ?\S-\C-e ?\M-w ?\C-z ?  ?$ ?\C-y return ?\M-o] 0 "%d"))
 
 ;; Filter news with deceased or age headlines in Gnus feed.
 ;; It inserts the "[Aa]os [[:digit:]]+ anos" regexp in the filter minibuffer.
 (fset 'auralcat/gnus-limit-to-age-headlines
-   (kmacro-lambda-form [?/ ?/ ?\[ ?A ?a ?\C-e ?o ?s ?  ?\[ ?\[ ?: ?d ?i ?g ?i ?t ?: ?\C-e ?+ ?  ?a ?n ?o ?s return] 0 "%d"))
+      (kmacro-lambda-form [?/ ?/ ?\[ ?A ?a ?\C-e ?o ?s ?  ?\[ ?\[ ?: ?d ?i ?g ?i ?t ?: ?\C-e ?+ ?  ?a ?n ?o ?s return] 0 "%d"))
 
 ;; Remove links in an Org entry
 (fset 'auralcat/org-remove-link
-   (kmacro-lambda-form [?d ?s ?\] ?d ?f ?\] ?d ?s ?\]] 0 "%d"))
+      (kmacro-lambda-form [?d ?s ?\] ?d ?f ?\] ?d ?s ?\]] 0 "%d"))
   #+END_SRC
 
 ** Elixir
@@ -187,15 +187,15 @@ This is quite useful to navigate through code faster.
 ;;   "yay!"
 ;; end
 (fset 'auralcat/elixir-change-one-line-function-to-multiline
-   (kmacro-lambda-form [?f ?: ?F ?, ?x ?E ?x ?i return escape ?o ?e ?n ?d return escape ?\M-a return] 0 "%d"))
+      (kmacro-lambda-form [?f ?: ?F ?, ?x ?E ?x ?i return escape ?o ?e ?n ?d return escape ?\M-a return] 0 "%d"))
 
 ;; Calls IEx.pry in the line above the cursor.
 (fset 'auralcat/elixir-iex-pry
-   (kmacro-lambda-form [?O ?r ?e ?q ?u ?i ?r ?e ?  ?I ?E ?x ?\; ?  ?I ?E ?x ?. ?p ?r ?y escape] 0 "%d"))
+      (kmacro-lambda-form [?O ?r ?e ?q ?u ?i ?r ?e ?  ?I ?E ?x ?\; ?  ?I ?E ?x ?. ?p ?r ?y escape] 0 "%d"))
 
 ;; Sends the whole buffer to an Alchemist-IEx buffer.
 (fset 'auralcat/alchemist-iex-send-buffer
-   (kmacro-lambda-form [?\C-x ?h ?\C-c ?a ?i ?r escape] 0 "%d"))
+      (kmacro-lambda-form [?\C-x ?h ?\C-c ?a ?i ?r escape] 0 "%d"))
 #+END_SRC
 
 * Mac OS
@@ -327,8 +327,8 @@ This is quite useful to navigate through code faster.
 
 * Personal info
   #+BEGIN_SRC emacs-lisp :tangle yes
-    ;; Load from external file.
-    (load "~/.emacs.secrets")
+;; Load from external file.
+(load "~/.emacs.secrets")
   #+END_SRC
 * REPL
 We need to do some customizations to comint-related buffers to improve performance.
@@ -347,26 +347,26 @@ We need to do some customizations to comint-related buffers to improve performan
 
 * Abbreviations
   #+BEGIN_SRC emacs-lisp :tangle yes
-  (setq abbrev-file-name "~/.abbrev_defs")
+(setq abbrev-file-name "~/.abbrev_defs")
   #+END_SRC
 * Hooks
   #+BEGIN_SRC emacs-lisp :tangle yes
-  ;; Prog-mode is from where all the programming modes are derived from.
-  ;; This means that if you call prog-mode-hook, the settings will be
-  ;; applied to ALL programming modes in Emacs.
+;; Prog-mode is from where all the programming modes are derived from.
+;; This means that if you call prog-mode-hook, the settings will be
+;; applied to ALL programming modes in Emacs.
 
-  (defun prog-mode-tweaks ()
-    ;; Set line number mode and column number mode for code files
-    (if (< (string-to-number emacs-version) 24)
-  (line-number-mode 1)
-      (display-line-numbers-mode))
-      (setq fill-column 80)
-    )
-  (add-hook 'prog-mode-hook 'prog-mode-tweaks)
-  (add-hook 'text-mode-hook 'column-number-mode)
+(defun prog-mode-tweaks ()
+  ;; Set line number mode and column number mode for code files
+  (if (< (string-to-number emacs-version) 24)
+      (line-number-mode 1)
+    (display-line-numbers-mode))
+  (setq fill-column 80)
+  )
+(add-hook 'prog-mode-hook 'prog-mode-tweaks)
+(add-hook 'text-mode-hook 'column-number-mode)
 
-  ;; Create filling for org-mode
-  (add-hook 'org-mode-hook 'auto-fill-mode)
+;; Create filling for org-mode
+(add-hook 'org-mode-hook 'auto-fill-mode)
   #+END_SRC
 * Function Aliases
   #+BEGIN_SRC emacs-lisp :tangle yes
@@ -381,24 +381,24 @@ We need to do some customizations to comint-related buffers to improve performan
 *** Elixir-mode
     Elixir support for Emacs
     #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package elixir-mode)
+(use-package elixir-mode)
     #+END_SRC
 *** Sass-mode
     #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package sass-mode
-       ;; Set Sass mode for SASS files and Css mode for SCSS files.
-       :config
-       (add-to-list 'auto-mode-alist
-      '("\\.sass\\'" . sass-mode)))
+(use-package sass-mode
+  ;; Set Sass mode for SASS files and Css mode for SCSS files.
+  :config
+  (add-to-list 'auto-mode-alist
+               '("\\.sass\\'" . sass-mode)))
 
     #+END_SRC
 *** SCSS-mode
     Major mode for SCSS files, together with Sass.
     #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package scss-mode
-       :config
-       (add-to-list 'auto-mode-alist
-      '("\\.scss\\'" . scss-mode)))
+(use-package scss-mode
+  :config
+  (add-to-list 'auto-mode-alist
+               '("\\.scss\\'" . scss-mode)))
     #+END_SRC
 *** Nov-mode
 This is a mode for reading .epub files.
@@ -440,73 +440,73 @@ I'm working with Makefiles now, so this is useful.
 *** PHP-mode
     PHP support for Emacs.
     #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package php-mode)
-    (add-hook 'php-mode-hook (lambda() (add-to-list 'company-backends 'company-php)))
+(use-package php-mode)
+(add-hook 'php-mode-hook (lambda() (add-to-list 'company-backends 'company-php)))
     #+END_SRC
 *** Enhanced-ruby-mode
     A better ruby-mode.
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package enh-ruby-mode
-      :defer nil)
+(use-package enh-ruby-mode
+  :defer nil)
 
-      ;; No magic comments, please.
-      (setq enh-ruby-add-encoding-comment-on-save nil)
-      (setq ruby-insert-encoding-magic-comment nil)
+;; No magic comments, please.
+(setq enh-ruby-add-encoding-comment-on-save nil)
+(setq ruby-insert-encoding-magic-comment nil)
 
-      ;; ;; Set it as default mode for Ruby files
-      ;; (add-to-list 'auto-mode-alist
-      ;; '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'"
-      ;; . enh-ruby-mode))
+;; ;; Set it as default mode for Ruby files
+;; (add-to-list 'auto-mode-alist
+;; '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'"
+;; . enh-ruby-mode))
 
-      ;; Fallback to vanilla Ruby mode when things go bad
-      (add-to-list 'auto-mode-alist
-      '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'"
-      . ruby-mode))
+;; Fallback to vanilla Ruby mode when things go bad
+(add-to-list 'auto-mode-alist
+             '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'"
+               . ruby-mode))
 
-      ;; (define-key enh-ruby-mode-map (kbd "M-<down>") 'auralcat/ruby-move-defun-forward)
-      ;; (define-key enh-ruby-mode-map (kbd "M-<up>") 'auralcat/ruby-move-defun-backward)
+;; (define-key enh-ruby-mode-map (kbd "M-<down>") 'auralcat/ruby-move-defun-forward)
+;; (define-key enh-ruby-mode-map (kbd "M-<up>") 'auralcat/ruby-move-defun-backward)
 
-      ;; (define-key ruby-mode-map (kbd "M-<down>") 'auralcat/ruby-move-defun-forward)
-      ;; (define-key ruby-mode-map (kbd "M-<up>") 'auralcat/ruby-move-defun-backward)
+;; (define-key ruby-mode-map (kbd "M-<down>") 'auralcat/ruby-move-defun-forward)
+;; (define-key ruby-mode-map (kbd "M-<up>") 'auralcat/ruby-move-defun-backward)
     #+END_SRC
 *** Web Mode
     I use this for HTML files mostly, works good for PHP too.
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package web-mode :ensure t
-      :bind (:map web-mode-map
-    ("C-<up>"    . web-mode-element-previous)
-    ("C-<down>"  . web-mode-element-next)
-    ("C-<left>"  . web-mode-element-beginning)
-    ("C-<right>" . web-mode-tag-match)
-    ("C-S-<up>"  . web-mode-element-parent)
-    ("M-<up>"    . web-mode-element-content-select)
-    ("C-k"       . web-mode-element-kill)
-    ("M-RET"     . complete)))
+(use-package web-mode :ensure t
+  :bind (:map web-mode-map
+              ("C-<up>"    . web-mode-element-previous)
+              ("C-<down>"  . web-mode-element-next)
+              ("C-<left>"  . web-mode-element-beginning)
+              ("C-<right>" . web-mode-tag-match)
+              ("C-S-<up>"  . web-mode-element-parent)
+              ("M-<up>"    . web-mode-element-content-select)
+              ("C-k"       . web-mode-element-kill)
+              ("M-RET"     . complete)))
 
-      ;; File associations
-      (add-to-list 'auto-mode-alist '("\\.phtml\\'"  . web-mode))
-      (add-to-list 'auto-mode-alist '("\\.php\\'"    . web-mode))
-      (add-to-list 'auto-mode-alist '("\\.html.erb\\'"    . web-mode))
-      (add-to-list 'auto-mode-alist '("\\.html.eex\\'"    . web-mode))
-      (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-      (add-to-list 'auto-mode-alist '("\\.html?\\'"  . web-mode))
-      (add-to-list 'auto-mode-alist '("\\.vue?\\'"   . web-mode))
-      (add-to-list 'auto-mode-alist '("\\.tsx?\\'"  . web-mode))
-      (add-to-list 'auto-mode-alist '("\\.jsx?\\'"  . web-mode))
+;; File associations
+(add-to-list 'auto-mode-alist '("\\.phtml\\'"  . web-mode))
+(add-to-list 'auto-mode-alist '("\\.php\\'"    . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html.erb\\'"    . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html.eex\\'"    . web-mode))
+(add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+(add-to-list 'auto-mode-alist '("\\.html?\\'"  . web-mode))
+(add-to-list 'auto-mode-alist '("\\.vue?\\'"   . web-mode))
+(add-to-list 'auto-mode-alist '("\\.tsx?\\'"  . web-mode))
+(add-to-list 'auto-mode-alist '("\\.jsx?\\'"  . web-mode))
 
-      ;; Engine associations
-      (setq web-mode-engines-alist
+;; Engine associations
+(setq web-mode-engines-alist
       '(("php"    . "\\.phtml\\'")
-      ("blade"  . "\\.blade\\.")))
+        ("blade"  . "\\.blade\\.")))
 
-      ;; Highlight tag when editing
-      (setq web-mode-enable-current-element-highlight t)
+;; Highlight tag when editing
+(setq web-mode-enable-current-element-highlight t)
 
     #+END_SRC
 *** YAML-mode
     YAML support for Emacs.
     #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package yaml-mode :ensure t)
+(use-package yaml-mode :ensure t)
     #+END_SRC
 *** CSV-mode
     CSV support for Emacs.
@@ -529,38 +529,38 @@ Necessary for parsing apib files (API Blueprint)
 *** JS-comint
     Open a REPL using Node.js in another buffer.
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package js-comint)
+(use-package js-comint)
 
-      ;; Call the REPL with C-c C-s in js2-mode
-      ;; (define-key js2-mode-map (kbd "C-c C-s") 'run-js)
+;; Call the REPL with C-c C-s in js2-mode
+;; (define-key js2-mode-map (kbd "C-c C-s") 'run-js)
 
-      ;; Send last JS expression to REPL
-      ;; (define-key js2-mode-map (kbd "C-x C-e") 'js-send-last-sexp)
+;; Send last JS expression to REPL
+;; (define-key js2-mode-map (kbd "C-x C-e") 'js-send-last-sexp)
     #+END_SRC
 *** Flycheck Inline
     Shows the error when leaving the point over the place where it occurs.
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package flycheck-inline
+(use-package flycheck-inline
   :config
   (add-hook 'flycheck-mode-hook #'flycheck-inline-mode))
     #+END_SRC
 *** Ruby-electric
     Auto-close do-end blocks, as well as braces and parens.
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package ruby-electric
-       :diminish ruby-electric-mode)
-      (add-hook 'enh-ruby-mode-hook
-     #'(lambda ()
-   (setq autopair-dont-activate t) ;; for emacsen < 24
-   (autopair-mode -1))             ;; for emacsen >= 24
-   )
-      (add-hook 'ruby-mode-hook
-     #'(lambda ()
-   (setq autopair-dont-activate t) ;; for emacsen < 24
-   (autopair-mode -1))             ;; for emacsen >= 24
-   )
-      (add-hook 'enh-ruby-mode-hook 'ruby-electric-mode)
-      (add-hook 'ruby-mode-hook 'ruby-electric-mode)
+(use-package ruby-electric
+  :diminish ruby-electric-mode)
+(add-hook 'enh-ruby-mode-hook
+          #'(lambda ()
+              (setq autopair-dont-activate t) ;; for emacsen < 24
+              (autopair-mode -1))             ;; for emacsen >= 24
+          )
+(add-hook 'ruby-mode-hook
+          #'(lambda ()
+              (setq autopair-dont-activate t) ;; for emacsen < 24
+              (autopair-mode -1))             ;; for emacsen >= 24
+          )
+(add-hook 'enh-ruby-mode-hook 'ruby-electric-mode)
+(add-hook 'ruby-mode-hook 'ruby-electric-mode)
     #+END_SRC
 *** Alchemist
     Elixir helper package integration for Emacs.
@@ -580,33 +580,33 @@ Necessary for parsing apib files (API Blueprint)
 *** Projectile
     Manage projects in Emacs.
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package projectile
-       :init
-       (setq projectile-keymap-prefix (kbd "C-c p")))
-       ;; Enable it
-       (add-hook 'after-init-hook #'projectile-global-mode)
+(use-package projectile
+  :init
+  (setq projectile-keymap-prefix (kbd "C-c p")))
+;; Enable it
+(add-hook 'after-init-hook #'projectile-global-mode)
     #+END_SRC
 *** Autopair
     Automatically pair braces and quotes like in TextMate
     #+BEGIN_SRC emacs-lisp :tangle yes
-   (use-package autopair
-      :init (autopair-global-mode))
+(use-package autopair
+  :init (autopair-global-mode))
     #+END_SRC
 *** Emmet-mode
     #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package emmet-mode)
+(use-package emmet-mode)
     #+END_SRC
 *** Highlight-numbers mode
     Sets font lock faces to numbers in Emacs.
     #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package highlight-numbers)
-    (add-hook 'prog-mode-hook 'highlight-numbers-mode)
+(use-package highlight-numbers)
+(add-hook 'prog-mode-hook 'highlight-numbers-mode)
     #+END_SRC
 *** Flyspell
     Used to check prose.
     I use Markdown to write stuff in English.
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package flyspell
+(use-package flyspell
   :config
   (add-hook 'text-mode-hook 'turn-on-auto-fill)
   (add-hook 'gfm-mode-hook 'flyspell-mode)
@@ -618,16 +618,16 @@ Necessary for parsing apib files (API Blueprint)
 *** Flycheck
     Syntax checker, replaces flymake
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package flycheck
-     :config
-     ;; turn on flychecking globally
-     (add-hook 'after-init-hook #'global-flycheck-mode))
-      ;; Disable rubylint on default for Ruby modes.
-      ;; If you need it, you can enable it locally using C-u C-c ! v.
-      (defun custom-disabled-ruby-checkers ()
-       (add-to-list 'flycheck-disabled-checkers 'ruby-rubylint))
-       (add-hook 'enh-ruby-mode-hook 'custom-disabled-ruby-checkers)
-       (add-hook 'ruby-mode-hook 'custom-disabled-ruby-checkers)
+(use-package flycheck
+  :config
+  ;; turn on flychecking globally
+  (add-hook 'after-init-hook #'global-flycheck-mode))
+;; Disable rubylint on default for Ruby modes.
+;; If you need it, you can enable it locally using C-u C-c ! v.
+(defun custom-disabled-ruby-checkers ()
+  (add-to-list 'flycheck-disabled-checkers 'ruby-rubylint))
+(add-hook 'enh-ruby-mode-hook 'custom-disabled-ruby-checkers)
+(add-hook 'ruby-mode-hook 'custom-disabled-ruby-checkers)
     #+END_SRC
 
 *** Helm
@@ -654,7 +654,7 @@ Necessary for parsing apib files (API Blueprint)
 *** Ace Window
     Switch between more than 3 windows (and act on them!) with ease.
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package ace-window
+(use-package ace-window
   :init
   ;; All you need to do is just give a keybinding to the main command.
   (global-set-key (kbd "M-o") 'ace-window))
@@ -733,12 +733,9 @@ Necessary for parsing apib files (API Blueprint)
 ;; - No auto-fill
 ;; - Line numbers on the side
 (add-hook 'apib-mode-hook #'(lambda ()
-            (variable-pitch-mode 0)
-            (auto-fill-mode 0)
-            (display-line-numbers-mode 0)))
-
-;; Autocompletion for Bootstrap/FontAwesome classes
-(use-package ac-html-bootstrap)
+                              (variable-pitch-mode 0)
+                              (auto-fill-mode 0)
+                              (display-line-numbers-mode 0)))
 
 ;; Web-mode completions
 (use-package company-web)
@@ -758,42 +755,42 @@ Necessary for parsing apib files (API Blueprint)
     Shows most used commands in editing session.
     To see the data, run (keyfreq-show) with M-:
     #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package keyfreq
-    :defer t)
+(use-package keyfreq
+  :defer t)
 
-    ;; Ignore arrow commands and self-insert-commands
-    (setq keyfreq-excluded-commands
-    '(self-insert-command
-    org-self-insert-command
-    weechat-self-insert-command
-    abort-recursive-edit
-    company-ignore
-    forward-char
-    backward-char
-    previous-line
-    next-line))
+;; Ignore arrow commands and self-insert-commands
+(setq keyfreq-excluded-commands
+      '(self-insert-command
+        org-self-insert-command
+        weechat-self-insert-command
+        abort-recursive-edit
+        company-ignore
+        forward-char
+        backward-char
+        previous-line
+        next-line))
 
-    ;; Activate it
-    (keyfreq-mode 1)
-    (keyfreq-autosave-mode 1)
+;; Activate it
+(keyfreq-mode 1)
+(keyfreq-autosave-mode 1)
     #+END_SRC
 *** Diminish
     Free some space in the mode line removing superfluous mode indications.
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package diminish :ensure t
-     ;; These are loaded at startup, I prefer declaring everything here.
-     :diminish flycheck-mode
-     :diminish projectile-mode
-     :diminish helm-mode
-     :diminish company-mode
-     :diminish auto-revert-mode
-     :diminish auto-fill-mode
-     :diminish wakatime-mode
-     :diminish abbrev-mode
-     :diminish autopair-mode)
-      ;; These are loaded in other moments
-      (eval-after-load "editorconfig" '(diminish 'editorconfig-mode))
-      (eval-after-load "yasnippet" '(diminish 'yas-minor-mode))
+(use-package diminish :ensure t
+  ;; These are loaded at startup, I prefer declaring everything here.
+  :diminish flycheck-mode
+  :diminish projectile-mode
+  :diminish helm-mode
+  :diminish company-mode
+  :diminish auto-revert-mode
+  :diminish auto-fill-mode
+  :diminish wakatime-mode
+  :diminish abbrev-mode
+  :diminish autopair-mode)
+;; These are loaded in other moments
+(eval-after-load "editorconfig" '(diminish 'editorconfig-mode))
+(eval-after-load "yasnippet" '(diminish 'yas-minor-mode))
     #+END_SRC
 *** Ace Jump
     Allows you to move anywhere in the visible portion of the buffer
@@ -814,23 +811,23 @@ Necessary for parsing apib files (API Blueprint)
     Helps developers define and maintain consistent coding styles
     between different editors and IDEs.
     #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package editorconfig
-       :ensure t
-       :config
-       (editorconfig-mode 1))
+(use-package editorconfig
+  :ensure t
+  :config
+  (editorconfig-mode 1))
     #+END_SRC
 *** Nyan-mode
     Put a Nyan Cat in your mode line! :3
     #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package nyan-mode)
-    (nyan-mode 1)
+(use-package nyan-mode)
+(nyan-mode 1)
     #+END_SRC
 *** Mode Icons
     Indicate modes in the mode line using icons
     #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package mode-icons
-       :init
-       (mode-icons-mode))
+(use-package mode-icons
+  :init
+  (mode-icons-mode))
     #+END_SRC
 *** Emojify
     Add emoji support for Emacs
@@ -871,9 +868,9 @@ This is great for opensource projects and work.
 *** Exec path from shell
   Replicates terminal env vars in graphical Emacs.
   #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package exec-path-from-shell
-    :init
-    (exec-path-from-shell-initialize))
+(use-package exec-path-from-shell
+  :init
+  (exec-path-from-shell-initialize))
   #+END_SRC
 *** Git-Link
 Create links to Github/GitLab files from the comfort of your Emacs buffer.
@@ -897,17 +894,17 @@ This works better than Autopair for Elixir mode.
 
 ;; Do not activate autopair for Elixir-related modes if we're using smartparens.
 (add-hook 'elixir-mode-hook
-    #'(lambda ()
-        (setq autopair-dont-activate t) ;; for emacsen < 24
-        (autopair-mode -1))             ;; for emacsen >= 24
-    )
+          #'(lambda ()
+              (setq autopair-dont-activate t) ;; for emacsen < 24
+              (autopair-mode -1))             ;; for emacsen >= 24
+          )
 (add-hook 'elixir-mode-hook #'smartparens-mode)
 
 (add-hook 'alchemist-iex-mode-hook
-    #'(lambda ()
-        (setq autopair-dont-activate t) ;; for emacsen < 24
-        (autopair-mode -1))             ;; for emacsen >= 24
-    )
+          #'(lambda ()
+              (setq autopair-dont-activate t) ;; for emacsen < 24
+              (autopair-mode -1))             ;; for emacsen >= 24
+          )
 (add-hook 'alchemist-iex-mode-hook #'smartparens-mode)
 #+END_SRC
 
@@ -915,25 +912,25 @@ This works better than Autopair for Elixir mode.
     Prettier.js integration for Emacs.
     I want to run this thing when saving .js and web-related files.
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package prettier-js
+(use-package prettier-js
   :hook ((js2-mode sass-mode scss-mode css-mode) . 'prettier-js-mode))
 
-      (setq prettier-js-allowed-modes '(js2-mode sass-mode css-mode scss-mode))
+(setq prettier-js-allowed-modes '(js2-mode sass-mode css-mode scss-mode))
 
-      (defun toggle-prettier-js-save-hook ()
+(defun toggle-prettier-js-save-hook ()
   "Toggles Prettier.js hook when you're working with a mode that supports it. Removes the hook otherwise."
   (if (member major-mode prettier-js-allowed-modes)
-  (add-hook 'before-save-hook 'prettier-js)
-  (remove-hook 'before-save-hook 'prettier-js)))
-      (add-hook 'change-major-mode-hook 'toggle-prettier-js-save-hook)
+      (add-hook 'before-save-hook 'prettier-js)
+    (remove-hook 'before-save-hook 'prettier-js)))
+(add-hook 'change-major-mode-hook 'toggle-prettier-js-save-hook)
     #+END_SRC
 *** Origami-mode
     Code folding in Emacs. You can use this with Evil by pressing z a
     in normal-mode.
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package origami)
-      ;; Activate it
-      (global-origami-mode)
+(use-package origami)
+;; Activate it
+(global-origami-mode)
     #+END_SRC
 *** Slack Client
     Run a Slack client inside Emacs. Surprisingly useful at work!
@@ -950,18 +947,18 @@ This works better than Autopair for Elixir mode.
 
   ;; Set abbrevs from org-mode
   (abbrev-table-put slack-mode-abbrev-table
-        :parents (list org-mode-abbrev-table))
+                    :parents (list org-mode-abbrev-table))
 
   (abbrev-table-put slack-thread-message-buffer-mode-abbrev-table
-        :parents (list slack-mode-abbrev-table))
+                    :parents (list slack-mode-abbrev-table))
 
   (abbrev-table-put slack-message-compose-buffer-mode-abbrev-table
-        :parents (list slack-mode-abbrev-table))
+                    :parents (list slack-mode-abbrev-table))
 
   ;; Expand abbrevs when pressing Enter in Slack modes (it's derived from lui-mode)
   (advice-add #'lui-send-input :before
-        (lambda (&rest _)
-    (ignore-errors (expand-abbrev))))
+              (lambda (&rest _)
+                (ignore-errors (expand-abbrev))))
 
   ;; Define the keybindings for Slack-related modes.
   (evil-define-key 'normal slack-info-mode-map
@@ -1007,25 +1004,25 @@ This works better than Autopair for Elixir mode.
 
 **** Notifications customization
      #+BEGIN_SRC emacs-lisp :tangle yes
-       ;; Channels
-       (setq slack-message-notification-title-format-function
-       (lambda (_team room threadp)
-   (concat (if threadp "Thread in #%s") room)))
+;; Channels
+(setq slack-message-notification-title-format-function
+      (lambda (_team room threadp)
+        (concat (if threadp "Thread in #%s") room)))
 
-       (defun endless/-cleanup-room-name (room-name)
-   "Make group-chat names a bit more human-readable."
-   (replace-regexp-in-string
-    "--" " "
-    (replace-regexp-in-string "#mpdm-" "" room-name)))
+(defun endless/-cleanup-room-name (room-name)
+  "Make group-chat names a bit more human-readable."
+  (replace-regexp-in-string
+   "--" " "
+   (replace-regexp-in-string "#mpdm-" "" room-name)))
 
        ;;; Private messages and group chats
-       (setq slack-message-im-notification-title-format-function
-       (lambda (_team room threadp)
-   (concat (if threadp "Thread in %s")
-     (endless/-cleanup-room-name room))))
+(setq slack-message-im-notification-title-format-function
+      (lambda (_team room threadp)
+        (concat (if threadp "Thread in %s")
+                (endless/-cleanup-room-name room))))
 
-       ;; Custom notifications
-       (load "~/.slack-custom-notifications.el")
+;; Custom notifications
+(load "~/.slack-custom-notifications.el")
      #+END_SRC
 **** Autocompletion
      #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1049,19 +1046,19 @@ This works better than Autopair for Elixir mode.
     smaller ones are easier to read. It makes the multi-window
     experience more pleasing to the eye. Yeah, nature!
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package golden-ratio
-       :diminish golden-ratio-mode)
+(use-package golden-ratio
+  :diminish golden-ratio-mode)
 
-      ;; Get golden-ratio to work with ace-window
-      (setq golden-ratio-extra-commands
-       (append golden-ratio-extra-commands '(magit-status ace-window aw-flip-window)))
-      (golden-ratio-mode 1)
+;; Get golden-ratio to work with ace-window
+(setq golden-ratio-extra-commands
+      (append golden-ratio-extra-commands '(magit-status ace-window aw-flip-window)))
+(golden-ratio-mode 1)
     #+END_SRC
 
 *** Helm-Ag
     Silver Searcher support for Helm.
     #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package helm-ag)
+(use-package helm-ag)
     #+END_SRC
 *** Docker
     A Docker command wrapper for Emacs
@@ -1099,26 +1096,26 @@ repository.
 
 ;; Configure the binding for Phoenix project buffers
 (add-hook 'find-file-hook #'(lambda ()
-            (when (projectile-phoenix-project-p)
-        (evil-leader/set-key "r" 'projectile-phoenix-command-map))))
+                              (when (projectile-phoenix-project-p)
+                                (evil-leader/set-key "r" 'projectile-phoenix-command-map))))
 #+END_SRC
 *** Bundler
     Interact with Bundler from Emacs
     #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package bundler)
+(use-package bundler)
     #+END_SRC
 *** Wakatime
     Time tracking in Emacs.
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package wakatime-mode
+(use-package wakatime-mode
   :diminish wakatime-mode)
-      ;; Enable it
-      (global-wakatime-mode)
+;; Enable it
+(global-wakatime-mode)
     #+END_SRC
 *** Evil-numbers
     Increment and decrement numbers like in Vim.
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package evil-numbers
+(use-package evil-numbers
   :config
   (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
   (define-key evil-normal-state-map (kbd "C-e") 'evil-numbers/dec-at-pt))
@@ -1127,64 +1124,64 @@ repository.
 *** Diff-Highlight
     Highlights the changed content in buffer.
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package diff-hl
-       :ensure
-       :config
-       ;; ((defun hl-diff-tweaks()
-       ;;   (diff-hl-mode t)
-       ;;   (diff-hl-flydiff-mode t))
-       ;;   (add-hook 'prog-mode-hook 'hl-diff-tweaks))
-       )
+(use-package diff-hl
+  :ensure
+  :config
+  ;; ((defun hl-diff-tweaks()
+  ;;   (diff-hl-mode t)
+  ;;   (diff-hl-flydiff-mode t))
+  ;;   (add-hook 'prog-mode-hook 'hl-diff-tweaks))
+  )
     #+END_SRC
 *** Evil-Matchit
     Adds more matching objects for the % operator in evil, such as
     def-end in Ruby/Python and HTML tags.
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package evil-matchit
-    :ensure t
-    :init
-    (global-evil-matchit-mode 1))
+(use-package evil-matchit
+  :ensure t
+  :init
+  (global-evil-matchit-mode 1))
     #+END_SRC
 *** Writeroom Mode
     Dims the modeline, perfect for focusing on writing text/code
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package writeroom-mode :ensure t)
-      ;; Activate it manually, it doesn't play well with Moe modeline globally
+(use-package writeroom-mode :ensure t)
+;; Activate it manually, it doesn't play well with Moe modeline globally
     #+END_SRC
 *** Restart Emacs
     Restart Emacs from within Emacs
     #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package restart-emacs)
+(use-package restart-emacs)
     #+END_SRC
 *** ReST Client
     Use it like Postman, but inside Emacs!
     #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package restclient)
-    (add-to-list 'auto-mode-alist '("\\.restclient?\\'"   . restclient-mode))
+(use-package restclient)
+(add-to-list 'auto-mode-alist '("\\.restclient?\\'"   . restclient-mode))
     #+END_SRC
 *** Helm-projectile
     Browse through Projectile commands using Helm.
     #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package helm-projectile)
-    ;; Activate it.
-    (helm-projectile-on)
+(use-package helm-projectile)
+;; Activate it.
+(helm-projectile-on)
     #+END_SRC
 *** Rainbow Delimiters
     Highlight parentheses, brackets and braces according to their
     depth.
     #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package rainbow-delimiters)
-    ;; Add this to prog-mode
-    (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
-    (add-hook 'ielm-mode-hook #'rainbow-delimiters-mode)
-    (add-hook 'slime-repl-mode-hook #'rainbow-delimiters-mode)
+(use-package rainbow-delimiters)
+;; Add this to prog-mode
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+(add-hook 'ielm-mode-hook #'rainbow-delimiters-mode)
+(add-hook 'slime-repl-mode-hook #'rainbow-delimiters-mode)
     #+END_SRC
 *** Git Gutter
     Shows (and enables you to navigate between) parts of the code
     which where changed comparing to the current revision in a
     version-controlled project.
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package git-gutter
+(use-package git-gutter
   :when window-system
   :defer t
   :hook ((prog-mode text-mode) . 'git-gutter-mode)
@@ -1196,16 +1193,16 @@ repository.
     (require 'git-gutter-fringe)
     (when (fboundp 'define-fringe-bitmap)
       (define-fringe-bitmap 'git-gutter-fr:added
-  [224 224 224 224 224 224 224 224 224 224 224 224 224
-       224 224 224 224 224 224 224 224 224 224 224 224]
-  nil nil 'center)
+        [224 224 224 224 224 224 224 224 224 224 224 224 224
+             224 224 224 224 224 224 224 224 224 224 224 224]
+        nil nil 'center)
       (define-fringe-bitmap 'git-gutter-fr:modified
-  [224 224 224 224 224 224 224 224 224 224 224 224 224
-       224 224 224 224 224 224 224 224 224 224 224 224]
-  nil nil 'center)
+        [224 224 224 224 224 224 224 224 224 224 224 224 224
+             224 224 224 224 224 224 224 224 224 224 224 224]
+        nil nil 'center)
       (define-fringe-bitmap 'git-gutter-fr:deleted
-  [0 0 0 0 0 0 0 0 0 0 0 0 0 128 192 224 240 248]
-  nil nil 'center)))
+        [0 0 0 0 0 0 0 0 0 0 0 0 0 128 192 224 240 248]
+        nil nil 'center)))
   ;; Adding evil-mode bindings
   (define-key evil-normal-state-map (kbd "g h") 'git-gutter:previous-hunk)
   (define-key evil-normal-state-map (kbd "g H") 'git-gutter:next-hunk)
@@ -1249,14 +1246,14 @@ We need this for tab completion inside shell-mode buffers in Docker containers.
 
 *** Eshell configurations
     #+BEGIN_SRC emacs-lisp :tangle yes
-    ;; Eshell extras
-    (use-package eshell-prompt-extras)
+;; Eshell extras
+(use-package eshell-prompt-extras)
 
-    ;; More configs
-    (with-eval-after-load "esh-opt"
-    (autoload 'epe-theme-lambda "eshell-prompt-extras")
-    (setq eshell-highlight-prompt t
-    eshell-prompt-function 'epe-theme-dakrone))
+;; More configs
+(with-eval-after-load "esh-opt"
+  (autoload 'epe-theme-lambda "eshell-prompt-extras")
+  (setq eshell-highlight-prompt t
+        eshell-prompt-function 'epe-theme-dakrone))
     #+END_SRC
 *** Yasnippets
     It originally came with company-mode, it's handy to write faster
@@ -1289,19 +1286,27 @@ We need this for tab completion inside shell-mode buffers in Docker containers.
    ((and (string-equal system-name auralcat/work-system-name) (eq system-type 'gnu/linux))
     (setq circadian-themes '((:sunrise . modus-operandi)
                              (:sunset  . modus-vivendi)))))
+
+  ;; Hooks
+  (add-hook 'circadian-before-load-theme-hook
+            #'(lambda (theme)
+                (if (eq theme 'solarized-dark)
+                    (set-frame-font "Fantasque Sans Mono"))
+                ))
+
   (circadian-setup))
     #+END_SRC
 *** Anzu
     Show search result count in the mode line.
     #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package evil-anzu)
-    (global-anzu-mode)
+(use-package evil-anzu)
+(global-anzu-mode)
     #+END_SRC
 *** The S library
 This is a string manipulation library that Emacs uses for stuff.
 I have to call it here because I use it in my scripts.
     #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package s)
+(use-package s)
     #+END_SRC
 *** Swiper-helm
 [[http://pragmaticemacs.com/emacs/dont-search-swipe/][Don't search, swipe]].
@@ -1323,16 +1328,16 @@ I have to call it here because I use it in my scripts.
   (interactive
    (list
     (intern (completing-read "Change to theme: "
-           (mapcar #'symbol-name
-         (custom-available-themes))))
+                             (mapcar #'symbol-name
+                                     (custom-available-themes))))
     ))
   (let* (
-   (current-theme (car custom-enabled-themes))
-   (new-theme-loaded-p (memq new-theme custom-enabled-themes))
-   )
+         (current-theme (car custom-enabled-themes))
+         (new-theme-loaded-p (memq new-theme custom-enabled-themes))
+         )
     (disable-theme current-theme)
     (if new-theme-loaded-p
-  (enable-theme new-theme)
+        (enable-theme new-theme)
       (load-theme new-theme)
       )
     ))
@@ -1343,33 +1348,33 @@ I have to call it here because I use it in my scripts.
 ** Jazz
    A warm theme with dark colors.
    #+BEGIN_SRC emacs-lisp :tangle yes
-   (use-package jazz-theme :ensure t
-   :defer t)
+(use-package jazz-theme :ensure t
+  :defer t)
    #+END_SRC
 ** Abyss
    Dark contrast theme
    #+BEGIN_SRC emacs-lisp :tangle yes
-   (use-package abyss-theme :ensure :defer t)
+(use-package abyss-theme :ensure :defer t)
    #+END_SRC
 ** Twilight Bright
    A port of the theme from TextMate.
    #+BEGIN_SRC emacs-lisp :tangle yes
-   (use-package twilight-bright-theme :defer t)
+(use-package twilight-bright-theme :defer t)
    #+END_SRC
 ** Organic Green
    A light theme with a light-green background, looks real nice!
    #+BEGIN_SRC emacs-lisp :tangle yes
-   (use-package organic-green-theme :defer t)
+(use-package organic-green-theme :defer t)
    #+END_SRC
 ** Flat UI
    Flat colors which blend nicely.
    #+BEGIN_SRC emacs-lisp :tangle yes
-   (use-package flatui-theme :defer t)
+(use-package flatui-theme :defer t)
    #+END_SRC
 ** Hemisu
    I like the dark theme from here.
    #+BEGIN_SRC emacs-lisp :tangle yes
-   (use-package hemisu-theme :defer t)
+(use-package hemisu-theme :defer t)
    #+END_SRC
 ** Gruvbox
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1399,7 +1404,7 @@ the themes themselves.
       (set-face-attribute 'default nil :font "Terminus" :height 100)
     (set-face-attribute 'default nil :font "Ubuntu Mono" :height 120)
     ))
-  )
+ )
   #+END_SRC
 ** Variable Pitch
   #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1414,13 +1419,8 @@ the themes themselves.
       (set-face-attribute 'variable-pitch nil :font "Liberation Sans" :height 120)
     (set-face-attribute 'variable-pitch nil :font "Open Sans" :height 120)
     ))
-  )
+ )
   #+END_SRC
-
-  #+RESULTS:
-  #+begin_example
-  ""
-  #+end_example
 
 * Graphical
   #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1452,6 +1452,7 @@ the themes themselves.
 (define-key key-translation-map (kbd "£") (kbd "M-4"))
 (define-key key-translation-map (kbd "ð") (kbd "M-d"))
 (define-key key-translation-map (kbd "ŋ") (kbd "M-g"))
+(define-key key-translation-map (kbd "<M-S-dead-grave>") (kbd "M-`"))
 
 ;; Some speed commands
 (global-set-key (kbd "M-1") 'delete-other-windows)
@@ -1461,11 +1462,11 @@ the themes themselves.
 
 (use-package org :ensure t
   :bind (:map org-mode-map
-        ("M-1". delete-other-windows)
-        ("M-2". helm-mini)
-        ("M-3". ace-jump-mode)
-        ("M-4". switch-to-buffer-other-window)
-        ))
+              ("M-1". delete-other-windows)
+              ("M-2". helm-mini)
+              ("M-3". ace-jump-mode)
+              ("M-4". switch-to-buffer-other-window)
+              ))
 
 (define-key comint-mode-map (kbd "M-1") 'delete-other-windows)
 (define-key comint-mode-map (kbd "M-2") 'helm-mini)
@@ -1500,7 +1501,7 @@ the themes themselves.
 ;; Move to beginning of line or indentation
 (defun back-to-indentation-or-beginning () (interactive)
        (if (= (point) (progn (back-to-indentation) (point)))
-     (beginning-of-line)))
+           (beginning-of-line)))
 
 ;; We need this to get back to the beginning of the indentation or first word of the line.
 (global-set-key (kbd "C-a") (quote back-to-indentation-or-beginning))
@@ -1543,32 +1544,32 @@ the themes themselves.
   current line. Quite useful when you write text in more than one language often. That way you're not bound to a
   specific mode to work with.
   #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package guess-language
-      :config
-      (setq guess-language-languages '(pt en))
-      (setq guess-language-langcodes
-      '((en . ("en_US" "English"))
-  (pt . ("pt_BR" "Brasileiro"))))
-      (setq guess-language-min-paragraph-length 35))
+(use-package guess-language
+  :config
+  (setq guess-language-languages '(pt en))
+  (setq guess-language-langcodes
+        '((en . ("en_US" "English"))
+          (pt . ("pt_BR" "Brasileiro"))))
+  (setq guess-language-min-paragraph-length 35))
   #+END_SRC
 * Web-mode
   #+BEGIN_SRC emacs-lisp :tangle yes
-    (defun web-mode-keybindings ()
+(defun web-mode-keybindings ()
   "Define mode-specific keybindings like this."
   (local-set-key (kbd "C-c C-v") 'browse-url-of-buffer)
   (local-set-key (kbd "C-c /") 'sgml-close-tag))
 
-    ;; Add company backends when loading web-mode.
-    (defun web-mode-company-load-backends ()
+;; Add company backends when loading web-mode.
+(defun web-mode-company-load-backends ()
   (company-web-bootstrap+)
   (company-web-fa+))
 
-    (add-hook 'web-mode-hook 'web-mode-keybindings)
-    (add-hook 'web-mode-hook 'web-mode-company-load-backends)
+(add-hook 'web-mode-hook 'web-mode-keybindings)
+(add-hook 'web-mode-hook 'web-mode-company-load-backends)
 
-    ;; Use tidy to check HTML buffers with web-mode.
-    (eval-after-load 'flycheck
-       '(flycheck-add-mode 'html-tidy 'web-mode))
+;; Use tidy to check HTML buffers with web-mode.
+(eval-after-load 'flycheck
+  '(flycheck-add-mode 'html-tidy 'web-mode))
   #+END_SRC
 * Org-mode
 ** Main configuration
@@ -1606,9 +1607,9 @@ the themes themselves.
 ;; Truncate long task names
 (setq org-clock-heading-function
       (lambda ()
-  (let ((str (nth 4 (org-heading-components))))
-    (concat (truncate-string-to-width str 27) "...")
-    )))
+        (let ((str (nth 4 (org-heading-components))))
+          (concat (truncate-string-to-width str 27) "...")
+          )))
 
 ;; Organize the bindings
 ;; Use helm-org-in-buffer-headings instead of imenu; it has more actions and
@@ -1681,11 +1682,11 @@ Colorize the agenda: https://llazarek.com/2018/07/improving-the-agenda.html
     (beginning-of-line)
     (let ((found (re-search-forward needle (point-at-eol) t count)))
       (if beginning
-    (match-beginning 0)
-  found))))
+          (match-beginning 0)
+        found))))
 (defun ll/org/agenda/find-todo-word-end ()
   (reduce (lambda (a b) (or a b))
-    (mapcar #'find-in-line ll/org/agenda-todo-words)))
+          (mapcar #'find-in-line ll/org/agenda-todo-words)))
 
 ;; Load my tag colors
 (load "~/.agenda-colors")
@@ -1701,43 +1702,48 @@ This is a derived mode to hold English abbrevs.
 #+END_SRC
 ** Auto-mark TODO entries as DONE
    #+BEGIN_SRC emacs-lisp :tangle yes
-     ;; see http://thread.gmane.org/gmane.emacs.orgmode/42715
-     (eval-after-load 'org-list
-       '(add-hook 'org-checkbox-statistics-hook (function ndk/checkbox-list-complete)))
+;; see http://thread.gmane.org/gmane.emacs.orgmode/42715
+(eval-after-load 'org-list
+  '(add-hook 'org-checkbox-statistics-hook (function ndk/checkbox-list-complete)))
 
-     ;; Mark a parent TODO entry as DONE when its checkboxes are all ticked
-     (defun ndk/checkbox-list-complete ()
-       (save-excursion
-   (org-back-to-heading t)
-   (let ((beg (point)) end)
-     (end-of-line)
-     (setq end (point))
-     (goto-char beg)
-     (if (re-search-forward "\\[\\([0-9]*%\\)\\]\\|\\[\\([0-9]*\\)/\\([0-9]*\\)\\]" end t)
-         (if (match-end 1)
-       (if (equal (match-string 1) "100%")
-           ;; all done - do the state change
-           (org-todo 'done)
-         (org-todo 'todo))
-     (if (and (> (match-end 2) (match-beginning 2))
-        (equal (match-string 2) (match-string 3)))
-         (org-todo 'done)
-       (org-todo 'todo)))))))
+;; Mark a parent TODO entry as DONE when its checkboxes are all ticked
+(defun ndk/checkbox-list-complete ()
+  (save-excursion
+    (org-back-to-heading t)
+    (let ((beg (point)) end)
+      (end-of-line)
+      (setq end (point))
+      (goto-char beg)
+      (if (re-search-forward "\\[\\([0-9]*%\\)\\]\\|\\[\\([0-9]*\\)/\\([0-9]*\\)\\]" end t)
+          (if (match-end 1)
+              (if (equal (match-string 1) "100%")
+                  ;; all done - do the state change
+                  (org-todo 'done)
+                (org-todo 'todo))
+            (if (and (> (match-end 2) (match-beginning 2))
+                     (equal (match-string 2) (match-string 3)))
+                (org-todo 'done)
+              (org-todo 'todo)))))))
    #+END_SRC
+** Tables
+Use the fixed-pitch font for tables.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(set-face-attribute 'org-table nil :inherit 'fixed-pitch)
+#+END_SRC
 ** Capture templates
    #+BEGIN_SRC emacs-lisp :tangle yes
-     ;; Load them from a separate file.
-     (load "~/.org-capture-templates.el")
+;; Load them from a separate file.
+(load "~/.org-capture-templates.el")
    #+END_SRC
 ** Org-bullets
    Change org-mode's *s to UTF-8 chars
    #+BEGIN_SRC emacs-lisp :tangle yes
-   (use-package org-bullets
-      :init
-      (add-hook 'org-mode-hook (lambda() (org-bullets-mode 1)))
-       ;; Fallback bullets.
-       (setq org-bullets-bullet-list (quote ("✿" "❀" "◉" "○" "✸")))
-)
+(use-package org-bullets
+  :init
+  (add-hook 'org-mode-hook (lambda() (org-bullets-mode 1)))
+  ;; Fallback bullets.
+  (setq org-bullets-bullet-list (quote ("✿" "❀" "◉" "○" "✸")))
+  )
    #+END_SRC
 ** Org-babel
 *** General settings
@@ -1749,8 +1755,8 @@ This is a derived mode to hold English abbrevs.
   =:noweb :results output verbatim replace :exports both=
 #+BEGIN_SRC emacs-lisp :tangle yes
 (defun my-org-confirm-babel-evaluate (lang body)
-    "Don't confirm squat."
-    (not (member lang '("sh" "elisp" "ruby" "elixir" "shell"))))
+  "Don't confirm squat."
+  (not (member lang '("sh" "elisp" "ruby" "elixir" "shell"))))
 
 ;; A few more tweaks for org-babel.
 (setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate
@@ -1758,66 +1764,69 @@ This is a derived mode to hold English abbrevs.
       org-babel-min-lines-for-block-output 1
       org-babel-default-header-args
       (cons '(:noweb . "yes")
-      (assq-delete-all :noweb org-babel-default-header-args))
+            (assq-delete-all :noweb org-babel-default-header-args))
       org-babel-default-header-args
       (cons '(:exports . "both")
-      (assq-delete-all :exports org-babel-default-header-args))
+            (assq-delete-all :exports org-babel-default-header-args))
       org-babel-default-header-args
       (cons '(:results . "output verbatim replace")
-      (assq-delete-all :results org-babel-default-header-args)))
+            (assq-delete-all :results org-babel-default-header-args)))
 
 #+END_SRC
 
 *** Elixir
     #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package ob-elixir)
+(use-package ob-elixir)
     #+END_SRC
 *** Emacs' restclient-mode
     #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package ob-restclient)
+(use-package ob-restclient)
     #+END_SRC
 
 *** Load languages
     #+BEGIN_SRC emacs-lisp :tangle yes
-     (org-babel-do-load-languages
-     'org-babel-load-languages
-     '(
-     (shell . t)
-    (python . t)
-    (ruby . t)
-    (elixir . t)
-    (plantuml . t)
-    (dot . t)
-     ))
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '(
+   (shell . t)
+   (python . t)
+   (ruby . t)
+   (elixir . t)
+   (plantuml . t)
+   (dot . t)
+   ))
     #+END_SRC
 
 ** Org-pomodoro
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (use-package org-pomodoro
-       :bind ("C-x p" . org-pomodoro))
+(use-package org-pomodoro
+  :bind ("C-x p" . org-pomodoro))
 
-     ;; Display notification when a pomodoro is completed
-     (defun pomodoro-display-notification (title body)
-   (if (eq system-type 'darwin)
-     (ns-do-applescript (format "display notification \"%s\" with title \"%s\" sound name \"Glass\"" body title))
-     (notifications-notify :title title
-     :body body
-     :app-icon "~/my-dotfiles/.emacs.d/org-pomodoro/tomato.png")))
+;; Display notification when a pomodoro is completed
+(defun pomodoro-display-notification (title body)
+  (if (eq system-type 'darwin)
+      (ns-do-applescript (format "display notification \"%s\" with title \"%s\" sound name \"Glass\"" body title))
+    (notifications-notify :title title
+                          :body body
+                          :app-icon "~/my-dotfiles/.emacs.d/org-pomodoro/tomato.png")))
 
-     ;; Use mpv in OS X
-     (when (eq system-type 'darwin)
-   (setq org-pomodoro-audio-player "/usr/local/bin/mpv"))
+;; Use mpv in OS X
+(when (eq system-type 'darwin)
+  (setq org-pomodoro-audio-player "/usr/local/bin/mpv"))
 
-     (add-hook 'org-pomodoro-started-hook (lambda() (pomodoro-display-notification "Pomodoro started!" "Concentrate on your task!")))
-     (add-hook 'org-pomodoro-finished-hook (lambda() (pomodoro-display-notification "Pomodoro finished" "Time to take a break!")))
+(add-hook 'org-pomodoro-started-hook (lambda() (pomodoro-display-notification "Pomodoro started!" "Concentrate on your task!")))
+(add-hook 'org-pomodoro-finished-hook (lambda() (pomodoro-display-notification "Pomodoro finished" "Time to take a break!")))
    #+END_SRC
 ** Evil-org
    Evil-mode keybindings for org-mode.
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (use-package evil-org
-       :diminish evil-org-mode
-       :hook (org-mode . evil-org-mode)
-       )
+(use-package evil-org
+  :diminish evil-org-mode
+  :hook (org-mode . evil-org-mode)
+  )
+
+;; Use 'complete when pressing C-<return> in insert mode for org-mode buffers.
+(add-hook 'org-mode-hook #'(lambda () (define-key evil-insert-state-map (kbd "C-<return>") 'complete)))
    #+END_SRC
 * Markdown-mode
   A couple tweaks to make it more Org-like.
@@ -1843,43 +1852,43 @@ This is a derived mode to hold English abbrevs.
   #+END_SRC
 * Variables
   #+BEGIN_SRC emacs-lisp :tangle yes
-  ;; Set Org mode as default mode for new buffers:
-  (setq-default major-mode 'org-mode)
+;; Set Org mode as default mode for new buffers:
+(setq-default major-mode 'fundamental-mode)
 
-  ;; Enable auto-fill mode by default
-  (auto-fill-mode 1)
+;; Enable auto-fill mode by default
+(auto-fill-mode 1)
 
-  ;; Change tab width and change tabs to spaces
-  (setq-default tab-width 4)
-  (setq-default indent-tabs-mode nil)
+;; Change tab width and change tabs to spaces
+(setq-default tab-width 4)
+(setq-default indent-tabs-mode nil)
 
-  ;; Making Emacs auto-indent
-  (define-key global-map (kbd "RET") 'newline-and-indent)
+;; Making Emacs auto-indent
+(define-key global-map (kbd "RET") 'newline-and-indent)
 
-  ;; Shows trailing whitespace, if any:
-  (setq-default show-trailing-whitespace t)
-  ;; Don't do that for terminal mode!
-  (add-hook 'multi-term-mode-hook (setq-default show-trailing-whitespace nil))
+;; Shows trailing whitespace, if any:
+(setq-default show-trailing-whitespace t)
+;; Don't do that for terminal mode!
+(add-hook 'multi-term-mode-hook (setq-default show-trailing-whitespace nil))
 
-  (defun css-mode-tweaks()
-    (set (make-local-variable 'company-backends) '(company-css company-yasnippet company-etags))
-    (emmet-mode 1))
+(defun css-mode-tweaks()
+  (set (make-local-variable 'company-backends) '(company-css company-yasnippet company-etags))
+  (emmet-mode 1))
 
-  ;; Emmet-mode: activate for html-mode, sgml-mode,
-  ;; css-mode, web-mode and sass-mode
-  (add-hook 'sgml-mode-hook 'emmet-mode)
-  (add-hook 'sass-mode-hook 'css-mode-tweaks)
-  (add-hook 'web-mode-hook 'emmet-mode)
-  (add-hook 'css-mode-hook 'css-mode-tweaks)
+;; Emmet-mode: activate for html-mode, sgml-mode,
+;; css-mode, web-mode and sass-mode
+(add-hook 'sgml-mode-hook 'emmet-mode)
+(add-hook 'sass-mode-hook 'css-mode-tweaks)
+(add-hook 'web-mode-hook 'emmet-mode)
+(add-hook 'css-mode-hook 'css-mode-tweaks)
 
-  ;; Python: use python3 as default shell interpreter
-  (setq python-shell-interpreter "python3")
+;; Python: use python3 as default shell interpreter
+(setq python-shell-interpreter "python3")
 
   #+END_SRC
 * Custom functions
 ** Rails Docker utils
    #+BEGIN_SRC emacs-lisp :tangle yes
-   (require 'rails-docker-utils)
+(require 'rails-docker-utils)
    #+END_SRC
 ** Kill relative file name
    I use that to work with rspec. Projectile has the ~C-c C-k~
@@ -1887,69 +1896,69 @@ This is a derived mode to hold English abbrevs.
    I need to get that, I'm in the buffer already.
 
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (defun auralcat-kill-relative-file-name ()
-       "Add the file name relative to the project's root to the kill ring."
-       (interactive)
-       (let ((relative-file-name (magit-file-relative-name buffer-file-name)))
-   (kill-new relative-file-name)
-   (message "Current buffer's relative file name copied to kill ring: %s" relative-file-name)))
+(defun auralcat-kill-relative-file-name ()
+  "Add the file name relative to the project's root to the kill ring."
+  (interactive)
+  (let ((relative-file-name (magit-file-relative-name buffer-file-name)))
+    (kill-new relative-file-name)
+    (message "Current buffer's relative file name copied to kill ring: %s" relative-file-name)))
    #+END_SRC
 ** Calculate leap year
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (defun is-leap-year (year)
-       "Checks if the given YEAR is a leap year"
-       (interactive "P")
-       (or
-  (and (not (eq (% year 100) 0))
-       (eq (% year 4) 0))
-  (eq (% year 400) 0))
-       )
+(defun is-leap-year (year)
+  "Checks if the given YEAR is a leap year"
+  (interactive "P")
+  (or
+   (and (not (eq (% year 100) 0))
+        (eq (% year 4) 0))
+   (eq (% year 400) 0))
+  )
 
    #+END_SRC
 ** Quick org-todo without leaving current buffer
    #+BEGIN_SRC emacs-lisp :tangle yes
-     (defun my-org-remote-todo ()
-       "Changes the TODO state of the currently clocked heading remotely."
-       (interactive)
-       (org-clock-goto)
-       (org-todo)
-       (mode-line-other-buffer)
-       )
+(defun my-org-remote-todo ()
+  "Changes the TODO state of the currently clocked heading remotely."
+  (interactive)
+  (org-clock-goto)
+  (org-todo)
+  (mode-line-other-buffer)
+  )
    #+END_SRC
 ** Unfill region
    #+BEGIN_SRC emacs-lisp :tangle yes
-     ;; Unfill region, AKA leave single huge line
-     (defun unfill-region (beg end)
-       "Unfill the region, joining text paragraphs into a single
+;; Unfill region, AKA leave single huge line
+(defun unfill-region (beg end)
+  "Unfill the region, joining text paragraphs into a single
        logical line.  This is useful, e.g., for use with
        `visual-line-mode'."
-       (interactive "*r")
-       (let ((fill-column (point-max)))
-   (fill-region beg end)))
+  (interactive "*r")
+  (let ((fill-column (point-max)))
+    (fill-region beg end)))
 
-     (load "~/my-dotfiles/.emacs.d/elisp-custom/docker-sync-utils.el")
+(load "~/my-dotfiles/.emacs.d/elisp-custom/docker-sync-utils.el")
    #+END_SRC
 * Twittering mode
   Use Twitter from within Emacs!
   #+BEGIN_SRC emacs-lisp :tangle yes
-    (use-package twittering-mode
-    :bind (:map twittering-mode-map
-      ("C-c r" . my-twittering-mode-reply-to-user)
-      ("C-c f" . twittering-favorite)
-      ("C-c n" . twittering-native-retweet)))
+(use-package twittering-mode
+  :bind (:map twittering-mode-map
+              ("C-c r" . my-twittering-mode-reply-to-user)
+              ("C-c f" . twittering-favorite)
+              ("C-c n" . twittering-native-retweet)))
 
-    ;; WIP, needs A LOT of remapping
-    ;; Use evil-mode to navigate twittering's frame
-    ;; (evil-set-initial-state 'twittering-mode 'emacs)
+;; WIP, needs A LOT of remapping
+;; Use evil-mode to navigate twittering's frame
+;; (evil-set-initial-state 'twittering-mode 'emacs)
 
-    ;; Adjust update interval in seconds. It's timeR, not time!
-    (setq twittering-timer-interval 3600)
+;; Adjust update interval in seconds. It's timeR, not time!
+(setq twittering-timer-interval 3600)
 
-    ;; Display icons (if applicable)
-    (setq twittering-icon-mode t)
+;; Display icons (if applicable)
+(setq twittering-icon-mode t)
 
-    ;; Use a master password so you don't have to ask for authentication every time
-    (setq twittering-use-master-password t)
+;; Use a master password so you don't have to ask for authentication every time
+(setq twittering-use-master-password t)
   #+END_SRC
 
 * Mode Line
@@ -1960,7 +1969,7 @@ This is a derived mode to hold English abbrevs.
   "Return a string with LEFT and RIGHT at the edges of the
 current window."
   (format (format "%%s %%%ds" (- (window-total-width) (length left) 2))
-    left right))
+          left right))
 
 (setq default-frame-alist '((internal-border-width . 20)))
 
@@ -1978,11 +1987,11 @@ current window."
             " " mode-line-end-spaces))
 
 (setq-default mode-line-format
-'("%e" (:eval (mode-line-align
-  (format-mode-line
-   auralcat/mode-line-left-side)
-  (format-mode-line
-   auralcat/mode-line-right-side)))))
+              '("%e" (:eval (mode-line-align
+                             (format-mode-line
+                              auralcat/mode-line-left-side)
+                             (format-mode-line
+                              auralcat/mode-line-right-side)))))
 
 #+END_SRC
 * Cursor
@@ -1994,69 +2003,70 @@ current window."
 * Diary
 ** Last day of month
    #+BEGIN_SRC emacs-lisp :tangle yes
-  ;;; ORG-MODE:  * My Task
-     ;              SCHEDULED: <%%(diary-last-day-of-month date)>
-     ;;; DIARY:  %%(diary-last-day-of-month date) Last Day of the Month
-     ;;; See also:  (setq org-agenda-include-diary t)
-     ;;; (diary-last-day-of-month '(2 28 2017))
-     (defun diary-last-day-of-month (date)
-       "Return `t` if DATE is the last day of the month."
-       (let* ((day (calendar-extract-day date))
-        (month (calendar-extract-month date))
-        (year (calendar-extract-year date))
-        (last-day-of-month
-         (calendar-last-day-of-month month year)))
-   (= day last-day-of-month)))
+;; ORG-MODE:
+;; * My Task
+;;   SCHEDULED: <%%(diary-last-day-of-month date)>
+;;; DIARY:  %%(diary-last-day-of-month date) Last Day of the Month
+;;; See also:  (setq org-agenda-include-diary t)
+;;; (diary-last-day-of-month '(2 28 2017))
+(defun diary-last-day-of-month (date)
+  "Return `t` if DATE is the last day of the month."
+  (let* ((day (calendar-extract-day date))
+         (month (calendar-extract-month date))
+         (year (calendar-extract-year date))
+         (last-day-of-month
+          (calendar-last-day-of-month month year)))
+    (= day last-day-of-month)))
 
-     (defun diary-first-weekday-of-month (date)
-       (let* ((day (calendar-extract-day date))
-        (month (calendar-extract-month date))
-        (year (calendar-extract-year date))
-        (first-day-date (list month 1 year))
-        (first-absolute-day-weekday (calendar-day-of-week first-day-date)))
+(defun diary-first-weekday-of-month (date)
+  (let* ((day (calendar-extract-day date))
+         (month (calendar-extract-month date))
+         (year (calendar-extract-year date))
+         (first-day-date (list month 1 year))
+         (first-absolute-day-weekday (calendar-day-of-week first-day-date)))
 
-   (or
-    ;; When the first day is Sunday, it's day 2.
-    (and (eq first-absolute-day-weekday 0)
-         (eq day 2))
+    (or
+     ;; When the first day is Sunday, it's day 2.
+     (and (eq first-absolute-day-weekday 0)
+          (eq day 2))
 
-    ;; When the first day is Saturday, it's day 3.
-    (and (eq first-absolute-day-weekday 6)
-         (eq day 3))
+     ;; When the first day is Saturday, it's day 3.
+     (and (eq first-absolute-day-weekday 6)
+          (eq day 3))
 
-    ;; Else, it's day 1 and a weekday.
-    (and (memq (calendar-day-of-week date) '(1 2 3 4 5))
-         (eq day 1))
-    )
+     ;; Else, it's day 1 and a weekday.
+     (and (memq (calendar-day-of-week date) '(1 2 3 4 5))
+          (eq day 1))
+     )
     ))
 
-     (defun diary-last-weekday-of-month (date)
-       (let* ((day-of-week (calendar-day-of-week date))
-        (month (calendar-extract-month date))
-        (year (calendar-extract-year date))
-        (last-month-day (calendar-last-day-of-month month year))
-        (month-day (cadr date)))
+(defun diary-last-weekday-of-month (date)
+  (let* ((day-of-week (calendar-day-of-week date))
+         (month (calendar-extract-month date))
+         (year (calendar-extract-year date))
+         (last-month-day (calendar-last-day-of-month month year))
+         (month-day (cadr date)))
 
-   (or
-    ;; it's the last day of the month & it is a weekday
-    (and (eq month-day last-month-day)
-         (memq day-of-week '(1 2 3 4 5)))
+    (or
+     ;; it's the last day of the month & it is a weekday
+     (and (eq month-day last-month-day)
+          (memq day-of-week '(1 2 3 4 5)))
 
-    ;; it's a friday, and it's the last-but-one or last-but-two day
-    ;; of the month
-    (and (eq day-of-week 5)
-         (or (eq month-day (1- last-month-day))
-       (eq month-day (1- (1- last-month-day))))))))
+     ;; it's a friday, and it's the last-but-one or last-but-two day
+     ;; of the month
+     (and (eq day-of-week 5)
+          (or (eq month-day (1- last-month-day))
+              (eq month-day (1- (1- last-month-day))))))))
 
-     (defun diary-first-working-day-of-month (date)
-       "Returns `t` if DATE is the first working day of the month.
+(defun diary-first-working-day-of-month (date)
+  "Returns `t` if DATE is the first working day of the month.
   This is defined as the first weekday of the month which is not a holiday."
-   (let* ((day (calendar-extract-day date))
-        (month (calendar-extract-month date)))
-     (if
-       ;; If it's May or Jan, check if day 2 is a weekday.
-         (and (or (= month 5) (= month 1)))
-         (and (= day 2) (memq (calendar-day-of-week date) '(1 2 3 4 5)))
-       ;; Else, check if it's the first weekday of the month.
-       (diary-first-weekday-of-month date))))
+  (let* ((day (calendar-extract-day date))
+         (month (calendar-extract-month date)))
+    (if
+        ;; If it's May or Jan, check if day 2 is a weekday.
+        (and (or (= month 5) (= month 1)))
+        (and (= day 2) (memq (calendar-day-of-week date) '(1 2 3 4 5)))
+      ;; Else, check if it's the first weekday of the month.
+      (diary-first-weekday-of-month date))))
    #+END_SRC
