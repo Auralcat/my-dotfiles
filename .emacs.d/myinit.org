@@ -396,37 +396,45 @@ We need to do some customizations to comint-related buffers to improve performan
     Major mode for SCSS files, together with Sass.
     #+BEGIN_SRC emacs-lisp :tangle yes
     (use-package scss-mode
-
        :config
        (add-to-list 'auto-mode-alist
       '("\\.scss\\'" . scss-mode)))
     #+END_SRC
+*** Nov-mode
+This is a mode for reading .epub files.
+It's quite comfortable when you want to read longform books in the computer.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package nov)
+(add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
+;; Set the width to 80 chars, this is better to read.
+(setq nov-text-width 80)
+;; Remove the mode line in the book's buffer.
+(add-hook 'nov-mode-hook #'(lambda () (setq-local mode-line-format nil)))
+#+END_SRC
 *** Makefile-mode
 I'm working with Makefiles now, so this is useful.
 #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package makefile-mode)
 (add-hook 'makefile-mode-hook #'(lambda () (setq-local indent-tabs-mode t)))
 #+END_SRC
 *** Js2-mode
     A better default Javascript mode
     #+BEGIN_SRC emacs-lisp :tangle yes
-      (use-package js2-mode
-       :defer nil)
+(use-package js2-mode
+  :defer nil)
 
-      ;; Set js2-mode as default mode for JS files
-      (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
+;; Set js2-mode as default mode for JS files
+(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
 
-
-      ;; TODO: Look for a better completion for JS modes in Company.
-      (defun js2-mode-tweaks ()
+;; TODO: Look for a better completion for JS modes in Company.
+(defun js2-mode-tweaks ()
   ;; Use company-yas as main backend
-  (set (make-local-variable 'company-backends) '(company-yasnippet company-etags))
+  (set (make-local-variable 'company-backends) '(company-etags company-yasnippet))
   (company-mode t))
 
-      (add-hook 'js2-mode-hook 'js2-mode-tweaks)
+(add-hook 'js2-mode-hook 'js2-mode-tweaks)
 
-      ;; Set syntax highlight level
-      (setq js2-highlight-level 3)
+;; Set syntax highlight level
+(setq js2-highlight-level 3)
     #+END_SRC
 
 *** PHP-mode
@@ -655,13 +663,18 @@ Necessary for parsing apib files (API Blueprint)
 *** Company
 **** Main Config
      *COMPlete ANYthing* inside Emacs.
-     I switched to it because it works in GUI Emacs and auto-complete doesn't.
+     I switched to it because it works in GUI Emacs and ~auto-complete~ didn't at the time.
      #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package company)
+(use-package company
+  :config
+  ;; My standard Company configuration
+  (setq company-tooltip-limit 20)
+  (setq company-show-numbers t)
+  (setq company-idle-delay 0)
+  (setq company-echo-delay 0))
 
 ;; Web-mode needs HTML and CSS completions.
 ;; JS is not satisfactory at this point IMO
-
 (defun web-mode-tweaks ()
   (require 'company-web-html)
   (set (make-local-variable 'company-backends) '(company-web-html company-css))
@@ -673,20 +686,20 @@ Necessary for parsing apib files (API Blueprint)
   ;; Increase the min prefix length so it doesn't clash with most used keywords, like def.
   (set (make-local-variable 'company-minimum-prefix-length) 4)
   (set (make-local-variable 'company-backends) '(company-etags company-capf company-dabbrev company-yasnippet))
-  (subword-mode 1)
-)
+  (subword-mode 1))
 
-;; Completion for Ruby mode
+;; Completion for REPL Ruby mode
 (defun inf-ruby-mode-tweaks ()
   (set (make-local-variable 'company-minimum-prefix-length) 2)
   (set (make-local-variable 'company-backends) '(company-capf company-etags company-dabbrev company-yasnippet))
-  (subword-mode 1)
-)
+  (subword-mode 1))
 
 ;; General text writing completion (uses dabbrev and filename completion)
 (defun human-language-mode-tweaks ()
   (set (make-local-variable 'company-backends) '(company-dabbrev company-capf company-files))
-  (set (make-local-variable 'company-minimum-prefix-length) 2)
+  ;; If you write a word with 3 letters, it's better to use 'complete, I think.
+  ;; Company-mode is meant for longer words and those with hard spelling IMO.
+  (set (make-local-variable 'company-minimum-prefix-length) 4)
   (setq fill-column 80))
 
 ;; Shell completion
@@ -696,8 +709,7 @@ Necessary for parsing apib files (API Blueprint)
 ;; Elisp completion
 (defun elisp-tweaks ()
   (set (make-local-variable 'company-minimum-prefix-length) 5)
-  (set (make-local-variable 'company-backends) '(company-elisp company-yasnippet company-etags))
-  )
+  (set (make-local-variable 'company-backends) '(company-elisp company-etags company-yasnippet)))
 
 ;; Add tweaks
 (add-hook 'enh-ruby-mode-hook 'ruby-mode-tweaks)
