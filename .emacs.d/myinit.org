@@ -1850,8 +1850,9 @@ Use the fixed-pitch font for tables.
   #+END_SRC
 * Variables
   #+BEGIN_SRC emacs-lisp :tangle yes
-;; Set Org mode as default mode for new buffers:
+;; Set Fundamental mode as default mode for new buffers:
 (setq-default major-mode 'fundamental-mode)
+(setq initial-major-mode 'fundamental-mode)
 
 ;; Enable auto-fill mode by default
 (auto-fill-mode 1)
