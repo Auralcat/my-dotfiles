@@ -140,6 +140,7 @@
   "j" 'ace-jump-mode
   ;; Org-capture. Keeping consistency with org-agenda's binding.
   "k" 'org-capture
+  "l" 'org-store-link
   ;; Work-related stuff
   "mb" 'auralcat-run-bash-in-docker-container
   "mp" 'my-open-ci-current-build
