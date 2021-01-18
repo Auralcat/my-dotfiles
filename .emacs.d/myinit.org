@@ -1104,14 +1104,6 @@ repository.
     #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package bundler)
     #+END_SRC
-*** Wakatime
-    Time tracking in Emacs.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package wakatime-mode
-  :diminish wakatime-mode)
-;; Enable it
-(global-wakatime-mode)
-    #+END_SRC
 *** Evil-numbers
     Increment and decrement numbers like in Vim.
     #+BEGIN_SRC emacs-lisp :tangle yes
