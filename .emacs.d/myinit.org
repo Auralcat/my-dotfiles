@@ -1316,17 +1316,6 @@ We need this for tab completion inside shell-mode buffers in Docker containers.
 (bash-completion-setup)
 #+END_SRC
 
-*** Eshell configurations
-    #+BEGIN_SRC emacs-lisp :tangle yes
-;; Eshell extras
-(use-package eshell-prompt-extras)
-
-;; More configs
-(with-eval-after-load "esh-opt"
-  (autoload 'epe-theme-lambda "eshell-prompt-extras")
-  (setq eshell-highlight-prompt t
-        eshell-prompt-function 'epe-theme-dakrone))
-    #+END_SRC
 *** Yasnippets
     It originally came with company-mode, it's handy to write faster
     #+BEGIN_SRC emacs-lisp :tangle yes
