@@ -1224,12 +1224,6 @@ repository.
 (use-package restart-emacs
   :defer t)
     #+END_SRC
-*** ReST Client
-    Use it like Postman, but inside Emacs!
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package restclient)
-(add-to-list 'auto-mode-alist '("\\.restclient?\\'"   . restclient-mode))
-    #+END_SRC
 *** Helm-projectile
     Browse through Projectile commands using Helm.
     #+BEGIN_SRC emacs-lisp :tangle yes
