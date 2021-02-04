@@ -1299,13 +1299,6 @@ repository.
 ;; Wrap those long lines.
 (add-hook 'magit-diff-mode-hook 'visual-line-mode)
 #+END_SRC
-*** Bash completion
-We need this for tab completion inside shell-mode buffers in Docker containers.
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package bash-completion)
-(bash-completion-setup)
-#+END_SRC
-
 *** Yasnippets
     It originally came with company-mode, it's handy to write faster
     #+BEGIN_SRC emacs-lisp :tangle yes
