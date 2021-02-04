@@ -37,7 +37,7 @@
   #+END_SRC
 * Evil Mode
   Yes, I'm committing this heresy
-**** Evil-leader
+** Evil-leader
      Add a prefix key to Evil mode, like the Leader key in Vim.
      #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package evil-leader
@@ -52,15 +52,15 @@
 ;; Load configs
 (load "~/my-dotfiles/.emacs.d/evilrc")
      #+END_SRC
-**** Evil Surround
+** Evil Surround
      Easier manipulation of delimiters, emulation of vim.surround
      #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package evil-surround
 :defer t)
 (global-evil-surround-mode)
      #+END_SRC
-**** Custom text objects
-***** Ruby Block
+** Custom text objects
+*** Ruby Block
       Defines a text object for Ruby blocks.
       Credits: [[https://github.com/env0der][@env0der's dotfiles]]
       My modification is just the ~ruby-block-beg-re~ variable.
@@ -372,14 +372,6 @@ We need to do some customizations to comint-related buffers to improve performan
 
 ;; Create filling for org-mode
 (add-hook 'org-mode-hook 'auto-fill-mode)
-  #+END_SRC
-* Function Aliases
-  #+BEGIN_SRC emacs-lisp :tangle yes
-;; This is how you define aliases for Elisp functions. These are useful for when
-;; you don't need to bind a command to a specific key, but you call that
-;; function through M-x often.
-(defalias 'plp 'package-list-packages)
-(defalias 'kfs 'keyfreq-show)
   #+END_SRC
 * Packages
 ** Major Modes
@@ -800,10 +792,8 @@ Necessary for parsing apib files (API Blueprint)
      #+END_SRC
 *** Keyfreq
     Shows most used commands in editing session.
-    To see the data, run (keyfreq-show) with M-:
     #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package keyfreq
-  :defer t
   :config
   ;; Ignore arrow commands and self-insert-commands
   (setq keyfreq-excluded-commands
@@ -1386,6 +1376,14 @@ use case though, since it removes the line wraps on exporting.
 (use-package ox-gfm
   :defer t)
 #+END_SRC
+* Function Aliases
+  #+BEGIN_SRC emacs-lisp :tangle yes
+;; This is how you define aliases for Elisp functions. These are useful for when
+;; you don't need to bind a command to a specific key, but you call that
+;; function through M-x often.
+(defalias 'plp 'package-list-packages)
+(defalias 'kfs 'keyfreq-show)
+  #+END_SRC
 * Themes
   Remember to _defer_ the loading of the theme packages, otherwise the
   faces might get mixed up and look ugly.
