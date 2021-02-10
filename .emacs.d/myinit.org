@@ -15,6 +15,14 @@
 (setq savehist-file "~/file-bouncer/emacs-savehist")
 (setq history-length 1024)
     #+END_SRC
+** Sessions
+Use the ~desktop-save-mode~ to save sessions.
+I prefer using this at work only since I keep Emacs running all the time in my
+personal machine.
+#+BEGIN_SRC emacs-lisp :tangle yes
+((and (string-equal system-name auralcat/work-system-name))
+ (desktop-save-mode 1))
+#+END_SRC
 * Bookmarks
   It's a quicker way to navigate through files you visit often.
   #+BEGIN_SRC emacs-lisp :tangle yes
