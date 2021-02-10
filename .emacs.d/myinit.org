@@ -2,6 +2,12 @@
 #+AUTHOR: Auralcat
 #+DATE: 2017:05:17
 
+* Personal info
+  #+BEGIN_SRC emacs-lisp :tangle yes
+;; Load from external file.
+(load "~/.emacs.secrets")
+  #+END_SRC
+
 * Command history
   It's a good idea to save the previous commands' history, for a couple reasons:
   - Check the complex commands you use most often and improve your workflow
@@ -20,8 +26,8 @@ Use the ~desktop-save-mode~ to save sessions.
 I prefer using this at work only since I keep Emacs running all the time in my
 personal machine.
 #+BEGIN_SRC emacs-lisp :tangle yes
-((and (string-equal system-name auralcat/work-system-name))
- (desktop-save-mode 1))
+(when (string-equal system-name auralcat/work-system-name)
+  (desktop-save-mode 1))
 #+END_SRC
 * Bookmarks
   It's a quicker way to navigate through files you visit often.
@@ -336,12 +342,6 @@ This is quite useful to navigate through code faster.
 
 ;; Use recentf-mode
 (recentf-mode)
-  #+END_SRC
-
-* Personal info
-  #+BEGIN_SRC emacs-lisp :tangle yes
-;; Load from external file.
-(load "~/.emacs.secrets")
   #+END_SRC
 * REPL
 We need to do some customizations to comint-related buffers to improve performance.
