@@ -2067,6 +2067,9 @@ current window."
 #+END_SRC
 * Cursor
 #+BEGIN_SRC emacs-lisp :tangle yes
+;; This is to be able to tell when I'm in Emacs state.
+(setq evil-emacs-state-cursor '("purple" box))
+
 (setq-default blink-cursor-blinks 0)
 (setq-default blink-cursor-interval 0.6)
 (setq-default blink-cursor-delay 0.2)
