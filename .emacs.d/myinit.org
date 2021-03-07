@@ -1284,7 +1284,10 @@ repository.
     The configuration for each part is below in separate headings.
     #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package magit
-  :defer t)
+  :defer t
+  :config
+  ;; Highlight what changed in diffs.
+  (setq magit-diff-refine-hunk t))
     #+END_SRC
 **** Commit configuration
      #+BEGIN_SRC emacs-lisp :tangle yes
