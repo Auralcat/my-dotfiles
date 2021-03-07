@@ -2062,6 +2062,29 @@ current window."
 #+END_SRC
 * Cursor
 #+BEGIN_SRC emacs-lisp :tangle yes
+(defun auralcat/get-face-foreground-color (face)
+  "Return the hex code from the specified FACE."
+  (face-attribute face :foreground))
+
+;; Use basic faces to customize Evil cursors based on theme.
+(defun auralcat/set-evil-faces-based-on-current-theme ()
+  "Changes the faces for Evil modes based on current theme."
+  (let
+      ((evil-normal-face-color    (auralcat/get-face-foreground-color  'font-lock-builtin-face))
+       (evil-insert-face-color    (auralcat/get-face-foreground-color  'font-lock-string-face))
+       (evil-motion-face-color    (auralcat/get-face-foreground-color  'font-lock-keyword-face))
+       (evil-replace-face-color   (auralcat/get-face-foreground-color  'font-lock-keyword-face))
+       (evil-operator-face-color  (auralcat/get-face-foreground-color  'font-lock-constant-face))
+       (evil-visual-face-color    (auralcat/get-face-foreground-color  'font-lock-type-face)))
+    (setq  evil-normal-state-cursor    `(,evil-normal-face-color    box))
+    (setq  evil-insert-state-cursor    `(,evil-insert-face-color    bar))
+    (setq  evil-motion-state-cursor    `(,evil-motion-face-color    box))
+    (setq  evil-replace-state-cursor   `(,evil-replace-face-color   hbar))
+    (setq  evil-operator-state-cursor  `(,evil-operator-face-color  box))
+    (setq  evil-visual-state-cursor    `(,evil-visual-face-color    box))))
+
+(add-hook 'circadian-after-load-theme-hook #'(lambda (theme) (auralcat/set-evil-faces-based-on-current-theme)))
+
 ;; This is to be able to tell when I'm in Emacs state.
 (setq evil-emacs-state-cursor '("purple" box))
 
