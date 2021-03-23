@@ -1384,6 +1384,16 @@ use case though, since it removes the line wraps on exporting.
 (use-package ox-gfm
   :defer t)
 #+END_SRC
+*** sqlformat
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package sqlformat
+  :commands (sqlformat sqlformat-buffer sqlformat-region)
+  :hook (sql-mode . sqlformat-on-save-mode)
+  :init
+  ;; This is for Postgres.
+  (setq sqlformat-command 'pgformatter
+        sqlformat-args '("-s2" "-g")))
+#+END_SRC
 * Function Aliases
   #+BEGIN_SRC emacs-lisp :tangle yes
 ;; This is how you define aliases for Elisp functions. These are useful for when
