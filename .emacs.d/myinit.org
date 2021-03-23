@@ -800,12 +800,10 @@ Necessary for parsing apib files (API Blueprint)
         '(self-insert-command
           org-self-insert-command
           weechat-self-insert-command
+          vterm--self-insert
           abort-recursive-edit
           company-ignore
-          forward-char
-          backward-char
-          previous-line
-          next-line))
+          ))
 
   ;; Activate it
   (keyfreq-mode 1)
@@ -909,6 +907,20 @@ This is great for opensource projects and work.
         (add-to-list 'minor-mode-overriding-map-alist new-ro-bind))
       (goto-char (point-min))))
   (define-key 'notmuch-show-part-map "d" 'my-notmuch-show-view-as-patch))
+#+END_SRC
+*** Vterm
+It is a full-fledged terminal emulator inside Emacs. It uses ~libvterm~, which
+is a C library, so it maintains compatibility between all CLI applications, and
+you can use them without problems from inside Emacs.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(defun vterm-mode-tweaks ()
+  (set (make-local-variable 'company-backends) '(company-capf company-files))
+  (evil-set-initial-state 'vterm-mode' emacs))
+
+(use-package vterm
+  :hook ((vterm-mode) . 'vterm-mode-tweaks)
+  :config
+  (setq vterm-use-vterm-prompt-detection-method t))
 #+END_SRC
 *** Exec path from shell
   Replicates terminal env vars in graphical Emacs.
