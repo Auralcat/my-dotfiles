@@ -165,6 +165,7 @@
   ;; TODO: map this to org-mode locally.
   "t" 'my-org-remote-todo
   "/" 'git-link
+  "-" 'zoom-window-zoom
   )
 
 ;; Set Emacs state as initial state for a handful of modes.

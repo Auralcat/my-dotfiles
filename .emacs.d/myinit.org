@@ -878,6 +878,11 @@ Necessary for parsing apib files (API Blueprint)
   :hook ((org-mode org-agenda-mode) . 'emojify-mode))
     #+END_SRC
 ** Utilities
+*** Zoom window
+Zooms a window just like in Tmux.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package zoom-window)
+#+END_SRC
 *** Notmuch
 Read mail inside Emacs!
 This is great for opensource projects and work.
@@ -2097,13 +2102,16 @@ current window."
        (evil-motion-face-color    (auralcat/get-face-foreground-color  'font-lock-keyword-face))
        (evil-replace-face-color   (auralcat/get-face-foreground-color  'font-lock-keyword-face))
        (evil-operator-face-color  (auralcat/get-face-foreground-color  'font-lock-constant-face))
-       (evil-visual-face-color    (auralcat/get-face-foreground-color  'font-lock-type-face)))
+       (evil-visual-face-color    (auralcat/get-face-foreground-color  'font-lock-type-face))
+       (zoom-window-color    (auralcat/get-face-foreground-color  'font-lock-string-face)))
     (setq  evil-normal-state-cursor    `(,evil-normal-face-color    box))
     (setq  evil-insert-state-cursor    `(,evil-insert-face-color    bar))
     (setq  evil-motion-state-cursor    `(,evil-motion-face-color    box))
     (setq  evil-replace-state-cursor   `(,evil-replace-face-color   hbar))
     (setq  evil-operator-state-cursor  `(,evil-operator-face-color  box))
-    (setq  evil-visual-state-cursor    `(,evil-visual-face-color    box))))
+    (setq  evil-visual-state-cursor    `(,evil-visual-face-color    box))
+    (setq  zoom-window-mode-line-color zoom-window-color)
+    ))
 
 (add-hook 'circadian-after-load-theme-hook #'(lambda (theme) (auralcat/set-evil-faces-based-on-current-theme)))
 
