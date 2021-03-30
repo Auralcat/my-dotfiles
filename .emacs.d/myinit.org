@@ -424,7 +424,8 @@ I'm working with Makefiles now, so this is useful.
 (use-package js2-mode
   :defer t
   :init
-(add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode)))
+  (add-to-list 'auto-mode-alist '("\\.js?\\'" . js2-mode))
+  (setq js-indent-level 2))
 
 ;; TODO: Look for a better completion for JS modes in Company.
 (defun js2-mode-tweaks ()
