@@ -373,6 +373,15 @@ We need to do some customizations to comint-related buffers to improve performan
   #+END_SRC
 * Packages
 ** Major Modes
+*** Compilation mode tweaks
+This is a built-in mode, but I want to change some stuff there.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(defun compilation-mode-tweaks ()
+  (visual-line-mode 1)
+  (auto-fill-mode -1))
+
+(add-hook 'compilation-mode-hook 'compilation-mode-tweaks)
+#+END_SRC
 *** Elixir-mode
     Elixir support for Emacs
     #+BEGIN_SRC emacs-lisp :tangle yes
