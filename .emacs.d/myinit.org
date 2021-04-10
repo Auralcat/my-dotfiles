@@ -202,10 +202,6 @@ This is quite useful to navigate through code faster.
 ;; Calls IEx.pry in the line above the cursor.
 (fset 'auralcat/elixir-iex-pry
       (kmacro-lambda-form [?O ?r ?e ?q ?u ?i ?r ?e ?  ?I ?E ?x ?\; ?  ?I ?E ?x ?. ?p ?r ?y escape] 0 "%d"))
-
-;; Sends the whole buffer to an Alchemist-IEx buffer.
-(fset 'auralcat/alchemist-iex-send-buffer
-      (kmacro-lambda-form [?\C-x ?h ?\C-c ?a ?i ?r escape] 0 "%d"))
 #+END_SRC
 
 * Mac OS
@@ -337,6 +333,9 @@ This is quite useful to navigate through code faster.
 * REPL
 We need to do some customizations to comint-related buffers to improve performance.
 #+BEGIN_SRC emacs-lisp :tangle yes
+;; I prefer Emacs state in comint-related buffers.
+(evil-set-initial-state 'comint-mode 'emacs)
+
 (defun comint-mode-tweaks ()
   ;; Font-lock is the one that takes the biggest toll on performance.
   (font-lock-mode -1)
@@ -577,25 +576,37 @@ Necessary for parsing apib files (API Blueprint)
   (add-hook 'enh-ruby-mode-hook 'ruby-electric-mode)
   (add-hook 'ruby-mode-hook 'ruby-electric-mode))
     #+END_SRC
-*** Alchemist
-    Elixir helper package integration for Emacs.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package alchemist
+*** Inf-elixir
+Utility around Elixir's REPL in Emacs.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package inf-elixir
   :after (elixir-mode)
   :ensure t
   :defer t
   :init
-  ;; Activate it in Elixir mode
-  (add-hook 'elixir-mode-hook 'alchemist-mode)
+  ;; Bindings for inf-elixir-mode
+  (define-key elixir-mode-map (kbd "C-c C-l") 'inf-elixir-send-line)
+  (define-key elixir-mode-map (kbd "C-c C-r") 'inf-elixir-send-region))
+#+END_SRC
+*** Mix
+A wrapper around Elixir's ~mix~ for Emacs
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package mix
+  ;; I prefer creating a prefix for these commands because it's 2 key presses
+  ;; instead of 3 with evil-leader.
+  :config
+  (define-prefix-command 'elixir-mix-map)
+            (define-key 'elixir-mix-map "t" 'mix-test)
+            (define-key 'elixir-mix-map (kbd "SPC") 'mix-test-current-buffer)
+            (define-key 'elixir-mix-map "." 'mix-test-current-test)
+            (define-key 'elixir-mix-map "c" 'mix-compile)
+            (define-key 'elixir-mix-map "x" 'mix-execute-task)
+            (define-key 'elixir-mix-map (kbd "C-,") 'mix-last-command))
 
-  ;; Use Emacs mode in IEx and Alchemist Test window
-  (add-hook 'alchemist-iex-mode-hook 'evil-emacs-state)
-  (evil-set-initial-state 'alchemist-test-report-mode' emacs)
+  (add-hook 'elixir-mode-hook '(lambda ()
+                                 (local-set-key (kbd "C-,") 'elixir-mix-map)))
+#+END_SRC
 
-  ;; Bindings for alchemist-iex
-  (define-key elixir-mode-map (kbd "C-c C-l") 'alchemist-iex-send-current-line)
-  (define-key elixir-mode-map (kbd "C-c C-r") 'alchemist-iex-send-region))
-    #+END_SRC
 *** Projectile
     Manage projects in Emacs.
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -966,14 +977,14 @@ This works better than Autopair for Elixir mode.
                 (setq autopair-dont-activate t) ;; for emacsen < 24
                 (autopair-mode -1))             ;; for emacsen >= 24
             )
-  (add-hook 'elixir-mode-hook #'smartparens-mode)
-
-  (add-hook 'alchemist-iex-mode-hook
+  (add-hook 'inf-elixir-mode-hook
             #'(lambda ()
                 (setq autopair-dont-activate t) ;; for emacsen < 24
                 (autopair-mode -1))             ;; for emacsen >= 24
             )
-  (add-hook 'alchemist-iex-mode-hook #'smartparens-mode)
+
+  (add-hook 'elixir-mode-hook #'smartparens-mode)
+  (add-hook 'inf-elixir-iex-mode-hook #'smartparens-mode)
   :config
   (require 'smartparens-config))
 #+END_SRC
@@ -1624,21 +1635,8 @@ the themes themselves.
 (evil-leader/set-key-for-mode 'python-mode "SPC" 'python-shell-send-buffer)
 (evil-leader/set-key-for-mode 'js2-mode "SPC" 'js-comint-send-buffer)
 (evil-leader/set-key-for-mode 'elixir-mode "!" 'auralcat/elixir-iex-pry)
-(evil-leader/set-key-for-mode 'elixir-mode "SPC" 'auralcat/alchemist-iex-send-buffer)
+(evil-leader/set-key-for-mode 'elixir-mode "SPC" 'inf-elixir-send-buffer)
   #+END_SRC
-** Elixir
-#+begin_src emacs-lisp :tangle yes
-(evil-leader/set-key-for-mode 'elixir-mode
-  "t." 'alchemist-mix-test-at-point
-  "tf" 'alchemist-mix-test-file
-  "ts" 'alchemist-mix-test-stale
-  "tt" 'alchemist-mix-rerun-last-test
-  "tb" 'alchemist-mix-test-this-buffer
-  "mc" 'alchemist-mix-compile
-  "mm" 'alchemist-mix-rerun-last-task
-  "mx" 'alchemist-mix
-  )
-#+end_src
 * Guess Language Mode
   This is a helper mode which changes the current ~flyspell~ dictionary depending on the language you're typing in the
   current line. Quite useful when you write text in more than one language often. That way you're not bound to a
