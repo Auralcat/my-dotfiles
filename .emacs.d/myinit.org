@@ -37,8 +37,7 @@
 (use-package midnight
   :defer t
   :init
-  ;; A good time for my "midnight" is 11:45am.
-  (midnight-delay-set 'midnight-delay "11:45am")
+  (midnight-delay-set 'midnight-delay "10:30am")
   )
   #+END_SRC
 * Evil Mode
