@@ -603,7 +603,10 @@ Necessary for parsing apib files (API Blueprint)
 (use-package projectile
   :defer t
   :init
-  (setq projectile-keymap-prefix (kbd "C-c p")))
+  (setq projectile-keymap-prefix (kbd "C-c p"))
+  ;; I use Universal ctags, so this needs some adjustment.
+  (setq projectile-tags-command "ctags -eR ."))
+
 ;; Enable it
 (add-hook 'after-init-hook #'projectile-global-mode)
     #+END_SRC
@@ -1983,6 +1986,12 @@ Use the fixed-pitch font for tables.
 (setq python-shell-interpreter "python3")
 
   #+END_SRC
+** Project-local variables
+Disable the ~risky-variable~ check. I know what I'm doing.
+This can be reverted later with ~(advice-remove)~ though.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(advice-add 'risky-local-variable-p :override #'ignore)
+#+END_SRC
 * Custom functions
 ** Rails Docker utils
    #+BEGIN_SRC emacs-lisp :tangle yes
