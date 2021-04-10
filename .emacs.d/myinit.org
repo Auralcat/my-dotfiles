@@ -1130,13 +1130,6 @@ This works better than Autopair for Elixir mode.
   (golden-ratio-mode 1))
     #+END_SRC
 
-*** Helm-Ag
-    Silver Searcher support for Helm.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package helm-ag
-  :after (helm)
-  :defer t)
-    #+END_SRC
 *** Docker
     A Docker command wrapper for Emacs
     #+BEGIN_SRC emacs-lisp :tangle yes
