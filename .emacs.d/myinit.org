@@ -1546,6 +1546,14 @@ the themes themselves.
 (define-key key-translation-map (kbd "‘") (kbd "M-S-v"))
 (define-key key-translation-map (kbd "C-“") (kbd "C-M-v"))
 (define-key key-translation-map (kbd "C-‘") (kbd "C-S-M-v"))
+(define-key key-translation-map (kbd "æ") (kbd "M-a"))
+(define-key key-translation-map (kbd "C-æ") (kbd "C-M-a"))
+(define-key key-translation-map (kbd "Æ") (kbd "M-S-a"))
+(define-key key-translation-map (kbd "°") (kbd "M-e"))
+(define-key key-translation-map (kbd "C-°") (kbd "C-M-e"))
+(define-key key-translation-map (kbd "C-đ") (kbd "C-M-f"))
+(define-key key-translation-map (kbd "C-”") (kbd "C-M-b"))
+(define-key key-translation-map (kbd "M-°") (kbd "M-S-e"))
 
 ;; Some speed commands
 (global-set-key (kbd "M-1") 'delete-other-windows)
