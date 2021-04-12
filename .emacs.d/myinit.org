@@ -1390,14 +1390,6 @@ I have to call it here because I use it in my scripts.
     #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package s)
     #+END_SRC
-*** Swiper-helm
-[[http://pragmaticemacs.com/emacs/dont-search-swipe/][Don't search, swipe]].
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package swiper-helm
-  :bind (:map global-map
-              ("C-s" . 'swiper-helm)
-              ("C-r" . 'swiper-helm)))
-#+END_SRC
 *** Org-mode GFM exporter
 GFM stands for *Github Flavored Markdown*. It's a nice exporter not just for that
 use case though, since it removes the line wraps on exporting.
