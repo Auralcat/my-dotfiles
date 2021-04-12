@@ -78,6 +78,7 @@ alias freq="history | awk '{a[$2]++} END {for(i in a) { print a[i] \" \" i}}' | 
 alias lynx='lynx -nofilereferer -noreferer -anonymous -cookies -vikeys'
 alias tuxsay='cowsay -f tux'
 alias unix='curl -L git.io/unix'
+alias rick='curl rickastley.live'
 alias weather='echo -e "--------------------------------------------------------------------------------\n ** If you want the full weather report, type weather_full. **\n--------------------------------------------------------------------------------\n"; weather_full | head -17'
 alias weather_full='curl -s wttr.in/Ponta_grossa'
 alias clearswap='sudo swapoff -a && sudo swapon -a'
