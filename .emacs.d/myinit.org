@@ -2118,6 +2118,7 @@ current window."
     ))
 
 (add-hook 'circadian-after-load-theme-hook #'(lambda (theme) (auralcat/set-evil-faces-based-on-current-theme)))
+(add-hook 'after-init-hook #'(lambda () (auralcat/set-evil-faces-based-on-current-theme)))
 
 ;; This is to be able to tell when I'm in Emacs state.
 (setq evil-emacs-state-cursor '("purple" box))
