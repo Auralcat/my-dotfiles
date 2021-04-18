@@ -1540,9 +1540,6 @@ the themes themselves.
   #+END_SRC
 * Keybindings
  #+BEGIN_SRC emacs-lisp :tangle yes
-;; Indent whole buffer using C-c TAB
-(define-key prog-mode-map (kbd "C-c TAB") 'auralcat/indent-whole-buffer)
-
 ;; Translate the compose keys
 (define-key key-translation-map (kbd "¹") (kbd "M-1"))
 (define-key key-translation-map (kbd "²") (kbd "M-2"))
