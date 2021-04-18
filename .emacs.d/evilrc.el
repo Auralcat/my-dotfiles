@@ -94,7 +94,6 @@
   "bk" '(lambda() (interactive) (bookmark-jump "org-capture-last-stored"))
   "br" '(lambda() (interactive) (bookmark-jump "org-refile-last-stored"))
   ;; Bookmark shortcuts
-  "bb" 'helm-bookmarks
   "b4b" 'bookmark-jump-other-window
   "bl" 'list-bookmarks
   "bs" 'bookmark-set
@@ -134,8 +133,6 @@
   "gl" 'magit-log
   "gp" 'magit-push
   "gx" 'magit-reset
-  ;; Helm prefix
-  "h" 'helm-command-prefix
   ;; Quick ace-jump in evil-mode.
   "j" 'ace-jump-mode
   ;; Org-capture. Keeping consistency with org-agenda's binding.
