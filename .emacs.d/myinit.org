@@ -1564,6 +1564,9 @@ the themes themselves.
 (define-key key-translation-map (kbd "C-°") (kbd "C-M-e"))
 (define-key key-translation-map (kbd "C-đ") (kbd "C-M-f"))
 (define-key key-translation-map (kbd "C-”") (kbd "C-M-b"))
+(define-key key-translation-map (kbd "C-ß") (kbd "C-M-s"))
+(define-key key-translation-map (kbd "C-®") (kbd "C-M-r"))
+(define-key key-translation-map (kbd "®") (kbd "M-r"))
 (define-key key-translation-map (kbd "M-°") (kbd "M-S-e"))
 
 ;; Some speed commands
