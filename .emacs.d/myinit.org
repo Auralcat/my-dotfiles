@@ -387,6 +387,23 @@ This is a built-in mode, but I want to change some stuff there.
     #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package elixir-mode
 :defer t)
+
+(defun auralcat/elixir-run-mix-format-from-project-root ()
+  "Runs 'mix format' from the project's root over the current buffer's file."
+  (let* (
+        (current-buffer-directory (cadr (split-string (pwd))))
+        (project-root-directory (expand-file-name (vc-root-dir))))
+    (with-current-buffer (current-buffer)
+      (when (eq major-mode 'elixir-mode)
+        (unless (string-equal default-directory project-root-directory)
+          (cd project-root-directory))
+
+        (shell-command (string-join (list "mix" "format" (buffer-file-name)) " "))
+        (cd current-buffer-directory)))))
+
+;; Need to try this out in the work computer.
+;; (add-hook 'after-save-hook 'auralcat/elixir-run-mix-format-from-project-root)
+
     #+END_SRC
 *** Sass-mode
     #+BEGIN_SRC emacs-lisp :tangle yes
