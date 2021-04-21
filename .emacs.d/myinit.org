@@ -244,6 +244,9 @@ This is quite useful to navigate through code faster.
 ;; Change window title
 (setq frame-title-format '("Emacs 26"))
 
+;; Add frame margins. This makes things more pleasant to read.
+(setq default-frame-alist '((internal-border-width . 20)))
+
 ;; A small performance improvement
 (setq redisplay-dont-pause t)
 
@@ -2068,8 +2071,6 @@ This can be reverted later with ~(advice-remove)~ though.
 current window."
   (format (format "%%s %%%ds" (- (window-total-width) (length left) 2))
           left right))
-
-(setq default-frame-alist '((internal-border-width . 20)))
 
 (setq auralcat/mode-line-left-side
       (list " " evil-mode-line-tag
