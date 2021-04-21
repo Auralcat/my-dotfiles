@@ -1470,6 +1470,18 @@ the themes themselves.
   (add-hook 'comint-mode-hook (lambda () (setq line-spacing 0.2)))
   (add-hook 'text-mode-hook (lambda () (setq line-spacing 0.6))))
   #+END_SRC
+
+** Adjust variable pitch fonts and monospace fonts
+Explanation/Context: https://github.com/olivertaylor/olivertaylor.github.io/blob/master/notes/20210324_emacs-optical-font-adjustment.org
+#+BEGIN_SRC emacs-lisp :tangle yes
+(defun scale-up-variable-pitch-face ()
+  "In the current buffer, scale variable-pitch up and fixed-pitch down."
+  (interactive)
+  (face-remap-add-relative 'variable-pitch :height 1.1)
+  (face-remap-add-relative 'fixed-pitch :height 0.9))
+
+(add-hook 'buffer-face-mode-hook 'scale-up-variable-pitch-face)
+#+END_SRC
 * Keybindings
  #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Translate the compose keys
