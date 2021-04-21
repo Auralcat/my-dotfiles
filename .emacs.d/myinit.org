@@ -896,7 +896,6 @@ A wrapper around Elixir's ~mix~ for Emacs
     Indicate modes in the mode line using icons
     #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package mode-icons
-  :defer t
   :init
   (mode-icons-mode))
     #+END_SRC
@@ -2071,30 +2070,34 @@ This can be reverted later with ~(advice-remove)~ though.
 #+BEGIN_SRC emacs-lisp :tangle yes
 (defun mode-line-align (left right)
   "Return a string with LEFT and RIGHT at the edges of the
-current window."
+  current window."
   (format (format "%%s %%%ds" (- (window-total-width) (length left) 2))
           left right))
 
 (setq auralcat/mode-line-left-side
-      (list " " evil-mode-line-tag
-            " " mode-line-buffer-identification
-            " " mode-line-modified
-            " " mode-name
-            " " mode-line-position
-            " " '(vc-mode vc-mode)))
+      ;; This should be a quoted list if you want values to be updated
+      ;; when things change in the buffer.
+      '(
+        " " evil-mode-line-tag
+        " " mode-line-buffer-identification
+        " " mode-line-modified
+        " " mode-name
+        " " mode-line-position
+        " " '(vc-mode vc-mode)
+        ))
 
 (setq auralcat/mode-line-right-side
       (list minor-mode-alist
             " " mode-line-misc-info
             " " mode-line-end-spaces))
 
+;; This needs to be setq-default to make every buffer use this mode line format.
 (setq-default mode-line-format
-              '("%e" (:eval (mode-line-align
-                             (format-mode-line
-                              auralcat/mode-line-left-side)
-                             (format-mode-line
-                              auralcat/mode-line-right-side)))))
-
+      '("%e" (:eval (mode-line-align
+                     (format-mode-line
+                      auralcat/mode-line-left-side)
+                     (format-mode-line
+                      auralcat/mode-line-right-side)))))
 #+END_SRC
 * Cursor
 #+BEGIN_SRC emacs-lisp :tangle yes
