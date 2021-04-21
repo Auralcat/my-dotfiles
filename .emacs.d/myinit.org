@@ -107,8 +107,6 @@ This is quite useful to navigate through code faster.
   A couple customizations.
   #+BEGIN_SRC emacs-lisp :tangle yes
 (setq dired-listing-switches "-alh")
-;; (define-key dired-mode-map (kbd "RET") 'dired-find-alternate-file)
-;; (define-key dired-mode-map (kbd "^") (lambda () (find-alternate-file "..")))
 ;; Use Emacs mode in Dired.
 (add-hook 'dired-mode-hook 'evil-emacs-state)
   #+END_SRC
@@ -376,6 +374,48 @@ We need to do some customizations to comint-related buffers to improve performan
   #+END_SRC
 * Packages
 ** Major Modes
+*** Markdown-mode
+  A couple tweaks to make it more Org-like.
+  #+BEGIN_SRC emacs-lisp :tangle yes
+(defun markdown-mode-tweaks ()
+  (visual-line-mode 1)
+  (auto-fill-mode -1)
+  )
+
+(use-package markdown-mode
+  :hook ((markdown-mode . markdown-mode-tweaks)
+         (gfm-mode . markdown-mode-tweaks))
+  :bind
+  ("M-<right>" . 'markdown-demote)
+  ("M-<left>" . 'markdown-promote)
+  ("M-<up>" . 'markdown-move-up)
+  ("M-<down>" . 'markdown-move-down)
+  ("C-c 1" . 'markdown-insert-header-atx-1)
+  ("C-c 2" . 'markdown-insert-header-atx-2)
+  ("C-c 3" . 'markdown-insert-header-atx-3)
+  :config
+  (setq markdown-asymmetric-header t))
+  #+END_SRC
+
+*** Web-mode
+  #+BEGIN_SRC emacs-lisp :tangle yes
+(defun web-mode-keybindings ()
+  "Define mode-specific keybindings like this."
+  (local-set-key (kbd "C-c C-v") 'browse-url-of-buffer)
+  (local-set-key (kbd "C-c /") 'sgml-close-tag))
+
+;; Add company backends when loading web-mode.
+(defun web-mode-company-load-backends ()
+  (company-web-bootstrap+)
+  (company-web-fa+))
+
+(add-hook 'web-mode-hook 'web-mode-keybindings)
+(add-hook 'web-mode-hook 'web-mode-company-load-backends)
+
+;; Use tidy to check HTML buffers with web-mode.
+(eval-after-load 'flycheck
+  '(flycheck-add-mode 'html-tidy 'web-mode))
+  #+END_SRC
 *** Compilation mode tweaks
 This is a built-in mode, but I want to change some stuff there.
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -969,16 +1009,6 @@ Create links to Github/GitLab files from the comfort of your Emacs buffer.
 (use-package git-link
   :defer t)
 #+END_SRC
-*** IEdit
-*I* nteractive *Edit*. This helps with interactive search and replace in a file.
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package iedit
-  :after (prog-mode)
-  :ensure t
-  :bind (:map prog-mode-map
-              ("C-;". iedit-mode)))
-#+END_SRC
-
 *** Smartparens
 This works better than Autopair for Elixir mode.
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1641,38 +1671,6 @@ the themes themselves.
 (evil-leader/set-key-for-mode 'elixir-mode "!" 'auralcat/elixir-iex-pry)
 (evil-leader/set-key-for-mode 'elixir-mode "SPC" 'inf-elixir-send-buffer)
   #+END_SRC
-* Guess Language Mode
-  This is a helper mode which changes the current ~flyspell~ dictionary depending on the language you're typing in the
-  current line. Quite useful when you write text in more than one language often. That way you're not bound to a
-  specific mode to work with.
-  #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package guess-language
-  :config
-  (setq guess-language-languages '(pt en))
-  (setq guess-language-langcodes
-        '((en . ("en_US" "English"))
-          (pt . ("pt_BR" "Brasileiro"))))
-  (setq guess-language-min-paragraph-length 35))
-  #+END_SRC
-* Web-mode
-  #+BEGIN_SRC emacs-lisp :tangle yes
-(defun web-mode-keybindings ()
-  "Define mode-specific keybindings like this."
-  (local-set-key (kbd "C-c C-v") 'browse-url-of-buffer)
-  (local-set-key (kbd "C-c /") 'sgml-close-tag))
-
-;; Add company backends when loading web-mode.
-(defun web-mode-company-load-backends ()
-  (company-web-bootstrap+)
-  (company-web-fa+))
-
-(add-hook 'web-mode-hook 'web-mode-keybindings)
-(add-hook 'web-mode-hook 'web-mode-company-load-backends)
-
-;; Use tidy to check HTML buffers with web-mode.
-(eval-after-load 'flycheck
-  '(flycheck-add-mode 'html-tidy 'web-mode))
-  #+END_SRC
 * Org-mode
 ** Main configuration
    #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1930,28 +1928,6 @@ Use the fixed-pitch font for tables.
 ;; Use 'complete when pressing C-<return> in insert mode for org-mode buffers.
 (add-hook 'org-mode-hook #'(lambda () (define-key evil-insert-state-map (kbd "C-<return>") 'complete)))
    #+END_SRC
-* Markdown-mode
-  A couple tweaks to make it more Org-like.
-  #+BEGIN_SRC emacs-lisp :tangle yes
-(defun markdown-mode-tweaks ()
-  (visual-line-mode 1)
-  (auto-fill-mode -1)
-  )
-
-(use-package markdown-mode
-  :hook ((markdown-mode . markdown-mode-tweaks)
-         (gfm-mode . markdown-mode-tweaks))
-  :bind
-  ("M-<right>" . 'markdown-demote)
-  ("M-<left>" . 'markdown-promote)
-  ("M-<up>" . 'markdown-move-up)
-  ("M-<down>" . 'markdown-move-down)
-  ("C-c 1" . 'markdown-insert-header-atx-1)
-  ("C-c 2" . 'markdown-insert-header-atx-2)
-  ("C-c 3" . 'markdown-insert-header-atx-3)
-  :config
-  (setq markdown-asymmetric-header t))
-  #+END_SRC
 * Variables
   #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Set Fundamental mode as default mode for new buffers:
@@ -2047,29 +2023,6 @@ This can be reverted later with ~(advice-remove)~ though.
 
 (load "~/my-dotfiles/.emacs.d/elisp-custom/docker-sync-utils.el")
    #+END_SRC
-* Twittering mode
-  Use Twitter from within Emacs!
-  #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package twittering-mode
-  :bind (:map twittering-mode-map
-              ("C-c r" . my-twittering-mode-reply-to-user)
-              ("C-c f" . twittering-favorite)
-              ("C-c n" . twittering-native-retweet)))
-
-;; WIP, needs A LOT of remapping
-;; Use evil-mode to navigate twittering's frame
-;; (evil-set-initial-state 'twittering-mode 'emacs)
-
-;; Adjust update interval in seconds. It's timeR, not time!
-(setq twittering-timer-interval 3600)
-
-;; Display icons (if applicable)
-(setq twittering-icon-mode t)
-
-;; Use a master password so you don't have to ask for authentication every time
-(setq twittering-use-master-password t)
-  #+END_SRC
-
 * Mode Line
 ** Custom code
 [[https://github.com/rnkn/olivetti/issues/39#issuecomment-660606677][Source]]
