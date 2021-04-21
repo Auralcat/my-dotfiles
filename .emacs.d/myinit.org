@@ -1020,15 +1020,21 @@ This works better than Autopair for Elixir mode.
       (remove-hook 'before-save-hook 'prettier-js)))
   (add-hook 'change-major-mode-hook 'toggle-prettier-js-save-hook))
     #+END_SRC
-*** Origami-mode
-    Code folding in Emacs. You can use this with Evil by pressing z a
-    in normal-mode.
+*** Yafolding
+    Code folding in Emacs.
+    Takes some configuration to use it with evil, but works fine for Elixir buffers.
     #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package origami
+(use-package yafolding
+  :hook (prog-mode . yafolding-mode)
   :defer t
-  :config
-  ;; Activate it
-  (global-origami-mode))
+  :bind (:map evil-normal-state-map
+              ("zo" . 'yafolding-show-element)
+              ("zc" . 'yafolding-hide-element)
+              ("za" . 'yafolding-toggle-element)
+              ("zA" . 'yafolding-toggle-all)
+              ("zr" . 'yafolding-show-all)
+              ("zm" . 'yafolding-hide-all)
+              ))
     #+END_SRC
 *** Slack Client
     Run a Slack client inside Emacs. Surprisingly useful at work!
