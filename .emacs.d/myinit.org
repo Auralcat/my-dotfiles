@@ -880,13 +880,18 @@ A wrapper around Elixir's ~mix~ for Emacs
   (editorconfig-mode 1))
     #+END_SRC
 *** Nyan-mode
-    Put a Nyan Cat in your mode line! :3
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package nyan-mode
-  :defer t
-  :config
-  (nyan-mode 1))
-    #+END_SRC
+      Put a Nyan Cat in your mode line! :3
+      #+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package nyan-mode
+    :init
+    ;; This is to avoid trouble with mode line displays.
+    ;; Nyan-mode changes the mode-line-position variable, where the line
+    ;; number and column numbers are displayed.
+    (add-hook 'nyan-mode-hook 'line-number-mode)
+    (add-hook 'nyan-mode-hook 'column-number-mode)
+    :config
+    (nyan-mode 1))
+      #+END_SRC
 *** Mode Icons
     Indicate modes in the mode line using icons
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -896,11 +901,11 @@ A wrapper around Elixir's ~mix~ for Emacs
   (mode-icons-mode))
     #+END_SRC
 *** Emojify
-    Add emoji support for Emacs
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package emojify
-  :hook ((org-mode org-agenda-mode) . 'emojify-mode))
-    #+END_SRC
+      Add emoji support for Emacs
+      #+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package emojify
+    :hook (after-init . global-emojify-mode))
+      #+END_SRC
 ** Utilities
 *** Zoom window
 Zooms a window just like in Tmux.
@@ -1531,8 +1536,6 @@ the themes themselves.
   (menu-bar-mode 0)
   (tool-bar-mode 0)
   (scroll-bar-mode 0)
-  ;; Global emoji in the mode line exclusively
-  (global-emojify-mode-line-mode)
   ;; Maximize frame on startup
   (toggle-frame-maximized)
   ;; Space lines and bask in the gloriousness of graphical mode.
