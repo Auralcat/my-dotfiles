@@ -16,10 +16,12 @@
     appear too often, but where this command saves your back (example
     in Ruby: extracting a variable inside "it" clause to a "let" block)
     #+BEGIN_SRC emacs-lisp :tangle yes
-(savehist-mode 1)
-(setq savehist-additional-variables '(kill-ring search-ring regexp-search-ring))
 (setq savehist-file "~/file-bouncer/emacs-savehist")
+(setq savehist-additional-variables '(kill-ring search-ring regexp-search-ring))
+(setq history-length 10000)
+(setq history-delete-duplicates t)
 (setq history-length 1024)
+(add-hook 'after-init-hook 'savehist-mode)
     #+END_SRC
 * Bookmarks
   It's a quicker way to navigate through files you visit often.
