@@ -1505,6 +1505,8 @@ Explanation/Context: https://github.com/olivertaylor/olivertaylor.github.io/blob
 (define-key key-translation-map (kbd "C-°") (kbd "C-M-e"))
 (define-key key-translation-map (kbd "C-đ") (kbd "C-M-f"))
 (define-key key-translation-map (kbd "C-”") (kbd "C-M-b"))
+(define-key key-translation-map (kbd "©") (kbd "M-c"))
+(define-key key-translation-map (kbd "C-©") (kbd "C-M-c"))
 (define-key key-translation-map (kbd "C-ß") (kbd "C-M-s"))
 (define-key key-translation-map (kbd "C-®") (kbd "C-M-r"))
 (define-key key-translation-map (kbd "®") (kbd "M-r"))
@@ -1520,6 +1522,11 @@ Explanation/Context: https://github.com/olivertaylor/olivertaylor.github.io/blob
 (define-key comint-mode-map (kbd "M-2") 'helm-mini)
 (define-key comint-mode-map (kbd "M-3") 'ace-jump-mode)
 (define-key comint-mode-map (kbd "M-4") 'switch-to-buffer-other-window)
+
+;; Improve the case change commands with built-in DWIM
+(global-set-key (kbd "M-u") 'upcase-dwim)
+(global-set-key (kbd "M-l") 'downcase-dwim)
+(global-set-key (kbd "M-c") 'capitalize-dwim)
 
 ;; Resize the frame with ease
 (global-set-key [M-f11] (quote toggle-frame-fullscreen))
@@ -1839,6 +1846,9 @@ Use the fixed-pitch font for tables.
 
 ;; Enable auto-fill mode by default
 (auto-fill-mode 1)
+
+;; When toggling a buffer into read-only mode, activate view-mode immediately.
+(setq view-read-only t)
 
 ;; Change tab width and change tabs to spaces
 (setq-default tab-width 4)
