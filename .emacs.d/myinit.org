@@ -258,6 +258,9 @@ This is quite useful to navigate through code faster.
 ;; I don't like lockfiles
 (setq create-lockfiles nil)
 
+;; Starts the Emacs server for emacsclient.
+(server-start)
+
 ;; Store all backups in a specific folder:
 (setq backup-directory-alist `(("." . "~/file-bouncer/emacs-backups")))
 
@@ -1236,6 +1239,14 @@ repository.
 #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Wrap those long lines.
 (add-hook 'magit-diff-mode-hook 'visual-line-mode)
+#+END_SRC
+**** Open files for code review
+#+BEGIN_SRC emacs-lisp :tangle yes
+(defun auralcat/magit-open-changed-files-from-main ()
+  "Opens the buffers visiting files that were changed compared to the main branch in the current branch.
+   Requires M-x server-start first."
+  (interactive "P")
+  (magit-git-command-topdir "git --no-pager diff --name-only FETCH_HEAD $(git merge-base FETCH_HEAD origin/master) | xargs emacsclient -n"))
 #+END_SRC
 *** Yasnippets
     It originally came with company-mode, it's handy to write faster
