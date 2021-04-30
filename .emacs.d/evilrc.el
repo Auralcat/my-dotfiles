@@ -103,7 +103,6 @@
   "cl" 'org-clock-in-last
   "co" 'org-clock-out
   "cj" 'org-clock-goto
-  "cp" 'org-pomodoro
   ;; Dired stuff
   "dj" 'dired-jump
   "d4j" 'dired-jump-other-window

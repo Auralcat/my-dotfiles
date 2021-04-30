@@ -29,12 +29,10 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
-  '(ansi-color-faces-vector
-     [default bold shadow italic underline success warning error])
-  '(ansi-color-names-vector
-     ["#ebdbb2" "#9d0006" "#79740e" "#b57614" "#076678" "#8f3f71" "#427b58" "#3c3836"])
-  '(ansi-term-color-vector
-     [unspecified "#FFFFFF" "#d15120" "#5f9411" "#d2ad00" "#6b82a7" "#a66bab" "#6b82a7" "#505050"] t)
+ '(ansi-color-faces-vector
+   [default bold shadow italic underline success warning error])
+ '(ansi-term-color-vector
+   [unspecified "#FFFFFF" "#d15120" "#5f9411" "#d2ad00" "#6b82a7" "#a66bab" "#6b82a7" "#505050"] t)
  '(auto-compression-mode nil)
  '(auto-image-file-mode t)
  '(awesome-tray-mode-line-active-color "#0031a9")
@@ -48,12 +46,6 @@
  '(company-abort-manual-when-too-short nil)
  '(company-auto-commit ''company-explicit-action-p)
  '(company-auto-commit-chars '(41))
- '(company-backends
-   '(company-yasnippet
-     (company-tern company-web-html company-css)
-     company-semantic company-capf company-files
-     (company-dabbrev-code company-gtags company-etags company-keywords)
-     company-oddmuse company-dabbrev))
  '(company-box-doc-enable nil)
  '(company-dabbrev-downcase nil)
  '(company-idle-delay 0.2)
@@ -63,11 +55,6 @@
  '(company-quickhelp-color-foreground "#DCDCCC")
  '(company-tooltip-minimum 6)
  '(company-transformers nil)
- '(compilation-message-face 'default)
- '(cua-global-mark-cursor-color "#2aa198")
- '(cua-normal-cursor-color "#839496")
- '(cua-overwrite-cursor-color "#b58900")
- '(cua-read-only-cursor-color "#859900")
  '(custom-safe-themes
    '("4bca89c1004e24981c840d3a32755bf859a6910c65b829d9441814000cf6c3d0" "99189f89d7a6566780a92addd8d01b4dac2ebe2c95e82da32bd4729fbf2897db" "6df412e59dbfe7f72f24319b9ee4513e40bb0e44384fc93a2c77399e641348f6" "7e22a8dcf2adcd8b330eab2ed6023fa20ba3b17704d4b186fa9c53f1fab3d4d2" "54ead94fc355041d7bf4570bb606bd4f9682b475fdf685c207695bfee93abd50" "4a8d4375d90a7051115db94ed40e9abb2c0766e80e228ecad60e06b3b397acab" "5f4dfda04fbf7fd55228266c8aab73953d3087cea7fd06dd7f8ff1e4a497c739" "e006d90eaf64a2d78154ecb277ccc82327e1b975d7d0e2f933acca3131cd0177" "0c5204945ca5cdf119390fe7f0b375e8d921e92076b416f6615bbe1bd5d80c88" "7b3ce93a17ce4fc6389bba8ecb9fee9a1e4e01027a5f3532cc47d160fe303d5a" "c8e076f0e2df414c02fdb46b09b735628e73c73f72f9d78392edf99de7d86977" "bf387180109d222aee6bb089db48ed38403a1e330c9ec69fe1f52460a8936b66" "19d399257f7bf0deb86a48f618754575ad30fcd730ba73aa9ec91b704d09a5a5" "830877f4aab227556548dc0a28bf395d0abe0e3a0ab95455731c9ea5ab5fe4e1" "68156f0669d7763a858882414ccd7e2df7b92c9c75618ee7f242e14613adfbaa" "70fa68d2c9a02d46282b42c3193411b13490d5d130326c63bfba1f807e0c53a3" "3df5335c36b40e417fec0392532c1b82b79114a05d5ade62cfe3de63a59bc5c6" "8e959d5a6771b4d1e2177263e1c1e62c62c0f848b265e9db46f18754ea1c1998" "e1ef2d5b8091f4953fe17b4ca3dd143d476c106e221d92ded38614266cea3c8b" "7a994c16aa550678846e82edc8c9d6a7d39cc6564baaaacc305a3fdc0bd8725f" "2cdc13ef8c76a22daa0f46370011f54e79bae00d5736340a5ddfe656a767fddf" "76bfa9318742342233d8b0b42e824130b3a50dcc732866ff8e47366aed69de11" "3c2f28c6ba2ad7373ea4c43f28fcf2eed14818ec9f0659b1c97d4e89c99e091e" "8310462f5008fe10661e27ceab164e05c509343641cc262134fc623422b5999d" "2f1518e906a8b60fac943d02ad415f1d8b3933a5a7f75e307e6e9a26ef5bf570" "0f302165235625ca5a827ac2f963c102a635f27879637d9021c04d845a32c568" "0ec7094cc0a201c1d6f7c37f2414595d6684403b89b6fd74dcc714b5d41cd338" "c4bdbbd52c8e07112d1bfd00fee22bf0f25e727e95623ecb20c4fa098b74c1bd" "a3b6a3708c6692674196266aad1cb19188a6da7b4f961e1369a68f06577afa16" "64affc3597b4271ba6b0b428777d616cfb20d8f7f147dbd00f1de220b2b59bbf" "4ca84f9861113f889d505b66c4a9c30b81400f450b54f4c857d3eb44c5bdc601" "e6ff132edb1bfa0645e2ba032c44ce94a3bd3c15e3929cdf6c049802cf059a2a" "71e5acf6053215f553036482f3340a5445aee364fb2e292c70d9175fb0cc8af7" "5516001c13a43f1f5be2d7df8035445f8d7c73179f637e40c1503afb184d98f2" "4e6ec38d7940398caef89b1f653a7f88d909f58a2837d6504edc573b063919df" "1a094b79734450a146b0c43afb6c669045d7a8a5c28bc0210aba28d36f85d86f" "939ea070fb0141cd035608b2baabc4bd50d8ecc86af8528df9d41f4d83664c6a" "d9c957b0e8d2d7f1bbb781fc729e06598017ade2d0c18611e5abbdde0f65d981" "6213a6047cc19f580c37ef3f6d47fd5a55ebdf9b5590475d8f7a6aecd79a1cc0" "7de92d9e450585f9f435f2d9b265f34218cb235541c3d0d42c154bbbfe44d4dd" "be0efbaebc85494f3c1c06e320fd13a24abf485d5f221a90fe811cea9a39ed85" "57d7e8b7b7e0a22dc07357f0c30d18b33ffcbb7bcd9013ab2c9f70748cfa4838" "9dc64d345811d74b5cd0dac92e5717e1016573417b23811b2c37bb985da41da2" "081f8df9ac778062cb547abc53c8a0a3ad36417247c71afbcd437b82ff25a980" "6a9e48e3ff2170edd584d2e9655d3b5c44a8d5a36ac5e52e9db98671a606e345" "9fcc37e34ac8603a7ebef47aac016bf9158145d3b8035204c650038bee310450" "e1d09f1b2afc2fed6feb1d672be5ec6ae61f84e058cb757689edb669be926896" "123a8dabd1a0eff6e0c48a03dc6fb2c5e03ebc7062ba531543dfbce587e86f2a" "711efe8b1233f2cf52f338fd7f15ce11c836d0b6240a18fffffc2cbd5bfe61b0" "f2c35f8562f6a1e5b3f4c543d5ff8f24100fae1da29aeb1864bbc17758f52b70" "75615f00bca2d070186d217af34b1337badbc55e6a6d6c3f6929e4c3405c8079" "54cf3f8314ce89c4d7e20ae52f7ff0739efb458f4326a2ca075bf34bc0b4f499" "9c859eda5163e646e164e40467408e9a00f4f4209b1876b5af401bb716bb4f1b" "45482e7ddf47ab1f30fe05f75e5f2d2118635f5797687e88571842ff6f18b4d5" "7be5c904ab89af341a06fa146844d4f96ffb58c39290c45a5ac2c0ddb5a346cc" "74ba9ed7161a26bfe04580279b8cad163c00b802f54c574bfa5d924b99daa4b9" "e246ff6951678c835ab95aedb99a48fdd665656eadf8b8bc0a4f60e17fbc6b7e" "9d8ad1c413fccc14d992f6bed0ead11f1798a05ee8913daaa24a24604c212b61" "bca1ef96784645bfaf69ea2430dd16801310428eb5fca53c7f8067336be38871" "b7e66d62669194652257afbec5baa9909b261aa219022aa4e5b0319c9955bc01" "830c887bd2cefd77326ddf24389f3806c2a561a550e309691933f772f1bc5825" "1d904ba8343822dff21ffae28a348975eafeb0734034ed5fa33d78bf2519e7cb" "37144b437478e4c235824f0e94afa740ee2c7d16952e69ac3c5ed4352209eefb" "00664002472a541e3df8a699c2ea4a5474ea30518b6f9711fdf5fe3fe8d6d34f" "4f01c1df1d203787560a67c1b295423174fd49934deb5e6789abd1e61dba9552" "93ed23c504b202cf96ee591138b0012c295338f38046a1f3c14522d4a64d7308" "9e39a8334e0e476157bfdb8e42e1cea43fad02c9ec7c0dbd5498cf02b9adeaf1" "ab32f86a67c520ca774b9697dbc47ca468d4ac001f32372208566abf2ceb114a" "8feca8afd3492985094597385f6a36d1f62298d289827aaa0d8a62fe6889b33c" "1d78d6d05d98ad5b95205670fe6022d15dabf8d131fe087752cc55df03d88595" "99ea831ca79a916f1bd789de366b639d09811501e8c092c85b2cb7d697777f93" "34c1b320a9d35318ca01660d533eee299d538f5a0c505c076511493b0a4f093d" "5a3e0900b08e23428547faf56302e4478c122285ed83b8ce239c01e1037fe0d2" "3d9df5511048d0815b1ccc2204cc739117c1a458be92fb26c03451149a1b1c11" "dde8c620311ea241c0b490af8e6f570fdd3b941d7bc209e55cd87884eb733b0e" "c83c095dd01cde64b631fb0fe5980587deec3834dc55144a6e78ff91ebc80b19" "3e67ab3ba08bccc7f0c318a5d50fdd6ff6fe53135ef50a286679e850ee16f047" "37768a79b479684b0756dec7c0fc7652082910c37d8863c35b702db3f16000f8" "b34559587bfbb22c8cfba36a81c55eeff9bf60dfa7906a2f4e94a770358f715d" "8f3f0f1ae5a9907bf8a978a0b20b763f010dd77c28292bbca27871d3e956b3c1" "ed92c27d2d086496b232617213a4e4a28110bdc0730a9457edf74f81b782c5cf" "3d73b17d60f39ab42de06bfbfbbba0df276a30e5ade90d37df20e6f40367f247" "285d1bf306091644fb49993341e0ad8bafe57130d9981b680c1dbd974475c5c7" "51ec7bfa54adf5fff5d466248ea6431097f5a18224788d0bd7eb1257a4f7b773" "e074be1c799b509f52870ee596a5977b519f6d269455b84ed998666cf6fc802a" "3577ee091e1d318c49889574a31175970472f6f182a9789f1a3e9e4513641d86" "7feeed063855b06836e0262f77f5c6d3f415159a98a9676d549bfeb6c49637c4" "c1fb68aa00235766461c7e31ecfc759aa2dd905899ae6d95097061faeb72f9ee" "00445e6f15d31e9afaa23ed0d765850e9cd5e929be5e8e63b114a3346236c44c" "c433c87bd4b64b8ba9890e8ed64597ea0f8eb0396f4c9a9e01bd20a04d15d358" "2809bcb77ad21312897b541134981282dc455ccd7c14d74cc333b6e549b824f3" "912cac216b96560654f4f15a3a4d8ba47d9c604cbc3b04801e465fb67a0234f0" "bb7303ab60750380957d8205794d031ab222390673ff6dd6369d0277b966c1d4" "4cf9ed30ea575fb0ca3cff6ef34b1b87192965245776afa9e9e20c17d115f3fb" "5903c5f26edd1ef3f9555a2864982b24f2980f096aacb9da0b4b5ccd47962233" "41c478598f93d62f46ec0ef9fbf351a02012e8651e2a0786e0f85e6ac598f599" "7f1d414afda803f3244c6fb4c2c64bea44dac040ed3731ec9d75275b9e831fe5" "a92e9da0fab90cbec4af4a2035602208cebf3d071ea547157b2bfc5d9bd4d48d" "6c3b5f4391572c4176908bb30eddc1718344b8eaff50e162e36f271f6de015ca" "3d4df186126c347e002c8366d32016948068d2e9198c496093a96775cc3b3eaa" "b5fff23b86b3fd2dd2cc86aa3b27ee91513adaefeaa75adc8af35a45ffb6c499" "b359d6cdc0684714046222cf2c21df785d01846a34f3676f2253a70c2bac31d6" "a06658a45f043cd95549d6845454ad1c1d6e24a99271676ae56157619952394a" "76b4632612953d1a8976d983c4fdf5c3af92d216e2f87ce2b0726a1f37606158" "0cb1b0ea66b145ad9b9e34c850ea8e842c4c4c83abe04e37455a1ef4cc5b8791" default))
  '(display-battery-mode t)
@@ -115,7 +102,6 @@
  '(erc-user-full-name "Realnamezz")
  '(evil-shift-width 2)
  '(fci-rule-character-color "#452E2E")
- '(fci-rule-color "#4F4F4F")
  '(flymake-error-bitmap '(flymake-double-exclamation-mark modus-theme-fringe-red))
  '(flymake-note-bitmap '(exclamation-mark modus-theme-fringe-cyan))
  '(flymake-warning-bitmap '(exclamation-mark modus-theme-fringe-yellow))
@@ -130,28 +116,8 @@
  '(global-wakatime-mode t)
  '(global-writeroom-mode nil nil (writeroom-mode))
  '(helm-completion-style 'emacs)
- '(highlight-changes-colors '("#d33682" "#6c71c4"))
  '(highlight-indent-guides-auto-enabled nil)
- '(highlight-symbol-colors
-   (--map
-    (solarized-color-blend it "#002b36" 0.25)
-    '("#b58900" "#2aa198" "#dc322f" "#6c71c4" "#859900" "#cb4b16" "#268bd2")))
- '(highlight-symbol-foreground-color "#93a1a1")
- '(highlight-tail-colors
-   '(("#ebdbb2" . 0)
-     ("#c6c148" . 20)
-     ("#82cc73" . 30)
-     ("#5b919b" . 50)
-     ("#e29a3f" . 60)
-     ("#df6835" . 70)
-     ("#f598a7" . 85)
-     ("#ebdbb2" . 100)))
- '(hl-bg-colors
-   '("#7B6000" "#8B2C02" "#990A1B" "#93115C" "#3F4D91" "#00629D" "#00736F" "#546E00"))
- '(hl-fg-colors
-   '("#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36" "#002b36"))
  '(hl-paren-background-colors '("#2492db" "#95a5a6" nil))
- '(hl-paren-colors '("#2aa198" "#b58900" "#268bd2" "#6c71c4" "#859900"))
  '(hl-todo-keyword-faces
    '(("HOLD" . "#70480f")
      ("TODO" . "#721045")
@@ -190,7 +156,6 @@
  '(keyboard-coding-system 'utf-8-unix)
  '(line-number-mode nil)
  '(linum-format "%3i")
- '(lsp-ui-doc-border "#9eacac")
  '(magit-diff-use-overlays nil)
  '(menu-bar-mode nil)
  '(mode-icons
@@ -299,8 +264,6 @@
  '(mode-icons-generate-font-xpms t)
  '(mode-icons-mode t)
  '(mode-ons-change-mode-name t)
- '(nrepl-message-colors
-   '("#032f62" "#6a737d" "#d73a49" "#6a737d" "#005cc5" "#6f42c1" "#d73a49" "#6a737d"))
  '(nyan-animate-nyancat t)
  '(nyan-animation-frame-interval 0.2)
  '(nyan-bar-length 16)
@@ -312,20 +275,6 @@
  '(org-bullets-bullet-list '("✿" "❀" "◉" "○" "✸"))
  '(org-default-notes-file "~/file-bouncer/everything-bucket")
  '(org-plantuml-jar-path "~/file-bouncer/plantuml.jar")
- '(org-pomodoro-audio-player "/usr/bin/mpv")
- '(org-pomodoro-finished-sound
-   "~/.emacs.d/pomodoro-sounds/Librem-5-power-on-by-Antonio-Paternina-Alvarez.ogg")
- '(org-pomodoro-finished-sound-p t)
- '(org-pomodoro-format "Focus!~%s")
- '(org-pomodoro-long-break-sound
-   "~/.emacs.d/pomodoro-sounds/Librem-5-phone-call-3-by-Nohumanconcept.ogg")
- '(org-pomodoro-long-break-sound-p t)
- '(org-pomodoro-short-break-sound
-   "~/.emacs.d/pomodoro-sounds/Librem-5-email-notification-2-by-Pablo-Somonte.ogg")
- '(org-pomodoro-short-break-sound-p t)
- '(org-pomodoro-start-sound
-   "~/.emacs.d/elpa/org-pomodoro-20171108.1314/resources/bell.wav")
- '(org-pomodoro-start-sound-p nil)
  '(org-refile-targets '((org-agenda-files :maxlevel . 3)))
  '(org-src-fontify-natively t)
  '(org-stuck-projects
@@ -335,11 +284,9 @@
  '(org-todo-keyword-faces '(("CURRENT" . "#ffcc11") ("NEXT" . "#6666ff")))
  '(org-todo-keywords '((sequence "TODO" "DONE")))
  '(package-selected-packages
-   '(esup swiper-helm solo-jazz-theme haskell-mode ob-mermaid mermaid-mode helm-org zenburn-theme gherkin-mode railscasts-theme symbol-overlay engine-mode inf-clojure clojure-mode notmuch atom-one-dark-theme erlang modus-vivendi-theme github-modern-theme github-theme paper-theme po-mode ts-comint all-the-icons ox-gfm nov mix tide typescript-mode go-mode dockerfile-mode exec-path-from-shell forge nord-theme cobol-mode undersea-theme modus-operandi-theme erc-hl-nicks olivetti gotham-theme night-owl-theme gruvbox-theme apib-mode rbtagger guess-language flycheck-inline font-lock+ elm-mode slack telephone-line organic-green-theme flatui-theme twilight-bright-theme hemisu-theme ruby-extra-highlight ace-jump org-beautify-theme ruby-electric selectric-mode org-alert bundler projectile-rails cl-lib multi-term term+ carbon-now-sh evil-snipe lua-mode yasnippet-snippets react-snippets nvm flycheck-credo zeno-theme rjsx-mode evil-numbers zeal-at-point js2-refactor ac-js2 edit-indirect yatemplate cheat-sh yaml-mode company-box evil-matchit evil-string-inflection circadian diminish alchemist sublimity writeroom-mode electric-operator jazz-theme highlight-indentation company-tern restart-emacs ob-restclient doom-themes restclient helm-projectile ibuffer-projectile yasnippet-classic-snippets vagrant-tramp ob-elixir company-prescient web-mode web-beautify vagrant use-package twittering-mode scss-mode sass-mode rust-mode ruby-tools robe rich-minority request rainbow-mode rainbow-delimiters projectile org-pomodoro org-bullets nyan-mode mode-icons memoize makey magit keyfreq js2-mode htmlize highlight-sexp highlight-numbers helm-tramp flymake-phpcs flymake-php flymake-elixir flycheck-mix evil-surround evil-leader evil-anzu eshell-prompt-extras eruby-mode enh-ruby-mode emojify emmet-mode electric-spacing editorconfig csv-mode company-web company-statistics company-php cl-generic autopair ace-jump-mode ac-html-bootstrap abyss-theme))
+   '(base16-theme esup swiper-helm solo-jazz-theme haskell-mode ob-mermaid mermaid-mode helm-org zenburn-theme gherkin-mode railscasts-theme symbol-overlay engine-mode inf-clojure clojure-mode notmuch atom-one-dark-theme erlang modus-vivendi-theme github-modern-theme github-theme paper-theme po-mode ts-comint all-the-icons ox-gfm nov mix tide typescript-mode go-mode dockerfile-mode exec-path-from-shell forge nord-theme cobol-mode undersea-theme modus-operandi-theme erc-hl-nicks olivetti gotham-theme night-owl-theme gruvbox-theme apib-mode rbtagger guess-language flycheck-inline font-lock+ elm-mode slack telephone-line organic-green-theme flatui-theme twilight-bright-theme hemisu-theme ruby-extra-highlight ace-jump org-beautify-theme ruby-electric selectric-mode org-alert bundler projectile-rails cl-lib multi-term term+ carbon-now-sh evil-snipe lua-mode yasnippet-snippets react-snippets nvm flycheck-credo zeno-theme rjsx-mode evil-numbers zeal-at-point js2-refactor ac-js2 edit-indirect yatemplate cheat-sh yaml-mode company-box evil-matchit evil-string-inflection circadian diminish alchemist sublimity writeroom-mode electric-operator jazz-theme highlight-indentation restart-emacs ob-restclient doom-themes restclient helm-projectile ibuffer-projectile yasnippet-classic-snippets vagrant-tramp ob-elixir company-prescient web-mode web-beautify vagrant use-package twittering-mode scss-mode sass-mode rust-mode ruby-tools robe rich-minority request rainbow-mode rainbow-delimiters projectile org-bullets nyan-mode mode-icons memoize makey magit keyfreq js2-mode htmlize highlight-sexp highlight-numbers helm-tramp flymake-phpcs flymake-php flymake-elixir flycheck-mix evil-surround evil-leader evil-anzu eshell-prompt-extras eruby-mode enh-ruby-mode emojify emmet-mode electric-spacing editorconfig csv-mode company-web company-statistics company-php cl-generic autopair ace-jump-mode ac-html-bootstrap abyss-theme))
  '(pdf-view-midnight-colors '("#282828" . "#f2e5bc"))
  '(persp-show-modestring ''header)
- '(pos-tip-background-color "#073642")
- '(pos-tip-foreground-color "#93a1a1")
  '(projectile-mode t nil (projectile))
  '(projectile-mode-line
    '(:eval
@@ -358,7 +305,6 @@
  '(send-mail-function 'smtpmail-send-it)
  '(shell-file-name "/bin/bash")
  '(show-paren-mode t)
- '(smartrep-mode-line-active-bg (solarized-color-blend "#93a61a" "#01323d" 0.2))
  '(sml/active-background-color "#34495e")
  '(sml/active-foreground-color "#ecf0f1")
  '(sml/inactive-background-color "#dfe4ea")
@@ -369,8 +315,6 @@
  '(tabbar-background-color "#ffffffffffff")
  '(tags-tag-face 'default)
  '(telega-mode-line-mode t)
- '(term-default-bg-color "#002732")
- '(term-default-fg-color "#8d9fa1")
  '(tetris-x-colors
    [[229 192 123]
     [97 175 239]
@@ -383,39 +327,11 @@
  '(tooltip-mode nil)
  '(tramp-default-method "ssh" nil (tramp))
  '(type-break-mode nil)
- '(vc-annotate-background nil)
- '(vc-annotate-background-mode nil)
- '(vc-annotate-color-map
-   '((20 . "#CC9393")
-     (40 . "#df51b97ca1ae")
-     (60 . "#e83dcc9aa8b1")
-     (80 . "#F0DFAF")
-     (100 . "#cadbca369f51")
-     (120 . "#b7fbbf79973e")
-     (140 . "#a52cb4cc8f3f")
-     (160 . "#9260aa2d8754")
-     (180 . "#7F9F7F")
-     (200 . "#87dbb4dba003")
-     (220 . "#8b6ebfadb0a1")
-     (240 . "#8e96ca9fc17c")
-     (260 . "#914ed5b0d293")
-     (280 . "#93E0E3")
-     (300 . "#90c5da6cdd6f")
-     (320 . "#8f5dd735da39")
-     (340 . "#8df4d401d704")
-     (360 . "#8CD0D3")))
- '(vc-annotate-very-old-color nil)
  '(wakatime-cli-path "/usr/local/bin/wakatime")
  '(wakatime-python-bin nil)
  '(web-mode-enable-auto-closing t)
  '(web-mode-enable-auto-expanding nil)
- '(weechat-color-list
-   '(unspecified "#002732" "#01323d" "#ae1212" "#ec423a" "#687f00" "#93a61a" "#936d00" "#c49619" "#0069b0" "#3c98e0" "#a81761" "#e2468f" "#008981" "#3cafa5" "#8d9fa1" "#60767e"))
  '(writeroom-width 1.0)
- '(xterm-color-names
-   ["#ebdbb2" "#9d0006" "#98971a" "#b57614" "#076678" "#d3869b" "#689d6a" "#32302f"])
- '(xterm-color-names-bright
-   ["#fbf1c7" "#af3a03" "#a89984" "#3c3836" "#7c6f64" "#8f3f71" "#665c54" "#282828"])
  '(yas-global-mode t)
  '(yas-snippet-dirs
    '("~/.emacs.d/snippets" yasnippet-snippets-dir yasnippet-classic-snippets-dir)))

@@ -1777,26 +1777,6 @@ Use the fixed-pitch font for tables.
    ))
     #+END_SRC
 
-** Org-pomodoro
-   #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package org-pomodoro
-  :bind ("C-x p" . org-pomodoro))
-
-;; Display notification when a pomodoro is completed
-(defun pomodoro-display-notification (title body)
-  (if (eq system-type 'darwin)
-      (ns-do-applescript (format "display notification \"%s\" with title \"%s\" sound name \"Glass\"" body title))
-    (notifications-notify :title title
-                          :body body
-                          :app-icon "~/my-dotfiles/.emacs.d/org-pomodoro/tomato.png")))
-
-;; Use mpv in OS X
-(when (eq system-type 'darwin)
-  (setq org-pomodoro-audio-player "/usr/local/bin/mpv"))
-
-(add-hook 'org-pomodoro-started-hook (lambda() (pomodoro-display-notification "Pomodoro started!" "Concentrate on your task!")))
-(add-hook 'org-pomodoro-finished-hook (lambda() (pomodoro-display-notification "Pomodoro finished" "Time to take a break!")))
-   #+END_SRC
 ** Evil-org
    Evil-mode keybindings for org-mode.
    #+BEGIN_SRC emacs-lisp :tangle yes
