@@ -848,6 +848,7 @@ A wrapper around Elixir's ~mix~ for Emacs
         '(self-insert-command
           org-self-insert-command
           weechat-self-insert-command
+          isearch-printing-char
           vterm--self-insert
           abort-recursive-edit
           company-ignore
@@ -1478,7 +1479,9 @@ Explanation/Context: https://github.com/olivertaylor/olivertaylor.github.io/blob
 (define-key key-translation-map (kbd "Æ") (kbd "M-S-a"))
 (define-key key-translation-map (kbd "°") (kbd "M-e"))
 (define-key key-translation-map (kbd "C-°") (kbd "C-M-e"))
+(define-key key-translation-map (kbd "đ") (kbd "M-f"))
 (define-key key-translation-map (kbd "C-đ") (kbd "C-M-f"))
+(define-key key-translation-map (kbd "”") (kbd "M-b"))
 (define-key key-translation-map (kbd "C-”") (kbd "C-M-b"))
 (define-key key-translation-map (kbd "©") (kbd "M-c"))
 (define-key key-translation-map (kbd "C-©") (kbd "C-M-c"))
