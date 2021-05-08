@@ -1297,12 +1297,6 @@ repository.
   :config
   (global-anzu-mode))
     #+END_SRC
-*** The S library
-This is a string manipulation library that Emacs uses for stuff.
-I have to call it here because I use it in my scripts.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package s)
-    #+END_SRC
 *** Org-mode GFM exporter
 GFM stands for *Github Flavored Markdown*. It's a nice exporter not just for that
 use case though, since it removes the line wraps on exporting.
@@ -1809,8 +1803,6 @@ Use the fixed-pitch font for tables.
 
 ;; Shows trailing whitespace, if any:
 (setq-default show-trailing-whitespace t)
-;; Don't do that for terminal mode!
-(add-hook 'multi-term-mode-hook (setq-default show-trailing-whitespace nil))
 
 (defun css-mode-tweaks()
   (set (make-local-variable 'company-backends) '(company-css company-yasnippet company-etags))

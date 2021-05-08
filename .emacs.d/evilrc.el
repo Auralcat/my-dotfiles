@@ -138,28 +138,10 @@
   "k" 'org-capture
   "l" 'org-store-link
   ;; Work-related stuff
-  "mb" 'auralcat-run-bash-in-docker-container
-  "mp" 'my-open-ci-current-build
-  "mc" 'my-find-daily-todos-org-file
-  "mr" 'auralcat-run-rails-console-in-docker-container
-  "ms" 'my-goto-staging-server-url
-  "ml" 'my-goto-local-server-url
-  "mg" 'my-goto-work-github-repo-url
-  ;; Get the relative file name of current buffer. I pass that to rspec.
+  ;; Get the relative file name of current buffer.
   "mf" 'auralcat-kill-relative-file-name
-  "mt" 'auralcat-run-local-rails-test-inside-docker-container
-  ;; Flip window with ace-window.
-  "o" 'aw-flip-window
   ;; Projectile prefix
   "p" 'projectile-command-map
-  ;; Slack bindings
-  "smi" 'slack-im-select
-  "smg" 'slack-group-select
-  "smc" 'slack-channel-select
-  "s'" 'slack-select-unread-rooms
-  "sus" 'slack-user-set-status
-  ;; TODO: map this to org-mode locally.
-  "t" 'my-org-remote-todo
   "/" 'git-link
   "-" 'zoom-window-zoom
   )
