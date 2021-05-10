@@ -730,16 +730,6 @@ A wrapper around Elixir's ~mix~ for Emacs
 (add-hook 'ruby-mode-hook 'custom-disabled-ruby-checkers)
     #+END_SRC
 
-*** Ace Window
-    Switch between more than 3 windows (and act on them!) with ease.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package ace-window
-  :defer t
-  :init
-  ;; All you need to do is just give a keybinding to the main command.
-  (global-set-key (kbd "M-o") 'ace-window))
-    #+END_SRC
-
 *** Company
 **** Main Config
      *COMPlete ANYthing* inside Emacs.
@@ -1059,9 +1049,8 @@ This works better than Autopair for Elixir mode.
 (use-package golden-ratio
   :diminish golden-ratio-mode
   :config
-  ;; Get golden-ratio to work with ace-window
   (setq golden-ratio-extra-commands
-        (append golden-ratio-extra-commands '(magit-status ace-window aw-flip-window)))
+        (append golden-ratio-extra-commands '(magit-status aw-flip-window)))
   (golden-ratio-mode 1))
     #+END_SRC
 
@@ -1509,9 +1498,11 @@ Explanation/Context: https://github.com/olivertaylor/olivertaylor.github.io/blob
 (global-set-key [M-f11] (quote toggle-frame-fullscreen))
 (global-set-key [M-f10] (quote toggle-frame-maximized))
 
-;; Jump to previous window using M-'
-(global-set-key (kbd "M-'") (quote evil-switch-to-windows-last-buffer))
 (global-set-key (kbd "M-\"") (quote abbrev-prefix-mark))
+
+;; Switch windows and frames
+(define-key global-map (kbd "M-o") 'other-window)
+(define-key global-map (kbd "C-M-o") 'other-frame)
 
 ;; Unfill region
 (define-key global-map "\C-\M-q" 'unfill-region)
