@@ -1820,10 +1820,6 @@ This can be reverted later with ~(advice-remove)~ though.
 (advice-add 'risky-local-variable-p :override #'ignore)
 #+END_SRC
 * Custom functions
-** Rails Docker utils
-   #+BEGIN_SRC emacs-lisp :tangle yes
-(require 'rails-docker-utils)
-   #+END_SRC
 ** Calculate leap year
    #+BEGIN_SRC emacs-lisp :tangle yes
 (defun is-leap-year (year)
@@ -1856,8 +1852,6 @@ This can be reverted later with ~(advice-remove)~ though.
   (interactive "*r")
   (let ((fill-column (point-max)))
     (fill-region beg end)))
-
-(load "~/my-dotfiles/.emacs.d/elisp-custom/docker-sync-utils.el")
    #+END_SRC
 * Mode Line
 ** VC mode customizations
