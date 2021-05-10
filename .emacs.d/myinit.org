@@ -99,6 +99,41 @@
 (define-key evil-inner-text-objects-map "r" 'evil-textobj-inner-ruby-block)
 (define-key evil-outer-text-objects-map "r" 'evil-textobj-outer-ruby-block)
       #+END_SRC
+* Terminal configurations
+I want my term to work like the shell-mode because I need to copy
+stuff from there and see Docker output correctly.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package term
+  :bind (:map term-raw-map
+              ("M-v" . 'scroll-down-command)
+              ("C-v" . 'scroll-up-command)
+              ("M-o" . 'other-window)
+              ("C-M-o" . 'other-frame)
+              ("M-2" . 'ido-switch-buffer)
+              ("M-w" . 'auralcat/term-copy-last-command)
+              ("M-4" . 'ido-switch-buffer-other-window))
+
+  :config
+  ;; Work PS1
+  (cond
+   ((and (string-equal system-name auralcat/work-system-name) (eq system-type 'gnu/linux))
+    (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] \n*"))
+   ;; Personal PS1
+   ((and (string-equal system-name auralcat/personal-system-name) (eq system-type 'gnu/linux))
+    (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *")))
+
+  (add-hook 'term-mode-hook #'(lambda ()
+                                (set (make-local-variable 'company-backends) '(company-capf company-files))))
+
+  (evil-set-initial-state 'term-mode 'emacs)
+  (evil-set-initial-state 'ansi-term-mode 'emacs))
+
+;; This is a macro to copy the last command's input to the kill-ring in term-mode.
+;; Should also work in ansi-term.
+(fset 'auralcat/term-copy-last-command
+      (kmacro-lambda-form [?\C-c ?\C-j ?\C-2 ?\C-p ?\C-e ?\C-  ?\C-c ?\C-p ?\C-a ?\M-w ?\M-> ?\C-c ?\C-k] 0 "%d"))
+#+END_SRC
 * Xref
 This is quite useful to navigate through code faster.
 #+BEGIN_SRC emacs-lisp :tangle yes
