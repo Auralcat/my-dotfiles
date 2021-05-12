@@ -1781,11 +1781,6 @@ Use the fixed-pitch font for tables.
     #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package ob-elixir)
     #+END_SRC
-*** Emacs' restclient-mode
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package ob-restclient)
-    #+END_SRC
-
 *** Load languages
     #+BEGIN_SRC emacs-lisp :tangle yes
 (org-babel-do-load-languages
