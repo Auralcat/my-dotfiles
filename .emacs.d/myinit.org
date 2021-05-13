@@ -901,22 +901,6 @@ A wrapper around Elixir's ~mix~ for Emacs
 (eval-after-load "editorconfig" '(diminish 'editorconfig-mode))
 (eval-after-load "yasnippet" '(diminish 'yas-minor-mode))
     #+END_SRC
-*** Ace Jump
-    Allows you to move anywhere in the visible portion of the buffer
-    using 2 keystrokes.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package ace-jump-mode
-  :after (evil)
-  :bind ("C-x j" . ace-jump-mode)
-  :config
-;; Save the position of the previous mark as a jump position for Evil.
-;; With that, we can cycle through where ace-jump was called from using C-i and C-o.
-(defadvice ace-jump-mode (before ace-jump-mode-advice)
-  (evil--jumps-push))
-(ad-activate 'ace-jump-mode))
-
-    #+END_SRC
-
 *** Editorconfig
     Helps developers define and maintain consistent coding styles
     between different editors and IDEs.
@@ -1517,11 +1501,9 @@ Explanation/Context: https://github.com/olivertaylor/olivertaylor.github.io/blob
 ;; Some speed commands
 (global-set-key (kbd "M-1") 'delete-other-windows)
 (global-set-key (kbd "M-2") 'ido-switch-buffer)
-(global-set-key (kbd "M-3") 'ace-jump-mode)
 (global-set-key (kbd "M-4") 'switch-to-buffer-other-window)
 
 (define-key comint-mode-map (kbd "M-1") 'delete-other-windows)
-(define-key comint-mode-map (kbd "M-3") 'ace-jump-mode)
 (define-key comint-mode-map (kbd "M-4") 'switch-to-buffer-other-window)
 
 ;; Improve the case change commands with built-in DWIM

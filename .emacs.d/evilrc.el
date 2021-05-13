@@ -132,8 +132,6 @@
   "gl" 'magit-log
   "gp" 'magit-push
   "gx" 'magit-reset
-  ;; Quick ace-jump in evil-mode.
-  "j" 'ace-jump-mode
   ;; Org-capture. Keeping consistency with org-agenda's binding.
   "k" 'org-capture
   "l" 'org-store-link
