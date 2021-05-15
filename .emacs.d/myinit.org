@@ -370,6 +370,8 @@ This is quite useful to navigate through code faster.
 
 ;; Use recentf-mode
 (recentf-mode)
+(setq recentf-max-menu-items 25)
+(global-set-key (kbd "C-x C-r") 'recentf-open-files)
   #+END_SRC
 * REPL
 We need to do some customizations to comint-related buffers to improve performance.
