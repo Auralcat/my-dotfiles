@@ -106,6 +106,7 @@ stuff from there and see Docker output correctly.
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package term
   :bind (:map term-raw-map
+              ("M-x" . 'execute-extended-command)
               ("M-v" . 'scroll-down-command)
               ("C-v" . 'scroll-up-command)
               ("M-o" . 'other-window)
@@ -983,12 +984,23 @@ you can use them without problems from inside Emacs.
 #+BEGIN_SRC emacs-lisp :tangle yes
 (defun vterm-mode-tweaks ()
   (set (make-local-variable 'company-backends) '(company-capf company-files))
+  (setq-local show-trailing-whitespace nil)
+  ;; Disable emojify mode for the terminal
+  (emojify-mode -1)
   (evil-set-initial-state 'vterm-mode' emacs))
 
 (use-package vterm
   :hook ((vterm-mode) . 'vterm-mode-tweaks)
+  :bind (:map vterm-mode-map
+              ("C-M-o" . 'other-frame)
+              ("M-w" . 'auralcat/vterm-copy-last-command-output)
+              )
   :config
   (setq vterm-use-vterm-prompt-detection-method t))
+
+;; Macro to copy vterm's last command output.
+(fset 'auralcat/vterm-copy-last-command-output
+      (kmacro-lambda-form [?\C-c ?\C-t ?\C-c ?\C-p ?\C-a ?\C-  ?\C-c ?\C-n ?\C-p ?\M-b ?\C-e return] 0 "%d"))
 #+END_SRC
 *** Exec path from shell
   Replicates terminal env vars in graphical Emacs.
