@@ -1867,6 +1867,16 @@ This can be reverted later with ~(advice-remove)~ though.
   (let ((fill-column (point-max)))
     (fill-region beg end)))
    #+END_SRC
+* Work configurations
+I prefer to leave the work Elisp configuration files somewhere else because they
+contain private/confidential information.
+
+These are usually aliases to commonly-accessed tools and workflows.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(add-to-list 'load-path "~/elisp-work/")
+;; Main entrypoint.
+(load "~/elisp-work/work-config.el")
+#+END_SRC
 * Mode Line
 ** VC mode customizations
 #+BEGIN_SRC emacs-lisp :tangle yes
