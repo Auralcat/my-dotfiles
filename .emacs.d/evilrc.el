@@ -140,6 +140,7 @@
   "mf" 'auralcat-kill-relative-file-name
   ;; Projectile prefix
   "p" 'projectile-command-map
+  "s" 'save-buffer
   "/" 'git-link
   "-" 'zoom-window-zoom
   )
