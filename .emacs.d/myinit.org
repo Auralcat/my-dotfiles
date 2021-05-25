@@ -1340,6 +1340,15 @@ use case though, since it removes the line wraps on exporting.
   This function makes it easier to change themes quickly. You can bind it to a
   keychord or whatnot and use it as you wish.
   #+BEGIN_SRC emacs-lisp :tangle yes
+(defun auralcat/set-fringe-face-to-default-bg ()
+  "Sets the fringe's background to the current theme's background color for the 'default face."
+  (set-face-attribute 'fringe nil :background (face-attribute 'default :background)))
+
+;; Set the fringe face function Circadian's change hook.
+;; That way whenever the theme changes automatically, the fringe gets updated as
+;; well.
+(add-hook 'circadian-after-load-theme-hook 'auralcat/set-fringe-face-to-default-bg)
+
 (defun auralcat/change-theme (new-theme)
   "Disables the current theme in the session, loads and enables the NEW-THEME."
   ;; This is the code Emacs uses to load themes in custom.el
@@ -1356,10 +1365,12 @@ use case though, since it removes the line wraps on exporting.
     (disable-theme current-theme)
     (if new-theme-loaded-p
         (enable-theme new-theme)
-      (load-theme new-theme)
-      )
-    ))
+      (load-theme new-theme))
+    ;; We should do this here because not every theme defines a fringe face and
+    ;; I customized the fringe on my end.
+    (auralcat/set-fringe-face-to-default-bg)))
 
+;; Add the hook on circadian
 ;; Bind it to a keychord.
 (global-set-key (kbd "M-`") 'auralcat/change-theme)
   #+END_SRC
