@@ -1896,9 +1896,13 @@ contain private/confidential information.
 
 These are usually aliases to commonly-accessed tools and workflows.
 #+BEGIN_SRC emacs-lisp :tangle yes
-(add-to-list 'load-path "~/elisp-work/")
-;; Main entrypoint.
-(load "~/elisp-work/work-config.el")
+(let ((work-config-file "~/elisp-work/work-config.el")
+      (work-config-entrypoint-dir "~/elisp-work"))
+  (when (file-exists-p work-config-entrypoint-dir)
+    (add-to-list 'load-path work-config-entrypoint-dir)
+    ;; Main entrypoint.
+    (load work-config-file)))
+
 #+END_SRC
 * Mode Line
 ** VC mode customizations
