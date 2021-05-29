@@ -981,6 +981,20 @@ This is great for opensource projects and work.
 It is a full-fledged terminal emulator inside Emacs. It uses ~libvterm~, which
 is a C library, so it maintains compatibility between all CLI applications, and
 you can use them without problems from inside Emacs.
+
+The advantage over using ~term-mode~ or ~shell-mode~ are:
+- No need to put additional configuration in Emacs to get the terminal to show colors.
+  It also respects the PS1 configuration in your ~.bashrc~.
+- Easier to toggle a mode to copy information from the terminal to other buffers.
+  Although ~vterm-copy-mode~ takes some time getting used to.
+
+The drawbacks are:
+- Currently the side of the terminal output gets cut if you switch to other
+  windows with ~golden-ratio-mode~
+- Needs to bind new keybindings to get commands that are by default in
+  ~shell-mode~ or ~term-mode~ with ~line-mode~.
+- To search the terminal buffer with =C-s=, you'll need to enter ~vterm-copy-mode~.
+
 #+BEGIN_SRC emacs-lisp :tangle yes
 (defun vterm-mode-tweaks ()
   (set (make-local-variable 'company-backends) '(company-capf company-files))
@@ -994,7 +1008,8 @@ you can use them without problems from inside Emacs.
   :bind (:map vterm-mode-map
               ("C-M-o" . 'other-frame)
               ("M-w" . 'auralcat/vterm-copy-last-command-output)
-              )
+              ("M-p" . 'vterm-send-up)
+              ("M-n" . 'vterm-send-down))
   :config
   (setq vterm-use-vterm-prompt-detection-method t))
 
