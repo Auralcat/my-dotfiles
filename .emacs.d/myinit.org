@@ -1009,6 +1009,7 @@ The drawbacks are:
               ("C-M-o" . 'other-frame)
               ("M-w" . 'auralcat/vterm-copy-last-command-output)
               ("M-p" . 'vterm-send-up)
+              ("M-r" . 'vterm-send-C-r)
               ("M-n" . 'vterm-send-down))
   :config
   (setq vterm-use-vterm-prompt-detection-method t))
