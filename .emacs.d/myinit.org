@@ -1353,6 +1353,23 @@ use case though, since it removes the line wraps on exporting.
   (setq sqlformat-command 'pgformatter
         sqlformat-args '("-s2" "-g")))
 #+END_SRC
+*** WIP - Emacs Everywhere
+This is neat for calling an Emacs buffer whenever you need to do something away
+from your main Emacs window.
+You'll need to add a keybinding to the window manager you're using to invoke
+~emacsclient~ like so:
+#+BEGIN_SRC shell
+emacsclient --eval "(emacs-everywhere)"
+#+END_SRC
+
+I'm using ~M-F9~.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package emacs-everywhere
+  :config
+  (setq emacs-everywhere-frame-parameters '((name . "emacs-everywhere")
+                                           (width . 80)
+                                           (height . 24))))
+#+END_SRC
 * Function Aliases
   #+BEGIN_SRC emacs-lisp :tangle yes
 ;; This is how you define aliases for Elisp functions. These are useful for when
@@ -1542,6 +1559,17 @@ Explanation/Context: https://github.com/olivertaylor/olivertaylor.github.io/blob
 (define-key key-translation-map (kbd "C-®") (kbd "C-M-r"))
 (define-key key-translation-map (kbd "®") (kbd "M-r"))
 (define-key key-translation-map (kbd "M-°") (kbd "M-S-e"))
+;; C-M-number translations.
+(define-key key-translation-map (kbd "⅜") (kbd "M-%"))
+(define-key key-translation-map (kbd "C-⅜") (kbd "C-M-%"))
+(define-key key-translation-map (kbd "¼") (kbd "M-$"))
+(define-key key-translation-map (kbd "C-¼") (kbd "C-M-$"))
+(define-key key-translation-map (kbd "¾") (kbd "M-#"))
+(define-key key-translation-map (kbd "C-¾") (kbd "C-M-#"))
+(define-key key-translation-map (kbd "½") (kbd "M-@"))
+(define-key key-translation-map (kbd "C-½") (kbd "C-M-@"))
+(define-key key-translation-map (kbd "¡") (kbd "M-!"))
+(define-key key-translation-map (kbd "C-¡") (kbd "C-M-!"))
 
 ;; Some speed commands
 (global-set-key (kbd "M-1") 'delete-other-windows)
