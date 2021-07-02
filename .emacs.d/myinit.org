@@ -1,6 +1,7 @@
 #+TITLE: Emacs configuration file
 #+AUTHOR: Auralcat
 #+DATE: 2017:05:17
+#+STARTUP: overview
 
 * Personal info
   #+BEGIN_SRC emacs-lisp :tangle yes
