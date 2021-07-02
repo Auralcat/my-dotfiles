@@ -371,7 +371,7 @@ This is quite useful to navigate through code faster.
 
 ;; Use recentf-mode
 (recentf-mode)
-(setq recentf-max-menu-items 50)
+(setq recentf-max-menu-items 100)
 (global-set-key (kbd "C-x C-r") 'recentf-open-files)
   #+END_SRC
 * REPL
