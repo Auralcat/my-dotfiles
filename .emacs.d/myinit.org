@@ -1000,6 +1000,9 @@ The drawbacks are:
 (defun vterm-mode-tweaks ()
   (set (make-local-variable 'company-backends) '(company-capf company-files))
   (setq-local show-trailing-whitespace nil)
+  ;; I don't like having the mode line in the terminals.
+  (setq-local show-trailing-whitespace nil)
+  (setq-local mode-line-format nil)
   ;; Disable emojify mode for the terminal
   (emojify-mode -1)
   (evil-set-initial-state 'vterm-mode' emacs))
