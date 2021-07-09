@@ -954,6 +954,27 @@ A wrapper around Elixir's ~mix~ for Emacs
     :hook (after-init . global-emojify-mode))
       #+END_SRC
 ** Utilities
+*** Ace Jump
+Allows you to move anywhere in the visible portion of the buffer (or any
+frame you got in your screens) using at least 3 keystrokes.
+
+This is pretty useful for when you want to jump to a different section in
+another window or even a frame.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package ace-jump-mode
+  :after (evil)
+  :bind
+  ("C-c SPC" . ace-jump-mode)
+  ("M-3" . ace-jump-mode)
+  (:map org-mode-map
+        ("C-c SPC" . ace-jump-mode))
+  :config
+  ;; Save the position of the previous mark as a jump position for Evil.
+  ;; With that, we can cycle through where ace-jump was called from using C-i and C-o.
+  (defadvice ace-jump-mode (before ace-jump-mode-advice)
+    (evil--jumps-push))
+  (ad-activate 'ace-jump-mode))
+#+END_SRC
 *** Zoom window
 Zooms a window just like in Tmux.
 #+BEGIN_SRC emacs-lisp :tangle yes
