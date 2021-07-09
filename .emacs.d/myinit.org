@@ -473,7 +473,10 @@ This is a built-in mode, but I want to change some stuff there.
     Elixir support for Emacs
     #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package elixir-mode
-:defer t)
+  :defer t
+  :config
+  (define-key elixir-mode-map (kbd "C-c C-l") 'inf-elixir-send-line)
+  (define-key elixir-mode-map (kbd "C-c C-r") 'inf-elixir-send-region))
     #+END_SRC
 *** Sass-mode
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -695,12 +698,20 @@ A wrapper around Elixir's ~mix~ for Emacs
             (define-key 'elixir-mix-map "t" 'mix-test)
             (define-key 'elixir-mix-map (kbd "SPC") 'mix-test-current-buffer)
             (define-key 'elixir-mix-map "." 'mix-test-current-test)
+            (define-key 'elixir-mix-map "f" 'auralcat/elixir-run-mix-format-in-project-root)
             (define-key 'elixir-mix-map "c" 'mix-compile)
             (define-key 'elixir-mix-map "x" 'mix-execute-task)
             (define-key 'elixir-mix-map (kbd "C-,") 'mix-last-command))
 
   (add-hook 'elixir-mode-hook '(lambda ()
                                  (local-set-key (kbd "C-,") 'elixir-mix-map)))
+
+(defun auralcat/elixir-run-mix-format-in-project-root (arg)
+  "Runs `mix format` ín the project's root directory."
+  (interactive "P")
+  (if arg
+      (projectile-run-shell-command-in-root "mix format --check-formatted")
+    (projectile-run-shell-command-in-root "mix format")))
 #+END_SRC
 
 *** Projectile
