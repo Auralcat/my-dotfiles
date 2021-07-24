@@ -1566,6 +1566,26 @@ Explanation/Context: https://github.com/olivertaylor/olivertaylor.github.io/blob
 
 (add-hook 'buffer-face-mode-hook 'scale-up-variable-pitch-face)
 #+END_SRC
+
+* Multiplexing
+This involves window and tab management.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+;; Set rules for displaying buffers in windows.
+(setq display-buffer-alist
+      ;; Press q in the Magit buffer and the window vanishes!
+      `(("\\(^magit: .*$\\|\\*mix .*\\*\\)"
+         (display-buffer-at-bottom)
+         (window-height . 0.5)
+         (window-parameters . ((delete-window . t)))
+         )
+        ;; This is so I can close other windows without switching to them.
+        ("^.*\\.ex[s]?$"
+         nil
+         (window-parameters . ((no-delete-other-windows . t)))
+         )))
+#+END_SRC
+
 * Keybindings
  #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Translate the compose keys
