@@ -1583,6 +1583,11 @@ This involves window and tab management.
         ("^.*\\.ex[s]?$"
          nil
          (window-parameters . ((no-delete-other-windows . t)))
+         )
+        ("^\\*Org .*Export\\*$"
+         (display-buffer-in-side-window)
+         (window-height . 0.5)
+         (window-parameters . ((delete-window . t)))
          )))
 #+END_SRC
 
