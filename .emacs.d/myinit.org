@@ -1574,18 +1574,30 @@ This involves window and tab management.
 ;; Set rules for displaying buffers in windows.
 (setq display-buffer-alist
       ;; Press q in the Magit buffer and the window vanishes!
-      `(("\\(^magit: .*$\\|\\*mix .*\\*\\)"
-         (display-buffer-at-bottom)
+      `(("^magit: .*$"
+         (display-buffer-reuse-mode-window display-buffer-reuse-window display-buffer-at-bottom)
          (window-height . 0.5)
          (window-parameters . ((delete-window . t)))
          )
+        ;; A buffer with unit test results: they're easier to read in another frame.
+        ("^\\*mix .*\\*$"
+         (display-buffer-use-some-frame display-buffer-in-tab display-buffer-reuse-mode-window display-buffer-reuse-window)
+         (reusable-frames . t)
+         (tab-name . "*Test results*")
+         (inhibit-same-window . t)
+         )
+        ;; Search buffers tend to be more useful when they're in the same frame as the code.
+        ("\\(^\\*ag search text:.*\\*$\\|\\^*Occur.*\\*$\\)"
+         (display-buffer-reuse-mode-window display-buffer-reuse-window)
+         (inhibit-same-window . t))
         ;; This is so I can close other windows without switching to them.
         ("^.*\\.ex[s]?$"
-         nil
+         display-buffer-in-tab
+         (tab-name . "*Coding*")
          (window-parameters . ((no-delete-other-windows . t)))
          )
         ("^\\*Org .*Export\\*$"
-         (display-buffer-in-side-window)
+         (display-buffer-reuse-window display-buffer-in-side-window)
          (window-height . 0.5)
          (window-parameters . ((delete-window . t)))
          )))
