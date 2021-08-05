@@ -1132,6 +1132,8 @@ This works better than Autopair for Elixir mode.
     experience more pleasing to the eye. Yeah, nature!
     #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package golden-ratio
+  ;; Play nice with ace-jump.
+  :hook ((ace-jump-mode-end) . 'golden-ratio)
   :diminish golden-ratio-mode
   :config
   (setq golden-ratio-extra-commands
