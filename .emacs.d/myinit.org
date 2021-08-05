@@ -205,22 +205,13 @@ This is quite useful to navigate through code faster.
 (fset 'auralcat/ruby-block-vanish
       (kmacro-lambda-form [?m ?m ?% ?d ?d ?\' ?m ?d ?d ?\C-x ?\C-x ?=] 0 "%d"))
 
-;; Sends a region to the *shell* buffer
-(fset 'auralcat/sh-send-region
-      (kmacro-lambda-form [?\M-w ?  ?$ ?\C-y return ?\M-o] 0 "%d"))
-
-;; Sends a line to the *shell* buffer
-(fset 'auralcat/sh-send-line
-      (kmacro-lambda-form [?\C-z ?\C-a ?\S-\C-e ?\M-w ?\C-z ?  ?$ ?\C-y return ?\M-o] 0 "%d"))
-
-;; Filter news with deceased or age headlines in Gnus feed.
-;; It inserts the "[Aa]os [[:digit:]]+ anos" regexp in the filter minibuffer.
-(fset 'auralcat/gnus-limit-to-age-headlines
-      (kmacro-lambda-form [?/ ?/ ?\[ ?A ?a ?\C-e ?o ?s ?  ?\[ ?\[ ?: ?d ?i ?g ?i ?t ?: ?\C-e ?+ ?  ?a ?n ?o ?s return] 0 "%d"))
-
 ;; Remove links in an Org entry
 (fset 'auralcat/org-remove-link
       (kmacro-lambda-form [?d ?s ?\] ?d ?f ?\] ?d ?s ?\]] 0 "%d"))
+
+;; Copy the link at point in Org mode buffers
+(fset 'org-copy-link-at-point
+   (kmacro-lambda-form [?\C-c ?\C-l ?\C-  ?\C-a ?\M-w return return] 0 "%d"))
   #+END_SRC
 
 ** Elixir
