@@ -1391,23 +1391,6 @@ use case though, since it removes the line wraps on exporting.
   (setq sqlformat-command 'pgformatter
         sqlformat-args '("-s2" "-g")))
 #+END_SRC
-*** WIP - Emacs Everywhere
-This is neat for calling an Emacs buffer whenever you need to do something away
-from your main Emacs window.
-You'll need to add a keybinding to the window manager you're using to invoke
-~emacsclient~ like so:
-#+BEGIN_SRC shell
-emacsclient --eval "(emacs-everywhere)"
-#+END_SRC
-
-I'm using ~M-F9~.
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package emacs-everywhere
-  :config
-  (setq emacs-everywhere-frame-parameters '((name . "emacs-everywhere")
-                                           (width . 80)
-                                           (height . 24))))
-#+END_SRC
 * Function Aliases
   #+BEGIN_SRC emacs-lisp :tangle yes
 ;; This is how you define aliases for Elisp functions. These are useful for when
