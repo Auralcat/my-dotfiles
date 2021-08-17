@@ -5,8 +5,6 @@
 ;; This is so I know what's going on when I ask for help from Emacs.
 ;;
 ;;; Code:
-(require 's)
-
 (defun my-find-budget-file ()
     "Jump to the budget file."
     (interactive)
@@ -47,23 +45,6 @@
     (interactive)
     (switch-to-buffer "*scratch*"))
 
-;; Work related shortcuts
-(defun my-open-ci-current-build ()
-    "Open the page for the build in the current branch in the continuous integration service."
-    (interactive)
-    ;; I'm not refactoring this right now. Later!
-    (browse-url (my-get-ci-build-url))
-    )
-
-(defun my-get-ci-build-url ()
-    "Return the generated CI build url."
-    (concat auralcat-work-project-ci-url
-        (s-join "/" (list auralcat-work-organization-name
-                      (projectile-project-name)
-                        "branches"
-                        (s-trim (shell-command-to-string "git rev-parse --abbrev-ref HEAD")))))
-    )
-
 (defun my-find-work-org-file ()
     "Open the kanban Org file for work."
     (interactive)
@@ -85,7 +66,7 @@
 (defun my-goto-work-github-repo-url ()
     "Open the project's GitHub repo page in the browser."
     (interactive)
-    (browse-url (concat "https://github.com/magnetis/" (projectile-project-name)))
+    (browse-url (concat "https://github.com/team-telnyx/" (projectile-project-name)))
     )
 
 (provide 'evil-leader-custom-functions)
