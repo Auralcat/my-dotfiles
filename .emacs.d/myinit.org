@@ -459,6 +459,8 @@ This is a built-in mode, but I want to change some stuff there.
   (auto-fill-mode -1))
 
 (add-hook 'compilation-mode-hook 'compilation-mode-tweaks)
+;; Use Emacs keys and bindings in compilation-mode and its derived modes.
+(add-hook 'compilation-mode-hook 'evil-emacs-state)
 #+END_SRC
 *** Elixir-mode
     Elixir support for Emacs
