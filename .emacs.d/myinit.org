@@ -1496,7 +1496,8 @@ the themes themselves.
   "Sets the fixed pitch fonts with the FONT-NAME family and the height as HEIGHT for both the 'default and 'fixed-pitch faces."
   (set-face-attribute 'default nil :family font-name :height height)
   (set-face-attribute 'fixed-pitch nil :family font-name :height height)
-    (set-face-attribute 'org-block nil :family font-name :height height))
+  (set-face-attribute 'org-block nil :family font-name :height height)
+  (set-face-attribute 'org-table nil :family font-name :height height))
 
 (defun auralcat--set-preferred-fonts-for-current-theme ()
   "Sets the preferred fonts for the current theme depending on the system Emacs is used in."
