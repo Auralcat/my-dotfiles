@@ -1398,6 +1398,10 @@ use case though, since it removes the line wraps on exporting.
 
   This function makes it easier to change themes quickly. You can bind it to a
   keychord or whatnot and use it as you wish.
+
+  NOTE: If you want to run extra functions when changing themes,
+  *you should add the function calls to the change theme function below*,
+  otherwise the changes you want to happen won't take effect!
   #+BEGIN_SRC emacs-lisp :tangle yes
 (defun auralcat/set-fringe-face-to-default-bg ()
   "Sets the fringe's background to the current theme's background color for the 'default face."
@@ -1415,19 +1419,20 @@ use case though, since it removes the line wraps on exporting.
    (list
     (intern (completing-read "Change to theme: "
                              (mapcar #'symbol-name
-                                     (custom-available-themes))))
-    ))
+                                     (custom-available-themes))))))
   (let* (
          (current-theme (car custom-enabled-themes))
-         (new-theme-loaded-p (memq new-theme custom-enabled-themes))
-         )
+         (new-theme-loaded-p (memq new-theme custom-enabled-themes)))
     (disable-theme current-theme)
     (if new-theme-loaded-p
         (enable-theme new-theme)
       (load-theme new-theme))
     ;; We should do this here because not every theme defines a fringe face and
     ;; I customized the fringe on my end.
-    (auralcat/set-fringe-face-to-default-bg)))
+    (auralcat/set-fringe-face-to-default-bg))
+  ;; We should also set the preferred fonts here because this function does not
+  ;; run any hooks.
+  (auralcat--set-preferred-fonts-for-current-theme))
 
 ;; Add the hook on circadian
 ;; Bind it to a keychord.
@@ -1487,33 +1492,24 @@ the themes themselves.
   #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Set fonts for each system if the extra ones are installed.
 ;; Otherwise use the system's default fonts.
-(cond
- ((eq system-type 'darwin)
-  (if (font-info "Fantasque Sans Mono")
-      (set-face-attribute 'default nil :font "Fantasque Sans Mono" :height 140)
-    (set-face-attribute 'default nil :font "Monaco" :height 120))
-  )
- ((eq system-type 'gnu/linux)
-  (if (font-info "Fantasque Sans Mono")
-      (set-face-attribute 'default nil :font "Fantasque Sans Mono" :height 120)
-    (set-face-attribute 'default nil :font "Ubuntu Mono" :height 120))))
-  #+END_SRC
-** Variable Pitch
-  #+BEGIN_SRC emacs-lisp :tangle yes
-(cond
- ((eq system-type 'darwin)
-  (if (font-info "Avenir")
-      (set-face-attribute 'variable-pitch nil :font "Avenir" :height 120)
-    (set-face-attribute 'variable-pitch nil :font "Helvetica" :height 120))
-  )
- ((eq system-type 'gnu/linux)
-  (if (font-info "Liberation Sans")
-      (set-face-attribute 'variable-pitch nil :font "Liberation Sans" :height 120)
-    (set-face-attribute 'variable-pitch nil :font "Open Sans" :height 120)
-    ))
- )
-  #+END_SRC
+(defun auralcat--set-fixed-pitch-fonts (font-name height)
+  "Sets the fixed pitch fonts with the FONT-NAME family and the height as HEIGHT for both the 'default and 'fixed-pitch faces."
+  (set-face-attribute 'default nil :family font-name :height height)
+  (set-face-attribute 'fixed-pitch nil :family font-name :height height)
+    (set-face-attribute 'org-block nil :family font-name :height height))
 
+(defun auralcat--set-preferred-fonts-for-current-theme ()
+  "Sets the preferred fonts for the current theme depending on the system Emacs is used in."
+  (cond
+   ((eq system-type 'darwin)
+    (if (font-info "Fantasque Sans Mono")
+        (auralcat--set-fixed-pitch-fonts "Fantasque Sans Mono" 140)
+      (auralcat--set-fixed-pitch-fonts "Monaco" 120)))
+   ((eq system-type 'gnu/linux)
+    (if (font-info "Fantasque Sans Mono")
+        (auralcat--set-fixed-pitch-fonts "Fantasque Sans Mono" 120)
+      (auralcat--set-fixed-pitch-fonts "Ubuntu Mono" 120)))))
+  #+END_SRC
 * Graphical
   #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Set font in graphical mode
@@ -1707,9 +1703,6 @@ This involves window and tab management.
 ;; Change the end of collapsed headings to an arrow.
 (setq org-ellipsis "⤵")
 
-;; Use fixed-pitch fonts inside org-src blocks.
-(set-face-attribute 'org-block nil :inherit 'fixed-pitch :height 120)
-
 ;; Keep agenda file list in a single file so I can publish my config.
 ;; DO NOT use C-c [ or C-c ] to add/remove files to the agenda otherwise
 ;; Emacs will write the var to init.el
@@ -1863,9 +1856,10 @@ Use the fixed-pitch font for tables.
 - Do not ask me if I want to run the source block
 - Output the results in _scripting_ mode, instead of eval mode.
 - Wrap them in an example block (for exporting)
-
   Important: the default header args will be:
   =:noweb :results output verbatim replace :exports both=
+- Also display the contents of the source code block in a monospace font when possible.
+
 #+BEGIN_SRC emacs-lisp :tangle yes
 (defun my-org-confirm-babel-evaluate (lang body)
   "Don't confirm squat."
@@ -1884,9 +1878,7 @@ Use the fixed-pitch font for tables.
       org-babel-default-header-args
       (cons '(:results . "output verbatim replace")
             (assq-delete-all :results org-babel-default-header-args)))
-
 #+END_SRC
-
 *** Elixir
     #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package ob-elixir)
@@ -2079,10 +2071,11 @@ These are usually aliases to commonly-accessed tools and workflows.
     (setq  evil-replace-state-cursor   `(,evil-replace-face-color   hbar))
     (setq  evil-operator-state-cursor  `(,evil-operator-face-color  box))
     (setq  evil-visual-state-cursor    `(,evil-visual-face-color    box))
-    (setq  zoom-window-mode-line-color zoom-window-color)
-    ))
+    (setq  zoom-window-mode-line-color zoom-window-color)))
 
+(add-hook 'circadian-after-load-theme-hook #'(lambda (theme) (auralcat--set-preferred-fonts-for-current-theme)))
 (add-hook 'circadian-after-load-theme-hook #'(lambda (theme) (auralcat/set-evil-faces-based-on-current-theme)))
+(add-hook 'after-init-hook #'(lambda () (auralcat--set-preferred-fonts-for-current-theme)))
 (add-hook 'after-init-hook #'(lambda () (auralcat/set-evil-faces-based-on-current-theme)))
 
 ;; This is to be able to tell when I'm in Emacs state.
