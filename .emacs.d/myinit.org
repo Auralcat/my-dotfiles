@@ -1583,6 +1583,7 @@ This involves window and tab management.
 (define-key key-translation-map (kbd "²") (kbd "M-2"))
 (define-key key-translation-map (kbd "³") (kbd "M-3"))
 (define-key key-translation-map (kbd "£") (kbd "M-4"))
+(define-key key-translation-map (kbd "¢") (kbd "M-5"))
 (define-key key-translation-map (kbd "ð") (kbd "M-d"))
 (define-key key-translation-map (kbd "ß") (kbd "M-s"))
 (define-key key-translation-map (kbd "»") (kbd "M-x"))
@@ -1627,6 +1628,7 @@ This involves window and tab management.
 (global-set-key (kbd "M-1") 'delete-other-windows)
 (global-set-key (kbd "M-2") 'ido-switch-buffer)
 (global-set-key (kbd "M-4") 'switch-to-buffer-other-window)
+(global-set-key (kbd "M-5") 'tab-bar-switch-to-tab)
 
 (define-key comint-mode-map (kbd "M-1") 'delete-other-windows)
 (define-key comint-mode-map (kbd "M-4") 'switch-to-buffer-other-window)
