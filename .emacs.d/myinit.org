@@ -141,7 +141,15 @@ This is quite useful to navigate through code faster.
 #+BEGIN_SRC emacs-lisp :tangle yes
 (evil-set-initial-state 'xref--xref-buffer-mode 'emacs)
 #+END_SRC
+* Occur
+Occur is useful for when you want to keep a list of code points of interest in a
+given buffer or a set of buffers with ~multi-occur-in-matching-buffers~. I was
+used to doing this multi search through ~ibuffer~, but you can call this function
+from ~M-x~ and get the same result if you want.
 
+#+BEGIN_SRC emacs-lisp :tangle yes
+(add-hook 'occur-hook 'occur-rename-buffer)
+#+END_SRC
 * Dired
   A couple customizations.
   #+BEGIN_SRC emacs-lisp :tangle yes
@@ -461,6 +469,7 @@ This is a built-in mode, but I want to change some stuff there.
 (add-hook 'compilation-mode-hook 'compilation-mode-tweaks)
 ;; Use Emacs keys and bindings in compilation-mode and its derived modes.
 (add-hook 'compilation-mode-hook 'evil-emacs-state)
+(add-hook 'compilation-start-hook 'evil-emacs-state)
 #+END_SRC
 *** Elixir-mode
     Elixir support for Emacs
@@ -1568,7 +1577,7 @@ This involves window and tab management.
         ;; Search buffers tend to be more useful when they're in the same frame as the code.
         ("\\(^\\*ag search text:.*\\*$\\|\\^*Occur.*\\*$\\)"
          (display-buffer-reuse-mode-window display-buffer-reuse-window)
-         (inhibit-same-window . t))
+         )
         ("^\\*Org .*Export\\*$"
          (display-buffer-reuse-window display-buffer-in-side-window)
          (window-height . 0.5)
