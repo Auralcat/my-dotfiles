@@ -1061,6 +1061,12 @@ Create links to Github/GitLab files from the comfort of your Emacs buffer.
 (use-package git-link
   :defer t)
 #+END_SRC
+*** Magit delta
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package magit-delta
+  :ensure t
+  :hook (magit-mode . magit-delta-mode))
+#+END_SRC
 *** Smartparens
 This works better than Autopair for Elixir mode.
 #+BEGIN_SRC emacs-lisp :tangle yes
