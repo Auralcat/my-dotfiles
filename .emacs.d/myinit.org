@@ -1133,6 +1133,14 @@ This works better than Autopair for Elixir mode.
               ("zm" . 'yafolding-hide-all)
               ))
     #+END_SRC
+*** Olivetti
+This is great to concentrate on text when you want to write prose.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package olivetti
+  :config
+  (setq olivetti-style 'fancy
+        olivetti-body-width 80))
+#+END_SRC
 *** Golden Ratio Mode
     Splits windows using the [[https://en.wikipedia.org/wiki/Golden_ratio][Golden Ratio]].
     This makes the focused window a bit larger than usual and the
@@ -1525,6 +1533,10 @@ the themes themselves.
     (if (font-info "Fantasque Sans Mono")
         (auralcat--set-fixed-pitch-fonts "Fantasque Sans Mono" 120)
       (auralcat--set-fixed-pitch-fonts "Ubuntu Mono" 120)))))
+
+;; Use Helvetica as the sans-serif font when available.
+(when (font-info "Helvetica")
+    (set-face-attribute 'variable-pitch nil :family "Helvetica" :height 120))
   #+END_SRC
 * Graphical
   #+BEGIN_SRC emacs-lisp :tangle yes
