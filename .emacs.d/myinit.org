@@ -1569,12 +1569,6 @@ This involves window and tab management.
         ("\\(^\\*ag search text:.*\\*$\\|\\^*Occur.*\\*$\\)"
          (display-buffer-reuse-mode-window display-buffer-reuse-window)
          (inhibit-same-window . t))
-        ;; This is so I can close other windows without switching to them.
-        ("^.*\\.ex[s]?$"
-         display-buffer-in-tab
-         (tab-name . "*Coding*")
-         (window-parameters . ((no-delete-other-windows . t)))
-         )
         ("^\\*Org .*Export\\*$"
          (display-buffer-reuse-window display-buffer-in-side-window)
          (window-height . 0.5)
