@@ -327,6 +327,7 @@ from ~M-x~ and get the same result if you want.
 
 ;; Enable ido-mode (fewer keystrokes to switch buffers!)
 (ido-mode 1)
+(ido-everywhere 1)
 
 ;; Easier mark cycling, both local and global
 (setq set-mark-command-repeat-pop t)
@@ -1918,6 +1919,7 @@ Use the fixed-pitch font for tables.
  '(
    (shell . t)
    (python . t)
+   (sql . t)
    (ruby . t)
    (elixir . t)
    (plantuml . t)
