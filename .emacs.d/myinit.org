@@ -327,12 +327,6 @@ from ~M-x~ and get the same result if you want.
 ;; Allow only one theme at a time
 (setq custom-theme-allow-multiple-selections nil)
 
-;; Enable ido-mode (fewer keystrokes to switch buffers!)
-(ido-mode 1)
-(ido-everywhere 1)
-(icomplete-mode 1)
-(icomplete-vertical-mode 1)
-
 ;; Easier mark cycling, both local and global
 (setq set-mark-command-repeat-pop t)
 
@@ -376,6 +370,19 @@ from ~M-x~ and get the same result if you want.
 (setq recentf-max-menu-items 100)
 (global-set-key (kbd "C-x C-r") 'recentf-open-files)
   #+END_SRC
+* Minibuffer completion
+Currently I'm using ~ido-mode~ and ~fido-mode~ to provide completion in the
+minibuffer.
+~ido-everywhere~ allows you to use ~ido~'s functionality in any function that uses
+the minibuffer, not only the ones that are directly supported.
+~icomplete-vertical-mode~ is just to show the candidates vertically. It's one of
+the things that I missed when switching from ~helm~.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(ido-mode 1)
+(fido-mode 1)
+(icomplete-vertical-mode 1)
+(ido-everywhere 1)
+#+END_SRC
 * REPL
 We need to do some customizations to comint-related buffers to improve performance.
 #+BEGIN_SRC emacs-lisp :tangle yes
