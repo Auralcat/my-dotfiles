@@ -328,12 +328,11 @@ from ~M-x~ and get the same result if you want.
 ;; Enable ido-mode (fewer keystrokes to switch buffers!)
 (ido-mode 1)
 (ido-everywhere 1)
+(icomplete-mode 1)
+(icomplete-vertical-mode 1)
 
 ;; Easier mark cycling, both local and global
 (setq set-mark-command-repeat-pop t)
-
-;; ido-mode in the minibuffer
-(icomplete-mode 1)
 
 ;; Replace the built-in buffer menu with ibuffer
 (global-set-key [24 2] (quote ibuffer))
