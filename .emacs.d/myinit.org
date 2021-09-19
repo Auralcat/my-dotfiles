@@ -383,6 +383,21 @@ the things that I missed when switching from ~helm~.
 (icomplete-vertical-mode 1)
 (ido-everywhere 1)
 #+END_SRC
+* MermaidJS
+[[http://mermaid-js.github.io/mermaid/][MermaidJS]] is a Markdown syntax to generate flowcharts and diagrams.
+It's quite handy to use whenever you need to explain complex concepts to other people.
+#+BEGIN_SRC emacs-lisp :tangle yes
+;; Add call to auto-mode-alist later.
+(use-package mermaid-mode
+:mode "\\.mermaid\\'")
+
+(use-package ob-mermaid
+  :config
+  ;; We need to install the mermaid CLI to be able to compile Mermaid files into diagrams.
+  ;; Have Emacs install it for you automatically.
+  (when (string-equal (shell-command-to-string "command -v mmdc") "")
+    (async-shell-command "npm install -g mermaid.cli")))
+#+END_SRC
 * REPL
 We need to do some customizations to comint-related buffers to improve performance.
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -494,9 +509,7 @@ This is a built-in mode, but I want to change some stuff there.
 (use-package sass-mode
   :defer t
   ;; Set Sass mode for SASS files and Css mode for SCSS files.
-  :init
-  (add-to-list 'auto-mode-alist
-               '("\\.sass\\'" . sass-mode)))
+  :mode "\\.sass\\'")
 
     #+END_SRC
 *** SCSS-mode
@@ -504,9 +517,7 @@ This is a built-in mode, but I want to change some stuff there.
     #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package scss-mode
   :defer t
-  :init
-  (add-to-list 'auto-mode-alist
-               '("\\.scss\\'" . scss-mode)))
+  :mode "\\.scss\\'")
     #+END_SRC
 *** Nov-mode
 This is a mode for reading .epub files.
@@ -514,8 +525,7 @@ It's quite comfortable when you want to read longform books in the computer.
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package nov
   :defer t
-  :init
-  (add-to-list 'auto-mode-alist '("\\.epub\\'" . nov-mode))
+  :mode "\\.epub\\'")
   ;; Set the width to 80 chars, this is better to read.
   (setq nov-text-width 80)
   ;; Remove the mode line in the book's buffer.
@@ -531,8 +541,8 @@ I'm working with Makefiles now, so this is useful.
     #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package js2-mode
   :defer t
+  :mode "\\.js?\\'"
   :init
-  (add-to-list 'auto-mode-alist '("\\.js?\\'" . js2-mode))
   (setq js-indent-level 2))
 
 ;; TODO: Look for a better completion for JS modes in Company.
@@ -636,8 +646,7 @@ Necessary for parsing apib files (API Blueprint)
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package apib-mode
   :defer t
-  :init
-  (add-to-list 'auto-mode-alist '("\\.apib?\\'"   . apib-mode)))
+  :mode "\\.apib?\\'")
 #+END_SRC
 *** Typescript mode
 #+BEGIN_SRC emacs-lisp :tangle yes
