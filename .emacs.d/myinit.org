@@ -525,7 +525,8 @@ It's quite comfortable when you want to read longform books in the computer.
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package nov
   :defer t
-  :mode "\\.epub\\'")
+  :mode "\\.epub\\'"
+  :init
   ;; Set the width to 80 chars, this is better to read.
   (setq nov-text-width 80)
   ;; Remove the mode line in the book's buffer.
