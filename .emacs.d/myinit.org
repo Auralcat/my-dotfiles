@@ -319,10 +319,10 @@ from ~M-x~ and get the same result if you want.
 (add-hook 'before-save-hook 'whitespace-cleanup)
 
 ;; While you're at it, save automatically when visiting files.
-;; It's surprisingly useful. The only caveat is when you got an
-;; open comment like this. It will remove all the whitespace.
-;; It saves the file after 5 seconds of inactivity.
-(auto-save-visited-mode t)
+;; This is best used in prog-mode derivatives.
+(add-hook 'prog-mode-hook '(lambda () (auto-save-visited-mode 1)))
+;; Disable it for outline-mode derivatives like Markdown and Org.
+(add-hook 'text-mode-hook '(lambda () (auto-save-visited-mode 0)))
 
 ;; Allow only one theme at a time
 (setq custom-theme-allow-multiple-selections nil)
