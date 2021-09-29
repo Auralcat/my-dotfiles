@@ -318,6 +318,11 @@ from ~M-x~ and get the same result if you want.
 ;; Clean whitespace before saving a file
 (add-hook 'before-save-hook 'whitespace-cleanup)
 
+;; When making executable scripts, this function can make the new file
+;; executable for you automatically.
+;; You'll still need to include the shebang in the start of the file though.
+(add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
+
 ;; While you're at it, save automatically when visiting files.
 ;; This is best used in prog-mode derivatives.
 (add-hook 'prog-mode-hook '(lambda () (auto-save-visited-mode 1)))
