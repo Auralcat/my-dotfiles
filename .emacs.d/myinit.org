@@ -329,6 +329,7 @@ from ~M-x~ and get the same result if you want.
 ;; While you're at it, save automatically when visiting files.
 ;; This is best used in prog-mode derivatives.
 (add-hook 'prog-mode-hook '(lambda () (auto-save-visited-mode 1)))
+
 ;; Disable it for outline-mode derivatives like Markdown and Org.
 (add-hook 'text-mode-hook '(lambda () (auto-save-visited-mode 0)))
 
@@ -1861,6 +1862,9 @@ This is a derived mode to hold English abbrevs.
   "Org-mode used to hold English abbrevs. Does everything that plain org-mode does.")
 
 (add-to-list 'auto-mode-alist '("\\.org\\.en?\\'" . org-english-mode))
+
+;; Disable it for outline-mode derivatives like Markdown and Org.
+(add-hook 'org-english-mode-hook '(lambda () (auto-save-visited-mode 0)))
 #+END_SRC
 ** Auto-mark TODO entries as DONE
    #+BEGIN_SRC emacs-lisp :tangle yes
