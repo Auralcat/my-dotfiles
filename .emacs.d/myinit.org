@@ -316,6 +316,14 @@ from ~M-x~ and get the same result if you want.
 (setq backup-by-copying t)
 
 ;; I'm too lazy to type "yes" or "no"
+;; And I'm also too lazy to press y.
+(defconst y-or-n-p-ret-yes-map
+  (let ((map (make-sparse-keymap)))
+    (set-keymap-parent map y-or-n-p-map)
+    (define-key map [return] 'act)
+    map)
+  "A keymap for y-or-n-p with RET meaning \"yes\".")
+
 (fset 'yes-or-no-p 'y-or-n-p)
 
 ;; Clean whitespace before saving a file
