@@ -1615,6 +1615,11 @@ This involves window and tab management.
          (window-height . 0.5)
          (window-parameters . ((delete-window . t)))
          )
+        ("^magit-diff: .*$"
+         (display-buffer-use-some-frame display-buffer-reuse-mode-window display-buffer-reuse-window)
+         (window-height . 0.5)
+         (window-parameters . ((delete-window . t)))
+         )
         ;; A buffer with unit test results: they're easier to read in another frame.
         ("^\\*mix .*\\*$"
          (display-buffer-use-some-frame display-buffer-in-tab display-buffer-reuse-mode-window display-buffer-reuse-window)
