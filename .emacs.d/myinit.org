@@ -153,12 +153,15 @@ from ~M-x~ and get the same result if you want.
 * Dired
   A couple customizations.
   #+BEGIN_SRC emacs-lisp :tangle yes
+;; Customize Dired list switches.
 (setq dired-listing-switches "-alh")
+
 ;; Use Emacs mode in Dired.
 (add-hook 'dired-mode-hook 'evil-emacs-state)
 
 ;; Kill selected subdir with C-M-k
-(define-key dired-mode-map (kbd "C-M-k") 'dired-kill-subdir)
+(add-hook 'dired-mode-hook #'(lambda () (define-key dired-mode-map (kbd "C-M-k") 'dired-kill-subdir)))
+
   #+END_SRC
 
 * Macros
