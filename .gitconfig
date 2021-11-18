@@ -1,0 +1,17 @@
+# Sample .gitconfig file to be replicated in other machines.
+
+[pull]
+    rebase = true
+[init]
+    defaultBranch = main
+
+[pager]
+    diff = delta
+    log = delta
+    reflog = delta
+    show = delta
+
+[interactive]
+    diffFilter = delta --color-only
+[remote "origin"]
+    prune = true
