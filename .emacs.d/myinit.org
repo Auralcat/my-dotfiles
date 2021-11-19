@@ -1620,9 +1620,14 @@ This involves window and tab management.
          )
         ("^magit-diff: .*$"
          (display-buffer-use-some-frame display-buffer-reuse-mode-window display-buffer-reuse-window)
+         (reusable-frames . t)
          (window-height . 0.5)
          (window-parameters . ((delete-window . t)))
          )
+        ("^\\*vterm .*\\*$"
+         (display-buffer-use-some-frame display-buffer-reuse-mode-window display-buffer-reuse-window)
+         (reusable-frames . t)
+         (inhibit-same-window . t))
         ;; A buffer with unit test results: they're easier to read in another frame.
         ("^\\*mix .*\\*$"
          (display-buffer-use-some-frame display-buffer-in-tab display-buffer-reuse-mode-window display-buffer-reuse-window)
