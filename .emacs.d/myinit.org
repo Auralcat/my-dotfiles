@@ -1648,7 +1648,11 @@ This involves window and tab management.
         ("^magit-diff: .*$"
          (display-buffer-use-some-frame display-buffer-reuse-mode-window display-buffer-reuse-window)
          (reusable-frames . t)
-         (window-height . 0.5)
+         (window-parameters . ((delete-window . t)))
+         )
+        ("^magit-revision: .*$"
+         (display-buffer-use-some-frame display-buffer-reuse-mode-window display-buffer-reuse-window)
+         (reusable-frames . t)
          (window-parameters . ((delete-window . t)))
          )
         ("^\*vterm.*\*$"
