@@ -768,9 +768,8 @@ A wrapper around Elixir's ~mix~ for Emacs
    (if (projectile-project-p)
    (let ((default-directory (projectile-project-root)))
      (message (format "Running mix format on %s" default-directory))
-     (shell-command "mix format")
-     )
-   (shell-command (concat "mix format %s" (buffer-file-name))))
+     (shell-command "mix format"))
+   (shell-command (format "mix format %s" (buffer-file-name))))
    (message "Elixir files formatted successfully."))
 
 (add-hook 'after-save-hook 'auralcat/elixir--run-mix-format-on-save)
