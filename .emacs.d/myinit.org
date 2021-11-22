@@ -753,6 +753,27 @@ A wrapper around Elixir's ~mix~ for Emacs
   (if arg
       (projectile-run-shell-command-in-root "mix format --check-formatted")
     (projectile-run-shell-command-in-root "mix format")))
+
+(defun auralcat/elixir--run-mix-format-on-save ()
+  "Intended to be used in before-save-hook.
+   Runs `mix format` on the buffer if it is visiting an Elixir file."
+  (let ((elixir-file-extension-regexp "exs?$")
+        )
+    (when (and (buffer-file-name) (string-match-p elixir-file-extension-regexp (buffer-file-name)))
+      (auralcat/elixir--run-mix-format))))
+
+(defun auralcat/elixir--run-mix-format ()
+   "- If the file is in a project, run `mix format` from the project root when saving current Elixir buffer.
+    - If the buffer is not visiting a file in a project, run standard `mix format`."
+   (if (projectile-project-p)
+   (let ((default-directory (projectile-project-root)))
+     (message (format "Running mix format on %s" default-directory))
+     (shell-command "mix format")
+     )
+   (shell-command (concat "mix format %s" (buffer-file-name))))
+   (message "Elixir files formatted successfully."))
+
+(add-hook 'after-save-hook 'auralcat/elixir--run-mix-format-on-save)
 #+END_SRC
 
 *** Projectile
