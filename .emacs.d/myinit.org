@@ -1374,11 +1374,17 @@ repository.
 #+END_SRC
 **** Open files for code review
 #+BEGIN_SRC emacs-lisp :tangle yes
-(defun auralcat/magit-open-changed-files-from-main ()
+(defun auralcat/magit-open-changed-files-from-main (args)
   "Opens the buffers visiting files that were changed compared to the main branch in the current branch.
-   Requires M-x server-start first."
+   Requires M-x server-start first.
+
+   It's highly recommended to update and pull changes from the remote repository into the master/main branch before running this command."
   (interactive "P")
-  (magit-git-command-topdir "git --no-pager diff --name-only FETCH_HEAD $(git merge-base FETCH_HEAD origin/master) | xargs emacsclient -n"))
+  (let* ((default-directory (projectile-project-root))
+         (git-open-changed-files-command "git --no-pager diff --name-only main $(git branch --show-current) | xargs emacsclient -n"))
+    (message "Opening changed files in the current branch compared to the master/main branch...")
+    (async-shell-command git-open-changed-files-command)
+    (kill-buffer-and-window)))
 #+END_SRC
 *** Yasnippets
     It originally came with company-mode, it's handy to write faster
