@@ -1036,6 +1036,12 @@ another window or even a frame.
     (evil--jumps-push))
   (ad-activate 'ace-jump-mode))
 #+END_SRC
+*** Evil-inflection
+This is a wrapper around the ~string-inflection~ package for ~evil-mode~.
+You get both the ~string-inflection~ package and a keybinding to use it in ~evil-mode.~
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package evil-string-inflection)
+#+END_SRC
 *** Zoom window
 Zooms a window just like in Tmux.
 #+BEGIN_SRC emacs-lisp :tangle yes
