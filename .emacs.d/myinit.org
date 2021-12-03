@@ -40,7 +40,7 @@
 (use-package midnight
   :defer t
   :init
-  (midnight-delay-set 'midnight-delay "10:30am")
+  (midnight-delay-set 'midnight-delay "11:30am")
   )
   #+END_SRC
 * Evil Mode
@@ -172,8 +172,7 @@ from ~M-x~ and get the same result if you want.
 ;; Then you execute it mapping it to a key!
 
 ;; This package allows you to override a couple functions.
-(use-package noflet
-:defer t)
+(use-package noflet)
 (lambda (&optional arg) "Extracts a variable from an it clause and puts in a let statement." (interactive "p") (kmacro-exec-ring-item (quote ([100 100 134217745 134217729 112 99 87 108 101 116 40 58 25 escape 102 61 50 120 67 123 25 escape 86 61 15 15 48 119] 0 "%d")) arg))
 
 ;; Adds a byebug line to Ruby code
@@ -226,6 +225,22 @@ from ~M-x~ and get the same result if you want.
 ;; Copy the link at point in Org mode buffers
 (fset 'org-copy-link-at-point
    (kmacro-lambda-form [?\C-c ?\C-l ?\C-  ?\C-a ?\M-w return return] 0 "%d"))
+
+;; Paste the content from the kill ring into the next and previous lines
+(fset 'auralcat/yank-content-into-next-line
+      (lambda (&optional arg) "Paste the content from the kill ring into the next line." (interactive "p")
+        (undo-boundary)
+        (noflet ((undo-boundary ()))
+          (kmacro-lambda-form [?\C-z return ?\C-p ?\C-y ?\C-a ?\C-n ?\C-z] 0 "%d"))
+        (undo-boundary)))
+
+(fset 'auralcat/yank-content-into-previous-line
+      (lambda (&optional arg) "Paste the content from the kill ring into the previous line." (interactive "p")
+        (undo-boundary)
+        (noflet ((undo-boundary ()))
+          (kmacro-lambda-form [?\C-z ?\C-e return ?\C-y ?\C-a ?\C-p ?\C-z] 0 "%d"))
+        (undo-boundary)))
+
   #+END_SRC
 
 ** Elixir
@@ -1477,6 +1492,13 @@ use case though, since it removes the line wraps on exporting.
   ;; This is for Postgres.
   (setq sqlformat-command 'pgformatter
         sqlformat-args '("-s2" "-g")))
+#+END_SRC
+*** Auto package update
+I honestly don't know why Emacs doesn't support this out of the box yet, but oh well.
+You can put ~auto-package-update-async~ in the ~midnight-hook~.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package auto-package-update
+  :hook (midnight . auto-package-update-async))
 #+END_SRC
 * Function Aliases
   #+BEGIN_SRC emacs-lisp :tangle yes
