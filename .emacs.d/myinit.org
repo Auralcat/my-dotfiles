@@ -1498,7 +1498,7 @@ I honestly don't know why Emacs doesn't support this out of the box yet, but oh 
 You can put ~auto-package-update-async~ in the ~midnight-hook~.
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package auto-package-update
-  :hook (midnight . auto-package-update-async))
+  :hook (midnight . auto-package-update-now-async))
 (setq auto-package-update-delete-old-versions t)
 #+END_SRC
 * Function Aliases
