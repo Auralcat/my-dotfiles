@@ -40,8 +40,7 @@
 (use-package midnight
   :defer t
   :init
-  (midnight-delay-set 'midnight-delay "11:30am")
-  )
+  (midnight-delay-set 'midnight-delay (auralcat/get-env-var "EMACS_MIDNIGHT_TIME")))
   #+END_SRC
 * Evil Mode
   Yes, I'm committing this heresy
@@ -2075,6 +2074,16 @@ This can be reverted later with ~(advice-remove)~ though.
   (let ((fill-column (point-max)))
     (fill-region beg end)))
    #+END_SRC
+** Read value from environment variables
+#+BEGIN_SRC emacs-lisp :tangle yes
+(defun auralcat/get-env-var (env-var-name)
+  "This is a way to work around how the system interprets environment variables
+to read them in real time. It returns the value under ENV-VAR-NAME in your shell init files.
+
+You just need to change the env var value (or add the key) in .bash_profile and
+this function will pick it up."
+ (shell-command-to-string (format "$SHELL --login -c 'echo -n $%s'" env-var-name)))
+#+END_SRC
 * Work configurations
 I prefer to leave the work Elisp configuration files somewhere else because they
 contain private/confidential information.
