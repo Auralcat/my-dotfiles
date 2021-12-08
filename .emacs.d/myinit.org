@@ -404,6 +404,34 @@ from ~M-x~ and get the same result if you want.
 (setq recentf-max-menu-items 100)
 (global-set-key (kbd "C-x C-r") 'recentf-open-files)
   #+END_SRC
+** Garbage collection tweaks
+#+BEGIN_SRC emacs-lisp :tangle yes
+(defvar file-name-handler-alist-old file-name-handler-alist)
+
+(setq-default gc-cons-threshold 402653184
+              file-name-handler-alist nil
+              gc-cons-percentage 0.6
+              auto-window-vscroll nil
+              message-log-max 16384)
+
+(add-hook 'after-init-hook
+          `(lambda ()
+             (setq file-name-handler-alist file-name-handler-alist-old
+                   gc-cons-threshold 800000
+                   gc-cons-percentage 0.1)
+             (garbage-collect)) t)
+
+(setq inhibit-compacting-font-caches t)
+
+;; Optimize garbage collection
+(use-package gcmh
+  :ensure t
+  :disabled t
+  :init
+  (setq gcmh-verbose nil)
+  :config
+  (gcmh-mode 1))
+#+END_SRC
 * Minibuffer completion
 Currently I'm using ~ido-mode~ and ~fido-mode~ to provide completion in the
 minibuffer.
