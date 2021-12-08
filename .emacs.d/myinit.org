@@ -40,7 +40,7 @@
 (use-package midnight
   :defer t
   :init
-  (midnight-delay-set 'midnight-delay (auralcat/get-env-var "EMACS_MIDNIGHT_TIME")))
+  (midnight-delay-set 'midnight-delay "11:30am"))
   #+END_SRC
 * Evil Mode
   Yes, I'm committing this heresy
@@ -457,8 +457,9 @@ It's quite handy to use whenever you need to explain complex concepts to other p
   :config
   ;; We need to install the mermaid CLI to be able to compile Mermaid files into diagrams.
   ;; Have Emacs install it for you automatically.
-  (when (string-equal (shell-command-to-string "command -v mmdc") "")
-    (async-shell-command "npm install -g mermaid.cli")))
+  (setq ob-mermaid-cli-path "~/node_modules/.bin/mmdc")
+  (when (string-equal (shell-command-to-string (format  "command -v %s" ob-mermaid-cli-path)) "")
+  (async-shell-command "npm install -g @mermaid-js/mermaid-cli")))
 #+END_SRC
 * REPL
 We need to do some customizations to comint-related buffers to improve performance.
@@ -2102,7 +2103,7 @@ This can be reverted later with ~(advice-remove)~ though.
   (let ((fill-column (point-max)))
     (fill-region beg end)))
    #+END_SRC
-** Read value from environment variables
+** COMMENT Read value from environment variables
 #+BEGIN_SRC emacs-lisp :tangle yes
 (defun auralcat/get-env-var (env-var-name)
   "This is a way to work around how the system interprets environment variables
