@@ -1058,6 +1058,16 @@ another window or even a frame.
     (evil--jumps-push))
   (ad-activate 'ace-jump-mode))
 #+END_SRC
+*** Ace Window
+I'm using ~other-frame~ quite a lot recently, and this is an upgrade over the
+standard function since it works the same way if you have 2 windows or frames,
+but it lets you select which window you want to jump to if you have more than 2
+windows or frames open.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package ace-window
+  :bind ("C-M-o" . ace-window))
+#+END_SRC
+
 *** Evil-inflection
 This is a wrapper around the ~string-inflection~ package for ~evil-mode~.
 You get both the ~string-inflection~ package and a keybinding to use it in ~evil-mode.~
@@ -1753,7 +1763,6 @@ This involves window and tab management.
 
 ;; Switch windows and frames
 (define-key global-map (kbd "M-o") 'other-window)
-(define-key global-map (kbd "C-M-o") 'other-frame)
 
 ;; Scroll other windows' pages easier
 (define-key global-map (kbd "M-]") 'scroll-other-window)
