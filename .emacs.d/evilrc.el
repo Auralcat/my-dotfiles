@@ -132,6 +132,7 @@
   "gl" 'magit-log
   "gp" 'magit-push
   "gx" 'magit-reset
+  "i" 'imenu
   ;; Org-capture. Keeping consistency with org-agenda's binding.
   "k" 'org-capture
   "l" 'org-store-link
