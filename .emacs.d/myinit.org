@@ -354,10 +354,10 @@ from ~M-x~ and get the same result if you want.
 
 ;; While you're at it, save automatically when visiting files.
 ;; This is best used in prog-mode derivatives.
-(add-hook 'prog-mode-hook '(lambda () (auto-save-visited-mode 1)))
+(add-hook 'prog-mode-hook #'(lambda () (auto-save-visited-mode 1)))
 
 ;; Disable it for outline-mode derivatives like Markdown and Org.
-(add-hook 'text-mode-hook '(lambda () (auto-save-visited-mode 0)))
+(add-hook 'text-mode-hook #'(lambda () (auto-save-visited-mode 0)))
 
 ;; Allow only one theme at a time
 (setq custom-theme-allow-multiple-selections nil)
@@ -747,7 +747,7 @@ A wrapper around Elixir's ~mix~ for Emacs
             (define-key 'elixir-mix-map "x" 'mix-execute-task)
             (define-key 'elixir-mix-map (kbd "C-,") 'mix-last-command))
 
-  (add-hook 'elixir-mode-hook '(lambda ()
+  (add-hook 'elixir-mode-hook #'(lambda ()
                                  (local-set-key (kbd "C-,") 'elixir-mix-map)))
 
 (defun auralcat/elixir-run-mix-format-in-project-root (arg)
@@ -1593,9 +1593,9 @@ the themes themselves.
   (toggle-frame-maximized)
   ;; Space lines and bask in the gloriousness of graphical mode.
   ;; 0.4 feels better for prose, and 0.2 is fine for code.
-  (add-hook 'prog-mode-hook (lambda () (setq line-spacing 0.2)))
-  (add-hook 'comint-mode-hook (lambda () (setq line-spacing 0.2)))
-  (add-hook 'text-mode-hook (lambda () (setq line-spacing 0.6))))
+  (add-hook 'prog-mode-hook #'(lambda () (setq line-spacing 0.2)))
+  (add-hook 'comint-mode-hook #'(lambda () (setq line-spacing 0.2)))
+  (add-hook 'text-mode-hook #'(lambda () (setq line-spacing 0.6))))
   #+END_SRC
 
 ** Adjust variable pitch fonts and monospace fonts
@@ -1784,7 +1784,7 @@ This involves window and tab management.
       org-hide-emphasis-markers t)
 
 ;; We don't need Flycheck in org-mode buffers. Usually.
-(add-hook 'org-mode-hook '(lambda() (flycheck-mode 0)))
+(add-hook 'org-mode-hook #'(lambda () (flycheck-mode 0)))
 
 ;; Change the end of collapsed headings to an arrow.
 (setq org-ellipsis "⤵")
@@ -1802,10 +1802,10 @@ This involves window and tab management.
 
 ;; Truncate long task names
 (setq org-clock-heading-function
-      (lambda ()
-        (let ((str (nth 4 (org-heading-components))))
-          (concat (truncate-string-to-width str 27) "...")
-          )))
+      #'(lambda ()
+    (let ((str (nth 4 (org-heading-components))))
+      (concat (truncate-string-to-width str 27) "...")
+      )))
 
 ;; Organize the bindings
 ;; Open subheading with C-c RET and invert with M-RET
@@ -1893,7 +1893,7 @@ This is a derived mode to hold English abbrevs.
 (add-to-list 'auto-mode-alist '("\\.org\\.en?\\'" . org-english-mode))
 
 ;; Disable it for outline-mode derivatives like Markdown and Org.
-(add-hook 'org-english-mode-hook '(lambda () (auto-save-visited-mode 0)))
+(add-hook 'org-english-mode-hook #'(lambda () (auto-save-visited-mode 0)))
 #+END_SRC
 ** Auto-mark TODO entries as DONE
    #+BEGIN_SRC emacs-lisp :tangle yes
