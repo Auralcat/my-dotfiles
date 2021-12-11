@@ -716,20 +716,8 @@ Necessary for parsing apib files (API Blueprint)
     #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package ruby-electric
   :defer t
-  :diminish ruby-electric-mode
-  :config
-  (add-hook 'enh-ruby-mode-hook
-            #'(lambda ()
-                (setq autopair-dont-activate t) ;; for emacsen < 24
-                (autopair-mode -1))             ;; for emacsen >= 24
-            )
-  (add-hook 'ruby-mode-hook
-            #'(lambda ()
-                (setq autopair-dont-activate t) ;; for emacsen < 24
-                (autopair-mode -1))             ;; for emacsen >= 24
-            )
-  (add-hook 'enh-ruby-mode-hook 'ruby-electric-mode)
-  (add-hook 'ruby-mode-hook 'ruby-electric-mode))
+  :hook ((enh-ruby-mode ruby-mode) . 'ruby-electric-mode)
+  :diminish ruby-electric-mode)
     #+END_SRC
 *** Inf-elixir
 Utility around Elixir's REPL in Emacs.
@@ -802,14 +790,6 @@ A wrapper around Elixir's ~mix~ for Emacs
 
 ;; Enable it
 (add-hook 'after-init-hook #'projectile-global-mode)
-    #+END_SRC
-*** Autopair
-    Automatically pair braces and quotes like in TextMate
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package autopair
-  :after (prog-mode)
-  :defer t
-  :init (autopair-global-mode))
     #+END_SRC
 *** Emmet-mode
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -986,8 +966,7 @@ A wrapper around Elixir's ~mix~ for Emacs
   :diminish company-mode
   :diminish auto-revert-mode
   :diminish auto-fill-mode
-  :diminish abbrev-mode
-  :diminish autopair-mode)
+  :diminish abbrev-mode)
 ;; These are loaded in other moments
 (eval-after-load "editorconfig" '(diminish 'editorconfig-mode))
 (eval-after-load "yasnippet" '(diminish 'yas-minor-mode))
@@ -1160,22 +1139,8 @@ Create links to Github/GitLab files from the comfort of your Emacs buffer.
 This works better than Autopair for Elixir mode.
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package smartparens
+  :hook ((elixir-mode inf-elixir-mode) . 'smartparens-mode)
   :after (elixir-mode)
-  :init
-  ;; Do not activate autopair for Elixir-related modes if we're using smartparens.
-  (add-hook 'elixir-mode-hook
-            #'(lambda ()
-                (setq autopair-dont-activate t) ;; for emacsen < 24
-                (autopair-mode -1))             ;; for emacsen >= 24
-            )
-  (add-hook 'inf-elixir-mode-hook
-            #'(lambda ()
-                (setq autopair-dont-activate t) ;; for emacsen < 24
-                (autopair-mode -1))             ;; for emacsen >= 24
-            )
-
-  (add-hook 'elixir-mode-hook #'smartparens-mode)
-  (add-hook 'inf-elixir-iex-mode-hook #'smartparens-mode)
   :config
   (require 'smartparens-config))
 #+END_SRC
