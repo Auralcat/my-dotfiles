@@ -1006,12 +1006,6 @@ A wrapper around Elixir's ~mix~ for Emacs
   :init
   (mode-icons-mode))
     #+END_SRC
-*** Emojify
-      Add emoji support for Emacs
-      #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package emojify
-    :hook (after-init . global-emojify-mode))
-      #+END_SRC
 ** Utilities
 *** Ace Jump
 Allows you to move anywhere in the visible portion of the buffer (or any
@@ -1100,8 +1094,6 @@ The drawbacks are:
   ;; I don't like having the mode line in the terminals.
   (setq-local show-trailing-whitespace nil)
   (setq-local mode-line-format nil)
-  ;; Disable emojify mode for the terminal
-  (emojify-mode -1)
   (evil-set-initial-state 'vterm-mode' emacs))
 
 (use-package vterm
