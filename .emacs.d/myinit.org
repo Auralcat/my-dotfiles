@@ -448,18 +448,21 @@ the things that I missed when switching from ~helm~.
 * MermaidJS
 [[http://mermaid-js.github.io/mermaid/][MermaidJS]] is a Markdown syntax to generate flowcharts and diagrams.
 It's quite handy to use whenever you need to explain complex concepts to other people.
+
+To install it, run the command below.
+I'm not installing it automatically when Emacs starts because that takes up init time.
+#+BEGIN_SRC shell
+npm install -g @mermaid-js/mermaid-cli
+#+END_SRC
+
 #+BEGIN_SRC emacs-lisp :tangle yes
-;; Add call to auto-mode-alist later.
 (use-package mermaid-mode
 :mode "\\.mermaid\\'")
 
 (use-package ob-mermaid
   :config
   ;; We need to install the mermaid CLI to be able to compile Mermaid files into diagrams.
-  ;; Have Emacs install it for you automatically.
-  (setq ob-mermaid-cli-path "~/node_modules/.bin/mmdc")
-  (when (string-equal (shell-command-to-string (format  "command -v %s" ob-mermaid-cli-path)) "")
-  (async-shell-command "npm install -g @mermaid-js/mermaid-cli")))
+  (setq ob-mermaid-cli-path (string-trim (shell-command-to-string "command -v mmdc"))))
 #+END_SRC
 * REPL
 We need to do some customizations to comint-related buffers to improve performance.
