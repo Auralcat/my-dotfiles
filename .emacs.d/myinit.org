@@ -1264,22 +1264,6 @@ This is great to concentrate on text when you want to write prose.
 
   (evil-leader/set-key-for-mode 'ruby-mode "r" 'projectile-rails-command-map))
     #+END_SRC
-*** Projectile Phoenix
-I made this package! <3
-It helps in working with Phoenix projects.
-Since it's not published in MELPA yet, we need to load it directly from the git
-repository.
-#+BEGIN_SRC emacs-lisp :tangle yes
-(add-to-list 'load-path "~/projectile-phoenix/")
-(load "projectile-phoenix")
-
-(projectile-phoenix-global-mode)
-
-;; Configure the binding for Phoenix project buffers
-(add-hook 'find-file-hook #'(lambda ()
-                              (when (projectile-phoenix-project-p)
-                                (evil-leader/set-key "r" 'projectile-phoenix-command-map))))
-#+END_SRC
 *** Bundler
     Interact with Bundler from Emacs
     #+BEGIN_SRC emacs-lisp :tangle yes
