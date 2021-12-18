@@ -27,7 +27,7 @@
 * Bookmarks
   It's a quicker way to navigate through files you visit often.
   #+BEGIN_SRC emacs-lisp :tangle yes
-(setq bookmark-default-file "~/file-bouncer/bookmarks")
+(setq bookmark-default-file "~/emacs-bookmarks")
 ;; Every time bookmarks are changed, save them
 (setq bookmark-save-flag 1)
   #+END_SRC
@@ -40,8 +40,7 @@
 (use-package midnight
   :defer t
   :init
-  (midnight-delay-set 'midnight-delay "11:30am")
-  )
+  (midnight-delay-set 'midnight-delay "11:30am"))
   #+END_SRC
 * Evil Mode
   Yes, I'm committing this heresy
@@ -405,6 +404,34 @@ from ~M-x~ and get the same result if you want.
 (setq recentf-max-menu-items 100)
 (global-set-key (kbd "C-x C-r") 'recentf-open-files)
   #+END_SRC
+** Garbage collection tweaks
+#+BEGIN_SRC emacs-lisp :tangle yes
+(defvar file-name-handler-alist-old file-name-handler-alist)
+
+(setq-default gc-cons-threshold 402653184
+              file-name-handler-alist nil
+              gc-cons-percentage 0.6
+              auto-window-vscroll nil
+              message-log-max 16384)
+
+(add-hook 'after-init-hook
+          `(lambda ()
+             (setq file-name-handler-alist file-name-handler-alist-old
+                   gc-cons-threshold 800000
+                   gc-cons-percentage 0.1)
+             (garbage-collect)) t)
+
+(setq inhibit-compacting-font-caches t)
+
+;; Optimize garbage collection
+(use-package gcmh
+  :ensure t
+  :disabled t
+  :init
+  (setq gcmh-verbose nil)
+  :config
+  (gcmh-mode 1))
+#+END_SRC
 * Minibuffer completion
 Currently I'm using ~ido-mode~ and ~fido-mode~ to provide completion in the
 minibuffer.
@@ -788,9 +815,10 @@ A wrapper around Elixir's ~mix~ for Emacs
 (use-package projectile
   :defer t
   :init
-  (setq projectile-keymap-prefix (kbd "C-c p"))
-  ;; I use Universal ctags, so this needs some adjustment.
-  (setq projectile-tags-command "ctags -eR ."))
+  (setq projectile-keymap-prefix (kbd "C-c p")
+        ;; I use Universal ctags, so this needs some adjustment.
+        projectile-tags-command "ctags -eR ."
+        projectile-switch-project-action 'projectile-vc))
 
 ;; Enable it
 (add-hook 'after-init-hook #'projectile-global-mode)
@@ -1363,6 +1391,25 @@ This is great to concentrate on text when you want to write prose.
     (evil-set-initial-state 'git-commit-mode 'emacs)
     ))
      #+END_SRC
+**** Auto pull data from forge on project switch
+You will need to define the ~auralcat-forge-pull-allowed-projects~ variable
+locally, so ~forge~ does not pull the new PRs and issues for every project you
+switch into.
+
+This may need more work in the future, if you get annoyed by pulling new data
+every time you call ~git status~.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+;; Add your projects locally later.
+(setq auralcat-forge-pull-allowed-projects '())
+
+(defun auralcat--magit-auto-run-forge-pull ()
+  "Runs forge-pull automatically on allowed projects."
+(when (member (projectile-project-name) auralcat-forge-pull-allowed-projects)
+  (forge-pull)))
+
+(add-hook 'magit-status-mode-hook #'auralcat--magit-auto-run-forge-pull)
+#+END_SRC
 **** Viewing diffs
 #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Wrap those long lines.
@@ -1413,14 +1460,6 @@ This is great to concentrate on text when you want to write prose.
    ((and (string-equal system-name auralcat/work-system-name) (eq system-type 'gnu/linux))
     (setq circadian-themes '((:sunrise . modus-operandi)
                              (:sunset  . modus-vivendi)))))
-
-  ;; Hooks
-  (add-hook 'circadian-before-load-theme-hook
-            #'(lambda (theme)
-                (if (eq theme 'solarized-dark)
-                    (set-frame-font "Fantasque Sans Mono"))
-                ))
-
   (circadian-setup))
     #+END_SRC
 *** Anzu
@@ -1453,8 +1492,9 @@ I honestly don't know why Emacs doesn't support this out of the box yet, but oh 
 You can put ~auto-package-update-async~ in the ~midnight-hook~.
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package auto-package-update
-  :hook (midnight . auto-package-update-now-async))
-(setq auto-package-update-delete-old-versions t)
+  :config
+  (auto-package-update-at-time "11:30am")
+  (setq auto-package-update-delete-old-versions t))
 #+END_SRC
 * Function Aliases
   #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1586,6 +1626,10 @@ the themes themselves.
 ;; Use Helvetica as the sans-serif font when available.
 (when (font-info "Helvetica")
     (set-face-attribute 'variable-pitch nil :family "Helvetica" :height 120))
+
+;; Use the Helvetica font as well for Emacs 29 mode line.
+(when (and (font-info "Helvetica") (>= (string-to-number emacs-version) 29))
+  (set-face-attribute 'mode-line nil :family "Helvetica"))
   #+END_SRC
 * Graphical
   #+BEGIN_SRC emacs-lisp :tangle yes
@@ -2080,6 +2124,16 @@ This can be reverted later with ~(advice-remove)~ though.
   (let ((fill-column (point-max)))
     (fill-region beg end)))
    #+END_SRC
+** COMMENT Read value from environment variables
+#+BEGIN_SRC emacs-lisp :tangle yes
+(defun auralcat/get-env-var (env-var-name)
+  "This is a way to work around how the system interprets environment variables
+to read them in real time. It returns the value under ENV-VAR-NAME in your shell init files.
+
+You just need to change the env var value (or add the key) in .bash_profile and
+this function will pick it up."
+ (shell-command-to-string (format "$SHELL --login -c 'echo -n $%s'" env-var-name)))
+#+END_SRC
 * Work configurations
 I prefer to leave the work Elisp configuration files somewhere else because they
 contain private/confidential information.
