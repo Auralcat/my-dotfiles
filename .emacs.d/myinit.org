@@ -27,7 +27,7 @@
 * Bookmarks
   It's a quicker way to navigate through files you visit often.
   #+BEGIN_SRC emacs-lisp :tangle yes
-(setq bookmark-default-file "~/file-bouncer/bookmarks")
+(setq bookmark-default-file "~/emacs-bookmarks")
 ;; Every time bookmarks are changed, save them
 (setq bookmark-save-flag 1)
   #+END_SRC
