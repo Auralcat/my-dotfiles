@@ -1468,14 +1468,6 @@ every time you call ~git status~.
    ((and (string-equal system-name auralcat/work-system-name) (eq system-type 'gnu/linux))
     (setq circadian-themes '((:sunrise . modus-operandi)
                              (:sunset  . modus-vivendi)))))
-
-  ;; Hooks
-  (add-hook 'circadian-before-load-theme-hook
-            #'(lambda (theme)
-                (if (eq theme 'solarized-dark)
-                    (set-frame-font "Fantasque Sans Mono"))
-                ))
-
   (circadian-setup))
     #+END_SRC
 *** Anzu
@@ -1642,6 +1634,10 @@ the themes themselves.
 ;; Use Helvetica as the sans-serif font when available.
 (when (font-info "Helvetica")
     (set-face-attribute 'variable-pitch nil :family "Helvetica" :height 120))
+
+;; Use the Helvetica font as well for Emacs 29 mode line.
+(when (and (font-info "Helvetica") (>= (string-to-number emacs-version) 29))
+  (set-face-attribute 'mode-line nil :family "Helvetica"))
   #+END_SRC
 * Graphical
   #+BEGIN_SRC emacs-lisp :tangle yes
