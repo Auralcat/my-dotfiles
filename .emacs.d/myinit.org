@@ -1399,6 +1399,25 @@ This is great to concentrate on text when you want to write prose.
     (evil-set-initial-state 'git-commit-mode 'emacs)
     ))
      #+END_SRC
+**** Auto pull data from forge on project switch
+You will need to define the ~auralcat-forge-pull-allowed-projects~ variable
+locally, so ~forge~ does not pull the new PRs and issues for every project you
+switch into.
+
+This may need more work in the future, if you get annoyed by pulling new data
+every time you call ~git status~.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+;; Add your projects locally later.
+(setq auralcat-forge-pull-allowed-projects '())
+
+(defun auralcat--magit-auto-run-forge-pull ()
+  "Runs forge-pull automatically on allowed projects."
+(when (member (projectile-project-name) auralcat-forge-pull-allowed-projects)
+  (forge-pull)))
+
+(add-hook 'magit-status-mode-hook #'auralcat--magit-auto-run-forge-pull)
+#+END_SRC
 **** Viewing diffs
 #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Wrap those long lines.
