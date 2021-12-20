@@ -596,7 +596,10 @@ It's quite comfortable when you want to read longform books in the computer.
   ;; Set the width to 80 chars, this is better to read.
   (setq nov-text-width 80)
   ;; Remove the mode line in the book's buffer.
-  (add-hook 'nov-mode-hook #'(lambda () (setq-local mode-line-format nil))))
+  (add-hook 'nov-mode-hook #'(lambda ()
+                               (setq-local mode-line-format nil)
+                               (setq-local show-trailing-whitespace nil)
+                               )))
 #+END_SRC
 *** Makefile-mode
 I'm working with Makefiles now, so this is useful.
