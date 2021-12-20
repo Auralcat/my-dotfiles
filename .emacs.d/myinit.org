@@ -1141,6 +1141,7 @@ The drawbacks are:
   :hook ((vterm-mode) . 'vterm-mode-tweaks)
   :bind (:map vterm-mode-map
               ("C-M-o" . 'ace-window)
+              ("C-]" . 'vterm-copy-mode)
               ("M-w" . 'auralcat/vterm-copy-last-command-output)
               ("M-p" . 'vterm-send-up)
               ("M-r" . 'vterm-send-C-r)
@@ -1151,6 +1152,22 @@ The drawbacks are:
 ;; Macro to copy vterm's last command output.
 (fset 'auralcat/vterm-copy-last-command-output
       (kmacro-lambda-form [?\C-c ?\C-t ?\C-c ?\C-p ?\C-a ?\C-  ?\C-c ?\C-n ?\C-p ?\M-b ?\C-e return] 0 "%d"))
+#+END_SRC
+**** Improve vterm copy mode
+I don't like the default ~C-c C-t~ binding to enter ~vterm-copy-mode~. It feels
+clunky to me.
+
+I also don't like using Emacs keybindings there to copy stuff. The ~evil~ bindings
+are more comfortable for that.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(defun auralcat/vterm-use-evil-normal-state-on-copy-mode ()
+  "Uses evil-normal-state when entering vterm-copy-mode and evil-emacs-state
+when exiting vterm-copy-mode."
+  (if (eq evil-state 'normal)
+      (evil-emacs-state)
+    (evil-normal-state)))
+
+(add-hook 'vterm-copy-mode-hook #'auralcat/vterm-use-evil-normal-state-on-copy-mode)
 #+END_SRC
 *** Exec path from shell
   Replicates terminal env vars in graphical Emacs.
