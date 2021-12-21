@@ -1639,17 +1639,24 @@ the themes themselves.
         (auralcat--set-fixed-pitch-fonts "Fantasque Sans Mono" 140)
       (auralcat--set-fixed-pitch-fonts "Monaco" 120)))
    ((eq system-type 'gnu/linux)
-    (if (font-info "Fantasque Sans Mono")
-        (auralcat--set-fixed-pitch-fonts "Fantasque Sans Mono" 120)
-      (auralcat--set-fixed-pitch-fonts "Ubuntu Mono" 120)))))
+    ;; This is because pure GTK Emacs does not play well with multiple frames.
+    ;; This is not a problem for the personal setup, but I use 2 displays at work.
+    (if (functionp 'pgtk-next-frame)
+        (auralcat--set-fonts-for-gnu-linux 100)
+      (auralcat--set-fonts-for-gnu-linux 120)))))
+
+(defun auralcat--set-fonts-for-gnu-linux (height)
+  "Sets fonts for GNU/Linux machines with HEIGHT."
+  (if (font-info "Fantasque Sans Mono")
+      (auralcat--set-fixed-pitch-fonts "Fantasque Sans Mono" height)
+    (auralcat--set-fixed-pitch-fonts "Ubuntu Mono" height)))
 
 ;; Use Helvetica as the sans-serif font when available.
 (when (font-info "Helvetica")
-    (set-face-attribute 'variable-pitch nil :family "Helvetica" :height 120))
+    (set-face-attribute 'variable-pitch nil :family "Helvetica" :height 100)
+    ;; Use the Helvetica font as well for Emacs 29 mode line.
+    (set-face-attribute 'mode-line nil :family "Helvetica"))
 
-;; Use the Helvetica font as well for Emacs 29 mode line.
-(when (and (font-info "Helvetica") (>= (string-to-number emacs-version) 29))
-  (set-face-attribute 'mode-line nil :family "Helvetica"))
   #+END_SRC
 * Graphical
   #+BEGIN_SRC emacs-lisp :tangle yes
