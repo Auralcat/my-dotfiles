@@ -8,8 +8,7 @@
 
 ;; Customize undo command as of Emacs 28.
 ;; 'undo-redo is the native feature in this new version.
-(when (string-match "28" (emacs-version))
- (evil-set-undo-system 'undo-redo))
+(evil-set-undo-system 'undo-redo)
 
 ;; I like to differentiate the Emacs state cursor with a box
 (setq evil-emacs-state-cursor '("magenta" box))
