@@ -1,5 +1,3 @@
-;; Porting my .vimrc to Emacs
-
 ;; Colorize the cursor depending on current mode.
 ;; It's one of those small things that you can't live without once you get it.
 
@@ -23,7 +21,7 @@
 ;; Some buffers in Emacs are read-only and can be usually killed pressing
 ;; lowercase q. Much more convenient if you ask me.
 ;; Use Q in normal mode to kill current buffer.
-(define-key evil-normal-state-map (kbd "Q") 'kill-current-buffer)
+(define-key evil-normal-state-map (kbd "Q") 'auralcat/quit-and-kill-buffer)
 
 ;; Evil-snipe: use s and S for sniping, transfer the command from S to K
 (define-key evil-normal-state-map (kbd "K") 'evil-change-whole-line)
@@ -112,14 +110,11 @@
   "dcd" 'auralcat-docker-compose-down
   "dcl" 'docker-compose-logs
   ;; Open frequently visited files
-  "fb" 'my-find-budget-file
   "fe" 'my-find-evilrc-file
-  "ff" 'my-find-finances-log-file
   "fm" 'jump-to-messages-buffer
   "fi" 'my-find-init-el-file
   "fo" 'my-find-init-org-file
   "fs" 'jump-to-scratch-buffer
-  "fw" 'my-find-work-org-file
   ;; Magit stuff
   "gs" 'magit-status
   "gb" 'magit-blame
