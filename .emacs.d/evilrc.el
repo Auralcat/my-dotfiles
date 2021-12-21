@@ -85,7 +85,7 @@
 ;; Global bindings go here
 (evil-leader/set-key
   ;; Eshell
-  "$" 'shell
+  "$" 'vterm
   ;; Org-agenda
   "a" 'org-agenda
   ;; Frequently visited bookmarks
