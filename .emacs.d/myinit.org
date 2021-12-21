@@ -310,8 +310,6 @@ from ~M-x~ and get the same result if you want.
 
 ;; Since I work only with left-to-right languages, we can set it like this.
 (setq bidi-paragraph-direction 'left-to-right)
-(if (version<= "27.1" emacs-version)
-    (setq bidi-inhibit-bpa t))
 
 ;; I don't like lockfiles
 (setq create-lockfiles nil)
@@ -494,11 +492,9 @@ We need to do some customizations to comint-related buffers to improve performan
 
 (defun prog-mode-tweaks ()
   ;; Set line number mode and column number mode for code files
-  (if (< (string-to-number emacs-version) 24)
-      (line-number-mode 1)
-    (display-line-numbers-mode))
-  (setq fill-column 80)
-  )
+  (display-line-numbers-mode)
+  (setq fill-column 80))
+
 (add-hook 'prog-mode-hook 'prog-mode-tweaks)
 (add-hook 'text-mode-hook 'column-number-mode)
 
