@@ -5,6 +5,13 @@
 ;; This is so I know what's going on when I ask for help from Emacs.
 ;;
 ;;; Code:
+
+;; This is a quick way to mark stuff as done, simple yet oh so efficient
+(defun auralcat/org-mark-heading-as-done (args)
+  "Marks the heading under point as DONE."
+  (interactive "P")
+  (org-todo "DONE"))
+
 (defun my-find-evilrc-file ()
     "Jump to the file with Evil-mode run commands."
     (interactive)
