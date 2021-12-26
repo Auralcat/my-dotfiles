@@ -1186,11 +1186,9 @@ Create links to Github/GitLab files from the comfort of your Emacs buffer.
   :hook (magit-mode . magit-delta-mode))
 #+END_SRC
 *** Smartparens
-This works better than Autopair for Elixir mode.
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package smartparens
-  :hook ((elixir-mode inf-elixir-mode) . 'smartparens-mode)
-  :after (elixir-mode)
+  :hook ((prog-mode inf-elixir-mode) . 'smartparens-mode)
   :config
   (require 'smartparens-config))
 #+END_SRC
