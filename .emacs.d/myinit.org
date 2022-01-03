@@ -1165,6 +1165,21 @@ when exiting vterm-copy-mode."
 
 (add-hook 'vterm-copy-mode-hook #'auralcat/vterm-use-evil-normal-state-on-copy-mode)
 #+END_SRC
+**** PROTIP: Compiling ~vterm-module~ manually
+Whenever you're not able to compile ~vterm-module~ from Emacs with
+~vterm-module-compile~, you can compile the module manually by running:
+
+#+BEGIN_SRC shell
+cd ~/my-dotfiles/.emacs.d/elpa/vterm-<version>
+mkdir -p build
+cd build
+cmake ..
+make
+#+END_SRC
+
+I ran into this situation once and the compilation buffer in Emacs didn't output
+any error information, it was crashing with silent errors. By compiling it in
+the terminal, I could see the output messages and there were no errors.
 *** Exec path from shell
   Replicates terminal env vars in graphical Emacs.
   #+BEGIN_SRC emacs-lisp :tangle yes
