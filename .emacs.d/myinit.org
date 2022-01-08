@@ -775,6 +775,7 @@ A wrapper around Elixir's ~mix~ for Emacs
             (define-key 'elixir-mix-map "f" 'auralcat/elixir-run-mix-format-in-project-root)
             (define-key 'elixir-mix-map "c" 'mix-compile)
             (define-key 'elixir-mix-map "x" 'mix-execute-task)
+            (define-key 'elixir-mix-map "w" 'auralcat/mix-test-watch-current-buffer)
             (define-key 'elixir-mix-map (kbd "C-,") 'mix-last-command))
 
   (add-hook 'elixir-mode-hook #'(lambda ()
@@ -826,6 +827,15 @@ A wrapper around Elixir's ~mix~ for Emacs
   (if (mix--umbrella-apps)
       (mix-test-current-buffer prefix t)
       (mix-test-current-buffer prefix)))
+
+(defun auralcat/mix-test-watch-current-buffer (prefix)
+  "Runs mix test.watch for the current buffer and respects umbrella app strucuture."
+  (interactive "P")
+  (mix--start
+   "test"
+   (format "test.watch --seed 0 --max-failures 1 %s" (kill-new (expand-file-name (buffer-file-name))))
+   (mix--find-closest-mix-file-dir (expand-file-name (buffer-file-name)))
+   prefix))
 
 (add-hook 'after-save-hook 'auralcat/elixir--run-mix-format-on-save)
 #+END_SRC
