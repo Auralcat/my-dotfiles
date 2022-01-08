@@ -769,9 +769,9 @@ A wrapper around Elixir's ~mix~ for Emacs
   ;; instead of 3 with evil-leader.
   :config
   (define-prefix-command 'elixir-mix-map)
-            (define-key 'elixir-mix-map "t" 'mix-test)
-            (define-key 'elixir-mix-map (kbd "SPC") 'mix-test-current-buffer)
-            (define-key 'elixir-mix-map "." 'mix-test-current-test)
+            (define-key 'elixir-mix-map "t" 'auralcat/mix-test)
+            (define-key 'elixir-mix-map (kbd "SPC") 'auralcat/mix-test-current-buffer)
+            (define-key 'elixir-mix-map "." 'auralcat/mix-test-current-test)
             (define-key 'elixir-mix-map "f" 'auralcat/elixir-run-mix-format-in-project-root)
             (define-key 'elixir-mix-map "c" 'mix-compile)
             (define-key 'elixir-mix-map "x" 'mix-execute-task)
@@ -804,6 +804,28 @@ A wrapper around Elixir's ~mix~ for Emacs
      (shell-command "mix format"))
    (shell-command (format "mix format %s" (buffer-file-name))))
    (message "Elixir files formatted successfully."))
+
+;; Wrappers around mix-test functions to use the umbrella app flag when necessary.
+(defun auralcat/mix-test (prefix)
+  "A wrapper around mix-test to pick up umbrella apps automatically."
+  (interactive "P")
+  (if (mix--umbrella-apps)
+      (mix-test prefix t)
+      (mix-test prefix)))
+
+(defun auralcat/mix-test-current-test (prefix)
+  "A wrapper around mix-test-current-test to pick up umbrella apps automatically."
+  (interactive "P")
+  (if (mix--umbrella-apps)
+      (mix-test-current-test prefix t)
+      (mix-test-current-test prefix)))
+
+(defun auralcat/mix-test-current-buffer (prefix)
+  "A wrapper around mix-test-current-buffer to pick up umbrella apps automatically."
+  (interactive "P")
+  (if (mix--umbrella-apps)
+      (mix-test-current-buffer prefix t)
+      (mix-test-current-buffer prefix)))
 
 (add-hook 'after-save-hook 'auralcat/elixir--run-mix-format-on-save)
 #+END_SRC
