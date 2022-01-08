@@ -322,10 +322,10 @@ from ~M-x~ and get the same result if you want.
 
 ;; Manual packages load path
 (add-to-list 'custom-theme-load-path "~/my-dotfiles/.emacs.d/manual-themes/")
-(add-to-list 'custom-theme-load-path "~/my-dotfiles/.emacs.d/manual-packages/")
 
 ;; Manual Elisp scripts load path
 (add-to-list 'load-path "~/my-dotfiles/.emacs.d/elisp-custom")
+(add-to-list 'load-path "~/my-dotfiles/.emacs.d/manual-packages/")
 
 ;; Backup files by copying them
 (setq backup-by-copying t)
@@ -1034,6 +1034,15 @@ A wrapper around Elixir's ~mix~ for Emacs
   (mode-icons-mode))
     #+END_SRC
 ** Utilities
+*** Play nice with ASDF
+I found this manual package called[[https://github.com/tabfugnic/asdf.el/][ asdf.el]] that makes Emacs identify binaries
+installed through ASDF in the system.
+
+You just need to make sure that the cloned repo is in your ~load-path~.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(require 'asdf)
+(asdf-enable)
+#+END_SRC
 *** Ace Jump
 Allows you to move anywhere in the visible portion of the buffer (or any
 frame you got in your screens) using at least 3 keystrokes.
@@ -1123,7 +1132,6 @@ The drawbacks are:
 - Needs to bind new keybindings to get commands that are by default in
   ~shell-mode~ or ~term-mode~ with ~line-mode~.
 - To search the terminal buffer with =C-s=, you'll need to enter ~vterm-copy-mode~.
-
 #+BEGIN_SRC emacs-lisp :tangle yes
 (defun vterm-mode-tweaks ()
   (set (make-local-variable 'company-backends) '(company-capf company-files))
