@@ -1495,10 +1495,9 @@ every time you call ~git status~.
    It's highly recommended to update and pull changes from the remote repository into the master/main branch before running this command."
   (interactive "P")
   (let* ((default-directory (projectile-project-root))
-         (git-open-changed-files-command "git --no-pager diff --name-only main $(git branch --show-current) | xargs emacsclient -n"))
+     (git-changed-files-command "git --no-pager diff --name-only main $(git branch --show-current)"))
     (message "Opening changed files in the current branch compared to the master/main branch...")
-    (async-shell-command git-open-changed-files-command)
-    (kill-buffer-and-window)))
+    (projectile-run-async-shell-command-in-root (format "find $(%s) -exec emacsclient -n {} \\;" git-changed-files-command))))
 #+END_SRC
 *** Yasnippets
     It originally came with company-mode, it's handy to write faster
