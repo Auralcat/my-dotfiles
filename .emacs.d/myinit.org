@@ -2113,17 +2113,6 @@ Use the fixed-pitch font for tables.
    ))
     #+END_SRC
 
-** Evil-org
-   Evil-mode keybindings for org-mode.
-   #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package evil-org
-  :diminish evil-org-mode
-  :hook (org-mode . evil-org-mode)
-  )
-
-;; Use 'complete when pressing C-<return> in insert mode for org-mode buffers.
-(add-hook 'org-mode-hook #'(lambda () (define-key evil-insert-state-map (kbd "C-<return>") 'complete)))
-   #+END_SRC
 * Variables
   #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Set Fundamental mode as default mode for new buffers:
