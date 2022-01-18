@@ -138,7 +138,7 @@
   "s" 'save-buffer
   "/" 'git-link
   "-" 'zoom-window-zoom
-  )
+  "n" 'auralcat/org-mark-heading-as-done)
 
 ;; Set Emacs state as initial state for a handful of modes.
 ;; This includes Dired, Xref, shell-related modes and list modes.
