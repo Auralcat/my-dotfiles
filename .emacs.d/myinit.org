@@ -556,6 +556,9 @@ This is a built-in mode, but I want to change some stuff there.
 ;; Use Emacs keys and bindings in compilation-mode and its derived modes.
 (add-hook 'compilation-mode-hook 'evil-emacs-state)
 (add-hook 'compilation-start-hook 'evil-emacs-state)
+
+;; Make the compilation buffer scroll to the end on command finish
+(setq compilation-scroll-output t)
 #+END_SRC
 *** Elixir-mode
     Elixir support for Emacs
