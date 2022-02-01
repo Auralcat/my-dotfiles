@@ -1074,8 +1074,9 @@ installed through ASDF in the system.
 
 You just need to make sure that the cloned repo is in your ~load-path~.
 #+BEGIN_SRC emacs-lisp :tangle yes
-(require 'asdf)
-(asdf-enable)
+(add-to-list 'load-path "~/my-dotfiles/.emacs.d/manual-packages/emacs-asdf")
+  (require 'asdf)
+  (asdf-enable)
 #+END_SRC
 *** Ace Jump
 Allows you to move anywhere in the visible portion of the buffer (or any
@@ -1289,7 +1290,7 @@ This is great to concentrate on text when you want to write prose.
 (use-package olivetti
   :config
   (setq olivetti-style 'fancy
-        olivetti-body-width 80))
+        olivetti-body-width 100))
 #+END_SRC
 *** Golden Ratio Mode
     Splits windows using the [[https://en.wikipedia.org/wiki/Golden_ratio][Golden Ratio]].
