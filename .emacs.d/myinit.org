@@ -569,6 +569,17 @@ This is a built-in mode, but I want to change some stuff there.
   (define-key elixir-mode-map (kbd "C-c C-l") 'inf-elixir-send-line)
   (define-key elixir-mode-map (kbd "C-c C-r") 'inf-elixir-send-region))
     #+END_SRC
+**** Livebook notebook editing support
+Livebook uses a special kind of Markdown, but for us there is no change
+whatsoever from the usual ~gfm-mode~.
+
+Livebook supports Elixir code as a first class citizen as well as Mermaid diagrams.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(define-derived-mode livemd-mode gfm-mode "Livebook"
+  "A Markdown-flavored mode for editing Livebook notebook files."
+(add-to-list 'auto-mode-alist '("\\.livemd?\\'" . livemd-mode))
+(add-hook 'livemd-mode-hook #'(lambda () (auto-revert-mode 1))))
+#+END_SRC
 *** Sass-mode
     #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package sass-mode
