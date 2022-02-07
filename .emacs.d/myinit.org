@@ -82,19 +82,19 @@
 
 (defun evil-ruby-block-range (count beg end type &optional inclusive)
   (let ((current-point (point))
-        (block-begin (progn (evil-end-of-line) (re-search-backward ruby-block-beg-re nil t)))
-        (block-end (progn (evilmi-jump-items) (point))))
+    (block-begin (progn (evil-end-of-line) (re-search-backward ruby-block-beg-re nil t)))
+    (block-end (progn (evilmi-jump-items) (point))))
     (if inclusive
-        (let ((begin (progn (goto-char block-begin) (evil-beginning-of-line) (point)))
-              (end (progn (goto-char block-end) (evil-next-line) (evil-beginning-of-line) (if (looking-at "^$") (+ (point) 1) (point)))))
-          (progn
-            (goto-char current-point)
-            (evil-range begin end)))
+    (let ((begin (progn (goto-char block-begin) (evil-beginning-of-line) (point)))
+          (end (progn (goto-char block-end) (evil-next-line) (evil-beginning-of-line) (if (looking-at "^$") (+ (point) 1) (point)))))
+      (progn
+        (goto-char current-point)
+        (evil-range begin end)))
       (let ((begin (progn (goto-char block-begin) (evil-next-line) (evil-first-non-blank) (point)))
-            (end (progn (goto-char block-end) (evil-previous-line) (evil-end-of-line) (+ (point) 1))))
-        (progn
-          (goto-char current-point)
-          (evil-range begin end))))))
+        (end (progn (goto-char block-end) (evil-previous-line) (evil-end-of-line) (+ (point) 1))))
+    (progn
+      (goto-char current-point)
+      (evil-range begin end))))))
 
 (define-key evil-inner-text-objects-map "r" 'evil-textobj-inner-ruby-block)
 (define-key evil-outer-text-objects-map "r" 'evil-textobj-outer-ruby-block)
@@ -106,14 +106,14 @@ stuff from there and see Docker output correctly.
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package term
   :bind (:map term-raw-map
-              ("M-x" . 'execute-extended-command)
-              ("M-v" . 'scroll-down-command)
-              ("C-v" . 'scroll-up-command)
-              ("M-o" . 'other-window)
-              ("C-M-o" . 'other-frame)
-              ("M-2" . 'ido-switch-buffer)
-              ("M-w" . 'auralcat/term-copy-last-command)
-              ("M-4" . 'ido-switch-buffer-other-window))
+          ("M-x" . 'execute-extended-command)
+          ("M-v" . 'scroll-down-command)
+          ("C-v" . 'scroll-up-command)
+          ("M-o" . 'other-window)
+          ("C-M-o" . 'other-frame)
+          ("M-2" . 'ido-switch-buffer)
+          ("M-w" . 'auralcat/term-copy-last-command)
+          ("M-4" . 'ido-switch-buffer-other-window))
 
   :config
   ;; Work PS1
@@ -125,7 +125,7 @@ stuff from there and see Docker output correctly.
     (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *")))
 
   (add-hook 'term-mode-hook #'(lambda ()
-                                (set (make-local-variable 'company-backends) '(company-capf company-files))))
+                (set (make-local-variable 'company-backends) '(company-capf company-files))))
 
   (evil-set-initial-state 'term-mode 'emacs)
   (evil-set-initial-state 'ansi-term-mode 'emacs))
@@ -186,31 +186,31 @@ from ~M-x~ and get the same result if you want.
 
 (fset (quote sample-macro)
       (lambda (&optional arg) "Sample description" (interactive "p")
-        (undo-boundary)
-        (noflet ((undo-boundary ()))
-          (kmacro-exec-ring-item (quote ([100 87 65 32 35 32 65 110 111 116 104 101 114 32 109 97 99 114 111 32 99 97 108 108 46 escape 134217730 return 112 45] 0 "%d")) arg)
-          )
-        (undo-boundary)
-        ))
+    (undo-boundary)
+    (noflet ((undo-boundary ()))
+      (kmacro-exec-ring-item (quote ([100 87 65 32 35 32 65 110 111 116 104 101 114 32 109 97 99 114 111 32 99 97 108 108 46 escape 134217730 return 112 45] 0 "%d")) arg)
+      )
+    (undo-boundary)
+    ))
 
 ;; Some macros to adjust Ruby blocks
 (fset 'auralcat/ruby-move-defun-backward
       (lambda (&optional arg) "Moves a DEF block backwards in the class definition." (interactive "p")
-        (undo-boundary)
-        (noflet ((undo-boundary ()))
-          (kmacro-exec-ring-item (quote ([26 167772166 23 134217820 16 4 134217820 4 2 134217730 16 return 25 return 134217730 26] 0 "%d")) arg)
-          )
-        (undo-boundary)
-        ))
+    (undo-boundary)
+    (noflet ((undo-boundary ()))
+      (kmacro-exec-ring-item (quote ([26 167772166 23 134217820 16 4 134217820 4 2 134217730 16 return 25 return 134217730 26] 0 "%d")) arg)
+      )
+    (undo-boundary)
+    ))
 
 (fset 'auralcat/ruby-move-block-forward
       (lambda (&optional arg) "Moves a Ruby block forward in the current nesting level." (interactive "p")
-        (undo-boundary)
-        (noflet ((undo-boundary ()))
-          (kmacro-lambda-form [?\C-z ?\C-  ?\C-\M-n ?\C-e ?\C-w ?\C-\M-n ?\C-m ?\C-/ ?\C-e ?\C-m ?\C-m ?\C-y ?\C-u ?\C-  ?\C-  ?\C-k ?\C-k ?\C-i ?\C-z] 0 "%d")
-          )
-        (undo-boundary)
-        )
+    (undo-boundary)
+    (noflet ((undo-boundary ()))
+      (kmacro-lambda-form [?\C-z ?\C-  ?\C-\M-n ?\C-e ?\C-w ?\C-\M-n ?\C-m ?\C-/ ?\C-e ?\C-m ?\C-m ?\C-y ?\C-u ?\C-  ?\C-  ?\C-k ?\C-k ?\C-i ?\C-z] 0 "%d")
+      )
+    (undo-boundary)
+    )
       )
 
 ;; Removes a Ruby block wrapping another block.
@@ -228,17 +228,17 @@ from ~M-x~ and get the same result if you want.
 ;; Paste the content from the kill ring into the next and previous lines
 (fset 'auralcat/yank-content-into-next-line
       (lambda (&optional arg) "Paste the content from the kill ring into the next line." (interactive "p")
-        (undo-boundary)
-        (noflet ((undo-boundary ()))
-          (kmacro-lambda-form [?\C-z return ?\C-p ?\C-y ?\C-a ?\C-n ?\C-z] 0 "%d"))
-        (undo-boundary)))
+    (undo-boundary)
+    (noflet ((undo-boundary ()))
+      (kmacro-lambda-form [?\C-z return ?\C-p ?\C-y ?\C-a ?\C-n ?\C-z] 0 "%d"))
+    (undo-boundary)))
 
 (fset 'auralcat/yank-content-into-previous-line
       (lambda (&optional arg) "Paste the content from the kill ring into the previous line." (interactive "p")
-        (undo-boundary)
-        (noflet ((undo-boundary ()))
-          (kmacro-lambda-form [?\C-z ?\C-e return ?\C-y ?\C-a ?\C-p ?\C-z] 0 "%d"))
-        (undo-boundary)))
+    (undo-boundary)
+    (noflet ((undo-boundary ()))
+      (kmacro-lambda-form [?\C-z ?\C-e return ?\C-y ?\C-a ?\C-p ?\C-z] 0 "%d"))
+    (undo-boundary)))
 
   #+END_SRC
 
@@ -299,8 +299,8 @@ from ~M-x~ and get the same result if you want.
 
 ;; Change window title
 (setq frame-title-format (format "%s %s - %s" (nth 1 (split-string (emacs-version)))
-                                   (nth 2 (split-string (emacs-version)))
-                                   (system-name)))
+                   (nth 2 (split-string (emacs-version)))
+                   (system-name)))
 
 ;; Add frame margins. This makes things more pleasant to read.
 (setq default-frame-alist '((internal-border-width . 20)))
@@ -407,17 +407,17 @@ from ~M-x~ and get the same result if you want.
 (defvar file-name-handler-alist-old file-name-handler-alist)
 
 (setq-default gc-cons-threshold 402653184
-              file-name-handler-alist nil
-              gc-cons-percentage 0.6
-              auto-window-vscroll nil
-              message-log-max 16384)
+          file-name-handler-alist nil
+          gc-cons-percentage 0.6
+          auto-window-vscroll nil
+          message-log-max 16384)
 
 (add-hook 'after-init-hook
-          `(lambda ()
-             (setq file-name-handler-alist file-name-handler-alist-old
-                   gc-cons-threshold 800000
-                   gc-cons-percentage 0.1)
-             (garbage-collect)) t)
+      `(lambda ()
+         (setq file-name-handler-alist file-name-handler-alist-old
+           gc-cons-threshold 800000
+           gc-cons-percentage 0.1)
+         (garbage-collect)) t)
 
 (setq inhibit-compacting-font-caches t)
 
@@ -497,9 +497,6 @@ We need to do some customizations to comint-related buffers to improve performan
 
 (add-hook 'prog-mode-hook 'prog-mode-tweaks)
 (add-hook 'text-mode-hook 'column-number-mode)
-
-;; Create filling for org-mode
-(add-hook 'org-mode-hook 'auto-fill-mode)
   #+END_SRC
 * Packages
 ** Major Modes
@@ -508,8 +505,7 @@ We need to do some customizations to comint-related buffers to improve performan
   #+BEGIN_SRC emacs-lisp :tangle yes
 (defun markdown-mode-tweaks ()
   (visual-line-mode 1)
-  (auto-fill-mode -1)
-  )
+  (auto-fill-mode -1))
 
 (use-package markdown-mode
   :hook ((markdown-mode . markdown-mode-tweaks)
@@ -523,9 +519,10 @@ We need to do some customizations to comint-related buffers to improve performan
   ("C-c 2" . 'markdown-insert-header-atx-2)
   ("C-c 3" . 'markdown-insert-header-atx-3)
   :config
-  (setq markdown-asymmetric-header t))
+  (setq markdown-fontify-code-blocks-natively t)
+  ;; Use fixed-pitch fonts inside code blocks.
+  (set-face-attribute 'markdown-code-face nil :inherit 'fixed-pitch))
   #+END_SRC
-
 *** Web-mode
   #+BEGIN_SRC emacs-lisp :tangle yes
 (defun web-mode-keybindings ()
@@ -577,8 +574,22 @@ Livebook supports Elixir code as a first class citizen as well as Mermaid diagra
 #+BEGIN_SRC emacs-lisp :tangle yes
 (define-derived-mode livemd-mode gfm-mode "Livebook"
   "A Markdown-flavored mode for editing Livebook notebook files."
+(define-key livemd-mode-map (kbd "C-c e") 'livemd/insert-elixir-block)
+(define-key livemd-mode-map (kbd "C-c m") 'livemd/insert-mermaid-block)
+(define-key livemd-mode-map (kbd "C-c n") 'markdown-insert-header-atx-2)
 (add-to-list 'auto-mode-alist '("\\.livemd?\\'" . livemd-mode))
-(add-hook 'livemd-mode-hook #'(lambda () (auto-revert-mode 1))))
+(add-hook 'livemd-mode-hook #'(lambda () (auto-revert-mode 1)))
+(add-hook 'livemd-mode-hook #'(lambda () (auto-save-visited-mode 0))))
+
+(defun livemd/insert-elixir-block (args)
+  "Inserts an Elixir code block."
+  (interactive "P")
+  (markdown-insert-gfm-code-block "elixir" nil))
+
+(defun livemd/insert-mermaid-block (args)
+  "Inserts a Mermaid diagram block."
+  (interactive "P")
+  (markdown-insert-gfm-code-block "mermaid" nil))
 #+END_SRC
 *** Sass-mode
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -607,9 +618,9 @@ It's quite comfortable when you want to read longform books in the computer.
   (setq nov-text-width 80)
   ;; Remove the mode line in the book's buffer.
   (add-hook 'nov-mode-hook #'(lambda ()
-                               (setq-local mode-line-format nil)
-                               (setq-local show-trailing-whitespace nil)
-                               )))
+                   (setq-local mode-line-format nil)
+                   (setq-local show-trailing-whitespace nil)
+                   )))
 #+END_SRC
 *** Makefile-mode
 I'm working with Makefiles now, so this is useful.
@@ -662,8 +673,8 @@ I'm working with Makefiles now, so this is useful.
 
 ;; Fallback to vanilla Ruby mode when things go bad
 (add-to-list 'auto-mode-alist
-             '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'"
-               . ruby-mode))
+         '("\\(?:\\.rb\\|ru\\|rake\\|thor\\|jbuilder\\|gemspec\\|podspec\\|/\\(?:Gem\\|Rake\\|Cap\\|Thor\\|Vagrant\\|Guard\\|Pod\\)file\\)\\'"
+           . ruby-mode))
 
 ;; (define-key enh-ruby-mode-map (kbd "M-<down>") 'auralcat/ruby-move-defun-forward)
 ;; (define-key enh-ruby-mode-map (kbd "M-<up>") 'auralcat/ruby-move-defun-backward)
@@ -678,14 +689,14 @@ I'm working with Makefiles now, so this is useful.
   :ensure t
   :defer t
   :bind (:map web-mode-map
-              ("C-<up>"    . web-mode-element-previous)
-              ("C-<down>"  . web-mode-element-next)
-              ("C-<left>"  . web-mode-element-beginning)
-              ("C-<right>" . web-mode-tag-match)
-              ("C-S-<up>"  . web-mode-element-parent)
-              ("M-<up>"    . web-mode-element-content-select)
-              ("C-k"       . web-mode-element-kill)
-              ("M-RET"     . complete))
+          ("C-<up>"    . web-mode-element-previous)
+          ("C-<down>"  . web-mode-element-next)
+          ("C-<left>"  . web-mode-element-beginning)
+          ("C-<right>" . web-mode-tag-match)
+          ("C-S-<up>"  . web-mode-element-parent)
+          ("M-<up>"    . web-mode-element-content-select)
+          ("C-k"       . web-mode-element-kill)
+          ("M-RET"     . complete))
 
   :init
   ;; File associations
@@ -701,8 +712,8 @@ I'm working with Makefiles now, so this is useful.
 
   ;; Engine associations
   (setq web-mode-engines-alist
-        '(("php"    . "\\.phtml\\'")
-          ("blade"  . "\\.blade\\.")))
+    '(("php"    . "\\.phtml\\'")
+      ("blade"  . "\\.blade\\.")))
 
   ;; Highlight tag when editing
   (setq web-mode-enable-current-element-highlight t))
@@ -783,17 +794,17 @@ A wrapper around Elixir's ~mix~ for Emacs
   ;; instead of 3 with evil-leader.
   :config
   (define-prefix-command 'elixir-mix-map)
-            (define-key 'elixir-mix-map "t" 'auralcat/mix-test)
-            (define-key 'elixir-mix-map (kbd "SPC") 'auralcat/mix-test-current-buffer)
-            (define-key 'elixir-mix-map "." 'auralcat/mix-test-current-test)
-            (define-key 'elixir-mix-map "f" 'auralcat/elixir-run-mix-format-in-project-root)
-            (define-key 'elixir-mix-map "c" 'mix-compile)
-            (define-key 'elixir-mix-map "x" 'mix-execute-task)
-            (define-key 'elixir-mix-map "w" 'auralcat/mix-test-watch-current-buffer)
-            (define-key 'elixir-mix-map (kbd "C-,") 'mix-last-command))
+        (define-key 'elixir-mix-map "t" 'auralcat/mix-test)
+        (define-key 'elixir-mix-map (kbd "SPC") 'auralcat/mix-test-current-buffer)
+        (define-key 'elixir-mix-map "." 'auralcat/mix-test-current-test)
+        (define-key 'elixir-mix-map "f" 'auralcat/elixir-run-mix-format-in-project-root)
+        (define-key 'elixir-mix-map "c" 'mix-compile)
+        (define-key 'elixir-mix-map "x" 'mix-execute-task)
+        (define-key 'elixir-mix-map "w" 'auralcat/mix-test-watch-current-buffer)
+        (define-key 'elixir-mix-map (kbd "C-,") 'mix-last-command))
 
   (add-hook 'elixir-mode-hook #'(lambda ()
-                                 (local-set-key (kbd "C-,") 'elixir-mix-map)))
+                 (local-set-key (kbd "C-,") 'elixir-mix-map)))
 
 (defun auralcat/elixir-run-mix-format-in-project-root (arg)
   "Runs `mix format` ín the project's root directory."
@@ -806,7 +817,7 @@ A wrapper around Elixir's ~mix~ for Emacs
   "Intended to be used in before-save-hook.
    Runs `mix format` on the buffer if it is visiting an Elixir file."
   (let ((elixir-file-extension-regexp "exs?$")
-        )
+    )
     (when (and (buffer-file-name) (string-match-p elixir-file-extension-regexp (buffer-file-name)))
       (auralcat/elixir--run-mix-format))))
 
@@ -892,7 +903,6 @@ A wrapper around Elixir's ~mix~ for Emacs
 (use-package flyspell
   :defer t
   :config
-  (add-hook 'text-mode-hook 'turn-on-auto-fill)
   (add-hook 'gfm-mode-hook 'flyspell-mode)
   (add-hook 'markdown-mode-hook 'flyspell-mode)
 
@@ -989,9 +999,9 @@ A wrapper around Elixir's ~mix~ for Emacs
 ;; - No auto-fill
 ;; - Line numbers on the side
 (add-hook 'apib-mode-hook #'(lambda ()
-                              (variable-pitch-mode 0)
-                              (auto-fill-mode 0)
-                              (display-line-numbers-mode 0)))
+                  (variable-pitch-mode 0)
+                  (auto-fill-mode 0)
+                  (display-line-numbers-mode 0)))
 
 ;; Web-mode completions
 (use-package company-web
@@ -1020,14 +1030,14 @@ A wrapper around Elixir's ~mix~ for Emacs
   :config
   ;; Ignore arrow commands and self-insert-commands
   (setq keyfreq-excluded-commands
-        '(self-insert-command
-          org-self-insert-command
-          weechat-self-insert-command
-          isearch-printing-char
-          vterm--self-insert
-          abort-recursive-edit
-          company-ignore
-          ))
+    '(self-insert-command
+      org-self-insert-command
+      weechat-self-insert-command
+      isearch-printing-char
+      vterm--self-insert
+      abort-recursive-edit
+      company-ignore
+      ))
 
   ;; Activate it
   (keyfreq-mode 1)
@@ -1088,7 +1098,7 @@ installed through ASDF in the system.
 
 You just need to make sure that the cloned repo is in your ~load-path~.
 #+BEGIN_SRC emacs-lisp :tangle yes
-(add-to-list 'load-path "~/my-dotfiles/.emacs.d/manual-packages/emacs-asdf")
+  (add-to-list 'load-path "~/my-dotfiles/.emacs.d/manual-packages/emacs-asdf")
   (require 'asdf)
   (asdf-enable)
 #+END_SRC
@@ -1105,7 +1115,7 @@ another window or even a frame.
   ("C-c SPC" . ace-jump-mode)
   ("M-3" . ace-jump-mode)
   (:map org-mode-map
-        ("C-c SPC" . ace-jump-mode))
+    ("C-c SPC" . ace-jump-mode))
   :config
   ;; Save the position of the previous mark as a jump position for Evil.
   ;; With that, we can cycle through where ace-jump was called from using C-i and C-o.
@@ -1145,22 +1155,22 @@ This is great for opensource projects and work.
     "View the the current message as a patch."
     (interactive)
     (let* ((id (notmuch-show-get-message-id))
-           (msg (notmuch-show-get-message-properties))
-           (part (notmuch-show-get-part-properties))
-           (subject (concat "Subject: " (notmuch-show-get-subject) "\n"))
-           (diff-default-read-only t)
-           (buf (get-buffer-create (concat "*notmuch-patch-" id "*")))
-           (map (make-sparse-keymap)))
+       (msg (notmuch-show-get-message-properties))
+       (part (notmuch-show-get-part-properties))
+       (subject (concat "Subject: " (notmuch-show-get-subject) "\n"))
+       (diff-default-read-only t)
+       (buf (get-buffer-create (concat "*notmuch-patch-" id "*")))
+       (map (make-sparse-keymap)))
       (define-key map "q" 'notmuch-bury-or-kill-this-buffer)
       (switch-to-buffer buf)
       (let ((inhibit-read-only t))
-        (erase-buffer)
-        (insert subject)
-        (insert (notmuch-get-bodypart-text msg part nil)))
+    (erase-buffer)
+    (insert subject)
+    (insert (notmuch-get-bodypart-text msg part nil)))
       (set-buffer-modified-p nil)
       (diff-mode)
       (lexical-let ((new-ro-bind (cons 'buffer-read-only map)))
-        (add-to-list 'minor-mode-overriding-map-alist new-ro-bind))
+    (add-to-list 'minor-mode-overriding-map-alist new-ro-bind))
       (goto-char (point-min))))
   (define-key 'notmuch-show-part-map "d" 'my-notmuch-show-view-as-patch))
 #+END_SRC
@@ -1193,12 +1203,12 @@ The drawbacks are:
 (use-package vterm
   :hook ((vterm-mode) . 'vterm-mode-tweaks)
   :bind (:map vterm-mode-map
-              ("C-M-o" . 'ace-window)
-              ("C-]" . 'vterm-copy-mode)
-              ("M-w" . 'auralcat/vterm-copy-last-command-output)
-              ("M-p" . 'vterm-send-up)
-              ("M-r" . 'vterm-send-C-r)
-              ("M-n" . 'vterm-send-down))
+          ("C-M-o" . 'ace-window)
+          ("C-]" . 'vterm-copy-mode)
+          ("M-w" . 'auralcat/vterm-copy-last-command-output)
+          ("M-p" . 'vterm-send-up)
+          ("M-r" . 'vterm-send-C-r)
+          ("M-n" . 'vterm-send-down))
   :config
   (setq vterm-use-vterm-prompt-detection-method t))
 
@@ -1278,7 +1288,7 @@ Create links to Github/GitLab files from the comfort of your Emacs buffer.
   (defun toggle-prettier-js-save-hook ()
     "Toggles Prettier.js hook when you're working with a mode that supports it. Removes the hook otherwise."
     (if (member major-mode prettier-js-allowed-modes)
-        (add-hook 'before-save-hook 'prettier-js)
+    (add-hook 'before-save-hook 'prettier-js)
       (remove-hook 'before-save-hook 'prettier-js)))
   (add-hook 'change-major-mode-hook 'toggle-prettier-js-save-hook))
     #+END_SRC
@@ -1290,21 +1300,27 @@ Create links to Github/GitLab files from the comfort of your Emacs buffer.
   :hook (prog-mode . yafolding-mode)
   :defer t
   :bind (:map evil-normal-state-map
-              ("zo" . 'yafolding-show-element)
-              ("zc" . 'yafolding-hide-element)
-              ("za" . 'yafolding-toggle-element)
-              ("zA" . 'yafolding-toggle-all)
-              ("zr" . 'yafolding-show-all)
-              ("zm" . 'yafolding-hide-all)
-              ))
+          ("zo" . 'yafolding-show-element)
+          ("zc" . 'yafolding-hide-element)
+          ("za" . 'yafolding-toggle-element)
+          ("zA" . 'yafolding-toggle-all)
+          ("zr" . 'yafolding-show-all)
+          ("zm" . 'yafolding-hide-all)
+          ))
     #+END_SRC
 *** Olivetti
 This is great to concentrate on text when you want to write prose.
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package olivetti
   :config
-  (setq olivetti-style 'fancy
-        olivetti-body-width 100))
+  (setq olivetti-style 'fancy))
+
+(defun auralcat/set-up-olivetti-for-outline-mode ()
+  "Initialization steps for olivetti-mode."
+  (setq olivetti-body-width 114)
+  (olivetti-mode 'toggle))
+
+(add-hook 'outline-mode-hook 'auralcat/set-up-olivetti-for-outline-mode)
 #+END_SRC
 *** Golden Ratio Mode
     Splits windows using the [[https://en.wikipedia.org/wiki/Golden_ratio][Golden Ratio]].
@@ -1318,7 +1334,7 @@ This is great to concentrate on text when you want to write prose.
   :diminish golden-ratio-mode
   :config
   (setq golden-ratio-extra-commands
-        (append golden-ratio-extra-commands '(magit-status aw-flip-window)))
+    (append golden-ratio-extra-commands '(magit-status aw-flip-window)))
   (golden-ratio-mode 1))
     #+END_SRC
 
@@ -1435,16 +1451,16 @@ This is great to concentrate on text when you want to write prose.
     (require 'git-gutter-fringe)
     (when (fboundp 'define-fringe-bitmap)
       (define-fringe-bitmap 'git-gutter-fr:added
-        [224 224 224 224 224 224 224 224 224 224 224 224 224
-             224 224 224 224 224 224 224 224 224 224 224 224]
-        nil nil 'center)
+    [224 224 224 224 224 224 224 224 224 224 224 224 224
+         224 224 224 224 224 224 224 224 224 224 224 224]
+    nil nil 'center)
       (define-fringe-bitmap 'git-gutter-fr:modified
-        [224 224 224 224 224 224 224 224 224 224 224 224 224
-             224 224 224 224 224 224 224 224 224 224 224 224]
-        nil nil 'center)
+    [224 224 224 224 224 224 224 224 224 224 224 224 224
+         224 224 224 224 224 224 224 224 224 224 224 224]
+    nil nil 'center)
       (define-fringe-bitmap 'git-gutter-fr:deleted
-        [0 0 0 0 0 0 0 0 0 0 0 0 0 128 192 224 240 248]
-        nil nil 'center)))
+    [0 0 0 0 0 0 0 0 0 0 0 0 0 128 192 224 240 248]
+    nil nil 'center)))
   ;; Adding evil-mode bindings
   (define-key evil-normal-state-map (kbd "g h") 'git-gutter:previous-hunk)
   (define-key evil-normal-state-map (kbd "g H") 'git-gutter:next-hunk)
@@ -1536,15 +1552,15 @@ every time you call ~git status~.
   (cond
    ((eq system-type 'darwin)
     (setq circadian-themes '((:sunrise . cosmos-light)
-                             (:sunset  . cosmos-dark))))
+                 (:sunset  . cosmos-dark))))
    ;; Personal Linux machine
    ((and (string-equal system-name auralcat/personal-system-name) (eq system-type 'gnu/linux))
     (setq circadian-themes '((:sunrise . solarized-light)
-                             (:sunset  . solarized-dark))))
+                 (:sunset  . solarized-dark))))
    ;; Work Linux machine
    ((and (string-equal system-name auralcat/work-system-name) (eq system-type 'gnu/linux))
     (setq circadian-themes '((:sunrise . modus-operandi)
-                             (:sunset  . modus-vivendi)))))
+                 (:sunset  . modus-vivendi)))))
   (circadian-setup))
     #+END_SRC
 *** Anzu
@@ -1570,7 +1586,7 @@ use case though, since it removes the line wraps on exporting.
   :init
   ;; This is for Postgres.
   (setq sqlformat-command 'pgformatter
-        sqlformat-args '("-s2" "-g")))
+    sqlformat-args '("-s2" "-g")))
 #+END_SRC
 *** Auto package update
 I honestly don't know why Emacs doesn't support this out of the box yet, but oh well.
@@ -1615,14 +1631,14 @@ You can put ~auto-package-update-async~ in the ~midnight-hook~.
   (interactive
    (list
     (intern (completing-read "Change to theme: "
-                             (mapcar #'symbol-name
-                                     (custom-available-themes))))))
+                 (mapcar #'symbol-name
+                     (custom-available-themes))))))
   (let* (
-         (current-theme (car custom-enabled-themes))
-         (new-theme-loaded-p (memq new-theme custom-enabled-themes)))
+     (current-theme (car custom-enabled-themes))
+     (new-theme-loaded-p (memq new-theme custom-enabled-themes)))
     (disable-theme current-theme)
     (if new-theme-loaded-p
-        (enable-theme new-theme)
+    (enable-theme new-theme)
       (load-theme new-theme))
     ;; We should do this here because not every theme defines a fringe face and
     ;; I customized the fringe on my end.
@@ -1680,7 +1696,7 @@ These are the official ones.
 (use-package modus-themes
   :init
   (setq modus-themes-syntax 'green-strings
-        modus-themes-success-deuteranopia t))
+    modus-themes-success-deuteranopia t))
 #+END_SRC
 * Fonts
 It's better to set the fonts here instead of hard-coding them in init.el or in
@@ -1701,13 +1717,13 @@ the themes themselves.
   (cond
    ((eq system-type 'darwin)
     (if (font-info "Fantasque Sans Mono")
-        (auralcat--set-fixed-pitch-fonts "Fantasque Sans Mono" 140)
+    (auralcat--set-fixed-pitch-fonts "Fantasque Sans Mono" 140)
       (auralcat--set-fixed-pitch-fonts "Monaco" 120)))
    ((eq system-type 'gnu/linux)
     ;; This is because pure GTK Emacs does not play well with multiple frames.
     ;; This is not a problem for the personal setup, but I use 2 displays at work.
     (if (functionp 'pgtk-next-frame)
-        (auralcat--set-fonts-for-gnu-linux 100)
+    (auralcat--set-fonts-for-gnu-linux 100)
       (auralcat--set-fonts-for-gnu-linux 120)))))
 
 (defun auralcat--set-fonts-for-gnu-linux (height)
@@ -1746,7 +1762,7 @@ Explanation/Context: https://github.com/olivertaylor/olivertaylor.github.io/blob
 (defun scale-up-variable-pitch-face ()
   "In the current buffer, scale variable-pitch up and fixed-pitch down."
   (interactive)
-  (face-remap-add-relative 'variable-pitch :height 1.1)
+  (face-remap-add-relative 'variable-pitch :height 1.2)
   (face-remap-add-relative 'fixed-pitch :height 0.9))
 
 (add-hook 'buffer-face-mode-hook 'scale-up-variable-pitch-face)
@@ -1760,40 +1776,36 @@ This involves window and tab management.
 (setq display-buffer-alist
       ;; Press q in the Magit buffer and the window vanishes!
       `(("^magit: .*$"
-         (display-buffer-reuse-mode-window display-buffer-reuse-window display-buffer-at-bottom)
-         (window-height . 0.5)
-         (window-parameters . ((delete-window . t)))
-         )
-        ("^magit-diff: .*$"
-         (display-buffer-use-some-frame display-buffer-reuse-mode-window display-buffer-reuse-window)
-         (reusable-frames . t)
-         (window-parameters . ((delete-window . t)))
-         )
-        ("^magit-revision: .*$"
-         (display-buffer-use-some-frame display-buffer-reuse-mode-window display-buffer-reuse-window)
-         (reusable-frames . t)
-         (window-parameters . ((delete-window . t)))
-         )
-        ("^\*vterm.*\*$"
-         (display-buffer-use-some-frame display-buffer-reuse-mode-window display-buffer-reuse-window)
-         (reusable-frames . t)
-         (inhibit-same-window . t))
-        ;; A buffer with unit test results: they're easier to read in another frame.
-        ("^\\*mix .*\\*$"
-         (display-buffer-use-some-frame display-buffer-in-tab display-buffer-reuse-mode-window display-buffer-reuse-window)
-         (reusable-frames . t)
-         (tab-name . "*Test results*")
-         (inhibit-same-window . t)
-         )
-        ;; Search buffers tend to be more useful when they're in the same frame as the code.
-        ("\\(^\\*ag search text:.*\\*$\\|\\^*Occur.*\\*$\\)"
-         (display-buffer-reuse-mode-window display-buffer-reuse-window)
-         )
-        ("^\\*Org .*Export\\*$"
-         (display-buffer-reuse-window display-buffer-in-side-window)
-         (window-height . 0.5)
-         (window-parameters . ((delete-window . t)))
-         )))
+     (display-buffer-reuse-mode-window display-buffer-reuse-window display-buffer-at-bottom)
+     (window-height . 0.5)
+     (window-parameters . ((delete-window . t)))
+     )
+    ("^magit-diff: .*$"
+     (display-buffer-use-some-frame display-buffer-reuse-mode-window display-buffer-reuse-window)
+     (reusable-frames . t)
+     (window-parameters . ((delete-window . t)))
+     )
+    ("^magit-revision: .*$"
+     (display-buffer-reuse-mode-window display-buffer-reuse-window display-buffer-use-some-frame)
+     (reusable-frames . t)
+     (window-parameters . ((delete-window . t)))
+     )
+    ;; A buffer with unit test results: they're easier to read in another frame.
+    ("^\\*mix .*\\*$"
+     (display-buffer-use-some-frame display-buffer-in-tab display-buffer-reuse-mode-window display-buffer-reuse-window)
+     (reusable-frames . t)
+     (tab-name . "*Test results*")
+     (inhibit-same-window . t)
+     )
+    ;; Search buffers tend to be more useful when they're in the same frame as the code.
+    ("\\(^\\*ag search text:.*\\*$\\|\\^*Occur.*\\*$\\)"
+     (display-buffer-reuse-mode-window display-buffer-reuse-window)
+     )
+    ("^\\*Org .*Export\\*$"
+     (display-buffer-reuse-window display-buffer-in-side-window)
+     (window-height . 0.5)
+     (window-parameters . ((delete-window . t)))
+     )))
 #+END_SRC
 
 * Keybindings
@@ -1886,7 +1898,7 @@ This involves window and tab management.
 ;; Move to beginning of line or indentation
 (defun back-to-indentation-or-beginning () (interactive)
        (if (= (point) (progn (back-to-indentation) (point)))
-           (beginning-of-line)))
+       (beginning-of-line)))
 
 ;; We need this to get back to the beginning of the indentation or first word of the line.
 (global-set-key (kbd "C-a") (quote back-to-indentation-or-beginning))
@@ -1996,17 +2008,17 @@ Colorize the agenda: https://llazarek.com/2018/07/improving-the-agenda.html
   (while (re-search-forward tag nil t)
     (unless (find-in-line "\\[#[A-Z]\\]")
       (let ((todo-end (or (ll/org/agenda/find-todo-word-end)
-                          (point-at-bol)))
-            (tags-beginning (or (find-in-line " :" t)
-                                (point-at-eol))))
-        (add-text-properties todo-end
-                             tags-beginning
-                             `(face (:foreground ,fg-col :background ,bg-col)))))))
+              (point-at-bol)))
+        (tags-beginning (or (find-in-line " :" t)
+                (point-at-eol))))
+    (add-text-properties todo-end
+                 tags-beginning
+                 `(face (:foreground ,fg-col :background ,bg-col)))))))
 
 ;; Helper definitions
 (setq ll/org/agenda-todo-words
       '("TODO" "GOAL" "NEXT" "STARTED" "WAITING" "REVIEW" "SUBMIT"
-        "DONE" "DEFERRED" "CANCELLED"))
+    "DONE" "DEFERRED" "CANCELLED"))
 (defun find-in-line (needle &optional beginning count)
   "Find the position of the start of NEEDLE in the current line.
   If BEGINNING is non-nil, find the beginning of NEEDLE in the current
@@ -2015,11 +2027,11 @@ Colorize the agenda: https://llazarek.com/2018/07/improving-the-agenda.html
     (beginning-of-line)
     (let ((found (re-search-forward needle (point-at-eol) t count)))
       (if beginning
-          (match-beginning 0)
-        found))))
+      (match-beginning 0)
+    found))))
 (defun ll/org/agenda/find-todo-word-end ()
   (reduce (lambda (a b) (or a b))
-          (mapcar #'find-in-line ll/org/agenda-todo-words)))
+      (mapcar #'find-in-line ll/org/agenda-todo-words)))
 
 ;; Load my tag colors
 (load "~/.agenda-colors")
@@ -2051,15 +2063,15 @@ This is a derived mode to hold English abbrevs.
       (setq end (point))
       (goto-char beg)
       (if (re-search-forward "\\[\\([0-9]*%\\)\\]\\|\\[\\([0-9]*\\)/\\([0-9]*\\)\\]" end t)
-          (if (match-end 1)
-              (if (equal (match-string 1) "100%")
-                  ;; all done - do the state change
-                  (org-todo 'done)
-                (org-todo 'todo))
-            (if (and (> (match-end 2) (match-beginning 2))
-                     (equal (match-string 2) (match-string 3)))
-                (org-todo 'done)
-              (org-todo 'todo)))))))
+      (if (match-end 1)
+          (if (equal (match-string 1) "100%")
+          ;; all done - do the state change
+          (org-todo 'done)
+        (org-todo 'todo))
+        (if (and (> (match-end 2) (match-beginning 2))
+             (equal (match-string 2) (match-string 3)))
+        (org-todo 'done)
+          (org-todo 'todo)))))))
    #+END_SRC
 ** Tables
 Use the fixed-pitch font for tables.
@@ -2101,13 +2113,13 @@ Use the fixed-pitch font for tables.
       org-babel-min-lines-for-block-output 1
       org-babel-default-header-args
       (cons '(:noweb . "yes")
-            (assq-delete-all :noweb org-babel-default-header-args))
+        (assq-delete-all :noweb org-babel-default-header-args))
       org-babel-default-header-args
       (cons '(:exports . "both")
-            (assq-delete-all :exports org-babel-default-header-args))
+        (assq-delete-all :exports org-babel-default-header-args))
       org-babel-default-header-args
       (cons '(:results . "output verbatim replace")
-            (assq-delete-all :results org-babel-default-header-args)))
+        (assq-delete-all :results org-babel-default-header-args)))
 #+END_SRC
 *** Elixir
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -2127,15 +2139,24 @@ Use the fixed-pitch font for tables.
    (dot . t)
    ))
     #+END_SRC
+** Faces
+Some extra customization on ~org-mode~ faces.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(defun auralcat/org-remap-heading-faces ()
+  (face-remap-add-relative 'org-level-1 :height 1.6)
+  (face-remap-add-relative 'org-document-title :height 1.6)
+  (face-remap-add-relative 'org-document-info :height 1.4)
+  (face-remap-add-relative 'org-level-2 :height 1.4)
+  (face-remap-add-relative 'org-level-3 :height 1.2))
 
+(add-hook 'org-mode-hook 'auralcat/org-remap-heading-faces)
+
+#+END_SRC
 * Variables
   #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Set Fundamental mode as default mode for new buffers:
 (setq-default major-mode 'fundamental-mode)
 (setq initial-major-mode 'fundamental-mode)
-
-;; Enable auto-fill mode by default
-(auto-fill-mode 1)
 
 ;; When toggling a buffer into read-only mode, activate view-mode immediately.
 (setq view-read-only t)
@@ -2179,7 +2200,7 @@ This can be reverted later with ~(advice-remove)~ though.
   (interactive "P")
   (or
    (and (not (eq (% year 100) 0))
-        (eq (% year 4) 0))
+    (eq (% year 4) 0))
    (eq (% year 400) 0))
   )
 
@@ -2235,8 +2256,8 @@ These are usually aliases to commonly-accessed tools and workflows.
 (advice-add #'vc-git-mode-line-string :filter-return #'my-replace-git-status)
 (defun my-replace-git-status (tstr)
   (let* ((tstr (replace-regexp-in-string "Git" "" tstr))
-         (first-char (substring tstr 0 1))
-         (rest-chars (substring tstr 1)))
+     (first-char (substring tstr 0 1))
+     (rest-chars (substring tstr 1)))
     (cond
      ((string= ":" first-char) ;;; Modified
       (replace-regexp-in-string "^:" "⚡️" tstr))
@@ -2251,32 +2272,32 @@ These are usually aliases to commonly-accessed tools and workflows.
   "Return a string with LEFT and RIGHT at the edges of the
   current window."
   (format (format "%%s %%%ds" (- (window-total-width) (length left) 2))
-          left right))
+      left right))
 
 (setq auralcat/mode-line-left-side
       ;; This should be a quoted list if you want values to be updated
       ;; when things change in the buffer.
       '(
-        " " evil-mode-line-tag
-        " " mode-line-buffer-identification
-        " " mode-line-modified
-        " " mode-name
-        " " mode-line-position
-        " " (vc-mode vc-mode)
-        ))
+    " " evil-mode-line-tag
+    " " mode-line-buffer-identification
+    " " mode-line-modified
+    " " mode-name
+    " " mode-line-position
+    " " (vc-mode vc-mode)
+    ))
 
 (setq auralcat/mode-line-right-side
       (list minor-mode-alist
-            " " mode-line-misc-info
-            " " mode-line-end-spaces))
+        " " mode-line-misc-info
+        " " mode-line-end-spaces))
 
 ;; This needs to be setq-default to make every buffer use this mode line format.
 (setq-default mode-line-format
       '("%e" (:eval (mode-line-align
-                     (format-mode-line
-                      auralcat/mode-line-left-side)
-                     (format-mode-line
-                      auralcat/mode-line-right-side)))))
+             (format-mode-line
+              auralcat/mode-line-left-side)
+             (format-mode-line
+              auralcat/mode-line-right-side)))))
 #+END_SRC
 * Cursor
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -2335,61 +2356,61 @@ This could be a subtle hint about what you were doing.
 (defun diary-last-day-of-month (date)
   "Return `t` if DATE is the last day of the month."
   (let* ((day (calendar-extract-day date))
-         (month (calendar-extract-month date))
-         (year (calendar-extract-year date))
-         (last-day-of-month
-          (calendar-last-day-of-month month year)))
+     (month (calendar-extract-month date))
+     (year (calendar-extract-year date))
+     (last-day-of-month
+      (calendar-last-day-of-month month year)))
     (= day last-day-of-month)))
 
 (defun diary-first-weekday-of-month (date)
   (let* ((day (calendar-extract-day date))
-         (month (calendar-extract-month date))
-         (year (calendar-extract-year date))
-         (first-day-date (list month 1 year))
-         (first-absolute-day-weekday (calendar-day-of-week first-day-date)))
+     (month (calendar-extract-month date))
+     (year (calendar-extract-year date))
+     (first-day-date (list month 1 year))
+     (first-absolute-day-weekday (calendar-day-of-week first-day-date)))
 
     (or
      ;; When the first day is Sunday, it's day 2.
      (and (eq first-absolute-day-weekday 0)
-          (eq day 2))
+      (eq day 2))
 
      ;; When the first day is Saturday, it's day 3.
      (and (eq first-absolute-day-weekday 6)
-          (eq day 3))
+      (eq day 3))
 
      ;; Else, it's day 1 and a weekday.
      (and (memq (calendar-day-of-week date) '(1 2 3 4 5))
-          (eq day 1))
+      (eq day 1))
      )
     ))
 
 (defun diary-last-weekday-of-month (date)
   (let* ((day-of-week (calendar-day-of-week date))
-         (month (calendar-extract-month date))
-         (year (calendar-extract-year date))
-         (last-month-day (calendar-last-day-of-month month year))
-         (month-day (cadr date)))
+     (month (calendar-extract-month date))
+     (year (calendar-extract-year date))
+     (last-month-day (calendar-last-day-of-month month year))
+     (month-day (cadr date)))
 
     (or
      ;; it's the last day of the month & it is a weekday
      (and (eq month-day last-month-day)
-          (memq day-of-week '(1 2 3 4 5)))
+      (memq day-of-week '(1 2 3 4 5)))
 
      ;; it's a friday, and it's the last-but-one or last-but-two day
      ;; of the month
      (and (eq day-of-week 5)
-          (or (eq month-day (1- last-month-day))
-              (eq month-day (1- (1- last-month-day))))))))
+      (or (eq month-day (1- last-month-day))
+          (eq month-day (1- (1- last-month-day))))))))
 
 (defun diary-first-working-day-of-month (date)
   "Returns `t` if DATE is the first working day of the month.
   This is defined as the first weekday of the month which is not a holiday."
   (let* ((day (calendar-extract-day date))
-         (month (calendar-extract-month date)))
+     (month (calendar-extract-month date)))
     (if
-        ;; If it's May or Jan, check if day 2 is a weekday.
-        (and (or (= month 5) (= month 1)))
-        (and (= day 2) (memq (calendar-day-of-week date) '(1 2 3 4 5)))
+    ;; If it's May or Jan, check if day 2 is a weekday.
+    (and (or (= month 5) (= month 1)))
+    (and (= day 2) (memq (calendar-day-of-week date) '(1 2 3 4 5)))
       ;; Else, check if it's the first weekday of the month.
       (diary-first-weekday-of-month date))))
    #+END_SRC
