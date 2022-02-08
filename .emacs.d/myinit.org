@@ -1317,10 +1317,11 @@ This is great to concentrate on text when you want to write prose.
 
 (defun auralcat/set-up-olivetti-for-outline-mode ()
   "Initialization steps for olivetti-mode."
-  (setq olivetti-body-width 114)
+  (setq olivetti-body-width 104)
   (olivetti-mode 'toggle))
 
 (add-hook 'outline-mode-hook 'auralcat/set-up-olivetti-for-outline-mode)
+(add-hook 'livemd-mode-hook 'auralcat/set-up-olivetti-for-outline-mode)
 #+END_SRC
 *** Golden Ratio Mode
     Splits windows using the [[https://en.wikipedia.org/wiki/Golden_ratio][Golden Ratio]].
