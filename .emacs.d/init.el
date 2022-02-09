@@ -49,8 +49,6 @@
  '(company-quickhelp-color-foreground "#DCDCCC")
  '(company-tooltip-minimum 6)
  '(company-transformers nil)
- '(custom-safe-themes
-   '("028c226411a386abc7f7a0fba1a2ebfae5fe69e2a816f54898df41a6a3412bb5" "97db542a8a1731ef44b60bc97406c1eb7ed4528b0d7296997cbb53969df852d6" "cbdf8c2e1b2b5c15b34ddb5063f1b21514c7169ff20e081d39cf57ffee89bc1e" "5784d048e5a985627520beb8a101561b502a191b52fa401139f4dd20acb07607" "d14f3df28603e9517eb8fb7518b662d653b25b26e83bd8e129acea042b774298" "7397cc72938446348521d8061d3f2e288165f65a2dbb6366bb666224de2629bb" "9f1d0627e756e58e0263fe3f00b16d8f7b2aca0882faacdc20ddd56a95acb7c2" "7afad8f4707c84129e4cb1e5bad4feb0a9f0db02e1cfadb029921a0bde693d1e" "37768a79b479684b0756dec7c0fc7652082910c37d8863c35b702db3f16000f8" "fd9e60866accaa68c8bede88623478e74b7c6e7c91765b0cdf11ddf04a5ff803" "a9c19ed339056aef3c1e538a22e896e7fceed12504b779b53c49a416075c45ce" "76b4632612953d1a8976d983c4fdf5c3af92d216e2f87ce2b0726a1f37606158" default))
  '(display-battery-mode t)
  '(display-default-load-average nil)
  '(display-time-24hr-format t)
@@ -115,17 +113,11 @@
    "# This buffer is for notes you don't want to save, and for program sketching.
 # You can write the contents of this buffer to a file with C-x C-w.
 # Current default mode for this buffer is: Org-mode.")
- '(jdee-db-active-breakpoint-face-colors (cons "#f2f2f2" "#4271ae"))
- '(jdee-db-requested-breakpoint-face-colors (cons "#f2f2f2" "#718c00"))
- '(jdee-db-spec-breakpoint-face-colors (cons "#f2f2f2" "#a5a4a5"))
  '(js2-strict-missing-semi-warning nil)
  '(keyboard-coding-system 'utf-8-unix)
  '(line-number-mode nil)
  '(linum-format "%3i")
  '(magit-diff-use-overlays nil)
- '(markdown-asymmetric-header t)
- '(markdown-header-scaling t)
- '(markdown-header-scaling-values '(1.6 1.4 1.2 1.1 1.0 1.0))
  '(menu-bar-mode nil)
  '(mode-icons
    '(("\\`CSS\\'" "css" xpm)
@@ -237,7 +229,6 @@
  '(nyan-animation-frame-interval 0.2)
  '(nyan-bar-length 16)
  '(nyan-mode t)
- '(objed-cursor-color "#c82829")
  '(org-agenda-scheduled-leaders '("Scheduled: " "Sched. previously %2dx: "))
  '(org-agenda-skip-scheduled-if-done t)
  '(org-agenda-start-on-weekday 0)

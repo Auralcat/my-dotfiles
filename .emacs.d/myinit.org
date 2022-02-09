@@ -519,9 +519,25 @@ We need to do some customizations to comint-related buffers to improve performan
   ("C-c 2" . 'markdown-insert-header-atx-2)
   ("C-c 3" . 'markdown-insert-header-atx-3)
   :config
-  (setq markdown-fontify-code-blocks-natively t)
+  (setq markdown-fontify-code-blocks-natively t
+        markdown-asymmetric-header t
+        markdown-header-scaling nil)
+
   ;; Use fixed-pitch fonts inside code blocks.
   (set-face-attribute 'markdown-code-face nil :inherit 'fixed-pitch))
+  #+END_SRC
+**** Faces
+I couldn't customize this through the ~markdown-header-scaling~ var, so let's try another approach.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(defun auralcat/markdown-remap-heading-faces ()
+  (face-remap-add-relative 'markdown-header-face-1 :height 2.0)
+  (face-remap-add-relative 'markdown-header-face-2 :height 1.7)
+  (face-remap-add-relative 'markdown-header-face-3 :height 1.4)
+  (face-remap-add-relative 'markdown-header-face-4 :height 1.1)
+  (face-remap-add-relative 'markdown-header-face-5 :height 1.0)
+  (face-remap-add-relative 'markdown-header-face-6 :height 1.0))
+
+(add-hook 'markdown-mode-hook 'auralcat/markdown-remap-heading-faces)
   #+END_SRC
 *** Web-mode
   #+BEGIN_SRC emacs-lisp :tangle yes
