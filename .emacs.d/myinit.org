@@ -1221,7 +1221,7 @@ The drawbacks are:
   :hook ((vterm-mode) . 'vterm-mode-tweaks)
   :bind (:map vterm-mode-map
           ("C-M-o" . 'ace-window)
-          ("C-]" . 'vterm-copy-mode)
+          ("C-[" . 'vterm-copy-mode)
           ("M-w" . 'auralcat/vterm-copy-last-command-output)
           ("M-p" . 'vterm-send-up)
           ("M-r" . 'vterm-send-C-r)
