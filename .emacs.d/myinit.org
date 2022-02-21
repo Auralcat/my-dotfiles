@@ -1713,8 +1713,7 @@ These are the official ones.
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package modus-themes
   :init
-  (setq modus-themes-syntax 'green-strings
-    modus-themes-success-deuteranopia t))
+  (setq modus-themes-success-deuteranopia t))
 #+END_SRC
 * Fonts
 It's better to set the fonts here instead of hard-coding them in init.el or in
