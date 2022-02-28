@@ -136,6 +136,10 @@
   ;; Projectile prefix
   "p" 'projectile-command-map
   "s" 'save-buffer
+  "yd" 'auralcat/prog-copy-region-in-diff-gfm-code-block
+  "yp" 'auralcat/prog-copy-region-in-plain-md-code-block
+  "ys" 'auralcat/prog-copy-region-in-suggestion-gfm-code-block
+  "yy" 'auralcat/prog-copy-region-in-named-gfm-code-block
   "/" 'git-link
   "-" 'zoom-window-zoom
   "n" 'auralcat/org-mark-heading-as-done)
