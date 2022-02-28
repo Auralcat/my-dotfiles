@@ -1300,20 +1300,21 @@ Create links to Github/GitLab files from the comfort of your Emacs buffer.
           ("zm" . 'yafolding-hide-all)
           ))
     #+END_SRC
-*** Olivetti
+*** Olivetti mode
 This is great to concentrate on text when you want to write prose.
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package olivetti
   :config
   (setq olivetti-style 'fancy))
 
-(defun auralcat/set-up-olivetti-for-outline-mode ()
+(defun auralcat/set-up-olivetti-mode-init ()
   "Initialization steps for olivetti-mode."
   (setq olivetti-body-width 104)
   (olivetti-mode 'toggle))
 
-(add-hook 'outline-mode-hook 'auralcat/set-up-olivetti-for-outline-mode)
-(add-hook 'livemd-mode-hook 'auralcat/set-up-olivetti-for-outline-mode)
+(add-hook 'outline-mode-hook 'auralcat/set-up-olivetti-mode-init)
+;; Setting this up for only the parent mode should do the trick.
+(add-hook 'markdown-mode-hook 'auralcat/set-up-olivetti-mode-init)
 #+END_SRC
 *** Golden Ratio Mode
     Splits windows using the [[https://en.wikipedia.org/wiki/Golden_ratio][Golden Ratio]].
@@ -2186,20 +2187,24 @@ An extra namespace for ~markdown-mode~ so I can store abbrevs and ~yasnippet~ sn
 I'm leaving this mode to be toggled manually for now.
 #+BEGIN_SRC emacs-lisp :tangle yes
 (define-derived-mode markdown-portuguese-mode markdown-mode "Markdown-PT"
-  "Markdown-mode used to hold Portuguese abbrevs. Does everything that plain markdown-mode does.")
+  "Markdown-mode used to hold Portuguese abbrevs. Does everything that plain markdown-mode does."
+  (setq-local ispell-local-dictionary "pt_BR"))
 
 (add-hook 'markdown-portuguese-mode-hook #'(lambda () (auto-save-visited-mode 0)))
 #+END_SRC
+
 ** Gfm-portuguese mode
 An extra namespace for ~gfm-mode~ so I can store abbrevs and ~yasnippet~ snippets in Portuguese for ~gfm-mode~.
 
 I'm leaving this mode to be toggled manually for now.
 #+BEGIN_SRC emacs-lisp :tangle yes
 (define-derived-mode gfm-portuguese-mode gfm-mode "Gfm-PT"
-  "Gfm-mode used to hold Portuguese abbrevs. Does everything that plain gfm-mode does.")
+  "Gfm-mode used to hold Portuguese abbrevs. Does everything that plain gfm-mode does."
+  (setq-local ispell-local-dictionary "pt_BR"))
 
 (add-hook 'gfm-portuguese-mode-hook #'(lambda () (auto-save-visited-mode 0)))
 #+END_SRC
+
 * Variables
   #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Set Fundamental mode as default mode for new buffers:
