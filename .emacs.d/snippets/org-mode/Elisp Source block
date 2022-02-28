@@ -1,5 +1,5 @@
 # -*- mode: snippet; require-final-newline: nil; backup-inhibited: t -*
-# key: esrc
+# key: el
 # name: Elisp Source block
 # --
 #+BEGIN_SRC emacs-lisp :tangle yes
