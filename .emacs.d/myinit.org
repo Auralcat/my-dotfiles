@@ -505,11 +505,14 @@ We need to do some customizations to comint-related buffers to improve performan
   #+BEGIN_SRC emacs-lisp :tangle yes
 (defun markdown-mode-tweaks ()
   (visual-line-mode 1)
-  (auto-fill-mode -1))
+  (outline-minor-mode-mode 1)
+  (auto-fill-mode -1)
+
+  ;; Set TAB to toggle headings in evil-mode)
 
 (use-package markdown-mode
   :hook ((markdown-mode . markdown-mode-tweaks)
-         (gfm-mode . markdown-mode-tweaks))
+     (gfm-mode . markdown-mode-tweaks))
   :bind
   ("M-<right>" . 'markdown-demote)
   ("M-<left>" . 'markdown-promote)
@@ -518,10 +521,12 @@ We need to do some customizations to comint-related buffers to improve performan
   ("C-c 1" . 'markdown-insert-header-atx-1)
   ("C-c 2" . 'markdown-insert-header-atx-2)
   ("C-c 3" . 'markdown-insert-header-atx-3)
+  :bind (:map evil-normal-state-map
+              ("TAB" . 'outline-toggle-children))
   :config
   (setq markdown-fontify-code-blocks-natively t
-        markdown-asymmetric-header t
-        markdown-header-scaling nil)
+    markdown-asymmetric-header t
+    markdown-header-scaling nil)
 
   ;; Use fixed-pitch fonts inside code blocks.
   (set-face-attribute 'markdown-code-face nil :inherit 'fixed-pitch))
