@@ -506,9 +506,7 @@ We need to do some customizations to comint-related buffers to improve performan
 (defun markdown-mode-tweaks ()
   (visual-line-mode 1)
   (outline-minor-mode-mode 1)
-  (auto-fill-mode -1)
-
-  ;; Set TAB to toggle headings in evil-mode)
+  (auto-fill-mode -1))
 
 (use-package markdown-mode
   :hook ((markdown-mode . markdown-mode-tweaks)
