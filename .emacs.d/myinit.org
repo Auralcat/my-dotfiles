@@ -99,6 +99,41 @@
 (define-key evil-inner-text-objects-map "r" 'evil-textobj-inner-ruby-block)
 (define-key evil-outer-text-objects-map "r" 'evil-textobj-outer-ruby-block)
       #+END_SRC
+** Easy copy and paste inside quotes
+These are wrapper functions and macros to copy and paste text from inside quotes. I'm doing this quite a lot lately.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(defun auralcat/evil-yank-inside-quotes ()
+     "Copies text from inside single or double quotes."
+     (interactive)
+     (cond
+      ((looking-at "\"")
+       (auralcat/evil-yank-inside-double-quotes 1))
+      ((looking-at "'")
+       (auralcat/evil-yank-inside-single-quotes 1))
+      ))
+
+(defun auralcat/evil-paste-inside-quotes ()
+     "Copies text from inside single or double quotes."
+     (interactive)
+     (cond
+      ((looking-at "\"")
+       (auralcat/evil-paste-inside-double-quotes 1))
+      ((looking-at "'")
+       (auralcat/evil-paste-inside-single-quotes 1))
+      ))
+
+(define-key evil-normal-state-map (kbd "g y") 'auralcat/evil-yank-inside-quotes)
+(define-key evil-normal-state-map (kbd "g p") 'auralcat/evil-paste-inside-quotes)
+
+(fset 'auralcat/evil-yank-inside-double-quotes
+   (kmacro-lambda-form [?y ?i ?\"] 0 "%d"))
+(fset 'auralcat/evil-yank-inside-single-quotes
+   (kmacro-lambda-form [?y ?i ?\'] 0 "%d"))
+(fset 'auralcat/evil-paste-inside-double-quotes
+   (kmacro-lambda-form [?m ?z ?v ?i ?\" ?P ?` ?z] 0 "%d"))
+(fset 'auralcat/evil-paste-inside-single-quotes
+   (kmacro-lambda-form [?m ?z ?v ?i ?\' ?P ?` ?z] 0 "%d"))
+#+END_SRC
 * Terminal configurations
 I want my term to work like the shell-mode because I need to copy
 stuff from there and see Docker output correctly.
