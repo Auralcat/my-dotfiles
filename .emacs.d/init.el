@@ -92,6 +92,7 @@
  '(erc-script-path '("~/my-dotfiles/.emacs.d/.erc/"))
  '(erc-try-new-nick-p t)
  '(erc-user-full-name "Realnamezz")
+ '(evil-search-module 'evil-search)
  '(evil-shift-width 2)
  '(fci-rule-character-color "#452E2E")
  '(font-use-system-font t)
