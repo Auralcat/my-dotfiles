@@ -2162,6 +2162,30 @@ Some extra customization on ~org-mode~ faces.
 
 (add-hook 'org-mode-hook 'auralcat/org-remap-heading-faces)
 #+END_SRC
+* HOWM
+Quote from https://leahneukirchen.org/blog/archive/2022/03/note-taking-in-emacs-with-howm.html:
+#+begin_quote
+~howm~ is short for =Hitori Otegaru Wiki Modoki=, which roughly translates to =Single-user Easy Wiki Mode=.
+#+end_quote
+
+It's a note-taking mode from the Japan Emacs community. The mode has been around for the last 20 years, and it does not force any standards on you to write notes, except for the note file structure.
+You can customize it however you want, and even use ~org-mode~ to write the notes if you wish (!)
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package howm
+  :ensure t
+  :hook ((howm-menu-mode . evil-emacs-state)
+         (howm-view-summary-mode . evil-emacs-state))
+  :demand t
+  :init
+  ;; Use this to set which major mode name you would like to write your notes in through the pattern in file-name-alist.
+  ;; In this case I'm using .org.en to open these files in org-english-mode.
+  (setq howm-file-name-format "%Y/%m/%Y-%m-%d-%H%M%S.org.en")
+  ;; Rename buffers with the base filename as the buffer title
+(add-hook 'howm-mode-hook 'howm-mode-set-buffer-name)
+(add-hook 'after-save-hook 'howm-mode-set-buffer-name))
+#+END_SRC
+
 * Custom derived modes
 I use those for creating new namespaces for abbrevs or special functions in them
 without affecting the respective parent mode.
