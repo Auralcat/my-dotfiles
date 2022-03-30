@@ -87,11 +87,9 @@
   "$" 'vterm
   ;; Org-agenda
   "a" 'org-agenda
-  ;; Frequently visited bookmarks
-  "bk" '(lambda() (interactive) (bookmark-jump "org-capture-last-stored"))
-  "br" '(lambda() (interactive) (bookmark-jump "org-refile-last-stored"))
   ;; Bookmark shortcuts
-  "b4b" 'bookmark-jump-other-window
+  "bj" 'bookmark-jump
+  "b4" 'bookmark-jump-other-window
   "bl" 'list-bookmarks
   "bs" 'bookmark-set
   ;; Org-clock functions. It makes sense to group them here.
@@ -130,9 +128,6 @@
   ;; Org-capture. Keeping consistency with org-agenda's binding.
   "k" 'org-capture
   "l" 'org-store-link
-  ;; Work-related stuff
-  ;; Get the relative file name of current buffer.
-  "mf" 'auralcat-kill-relative-file-name
   ;; Projectile prefix
   "p" 'projectile-command-map
   "s" 'save-buffer
