@@ -1225,7 +1225,7 @@ Create links to Github/GitLab files from the comfort of your Emacs buffer.
 *** Smartparens
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package smartparens
-  :hook ((prog-mode inf-elixir-mode) . 'smartparens-mode)
+  :hook ((prog-mode inf-elixir-mode outline-mode markdown-mode) . 'smartparens-mode)
   :config
   (require 'smartparens-config))
 #+END_SRC
