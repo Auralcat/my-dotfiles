@@ -2168,16 +2168,13 @@ This removes the focus on done items (either checklist items or headings). I thi
 The only adjustment I did for my specific case is adding an iteration over the list of org-modes I use, since I created ~org-english-mode~ for my own use.
 
 #+BEGIN_SRC emacs-lisp :tangle yes
+;; We are using an _anonymous face_ to have this customization work on startup.
 (dolist (major-mode '(org-english-mode org-mode))
   (font-lock-add-keywords
  major-mode
- `(("^[ \t]*\\(?:[-+*]\\|[0-9]+[).]\\)[ \t]+\\(\\(?:\\[@\\(?:start:\\)?[0-9]+\\][ \t]*\\)?\\[\\(?:X\\|\\([0-9]+\\)/\\2\\)\\][^\n]*\n\\)" 1 'org-done prepend))
+ `(("^[ \t]*\\(?:[-+*]\\|[0-9]+[).]\\)[ \t]+\\(\\(?:\\[@\\(?:start:\\)?[0-9]+\\][ \t]*\\)?\\[\\(?:X\\|\\([0-9]+\\)/\\2\\)\\][^\n]*\n\\)" 1 '(:strike-through t :inherit 'font-lock-comment-face) prepend))
  'append))
 #+END_SRC
-
-I also want the done face to strike through the done items:
-#+BEGIN_SRC emacs-lisp :tangle yes
-(set-face-attribute 'org-done nil :strike-through t :foreground (face-attribute 'font-lock-comment-face :foreground))
 #+END_SRC
 * HOWM
 Quote from https://leahneukirchen.org/blog/archive/2022/03/note-taking-in-emacs-with-howm.html:
