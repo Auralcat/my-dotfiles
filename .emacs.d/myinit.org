@@ -1692,19 +1692,6 @@ the themes themselves.
   (add-hook 'comint-mode-hook #'(lambda () (setq line-spacing 0.2)))
   (add-hook 'text-mode-hook #'(lambda () (setq line-spacing 0.6))))
   #+END_SRC
-
-** Adjust variable pitch fonts and monospace fonts
-Explanation/Context: https://github.com/olivertaylor/olivertaylor.github.io/blob/master/notes/20210324_emacs-optical-font-adjustment.org
-#+BEGIN_SRC emacs-lisp :tangle yes
-(defun scale-up-variable-pitch-face ()
-  "In the current buffer, scale variable-pitch up and fixed-pitch down."
-  (interactive)
-  (face-remap-add-relative 'variable-pitch :height 1.2)
-  (face-remap-add-relative 'fixed-pitch :height 0.9))
-
-(add-hook 'buffer-face-mode-hook 'scale-up-variable-pitch-face)
-#+END_SRC
-
 * Multiplexing
 This involves window and tab management.
 
@@ -2069,22 +2056,13 @@ Use the fixed-pitch font for tables.
    ))
     #+END_SRC
 ** Faces
-Some extra customization on ~org-mode~ faces.
-#+BEGIN_SRC emacs-lisp :tangle yes
-(defun auralcat/org-remap-heading-faces ()
-  (face-remap-add-relative 'org-document-title :height 2.0)
-  (face-remap-add-relative 'org-document-info :height 1.7)
-  (face-remap-add-relative 'org-level-1 :height 2.0 :underline t)
-  (face-remap-add-relative 'org-level-2 :height 1.7 :underline t)
-  (face-remap-add-relative 'org-level-3 :height 1.4 :underline t)
-  (face-remap-add-relative 'org-level-4 :height 1.1 :underline t))
-
-(add-hook 'org-mode-hook 'auralcat/org-remap-heading-faces)
-#+END_SRC
 *** Fontify DONE items
-This removes the focus on done items (either checklist items or headings). I think this is a nice quality-of-life improvement for using ~org-mode~ as a TODO tracker.
+This removes the focus on done items (either checklist items or headings). I
+think this is a nice quality-of-life improvement for using ~org-mode~ as a TODO
+tracker.
 
-The only adjustment I did for my specific case is adding an iteration over the list of org-modes I use, since I created ~org-english-mode~ for my own use.
+The only adjustment I did for my specific case is adding an iteration over the
+list of org-modes I use, since I created ~org-english-mode~ for my own use.
 
 #+BEGIN_SRC emacs-lisp :tangle yes
 ;; We are using an _anonymous face_ to have this customization work on startup.
@@ -2098,11 +2076,15 @@ The only adjustment I did for my specific case is adding an iteration over the l
 * HOWM
 Quote from https://leahneukirchen.org/blog/archive/2022/03/note-taking-in-emacs-with-howm.html:
 #+begin_quote
-~howm~ is short for =Hitori Otegaru Wiki Modoki=, which roughly translates to =Single-user Easy Wiki Mode=.
+~howm~ is short for =Hitori Otegaru Wiki Modoki=, which roughly translates to
+=Single-user Easy Wiki Mode=.
 #+end_quote
 
-It's a note-taking mode from the Japan Emacs community. The mode has been around for the last 20 years, and it does not force any standards on you to write notes, except for the note file structure.
-You can customize it however you want, and even use ~org-mode~ to write the notes if you wish (!)
+It's a note-taking mode from the Japan Emacs community. The mode has been around
+for the last 20 years, and it does not force any standards on you to write
+notes, except for the note file structure.
+You can customize it however you want, and even use ~org-mode~ to write the notes
+if you wish (!)
 
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package howm
