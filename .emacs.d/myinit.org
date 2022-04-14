@@ -31,19 +31,8 @@
 ;; Every time bookmarks are changed, save them
 (setq bookmark-save-flag 1)
   #+END_SRC
-* Midnight mode
-  Think of this as a kind of cron for Emacs. It runs a list of
-  specified commands every "midnight". What constitutes a "midnight"
-  can be defined by the user.
-  The default action for ~midnight-hook~ is ~clean-buffer-list~
-  #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package midnight
-  :defer t
-  :init
-  (midnight-delay-set 'midnight-delay "11:30am"))
-  #+END_SRC
 * Evil Mode
-  Yes, I'm committing this heresy
+  Yes, I'm committing this heresy.
 ** Evil-leader
      Add a prefix key to Evil mode, like the Leader key in Vim.
      #+BEGIN_SRC emacs-lisp :tangle yes
@@ -66,39 +55,6 @@
 :defer t)
 (global-evil-surround-mode)
      #+END_SRC
-** Custom text objects
-*** Ruby Block
-      Defines a text object for Ruby blocks.
-      Credits: [[https://github.com/env0der][@env0der's dotfiles]]
-      My modification is just the ~ruby-block-beg-re~ variable.
-      #+BEGIN_SRC emacs-lisp :tangle yes
-(evil-define-text-object evil-textobj-outer-ruby-block
-  (count &optional beg end type)
-  (evil-ruby-block-range beg end type count t))
-
-(evil-define-text-object evil-textobj-inner-ruby-block
-  (count &optional beg end type)
-  (evil-ruby-block-range beg end type count nil))
-
-(defun evil-ruby-block-range (count beg end type &optional inclusive)
-  (let ((current-point (point))
-    (block-begin (progn (evil-end-of-line) (re-search-backward ruby-block-beg-re nil t)))
-    (block-end (progn (evilmi-jump-items) (point))))
-    (if inclusive
-    (let ((begin (progn (goto-char block-begin) (evil-beginning-of-line) (point)))
-          (end (progn (goto-char block-end) (evil-next-line) (evil-beginning-of-line) (if (looking-at "^$") (+ (point) 1) (point)))))
-      (progn
-        (goto-char current-point)
-        (evil-range begin end)))
-      (let ((begin (progn (goto-char block-begin) (evil-next-line) (evil-first-non-blank) (point)))
-        (end (progn (goto-char block-end) (evil-previous-line) (evil-end-of-line) (+ (point) 1))))
-    (progn
-      (goto-char current-point)
-      (evil-range begin end))))))
-
-(define-key evil-inner-text-objects-map "r" 'evil-textobj-inner-ruby-block)
-(define-key evil-outer-text-objects-map "r" 'evil-textobj-outer-ruby-block)
-      #+END_SRC
 ** Easy copy and paste inside quotes
 These are wrapper functions and macros to copy and paste text from inside quotes. I'm doing this quite a lot lately.
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -134,42 +90,6 @@ These are wrapper functions and macros to copy and paste text from inside quotes
 (fset 'auralcat/evil-paste-inside-single-quotes
    (kmacro-lambda-form [?m ?z ?v ?i ?\' ?P ?` ?z] 0 "%d"))
 #+END_SRC
-* Terminal configurations
-I want my term to work like the shell-mode because I need to copy
-stuff from there and see Docker output correctly.
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package term
-  :bind (:map term-raw-map
-          ("M-x" . 'execute-extended-command)
-          ("M-v" . 'scroll-down-command)
-          ("C-v" . 'scroll-up-command)
-          ("M-o" . 'other-window)
-          ("C-M-o" . 'other-frame)
-          ("M-2" . 'ido-switch-buffer)
-          ("M-w" . 'auralcat/term-copy-last-command)
-          ("M-4" . 'ido-switch-buffer-other-window))
-
-  :config
-  ;; Work PS1
-  (cond
-   ((and (string-equal system-name auralcat/work-system-name) (eq system-type 'gnu/linux))
-    (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] \n*"))
-   ;; Personal PS1
-   ((and (string-equal system-name auralcat/personal-system-name) (eq system-type 'gnu/linux))
-    (setq term-prompt-regexp "^[^#$%>\n]*[#$%>] *")))
-
-  (add-hook 'term-mode-hook #'(lambda ()
-                (set (make-local-variable 'company-backends) '(company-capf company-files))))
-
-  (evil-set-initial-state 'term-mode 'emacs)
-  (evil-set-initial-state 'ansi-term-mode 'emacs))
-
-;; This is a macro to copy the last command's input to the kill-ring in term-mode.
-;; Should also work in ansi-term.
-(fset 'auralcat/term-copy-last-command
-      (kmacro-lambda-form [?\C-c ?\C-j ?\C-2 ?\C-p ?\C-e ?\C-  ?\C-c ?\C-p ?\C-a ?\M-w ?\M-> ?\C-c ?\C-k] 0 "%d"))
-#+END_SRC
 * Xref
 This is quite useful to navigate through code faster.
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -195,7 +115,6 @@ from ~M-x~ and get the same result if you want.
 
 ;; Kill selected subdir with C-M-k
 (add-hook 'dired-mode-hook #'(lambda () (define-key dired-mode-map (kbd "C-M-k") 'dired-kill-subdir)))
-
   #+END_SRC
 
 * Macros
