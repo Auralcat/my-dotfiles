@@ -1874,9 +1874,6 @@ This involves window and tab management.
 ;; Emacs will write the var to init.el
 (setq org-agenda-files "~/file-bouncer/org-agenda-file-list.org")
 
-;; When TODOs are ordered, enforce task dependencies
-(setq org-enforce-todo-dependencies t)
-
 ;; Don't split my lines, thx.
 (setq org-M-RET-may-split-line nil)
 
@@ -1894,9 +1891,6 @@ This involves window and tab management.
 
 ;; Use C-RET to complete words in Org-mode
 (define-key org-mode-map (kbd "C-RET") 'complete)
-
-;; Always respect the content of a heading when creating todos!
-(define-key org-mode-map (kbd "<M-S-return>") 'org-insert-todo-heading-respect-content)
 
 ;; Map C-S-enter to org-insert-todo-subheading
 (define-key org-mode-map (kbd "<C-S-return>") 'org-insert-todo-subheading)
@@ -1964,31 +1958,6 @@ Colorize the agenda: https://llazarek.com/2018/07/improving-the-agenda.html
 (load "~/.agenda-colors")
 #+END_SRC
 
-** Auto-mark TODO entries as DONE
-   #+BEGIN_SRC emacs-lisp :tangle yes
-;; see http://thread.gmane.org/gmane.emacs.orgmode/42715
-(eval-after-load 'org-list
-  '(add-hook 'org-checkbox-statistics-hook (function ndk/checkbox-list-complete)))
-
-;; Mark a parent TODO entry as DONE when its checkboxes are all ticked
-(defun ndk/checkbox-list-complete ()
-  (save-excursion
-    (org-back-to-heading t)
-    (let ((beg (point)) end)
-      (end-of-line)
-      (setq end (point))
-      (goto-char beg)
-      (if (re-search-forward "\\[\\([0-9]*%\\)\\]\\|\\[\\([0-9]*\\)/\\([0-9]*\\)\\]" end t)
-      (if (match-end 1)
-          (if (equal (match-string 1) "100%")
-          ;; all done - do the state change
-          (org-todo 'done)
-        (org-todo 'todo))
-        (if (and (> (match-end 2) (match-beginning 2))
-             (equal (match-string 2) (match-string 3)))
-        (org-todo 'done)
-          (org-todo 'todo)))))))
-   #+END_SRC
 ** Tables
 Use the fixed-pitch font for tables.
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -2221,16 +2190,6 @@ This can be reverted later with ~(advice-remove)~ though.
    (eq (% year 400) 0))
   )
 
-   #+END_SRC
-** Quick org-todo without leaving current buffer
-   #+BEGIN_SRC emacs-lisp :tangle yes
-(defun my-org-remote-todo ()
-  "Changes the TODO state of the currently clocked heading remotely."
-  (interactive)
-  (org-clock-goto)
-  (org-todo)
-  (mode-line-other-buffer)
-  )
    #+END_SRC
 ** Unfill region
    #+BEGIN_SRC emacs-lisp :tangle yes
