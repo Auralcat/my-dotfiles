@@ -214,29 +214,6 @@ from ~M-x~ and get the same result if you want.
       (kmacro-lambda-form [?O ?r ?e ?q ?u ?i ?r ?e ?  ?I ?E ?x ?\; ?  ?I ?E ?x ?. ?p ?r ?y escape] 0 "%d"))
 #+END_SRC
 
-* Mac OS
-  #+BEGIN_SRC emacs-lisp :tangle yes
-(when (eq system-type 'darwin) ;; mac specific settings
-  ;; Use bigger fonts because of that Retina display
-  (if (member "Fantasque Sans Mono" (font-family-list))
-      (set-face-attribute (quote default) nil :font "Fantasque Sans Mono" :height 140)
-    (set-face-attribute (quote default) nil :font "Monaco" :height 120))
-  ;; Map Command to Meta
-  (setq mac-command-modifier 'meta)
-  ;; Map Option to Control (I know, smaller key, that's what we have for now. :/)
-  (setq mac-option-modifier 'control)
-  ;; Map Control key in OS X to Super
-  (setq mac-control-modifier 'super)
-  ;; Map Fn key in OS X to Hyper
-  (setq ns-function-modifier 'hyper)
-  ;; Point the executables in Mac OS to Emacs.
-  (add-to-list 'exec-path "/usr/local/bin/")
-  ;; Enable EPA
-  (custom-set-variables '(epg-gpg-program  "/usr/local/bin/gpg"))
-
-  ;; Use Emacsclient in OS X
-  (setq server-socket-dir (format "/tmp/emacs%d" (user-uid))))
-  #+END_SRC
 * Environment Customizations
   #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Make startup faster by reducing the frequency of garbage
@@ -1310,9 +1287,6 @@ This is great to concentrate on text when you want to write prose.
   :ensure t
   :config
   (cond
-   ((eq system-type 'darwin)
-    (setq circadian-themes '((:sunrise . cosmos-light)
-                 (:sunset  . cosmos-dark))))
    ;; Personal Linux machine
    ((and (string-equal system-name auralcat/personal-system-name) (eq system-type 'gnu/linux))
     (setq circadian-themes '((:sunrise . solarized-light)
@@ -1453,10 +1427,6 @@ the themes themselves.
 (defun auralcat--set-preferred-fonts-for-current-theme ()
   "Sets the preferred fonts for the current theme depending on the system Emacs is used in."
   (cond
-   ((eq system-type 'darwin)
-    (if (font-info "Fantasque Sans Mono")
-    (auralcat--set-fixed-pitch-fonts "Fantasque Sans Mono" 140)
-      (auralcat--set-fixed-pitch-fonts "Monaco" 120)))
    ((eq system-type 'gnu/linux)
     ;; This is because pure GTK Emacs does not play well with multiple frames.
     ;; This is not a problem for the personal setup, but I use 2 displays at work.
