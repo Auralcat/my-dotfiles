@@ -539,21 +539,6 @@ This is a built-in mode, but I want to change some stuff there.
   (define-key elixir-mode-map (kbd "C-c C-l") 'inf-elixir-send-line)
   (define-key elixir-mode-map (kbd "C-c C-r") 'inf-elixir-send-region))
     #+END_SRC
-*** Sass-mode
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package sass-mode
-  :defer t
-  ;; Set Sass mode for SASS files and Css mode for SCSS files.
-  :mode "\\.sass\\'")
-
-    #+END_SRC
-*** SCSS-mode
-    Major mode for SCSS files, together with Sass.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package scss-mode
-  :defer t
-  :mode "\\.scss\\'")
-    #+END_SRC
 *** Nov-mode
 This is a mode for reading .epub files.
 It's quite comfortable when you want to read longform books in the computer.
@@ -596,14 +581,6 @@ I'm working with Makefiles now, so this is useful.
 (setq js2-highlight-level 3)
     #+END_SRC
 
-*** PHP-mode
-    PHP support for Emacs.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package php-mode
-  :defer t
-  :config
-  (add-hook 'php-mode-hook (lambda() (add-to-list 'company-backends 'company-php))))
-    #+END_SRC
 *** Enhanced-ruby-mode
     A better ruby-mode.
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -680,32 +657,7 @@ I'm working with Makefiles now, so this is useful.
 (use-package csv-mode
   :defer t)
     #+END_SRC
-*** APIB-mode
-Necessary for parsing apib files (API Blueprint)
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package apib-mode
-  :defer t
-  :mode "\\.apib?\\'")
-#+END_SRC
-*** Typescript mode
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package typescript-mode
-  :defer t)
-#+END_SRC
-
 ** Minor Modes
-*** JS-comint
-    Open a REPL using Node.js in another buffer.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package js-comint
-:defer t)
-
-;; Call the REPL with C-c C-s in js2-mode
-;; (define-key js2-mode-map (kbd "C-c C-s") 'run-js)
-
-;; Send last JS expression to REPL
-;; (define-key js2-mode-map (kbd "C-x C-e") 'js-send-last-sexp)
-    #+END_SRC
 *** Flycheck Inline
     Shows the error when leaving the point over the place where it occurs.
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -722,18 +674,6 @@ Necessary for parsing apib files (API Blueprint)
   :hook ((enh-ruby-mode ruby-mode) . 'ruby-electric-mode)
   :diminish ruby-electric-mode)
     #+END_SRC
-*** Inf-elixir
-Utility around Elixir's REPL in Emacs.
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package inf-elixir
-  :after (elixir-mode)
-  :ensure t
-  :defer t
-  :init
-  ;; Bindings for inf-elixir-mode
-  (define-key elixir-mode-map (kbd "C-c C-l") 'inf-elixir-send-line)
-  (define-key elixir-mode-map (kbd "C-c C-r") 'inf-elixir-send-region))
-#+END_SRC
 *** Mix
 A wrapper around Elixir's ~mix~ for Emacs
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -832,7 +772,7 @@ A wrapper around Elixir's ~mix~ for Emacs
 *** Emmet-mode
     #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package emmet-mode
-  :after (:any web-mode sass-mode scss-mode)
+  :after (:any web-mode)
   :defer t)
     #+END_SRC
 *** Highlight-numbers mode
@@ -1094,11 +1034,6 @@ You get both the ~string-inflection~ package and a keybinding to use it in ~evil
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package evil-string-inflection)
 #+END_SRC
-*** Zoom window
-Zooms a window just like in Tmux.
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package zoom-window)
-#+END_SRC
 *** Notmuch
 Read mail inside Emacs!
 This is great for opensource projects and work.
@@ -1129,79 +1064,6 @@ This is great for opensource projects and work.
       (goto-char (point-min))))
   (define-key 'notmuch-show-part-map "d" 'my-notmuch-show-view-as-patch))
 #+END_SRC
-*** Vterm
-It is a full-fledged terminal emulator inside Emacs. It uses ~libvterm~, which
-is a C library, so it maintains compatibility between all CLI applications, and
-you can use them without problems from inside Emacs.
-
-The advantage over using ~term-mode~ or ~shell-mode~ are:
-- No need to put additional configuration in Emacs to get the terminal to show colors.
-  It also respects the PS1 configuration in your ~.bashrc~.
-- Easier to toggle a mode to copy information from the terminal to other buffers.
-  Although ~vterm-copy-mode~ takes some time getting used to.
-
-The drawbacks are:
-- Currently the side of the terminal output gets cut if you switch to other
-  windows with ~golden-ratio-mode~
-- Needs to bind new keybindings to get commands that are by default in
-  ~shell-mode~ or ~term-mode~ with ~line-mode~.
-- To search the terminal buffer with =C-s=, you'll need to enter ~vterm-copy-mode~.
-#+BEGIN_SRC emacs-lisp :tangle yes
-(defun vterm-mode-tweaks ()
-  (set (make-local-variable 'company-backends) '(company-capf company-files))
-  (setq-local show-trailing-whitespace nil)
-  ;; I don't like having the mode line in the terminals.
-  (setq-local show-trailing-whitespace nil)
-  (setq-local mode-line-format nil)
-  (evil-set-initial-state 'vterm-mode' emacs))
-
-(use-package vterm
-  :hook ((vterm-mode) . 'vterm-mode-tweaks)
-  :bind (:map vterm-mode-map
-          ("C-M-o" . 'ace-window)
-          ("C-[" . 'vterm-copy-mode)
-          ("M-w" . 'auralcat/vterm-copy-last-command-output)
-          ("M-p" . 'vterm-send-up)
-          ("M-r" . 'vterm-send-C-r)
-          ("M-n" . 'vterm-send-down))
-  :config
-  (setq vterm-use-vterm-prompt-detection-method t))
-
-;; Macro to copy vterm's last command output.
-(fset 'auralcat/vterm-copy-last-command-output
-      (kmacro-lambda-form [?\C-c ?\C-t ?\C-c ?\C-p ?\C-a ?\C-  ?\C-c ?\C-n ?\C-p ?\M-b ?\C-e return] 0 "%d"))
-#+END_SRC
-**** Improve vterm copy mode
-I don't like the default ~C-c C-t~ binding to enter ~vterm-copy-mode~. It feels
-clunky to me.
-
-I also don't like using Emacs keybindings there to copy stuff. The ~evil~ bindings
-are more comfortable for that.
-#+BEGIN_SRC emacs-lisp :tangle yes
-(defun auralcat/vterm-use-evil-normal-state-on-copy-mode ()
-  "Uses evil-normal-state when entering vterm-copy-mode and evil-emacs-state
-when exiting vterm-copy-mode."
-  (if (eq evil-state 'normal)
-      (evil-emacs-state)
-    (evil-normal-state)))
-
-(add-hook 'vterm-copy-mode-hook #'auralcat/vterm-use-evil-normal-state-on-copy-mode)
-#+END_SRC
-**** PROTIP: Compiling ~vterm-module~ manually
-Whenever you're not able to compile ~vterm-module~ from Emacs with
-~vterm-module-compile~, you can compile the module manually by running:
-
-#+BEGIN_SRC shell
-cd ~/my-dotfiles/.emacs.d/elpa/vterm-<version>
-mkdir -p build
-cd build
-cmake ..
-make
-#+END_SRC
-
-I ran into this situation once and the compilation buffer in Emacs didn't output
-any error information, it was crashing with silent errors. By compiling it in
-the terminal, I could see the output messages and there were no errors.
 *** Exec path from shell
   Replicates terminal env vars in graphical Emacs.
   #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1230,23 +1092,6 @@ Create links to Github/GitLab files from the comfort of your Emacs buffer.
   (require 'smartparens-config))
 #+END_SRC
 
-*** Prettier.js
-    Prettier.js integration for Emacs.
-    I want to run this thing when saving .js and web-related files.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package prettier-js
-  :after (:any js2-mode sass-mode css-mode scss-mode)
-  :hook ((js2-mode sass-mode scss-mode css-mode) . 'prettier-js-mode)
-  :config
-  (setq prettier-js-allowed-modes '(js2-mode sass-mode css-mode scss-mode))
-
-  (defun toggle-prettier-js-save-hook ()
-    "Toggles Prettier.js hook when you're working with a mode that supports it. Removes the hook otherwise."
-    (if (member major-mode prettier-js-allowed-modes)
-    (add-hook 'before-save-hook 'prettier-js)
-      (remove-hook 'before-save-hook 'prettier-js)))
-  (add-hook 'change-major-mode-hook 'toggle-prettier-js-save-hook))
-    #+END_SRC
 *** Yafolding
     Code folding in Emacs.
     Takes some configuration to use it with evil, but works fine for Elixir buffers.
@@ -1293,21 +1138,6 @@ This is great to concentrate on text when you want to write prose.
   (setq golden-ratio-extra-commands
     (append golden-ratio-extra-commands '(magit-status aw-flip-window)))
   (golden-ratio-mode 1))
-    #+END_SRC
-
-*** Docker
-    A Docker command wrapper for Emacs
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package docker
-  :defer t
-  :config
-  ;; Extra stuff Docker needs on Mac OS X
-  (when (eq system-type 'darwin)
-    (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
-    (setq exec-path (append exec-path '("/usr/local/bin"))))
-
-  ;; Set the Docker command for me, please.
-  (setq docker-command (string-trim (shell-command-to-string "command -v docker"))))
     #+END_SRC
 
 *** Projectile Rails
@@ -1362,14 +1192,6 @@ This is great to concentrate on text when you want to write prose.
   :ensure t
   :init
   (global-evil-matchit-mode 1))
-    #+END_SRC
-*** Writeroom Mode
-    Dims the modeline, perfect for focusing on writing text/code
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package writeroom-mode
-  :ensure t
-  :defer t)
-;; Activate it manually, it doesn't play well with Moe modeline globally
     #+END_SRC
 *** Restart Emacs
     Restart Emacs from within Emacs
@@ -1589,12 +1411,6 @@ You can put ~auto-package-update-async~ in the ~midnight-hook~.
 ;; Bind it to a keychord.
 (global-set-key (kbd "M-`") 'auralcat/change-theme)
   #+END_SRC
-** Jazz
-   A warm theme with dark colors.
-   #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package jazz-theme :ensure t
-  :defer t)
-   #+END_SRC
 ** Abyss
    Dark contrast theme
    #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1604,21 +1420,6 @@ You can put ~auto-package-update-async~ in the ~midnight-hook~.
    A port of the theme from TextMate.
    #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package twilight-bright-theme :defer t)
-   #+END_SRC
-** Organic Green
-   A light theme with a light-green background, looks real nice!
-   #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package organic-green-theme :defer t)
-   #+END_SRC
-** Flat UI
-   Flat colors which blend nicely.
-   #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package flatui-theme :defer t)
-   #+END_SRC
-** Hemisu
-   I like the dark theme from here.
-   #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package hemisu-theme :defer t)
    #+END_SRC
 ** Gruvbox
 #+BEGIN_SRC emacs-lisp :tangle yes
