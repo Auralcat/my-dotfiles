@@ -1,11 +1,3 @@
-;; Colorize the cursor depending on current mode.
-;; It's one of those small things that you can't live without once you get it.
-
-;; ADDENDUM: You can get the color of a face like this:
-;; (color-values (face-foreground 'face-name))
-;; Setting the color through faces blends well with each theme, but if you hover over the
-;; face it gets the color from, it defeats the whole purpose of this.
-
 ;; Customize undo command as of Emacs 28.
 ;; 'undo-redo is the native feature in this new version.
 (evil-set-undo-system 'undo-redo)
@@ -14,16 +6,13 @@
 (setq evil-emacs-state-cursor '("magenta" box))
 
 ;; I have bound C-a to back-to-indentation-or-beginning in another config,
-;; Now I need C-e, $ is too far for me 😂
+;; Now I need C-e, $ is too far for me
 (define-key evil-normal-state-map (kbd "C-e") 'end-of-line)
 
 ;; Some buffers in Emacs are read-only and can be usually killed pressing
 ;; lowercase q. Much more convenient if you ask me.
 ;; Use Q in normal mode to kill current buffer.
 (define-key evil-normal-state-map (kbd "Q") 'auralcat/quit-and-kill-buffer)
-
-;; Evil-snipe: use s and S for sniping, transfer the command from S to K
-(define-key evil-normal-state-map (kbd "K") 'evil-change-whole-line)
 
 ;; INSERT MODE
 ;; Use C-g to exit from Normal mode as well.
@@ -38,9 +27,6 @@
 (define-key evil-normal-state-map (kbd "C-t") 'transpose-chars)
 (define-key evil-insert-state-map (kbd "C-t") 'transpose-chars)
 
-;; Use C-w to kill region. I don't use C-w to delete backward words anymore.
-(define-key evil-insert-state-map (kbd "C-w") 'completion-kill-region)
-
 ;; Use C-y to paste text, just like Emacs mode
 ;; The previous command was copy-line-from-above, not that useful IMO
 (define-key evil-insert-state-map (kbd "C-y") 'yank)
@@ -49,8 +35,8 @@
   "Paste last insertion and exit insert mode."
   (interactive)
   (evil-paste-last-insertion)
-  (evil-normal-state)
-  )
+  (evil-normal-state))
+
 ;; Use C-@ in insert mode to paste the last insertion and quit insert mode.
 ;; This is present in Vim, but not in Evil for some reason.
 (define-key evil-insert-state-map (kbd "C-@") 'evil-control-at)
@@ -83,8 +69,6 @@
 
 ;; Global bindings go here
 (evil-leader/set-key
-  ;; Eshell
-  "$" 'vterm
   ;; Org-agenda
   "a" 'org-agenda
   ;; Bookmark shortcuts
@@ -92,20 +76,9 @@
   "b4" 'bookmark-jump-other-window
   "bl" 'list-bookmarks
   "bs" 'bookmark-set
-  ;; Org-clock functions. It makes sense to group them here.
-  ;; For example, you can choose which clock funct
-  "ci" 'org-clock-in
-  "cl" 'org-clock-in-last
-  "co" 'org-clock-out
-  "cj" 'org-clock-goto
   ;; Dired stuff
   "dj" 'dired-jump
   "d4j" 'dired-jump-other-window
-  ;; Docker
-  "dd" 'docker
-  "dcu" 'auralcat-docker-compose-up
-  "dcd" 'auralcat-docker-compose-down
-  "dcl" 'docker-compose-logs
   ;; Open frequently visited files
   "fe" 'my-find-evilrc-file
   "fm" 'jump-to-messages-buffer
@@ -125,19 +98,17 @@
   "gp" 'magit-push
   "gx" 'magit-reset
   "i" 'imenu
-  ;; Org-capture. Keeping consistency with org-agenda's binding.
-  "k" 'org-capture
+  ;; Store links in Org.
   "l" 'org-store-link
   ;; Projectile prefix
   "p" 'projectile-command-map
   "s" 'save-buffer
+  ;; These are custom functions to copy text into GFM code blocks
   "yd" 'auralcat/prog-copy-region-in-diff-gfm-code-block
   "yp" 'auralcat/prog-copy-region-in-plain-md-code-block
   "ys" 'auralcat/prog-copy-region-in-suggestion-gfm-code-block
   "yy" 'auralcat/prog-copy-region-in-named-gfm-code-block
-  "/" 'git-link
-  "-" 'zoom-window-zoom
-  "n" 'auralcat/org-mark-heading-as-done)
+  "/" 'git-link)
 
 ;; Set Emacs state as initial state for a handful of modes.
 ;; This includes Dired, Xref, shell-related modes and list modes.

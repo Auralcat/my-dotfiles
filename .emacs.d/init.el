@@ -59,10 +59,6 @@
  '(display-time-mail-string "✉")
  '(display-time-mode nil)
  '(dynamic-completion-mode t)
- '(emmet-indent-after-insert t)
- '(emmet-indentation 2)
- '(emmet-preview-default t)
- '(engine-mode nil)
  '(enh-ruby-use-encoding-map nil)
  '(ensime-sem-high-faces
    '((var :foreground "#000000" :underline
@@ -102,8 +98,6 @@
  '(global-eldoc-mode nil)
  '(global-emojify-mode t)
  '(global-linum-mode nil)
- '(global-wakatime-mode t)
- '(global-writeroom-mode nil nil (writeroom-mode))
  '(highlight-indent-guides-auto-enabled nil)
  '(hl-paren-background-colors '("#2492db" "#95a5a6" nil))
  '(ido-enable-flex-matching nil)
