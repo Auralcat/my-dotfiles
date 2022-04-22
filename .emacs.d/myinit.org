@@ -900,7 +900,6 @@ A wrapper around Elixir's ~mix~ for Emacs
       org-self-insert-command
       weechat-self-insert-command
       isearch-printing-char
-      vterm--self-insert
       abort-recursive-edit
       company-ignore
       ))
