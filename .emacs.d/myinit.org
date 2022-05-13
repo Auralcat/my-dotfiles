@@ -315,9 +315,6 @@ from ~M-x~ and get the same result if you want.
 ;; (setq shell-command-switch "-c")
 ;; (setq shell-command-switch "-ic")
 
-;; Activate Company mode
-(add-hook 'after-init-hook 'global-company-mode)
-
 ;; Enable global Abbrev mode
 (setq-default abbrev-mode t)
 
@@ -778,10 +775,8 @@ A wrapper around Elixir's ~mix~ for Emacs
     Syntax checker, replaces flymake
     #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package flycheck
-  :defer t
-  :config
-  ;; turn on flychecking globally
-  (add-hook 'after-init-hook #'global-flycheck-mode))
+  :hook (prog-mode . 'flycheck-mode)
+  :defer t)
 ;; Disable rubylint on default for Ruby modes.
 ;; If you need it, you can enable it locally using C-u C-c ! v.
 (defun custom-disabled-ruby-checkers ()
@@ -796,6 +791,7 @@ A wrapper around Elixir's ~mix~ for Emacs
      I switched to it because it works in GUI Emacs and ~auto-complete~ didn't at the time.
      #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package company
+  :hook (prog-mode . 'company-mode)
   :defer t
   :config
   ;; My standard Company configuration
@@ -825,14 +821,6 @@ A wrapper around Elixir's ~mix~ for Emacs
   (set (make-local-variable 'company-backends) '(company-capf company-etags company-dabbrev company-yasnippet))
   (subword-mode 1))
 
-;; General text writing completion (uses dabbrev and filename completion)
-(defun human-language-mode-tweaks ()
-  (set (make-local-variable 'company-backends) '(company-dabbrev company-capf company-files))
-  ;; If you write a word with 3 letters, it's better to use 'complete, I think.
-  ;; Company-mode is meant for longer words and those with hard spelling IMO.
-  (set (make-local-variable 'company-minimum-prefix-length) 4)
-  (setq fill-column 80))
-
 ;; Shell completion
 (defun shell-mode-tweaks ()
   (set (make-local-variable 'company-backends) '(company-capf company-files)))
@@ -850,10 +838,6 @@ A wrapper around Elixir's ~mix~ for Emacs
 (add-hook 'shell-mode-hook 'shell-mode-tweaks)
 (add-hook 'emacs-lisp-mode-hook 'elisp-tweaks)
 (add-hook 'ielm-mode-hook 'elisp-tweaks)
-
-;; Human language writing hooks
-(add-hook 'org-mode-hook 'human-language-mode-tweaks)
-(add-hook 'markdown-mode-hook 'human-language-mode-tweaks)
 
 (add-hook 'org-mode-hook 'variable-pitch-mode)
 (add-hook 'org-english-mode-hook 'variable-pitch-mode)
@@ -873,21 +857,6 @@ A wrapper around Elixir's ~mix~ for Emacs
 (use-package company-web
   :after (:all company-mode web-mode)
   :defer t)
-
-;; Company statistics package
-(use-package company-statistics
-  :after (company-mode)
-  :defer t
-  :config
-(company-statistics-mode))
-
-;; Company with prescient.el offers better sorting of completion candidates.
-;; I don't know if it clashes with company-statistics.
-(use-package company-prescient
-  :after (company-mode)
-  :defer t
-  :config
-  (company-prescient-mode))
      #+END_SRC
 *** Keyfreq
     Shows most used commands in editing session.
@@ -1632,9 +1601,6 @@ This involves window and tab management.
 (setq org-startup-indented t
       org-startup-with-inline-images t
       org-hide-emphasis-markers t)
-
-;; We don't need Flycheck in org-mode buffers. Usually.
-(add-hook 'org-mode-hook #'(lambda () (flycheck-mode 0)))
 
 ;; Change the end of collapsed headings to an arrow.
 (setq org-ellipsis "⤵")
