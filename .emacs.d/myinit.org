@@ -424,7 +424,6 @@ We need to do some customizations to comint-related buffers to improve performan
   (setq fill-column 80))
 
 (add-hook 'prog-mode-hook 'prog-mode-tweaks)
-(add-hook 'text-mode-hook 'column-number-mode)
   #+END_SRC
 * Packages
 ** Major Modes
@@ -546,8 +545,7 @@ I'm working with Makefiles now, so this is useful.
 ;; TODO: Look for a better completion for JS modes in Company.
 (defun js2-mode-tweaks ()
   ;; Use company-yas as main backend
-  (set (make-local-variable 'company-backends) '(company-etags company-yasnippet))
-  (company-mode t))
+  (set (make-local-variable 'company-backends) '(company-etags company-yasnippet)))
 
 (add-hook 'js2-mode-hook 'js2-mode-tweaks)
 
@@ -771,27 +769,12 @@ A wrapper around Elixir's ~mix~ for Emacs
   (add-hook 'git-commit-mode-hook 'flyspell-mode))
     #+END_SRC
 
-*** Flycheck
-    Syntax checker, replaces flymake
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package flycheck
-  :hook (prog-mode . 'flycheck-mode)
-  :defer t)
-;; Disable rubylint on default for Ruby modes.
-;; If you need it, you can enable it locally using C-u C-c ! v.
-(defun custom-disabled-ruby-checkers ()
-  (add-to-list 'flycheck-disabled-checkers 'ruby-rubylint))
-(add-hook 'enh-ruby-mode-hook 'custom-disabled-ruby-checkers)
-(add-hook 'ruby-mode-hook 'custom-disabled-ruby-checkers)
-    #+END_SRC
-
 *** Company
 **** Main Config
      *COMPlete ANYthing* inside Emacs.
      I switched to it because it works in GUI Emacs and ~auto-complete~ didn't at the time.
      #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package company
-  :hook (prog-mode . 'company-mode)
   :defer t
   :config
   ;; My standard Company configuration
@@ -800,13 +783,15 @@ A wrapper around Elixir's ~mix~ for Emacs
   (setq company-idle-delay 0)
   (setq company-echo-delay 0))
 
+;; Use company-mode only in prog-mode buffers.
+(add-hook 'prog-mode-hook #'company-mode)
+
 ;; Web-mode needs HTML and CSS completions.
 ;; JS is not satisfactory at this point IMO
 (defun web-mode-tweaks ()
   (require 'company-web-html)
   (set (make-local-variable 'company-backends) '(company-web-html company-css))
-  (emmet-mode 1)
-  (company-mode t))
+  (emmet-mode 1))
 
 ;; Completion for Ruby mode
 (defun ruby-mode-tweaks ()
@@ -843,20 +828,6 @@ A wrapper around Elixir's ~mix~ for Emacs
 (add-hook 'org-english-mode-hook 'variable-pitch-mode)
 (add-hook 'markdown-mode-hook 'variable-pitch-mode)
 (add-hook 'git-commit-setup-hook 'variable-pitch-mode)
-
-;; Apib mode should come with its own customizations:
-;; - Monospace fonts
-;; - No auto-fill
-;; - Line numbers on the side
-(add-hook 'apib-mode-hook #'(lambda ()
-                  (variable-pitch-mode 0)
-                  (auto-fill-mode 0)
-                  (display-line-numbers-mode 0)))
-
-;; Web-mode completions
-(use-package company-web
-  :after (:all company-mode web-mode)
-  :defer t)
      #+END_SRC
 *** Keyfreq
     Shows most used commands in editing session.
@@ -1164,7 +1135,7 @@ This is great to concentrate on text when you want to write prose.
     #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package git-gutter
   :when window-system
-  :hook ((prog-mode text-mode) . 'git-gutter-mode)
+  :hook ((prog-mode) . 'git-gutter-mode)
   :diminish ""
   :config
   (use-package git-gutter-fringe
