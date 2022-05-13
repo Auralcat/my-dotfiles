@@ -30,25 +30,14 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(auto-compression-mode nil)
- '(auto-image-file-mode t)
  '(battery-mode-line-format " 🔋 %b%p%% ")
  '(beacon-color "#F8BBD0")
  '(browse-url-browser-display nil)
  '(browse-url-browser-function 'browse-url-default-browser)
  '(browse-url-firefox-program "firefox")
  '(column-number-mode t)
- '(company-abort-manual-when-too-short nil)
- '(company-box-doc-enable nil)
- '(company-dabbrev-downcase nil)
- '(company-idle-delay 0.2)
- '(company-insertion-on-trigger ''company-explicit-action-p)
- '(company-insertion-triggers '(41))
- '(company-minimum-prefix-length 3)
- '(company-prescient-mode t)
- '(company-quickhelp-color-background "#4F4F4F")
- '(company-quickhelp-color-foreground "#DCDCCC")
- '(company-tooltip-minimum 6)
- '(company-transformers nil)
+ '(custom-safe-themes
+   '("37768a79b479684b0756dec7c0fc7652082910c37d8863c35b702db3f16000f8" "76b4632612953d1a8976d983c4fdf5c3af92d216e2f87ce2b0726a1f37606158" "02fff7eedb18d38b8fd09a419c579570673840672da45b77fde401d8708dc6b5" "8feca8afd3492985094597385f6a36d1f62298d289827aaa0d8a62fe6889b33c" "c9f102cf31165896631747fd20a0ca0b9c64ecae019ce5c2786713a5b7d6315e" "246a9596178bb806c5f41e5b571546bb6e0f4bd41a9da0df5dfbca7ec6e2250c" "613aedadd3b9e2554f39afe760708fc3285bf594f6447822dd29f947f0775d6c" "d583e413c94b50882768e499db730599696→
  '(display-battery-mode t)
  '(display-default-load-average nil)
  '(display-time-24hr-format t)
@@ -58,7 +47,6 @@
  '(display-time-mail-face 'change-log-email)
  '(display-time-mail-string "✉")
  '(display-time-mode nil)
- '(dynamic-completion-mode t)
  '(enh-ruby-use-encoding-map nil)
  '(ensime-sem-high-faces
    '((var :foreground "#000000" :underline
@@ -92,11 +80,8 @@
  '(evil-shift-width 2)
  '(fci-rule-character-color "#452E2E")
  '(font-use-system-font t)
- '(global-anzu-mode t)
- '(global-auto-revert-mode t)
  '(global-discover-mode t)
  '(global-eldoc-mode nil)
- '(global-emojify-mode t)
  '(global-linum-mode nil)
  '(highlight-indent-guides-auto-enabled nil)
  '(hl-paren-background-colors '("#2492db" "#95a5a6" nil))
