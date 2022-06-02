@@ -1678,16 +1678,6 @@ Use the fixed-pitch font for tables.
 ;; Load them from a separate file.
 (load "~/.org-capture-templates.el")
    #+END_SRC
-** Org-bullets
-   Change org-mode's *s to UTF-8 chars
-   #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package org-bullets
-  :init
-  (add-hook 'org-mode-hook (lambda() (org-bullets-mode 1)))
-  ;; Fallback bullets.
-  (setq org-bullets-bullet-list (quote ("✿" "❀" "◉" "○" "✸")))
-  )
-   #+END_SRC
 ** Org-babel
 *** General settings
 - Do not ask me if I want to run the source block
