@@ -218,6 +218,11 @@ from ~M-x~ and get the same result if you want.
   #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Make startup faster by reducing the frequency of garbage
 ;; collection.  The default is 0.8MB.  Measured in bytes.
+
+;; Display things faster in the GUI. You might have some weird issues if you
+;; do some aggressive scrolling in big files though.
+(setq redisplay-dont-pause t)
+
 (setq gc-cons-threshold (* 50 1000 1000))
 ;; Portion of heap used for allocation.  Defaults to 0.1.
 (setq gc-cons-percentage 0.6)
