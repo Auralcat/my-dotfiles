@@ -1427,13 +1427,6 @@ This involves window and tab management.
      (reusable-frames . t)
      (window-parameters . ((delete-window . t)))
      )
-    ;; A buffer with unit test results: they're easier to read in another frame.
-    ("^\\*mix .*\\*$"
-     (display-buffer-use-some-frame display-buffer-in-tab display-buffer-reuse-mode-window display-buffer-reuse-window)
-     (reusable-frames . t)
-     (tab-name . "*Test results*")
-     (inhibit-same-window . t)
-     )
     ;; Search buffers tend to be more useful when they're in the same frame as the code.
     ("\\(^\\*ag search text:.*\\*$\\|\\^*Occur.*\\*$\\)"
      (display-buffer-reuse-mode-window display-buffer-reuse-window)
