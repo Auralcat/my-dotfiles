@@ -799,7 +799,7 @@ A wrapper around Elixir's ~mix~ for Emacs
 ;; Completion for Ruby mode
 (defun ruby-mode-tweaks ()
   ;; Increase the min prefix length so it doesn't clash with most used keywords, like def.
-  (set (make-local-variable 'company-minimum-prefix-length) 4)
+  (set (make-local-variable 'company-minimum-prefix-length) 2)
   (set (make-local-variable 'company-backends) '(company-etags company-capf company-dabbrev company-yasnippet))
   (subword-mode 1))
 
@@ -1036,10 +1036,9 @@ This is great to concentrate on text when you want to write prose.
 
 (defun auralcat/set-up-olivetti-mode-init ()
   "Initialization steps for olivetti-mode."
-  (setq olivetti-body-width 104)
+  (setq olivetti-body-width 90)
   (olivetti-mode 'toggle))
 
-(add-hook 'outline-mode-hook 'auralcat/set-up-olivetti-mode-init)
 ;; Setting this up for only the parent mode should do the trick.
 (add-hook 'markdown-mode-hook 'auralcat/set-up-olivetti-mode-init)
 #+END_SRC
@@ -1758,16 +1757,20 @@ if you wish (!)
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package howm
   :ensure t
-  :hook ((howm-menu-mode . evil-emacs-state)
-         (howm-view-summary-mode . evil-emacs-state))
+  :hook (
+         ;; Rename buffers with the base filename as the buffer title
+         (howm-mode-hook . howm-mode-set-buffer-name)
+         (howm-create-hook . auralcat/set-up-olivetti-mode-init)
+         (howm-create-file-hook . auralcat/set-up-olivetti-mode-init)
+         (after-save-hook . howm-mode-set-buffer-name))
   :demand t
   :init
   ;; Use this to set which major mode name you would like to write your notes in through the pattern in file-name-alist.
   ;; In this case I'm using .org.en to open these files in org-english-mode.
   (setq howm-file-name-format "%Y/%m/%Y-%m-%d-%H%M%S.org.en")
-  ;; Rename buffers with the base filename as the buffer title
-(add-hook 'howm-mode-hook 'howm-mode-set-buffer-name)
-(add-hook 'after-save-hook 'howm-mode-set-buffer-name))
+  ;; These hooks need to be set up out of the :hook clause for evil-emacs-state to work.
+  (add-hook 'howm-menu-hook 'evil-emacs-state)
+  (add-hook 'howm-view-summary-mode-hook 'evil-emacs-state))
 #+END_SRC
 
 * Custom derived modes
