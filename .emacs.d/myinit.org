@@ -2086,14 +2086,6 @@ These are usually aliases to commonly-accessed tools and workflows.
 (setq-default blink-cursor-interval 0.6)
 (setq-default blink-cursor-delay 0.2)
 #+END_SRC
-** Cursor position
-Saves where you were in the last time you edited a given file.
-This could be a subtle hint about what you were doing.
-#+BEGIN_SRC emacs-lisp :tangle yes
-(setq save-place-file "~/.places")
-(setq save-place-forget-unreadable-files t)
-(save-place-mode 1)
-#+END_SRC
 * Diary
 ** Last day of month
    #+BEGIN_SRC emacs-lisp :tangle yes
