@@ -1882,6 +1882,17 @@ This can be reverted later with ~(advice-remove)~ though.
 (advice-add 'risky-local-variable-p :override #'ignore)
 #+END_SRC
 * Custom functions
+** Auto create missing directories
+Taken from https://emacsredux.com/blog/2022/06/12/auto-create-missing-directories/
+   #+BEGIN_SRC emacs-lisp :tangle yes
+(defun er-auto-create-missing-dirs ()
+  (let ((target-dir (file-name-directory buffer-file-name)))
+    (unless (file-exists-p target-dir)
+      (make-directory target-dir t))))
+
+(add-to-list 'find-file-not-found-functions #'er-auto-create-missing-dirs)
+   #+END_SRC
+
 ** Calculate leap year
    #+BEGIN_SRC emacs-lisp :tangle yes
 (defun is-leap-year (year)
