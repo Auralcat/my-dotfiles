@@ -1,0 +1,8 @@
+# -*- mode: snippet -*-
+# name: flowchart decision node link
+# key: d
+# --
+${1:nodeA} --> ${2:nodeB}\{${3:Decision?}\}
+$2 --> |Yes| ${4:nodeC}[$5]
+$2 --> |No| ${6:nodeD}[$7]
+$0
