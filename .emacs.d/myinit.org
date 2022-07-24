@@ -223,10 +223,6 @@ from ~M-x~ and get the same result if you want.
 ;; do some aggressive scrolling in big files though.
 (setq redisplay-dont-pause t)
 
-(setq gc-cons-threshold (* 50 1000 1000))
-;; Portion of heap used for allocation.  Defaults to 0.1.
-(setq gc-cons-percentage 0.6)
-
 ;; Sentences end with single spaces for me.
 (setq sentence-end-double-space nil)
 
@@ -472,7 +468,8 @@ I couldn't customize this through the ~markdown-header-scaling~ var, so let's tr
 
 (add-hook 'markdown-mode-hook 'auralcat/markdown-remap-heading-faces)
   #+END_SRC
-*** Web-mode
+*** Web Mode
+    I use this for HTML files mostly, works good for PHP too.
   #+BEGIN_SRC emacs-lisp :tangle yes
 (defun web-mode-keybindings ()
   "Define mode-specific keybindings like this."
@@ -491,6 +488,41 @@ I couldn't customize this through the ~markdown-header-scaling~ var, so let's tr
 (eval-after-load 'flycheck
   '(flycheck-add-mode 'html-tidy 'web-mode))
   #+END_SRC
+
+    #+BEGIN_SRC emacs-lisp :tangle yes
+(use-package web-mode
+  :ensure t
+  :defer t
+  :bind (:map web-mode-map
+          ("C-<up>"    . web-mode-element-previous)
+          ("C-<down>"  . web-mode-element-next)
+          ("C-<left>"  . web-mode-element-beginning)
+          ("C-<right>" . web-mode-tag-match)
+          ("C-S-<up>"  . web-mode-element-parent)
+          ("M-<up>"    . web-mode-element-content-select)
+          ("C-k"       . web-mode-element-kill)
+          ("M-RET"     . complete))
+
+  :init
+  ;; File associations
+  (add-to-list 'auto-mode-alist '("\\.phtml\\'"  . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.php\\'"    . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.html.erb\\'"    . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.html.eex\\'"    . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.html?\\'"  . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.vue?\\'"   . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.tsx?\\'"  . web-mode))
+  (add-to-list 'auto-mode-alist '("\\.jsx?\\'"  . web-mode))
+
+  ;; Engine associations
+  (setq web-mode-engines-alist
+    '(("php"    . "\\.phtml\\'")
+      ("blade"  . "\\.blade\\.")))
+
+  ;; Highlight tag when editing
+  (setq web-mode-enable-current-element-highlight t))
+    #+END_SRC
 *** Compilation mode tweaks
 This is a built-in mode, but I want to change some stuff there.
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -581,43 +613,6 @@ I'm working with Makefiles now, so this is useful.
 
 ;; (define-key ruby-mode-map (kbd "M-<down>") 'auralcat/ruby-move-defun-forward)
 ;; (define-key ruby-mode-map (kbd "M-<up>") 'auralcat/ruby-move-defun-backward)
-    #+END_SRC
-*** Web Mode
-    I use this for HTML files mostly, works good for PHP too.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package web-mode
-  :ensure t
-  :defer t
-  :bind (:map web-mode-map
-          ("C-<up>"    . web-mode-element-previous)
-          ("C-<down>"  . web-mode-element-next)
-          ("C-<left>"  . web-mode-element-beginning)
-          ("C-<right>" . web-mode-tag-match)
-          ("C-S-<up>"  . web-mode-element-parent)
-          ("M-<up>"    . web-mode-element-content-select)
-          ("C-k"       . web-mode-element-kill)
-          ("M-RET"     . complete))
-
-  :init
-  ;; File associations
-  (add-to-list 'auto-mode-alist '("\\.phtml\\'"  . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.php\\'"    . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.html.erb\\'"    . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.html.eex\\'"    . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.html?\\'"  . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.vue?\\'"   . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.tsx?\\'"  . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.jsx?\\'"  . web-mode))
-
-  ;; Engine associations
-  (setq web-mode-engines-alist
-    '(("php"    . "\\.phtml\\'")
-      ("blade"  . "\\.blade\\.")))
-
-  ;; Highlight tag when editing
-  (setq web-mode-enable-current-element-highlight t))
-
     #+END_SRC
 *** YAML-mode
     YAML support for Emacs.
@@ -1230,14 +1225,15 @@ This is great to concentrate on text when you want to write prose.
   (cond
    ;; Personal Linux machine
    ((and (string-equal system-name auralcat/personal-system-name) (eq system-type 'gnu/linux))
-    (setq circadian-themes '((:sunrise . solarized-light)
-                 (:sunset  . solarized-dark))))
+    (setq circadian-themes '((:sunrise . doom-gruvbox-light)
+                 (:sunset  . doom-gruvbox))))
    ;; Work Linux machine
    ((and (string-equal system-name auralcat/work-system-name) (eq system-type 'gnu/linux))
-    (setq circadian-themes '((:sunrise . doom-gruvbox-light)
-                 (:sunset  . doom-gruvbox)))))
+    (setq circadian-themes '((:sunrise . modus-operandi)
+                 (:sunset  . modus-vivendi)))))
   (circadian-setup))
     #+END_SRC
+
 *** Anzu
     Show search result count in the mode line.
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1326,6 +1322,17 @@ You can put ~auto-package-update-async~ in the ~midnight-hook~.
 ;; Bind it to a keychord.
 (global-set-key (kbd "M-`") 'auralcat/change-theme)
   #+END_SRC
+** Modus themes customization
+The ~modus-themes~ come with Emacs since version 28, so you don't need
+to install it through ~use-package~ anymore.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(setq modus-themes-deuteranopia t)
+(setq modus-themes-syntax '(green-strings)
+      modus-themes-mode-line '(3d accented borderless)
+      modus-themes-diffs 'desaturated)
+#+END_SRC
+
 ** Abyss
    Dark contrast theme
    #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1344,12 +1351,6 @@ You can put ~auto-package-update-async~ in the ~midnight-hook~.
 These are the official ones.
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package solarized-theme :defer t)
-#+END_SRC
-** Modus themes
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package modus-themes
-  :init
-  (setq modus-themes-success-deuteranopia t))
 #+END_SRC
 * Fonts
 It's better to set the fonts here instead of hard-coding them in init.el or in
@@ -1372,7 +1373,7 @@ the themes themselves.
     ;; This is because pure GTK Emacs does not play well with multiple frames.
     ;; This is not a problem for the personal setup, but I use 2 displays at work.
     (if (functionp 'pgtk-next-frame)
-    (auralcat--set-fonts-for-gnu-linux 100)
+    (auralcat--set-fonts-for-gnu-linux 110)
       (auralcat--set-fonts-for-gnu-linux 120)))))
 
 (defun auralcat--set-fonts-for-gnu-linux (height)
