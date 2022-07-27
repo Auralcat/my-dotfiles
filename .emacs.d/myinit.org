@@ -874,19 +874,6 @@ A wrapper around Elixir's ~mix~ for Emacs
   :config
   (editorconfig-mode 1))
     #+END_SRC
-*** Nyan-mode
-      Put a Nyan Cat in your mode line! :3
-      #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package nyan-mode
-    :init
-    ;; This is to avoid trouble with mode line displays.
-    ;; Nyan-mode changes the mode-line-position variable, where the line
-    ;; number and column numbers are displayed.
-    (add-hook 'nyan-mode-hook 'line-number-mode)
-    (add-hook 'nyan-mode-hook 'column-number-mode)
-    :config
-    (nyan-mode 1))
-      #+END_SRC
 *** Mode Icons
     Indicate modes in the mode line using icons
     #+BEGIN_SRC emacs-lisp :tangle yes
