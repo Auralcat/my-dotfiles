@@ -1686,6 +1686,16 @@ Use the fixed-pitch font for tables.
       (cons '(:results . "output verbatim replace")
         (assq-delete-all :results org-babel-default-header-args)))
 #+END_SRC
+*** ob-async
+This is to run org source code blocks asynchronously.
+Backends like Python implement their own asynchronous way of running
+things, so you need to add extra configuration when using them.
+Not the case right now, though.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package ob-async)
+#+END_SRC
+
 *** Elixir
     #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package ob-elixir)
