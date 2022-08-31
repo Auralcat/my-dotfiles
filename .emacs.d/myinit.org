@@ -1512,9 +1512,10 @@ This involves window and tab management.
 (global-set-key [end] (quote end-of-buffer))
 
 ;; Move to beginning of line or indentation
-(defun back-to-indentation-or-beginning () (interactive)
-       (if (= (point) (progn (back-to-indentation) (point)))
-       (beginning-of-line)))
+(defun back-to-indentation-or-beginning (args)
+  (interactive "P")
+  (if (= (point) (progn (back-to-indentation) (point)))
+      (beginning-of-line args)))
 
 ;; We need this to get back to the beginning of the indentation or first word of the line.
 (global-set-key (kbd "C-a") (quote back-to-indentation-or-beginning))
