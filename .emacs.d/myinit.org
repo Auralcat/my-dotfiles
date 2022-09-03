@@ -129,14 +129,14 @@ from ~M-x~ and get the same result if you want.
 (lambda (&optional arg) "Extracts a variable from an it clause and puts in a let statement." (interactive "p") (kmacro-exec-ring-item (quote ([100 100 134217745 134217729 112 99 87 108 101 116 40 58 25 escape 102 61 50 120 67 123 25 escape 86 61 15 15 48 119] 0 "%d")) arg))
 
 ;; Adds a byebug line to Ruby code
-(fset 'auralcat/ruby/add-byebug-line
+(fset 'auralcat/kmacro-ruby/add-byebug-line
       (kmacro-lambda-form [?O ?b ?y ?e ?b ?u ?g escape return] 0 "%d"))
 
-(fset 'auralcat/ruby-clone-method
+(fset 'auralcat/kmacro-ruby-clone-method
       (lambda (&optional arg) "Clones a def method in Ruby." (interactive "p") (kmacro-exec-ring-item (quote ([86 125 121 103 118 escape 112] 0 "%d")) arg)))
 
-(fset 'auralcat/search-git-conflict-string
-      (lambda (&optional arg) "Searches for a Git conflict string." (interactive "p") (kmacro-exec-ring-item (quote ([134217747 94 91 60 61 62 93 13] 0 "%d")) argumento)))
+(fset 'auralcat/kmacro-search-git-conflict-string
+      (lambda (&optional arg) "Searches for a Git conflict string." (interactive "p") (kmacro-exec-ring-item (quote ([134217747 94 91 60 61 62 93 13] 0 "%d")) arg)))
 
 (fset (quote sample-macro)
       (lambda (&optional arg) "Sample description" (interactive "p")
@@ -148,7 +148,7 @@ from ~M-x~ and get the same result if you want.
     ))
 
 ;; Some macros to adjust Ruby blocks
-(fset 'auralcat/ruby-move-defun-backward
+(fset 'auralcat/kmacro-ruby-move-defun-backward
       (lambda (&optional arg) "Moves a DEF block backwards in the class definition." (interactive "p")
     (undo-boundary)
     (noflet ((undo-boundary ()))
@@ -157,7 +157,7 @@ from ~M-x~ and get the same result if you want.
     (undo-boundary)
     ))
 
-(fset 'auralcat/ruby-move-block-forward
+(fset 'auralcat/kmacro-ruby-move-block-forward
       (lambda (&optional arg) "Moves a Ruby block forward in the current nesting level." (interactive "p")
     (undo-boundary)
     (noflet ((undo-boundary ()))
@@ -168,11 +168,11 @@ from ~M-x~ and get the same result if you want.
       )
 
 ;; Removes a Ruby block wrapping another block.
-(fset 'auralcat/ruby-block-vanish
+(fset 'auralcat/kmacro-ruby-block-vanish
       (kmacro-lambda-form [?m ?m ?% ?d ?d ?\' ?m ?d ?d ?\C-x ?\C-x ?=] 0 "%d"))
 
 ;; Remove links in an Org entry
-(fset 'auralcat/org-remove-link
+(fset 'auralcat/kmacro-org-remove-link
       (kmacro-lambda-form [?d ?s ?\] ?d ?f ?\] ?d ?s ?\]] 0 "%d"))
 
 ;; Copy the link at point in Org mode buffers
@@ -180,14 +180,14 @@ from ~M-x~ and get the same result if you want.
    (kmacro-lambda-form [?\C-c ?\C-l ?\C-  ?\C-a ?\M-w return return] 0 "%d"))
 
 ;; Paste the content from the kill ring into the next and previous lines
-(fset 'auralcat/yank-content-into-next-line
+(fset 'auralcat/kmacro-yank-content-into-next-line
       (lambda (&optional arg) "Paste the content from the kill ring into the next line." (interactive "p")
     (undo-boundary)
     (noflet ((undo-boundary ()))
       (kmacro-lambda-form [?\C-z return ?\C-p ?\C-y ?\C-a ?\C-n ?\C-z] 0 "%d"))
     (undo-boundary)))
 
-(fset 'auralcat/yank-content-into-previous-line
+(fset 'auralcat/kmacro-yank-content-into-previous-line
       (lambda (&optional arg) "Paste the content from the kill ring into the previous line." (interactive "p")
     (undo-boundary)
     (noflet ((undo-boundary ()))
@@ -195,6 +195,27 @@ from ~M-x~ and get the same result if you want.
     (undo-boundary)))
 
   #+END_SRC
+
+** General
+#+BEGIN_SRC emacs-lisp :tangle yes
+(defalias 'auralcat/kmacro-open-new-paragraph
+   (kmacro "<return> <return>"))
+#+END_SRC
+
+** Writing modes
+#+BEGIN_SRC emacs-lisp :tangle yes
+(defalias 'auralcat/kmacro-markdown-wrap-region-code
+   (kmacro "C-w ` C-y C-x C-x C-b C-SPC C-SPC"))
+
+(defalias 'auralcat/kmacro-org-wrap-region-code
+   (kmacro "C-w ~ C-y C-x C-x C-b C-SPC C-SPC"))
+
+(defalias 'auralcat/kmacro-markdown-insert-header-same-level
+   (kmacro "<return> <return> C-c C-t h"))
+
+(defalias 'auralcat/kmacro-markdown-insert-header-nest-one-level
+   (kmacro "<return> <return> C-c C-t h M-<right> C-e"))
+#+END_SRC
 
 ** Elixir
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -445,6 +466,8 @@ We need to do some customizations to comint-related buffers to improve performan
               ("M-<down>" . 'markdown-move-down)
               ("C-c 1" . 'markdown-insert-header-atx-1)
               ("C-c 2" . 'markdown-insert-header-atx-2)
+              ("C-<return>" . 'auralcat/kmacro-markdown-insert-header-same-level)
+              ("C-M-<return>" . 'auralcat/kmacro-markdown-insert-header-nest-one-level)
               ("C-c 3" . 'markdown-insert-header-atx-3))
   :config
   (setq markdown-fontify-code-blocks-natively t
