@@ -1,3 +1,4 @@
+-*- mode: org-english-*-
 #+TITLE: Emacs configuration file
 #+AUTHOR: Auralcat
 #+DATE: 2017:05:17
