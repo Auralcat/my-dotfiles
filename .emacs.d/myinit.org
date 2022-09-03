@@ -211,10 +211,10 @@ from ~M-x~ and get the same result if you want.
    (kmacro "C-w ~ C-y C-x C-x C-b C-SPC C-SPC"))
 
 (defalias 'auralcat/kmacro-markdown-insert-header-same-level
-   (kmacro "<return> <return> C-c C-t h"))
+   (kmacro "C-e <return> <return> C-c C-t h"))
 
 (defalias 'auralcat/kmacro-markdown-insert-header-nest-one-level
-   (kmacro "<return> <return> C-c C-t h M-<right> C-e"))
+   (kmacro "C-e <return> <return> C-c C-t h M-<right> C-e"))
 #+END_SRC
 
 ** Elixir
