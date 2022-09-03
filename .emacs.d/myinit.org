@@ -235,6 +235,64 @@ from ~M-x~ and get the same result if you want.
       (kmacro-lambda-form [?O ?r ?e ?q ?u ?i ?r ?e ?  ?I ?E ?x ?\; ?  ?I ?E ?x ?. ?p ?r ?y escape] 0 "%d"))
 #+END_SRC
 
+* Repeat-mode maps
+These are for the new ~repeat-mode~ added to Emacs 28.
+First we need to enable repeat-mode globally:
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(repeat-mode 1)
+#+END_SRC
+** General
+#+BEGIN_SRC emacs-lisp :tangle yes
+(defvar undo-repeat-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "u") 'undo)
+    (define-key map (kbd "r") 'undo-redo)
+    map))
+
+(dolist (cmd '(undo undo-redo))
+  (put cmd 'repeat-map 'undo-repeat-map))
+#+END_SRC
+
+** Org-mode repeat maps
+#+BEGIN_SRC emacs-lisp :tangle yes
+(defvar org-link-repeat-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "n") 'org-next-link)
+    (define-key map (kbd "p") 'org-previous-link)
+    map))
+
+(defvar org-heading-repeat-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "n") 'org-next-visible-heading)
+    (define-key map (kbd "p") 'org-previous-visible-heading)
+    (define-key map (kbd "f") 'org-forward-heading-same-level)
+    (define-key map (kbd "b") 'org-backward-heading-same-level)
+    map))
+
+(dolist (cmd '(org-next-link org-previous-link))
+  (put cmd 'repeat-map 'org-link-repeat-map))
+
+(dolist (cmd '(org-forward-heading-same-level org-backward-heading-same-level org-next-visible-heading org-previous-visible-heading))
+  (put cmd 'repeat-map 'org-heading-repeat-map))
+#+END_SRC
+** Markdown repeat maps
+#+BEGIN_SRC emacs-lisp :tangle yes
+(defvar markdown-heading-repeat-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "n") 'markdown-outline-next)
+    (define-key map (kbd "p") 'markdown-outline-previous)
+    (define-key map (kbd "f") 'markdown-outline-next-same-level)
+    (define-key map (kbd "b") 'markdown-outline-previous-same-level)
+    map))
+
+(dolist (cmd '(markdown-outline-next
+               markdown-outline-previous
+               markdown-outline-next-same-level
+               markdown-outline-previous-same-level))
+  (put cmd 'repeat-map 'markdown-heading-repeat-map))
+#+END_SRC
+
 * Environment Customizations
   #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Make startup faster by reducing the frequency of garbage
