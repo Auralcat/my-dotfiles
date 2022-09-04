@@ -216,6 +216,12 @@ from ~M-x~ and get the same result if you want.
 
 (defalias 'auralcat/kmacro-markdown-insert-header-nest-one-level
    (kmacro "C-e <return> <return> C-c C-t h M-<right> C-e"))
+
+;; Not really a macro but behaves like one.
+(defun auralcat/kmacro-markdown-convert-list-region (arg)
+  "Converts a region to a list."
+  (interactive "p")
+  (apply-macro-to-region-lines (region-beginning) (region-end) "- "))
 #+END_SRC
 
 ** Elixir
