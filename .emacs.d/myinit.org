@@ -1525,6 +1525,11 @@ This involves window and tab management.
 #+END_SRC
 
 * Keybindings
+** Translation keymap
+The keys in my personal machine are bound to the corresponding
+bindings using ~AltGr~ so this is necessary to use the Meta key on the
+right button as well.
+
  #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Translate the compose keys
 (define-key key-translation-map (kbd "¹") (kbd "M-1"))
@@ -1535,6 +1540,7 @@ This involves window and tab management.
 (define-key key-translation-map (kbd "ð") (kbd "M-d"))
 (define-key key-translation-map (kbd "ß") (kbd "M-s"))
 (define-key key-translation-map (kbd "»") (kbd "M-x"))
+(define-key key-translation-map (kbd "«") (kbd "M-z"))
 (define-key key-translation-map (kbd "ŋ") (kbd "M-g"))
 (define-key key-translation-map (kbd "<M-S-dead-grave>") (kbd "M-`"))
 (define-key key-translation-map (kbd "“") (kbd "M-v"))
