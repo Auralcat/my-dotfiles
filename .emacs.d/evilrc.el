@@ -99,6 +99,7 @@
   "gx" 'magit-reset
   "i" 'imenu
   ;; Store links in Org.
+  "j" 'jump-to-register
   "l" 'org-store-link
   ;; Projectile prefix
   "p" 'projectile-command-map
