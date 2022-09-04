@@ -937,6 +937,7 @@ A wrapper around Elixir's ~mix~ for Emacs
       org-self-insert-command
       weechat-self-insert-command
       isearch-printing-char
+      markdown-enter-key
       abort-recursive-edit
       company-ignore
       ))
