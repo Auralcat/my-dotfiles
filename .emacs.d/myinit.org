@@ -242,69 +242,6 @@ from ~M-x~ and get the same result if you want.
       (kmacro-lambda-form [?O ?r ?e ?q ?u ?i ?r ?e ?  ?I ?E ?x ?\; ?  ?I ?E ?x ?. ?p ?r ?y escape] 0 "%d"))
 #+END_SRC
 
-* Repeat-mode maps
-These are for the new ~repeat-mode~ added to Emacs 28.
-First we need to enable repeat-mode globally:
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-(repeat-mode 1)
-
-;; We're also defining a macro to reduce code duplication in this config.
-(defmacro auralcat/macro-make-map-for-repeat-commands (map-symbol key-commands-alist)
-  (require 'cl-lib)
-  `(defvar ,map-symbol
-     (let ((map (make-sparse-keymap)))
-       (cl-loop for (key . command) in ,key-commands-alist
-                do (define-key map (kbd key) command)
-                (put command 'repeat-map ',map-symbol))
-       map)))
-#+END_SRC
-
-** General
-#+BEGIN_SRC emacs-lisp :tangle yes
-(auralcat/macro-make-map-for-repeat-commands undo-repeat-map
-                                             '(("u" . undo)
-                                               ("r" . undo-redo)))
-
-(auralcat/macro-make-map-for-repeat-commands scroll-map
-                                             '(("n" . scroll-up-command)
-                                               ("p" . scroll-down-command)))
-
-(auralcat/macro-make-map-for-repeat-commands scroll-other-window-map
-                                             '(("]" . scroll-other-window)
-                                               ("[" . scroll-other-window-down)))
-
-(auralcat/macro-make-map-for-repeat-commands line-navigation-map
-                                             '(("n" . next-line)
-                                               ("p" . previous-line)))
-
-(auralcat/macro-make-map-for-repeat-commands icomplete-navigation-map
-                                             '(("n" . icomplete-forward-completions)
-                                               ("p" . icomplete-backward-completions)))
-#+END_SRC
-
-** Org-mode repeat maps
-#+BEGIN_SRC emacs-lisp :tangle yes
-(auralcat/macro-make-map-for-repeat-commands org-link-repeat-map
-                                             '(("n" . org-next-link)
-                                               ("p" . org-previous-link)))
-
-(auralcat/macro-make-map-for-repeat-commands org-heading-navigation-map
-                                             '(("n" . org-next-visible-heading)
-                                               ("p" . org-previous-visible-heading)
-                                               ("f" . org-forward-heading-same-level)
-                                               ("b" . org-backward-heading-same-level)))
-#+END_SRC
-
-** Markdown repeat maps
-#+BEGIN_SRC emacs-lisp :tangle yes
-(auralcat/macro-make-map-for-repeat-commands markdown-heading-repeat-map
-                                             '(("n" . markdown-outline-next)
-                                               ("p" . markdown-outline-previous)
-                                               ("f" . markdown-outline-next-same-level)
-                                               ("b" . markdown-outline-previous-same-level)))
-#+END_SRC
-
 * Environment Customizations
   #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Make startup faster by reducing the frequency of garbage
@@ -1991,6 +1928,71 @@ This can be reverted later with ~(advice-remove)~ though.
 #+BEGIN_SRC emacs-lisp :tangle yes
 (advice-add 'risky-local-variable-p :override #'ignore)
 #+END_SRC
+* Repeat-mode maps
+These are for the new ~repeat-mode~ added to Emacs 28.
+First we need to enable repeat-mode globally:
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(repeat-mode 1)
+
+;; We're also defining a macro to reduce code duplication in this config.
+(defmacro auralcat/macro-make-map-for-repeat-commands (map-symbol key-commands-alist)
+  (require 'cl-lib)
+  `(defvar ,map-symbol
+     (let ((map (make-sparse-keymap)))
+       (cl-loop for (key . command) in ,key-commands-alist
+                do (define-key map (kbd key) command)
+                (put command 'repeat-map ',map-symbol))
+       map)))
+#+END_SRC
+
+** General
+#+BEGIN_SRC emacs-lisp :tangle yes
+;; TODO: undo-redo is not loaded on startup through this macro. Need to figure out why.
+(auralcat/macro-make-map-for-repeat-commands undo-repeat-map
+                                             '(("u" . undo)
+                                               ("r" . undo-redo)))
+
+;; TODO: why are these keys not bound to scroll-up-command and scroll-down-command?
+(auralcat/macro-make-map-for-repeat-commands scroll-map
+                                             '(("n" . scroll-up-command)
+                                               ("p" . scroll-down-command)))
+
+(auralcat/macro-make-map-for-repeat-commands scroll-other-window-map
+                                             '(("]" . scroll-other-window)
+                                               ("[" . scroll-other-window-down)))
+
+(auralcat/macro-make-map-for-repeat-commands line-navigation-map
+                                             '(("n" . next-line)
+                                               ("p" . previous-line)))
+
+(auralcat/macro-make-map-for-repeat-commands icomplete-navigation-map
+                                             '(("n" . icomplete-forward-completions)
+                                               ("p" . icomplete-backward-completions)))
+#+END_SRC
+
+** Org-mode repeat maps
+#+BEGIN_SRC emacs-lisp :tangle yes
+(auralcat/macro-make-map-for-repeat-commands org-link-repeat-map
+                                             '(("n" . org-next-link)
+                                               ("p" . org-previous-link)))
+
+(auralcat/macro-make-map-for-repeat-commands org-heading-navigation-map
+                                             '(("n" . org-next-visible-heading)
+                                               ("p" . org-previous-visible-heading)
+                                               ("f" . org-forward-heading-same-level)
+                                               ("b" . org-backward-heading-same-level)))
+#+END_SRC
+
+** Markdown repeat maps
+#+BEGIN_SRC emacs-lisp :tangle yes
+(auralcat/macro-make-map-for-repeat-commands markdown-heading-repeat-map
+                                             '(("n" . markdown-outline-next)
+                                               ("p" . markdown-outline-previous)
+                                               ("f" . markdown-outline-next-same-level)
+                                               ("b" . markdown-outline-previous-same-level)))
+#+END_SRC
+
 * Custom functions
 ** Auto create missing directories
 Taken from https://emacsredux.com/blog/2022/06/12/auto-create-missing-directories/
