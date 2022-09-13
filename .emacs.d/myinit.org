@@ -1969,6 +1969,14 @@ First we need to enable repeat-mode globally:
 (auralcat/macro-make-map-for-repeat-commands icomplete-navigation-map
                                              '(("n" . icomplete-forward-completions)
                                                ("p" . icomplete-backward-completions)))
+
+(auralcat/macro-make-map-for-repeat-commands control-meta-navigation-map
+                                             '(("n" . forward-list)
+                                               ("p" . backward-list)
+                                               ("a" . beginning-of-defun)
+                                               ("e" . end-of-defun)
+                                               ("f" . forward-sexp)
+                                               ("b" . backward-sexp)))
 #+END_SRC
 
 ** Org-mode repeat maps
