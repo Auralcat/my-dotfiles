@@ -399,6 +399,10 @@ the things that I missed when switching from ~helm~.
 (fido-mode 1)
 (icomplete-vertical-mode 1)
 (ido-everywhere 1)
+
+;; Stop Ido from prompting me when I want to create a new buffer
+(setq confirm-nonexistent-file-or-buffer nil)
+(setq ido-create-new-buffer 'always)
 #+END_SRC
 * MermaidJS
 [[http://mermaid-js.github.io/mermaid/][MermaidJS]] is a Markdown syntax to generate flowcharts and diagrams.
