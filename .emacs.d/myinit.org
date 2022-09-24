@@ -344,9 +344,6 @@ from ~M-x~ and get the same result if you want.
 ;; (setq shell-command-switch "-c")
 ;; (setq shell-command-switch "-ic")
 
-;; Enable global Abbrev mode
-(setq-default abbrev-mode t)
-
 ;; Save last edited place in files
 (require 'saveplace)
 (setq-default save-place t)
@@ -443,6 +440,13 @@ We need to do some customizations to comint-related buffers to improve performan
 
 * Abbreviations
   #+BEGIN_SRC emacs-lisp :tangle yes
+;; Enable global Abbrev mode
+(setq-default abbrev-mode t)
+
+;; Don't ask to save new abbrevs, just save them.
+(setq save-abbrevs 'silently)
+
+;; Location of the abbrev definition file
 (setq abbrev-file-name "~/.abbrev_defs")
   #+END_SRC
 * Hooks
