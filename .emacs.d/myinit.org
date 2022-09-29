@@ -982,7 +982,13 @@ another window or even a frame.
   ;; With that, we can cycle through where ace-jump was called from using C-i and C-o.
   (defadvice ace-jump-mode (before ace-jump-mode-advice)
     (evil--jumps-push))
-  (ad-activate 'ace-jump-mode))
+  (ad-activate 'ace-jump-mode)
+  ;; Most of the time, I want to jump to a specific char first, so we should customize the list of
+  ;; submodes that ace-jump uses to determine which commands to run.
+  ;; By putting ace-jump-char-mode first, we can use the standard command to jump to a specific char.
+  ;; C-u ace-jump-mode will search for positions based on words, and C-u C-u ace-jump-mode will let
+  ;; you jump to a specific line in the buffer.
+  (setq ace-jump-mode-submode-list '(ace-jump-char-mode ace-jump-word-mode ace-jump-line-mode)))
 #+END_SRC
 *** Ace Window
 I'm using ~other-frame~ quite a lot recently, and this is an upgrade over the
