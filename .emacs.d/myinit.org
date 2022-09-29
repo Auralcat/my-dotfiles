@@ -1667,7 +1667,7 @@ right button as well.
 ;; Use Emacs mode in Org-capture buffers and notes buffer
 (add-hook 'org-capture-mode-hook 'evil-emacs-state)
 
-;; Idiot-proofing my configs
+;; Dummy-proofing my configs
 (define-key org-mode-map (kbd "C-c ]") nil)
 (define-key org-mode-map (kbd "C-c [") nil)
 
@@ -1810,7 +1810,7 @@ list of org-modes I use, since I created ~org-english-mode~ for my own use.
  `(("^[ \t]*\\(?:[-+*]\\|[0-9]+[).]\\)[ \t]+\\(\\(?:\\[@\\(?:start:\\)?[0-9]+\\][ \t]*\\)?\\[\\(?:X\\|\\([0-9]+\\)/\\2\\)\\][^\n]*\n\\)" 1 '(:strike-through t :inherit 'font-lock-comment-face) prepend))
  'append))
 #+END_SRC
-#+END_SRC
+
 ** Keybindings
 #+BEGIN_SRC emacs-lisp :tangle yes
 ;; The correct way to define keybindings for evil-mode.
