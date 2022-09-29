@@ -103,7 +103,22 @@ used to doing this multi search through ~ibuffer~, but you can call this functio
 from ~M-x~ and get the same result if you want.
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-(add-hook 'occur-hook 'occur-rename-buffer)
+;; Source: https://www.reddit.com/r/emacs/comments/l9b049/comment/glheho5
+(defun rename-occur-buffer ()
+  "Rename *Occur* buffers more descriptively."
+  (interactive) ; if you want to do it manually
+  (save-excursion
+    (save-match-data
+      (goto-char (point-min))
+      (when
+          (search-forward-regexp
+           "^[0-9]+ matches for \"\\(.*\\)\" in buffer: \\(.*\\)$"
+           (line-end-position)
+           nil)
+        (rename-buffer
+         (format "*Occur %s: %s*" (match-string 2) (match-string 1)))))))
+
+(add-hook 'occur-hook #'(lambda () (occur-rename-buffer t nil)))
 #+END_SRC
 * Dired
   A couple customizations.
