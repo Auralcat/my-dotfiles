@@ -1619,6 +1619,10 @@ right button as well.
 (evil-leader/set-key-for-mode 'elixir-mode "!" 'auralcat/elixir-iex-pry)
 (evil-leader/set-key-for-mode 'elixir-mode "SPC" 'inf-elixir-send-buffer)
   #+END_SRC
+;; More navigation aids that are not bound to any key by default
+(define-key global-map (kbd "M-g ,") 'goto-last-change-reverse)
+(define-key global-map (kbd "M-g .") 'goto-last-change)
+(define-key global-map (kbd "M-g u") 'browse-url)
 * Org-mode
 ** Main configuration
    #+BEGIN_SRC emacs-lisp :tangle yes
@@ -2007,6 +2011,10 @@ First we need to enable repeat-mode globally:
                                                ("e" . end-of-defun)
                                                ("f" . forward-sexp)
                                                ("b" . backward-sexp)))
+
+(auralcat/macro-make-map-for-repeat-commands goto-change-map
+                                             '(("." . goto-last-change)
+                                               ("," . goto-last-change-reverse)))
 #+END_SRC
 
 ** Org-mode repeat maps
