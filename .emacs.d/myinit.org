@@ -1310,11 +1310,7 @@ This is great to concentrate on text when you want to write prose.
    ;; Personal Linux machine
    ((and (string-equal system-name auralcat/personal-system-name) (eq system-type 'gnu/linux))
     (setq circadian-themes '((:sunrise . doom-gruvbox-light)
-                 (:sunset  . doom-gruvbox))))
-   ;; Work Linux machine
-   ((and (string-equal system-name auralcat/work-system-name) (eq system-type 'gnu/linux))
-    (setq circadian-themes '((:sunrise . modus-operandi)
-                 (:sunset  . modus-vivendi)))))
+                 (:sunset  . doom-gruvbox)))))
   (circadian-setup))
     #+END_SRC
 
