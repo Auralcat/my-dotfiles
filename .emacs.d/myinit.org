@@ -134,6 +134,128 @@ from ~M-x~ and get the same result if you want.
   #+END_SRC
 * Programming
 ** General configuration
+#+BEGIN_SRC emacs-lisp :tangle yes
+;; Manual completion for you.
+(define-key prog-mode-map (kbd "M-<return>") 'dabbrev-expand)
+
+;; Save automatically when visiting source code files.
+(add-hook 'prog-mode-hook #'(lambda () (auto-save-visited-mode 1)))
+
+(defun prog-mode-tweaks ()
+  ;; Set line number mode and column number mode for code files
+  (display-line-numbers-mode)
+  (setq fill-column 80))
+
+(add-hook 'prog-mode-hook 'prog-mode-tweaks)
+#+END_SRC
+*** Highlight TODO
+This is a package to highlight TODO keywords in any given mode, not just on ~org-mode~.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package hl-todo
+  :hook ((prog-mode) . hl-todo-mode))
+#+END_SRC
+*** Highlight indentation
+Saves you from getting lost in indentations.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package highlight-indentation
+  :hook ((prog-mode) . 'highlight-indentation-mode))
+#+END_SRC
+*** Highlight line
+This does not require any extra packages as of Emacs 21. Great thing to know where you are at a given point when programming.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(add-hook 'prog-mode-hook 'hl-line-mode)
+#+END_SRC
+*** Highlight-numbers mode
+    Sets font lock faces to numbers in Emacs.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+(use-package highlight-numbers
+  :after (prog-mode)
+  :defer t
+  :config
+  (add-hook 'prog-mode-hook 'highlight-numbers-mode))
+    #+END_SRC
+*** Yafolding
+    Code folding in Emacs.
+    Takes some configuration to use it with evil, but works fine for Elixir buffers.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+(use-package yafolding
+  :hook (prog-mode . yafolding-mode)
+  :defer t
+  :bind (:map evil-normal-state-map
+          ("zo" . 'yafolding-show-element)
+          ("zc" . 'yafolding-hide-element)
+          ("za" . 'yafolding-toggle-element)
+          ("zA" . 'yafolding-toggle-all)
+          ("zr" . 'yafolding-show-all)
+          ("zm" . 'yafolding-hide-all)
+          ))
+    #+END_SRC
+*** Editorconfig
+    Helps developers define and maintain consistent coding styles
+    between different editors and IDEs.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+(use-package editorconfig
+  :after (prog-mode)
+  :ensure t
+  :defer t
+  :config
+  (editorconfig-mode 1))
+    #+END_SRC
+*** Diff-Highlight
+    Highlights the changed content in buffer.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+(use-package diff-hl
+  :ensure
+  :defer t)
+    #+END_SRC
+*** Rainbow Delimiters
+    Highlight parentheses, brackets and braces according to their
+    depth.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+(use-package rainbow-delimiters
+  :after (prog-mode)
+  :defer t
+  :init
+  ;; Add this to prog-mode
+  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+  (add-hook 'ielm-mode-hook #'rainbow-delimiters-mode)
+  (add-hook 'slime-repl-mode-hook #'rainbow-delimiters-mode))
+    #+END_SRC
+*** Git Gutter
+    Shows (and enables you to navigate between) parts of the code
+    which where changed comparing to the current revision in a
+    version-controlled project.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+(use-package git-gutter
+  :when window-system
+  :hook ((prog-mode) . 'git-gutter-mode)
+  :diminish ""
+  :config
+  (use-package git-gutter-fringe
+    :after (git-gutter)
+    :defer t
+    :ensure t
+    :init
+    (require 'git-gutter-fringe)
+    (when (fboundp 'define-fringe-bitmap)
+      (define-fringe-bitmap 'git-gutter-fr:added
+    [224 224 224 224 224 224 224 224 224 224 224 224 224
+         224 224 224 224 224 224 224 224 224 224 224 224]
+    nil nil 'center)
+      (define-fringe-bitmap 'git-gutter-fr:modified
+    [224 224 224 224 224 224 224 224 224 224 224 224 224
+         224 224 224 224 224 224 224 224 224 224 224 224]
+    nil nil 'center)
+      (define-fringe-bitmap 'git-gutter-fr:deleted
+    [0 0 0 0 0 0 0 0 0 0 0 0 0 128 192 224 240 248]
+    nil nil 'center)))
+  ;; Adding evil-mode bindings
+  (define-key evil-normal-state-map (kbd "g h") 'git-gutter:previous-hunk)
+  (define-key evil-normal-state-map (kbd "g H") 'git-gutter:next-hunk)
+  (define-key evil-normal-state-map (kbd "g @") 'git-gutter:popup-hunk))
+    #+END_SRC
+
 ** Ruby
 *** Main configuration
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -196,7 +318,7 @@ After that, we can require it in our configuration:
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package ruby-mode
     :bind (:map ruby-mode-map
-		("C-c C-c" . xmp))
+        ("C-c C-c" . xmp))
     :init
     (add-to-list 'load-path "~/my-dotfiles/.emacs.d/manual-packages")
     (require 'rcodetools))
@@ -291,7 +413,6 @@ A wrapper around Elixir's ~mix~ for Emacs
 
 (add-hook 'after-save-hook 'auralcat/elixir--run-mix-format-on-save)
 #+END_SRC
-
 
 * Macros
   #+BEGIN_SRC emacs-lisp :tangle yes
@@ -513,10 +634,6 @@ A wrapper around Elixir's ~mix~ for Emacs
 ;; You'll still need to include the shebang in the start of the file though.
 (add-hook 'after-save-hook 'executable-make-buffer-file-executable-if-script-p)
 
-;; While you're at it, save automatically when visiting files.
-;; This is best used in prog-mode derivatives.
-(add-hook 'prog-mode-hook #'(lambda () (auto-save-visited-mode 1)))
-
 ;; Disable it for outline-mode derivatives like Markdown and Org.
 (add-hook 'text-mode-hook #'(lambda () (auto-save-visited-mode 0)))
 
@@ -652,19 +769,6 @@ We need to do some customizations to comint-related buffers to improve performan
 
 ;; Location of the abbrev definition file
 (setq abbrev-file-name "~/.abbrev_defs")
-  #+END_SRC
-* Hooks
-  #+BEGIN_SRC emacs-lisp :tangle yes
-;; Prog-mode is from where all the programming modes are derived from.
-;; This means that if you call prog-mode-hook, the settings will be
-;; applied to ALL programming modes in Emacs.
-
-(defun prog-mode-tweaks ()
-  ;; Set line number mode and column number mode for code files
-  (display-line-numbers-mode)
-  (setq fill-column 80))
-
-(add-hook 'prog-mode-hook 'prog-mode-tweaks)
   #+END_SRC
 * Packages
 ** Major Modes
@@ -876,15 +980,6 @@ YAML support for Emacs.
   :after (:any web-mode)
   :defer t)
     #+END_SRC
-*** Highlight-numbers mode
-    Sets font lock faces to numbers in Emacs.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package highlight-numbers
-  :after (prog-mode)
-  :defer t
-  :config
-  (add-hook 'prog-mode-hook 'highlight-numbers-mode))
-    #+END_SRC
 *** Flyspell
     Used to check prose.
     I use Markdown to write stuff in English.
@@ -978,17 +1073,6 @@ YAML support for Emacs.
 ;; These are loaded in other moments
 (eval-after-load "editorconfig" '(diminish 'editorconfig-mode))
 (eval-after-load "yasnippet" '(diminish 'yas-minor-mode))
-    #+END_SRC
-*** Editorconfig
-    Helps developers define and maintain consistent coding styles
-    between different editors and IDEs.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package editorconfig
-  :after (prog-mode)
-  :ensure t
-  :defer t
-  :config
-  (editorconfig-mode 1))
     #+END_SRC
 *** Mode Icons
     Indicate modes in the mode line using icons
@@ -1116,22 +1200,6 @@ Create links to Github/GitLab files from the comfort of your Emacs buffer.
   (require 'smartparens-config))
 #+END_SRC
 
-*** Yafolding
-    Code folding in Emacs.
-    Takes some configuration to use it with evil, but works fine for Elixir buffers.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package yafolding
-  :hook (prog-mode . yafolding-mode)
-  :defer t
-  :bind (:map evil-normal-state-map
-          ("zo" . 'yafolding-show-element)
-          ("zc" . 'yafolding-hide-element)
-          ("za" . 'yafolding-toggle-element)
-          ("zA" . 'yafolding-toggle-all)
-          ("zr" . 'yafolding-show-all)
-          ("zm" . 'yafolding-hide-all)
-          ))
-    #+END_SRC
 *** Olivetti mode
 This is great to concentrate on text when you want to write prose.
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1174,19 +1242,6 @@ This is great to concentrate on text when you want to write prose.
   (define-key evil-normal-state-map (kbd "C-e") 'evil-numbers/dec-at-pt))
     #+END_SRC
 
-*** Diff-Highlight
-    Highlights the changed content in buffer.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package diff-hl
-  :ensure
-  :defer t
-  :config
-  ;; ((defun hl-diff-tweaks()
-  ;;   (diff-hl-mode t)
-  ;;   (diff-hl-flydiff-mode t))
-  ;;   (add-hook 'prog-mode-hook 'hl-diff-tweaks))
-  )
-    #+END_SRC
 *** Evil-Matchit
     Adds more matching objects for the % operator in evil, such as
     def-end in Ruby/Python and HTML tags.
@@ -1204,53 +1259,6 @@ This is great to concentrate on text when you want to write prose.
 (use-package restart-emacs
   :defer t)
     #+END_SRC
-*** Rainbow Delimiters
-    Highlight parentheses, brackets and braces according to their
-    depth.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package rainbow-delimiters
-  :after (prog-mode)
-  :defer t
-  :init
-  ;; Add this to prog-mode
-  (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
-  (add-hook 'ielm-mode-hook #'rainbow-delimiters-mode)
-  (add-hook 'slime-repl-mode-hook #'rainbow-delimiters-mode))
-    #+END_SRC
-*** Git Gutter
-    Shows (and enables you to navigate between) parts of the code
-    which where changed comparing to the current revision in a
-    version-controlled project.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package git-gutter
-  :when window-system
-  :hook ((prog-mode) . 'git-gutter-mode)
-  :diminish ""
-  :config
-  (use-package git-gutter-fringe
-    :after (git-gutter)
-    :defer t
-    :ensure t
-    :init
-    (require 'git-gutter-fringe)
-    (when (fboundp 'define-fringe-bitmap)
-      (define-fringe-bitmap 'git-gutter-fr:added
-    [224 224 224 224 224 224 224 224 224 224 224 224 224
-         224 224 224 224 224 224 224 224 224 224 224 224]
-    nil nil 'center)
-      (define-fringe-bitmap 'git-gutter-fr:modified
-    [224 224 224 224 224 224 224 224 224 224 224 224 224
-         224 224 224 224 224 224 224 224 224 224 224 224]
-    nil nil 'center)
-      (define-fringe-bitmap 'git-gutter-fr:deleted
-    [0 0 0 0 0 0 0 0 0 0 0 0 0 128 192 224 240 248]
-    nil nil 'center)))
-  ;; Adding evil-mode bindings
-  (define-key evil-normal-state-map (kbd "g h") 'git-gutter:previous-hunk)
-  (define-key evil-normal-state-map (kbd "g H") 'git-gutter:next-hunk)
-  (define-key evil-normal-state-map (kbd "g @") 'git-gutter:popup-hunk))
-    #+END_SRC
-
 *** Magit
     How to win at Git from Emacs.
     The configuration for each part is below in separate headings.
@@ -1676,12 +1684,6 @@ Since I'm planning to drop ~evil-mode~ recently, I'll need to transfer what keep
 
 (global-set-key (kbd "C-\\") auralcat-map)
 #+END_SRC
-** Programming
-#+BEGIN_SRC emacs-lisp :tangle yes
-;; Manual completion for you.
-(define-key prog-mode-map (kbd "M-<return>") 'dabbrev-expand)
-#+END_SRC
-
 ** Remappings
 #+BEGIN_SRC emacs-lisp :tangle yes
 ;; I use zap-up-to-char much more than zap-to-char.
