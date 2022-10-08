@@ -134,6 +134,7 @@ from ~M-x~ and get the same result if you want.
   #+END_SRC
 * Programming
 ** General configuration
+*** Manual customization
 #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Manual completion for you.
 (define-key prog-mode-map (kbd "M-<return>") 'dabbrev-expand)
@@ -152,13 +153,14 @@ from ~M-x~ and get the same result if you want.
 This is a package to highlight TODO keywords in any given mode, not just on ~org-mode~.
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package hl-todo
-  :hook ((prog-mode) . hl-todo-mode))
+  :hook ((prog-mode . hl-todo-mode))
 #+END_SRC
 *** Highlight indentation
 Saves you from getting lost in indentations.
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package highlight-indentation
-  :hook ((prog-mode) . 'highlight-indentation-mode))
+  :hook ((prog-mode . highlight-indentation-mode)
+         (yaml-mode . highlight-indentation-mode)))
 #+END_SRC
 *** Highlight line
 This does not require any extra packages as of Emacs 21. Great thing to know where you are at a given point when programming.
@@ -180,16 +182,14 @@ This does not require any extra packages as of Emacs 21. Great thing to know whe
     Takes some configuration to use it with evil, but works fine for Elixir buffers.
     #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package yafolding
-  :hook (prog-mode . yafolding-mode)
-  :defer t
+  :hook ((prog-mode . yafolding-mode))
   :bind (:map evil-normal-state-map
           ("zo" . 'yafolding-show-element)
           ("zc" . 'yafolding-hide-element)
           ("za" . 'yafolding-toggle-element)
           ("zA" . 'yafolding-toggle-all)
           ("zr" . 'yafolding-show-all)
-          ("zm" . 'yafolding-hide-all)
-          ))
+          ("zm" . 'yafolding-hide-all)))
     #+END_SRC
 *** Editorconfig
     Helps developers define and maintain consistent coding styles
@@ -229,7 +229,7 @@ This does not require any extra packages as of Emacs 21. Great thing to know whe
     #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package git-gutter
   :when window-system
-  :hook ((prog-mode) . 'git-gutter-mode)
+  :hook ((prog-mode . git-gutter-mode))
   :diminish ""
   :config
   (use-package git-gutter-fringe
@@ -263,7 +263,7 @@ more maintainable and works better.
 
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package format-all
-  :hook ((prog-mode) . format-all-mode))
+  :hook ((prog-mode . format-all-mode)))
 #+END_SRC
 ** Ruby
 *** Main configuration
@@ -395,6 +395,20 @@ A wrapper around Elixir's ~mix~ for Emacs
    prefix))
 #+END_SRC
 
+** YAML
+*** Main configuration
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package yaml-mode
+  :ensure t
+  :hook ((yaml-mode . display-line-numbers-mode)
+         (yaml-mode . hl-line-mode)))
+#+END_SRC
+*** Indent-tools
+Kinda necessary for working in a sane way with YAML files if you don't use ~evil-mode~.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package indent-tools
+  :hook ((yaml-mode . indent-tools-minor-mode)))
+#+END_SRC
 * Macros
   #+BEGIN_SRC emacs-lisp :tangle yes
 ;; To save a macro, record it with C-x ( (start) and C-x ) (stop),
@@ -917,13 +931,6 @@ I'm working with Makefiles now, so this is useful.
 (setq js2-highlight-level 3)
     #+END_SRC
 
-*** YAML-mode
-YAML support for Emacs.
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package yaml-mode
-  :ensure t
-  :defer t)
-#+END_SRC
 *** CSV-mode
     CSV support for Emacs.
     #+BEGIN_SRC emacs-lisp :tangle yes
