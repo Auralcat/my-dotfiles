@@ -271,19 +271,25 @@ more maintainable and works better.
 ;; Completion for Ruby mode
 (defun ruby-mode-tweaks ()
   ;; Increase the min prefix length so it doesn't clash with most used keywords, like def.
-  (set (make-local-variable 'company-minimum-prefix-length) 2)
+  (set (make-local-variable 'company-minimum-prefix-length) 3)
   (set (make-local-variable 'company-backends) '(company-etags company-capf company-dabbrev company-yasnippet))
   (subword-mode 1))
 
 ;; Completion for REPL Ruby mode
 (defun inf-ruby-mode-tweaks ()
-  (set (make-local-variable 'company-minimum-prefix-length) 2)
+  (set (make-local-variable 'company-minimum-prefix-length) 3)
   (set (make-local-variable 'company-backends) '(company-capf company-etags company-dabbrev company-yasnippet))
   (subword-mode 1))
 
 (add-hook 'ruby-mode-hook 'ruby-mode-tweaks)
 (add-hook 'inf-ruby-mode-hook 'inf-ruby-mode-tweaks)
 #+END_SRC
+
+#+RESULTS:
+#+begin_example
+""
+#+end_example
+
 *** Ruby-electric
 Auto-close do-end blocks, as well as braces and parens.
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1012,7 +1018,7 @@ I'm working with Makefiles now, so this is useful.
 
 ;; Elisp completion
 (defun elisp-tweaks ()
-  (set (make-local-variable 'company-minimum-prefix-length) 5)
+  (set (make-local-variable 'company-minimum-prefix-length) 3)
   (set (make-local-variable 'company-backends) '(company-elisp company-etags company-yasnippet)))
 
 ;; Add tweaks
@@ -1268,10 +1274,8 @@ This is great to concentrate on text when you want to write prose.
     "Ensures that the commit body does not exceed 72 characters."
     (setq fill-column 72)
     (set (make-local-variable 'company-backends) '(company-dabbrev company-capf company-files))
-    (set (make-local-variable 'company-minimum-prefix-length) 2)
-    (setq-local comment-auto-fill-only-comments nil)
-    (evil-set-initial-state 'git-commit-mode 'emacs)
-    ))
+    (set (make-local-variable 'company-minimum-prefix-length) 3)
+    (setq-local comment-auto-fill-only-comments nil)))
      #+END_SRC
 **** Viewing diffs
 #+BEGIN_SRC emacs-lisp :tangle yes
