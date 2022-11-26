@@ -32,70 +32,6 @@
 ;; Every time bookmarks are changed, save them
 (setq bookmark-save-flag 1)
   #+END_SRC
-* Evil Mode
-  Yes, I'm committing this heresy.
-** Evil-leader
-     Add a prefix key to Evil mode, like the Leader key in Vim.
-     #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package evil-leader
-  :defer t)
-(load "~/my-dotfiles/.emacs.d/elisp-custom/evil-leader-custom-functions.el")
-(global-evil-leader-mode)
-;; Evil mode needs to be loaded after evil-leader
-(use-package evil
-:defer t)
-(evil-mode 1)
-
-;; Load configs
-(load "~/my-dotfiles/.emacs.d/evilrc")
-     #+END_SRC
-** Evil Surround
-     Easier manipulation of delimiters, emulation of vim.surround
-     #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package evil-surround
-:defer t)
-(global-evil-surround-mode)
-     #+END_SRC
-** Easy copy and paste inside quotes
-These are wrapper functions and macros to copy and paste text from inside quotes. I'm doing this quite a lot lately.
-#+BEGIN_SRC emacs-lisp :tangle yes
-(defun auralcat/evil-yank-inside-quotes ()
-     "Copies text from inside single or double quotes."
-     (interactive)
-     (cond
-      ((looking-at "\"")
-       (auralcat/evil-yank-inside-double-quotes 1))
-      ((looking-at "'")
-       (auralcat/evil-yank-inside-single-quotes 1))
-      ))
-
-(defun auralcat/evil-paste-inside-quotes ()
-     "Copies text from inside single or double quotes."
-     (interactive)
-     (cond
-      ((looking-at "\"")
-       (auralcat/evil-paste-inside-double-quotes 1))
-      ((looking-at "'")
-       (auralcat/evil-paste-inside-single-quotes 1))
-      ))
-
-(define-key evil-normal-state-map (kbd "g y") 'auralcat/evil-yank-inside-quotes)
-(define-key evil-normal-state-map (kbd "g p") 'auralcat/evil-paste-inside-quotes)
-
-(fset 'auralcat/evil-yank-inside-double-quotes
-   (kmacro-lambda-form [?y ?i ?\"] 0 "%d"))
-(fset 'auralcat/evil-yank-inside-single-quotes
-   (kmacro-lambda-form [?y ?i ?\'] 0 "%d"))
-(fset 'auralcat/evil-paste-inside-double-quotes
-   (kmacro-lambda-form [?m ?z ?v ?i ?\" ?P ?` ?z] 0 "%d"))
-(fset 'auralcat/evil-paste-inside-single-quotes
-   (kmacro-lambda-form [?m ?z ?v ?i ?\' ?P ?` ?z] 0 "%d"))
-#+END_SRC
-* Xref
-This is quite useful to navigate through code faster.
-#+BEGIN_SRC emacs-lisp :tangle yes
-(evil-set-initial-state 'xref--xref-buffer-mode 'emacs)
-#+END_SRC
 * Occur
 Occur is useful for when you want to keep a list of code points of interest in a
 given buffer or a set of buffers with ~multi-occur-in-matching-buffers~. I was
@@ -125,9 +61,6 @@ from ~M-x~ and get the same result if you want.
   #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Customize Dired list switches.
 (setq dired-listing-switches "-alh")
-
-;; Use Emacs mode in Dired.
-(add-hook 'dired-mode-hook 'evil-emacs-state)
 
 ;; Kill selected subdir with C-M-k
 (add-hook 'dired-mode-hook #'(lambda () (define-key dired-mode-map (kbd "C-M-k") 'dired-kill-subdir)))
@@ -179,17 +112,9 @@ This does not require any extra packages as of Emacs 21. Great thing to know whe
     #+END_SRC
 *** Yafolding
     Code folding in Emacs.
-    Takes some configuration to use it with evil, but works fine for Elixir buffers.
     #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package yafolding
-  :hook ((prog-mode . yafolding-mode))
-  :bind (:map evil-normal-state-map
-          ("zo" . 'yafolding-show-element)
-          ("zc" . 'yafolding-hide-element)
-          ("za" . 'yafolding-toggle-element)
-          ("zA" . 'yafolding-toggle-all)
-          ("zr" . 'yafolding-show-all)
-          ("zm" . 'yafolding-hide-all)))
+  :hook ((prog-mode . yafolding-mode)))
     #+END_SRC
 *** Editorconfig
     Helps developers define and maintain consistent coding styles
@@ -249,11 +174,7 @@ This does not require any extra packages as of Emacs 21. Great thing to know whe
     nil nil 'center)
       (define-fringe-bitmap 'git-gutter-fr:deleted
     [0 0 0 0 0 0 0 0 0 0 0 0 0 128 192 224 240 248]
-    nil nil 'center)))
-  ;; Adding evil-mode bindings
-  (define-key evil-normal-state-map (kbd "g h") 'git-gutter:previous-hunk)
-  (define-key evil-normal-state-map (kbd "g H") 'git-gutter:next-hunk)
-  (define-key evil-normal-state-map (kbd "g @") 'git-gutter:popup-hunk))
+    nil nil 'center))))
     #+END_SRC
 
 *** Format all the code
@@ -354,8 +275,6 @@ After that, we can require it in our configuration:
 A wrapper around Elixir's ~mix~ for Emacs
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package mix
-  ;; I prefer creating a prefix for these commands because it's 2 key presses
-  ;; instead of 3 with evil-leader.
   :config
   (define-prefix-command 'elixir-mix-map)
         (define-key 'elixir-mix-map "t" 'auralcat/mix-test)
@@ -410,7 +329,7 @@ A wrapper around Elixir's ~mix~ for Emacs
          (yaml-mode . hl-line-mode)))
 #+END_SRC
 *** Indent-tools
-Kinda necessary for working in a sane way with YAML files if you don't use ~evil-mode~.
+Necessary to work in a sane way with YAML files.
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package indent-tools
   :hook ((yaml-mode . indent-tools-minor-mode)))
@@ -745,9 +664,6 @@ npm install -g @mermaid-js/mermaid-cli
 * REPL
 We need to do some customizations to comint-related buffers to improve performance.
 #+BEGIN_SRC emacs-lisp :tangle yes
-;; I prefer Emacs state in comint-related buffers.
-(evil-set-initial-state 'comint-mode 'emacs)
-
 (defun comint-mode-tweaks ()
   ;; Font-lock is the one that takes the biggest toll on performance.
   (font-lock-mode -1)
@@ -877,9 +793,6 @@ This is a built-in mode, but I want to change some stuff there.
   (auto-fill-mode -1))
 
 (add-hook 'compilation-mode-hook 'compilation-mode-tweaks)
-;; Use Emacs keys and bindings in compilation-mode and its derived modes.
-(add-hook 'compilation-mode-hook 'evil-emacs-state)
-(add-hook 'compilation-start-hook 'evil-emacs-state)
 
 ;; Make the compilation buffer scroll to the end on command finish
 (setq compilation-scroll-output t)
@@ -1101,18 +1014,12 @@ This is pretty useful for when you want to jump to a different section in
 another window or even a frame.
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package ace-jump-mode
-  :after (evil)
   :bind
   ("C-c SPC" . ace-jump-mode)
   ("M-3" . ace-jump-mode)
   (:map org-mode-map
     ("C-c SPC" . ace-jump-mode))
   :config
-  ;; Save the position of the previous mark as a jump position for Evil.
-  ;; With that, we can cycle through where ace-jump was called from using C-i and C-o.
-  (defadvice ace-jump-mode (before ace-jump-mode-advice)
-    (evil--jumps-push))
-  (ad-activate 'ace-jump-mode)
   ;; Most of the time, I want to jump to a specific char first, so we should customize the list of
   ;; submodes that ace-jump uses to determine which commands to run.
   ;; By putting ace-jump-char-mode first, we can use the standard command to jump to a specific char.
@@ -1130,12 +1037,6 @@ windows or frames open.
   :bind ("C-M-o" . ace-window))
 #+END_SRC
 
-*** Evil-inflection
-This is a wrapper around the ~string-inflection~ package for ~evil-mode~.
-You get both the ~string-inflection~ package and a keybinding to use it in ~evil-mode.~
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package evil-string-inflection)
-#+END_SRC
 *** Notmuch
 Read mail inside Emacs!
 This is great for opensource projects and work.
@@ -1225,28 +1126,6 @@ This is great to concentrate on text when you want to write prose.
   (golden-ratio-mode 1))
     #+END_SRC
 
-*** Evil-numbers
-    Increment and decrement numbers like in Vim.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package evil-numbers
-  :after (evil)
-  :defer t
-  :config
-  (define-key evil-normal-state-map (kbd "C-a") 'evil-numbers/inc-at-pt)
-  (define-key evil-normal-state-map (kbd "C-e") 'evil-numbers/dec-at-pt))
-    #+END_SRC
-
-*** Evil-Matchit
-    Adds more matching objects for the % operator in evil, such as
-    def-end in Ruby/Python and HTML tags.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package evil-matchit
-  :after (evil)
-  :defer t
-  :ensure t
-  :init
-  (global-evil-matchit-mode 1))
-    #+END_SRC
 *** Restart Emacs
     Restart Emacs from within Emacs
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1325,14 +1204,6 @@ This is great to concentrate on text when you want to write prose.
   (circadian-setup))
     #+END_SRC
 
-*** Anzu
-    Show search result count in the mode line.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package evil-anzu
-  :after (evil)
-  :config
-  (global-anzu-mode))
-    #+END_SRC
 *** Org-mode GFM exporter
 GFM stands for *Github Flavored Markdown*. It's a nice exporter not just for that
 use case though, since it removes the line wraps on exporting.
@@ -1640,32 +1511,16 @@ right button as well.
 ;; Hippie-Expand: change key to M-SPC; Replace dabbrev-expand
 (global-set-key "\M- " 'hippie-expand)
 (global-set-key "\M-/" 'hippie-expand)
-
-;; Eshell configuration
-(defun eshell-tweaks ()
-  "Tweaks for the Emacs shell"
-  (evil-set-initial-state 'shell-mode 'emacs))
-(add-hook 'shell-mode-hook 'eshell-tweaks)
-
-;; Evaluate buffer using SPC SPC, depending on major mode.
-(evil-leader/set-key-for-mode 'emacs-lisp-mode "SPC" 'eval-buffer)
-(evil-leader/set-key-for-mode 'ruby-mode "!" 'auralcat/ruby/add-byebug-line)
-(evil-leader/set-key-for-mode 'ruby-mode "SPC" 'ruby-send-buffer-and-go)
-(evil-leader/set-key-for-mode 'python-mode "SPC" 'python-shell-send-buffer)
-(evil-leader/set-key-for-mode 'js2-mode "SPC" 'js-comint-send-buffer)
-(evil-leader/set-key-for-mode 'elixir-mode "!" 'auralcat/elixir-iex-pry)
-(evil-leader/set-key-for-mode 'elixir-mode "SPC" 'inf-elixir-send-buffer)
   #+END_SRC
 
 ** Personal keymap
-Since I'm planning to drop ~evil-mode~ recently, I'll need to transfer what keeps me using it: the keybindings I have on ~evil-leader~. I need them to call quick functions I use often, so we can transfer them to a personal keymap and bind the keymap prefix to a key.
+I need these keybindings to call quick functions I use often.
 
 #+BEGIN_SRC emacs-lisp :tangle yes
 (defvar auralcat-map
   (let ((map (make-sparse-keymap)))
     ;; Your keybindings go here.
     (define-key map (kbd "fo") 'my-find-init-org-file)
-    (define-key map (kbd "fe") 'my-find-evilrc-file)
     (define-key map (kbd "fs") 'jump-to-scratch-buffer)
     (define-key map (kbd "fm") 'jump-to-messages-buffer)
     (define-key map (kbd "j") 'jump-to-register)
@@ -1690,13 +1545,8 @@ Since I'm planning to drop ~evil-mode~ recently, I'll need to transfer what keep
 * Org-mode
 ** Main configuration
    #+BEGIN_SRC emacs-lisp :tangle yes
-;; Some bindings for Emacs mode.
-;; I've noticed that Org seems easier to navigate with Emacs bindings instead of Evil.
 (define-key global-map (kbd "C-c a") 'org-agenda)
 (define-key global-map (kbd "C-c k") 'org-capture)
-
-;; More customizations for evil-mode.
-
 
 ;; Start indented, with inline images, and don't show emphasis markers.
 (setq org-startup-indented t
@@ -1732,15 +1582,9 @@ Since I'm planning to drop ~evil-mode~ recently, I'll need to transfer what keep
 ;; Map C-S-enter to org-insert-todo-subheading
 (define-key org-mode-map (kbd "<C-S-return>") 'org-insert-todo-subheading)
 
-;; Use Emacs mode in Org-capture buffers and notes buffer
-(add-hook 'org-capture-mode-hook 'evil-emacs-state)
-
 ;; Dummy-proofing my configs
 (define-key org-mode-map (kbd "C-c ]") nil)
 (define-key org-mode-map (kbd "C-c [") nil)
-
-;; Simplify org-todo in org-mode buffers with <leader> t
-(evil-leader/set-key-for-mode 'org-mode "t" 'org-todo)
 
 ;; Log when a task was done and when it was rescheduled.
 (setq org-log-done 'time)
@@ -1879,13 +1723,6 @@ list of org-modes I use, since I created ~org-english-mode~ for my own use.
  'append))
 #+END_SRC
 
-** Keybindings
-#+BEGIN_SRC emacs-lisp :tangle yes
-;; The correct way to define keybindings for evil-mode.
-(evil-define-key '(normal visual) org-mode-map
-    (kbd "<tab>") 'org-cycle
-    (kbd "<backtab>") 'org-shifttab)
-#+END_SRC
 * HOWM
 Quote from https://leahneukirchen.org/blog/archive/2022/03/note-taking-in-emacs-with-howm.html:
 #+begin_quote
@@ -2263,7 +2100,6 @@ These are usually aliases to commonly-accessed tools and workflows.
       ;; This should be a quoted list if you want values to be updated
       ;; when things change in the buffer.
       '(
-    " " evil-mode-line-tag
     " " mode-line-buffer-identification
     " " mode-line-modified
     " " mode-name
@@ -2290,32 +2126,8 @@ These are usually aliases to commonly-accessed tools and workflows.
   "Return the hex code from the specified FACE."
   (face-attribute face :foreground))
 
-;; Use basic faces to customize Evil cursors based on theme.
-(defun auralcat/set-evil-faces-based-on-current-theme ()
-  "Changes the faces for Evil modes based on current theme."
-  (let
-      ((evil-normal-face-color    (auralcat/get-face-foreground-color  'font-lock-builtin-face))
-       (evil-insert-face-color    (auralcat/get-face-foreground-color  'font-lock-string-face))
-       (evil-motion-face-color    (auralcat/get-face-foreground-color  'font-lock-keyword-face))
-       (evil-replace-face-color   (auralcat/get-face-foreground-color  'font-lock-keyword-face))
-       (evil-operator-face-color  (auralcat/get-face-foreground-color  'font-lock-constant-face))
-       (evil-visual-face-color    (auralcat/get-face-foreground-color  'font-lock-type-face))
-       (zoom-window-color    (auralcat/get-face-foreground-color  'font-lock-string-face)))
-    (setq  evil-normal-state-cursor    `(,evil-normal-face-color    box))
-    (setq  evil-insert-state-cursor    `(,evil-insert-face-color    bar))
-    (setq  evil-motion-state-cursor    `(,evil-motion-face-color    box))
-    (setq  evil-replace-state-cursor   `(,evil-replace-face-color   hbar))
-    (setq  evil-operator-state-cursor  `(,evil-operator-face-color  box))
-    (setq  evil-visual-state-cursor    `(,evil-visual-face-color    box))
-    (setq  zoom-window-mode-line-color zoom-window-color)))
-
 (add-hook 'circadian-after-load-theme-hook #'(lambda (theme) (auralcat--set-preferred-fonts-for-current-theme)))
-(add-hook 'circadian-after-load-theme-hook #'(lambda (theme) (auralcat/set-evil-faces-based-on-current-theme)))
 (add-hook 'after-init-hook #'(lambda () (auralcat--set-preferred-fonts-for-current-theme)))
-(add-hook 'after-init-hook #'(lambda () (auralcat/set-evil-faces-based-on-current-theme)))
-
-;; This is to be able to tell when I'm in Emacs state.
-(setq evil-emacs-state-cursor '("purple" box))
 
 (setq-default blink-cursor-blinks 0)
 (setq-default blink-cursor-interval 0.6)
