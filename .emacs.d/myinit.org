@@ -86,7 +86,7 @@ from ~M-x~ and get the same result if you want.
 This is a package to highlight TODO keywords in any given mode, not just on ~org-mode~.
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package hl-todo
-  :hook ((prog-mode . hl-todo-mode))
+  :hook ((prog-mode . hl-todo-mode)))
 #+END_SRC
 *** Highlight indentation
 Saves you from getting lost in indentations.
