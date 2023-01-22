@@ -334,6 +334,11 @@ Necessary to work in a sane way with YAML files.
 (use-package indent-tools
   :hook ((yaml-mode . indent-tools-minor-mode)))
 #+END_SRC
+** Vue.js
+For Vue, we can use ~web-mode~. It's smart enough to work with multiple frameworks, so we just need to add it to ~auto-mode-alist~ here.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(add-to-list 'auto-mode-alist '("\\.vue\\'"  . web-mode))
+#+END_SRC
 * Macros
   #+BEGIN_SRC emacs-lisp :tangle yes
 ;; To save a macro, record it with C-x ( (start) and C-x ) (stop),
