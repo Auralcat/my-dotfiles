@@ -192,24 +192,19 @@ more maintainable and works better.
 ;; Completion for Ruby mode
 (defun ruby-mode-tweaks ()
   ;; Increase the min prefix length so it doesn't clash with most used keywords, like def.
-  (set (make-local-variable 'company-minimum-prefix-length) 3)
+  (set (make-local-variable 'company-minimum-prefix-length) 5)
   (set (make-local-variable 'company-backends) '(company-etags company-capf company-dabbrev company-yasnippet))
   (subword-mode 1))
 
 ;; Completion for REPL Ruby mode
 (defun inf-ruby-mode-tweaks ()
-  (set (make-local-variable 'company-minimum-prefix-length) 3)
+  (set (make-local-variable 'company-minimum-prefix-length) 5)
   (set (make-local-variable 'company-backends) '(company-capf company-etags company-dabbrev company-yasnippet))
   (subword-mode 1))
 
 (add-hook 'ruby-mode-hook 'ruby-mode-tweaks)
 (add-hook 'inf-ruby-mode-hook 'inf-ruby-mode-tweaks)
 #+END_SRC
-
-#+RESULTS:
-#+begin_example
-""
-#+end_example
 
 *** Ruby-electric
 Auto-close do-end blocks, as well as braces and parens.
