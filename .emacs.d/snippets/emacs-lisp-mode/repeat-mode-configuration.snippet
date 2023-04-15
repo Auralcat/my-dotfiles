@@ -1,0 +1,13 @@
+# -*- mode: snippet -*-
+# name: repeat-mode configuration
+# key: rep
+# --
+
+(defvar ${1:keymap-name}-map
+  (let ((map (make-sparse-keymap)))
+    (define-key map (kbd "${2:n}") #'${3:function})
+    (define-key map (kbd "${4:p}") #'${5:another-function})
+    map))
+
+(dolist (cmd '($3 $5))
+  (put cmd 'repeat-map '$1-map))
