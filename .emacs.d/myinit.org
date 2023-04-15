@@ -883,7 +883,8 @@ I'm working with Makefiles now, so this is useful.
     projectile-tags-command "ctags -eR ."
     projectile-switch-project-action 'projectile-vc
     ;; We don't need to be prompted if we want to re-read the tags.
-    tags-revert-without-query t))
+    tags-revert-without-query t)
+  (define-key global-map (kbd "C-c p") projectile-command-map))
 
 ;; Enable it
 (add-hook 'after-init-hook #'projectile-global-mode)
