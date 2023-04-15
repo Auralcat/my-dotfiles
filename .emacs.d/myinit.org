@@ -255,6 +255,14 @@ After that, we can require it in our configuration:
     (require 'rcodetools))
 #+END_SRC
 
+*** Robe
+Robe provides references for code evaluated in runtime. It unpacks all
+the metaprogramming definitions that you may have in the project and
+points you to where the original code is defined.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package robe
+  :hook ((ruby-mode) . robe-mode))
+#+END_SRC
 ** Elixir
 *** Main configuration
 #+BEGIN_SRC emacs-lisp :tangle yes
