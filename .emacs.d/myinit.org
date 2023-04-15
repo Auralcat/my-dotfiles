@@ -1100,7 +1100,15 @@ Create links to Github/GitLab files from the comfort of your Emacs buffer.
 (use-package smartparens
   :hook ((prog-mode inf-elixir-mode outline-mode markdown-mode) . 'smartparens-mode)
   :config
-  (require 'smartparens-config))
+  (require 'smartparens-config)
+  ;; Remap standard Emacs functions to smartparens equivalents
+  (define-key smartparens-mode-map [remap backward-sexp]   'sp-backward-sexp)
+  (define-key smartparens-mode-map [remap forward-sexp]    'sp-forward-sexp)
+  (define-key smartparens-mode-map [remap kill-sexp]       'sp-kill-sexp)
+  (define-key smartparens-mode-map [remap mark-sexp]       'sp-mark-sexp)
+  (define-key smartparens-mode-map [remap transpose-sexp]  'sp-transpose-sexp)
+  (define-key smartparens-mode-map [remap kill-region]     'sp-kill-region)
+  (define-key smartparens-mode-map [remap kill-whole-line] 'sp-kill-whole-line))
 #+END_SRC
 
 *** Olivetti mode
