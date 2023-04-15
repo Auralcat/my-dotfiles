@@ -1348,25 +1348,23 @@ the themes themselves.
   "Sets the preferred fonts for the current theme depending on the system Emacs is used in."
   (cond
    ((eq system-type 'darwin)
-    (if (font-info "Fantasque Sans Mono")
-    (auralcat--set-fixed-pitch-fonts "Fantasque Sans Mono" 140)
+    (if (font-info "B612 Mono")
+    (auralcat--set-fixed-pitch-fonts "B612 Mono" 90)
       (auralcat--set-fixed-pitch-fonts "Monaco" 120)))
    ((eq system-type 'gnu/linux)
-    ;; This is because pure GTK Emacs does not play well with multiple frames.
+    ;; Pure GTK Emacs does not play well with multiple frames.
     ;; This is not a problem for the personal setup, but I use 2 displays at work.
-    (if (functionp 'pgtk-next-frame)
-    (auralcat--set-fonts-for-gnu-linux 110)
-      (auralcat--set-fonts-for-gnu-linux 120)))))
+    (auralcat--set-fonts-for-gnu-linux 90))))
 
 (defun auralcat--set-fonts-for-gnu-linux (height)
   "Sets fonts for GNU/Linux machines with HEIGHT."
-  (if (font-info "Fantasque Sans Mono")
-      (auralcat--set-fixed-pitch-fonts "Fantasque Sans Mono" height)
+  (if (font-info "B612 Mono")
+      (auralcat--set-fixed-pitch-fonts "B612 Mono" height)
     (auralcat--set-fixed-pitch-fonts "Ubuntu Mono" height)))
 
 ;; Use Helvetica as the sans-serif font when available.
 (when (font-info "Helvetica")
-    (set-face-attribute 'variable-pitch nil :family "Helvetica" :height 110)
+    (set-face-attribute 'variable-pitch nil :family "Helvetica" :height 100)
     ;; Use the Helvetica font as well for Emacs 29 mode line.
     (set-face-attribute 'mode-line nil :family "Helvetica"))
 
