@@ -1527,6 +1527,9 @@ right button as well.
 ;; Hippie-Expand: change key to M-SPC; Replace dabbrev-expand
 (global-set-key "\M- " 'hippie-expand)
 (global-set-key "\M-/" 'hippie-expand)
+
+;; Use replace-string instead of query-replace in M-%
+(global-set-key "\M-%" 'replace-string)
   #+END_SRC
 
 ** Personal keymap
