@@ -221,8 +221,7 @@ Rails utilities for Projectile-mode
   :after (projectile)
   :defer t
   :init
-  (add-hook 'ruby-mode-hook 'projectile-rails-mode)
-  (evil-leader/set-key-for-mode 'ruby-mode "r" 'projectile-rails-command-map))
+  (add-hook 'ruby-mode-hook 'projectile-rails-mode))
 #+END_SRC
 *** Bundler
 Interact with Bundler from Emacs
