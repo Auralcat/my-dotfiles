@@ -341,6 +341,10 @@ For Vue, we can use ~web-mode~. It's smart enough to work with multiple framewor
 #+BEGIN_SRC emacs-lisp :tangle yes
 (add-to-list 'auto-mode-alist '("\\.vue\\'"  . web-mode))
 #+END_SRC
+** Svelte
+#+BEGIN_SRC emacs-lisp :tangle yes
+(add-to-list 'auto-mode-alist '("\\.svelte\\'"  . web-mode))
+#+END_SRC
 * Macros
   #+BEGIN_SRC emacs-lisp :tangle yes
 ;; To save a macro, record it with C-x ( (start) and C-x ) (stop),
@@ -738,60 +742,53 @@ I couldn't customize this through the ~markdown-header-scaling~ var, so let's tr
 (add-hook 'markdown-mode-hook 'auralcat/markdown-remap-heading-faces)
   #+END_SRC
 *** Web Mode
-    I use this for HTML files mostly, works good for PHP too.
+    I use this for HTML files mostly.
   #+BEGIN_SRC emacs-lisp :tangle yes
-(defun web-mode-keybindings ()
-  "Define mode-specific keybindings like this."
-  (local-set-key (kbd "C-c C-v") 'browse-url-of-buffer)
-  (local-set-key (kbd "C-c /") 'sgml-close-tag))
-
-;; Add company backends when loading web-mode.
-(defun web-mode-company-load-backends ()
-  (company-web-bootstrap+)
-  (company-web-fa+))
-
-(add-hook 'web-mode-hook 'web-mode-keybindings)
-(add-hook 'web-mode-hook 'web-mode-company-load-backends)
-
-;; Use tidy to check HTML buffers with web-mode.
-(eval-after-load 'flycheck
-  '(flycheck-add-mode 'html-tidy 'web-mode))
-  #+END_SRC
-
-    #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package web-mode
-  :ensure t
-  :defer t
   :bind (:map web-mode-map
-          ("C-<up>"    . web-mode-element-previous)
-          ("C-<down>"  . web-mode-element-next)
-          ("C-<left>"  . web-mode-element-beginning)
-          ("C-<right>" . web-mode-tag-match)
-          ("C-S-<up>"  . web-mode-element-parent)
-          ("M-<up>"    . web-mode-element-content-select)
-          ("C-k"       . web-mode-element-kill)
-          ("M-RET"     . complete))
-
-  :init
+              ("C-<up>"    . web-mode-element-previous)
+              ("C-<down>"  . web-mode-element-next)
+              ("C-<left>"  . web-mode-element-beginning)
+              ("C-<right>" . web-mode-tag-match)
+              ("C-S-<up>"  . web-mode-element-parent)
+              ("M-<up>"    . web-mode-element-content-select)
+              ("M-RET"     . complete))
+  :config
   ;; File associations
-  (add-to-list 'auto-mode-alist '("\\.phtml\\'"  . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.php\\'"    . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.html.erb\\'"    . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.html.eex\\'"    . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.djhtml\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.html?\\'"  . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.vue?\\'"   . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.tsx?\\'"  . web-mode))
-  (add-to-list 'auto-mode-alist '("\\.jsx?\\'"  . web-mode))
+  (add-to-list 'auto-mode-alist '(" \\.html.erb\\'"  . web-mode))
+  (add-to-list 'auto-mode-alist '(" \\.html.heex\\'" . web-mode))
+  (add-to-list 'auto-mode-alist '(" \\.html?\\'"     . web-mode))
 
   ;; Engine associations
   (setq web-mode-engines-alist
-    '(("php"    . "\\.phtml\\'")
-      ("blade"  . "\\.blade\\.")))
+        '(("php"    . "\\.phtml\\'")
+          ("blade"  . "\\.blade\\.")))
+  ;; Indentation configuration
+  (setq web-mode-markup-indent-offset 2
+        web-mode-css-indent-offset    2
+        web-mode-code-indent-offset   2
+        web-mode-script-padding       2)
+  ;; Use tidy to check HTML buffers with web-mode.
+  (eval-after-load 'flycheck
+    '(flycheck-add-mode 'html-tidy 'web-mode))
+
+  ;; Use smartparens with web-mode
+  (defun my-web-mode-hook ()
+    (setq web-mode-enable-auto-pairing nil))
+
+  (add-hook 'web-mode-hook  'my-web-mode-hook)
+
+  (defun sp-web-mode-is-code-context (id action context)
+    (and (eq action 'insert)
+         (not (or (get-text-property (point) 'part-side)
+                  (get-text-property (point) 'block-side)))))
+
+  (sp-local-pair 'web-mode "<" nil :when '(sp-web-mode-is-code-context))
 
   ;; Highlight tag when editing
   (setq web-mode-enable-current-element-highlight t))
     #+END_SRC
+
 *** Compilation mode tweaks
 This is a built-in mode, but I want to change some stuff there.
 #+BEGIN_SRC emacs-lisp :tangle yes
