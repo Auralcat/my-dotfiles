@@ -344,7 +344,12 @@ For Vue, we can use ~web-mode~. It's smart enough to work with multiple framewor
 ** Svelte
 #+BEGIN_SRC emacs-lisp :tangle yes
 (add-to-list 'auto-mode-alist '("\\.svelte\\'"  . web-mode))
+;; We want to use ESLint to check our syntax and stuff.
+;; To have eslint work, you'll need to have a .eslintrc file in your project root.
+(flycheck-add-mode 'javascript-eslint 'web-mode)
+(add-hook 'web-mode-hook 'flycheck-mode)
 #+END_SRC
+
 * Macros
   #+BEGIN_SRC emacs-lisp :tangle yes
 ;; To save a macro, record it with C-x ( (start) and C-x ) (stop),
