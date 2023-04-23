@@ -194,6 +194,8 @@ more maintainable and works better.
   ;; Increase the min prefix length so it doesn't clash with most used keywords, like def.
   (set (make-local-variable 'company-minimum-prefix-length) 5)
   (set (make-local-variable 'company-backends) '(company-etags company-capf company-dabbrev company-yasnippet))
+  ;; Enable flycheck
+  (flycheck-mode 1)
   (subword-mode 1))
 
 ;; Completion for REPL Ruby mode
@@ -865,6 +867,12 @@ I'm working with Makefiles now, so this is useful.
 (use-package csv-mode
   :defer t)
     #+END_SRC
+*** PHP mode
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package php-mode
+  :config
+  (add-to-list 'auto-mode-alist '(" \\.php\\'"       . php-mode)))
+#+END_SRC
 ** Minor Modes
 *** Flycheck Inline
     Shows the error when leaving the point over the place where it occurs.
@@ -999,6 +1007,35 @@ I'm working with Makefiles now, so this is useful.
   (mode-icons-mode))
     #+END_SRC
 ** Utilities
+*** Detached
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package detached
+  :init
+  (detached-init)
+  :bind (;; Replace `async-shell-command' with `detached-shell-command'
+         ([remap async-shell-command] . detached-shell-command)
+         ;; Replace `compile' with `detached-compile'
+         ([remap compile] . detached-compile)
+         ([remap recompile] . detached-compile-recompile)
+         ;; Replace built in completion of sessions with `consult'
+         ([remap detached-open-session] . detached-consult-session))
+  :custom ((detached-show-output-on-attach t)
+           (detached-terminal-data-command system-type)))
+#+END_SRC
+
+*** Engine-mode
+Make web searches from the comfort of your Emacs.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package engine-mode
+  :config
+  (defengine duckduckgo
+    "https://duckduckgo.com/?q=%s"
+    :keybinding "d")
+
+  (defengine github
+    "https://github.com/search?ref=simplesearch&q=%s"
+    :keybinding "h"))
+#+END_SRC
 *** Play nice with ASDF
 I found this manual package called[[https://github.com/tabfugnic/asdf.el/][ asdf.el]] that makes Emacs identify binaries
 installed through ASDF in the system.
@@ -1539,17 +1576,17 @@ I need these keybindings to call quick functions I use often.
 (defvar auralcat-map
   (let ((map (make-sparse-keymap)))
     ;; Your keybindings go here.
-    (define-key map (kbd "fo") 'my-find-init-org-file)
-    (define-key map (kbd "fs") 'jump-to-scratch-buffer)
-    (define-key map (kbd "fm") 'jump-to-messages-buffer)
+    (define-key map (kbd "fo") #'(lambda () (find-file "~/.emacs.d/myinit.org")))
+    (define-key map (kbd "fs") #'(lambda () (switch-to-buffer (get-buffer "*scratch*"))))
+    (define-key map (kbd "fm") #'(lambda () (switch-to-buffer (get-buffer "*Messages*"))))
     (define-key map (kbd "j") 'jump-to-register)
     (define-key map (kbd "p") 'projectile-command-map)
-    (define-key map (kbd "k") 'auralcat/quit-and-kill-buffer)
         map)
   "My personal keymap.")
 
 (global-set-key (kbd "C-\\") auralcat-map)
 #+END_SRC
+
 ** Remappings
 #+BEGIN_SRC emacs-lisp :tangle yes
 ;; I use zap-up-to-char much more than zap-to-char.
@@ -1767,11 +1804,10 @@ if you wish (!)
   :demand t
   :init
   ;; Use this to set which major mode name you would like to write your notes in through the pattern in file-name-alist.
-  ;; In this case I'm using .org.en to open these files in org-english-mode.
-  (setq howm-file-name-format "%Y/%m/%Y-%m-%d-%H%M%S.org.en")
-  ;; These hooks need to be set up out of the :hook clause for evil-emacs-state to work.
-  (add-hook 'howm-menu-hook 'evil-emacs-state)
-  (add-hook 'howm-view-summary-mode-hook 'evil-emacs-state))
+  ;; In this case I'm using .txt to open these files in text-mode.
+  (setq howm-file-name-format "%Y-%m-%d__%H%M%S.org.en")
+  ;; Changing the prefix because it clashes with org-mode and rspec-mode.
+  (setq howm-prefix (kbd "C-c ]")))
 #+END_SRC
 
 * Custom derived modes
@@ -1804,7 +1840,8 @@ Livebook supports Elixir code as a first class citizen as well as Mermaid diagra
 (define-key livemd-mode-map (kbd "C-c e") 'livemd/insert-elixir-block)
 (define-key livemd-mode-map (kbd "C-c m") 'livemd/insert-mermaid-block)
 (define-key livemd-mode-map (kbd "C-c n") 'markdown-insert-header-atx-2)
-(add-to-list 'auto-mode-alist '("\\.livemd?\\'" . livemd-mode))
+(add-to-list '
+auto-mode-alist '("\\.livemd?\\'" . livemd-mode))
 (add-hook 'livemd-mode-hook #'(lambda () (auto-revert-mode 1)))
 (add-hook 'livemd-mode-hook #'(lambda () (auto-save-visited-mode 0))))
 
