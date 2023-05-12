@@ -1054,26 +1054,14 @@ This one is a classic in the Emacs community.
 (use-package expand-region
   :bind ("C-=" . er/expand-region))
 #+END_SRC
-*** Ace Jump
-Allows you to move anywhere in the visible portion of the buffer (or any
-frame you got in your screens) using at least 3 keystrokes.
-
-This is pretty useful for when you want to jump to a different section in
-another window or even a frame.
+*** Avy
+It's a supercharged version of =ace-jump=, with batteries included and better performance!
 #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package ace-jump-mode
-  :bind
-  ("C-c SPC" . ace-jump-mode)
-  ("M-3" . ace-jump-mode)
-  (:map org-mode-map
-    ("C-c SPC" . ace-jump-mode))
+(use-package avy
   :config
-  ;; Most of the time, I want to jump to a specific char first, so we should customize the list of
-  ;; submodes that ace-jump uses to determine which commands to run.
-  ;; By putting ace-jump-char-mode first, we can use the standard command to jump to a specific char.
-  ;; C-u ace-jump-mode will search for positions based on words, and C-u C-u ace-jump-mode will let
-  ;; you jump to a specific line in the buffer.
-  (setq ace-jump-mode-submode-list '(ace-jump-char-mode ace-jump-word-mode ace-jump-line-mode)))
+  (avy-setup-default)
+  (global-set-key (kbd "M-g j") 'avy-resume)
+  (global-set-key (kbd "M-3") 'avy-goto-char))
 #+END_SRC
 *** Ace Window
 I'm using ~other-frame~ quite a lot recently, and this is an upgrade over the
@@ -1173,8 +1161,6 @@ This is great to concentrate on text when you want to write prose.
     experience more pleasing to the eye. Yeah, nature!
     #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package golden-ratio
-  ;; Play nice with ace-jump.
-  :hook ((ace-jump-mode-end) . 'golden-ratio)
   :diminish golden-ratio-mode
   :config
   (setq golden-ratio-extra-commands
