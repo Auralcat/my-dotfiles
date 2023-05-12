@@ -1,7 +1,7 @@
 # -*- mode: snippet -*-
 # name: Rspec context block
-# key: cont
+# key: cx
 # --
 context '${1: Your context description here}' do
-  $0
+  `yas-selected-text`$0
 end
