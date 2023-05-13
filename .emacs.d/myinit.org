@@ -208,14 +208,6 @@ more maintainable and works better.
 (add-hook 'inf-ruby-mode-hook 'inf-ruby-mode-tweaks)
 #+END_SRC
 
-*** Ruby-electric
-Auto-close do-end blocks, as well as braces and parens.
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package ruby-electric
-  :defer t
-  :hook ((ruby-mode) . 'ruby-electric-mode)
-  :diminish ruby-electric-mode)
-#+END_SRC
 *** Projectile Rails
 Rails utilities for Projectile-mode
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1126,7 +1118,7 @@ Create links to Github/GitLab files from the comfort of your Emacs buffer.
 *** Smartparens
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package smartparens
-  :hook ((prog-mode inf-elixir-mode outline-mode markdown-mode) . 'smartparens-mode)
+  :hook ((prog-mode ruby-mode inf-elixir-mode outline-mode markdown-mode) . 'smartparens-mode)
   :config
   (require 'smartparens-config)
   ;; Remap standard Emacs functions to smartparens equivalents
