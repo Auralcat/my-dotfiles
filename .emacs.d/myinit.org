@@ -2082,6 +2082,19 @@ For other cases where GFM code blocks don't get interpreted correctly, we can us
 ```"  (buffer-substring-no-properties beg end)))
   (message "Region copied to clipboard inside plain Markdown code block!"))
 #+END_SRC
+** Open a new line before point
+Just like O in Vim.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(defun auralcat/open-line (args)
+  (interactive "p")
+  "Inserts a new line before the line where point is.
+   Keeps point in the same column as it was before."
+  (save-excursion
+    (move-beginning-of-line 1)
+    (newline args)))
+
+(global-set-key (kbd "C-o") 'auralcat/open-line)
+#+END_SRC
 
 * Work configurations
 I prefer to leave the work Elisp configuration files somewhere else because they
