@@ -1674,6 +1674,10 @@ Colorize the agenda: https://llazarek.com/2018/07/improving-the-agenda.html
 ;; Load my tag colors
 (load "~/.agenda-colors")
 #+END_SRC
+** Display holidays from calendar in agenda
+#+begin_src emacs-lisp :tangle yes
+(setq org-agenda-include-diary t)
+#+end_src
 
 ** Tables
 Use the fixed-pitch font for tables.
