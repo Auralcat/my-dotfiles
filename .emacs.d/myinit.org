@@ -1689,6 +1689,35 @@ Use the fixed-pitch font for tables.
 ;; Load them from a separate file.
 (load "~/.org-capture-templates.el")
    #+END_SRC
+** Quick capture to inbox
+Borrowed and adapted from https://macowners.club/posts/org-capture-from-everywhere-macos/#capture-an-url-from-safari
+#+begin_src emacs-lisp :tangle yes
+(defun timu-func-make-capture-frame ()
+  "Create a new frame and run `org-capture'."
+  (interactive)
+  (make-frame '((name . "capture")
+                (top . 300)
+                (left . 700)
+                (width . 80)
+                (height . 25)))
+  (select-frame-by-name "capture")
+  (delete-other-windows)
+  (noflet ((switch-to-buffer-other-window (buf) (switch-to-buffer buf)))
+    ;; Customize your org-capture function here
+          (org-capture nil "i")))
+
+(defadvice org-capture-finalize
+    (after delete-capture-frame activate)
+  "Advise capture-finalize to close the frame."
+  (if (equal "capture" (frame-parameter nil 'name))
+      (delete-frame)))
+
+(defadvice org-capture-destroy
+    (after delete-capture-frame activate)
+  "Advise capture-destroy to close the frame."
+  (if (equal "capture" (frame-parameter nil 'name))
+      (delete-frame)))
+#+end_src
 ** Org-babel
 *** General settings
 - Do not ask me if I want to run the source block
