@@ -1620,6 +1620,10 @@ I need these keybindings to call quick functions I use often.
 ;; Set agenda as sticky. This makes the buffers persistent, and load faster if
 ;; you open them all the time.
 (setq org-agenda-sticky t)
+
+;; Refile items to the same buffer along with the agenda files
+(setq org-refile-targets '((nil :maxlevel . 3)
+                           (org-agenda-files :maxlevel . 3)))
    #+END_SRC
 ** Org-agenda configuration
 Colorize the agenda: https://llazarek.com/2018/07/improving-the-agenda.html
