@@ -2230,7 +2230,7 @@ These are usually aliases to commonly-accessed tools and workflows.
      )
     ))
 
-(defun diary-last-weekday-of-month (date)
+(defun auralcat/calendar-last-weekday-of-month (date)
   (let* ((day-of-week (calendar-day-of-week date))
      (month (calendar-extract-month date))
      (year (calendar-extract-year date))
@@ -2260,3 +2260,23 @@ These are usually aliases to commonly-accessed tools and workflows.
       ;; Else, check if it's the first weekday of the month.
       (diary-first-weekday-of-month date))))
    #+END_SRC
+*** Helper calendar functions
+These are meant to reduce verbosity when scheduling events in org-mode.
+#+begin_src emacs-lisp :tangle yes
+(defun auralcat/calendar-weekday (date)
+  "Return whether DATE is a weekday or not."
+  (let ((weekdays '(1 2 3 4 5)))
+    (memq (calendar-day-of-week date) weekdays)))
+
+(defun auralcat/calendar-tuesday (date)
+  "Return whether DATE is a Tuesday.
+This is represented by the day code 2 in `calendar-day-of-week"
+  (let ((tuesday-code '(2)))
+    (memq (calendar-day-of-week date) tuesday-code)))
+
+(defun auralcat/calendar-wednesday (date)
+  "Return whether DATE is a Wednesday.
+This is represented by the day code 3 in `calendar-day-of-week"
+  (let ((wednesday-code '(3)))
+    (memq (calendar-day-of-week date) wednesday-code)))
+#+end_src
