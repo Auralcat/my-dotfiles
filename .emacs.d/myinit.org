@@ -1224,23 +1224,6 @@ This is great to concentrate on text when you want to write prose.
 
 (add-hook 'snippet-mode-hook 'do-not-add-newline-for-snippets)
     #+END_SRC
-*** Circadian
-    Theme changer for Emacs.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package circadian
-  :ensure t
-  :config
-  (cond
-   ((eq system-type 'darwin)
-    (setq circadian-themes '((:sunrise . modus-operandi)
-                 (:sunset  . modus-vivendi))))
-   ;; Personal Linux machine
-   ((and (string-equal system-name auralcat/personal-system-name) (eq system-type 'gnu/linux))
-    (setq circadian-themes '((:sunrise . doom-gruvbox-light)
-                 (:sunset  . doom-gruvbox)))))
-  (circadian-setup))
-    #+END_SRC
-
 *** Org-mode GFM exporter
 GFM stands for *Github Flavored Markdown*. It's a nice exporter not just for that
 use case though, since it removes the line wraps on exporting.
