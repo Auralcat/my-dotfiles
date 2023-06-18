@@ -530,9 +530,11 @@ For Vue, we can use ~web-mode~. It's smart enough to work with multiple framewor
 ;; I don't like lockfiles
 (setq create-lockfiles nil)
 
-;; Starts the Emacs server for emacsclient.
-(unless (server-running-p)
-  (server-start))
+;; Starts the Emacs server for emacsclient only if it's not started already
+(load "server")
+(unless (server-running-p) (server-start))
+
+
 
 ;; Store all backups in a specific folder:
 (setq backup-directory-alist `(("." . "~/file-bouncer/emacs-backups")))
