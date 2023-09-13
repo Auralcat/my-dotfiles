@@ -1582,11 +1582,6 @@ If you're using Emacs 28 or lower, you can backport this function like so:
 ;; Change the end of collapsed headings to an arrow.
 (setq org-ellipsis "⤵")
 
-;; Keep agenda file list in a single file so I can publish my config.
-;; DO NOT use C-c [ or C-c ] to add/remove files to the agenda otherwise
-;; Emacs will write the var to init.el
-(setq org-agenda-files "~/file-bouncer/org-agenda-file-list.org")
-
 ;; Don't split my lines, thx.
 (setq org-M-RET-may-split-line nil)
 
@@ -1622,10 +1617,6 @@ If you're using Emacs 28 or lower, you can backport this function like so:
 ;; Define a standard format for Org's column view
 (setq org-columns-default-format "%50ITEM(Item) %EFFORT(Effort) %CLOCK(Time Spent)")
 
-;; Set agenda as sticky. This makes the buffers persistent, and load faster if
-;; you open them all the time.
-(setq org-agenda-sticky t)
-
 ;; Refile items to the same buffer along with the agenda files
 (setq org-refile-targets '((nil :maxlevel . 3)
                            (org-agenda-files :maxlevel . 3)))
@@ -1633,6 +1624,18 @@ If you're using Emacs 28 or lower, you can backport this function like so:
 ** Org-agenda configuration
 Colorize the agenda: https://llazarek.com/2018/07/improving-the-agenda.html
 #+BEGIN_SRC emacs-lisp :tangle yes
+;; Display holidays from calendar into agenda
+(setq org-agenda-include-diary t)
+
+;; Set agenda as sticky. This makes the buffers persistent, and load faster if
+;; you open them all the time.
+(setq org-agenda-sticky t)
+
+;; Keep agenda file list in a single file so I can publish my config.
+;; DO NOT use C-c [ or C-c ] to add/remove files to the agenda otherwise
+;; Emacs will write the var to init.el
+(setq org-agenda-files "~/file-bouncer/org-agenda-file-list.org")
+
 (defun ll/org/agenda/color-headers-with (tag fg-col bg-col)
   "Color agenda lines matching TAG with color FG-COL."
   (interactive)
@@ -1668,11 +1671,6 @@ Colorize the agenda: https://llazarek.com/2018/07/improving-the-agenda.html
 ;; Load my tag colors
 (load "~/.agenda-colors")
 #+END_SRC
-** Display holidays from calendar in agenda
-#+begin_src emacs-lisp :tangle yes
-(setq org-agenda-include-diary t)
-#+end_src
-
 ** Tables
 Use the fixed-pitch font for tables.
 #+BEGIN_SRC emacs-lisp :tangle yes
