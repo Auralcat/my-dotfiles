@@ -1671,6 +1671,12 @@ Colorize the agenda: https://llazarek.com/2018/07/improving-the-agenda.html
 ;; Load my tag colors
 (load "~/.agenda-colors")
 #+END_SRC
+*** Custom agenda commands
+#+BEGIN_SRC emacs-lisp :tangle yes
+(setq org-agenda-custom-commands
+      '(("i" "Inbox items"
+        ((tags "inbox")))))
+#+END_SRC
 ** Tables
 Use the fixed-pitch font for tables.
 #+BEGIN_SRC emacs-lisp :tangle yes
