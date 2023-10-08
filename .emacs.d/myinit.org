@@ -344,6 +344,13 @@ For Vue, we can use ~web-mode~. It's smart enough to work with multiple framewor
     '(flycheck-add-mode 'javascript-eslint 'web-mode))
   (add-hook 'web-mode-hook 'flycheck-mode)
 #+END_SRC
+** JSON
+Turns out that the built-in ~electric-pair-mode~ behaves better than ~smartparens~ when you're writing JSON.
+#+begin_src emacs-lisp :tangle yes
+(use-package json
+  :config
+  (setq js-indent-level 2))
+#+end_src
 * AWS
 ** CloudFormation template linting
 Taken from https://www.emacswiki.org/emacs/CfnLint
@@ -1145,7 +1152,7 @@ Create links to Github/GitLab files from the comfort of your Emacs buffer.
 *** Smartparens
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package smartparens
-  :hook ((prog-mode ruby-mode inf-elixir-mode outline-mode markdown-mode) . 'smartparens-mode)
+  :hook ((ruby-mode inf-elixir-mode) . 'smartparens-mode)
   :config
   (require 'smartparens-config)
   ;; Remap standard Emacs functions to smartparens equivalents
@@ -1282,6 +1289,20 @@ use case though, since it removes the line wraps on exporting.
   (setq sqlformat-command 'pgformatter
     sqlformat-args '("-s2" "-g")))
 #+END_SRC
+*** Electric pair mode
+This _built-in_ mode adds paired characters when you type brackets and
+other things.
+
+It's got a better performance than ~smartparens-mode~. Use it when you
+don't need any specific features from ~smartparens-mode~.
+
+#+begin_src emacs-lisp :tangle yes
+(add-hook 'js-mode-hook 'electric-pair-mode)
+(add-hook 'json-mode-hook 'electric-pair-mode)
+(add-hook 'outline-mode-hook 'electric-pair-mode)
+(add-hook 'markdown-mode-hook 'electric-pair-mode)
+#+end_src
+
 *** Auto package update
 I honestly don't know why Emacs doesn't support this out of the box yet, but oh well.
 You can put ~auto-package-update-async~ in the ~midnight-hook~.
