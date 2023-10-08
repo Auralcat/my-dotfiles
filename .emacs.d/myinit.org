@@ -687,16 +687,15 @@ See `https://github.com/aws-cloudformation/cfn-python-lint'."
   (gcmh-mode 1))
 #+END_SRC
 * Minibuffer completion
-Currently I'm using ~ido-mode~ and ~fido-mode~ to provide completion in the
+Currently I'm using ~ido-mode~ to provide completion in the
 minibuffer.
 ~ido-everywhere~ allows you to use ~ido~'s functionality in any function that uses
 the minibuffer, not only the ones that are directly supported.
-~icomplete-vertical-mode~ is just to show the candidates vertically. It's one of
-the things that I missed when switching from ~helm~.
+
+<2023-10-08 Sun> Turns out ~icomplete-mode~ was hogging too much CPU on
+large buffers and slowing Emacs down. Then I removed it.
 #+BEGIN_SRC emacs-lisp :tangle yes
 (ido-mode 1)
-(fido-mode 1)
-(icomplete-vertical-mode 1)
 (ido-everywhere 1)
 
 ;; Stop Ido from prompting me when I want to create a new buffer
@@ -2051,10 +2050,6 @@ First we need to enable repeat-mode globally:
 (auralcat/macro-make-map-for-repeat-commands scroll-other-window-map
                                              '(("]" . scroll-other-window)
                                                ("[" . scroll-other-window-down)))
-
-(auralcat/macro-make-map-for-repeat-commands icomplete-navigation-map
-                                             '(("n" . icomplete-forward-completions)
-                                               ("p" . icomplete-backward-completions)))
 
 (auralcat/macro-make-map-for-repeat-commands control-meta-navigation-map
                                              '(("n" . forward-list)
