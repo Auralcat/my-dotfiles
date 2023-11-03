@@ -110,12 +110,6 @@ This does not require any extra packages as of Emacs 21. Great thing to know whe
   :config
   (add-hook 'prog-mode-hook 'highlight-numbers-mode))
     #+END_SRC
-*** Yafolding
-    Code folding in Emacs.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package yafolding
-  :hook ((prog-mode . yafolding-mode)))
-    #+END_SRC
 *** Editorconfig
     Helps developers define and maintain consistent coding styles
     between different editors and IDEs.
@@ -177,15 +171,6 @@ This does not require any extra packages as of Emacs 21. Great thing to know whe
     nil nil 'center))))
     #+END_SRC
 
-*** Format all the code
-There is a package to run formatters on your source code. I used to
-have a custom solution for this, but I think using a package for it is
-more maintainable and works better.
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package format-all
-  :hook ((prog-mode . format-all-mode)))
-#+END_SRC
 ** Ruby
 *** Main configuration
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -351,21 +336,6 @@ Turns out that the built-in ~electric-pair-mode~ behaves better than ~smartparen
   :config
   (setq js-indent-level 2))
 #+end_src
-* SysAdmin things
-** ESS
-Emacs Speaks Shell is a package to turn the ~shell-mode~ buffer in a REPL and send shell commadns from one buffer to there!
-#+begin_src emacs-lisp :tangle yes
-(require 'essh)
-(defun essh-sh-hook ()
-  (define-key sh-mode-map "\C-c\C-r" 'pipe-region-to-shell)
-  (define-key sh-mode-map "\C-c\C-b" 'pipe-buffer-to-shell)
-  (define-key sh-mode-map "\C-x\C-e" 'pipe-line-to-shell)
-  (define-key sh-mode-map "\C-c\C-n" 'pipe-line-to-shell-and-step)
-  (define-key sh-mode-map "\C-c\C-f" 'pipe-function-to-shell)
-  (define-key sh-mode-map "\C-c\C-d" 'shell-cd-current-directory))
-(add-hook 'sh-mode-hook 'essh-sh-hook)
-#+end_src
-
 * AWS
 ** CloudFormation template linting
 Taken from https://www.emacswiki.org/emacs/CfnLint
@@ -541,7 +511,7 @@ See `https://github.com/aws-cloudformation/cfn-python-lint'."
 (when (eq system-type 'darwin) ;; mac specific settings
   ;; Use bigger fonts because of that Retina display
   (if (member "Fantasque Sans Mono" (font-family-list))
-      (set-face-attribute (quote default) nil :font "Fantasque Sans Mono" :height 140)
+      (set-face-attribute (quote default) nil :font "Courier Prime" :height 120)
     (set-face-attribute (quote default) nil :font "Monaco" :height 120))
   ;; Map Command to Meta
   (setq mac-command-modifier 'meta)
@@ -924,12 +894,6 @@ I'm working with Makefiles now, so this is useful.
 (use-package csv-mode
   :defer t)
     #+END_SRC
-*** PHP mode
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package php-mode
-  :config
-  (add-to-list 'auto-mode-alist '(" \\.php\\'"       . php-mode)))
-#+END_SRC
 ** Minor Modes
 *** Flycheck Inline
     Shows the error when leaving the point over the place where it occurs.
@@ -956,25 +920,6 @@ I'm working with Makefiles now, so this is useful.
 ;; Enable it
 (add-hook 'after-init-hook #'projectile-global-mode)
     #+END_SRC
-*** Emmet-mode
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package emmet-mode
-  :after (:any web-mode)
-  :defer t)
-    #+END_SRC
-*** Flyspell
-    Used to check prose.
-    I use Markdown to write stuff in English.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package flyspell
-  :defer t
-  :config
-  (add-hook 'gfm-mode-hook 'flyspell-mode)
-  (add-hook 'markdown-mode-hook 'flyspell-mode)
-
-  (add-hook 'git-commit-mode-hook 'flyspell-mode))
-    #+END_SRC
-
 *** Company
 **** Main Config
      *COMPlete ANYthing* inside Emacs.
@@ -1064,19 +1009,6 @@ I'm working with Makefiles now, so this is useful.
   (mode-icons-mode))
     #+END_SRC
 ** Utilities
-*** Engine-mode
-Make web searches from the comfort of your Emacs.
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package engine-mode
-  :config
-  (defengine duckduckgo
-    "https://duckduckgo.com/?q=%s"
-    :keybinding "d")
-
-  (defengine github
-    "https://github.com/search?ref=simplesearch&q=%s"
-    :keybinding "h"))
-#+END_SRC
 *** Play nice with ASDF
 I found this manual package called[[https://github.com/tabfugnic/asdf.el/][ asdf.el]] that makes Emacs identify binaries
 installed through ASDF in the system.
@@ -1102,46 +1034,6 @@ It's a supercharged version of =ace-jump=, with batteries included and better pe
   (avy-setup-default)
   (global-set-key (kbd "M-g j") 'avy-resume)
   (global-set-key (kbd "M-3") 'avy-goto-char))
-#+END_SRC
-*** Ace Window
-I'm using ~other-frame~ quite a lot recently, and this is an upgrade over the
-standard function since it works the same way if you have 2 windows or frames,
-but it lets you select which window you want to jump to if you have more than 2
-windows or frames open.
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package ace-window
-  :bind ("C-M-o" . ace-window))
-#+END_SRC
-
-*** Notmuch
-Read mail inside Emacs!
-This is great for opensource projects and work.
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package notmuch
-  :defer t
-  :config
-  (defun my-notmuch-show-view-as-patch ()
-    "View the the current message as a patch."
-    (interactive)
-    (let* ((id (notmuch-show-get-message-id))
-       (msg (notmuch-show-get-message-properties))
-       (part (notmuch-show-get-part-properties))
-       (subject (concat "Subject: " (notmuch-show-get-subject) "\n"))
-       (diff-default-read-only t)
-       (buf (get-buffer-create (concat "*notmuch-patch-" id "*")))
-       (map (make-sparse-keymap)))
-      (define-key map "q" 'notmuch-bury-or-kill-this-buffer)
-      (switch-to-buffer buf)
-      (let ((inhibit-read-only t))
-    (erase-buffer)
-    (insert subject)
-    (insert (notmuch-get-bodypart-text msg part nil)))
-      (set-buffer-modified-p nil)
-      (diff-mode)
-      (lexical-let ((new-ro-bind (cons 'buffer-read-only map)))
-    (add-to-list 'minor-mode-overriding-map-alist new-ro-bind))
-      (goto-char (point-min))))
-  (define-key 'notmuch-show-part-map "d" 'my-notmuch-show-view-as-patch))
 #+END_SRC
 *** Exec path from shell
   Replicates terminal env vars in graphical Emacs.
@@ -1179,21 +1071,6 @@ Create links to Github/GitLab files from the comfort of your Emacs buffer.
   (define-key smartparens-mode-map [remap kill-whole-line] 'sp-kill-whole-line))
 #+END_SRC
 
-*** Olivetti mode
-This is great to concentrate on text when you want to write prose.
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package olivetti
-  :config
-  (setq olivetti-style 'fancy))
-
-(defun auralcat/set-up-olivetti-mode-init ()
-  "Initialization steps for olivetti-mode."
-  (setq olivetti-body-width 90)
-  (olivetti-mode 'toggle))
-
-;; Setting this up for only the parent mode should do the trick.
-(add-hook 'markdown-mode-hook 'auralcat/set-up-olivetti-mode-init)
-#+END_SRC
 *** Golden Ratio Mode
     Splits windows using the [[https://en.wikipedia.org/wiki/Golden_ratio][Golden Ratio]].
     This makes the focused window a bit larger than usual and the
@@ -1286,13 +1163,6 @@ This is great to concentrate on text when you want to write prose.
   (circadian-setup))
     #+END_SRC
 
-*** Org-mode GFM exporter
-GFM stands for *Github Flavored Markdown*. It's a nice exporter not just for that
-use case though, since it removes the line wraps on exporting.
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package ox-gfm
-  :defer t)
-#+END_SRC
 *** sqlformat
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package sqlformat
@@ -1410,6 +1280,13 @@ These are the official ones.
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package solarized-theme :defer t)
 #+END_SRC
+** Zenburn
+The Zenburn theme is the only theme I found so far that is _balanced
+enough_ for both light and dark settings!
+
+#+begin_src emacs-lisp :tangle yes
+(use-package zenburn-theme)
+#+end_src
 * Fonts
 It's better to set the fonts here instead of hard-coding them in init.el or in
 the themes themselves.
@@ -1434,17 +1311,17 @@ the themes themselves.
    ((eq system-type 'gnu/linux)
     ;; Pure GTK Emacs does not play well with multiple frames.
     ;; This is not a problem for the personal setup, but I use 2 displays at work.
-    (auralcat--set-fonts-for-gnu-linux 90))))
+    (auralcat--set-fonts-for-gnu-linux 120))))
 
 (defun auralcat--set-fonts-for-gnu-linux (height)
   "Sets fonts for GNU/Linux machines with HEIGHT."
-  (if (font-info "B612 Mono")
-      (auralcat--set-fixed-pitch-fonts "B612 Mono" height)
+  (if (font-info "Courier Prime")
+      (auralcat--set-fixed-pitch-fonts "Courier Prime" height)
     (auralcat--set-fixed-pitch-fonts "Ubuntu Mono" height)))
 
 ;; Use Helvetica as the sans-serif font when available.
 (when (font-info "Helvetica")
-    (set-face-attribute 'variable-pitch nil :family "Helvetica" :height 100)
+    (set-face-attribute 'variable-pitch nil :family "Helvetica" :height 120)
     ;; Use the Helvetica font as well for Emacs 29 mode line.
     (set-face-attribute 'mode-line nil :family "Helvetica"))
 
@@ -1666,6 +1543,8 @@ If you're using Emacs 28 or lower, you can backport this function like so:
 (define-key global-map (kbd "C-c a") 'org-agenda)
 (define-key global-map (kbd "C-c k") 'org-capture)
 
+(setq org-hierarchical-todo-statistics nil)
+
 ;; Start indented, with inline images, and don't show emphasis markers.
 (setq org-startup-indented t
       org-startup-with-inline-images t
@@ -1705,9 +1584,6 @@ If you're using Emacs 28 or lower, you can backport this function like so:
 
 ;; Don't write inside invisible area when collapsing headings!
 (setq org-catch-invisible-edits 'error)
-
-;; Define a standard format for Org's column view
-(setq org-columns-default-format "%50ITEM(Item) %EFFORT(Effort) %CLOCK(Time Spent)")
 
 ;; Refile items to the same buffer along with the agenda files
 (setq org-refile-targets '((nil :maxlevel . 3)
