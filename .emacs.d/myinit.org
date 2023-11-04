@@ -659,7 +659,8 @@ See `https://github.com/aws-cloudformation/cfn-python-lint'."
 (add-hook 'after-init-hook
       `(lambda ()
          (setq file-name-handler-alist file-name-handler-alist-old
-           gc-cons-threshold 800000
+           gc-cons-threshold 40265318400
+           select-active-regions 'only
            gc-cons-percentage 0.1)
          (garbage-collect)) t)
 
