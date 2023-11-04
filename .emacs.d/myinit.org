@@ -647,11 +647,14 @@ See `https://github.com/aws-cloudformation/cfn-python-lint'."
 #+BEGIN_SRC emacs-lisp :tangle yes
 (defvar file-name-handler-alist-old file-name-handler-alist)
 
-(setq-default gc-cons-threshold 402653184
-          file-name-handler-alist nil
-          gc-cons-percentage 0.6
-          auto-window-vscroll nil
-          message-log-max 16384)
+;; https://lists.gnu.org/archive/html/bug-gnu-emacs/2017-12/msg01088.html
+;; Long-story short, use select-active-regions 'only to make visual selection faster.
+(setq-default gc-cons-threshold 40265318400
+              select-active-regions 'only
+              file-name-handler-alist nil
+              gc-cons-percentage 0.6
+              auto-window-vscroll nil
+              message-log-max 16384)
 
 (add-hook 'after-init-hook
       `(lambda ()
