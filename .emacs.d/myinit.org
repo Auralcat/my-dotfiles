@@ -25,6 +25,22 @@
 (setq history-length 1024)
 (add-hook 'after-init-hook 'savehist-mode)
     #+END_SRC
+* Enabled complex commands
+Emacs comes with some commands disabled by default to not confuse new users.
+So I need to enable them like this to not get pestered by it when trying to use them.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
+#+END_SRC
+* Browse-url
+  This is a command to open the browser for the URL at point.
+  #+begin_src emacs-lisp :tangle yes
+  (setq browse-url-browser-display nil
+        browse-url-browser-function 'browse-url-default-browser
+        browse-url-firefox-program "firefox")
+  #+end_src
 * Bookmarks
   It's a quicker way to navigate through files you visit often.
   #+BEGIN_SRC emacs-lisp :tangle yes
@@ -47,12 +63,12 @@ from ~M-x~ and get the same result if you want.
     (save-match-data
       (goto-char (point-min))
       (when
-          (search-forward-regexp
-           "^[0-9]+ matches for \"\\(.*\\)\" in buffer: \\(.*\\)$"
-           (line-end-position)
-           nil)
-        (rename-buffer
-         (format "*Occur %s: %s*" (match-string 2) (match-string 1)))))))
+      (search-forward-regexp
+       "^[0-9]+ matches for \"\\(.*\\)\" in buffer: \\(.*\\)$"
+       (line-end-position)
+       nil)
+    (rename-buffer
+     (format "*Occur %s: %s*" (match-string 2) (match-string 1)))))))
 
 (add-hook 'occur-hook #'(lambda () (occur-rename-buffer t nil)))
 #+END_SRC
@@ -93,7 +109,7 @@ Saves you from getting lost in indentations.
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package highlight-indentation
   :hook ((prog-mode . highlight-indentation-mode)
-         (yaml-mode . highlight-indentation-mode)))
+     (yaml-mode . highlight-indentation-mode)))
 #+END_SRC
 *** Highlight line
 This does not require any extra packages as of Emacs 21. Great thing to know where you are at a given point when programming.
@@ -160,11 +176,11 @@ This does not require any extra packages as of Emacs 21. Great thing to know whe
     (when (fboundp 'define-fringe-bitmap)
       (define-fringe-bitmap 'git-gutter-fr:added
     [224 224 224 224 224 224 224 224 224 224 224 224 224
-         224 224 224 224 224 224 224 224 224 224 224 224]
+     224 224 224 224 224 224 224 224 224 224 224 224]
     nil nil 'center)
       (define-fringe-bitmap 'git-gutter-fr:modified
     [224 224 224 224 224 224 224 224 224 224 224 224 224
-         224 224 224 224 224 224 224 224 224 224 224 224]
+     224 224 224 224 224 224 224 224 224 224 224 224]
     nil nil 'center)
       (define-fringe-bitmap 'git-gutter-fr:deleted
     [0 0 0 0 0 0 0 0 0 0 0 0 0 128 192 224 240 248]
@@ -227,7 +243,7 @@ After that, we can require it in our configuration:
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package ruby-mode
     :bind (:map ruby-mode-map
-        ("C-c C-c" . xmp))
+    ("C-c C-c" . xmp))
     :init
     (add-to-list 'load-path "~/my-dotfiles/.emacs.d/manual-packages")
     (require 'rcodetools))
@@ -258,16 +274,16 @@ A wrapper around Elixir's ~mix~ for Emacs
 (use-package mix
   :config
   (define-prefix-command 'elixir-mix-map)
-        (define-key 'elixir-mix-map "t" 'auralcat/mix-test)
-        (define-key 'elixir-mix-map (kbd "SPC") 'auralcat/mix-test-current-buffer)
-        (define-key 'elixir-mix-map "." 'auralcat/mix-test-current-test)
-        (define-key 'elixir-mix-map "c" 'mix-compile)
-        (define-key 'elixir-mix-map "x" 'mix-execute-task)
-        (define-key 'elixir-mix-map "w" 'auralcat/mix-test-watch-current-buffer)
-        (define-key 'elixir-mix-map (kbd "C-,") 'mix-last-command))
+    (define-key 'elixir-mix-map "t" 'auralcat/mix-test)
+    (define-key 'elixir-mix-map (kbd "SPC") 'auralcat/mix-test-current-buffer)
+    (define-key 'elixir-mix-map "." 'auralcat/mix-test-current-test)
+    (define-key 'elixir-mix-map "c" 'mix-compile)
+    (define-key 'elixir-mix-map "x" 'mix-execute-task)
+    (define-key 'elixir-mix-map "w" 'auralcat/mix-test-watch-current-buffer)
+    (define-key 'elixir-mix-map (kbd "C-,") 'mix-last-command))
 
   (add-hook 'elixir-mode-hook #'(lambda ()
-                 (local-set-key (kbd "C-,") 'elixir-mix-map)))
+         (local-set-key (kbd "C-,") 'elixir-mix-map)))
 
 ;; Wrappers around mix-test functions to use the umbrella app flag when necessary.
 (defun auralcat/mix-test (prefix)
@@ -307,7 +323,7 @@ A wrapper around Elixir's ~mix~ for Emacs
 (use-package yaml-mode
   :ensure t
   :hook ((yaml-mode . display-line-numbers-mode)
-         (yaml-mode . hl-line-mode)))
+     (yaml-mode . hl-line-mode)))
 #+END_SRC
 *** Indent-tools
 Necessary to work in a sane way with YAML files.
@@ -347,7 +363,7 @@ Taken from https://www.emacswiki.org/emacs/CfnLint
     (setq js-indent-level 2))
 
 (add-to-list 'magic-mode-alist
-             '("\\({\n *\\)? *[\"']AWSTemplateFormatVersion" . cfn-json-mode))
+         '("\\({\n *\\)? *[\"']AWSTemplateFormatVersion" . cfn-json-mode))
 
 ;; Set up a mode for YAML based templates if yaml-mode is installed
 ;; Get yaml-mode here https://github.com/yoshiki/yaml-mode
@@ -356,7 +372,7 @@ Taken from https://www.emacswiki.org/emacs/CfnLint
     "CFN-YAML"
     "Simple mode to edit CloudFormation template in YAML format.")
   (add-to-list 'magic-mode-alist
-               '("\\(---\n\\)?AWSTemplateFormatVersion:" . cfn-yaml-mode)))
+           '("\\(---\n\\)?AWSTemplateFormatVersion:" . cfn-yaml-mode)))
 
 ;; Set up cfn-lint integration if flycheck is installed
 (when (featurep 'flycheck)
@@ -366,11 +382,11 @@ Install cfn-lint first: pip install cfn-lint
 See `https://github.com/aws-cloudformation/cfn-python-lint'."
     :command ("cfn-lint" "-f" "parseable" source)
     :error-patterns ((warning line-start (file-name) ":" line ":" column
-                              ":" (one-or-more digit) ":" (one-or-more digit) ":"
-                              (id "W" (one-or-more digit)) ":" (message) line-end)
-                     (error line-start (file-name) ":" line ":" column
-                            ":" (one-or-more digit) ":" (one-or-more digit) ":"
-                            (id "E" (one-or-more digit)) ":" (message) line-end))
+                  ":" (one-or-more digit) ":" (one-or-more digit) ":"
+                  (id "W" (one-or-more digit)) ":" (message) line-end)
+             (error line-start (file-name) ":" line ":" column
+                ":" (one-or-more digit) ":" (one-or-more digit) ":"
+                (id "E" (one-or-more digit)) ":" (message) line-end))
     :modes (cfn-json-mode cfn-yaml-mode))
 
   (add-to-list 'flycheck-checkers 'cfn-lint)
@@ -458,17 +474,21 @@ See `https://github.com/aws-cloudformation/cfn-python-lint'."
 
 ** General
 #+BEGIN_SRC emacs-lisp :tangle yes
-(defalias 'auralcat/kmacro-open-new-paragraph
-   (kmacro "<return> <return>"))
+;; Trim questions dump text from Udemy.
+;; You need to pull an `occur` buffer first.
+(defalias 'auralcat/udemy-trim-question-explanation
+   (kmacro "M-o C-s E x p l a n a t i o n <return> C-a C-SPC M-o n M-o C-w C-l M-o g M-o C-s C-w C-w <return> M-o C-s C-s C-a"))
+
+(defalias 'auralcat/udemy-format-question-org-headings
+   (kmacro "C-c @ M-q C-n C-d C-p C-c C-n"))
+
+
 #+END_SRC
 
 ** Writing modes
 #+BEGIN_SRC emacs-lisp :tangle yes
 (defalias 'auralcat/kmacro-markdown-wrap-region-code
    (kmacro "C-w ` C-y C-x C-x C-b C-SPC C-SPC"))
-
-(defalias 'auralcat/kmacro-org-wrap-region-code
-   (kmacro "C-w ~ C-y C-x C-x C-b C-SPC C-SPC"))
 
 (defalias 'auralcat/kmacro-markdown-insert-header-same-level
    (kmacro "C-e <return> <return> C-c C-t h"))
@@ -510,8 +530,8 @@ See `https://github.com/aws-cloudformation/cfn-python-lint'."
   #+BEGIN_SRC emacs-lisp :tangle yes
 (when (eq system-type 'darwin) ;; mac specific settings
   ;; Use bigger fonts because of that Retina display
-  (if (member "Fantasque Sans Mono" (font-family-list))
-      (set-face-attribute (quote default) nil :font "Courier Prime" :height 120)
+  (if (member "Monofur" (font-family-list))
+      (set-face-attribute (quote default) nil :font "Monofur" :height 120)
     (set-face-attribute (quote default) nil :font "Monaco" :height 120))
   ;; Map Command to Meta
   (setq mac-command-modifier 'meta)
@@ -532,8 +552,12 @@ See `https://github.com/aws-cloudformation/cfn-python-lint'."
 
 * Environment Customizations
   #+BEGIN_SRC emacs-lisp :tangle yes
-;; Make startup faster by reducing the frequency of garbage
-;; collection.  The default is 0.8MB.  Measured in bytes.
+;; Take out unused stuff.
+(setq tool-bar-mode nil
+      tooltip-mode nil)
+;; Remove the menu bar in terminal mode
+(when (not (display-graphic-p))
+  (menu-bar-mode -1))
 
 ;; Display things faster in the GUI. You might have some weird issues if you
 ;; do some aggressive scrolling in big files though.
@@ -547,8 +571,8 @@ See `https://github.com/aws-cloudformation/cfn-python-lint'."
 
 ;; Change window title
 (setq frame-title-format (format "%s %s - %s" (nth 1 (split-string (emacs-version)))
-                   (nth 2 (split-string (emacs-version)))
-                   (system-name)))
+           (nth 2 (split-string (emacs-version)))
+           (system-name)))
 
 ;; Add frame margins. This makes things more pleasant to read.
 (setq default-frame-alist '((internal-border-width . 20)))
@@ -619,9 +643,7 @@ See `https://github.com/aws-cloudformation/cfn-python-lint'."
 ;; Enable auto-revert-mode
 (global-auto-revert-mode t)
 
-;; Remove the menu bar in terminal mode
-(when (not (display-graphic-p))
-  (menu-bar-mode -1))
+
 
 ;; Use Bash as default shell interpreter
 (setq org-babel-sh-command "/bin/bash")
@@ -649,20 +671,20 @@ See `https://github.com/aws-cloudformation/cfn-python-lint'."
 
 ;; https://lists.gnu.org/archive/html/bug-gnu-emacs/2017-12/msg01088.html
 ;; Long-story short, use select-active-regions 'only to make visual selection faster.
-(setq-default gc-cons-threshold 40265318400
-              select-active-regions 'only
-              file-name-handler-alist nil
-              gc-cons-percentage 0.6
-              auto-window-vscroll nil
-              message-log-max 16384)
+(setq-default gc-cons-threshold 800000
+          select-active-regions 'only
+          file-name-handler-alist nil
+          gc-cons-percentage 0.6
+          auto-window-vscroll nil
+          message-log-max 16384)
 
 (add-hook 'after-init-hook
       `(lambda ()
-         (setq file-name-handler-alist file-name-handler-alist-old
-           gc-cons-threshold 40265318400
-           select-active-regions 'only
-           gc-cons-percentage 0.1)
-         (garbage-collect)) t)
+     (setq file-name-handler-alist file-name-handler-alist-old
+       gc-cons-threshold 80000
+       select-active-regions 'only
+       gc-cons-percentage 0.1)
+     (garbage-collect)) t)
 
 (setq inhibit-compacting-font-caches t)
 
@@ -675,6 +697,109 @@ See `https://github.com/aws-cloudformation/cfn-python-lint'."
   :config
   (gcmh-mode 1))
 #+END_SRC
+* IRC
+** Circe setup
+Trying it out with Circe for now.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package circe
+  :config
+  (setq circe-network-options
+      '(("ZNC bouncer"
+     :tls nil
+     :nick "mretka")))
+
+;; Customize the prompt
+(defun my-circe-prompt ()
+  (lui-set-prompt
+   (concat (propertize (concat (buffer-name) ">")
+               'face 'circe-prompt-face)
+       " ")))
+(add-hook 'circe-chat-mode-hook 'my-circe-prompt)
+
+;; For more configuration, check https://github.com/emacs-circe/circe/wiki/Configuration
+(setq circe-format-server-topic "*** Topic change by {userhost}: {topic-diff}")
+
+;; Show the nicks beside the messages
+(setq circe-format-say "{nick:-16s} {body}")
+(setq circe-format-self-say "<{nick}> {body}")
+
+;; Set the trackbar
+(setq lui-track-bar-behavior 'before-switch-to-buffer)
+(enable-lui-track-bar))
+#+END_SRC
+** ERC general settings
+#+begin_src emacs-lisp :tangle yes
+;; Set up nicks and stuff
+(setq erc-try-new-nick-p t)
+(setq erc-nicklist-voiced-position 'top)
+(setq erc-script-path '("~/my-dotfiles/.emacs.d/.erc/"))
+
+;; Loaded modules
+(setq erc-modules '(autojoin button completion dcc fill hl-nicks irccontrols list match menu move-to-prompt netsplit networks noncommands readonly ring smiley stamp track))
+#+end_src
+** ERC Logging
+Reference: https://www.emacswiki.org/emacs/ErcLogging
+#+BEGIN_SRC emacs-lisp :tangle yes
+(setq erc-log-matches-flag t)
+(setq erc-log-matches-types-alist
+         '((pal . "erc_buddies.txt")
+           (current-nick . "erc_mentions.txt")
+           (keyword . "erc_keywords.txt")))
+
+(setq erc-save-buffer-on-part nil
+      erc-save-queries-on-quit nil
+      erc-log-write-after-send t
+      erc-log-write-after-insert t)
+
+;; Hide transactional messages
+;; Reference for the numbers: https://datatracker.ietf.org/doc/html/rfc1459
+(setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE"
+                   "324" "329" "333" "353" "477"))
+(setq erc-hide-list '("JOIN" "NICK" "PART" "QUIT" "MODE"
+                   "324" "329" "333" "353" "477"))
+#+END_SRC
+** Set up a trackbar
+This is the only thing I miss from Circe.
+#+begin_src emacs-lisp :tangle yes
+(eval-after-load 'erc-track
+  '(progn
+     (defun erc-bar-move-back (n)
+       "Moves back n message lines. Ignores wrapping, and server messages."
+       (interactive "nHow many lines ? ")
+       (re-search-backward "^.*<.*>" nil t n))
+
+     (defun erc-bar-update-overlay ()
+       "Update the overlay for current buffer, based on the content of
+erc-modified-channels-alist. Should be executed on window change."
+       (interactive)
+       (let* ((info (assq (current-buffer) erc-modified-channels-alist))
+      (count (cadr info)))
+     (if (and info (> count erc-bar-threshold))
+     (save-excursion
+       (end-of-buffer)
+       (when (erc-bar-move-back count)
+     (let ((inhibit-field-text-motion t))
+       (move-overlay erc-bar-overlay
+         (line-beginning-position)
+         (line-end-position)
+         (current-buffer)))))
+       (delete-overlay erc-bar-overlay))))
+
+     (defvar erc-bar-threshold 1
+       "Display bar when there are more than erc-bar-threshold unread messages.")
+     (defvar erc-bar-overlay nil
+       "Overlay used to set bar")
+     (setq erc-bar-overlay (make-overlay 0 0))
+     (overlay-put erc-bar-overlay 'face '(:underline "black"))
+     ;;put the hook before erc-modified-channels-update
+     (defadvice erc-track-mode (after erc-bar-setup-hook
+              (&rest args) activate)
+       ;;remove and add, so we know it's in the first place
+       (remove-hook 'window-configuration-change-hook 'erc-bar-update-overlay)
+       (add-hook 'window-configuration-change-hook 'erc-bar-update-overlay))
+     (add-hook 'erc-send-completed-hook (lambda (str)
+              (erc-bar-update-overlay)))))
+#+end_src
 * Minibuffer completion
 Currently I'm using ~ido-mode~ to provide completion in the
 minibuffer.
@@ -686,6 +811,7 @@ large buffers and slowing Emacs down. Then I removed it.
 #+BEGIN_SRC emacs-lisp :tangle yes
 (ido-mode 1)
 (ido-everywhere 1)
+(setq ido-enable-flex-matching nil)
 
 ;; Stop Ido from prompting me when I want to create a new buffer
 (setq confirm-nonexistent-file-or-buffer nil)
@@ -749,15 +875,15 @@ We need to do some customizations to comint-related buffers to improve performan
   :hook ((markdown-mode . markdown-mode-tweaks)
      (gfm-mode . markdown-mode-tweaks))
   :bind (:map markdown-mode-map
-              ("M-<right>" . 'markdown-demote)
-              ("M-<left>" . 'markdown-promote)
-              ("M-<up>" . 'markdown-move-up)
-              ("M-<down>" . 'markdown-move-down)
-              ("C-c 1" . 'markdown-insert-header-atx-1)
-              ("C-c 2" . 'markdown-insert-header-atx-2)
-              ("C-<return>" . 'auralcat/kmacro-markdown-insert-header-same-level)
-              ("C-M-<return>" . 'auralcat/kmacro-markdown-insert-header-nest-one-level)
-              ("C-c 3" . 'markdown-insert-header-atx-3))
+          ("M-<right>" . 'markdown-demote)
+          ("M-<left>" . 'markdown-promote)
+          ("M-<up>" . 'markdown-move-up)
+          ("M-<down>" . 'markdown-move-down)
+          ("C-c 1" . 'markdown-insert-header-atx-1)
+          ("C-c 2" . 'markdown-insert-header-atx-2)
+          ("C-<return>" . 'auralcat/kmacro-markdown-insert-header-same-level)
+          ("C-M-<return>" . 'auralcat/kmacro-markdown-insert-header-nest-one-level)
+          ("C-c 3" . 'markdown-insert-header-atx-3))
   :config
   (setq markdown-fontify-code-blocks-natively t
     markdown-asymmetric-header t
@@ -784,28 +910,31 @@ I couldn't customize this through the ~markdown-header-scaling~ var, so let's tr
   #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package web-mode
   :bind (:map web-mode-map
-              ("C-<up>"    . web-mode-element-previous)
-              ("C-<down>"  . web-mode-element-next)
-              ("C-<left>"  . web-mode-element-beginning)
-              ("C-<right>" . web-mode-tag-match)
-              ("C-S-<up>"  . web-mode-element-parent)
-              ("M-<up>"    . web-mode-element-content-select)
-              ("M-RET"     . complete))
+          ("C-<up>"    . web-mode-element-previous)
+          ("C-<down>"  . web-mode-element-next)
+          ("C-<left>"  . web-mode-element-beginning)
+          ("C-<right>" . web-mode-tag-match)
+          ("C-S-<up>"  . web-mode-element-parent)
+          ("M-<up>"    . web-mode-element-content-select)
+          ("M-RET"     . complete))
   :config
   ;; File associations
   (add-to-list 'auto-mode-alist '(" \\.html.erb\\'"  . web-mode))
   (add-to-list 'auto-mode-alist '(" \\.html.heex\\'" . web-mode))
   (add-to-list 'auto-mode-alist '(" \\.html?\\'"     . web-mode))
 
+  (setq web-mode-enable-auto-closing t
+    web-mode-enable-auto-expanding nil)
+
   ;; Engine associations
   (setq web-mode-engines-alist
-        '(("php"    . "\\.phtml\\'")
-          ("blade"  . "\\.blade\\.")))
+    '(("php"    . "\\.phtml\\'")
+      ("blade"  . "\\.blade\\.")))
   ;; Indentation configuration
   (setq web-mode-markup-indent-offset 2
-        web-mode-css-indent-offset    2
-        web-mode-code-indent-offset   2
-        web-mode-script-padding       2)
+    web-mode-css-indent-offset    2
+    web-mode-code-indent-offset   2
+    web-mode-script-padding       2)
   ;; Use tidy to check HTML buffers with web-mode.
   (eval-after-load 'flycheck
     '(flycheck-add-mode 'html-tidy 'web-mode))
@@ -818,8 +947,8 @@ I couldn't customize this through the ~markdown-header-scaling~ var, so let's tr
 
   (defun sp-web-mode-is-code-context (id action context)
     (and (eq action 'insert)
-         (not (or (get-text-property (point) 'part-side)
-                  (get-text-property (point) 'block-side)))))
+     (not (or (get-text-property (point) 'part-side)
+          (get-text-property (point) 'block-side)))))
 
   (sp-local-pair 'web-mode "<" nil :when '(sp-web-mode-is-code-context))
 
@@ -849,7 +978,7 @@ This is a built-in mode, but I want to change some stuff there.
      compilation-filter-start (point))))
 
 (add-hook 'compilation-filter-hook
-          #'endless/colorize-compilation)
+      #'endless/colorize-compilation)
 #+END_SRC
 *** Nov-mode
 This is a mode for reading .epub files.
@@ -863,9 +992,9 @@ It's quite comfortable when you want to read longform books in the computer.
   (setq nov-text-width 80)
   ;; Remove the mode line in the book's buffer.
   (add-hook 'nov-mode-hook #'(lambda ()
-                   (setq-local mode-line-format nil)
-                   (setq-local show-trailing-whitespace nil)
-                   )))
+           (setq-local mode-line-format nil)
+           (setq-local show-trailing-whitespace nil)
+           )))
 #+END_SRC
 *** Makefile-mode
 I'm working with Makefiles now, so this is useful.
@@ -964,7 +1093,6 @@ I'm working with Makefiles now, so this is useful.
 (add-hook 'ielm-mode-hook 'elisp-tweaks)
 
 (add-hook 'org-mode-hook 'variable-pitch-mode)
-(add-hook 'org-english-mode-hook 'variable-pitch-mode)
 (add-hook 'markdown-mode-hook 'variable-pitch-mode)
 (add-hook 'git-commit-setup-hook 'variable-pitch-mode)
      #+END_SRC
@@ -1010,7 +1138,114 @@ I'm working with Makefiles now, so this is useful.
     #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package mode-icons
   :init
-  (mode-icons-mode))
+  (mode-icons-mode)
+  :config
+  (setq mode-icons
+   '(("\\`CSS\\'" "css" xpm)
+     ("\\`Coffee\\'" "coffee" xpm-bw)
+     ("\\`Compilation\\'" "compile" xpm)
+     ("\\`Emacs-Lisp\\'" "emacs" xpm)
+     ("\\`Lisp Interaction\\'" "emacs" xpm)
+     ("\\`HTML\\'" "html" xpm)
+     ("\\`Haml\\'" "haml" xpm)
+     ("\\`Image\\[imagemagick\\]\\'" "svg" xpm)
+     ("\\`Inf-Ruby\\'" "infruby" xpm)
+     ("\\`Java[Ss]cript\\'" "js" xpm)
+     ("\\`Lisp\\'" "cl" xpm)
+     ("\\`nXML\\'" "xml" xpm)
+     ("\\`Org\\'" "org" xpm)
+     ("\\`PHP\\(\\|/.*\\)\\'" "php" xpm)
+     ("\\`Projectile Rails Server\\'" "rails" xpm)
+     ("\\`Python\\'" "python" xpm)
+     ("\\`Ruby\\'" "ruby" xpm)
+     ("\\`EnhRuby\\'" "ruby" xpm)
+     ("\\`ESS\\[S\\]\\'" "R" xpm)
+     ("\\`ESS\\[SAS\\]\\'" "sas" xpm)
+     ("\\`ESS\\[BUGS\\]\\'" 61832 FontAwesome)
+     ("\\`iESS\\'" "R" xpm)
+     ("\\`Rust\\'" "rust" xpm)
+     ("\\`SCSS\\'" "sass" xpm)
+     ("\\`Sass\\'" "sass" xpm)
+     ("\\`Scheme" "scheme" xpm-bw)
+     ("\\`Shell-script" "bash" xpm-bw)
+     ("\\`Slim" "slim" xpm-bw)
+     ("\\`Snippet" "yas" xpm)
+     ("\\`Term\\'" "term" xpm)
+     ("\\`Web\\'" "html" xpm)
+     ("\\`XML\\'" "xml" xpm)
+     ("\\`YAML\\'" "yaml" xpm)
+     ("\\` ?YASnippet\\'" "yas" xpm)
+     ("\\` ?yas\\'" "yas" xpm)
+     ("\\` ?hs\\'" "hs" xpm)
+     ("\\`Markdown\\'" 61641 github-octicons)
+     ("\\`Scala\\'" 61787 font-mfizz)
+     ("\\`Magit\\'" 61906 FontAwesome)
+     ("\\` Pulls\\'" 61586 FontAwesome)
+     ("\\`Zip-Archive\\'" 61894 FontAwesome)
+     ("\\` ARev\\'" 61473 FontAwesome)
+     ("\\`Calc\\(ulator\\)?\\'" 61932 FontAwesome)
+     ("\\`Debug.*\\'" 61832 FontAwesome)
+     ("\\`Debug.*\\'" 61832 FontAwesome)
+     ("\\`Calendar\\'" 61555 FontAwesome)
+     ("\\`Help\\'" 61529 FontAwesome)
+     ("\\`WoMan\\'" 61530 FontAwesome)
+     ("\\`C\\(/.*\\|\\)\\'" 61703 font-mfizz)
+     ("\\`Custom\\'" 61459 FontAwesome)
+     ("\\`Go\\'" "go" xpm)
+     ("\\` ?Rbow\\'" "rainbow" xpm)
+     ("\\` ?ICY\\'" "icy" xpm)
+     ("\\` ?Golden\\'" "golden" xpm-bw)
+     ("\\`BibTeX\\'\\'" "bibtex" xpm-bw)
+     ("\\`C[+][+]\\(/.*\\|\\)\\'" 61708 font-mfizz)
+     ("\\`C[#]\\(/.*\\|\\)\\'" 61709 font-mfizz)
+     ("\\`Elixir\\'" 61717 font-mfizz)
+     ("\\`Erlang\\'" 61718 font-mfizz)
+     ("\\`Haskell\\'" 61734 font-mfizz)
+     ("\\`Clojure\\'" 61706 font-mfizz)
+     ("\\`Java\\(/.*\\|\\)\\'" 61739 font-mfizz)
+     ("\\`C?Perl\\'" 61768 font-mfizz)
+     ("\\`Octave\\'" "octave" xpm)
+     ("\\`AHK\\'" "autohotkey" xpm)
+     ("\\`Info\\'" 61530 FontAwesome)
+     ("\\` ?Narrow\\'" 61542 FontAwesome)
+     ("\\`Dockerfile\\'" "docker" xpm)
+     (read-only 61475 FontAwesome)
+     (writable 61596 FontAwesome)
+     (save 61639 FontAwesome)
+     (saved "" nil)
+     (modified-outside 61553 FontAwesome)
+     (steal 61979 FontAwesome)
+     (apple 60095 IcoMoon-Free)
+     (apple 61817 FontAwesome)
+     (win 61818 FontAwesome)
+     (unix 60093 IcoMoon-Free)
+     (unix 61798 font-mfizz)
+     (unix 61820 FontAwesome)
+     (undecided 61736 FontAwesome)
+     ("Text\\'" 61686 FontAwesome)
+     ("\\` ?company\\'" 61869 FontAwesome)
+     ("\\` ?AC\\'" 61838 FontAwesome)
+     ("\\` ?Fly\\'" 59922 IcoMoon-Free)
+     ("\\` ?Ergo" 61724 FontAwesome)
+     ("\\` ?drag\\'" 61511 FontAwesome)
+     ("\\` ?Helm\\'" "helm" xpm-bw)
+     ("\\`Messages\\'" 62075 FontAwesome)
+     ("\\`Conf" 61918 FontAwesome)
+     ("\\`Fundamental\\'" 61462 FontAwesome)
+     ("\\`Javascript-IDE\\'" "js" xpm)
+     ("\\` Undo-Tree\\'" ":palm_tree:" emoji)
+     ("\\`LaTeX\\'" "tex" ext)
+     ("\\`Image\\[xpm\\]\\'" "xpm" ext)
+     ("\\`Image\\[png\\]\\'" "png" ext)
+     ("\\` ?AI\\'" 61500 FontAwesome)
+     ("\\`twittering-mode\\'" "twitter" xpm)
+     ("\\` Emmet\\'" "emmet" xpm)
+     ("\\`Vue\\'" "vue" xpm)
+     ("\\` ?\\(?:ElDoc\\|Anzu\\|SP\\|Guide\\|PgLn\\|Undo-Tree\\|Ergo.*\\|,\\|Isearch\\|Ind\\)\\'" nil nil)))
+ (setq mode-icons-generate-emoji-xpms t
+       mode-icons-generate-font-xpms t
+       mode-icons-mode t
+       mode-icons-change-mode-name t))
     #+END_SRC
 ** Utilities
 *** Play nice with ASDF
@@ -1143,6 +1378,9 @@ Create links to Github/GitLab files from the comfort of your Emacs buffer.
 (use-package yasnippet-snippets)
 (use-package yasnippet-classic-snippets)
 
+(setq yas-snippet-dirs
+      '("~/.emacs.d/snippets" yasnippet-snippets-dir yasnippet-classic-snippets-dir))
+
 (defun do-not-add-newline-for-snippets ()
   "What is says on the tin."
   (setq-local require-final-newline nil)
@@ -1159,11 +1397,11 @@ Create links to Github/GitLab files from the comfort of your Emacs buffer.
   (cond
    ((eq system-type 'darwin)
     (setq circadian-themes '((:sunrise . modus-operandi)
-                 (:sunset  . modus-vivendi))))
+         (:sunset  . modus-vivendi))))
    ;; Personal Linux machine
    ((and (string-equal system-name auralcat/personal-system-name) (eq system-type 'gnu/linux))
     (setq circadian-themes '((:sunrise . ef-cyprus)
-                 (:sunset  . ef-maris-dark)))))
+         (:sunset  . ef-maris-dark)))))
   (circadian-setup))
     #+END_SRC
 
@@ -1234,8 +1472,8 @@ You can put ~auto-package-update-async~ in the ~midnight-hook~.
   (interactive
    (list
     (intern (completing-read "Change to theme: "
-                 (mapcar #'symbol-name
-                     (custom-available-themes))))))
+         (mapcar #'symbol-name
+             (custom-available-themes))))))
   (let* (
      (current-theme (car custom-enabled-themes))
      (new-theme-loaded-p (memq new-theme custom-enabled-themes)))
@@ -1319,8 +1557,8 @@ the themes themselves.
 
 (defun auralcat--set-fonts-for-gnu-linux (height)
   "Sets fonts for GNU/Linux machines with HEIGHT."
-  (if (font-info "Courier Prime")
-      (auralcat--set-fixed-pitch-fonts "Courier Prime" height)
+  (if (font-info "monofur")
+      (auralcat--set-fixed-pitch-fonts "monofur" height)
     (auralcat--set-fixed-pitch-fonts "Ubuntu Mono" height)))
 
 ;; Use Helvetica as the sans-serif font when available.
@@ -1503,7 +1741,7 @@ I need these keybindings to call quick functions I use often.
     (define-key map (kbd "fm") #'(lambda () (switch-to-buffer (get-buffer "*Messages*"))))
     (define-key map (kbd "j") 'jump-to-register)
     (define-key map (kbd "p") 'projectile-command-map)
-        map)
+    map)
   "My personal keymap.")
 
 (global-set-key (kbd "C-\\") auralcat-map)
@@ -1530,13 +1768,13 @@ If you're using Emacs 28 or lower, you can backport this function like so:
 +Also see the `copy-from-above-command' command."
     (interactive "p")
     (let ((line (buffer-substring (line-beginning-position)
-                                  (line-end-position))))
+                  (line-end-position))))
       (save-excursion
-        (forward-line 1)
-        (unless (bolp)
-          (insert "\n"))
-        (dotimes (_ n)
-          (insert line "\n"))))))
+    (forward-line 1)
+    (unless (bolp)
+      (insert "\n"))
+    (dotimes (_ n)
+      (insert line "\n"))))))
 
 (define-key global-map (kbd "C-S-d") 'duplicate-line)
 #+END_SRC
@@ -1544,58 +1782,62 @@ If you're using Emacs 28 or lower, you can backport this function like so:
 * Org-mode
 ** Main configuration
    #+BEGIN_SRC emacs-lisp :tangle yes
-(define-key global-map (kbd "C-c a") 'org-agenda)
-(define-key global-map (kbd "C-c k") 'org-capture)
+     (define-key global-map (kbd "C-c a") 'org-agenda)
+     (define-key global-map (kbd "C-c k") 'org-capture)
 
-(setq org-hierarchical-todo-statistics nil)
+     (setq org-hierarchical-todo-statistics nil
+       org-src-fontify-natively t
+       org-todo-keywords '((sequence "TODO" "DONE"))
+       org-agenda-scheduled-leaders '("Scheduled: " "Sched. previously %2dx: ")
+       org-agenda-skip-scheduled-if-done t
+       org-agenda-start-on-weekday 0)
 
-;; Start indented, with inline images, and don't show emphasis markers.
-(setq org-startup-indented t
-      org-startup-with-inline-images t
-      org-hide-emphasis-markers t)
+     ;; Start indented.
+     ;; (setq org-startup-indented t)
 
-;; Change the end of collapsed headings to an arrow.
-(setq org-ellipsis "⤵")
+     ;; Change the end of collapsed headings to an arrow.
+     (setq org-ellipsis "⤵")
 
-;; Don't split my lines, thx.
-(setq org-M-RET-may-split-line nil)
+     ;; Don't split my lines, thx.
+     (setq org-M-RET-may-split-line nil)
 
-;; Truncate long task names
-(setq org-clock-heading-function
-      #'(lambda ()
-    (let ((str (nth 4 (org-heading-components))))
-      (concat (truncate-string-to-width str 27) "...")
-      )))
+     ;; Truncate long task names
+     (setq org-clock-heading-function
+       #'(lambda ()
+     (let ((str (nth 4 (org-heading-components))))
+       (concat (truncate-string-to-width str 27) "...")
+       )))
 
-;; Organize the bindings
-;; Open subheading with C-c RET and invert with M-RET
-(define-key org-mode-map (kbd "C-c RET") 'org-ctrl-c-ret)
-(define-key org-mode-map (kbd "<C-M-return>") 'org-insert-subheading)
+     ;; Organize the bindings
+     ;; Open subheading with C-c RET and invert with M-RET
+     (define-key org-mode-map (kbd "C-c RET") 'org-ctrl-c-ret)
+     (define-key org-mode-map (kbd "<C-M-return>") 'org-insert-subheading)
 
-;; Use C-RET to complete words in Org-mode
-(define-key org-mode-map (kbd "C-RET") 'complete)
+     ;; Use C-RET to complete words in Org-mode
+     (define-key org-mode-map (kbd "C-RET") 'complete)
 
-;; Map C-S-enter to org-insert-todo-subheading
-(define-key org-mode-map (kbd "<C-S-return>") 'org-insert-todo-subheading)
+     ;; Map C-S-enter to org-insert-todo-subheading
+     (define-key org-mode-map (kbd "<C-S-return>") 'org-insert-todo-subheading)
 
-;; Dummy-proofing my configs
-(define-key org-mode-map (kbd "C-c ]") nil)
-(define-key org-mode-map (kbd "C-c [") nil)
+     ;; Dummy-proofing my configs
+     (define-key org-mode-map (kbd "C-c ]") nil)
+     (define-key org-mode-map (kbd "C-c [") nil)
 
-;; Log when a task was done and when it was rescheduled.
-(setq org-log-done 'time)
-(setq org-log-reschedule 'time)
+     ;; Log when a task was done and when it was rescheduled.
+     (setq org-log-done 'time)
+     (setq org-log-reschedule 'time)
 
-;; Don't write inside invisible area when collapsing headings!
-(setq org-catch-invisible-edits 'error)
+     ;; Don't write inside invisible area when collapsing headings!
+     (setq org-catch-invisible-edits 'error)
 
-;; Refile items to the same buffer along with the agenda files
-(setq org-refile-targets '((nil :maxlevel . 3)
-                           (org-agenda-files :maxlevel . 3)))
+     ;; Refile items to the same buffer along with the agenda files
+     (setq org-refile-targets '((nil :maxlevel . 3)
+                (org-agenda-files :maxlevel . 3)))
 
-;; Allow alphabetical lists please
-(setq org-list-allow-alphabetical t)
+     ;; Allow alphabetical lists please
+     (setq org-list-allow-alphabetical t)
    #+END_SRC
+
 ** Org-agenda configuration
 Colorize the agenda: https://llazarek.com/2018/07/improving-the-agenda.html
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1618,12 +1860,12 @@ Colorize the agenda: https://llazarek.com/2018/07/improving-the-agenda.html
   (while (re-search-forward tag nil t)
     (unless (find-in-line "\\[#[A-Z]\\]")
       (let ((todo-end (or (ll/org/agenda/find-todo-word-end)
-              (point-at-bol)))
-        (tags-beginning (or (find-in-line " :" t)
-                (point-at-eol))))
+          (point-at-bol)))
+    (tags-beginning (or (find-in-line " :" t)
+        (point-at-eol))))
     (add-text-properties todo-end
-                 tags-beginning
-                 `(face (:foreground ,fg-col :background ,bg-col)))))))
+         tags-beginning
+         `(face (:foreground ,fg-col :background ,bg-col)))))))
 
 ;; Helper definitions
 (setq ll/org/agenda-todo-words
@@ -1650,7 +1892,7 @@ Colorize the agenda: https://llazarek.com/2018/07/improving-the-agenda.html
 #+BEGIN_SRC emacs-lisp :tangle yes
 (setq org-agenda-custom-commands
       '(("i" "Inbox items"
-        ((tags "inbox")))))
+    ((tags "inbox")))))
 #+END_SRC
 ** Tables
 Use the fixed-pitch font for tables.
@@ -1669,15 +1911,15 @@ Borrowed and adapted from https://macowners.club/posts/org-capture-from-everywhe
   "Create a new frame and run `org-capture'."
   (interactive)
   (make-frame '((name . "capture")
-                (top . 300)
-                (left . 700)
-                (width . 80)
-                (height . 25)))
+        (top . 300)
+        (left . 700)
+        (width . 80)
+        (height . 25)))
   (select-frame-by-name "capture")
   (delete-other-windows)
   (noflet ((switch-to-buffer-other-window (buf) (switch-to-buffer buf)))
     ;; Customize your org-capture function here
-          (org-capture nil "i")))
+      (org-capture nil "i")))
 
 (defadvice org-capture-finalize
     (after delete-capture-frame activate)
@@ -1711,13 +1953,13 @@ Borrowed and adapted from https://macowners.club/posts/org-capture-from-everywhe
       org-babel-min-lines-for-block-output 1
       org-babel-default-header-args
       (cons '(:noweb . "yes")
-        (assq-delete-all :noweb org-babel-default-header-args))
+    (assq-delete-all :noweb org-babel-default-header-args))
       org-babel-default-header-args
       (cons '(:exports . "both")
-        (assq-delete-all :exports org-babel-default-header-args))
+    (assq-delete-all :exports org-babel-default-header-args))
       org-babel-default-header-args
       (cons '(:results . "output verbatim replace")
-        (assq-delete-all :results org-babel-default-header-args)))
+    (assq-delete-all :results org-babel-default-header-args)))
 #+END_SRC
 *** ob-async
 This is to run org source code blocks asynchronously.
@@ -1747,23 +1989,6 @@ Not the case right now, though.
    (dot . t)
    ))
     #+END_SRC
-** Faces
-*** Fontify DONE items
-This removes the focus on done items (either checklist items or headings). I
-think this is a nice quality-of-life improvement for using ~org-mode~ as a TODO
-tracker.
-
-The only adjustment I did for my specific case is adding an iteration over the
-list of org-modes I use, since I created ~org-english-mode~ for my own use.
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-;; We are using an _anonymous face_ to have this customization work on startup.
-(dolist (major-mode '(org-english-mode org-mode))
-  (font-lock-add-keywords
- major-mode
- `(("^[ \t]*\\(?:[-+*]\\|[0-9]+[).]\\)[ \t]+\\(\\(?:\\[@\\(?:start:\\)?[0-9]+\\][ \t]*\\)?\\[\\(?:X\\|\\([0-9]+\\)/\\2\\)\\][^\n]*\n\\)" 1 '(:strike-through t :inherit 'font-lock-comment-face) prepend))
- 'append))
-#+END_SRC
 ** Kill entire heading with a single command
 #+BEGIN_SRC emacs-lisp :tangle yes
 (defalias 'auralcat/org-kill-heading
@@ -1789,11 +2014,11 @@ if you wish (!)
 (use-package howm
   :ensure t
   :hook (
-         ;; Rename buffers with the base filename as the buffer title
-         (howm-mode-hook . howm-mode-set-buffer-name)
-         (howm-create-hook . auralcat/set-up-olivetti-mode-init)
-         (howm-create-file-hook . auralcat/set-up-olivetti-mode-init)
-         (after-save-hook . howm-mode-set-buffer-name))
+     ;; Rename buffers with the base filename as the buffer title
+     (howm-mode-hook . howm-mode-set-buffer-name)
+     (howm-create-hook . auralcat/set-up-olivetti-mode-init)
+     (howm-create-file-hook . auralcat/set-up-olivetti-mode-init)
+     (after-save-hook . howm-mode-set-buffer-name))
   :demand t
   :init
   ;; Use this to set which major mode name you would like to write your notes in through the pattern in file-name-alist.
@@ -1925,8 +2150,8 @@ First we need to enable repeat-mode globally:
   `(setq ,map-symbol
      (let ((map (make-sparse-keymap)))
        (cl-loop for (key . command) in ,key-commands-alist
-                do (define-key map (kbd key) command)
-                (put command 'repeat-map ',map-symbol))
+        do (define-key map (kbd key) command)
+        (put command 'repeat-map ',map-symbol))
        map)))
 #+END_SRC
 
@@ -1934,51 +2159,51 @@ First we need to enable repeat-mode globally:
 #+BEGIN_SRC emacs-lisp :tangle yes
 ;; TODO: undo-redo is not loaded on startup through this macro. Need to figure out why.
 (auralcat/macro-make-map-for-repeat-commands undo-repeat-map
-                                             '(("u" . undo)
-                                               ("r" . undo-redo)))
+                         '(("u" . undo)
+                           ("r" . undo-redo)))
 
 ;; TODO: why are these keys not bound to scroll-up-command and scroll-down-command?
 (auralcat/macro-make-map-for-repeat-commands scroll-map
-                                             '(("n" . scroll-up-command)
-                                               ("p" . scroll-down-command)))
+                         '(("n" . scroll-up-command)
+                           ("p" . scroll-down-command)))
 
 (auralcat/macro-make-map-for-repeat-commands scroll-other-window-map
-                                             '(("]" . scroll-other-window)
-                                               ("[" . scroll-other-window-down)))
+                         '(("]" . scroll-other-window)
+                           ("[" . scroll-other-window-down)))
 
 (auralcat/macro-make-map-for-repeat-commands control-meta-navigation-map
-                                             '(("n" . forward-list)
-                                               ("p" . backward-list)
-                                               ("a" . beginning-of-defun)
-                                               ("e" . end-of-defun)
-                                               ("f" . forward-sexp)
-                                               ("b" . backward-sexp)))
+                         '(("n" . forward-list)
+                           ("p" . backward-list)
+                           ("a" . beginning-of-defun)
+                           ("e" . end-of-defun)
+                           ("f" . forward-sexp)
+                           ("b" . backward-sexp)))
 
 (auralcat/macro-make-map-for-repeat-commands goto-change-map
-                                             '(("." . goto-last-change)
-                                               ("," . goto-last-change-reverse)))
+                         '(("." . goto-last-change)
+                           ("," . goto-last-change-reverse)))
 #+END_SRC
 
 ** Org-mode repeat maps
 #+BEGIN_SRC emacs-lisp :tangle yes
 (auralcat/macro-make-map-for-repeat-commands org-link-repeat-map
-                                             '(("n" . org-next-link)
-                                               ("p" . org-previous-link)))
+                         '(("n" . org-next-link)
+                           ("p" . org-previous-link)))
 
 (auralcat/macro-make-map-for-repeat-commands org-heading-navigation-map
-                                             '(("n" . org-next-visible-heading)
-                                               ("p" . org-previous-visible-heading)
-                                               ("f" . org-forward-heading-same-level)
-                                               ("b" . org-backward-heading-same-level)))
+                         '(("n" . org-next-visible-heading)
+                           ("p" . org-previous-visible-heading)
+                           ("f" . org-forward-heading-same-level)
+                           ("b" . org-backward-heading-same-level)))
 #+END_SRC
 
 ** Markdown repeat maps
 #+BEGIN_SRC emacs-lisp :tangle yes
 (auralcat/macro-make-map-for-repeat-commands markdown-heading-repeat-map
-                                             '(("n" . markdown-outline-next)
-                                               ("p" . markdown-outline-previous)
-                                               ("f" . markdown-outline-next-same-level)
-                                               ("b" . markdown-outline-previous-same-level)))
+                         '(("n" . markdown-outline-next)
+                           ("p" . markdown-outline-previous)
+                           ("f" . markdown-outline-next-same-level)
+                           ("b" . markdown-outline-previous-same-level)))
 #+END_SRC
 
 * Custom functions
@@ -2034,10 +2259,10 @@ This is useful when you want to copy some lines of code from Emacs to paste on G
 (defun auralcat/prog-copy-region-in-named-gfm-code-block (beg end)
   "Copy the selected region inside a named GFM code block with the major mode name to the clipboard."
   (interactive (if (use-region-p)
-                   (list (region-beginning) (region-end))
-                 (list nil nil)))
+           (list (region-beginning) (region-end))
+         (list nil nil)))
   (let ((major-mode-basename (string-replace "-mode" "" (prin1-to-string major-mode)))
-        (region-raw-string (buffer-substring-no-properties beg end)))
+    (region-raw-string (buffer-substring-no-properties beg end)))
       (kill-new (format "```%s
 %s
 ```" major-mode-basename region-raw-string))
@@ -2053,8 +2278,8 @@ The ~diff~ block is handy when you want to highlight a single line of code when 
 
    This is useful to highlight a single line in your message or comment."
   (interactive (if (use-region-p)
-                   (list (region-beginning) (region-end))
-                 (list nil nil)))
+           (list (region-beginning) (region-end))
+         (list nil nil)))
   (kill-new (format "```%s
 %s
 ```" "diff" (buffer-substring-no-properties beg end)))
@@ -2070,8 +2295,8 @@ We can also create the special ~suggestion~ GFM code block here. This is interpr
 
   This block is interpreted by GitHub as a suggestion to the pull request, so the author or maintainers can apply the suggestions to the branch with a single click."
   (interactive (if (use-region-p)
-                   (list (region-beginning) (region-end))
-                 (list nil nil)))
+           (list (region-beginning) (region-end))
+         (list nil nil)))
   (kill-new (format "```%s
 %s
 ```" "suggestion" (buffer-substring-no-properties beg end)))
@@ -2085,8 +2310,8 @@ For other cases where GFM code blocks don't get interpreted correctly, we can us
 (defun auralcat/prog-copy-region-in-plain-md-code-block (beg end)
   "Copy the selected region inside a plain Markdown code block."
   (interactive (if (use-region-p)
-                   (list (region-beginning) (region-end))
-                 (list nil nil)))
+           (list (region-beginning) (region-end))
+         (list nil nil)))
   (kill-new (format "```
 %s
 ```"  (buffer-substring-no-properties beg end)))
@@ -2157,16 +2382,16 @@ These are usually aliases to commonly-accessed tools and workflows.
 
 (setq auralcat/mode-line-right-side
       (list minor-mode-alist
-        " " mode-line-misc-info
-        " " mode-line-end-spaces))
+    " " mode-line-misc-info
+    " " mode-line-end-spaces))
 
 ;; This needs to be setq-default to make every buffer use this mode line format.
 (setq-default mode-line-format
       '("%e" (:eval (mode-line-align
-             (format-mode-line
-              auralcat/mode-line-left-side)
-             (format-mode-line
-              auralcat/mode-line-right-side)))))
+         (format-mode-line
+          auralcat/mode-line-left-side)
+         (format-mode-line
+          auralcat/mode-line-right-side)))))
 #+END_SRC
 * Cursor
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -2237,7 +2462,7 @@ These are usually aliases to commonly-accessed tools and workflows.
      ;; of the month
      (and (eq day-of-week 5)
       (or (eq month-day (1- last-month-day))
-          (eq month-day (1- (1- last-month-day))))))))
+      (eq month-day (1- (1- last-month-day))))))))
 
 (defun diary-first-working-day-of-month (date)
   "Returns `t` if DATE is the first working day of the month.
