@@ -192,21 +192,10 @@ This does not require any extra packages as of Emacs 21. Great thing to know whe
 #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Completion for Ruby mode
 (defun ruby-mode-tweaks ()
-  ;; Increase the min prefix length so it doesn't clash with most used keywords, like def.
-  (set (make-local-variable 'company-minimum-prefix-length) 5)
-  (set (make-local-variable 'company-backends) '(company-etags company-capf company-dabbrev company-yasnippet))
   ;; Enable flycheck
-  (flycheck-mode 1)
-  (subword-mode 1))
-
-;; Completion for REPL Ruby mode
-(defun inf-ruby-mode-tweaks ()
-  (set (make-local-variable 'company-minimum-prefix-length) 5)
-  (set (make-local-variable 'company-backends) '(company-capf company-etags company-dabbrev company-yasnippet))
-  (subword-mode 1))
+  (flycheck-mode 1))
 
 (add-hook 'ruby-mode-hook 'ruby-mode-tweaks)
-(add-hook 'inf-ruby-mode-hook 'inf-ruby-mode-tweaks)
 #+END_SRC
 
 *** Projectile Rails
@@ -1010,13 +999,6 @@ I'm working with Makefiles now, so this is useful.
   :init
   (setq js-indent-level 2))
 
-;; TODO: Look for a better completion for JS modes in Company.
-(defun js2-mode-tweaks ()
-  ;; Use company-yas as main backend
-  (set (make-local-variable 'company-backends) '(company-etags company-yasnippet)))
-
-(add-hook 'js2-mode-hook 'js2-mode-tweaks)
-
 ;; Set syntax highlight level
 (setq js2-highlight-level 3)
     #+END_SRC
@@ -1053,49 +1035,6 @@ I'm working with Makefiles now, so this is useful.
 ;; Enable it
 (add-hook 'after-init-hook #'projectile-global-mode)
     #+END_SRC
-*** Company
-**** Main Config
-     *COMPlete ANYthing* inside Emacs.
-     I switched to it because it works in GUI Emacs and ~auto-complete~ didn't at the time.
-     #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package company
-  :defer t
-  :config
-  ;; My standard Company configuration
-  (setq company-tooltip-limit 20)
-  (setq company-show-numbers t)
-  (setq company-idle-delay 0)
-  (setq company-echo-delay 0))
-
-;; Use company-mode only in prog-mode buffers.
-(add-hook 'prog-mode-hook #'company-mode)
-
-;; Web-mode needs HTML and CSS completions.
-;; JS is not satisfactory at this point IMO
-(defun web-mode-tweaks ()
-  (require 'company-web-html)
-  (set (make-local-variable 'company-backends) '(company-web-html company-css))
-  (emmet-mode 1))
-
-
-;; Shell completion
-(defun shell-mode-tweaks ()
-  (set (make-local-variable 'company-backends) '(company-capf company-files)))
-
-;; Elisp completion
-(defun elisp-tweaks ()
-  (set (make-local-variable 'company-minimum-prefix-length) 3)
-  (set (make-local-variable 'company-backends) '(company-elisp company-etags company-yasnippet)))
-
-;; Add tweaks
-(add-hook 'shell-mode-hook 'shell-mode-tweaks)
-(add-hook 'emacs-lisp-mode-hook 'elisp-tweaks)
-(add-hook 'ielm-mode-hook 'elisp-tweaks)
-
-(add-hook 'org-mode-hook 'variable-pitch-mode)
-(add-hook 'markdown-mode-hook 'variable-pitch-mode)
-(add-hook 'git-commit-setup-hook 'variable-pitch-mode)
-     #+END_SRC
 *** Keyfreq
     Shows most used commands in editing session.
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1109,7 +1048,6 @@ I'm working with Makefiles now, so this is useful.
       isearch-printing-char
       markdown-enter-key
       abort-recursive-edit
-      company-ignore
       ))
 
   ;; Activate it
@@ -1125,7 +1063,6 @@ I'm working with Makefiles now, so this is useful.
   ;; These are loaded at startup, I prefer declaring everything here.
   :diminish flycheck-mode
   :diminish projectile-mode
-  :diminish company-mode
   :diminish auto-revert-mode
   :diminish auto-fill-mode
   :diminish abbrev-mode)
@@ -1223,7 +1160,6 @@ I'm working with Makefiles now, so this is useful.
      (unix 61820 FontAwesome)
      (undecided 61736 FontAwesome)
      ("Text\\'" 61686 FontAwesome)
-     ("\\` ?company\\'" 61869 FontAwesome)
      ("\\` ?AC\\'" 61838 FontAwesome)
      ("\\` ?Fly\\'" 59922 IcoMoon-Free)
      ("\\` ?Ergo" 61724 FontAwesome)
@@ -1350,8 +1286,6 @@ Create links to Github/GitLab files from the comfort of your Emacs buffer.
   (defun git-commit-tweaks ()
     "Ensures that the commit body does not exceed 72 characters."
     (setq fill-column 72)
-    (set (make-local-variable 'company-backends) '(company-dabbrev company-capf company-files))
-    (set (make-local-variable 'company-minimum-prefix-length) 3)
     (setq-local comment-auto-fill-only-comments nil)))
      #+END_SRC
 **** Viewing diffs
@@ -2116,16 +2050,10 @@ I'm leaving this mode to be toggled manually for now.
 ;; Shows trailing whitespace, if any:
 (setq-default show-trailing-whitespace t)
 
-(defun css-mode-tweaks()
-  (set (make-local-variable 'company-backends) '(company-css company-yasnippet company-etags))
-  (emmet-mode 1))
 
-;; Emmet-mode: activate for html-mode, sgml-mode,
-;; css-mode, web-mode and sass-mode
+;; Emmet-mode: activate for sgml-mode and web-mode
 (add-hook 'sgml-mode-hook 'emmet-mode)
-(add-hook 'sass-mode-hook 'css-mode-tweaks)
 (add-hook 'web-mode-hook 'emmet-mode)
-(add-hook 'css-mode-hook 'css-mode-tweaks)
 
 ;; Python: use python3 as default shell interpreter
 (setq python-shell-interpreter "python3")
