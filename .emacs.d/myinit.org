@@ -1070,119 +1070,6 @@ I'm working with Makefiles now, so this is useful.
 (eval-after-load "editorconfig" '(diminish 'editorconfig-mode))
 (eval-after-load "yasnippet" '(diminish 'yas-minor-mode))
     #+END_SRC
-*** Mode Icons
-    Indicate modes in the mode line using icons
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package mode-icons
-  :init
-  (mode-icons-mode)
-  :config
-  (setq mode-icons
-   '(("\\`CSS\\'" "css" xpm)
-     ("\\`Coffee\\'" "coffee" xpm-bw)
-     ("\\`Compilation\\'" "compile" xpm)
-     ("\\`Emacs-Lisp\\'" "emacs" xpm)
-     ("\\`Lisp Interaction\\'" "emacs" xpm)
-     ("\\`HTML\\'" "html" xpm)
-     ("\\`Haml\\'" "haml" xpm)
-     ("\\`Image\\[imagemagick\\]\\'" "svg" xpm)
-     ("\\`Inf-Ruby\\'" "infruby" xpm)
-     ("\\`Java[Ss]cript\\'" "js" xpm)
-     ("\\`Lisp\\'" "cl" xpm)
-     ("\\`nXML\\'" "xml" xpm)
-     ("\\`Org\\'" "org" xpm)
-     ("\\`PHP\\(\\|/.*\\)\\'" "php" xpm)
-     ("\\`Projectile Rails Server\\'" "rails" xpm)
-     ("\\`Python\\'" "python" xpm)
-     ("\\`Ruby\\'" "ruby" xpm)
-     ("\\`EnhRuby\\'" "ruby" xpm)
-     ("\\`ESS\\[S\\]\\'" "R" xpm)
-     ("\\`ESS\\[SAS\\]\\'" "sas" xpm)
-     ("\\`ESS\\[BUGS\\]\\'" 61832 FontAwesome)
-     ("\\`iESS\\'" "R" xpm)
-     ("\\`Rust\\'" "rust" xpm)
-     ("\\`SCSS\\'" "sass" xpm)
-     ("\\`Sass\\'" "sass" xpm)
-     ("\\`Scheme" "scheme" xpm-bw)
-     ("\\`Shell-script" "bash" xpm-bw)
-     ("\\`Slim" "slim" xpm-bw)
-     ("\\`Snippet" "yas" xpm)
-     ("\\`Term\\'" "term" xpm)
-     ("\\`Web\\'" "html" xpm)
-     ("\\`XML\\'" "xml" xpm)
-     ("\\`YAML\\'" "yaml" xpm)
-     ("\\` ?YASnippet\\'" "yas" xpm)
-     ("\\` ?yas\\'" "yas" xpm)
-     ("\\` ?hs\\'" "hs" xpm)
-     ("\\`Markdown\\'" 61641 github-octicons)
-     ("\\`Scala\\'" 61787 font-mfizz)
-     ("\\`Magit\\'" 61906 FontAwesome)
-     ("\\` Pulls\\'" 61586 FontAwesome)
-     ("\\`Zip-Archive\\'" 61894 FontAwesome)
-     ("\\` ARev\\'" 61473 FontAwesome)
-     ("\\`Calc\\(ulator\\)?\\'" 61932 FontAwesome)
-     ("\\`Debug.*\\'" 61832 FontAwesome)
-     ("\\`Debug.*\\'" 61832 FontAwesome)
-     ("\\`Calendar\\'" 61555 FontAwesome)
-     ("\\`Help\\'" 61529 FontAwesome)
-     ("\\`WoMan\\'" 61530 FontAwesome)
-     ("\\`C\\(/.*\\|\\)\\'" 61703 font-mfizz)
-     ("\\`Custom\\'" 61459 FontAwesome)
-     ("\\`Go\\'" "go" xpm)
-     ("\\` ?Rbow\\'" "rainbow" xpm)
-     ("\\` ?ICY\\'" "icy" xpm)
-     ("\\` ?Golden\\'" "golden" xpm-bw)
-     ("\\`BibTeX\\'\\'" "bibtex" xpm-bw)
-     ("\\`C[+][+]\\(/.*\\|\\)\\'" 61708 font-mfizz)
-     ("\\`C[#]\\(/.*\\|\\)\\'" 61709 font-mfizz)
-     ("\\`Elixir\\'" 61717 font-mfizz)
-     ("\\`Erlang\\'" 61718 font-mfizz)
-     ("\\`Haskell\\'" 61734 font-mfizz)
-     ("\\`Clojure\\'" 61706 font-mfizz)
-     ("\\`Java\\(/.*\\|\\)\\'" 61739 font-mfizz)
-     ("\\`C?Perl\\'" 61768 font-mfizz)
-     ("\\`Octave\\'" "octave" xpm)
-     ("\\`AHK\\'" "autohotkey" xpm)
-     ("\\`Info\\'" 61530 FontAwesome)
-     ("\\` ?Narrow\\'" 61542 FontAwesome)
-     ("\\`Dockerfile\\'" "docker" xpm)
-     (read-only 61475 FontAwesome)
-     (writable 61596 FontAwesome)
-     (save 61639 FontAwesome)
-     (saved "" nil)
-     (modified-outside 61553 FontAwesome)
-     (steal 61979 FontAwesome)
-     (apple 60095 IcoMoon-Free)
-     (apple 61817 FontAwesome)
-     (win 61818 FontAwesome)
-     (unix 60093 IcoMoon-Free)
-     (unix 61798 font-mfizz)
-     (unix 61820 FontAwesome)
-     (undecided 61736 FontAwesome)
-     ("Text\\'" 61686 FontAwesome)
-     ("\\` ?AC\\'" 61838 FontAwesome)
-     ("\\` ?Fly\\'" 59922 IcoMoon-Free)
-     ("\\` ?Ergo" 61724 FontAwesome)
-     ("\\` ?drag\\'" 61511 FontAwesome)
-     ("\\` ?Helm\\'" "helm" xpm-bw)
-     ("\\`Messages\\'" 62075 FontAwesome)
-     ("\\`Conf" 61918 FontAwesome)
-     ("\\`Fundamental\\'" 61462 FontAwesome)
-     ("\\`Javascript-IDE\\'" "js" xpm)
-     ("\\` Undo-Tree\\'" ":palm_tree:" emoji)
-     ("\\`LaTeX\\'" "tex" ext)
-     ("\\`Image\\[xpm\\]\\'" "xpm" ext)
-     ("\\`Image\\[png\\]\\'" "png" ext)
-     ("\\` ?AI\\'" 61500 FontAwesome)
-     ("\\`twittering-mode\\'" "twitter" xpm)
-     ("\\` Emmet\\'" "emmet" xpm)
-     ("\\`Vue\\'" "vue" xpm)
-     ("\\` ?\\(?:ElDoc\\|Anzu\\|SP\\|Guide\\|PgLn\\|Undo-Tree\\|Ergo.*\\|,\\|Isearch\\|Ind\\)\\'" nil nil)))
- (setq mode-icons-generate-emoji-xpms t
-       mode-icons-generate-font-xpms t
-       mode-icons-mode t
-       mode-icons-change-mode-name t))
-    #+END_SRC
 ** Utilities
 *** Play nice with ASDF
 I found this manual package called[[https://github.com/tabfugnic/asdf.el/][ asdf.el]] that makes Emacs identify binaries
@@ -1339,16 +1226,6 @@ Create links to Github/GitLab files from the comfort of your Emacs buffer.
   (circadian-setup))
     #+END_SRC
 
-*** sqlformat
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package sqlformat
-  :commands (sqlformat sqlformat-buffer sqlformat-region)
-  :hook (sql-mode . sqlformat-on-save-mode)
-  :init
-  ;; This is for Postgres.
-  (setq sqlformat-command 'pgformatter
-    sqlformat-args '("-s2" "-g")))
-#+END_SRC
 *** Electric pair mode
 This _built-in_ mode adds paired characters when you type brackets and
 other things.
