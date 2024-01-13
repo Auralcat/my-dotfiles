@@ -786,25 +786,6 @@ large buffers and slowing Emacs down. Then I removed it.
 (setq confirm-nonexistent-file-or-buffer nil)
 (setq ido-create-new-buffer 'always)
 #+END_SRC
-* MermaidJS
-[[http://mermaid-js.github.io/mermaid/][MermaidJS]] is a Markdown syntax to generate flowcharts and diagrams.
-It's quite handy to use whenever you need to explain complex concepts to other people.
-
-To install it, run the command below.
-I'm not installing it automatically when Emacs starts because that takes up init time.
-#+BEGIN_SRC shell
-npm install -g @mermaid-js/mermaid-cli
-#+END_SRC
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package mermaid-mode
-:mode "\\.mermaid\\'")
-
-(use-package ob-mermaid
-  :config
-  ;; We need to install the mermaid CLI to be able to compile Mermaid files into diagrams.
-  (setq ob-mermaid-cli-path (string-trim (shell-command-to-string "command -v mmdc"))))
-#+END_SRC
 * REPL
 We need to do some customizations to comint-related buffers to improve performance.
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -989,6 +970,204 @@ I'm working with Makefiles now, so this is useful.
 (use-package csv-mode
   :defer t)
     #+END_SRC
+*** MermaidJS
+[[http://mermaid-js.github.io/mermaid/][MermaidJS]] is a Markdown syntax to generate flowcharts and diagrams.
+It's quite handy to use whenever you need to explain complex concepts to other people.
+
+To install it, run the command below.
+I'm not installing it automatically when Emacs starts because that takes up init time.
+#+BEGIN_SRC shell
+npm install -g @mermaid-js/mermaid-cli
+#+END_SRC
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package mermaid-mode
+:mode "\\.mermaid\\'")
+
+(use-package ob-mermaid
+  :config
+  ;; We need to install the mermaid CLI to be able to compile Mermaid files into diagrams.
+  (setq ob-mermaid-cli-path (string-trim (shell-command-to-string "command -v mmdc"))))
+#+END_SRC
+
+***** Play nice with ASDF
+I found this manual package called[[https://github.com/tabfugnic/asdf.el/][ asdf.el]] that makes Emacs identify binaries
+installed through ASDF in the system.
+
+You just need to make sure that the cloned repo is in your ~load-path~.
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (add-to-list 'load-path "~/my-dotfiles/.emacs.d/manual-packages/emacs-asdf")
+  (require 'asdf)
+  (asdf-enable)
+#+END_SRC
+
+***** Expand-region
+This one is a classic in the Emacs community.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package expand-region
+  :bind ("C-=" . er/expand-region))
+#+END_SRC
+***** Avy
+It's a supercharged version of =ace-jump=, with batteries included and better performance!
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package avy
+  :config
+  (avy-setup-default)
+  (global-set-key (kbd "M-g j") 'avy-resume)
+  (global-set-key (kbd "M-3") 'avy-goto-char))
+#+END_SRC
+***** Exec path from shell
+  Replicates terminal env vars in graphical Emacs.
+  #+BEGIN_SRC emacs-lisp :tangle yes
+(use-package exec-path-from-shell
+  :defer t
+  :init
+  (exec-path-from-shell-initialize))
+  #+END_SRC
+***** Git-Link
+Create links to Github/GitLab files from the comfort of your Emacs buffer.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package git-link
+  :defer t)
+#+END_SRC
+***** Magit delta
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package magit-delta
+  :ensure t
+  :hook (magit-mode . magit-delta-mode))
+#+END_SRC
+***** Smartparens
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package smartparens
+  :hook ((ruby-mode inf-elixir-mode) . 'smartparens-mode)
+  :config
+  (require 'smartparens-config)
+  ;; Remap standard Emacs functions to smartparens equivalents
+  (define-key smartparens-mode-map [remap backward-sexp]   'sp-backward-sexp)
+  (define-key smartparens-mode-map [remap forward-sexp]    'sp-forward-sexp)
+  (define-key smartparens-mode-map [remap kill-sexp]       'sp-kill-sexp)
+  (define-key smartparens-mode-map [remap mark-sexp]       'sp-mark-sexp)
+  (define-key smartparens-mode-map [remap transpose-sexp]  'sp-transpose-sexp)
+  (define-key smartparens-mode-map [remap kill-region]     'sp-kill-region)
+  (define-key smartparens-mode-map [remap kill-whole-line] 'sp-kill-whole-line))
+#+END_SRC
+
+***** Golden Ratio Mode
+    Splits windows using the [[https://en.wikipedia.org/wiki/Golden_ratio][Golden Ratio]].
+    This makes the focused window a bit larger than usual and the
+    smaller ones are easier to read. It makes the multi-window
+    experience more pleasing to the eye. Yeah, nature!
+    #+BEGIN_SRC emacs-lisp :tangle yes
+(use-package golden-ratio
+  :diminish golden-ratio-mode
+  :config
+  (setq golden-ratio-extra-commands
+    (append golden-ratio-extra-commands '(magit-status aw-flip-window)))
+  (golden-ratio-mode 1))
+    #+END_SRC
+
+***** Restart Emacs
+    Restart Emacs from within Emacs
+    #+BEGIN_SRC emacs-lisp :tangle yes
+(use-package restart-emacs
+  :defer t)
+    #+END_SRC
+***** Magit
+    How to win at Git from Emacs.
+    The configuration for each part is below in separate headings.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+(use-package magit
+  :defer t
+  :config
+  ;; Highlight what changed in diffs.
+  (setq magit-diff-refine-hunk t))
+    #+END_SRC
+****** Commit configuration
+     #+BEGIN_SRC emacs-lisp :tangle yes
+(use-package git-commit
+  :after (magit)
+  :hook (git-commit-mode . git-commit-tweaks)
+  :custom (git-commit-summary-max-length 50)
+  :preface
+  (defun git-commit-tweaks ()
+    "Ensures that the commit body does not exceed 72 characters."
+    (setq fill-column 72)
+    (setq-local comment-auto-fill-only-comments nil)))
+     #+END_SRC
+****** Viewing diffs
+#+BEGIN_SRC emacs-lisp :tangle yes
+;; Wrap those long lines.
+(add-hook 'magit-diff-mode-hook 'visual-line-mode)
+#+END_SRC
+****** Open files for code review
+#+BEGIN_SRC emacs-lisp :tangle yes
+(defun auralcat/magit-open-changed-files-from-main (args)
+  "Opens the buffers visiting files that were changed compared to the main branch in the current branch.
+   Requires M-x server-start first.
+
+   It's highly recommended to update and pull changes from the remote repository into the master/main branch before running this command."
+  (interactive "P")
+  (let* ((default-directory (projectile-project-root))
+     (git-changed-files-command "git --no-pager diff --name-only main $(git branch --show-current)"))
+    (message "Opening changed files in the current branch compared to the master/main branch...")
+    (projectile-run-async-shell-command-in-root (format "find $(%s) -exec emacsclient -n {} \\;" git-changed-files-command))))
+#+END_SRC
+***** Yasnippets
+    It originally came with company-mode, it's handy to write faster
+    #+BEGIN_SRC emacs-lisp :tangle yes
+(use-package yasnippet-snippets)
+(use-package yasnippet-classic-snippets)
+
+(setq yas-snippet-dirs
+      '("~/.emacs.d/snippets" yasnippet-snippets-dir yasnippet-classic-snippets-dir))
+
+(defun do-not-add-newline-for-snippets ()
+  "What is says on the tin."
+  (setq-local require-final-newline nil)
+  )
+
+(add-hook 'snippet-mode-hook 'do-not-add-newline-for-snippets)
+    #+END_SRC
+***** Circadian
+    Theme changer for Emacs.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+(use-package circadian
+  :ensure t
+  :config
+  (cond
+   ((eq system-type 'darwin)
+    (setq circadian-themes '((:sunrise . modus-operandi)
+         (:sunset  . modus-vivendi))))
+   ;; Personal Linux machine
+   ((and (string-equal system-name auralcat/personal-system-name) (eq system-type 'gnu/linux))
+    (setq circadian-themes '((:sunrise . ef-cyprus)
+         (:sunset  . ef-maris-dark)))))
+  (circadian-setup))
+    #+END_SRC
+
+***** Electric pair mode
+This _built-in_ mode adds paired characters when you type brackets and
+other things.
+
+It's got a better performance than ~smartparens-mode~. Use it when you
+don't need any specific features from ~smartparens-mode~.
+
+#+begin_src emacs-lisp :tangle yes
+(add-hook 'js-mode-hook 'electric-pair-mode)
+(add-hook 'json-mode-hook 'electric-pair-mode)
+(add-hook 'outline-mode-hook 'electric-pair-mode)
+(add-hook 'markdown-mode-hook 'electric-pair-mode)
+#+end_src
+
+***** Auto package update
+I honestly don't know why Emacs doesn't support this out of the box yet, but oh well.
+You can put ~auto-package-update-async~ in the ~midnight-hook~.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package auto-package-update
+  :config
+  (auto-package-update-at-time "11:30am")
+  (setq auto-package-update-delete-old-versions t))
+#+END_SRC
 ** Minor Modes
 *** Flycheck Inline
     Shows the error when leaving the point over the place where it occurs.
@@ -1051,184 +1230,324 @@ I'm working with Makefiles now, so this is useful.
 (eval-after-load "yasnippet" '(diminish 'yas-minor-mode))
     #+END_SRC
 ** Utilities
-*** Play nice with ASDF
-I found this manual package called[[https://github.com/tabfugnic/asdf.el/][ asdf.el]] that makes Emacs identify binaries
-installed through ASDF in the system.
+* Custom derived modes
+I use those for creating new namespaces for abbrevs or special functions in them
+without affecting the respective parent mode.
+** Org-English mode
+This is a derived mode to hold English abbrevs.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(define-derived-mode org-english-mode org-mode "Org-EN"
+  "Org-mode used to hold English abbrevs. Does everything that plain org-mode does.")
 
-You just need to make sure that the cloned repo is in your ~load-path~.
-#+BEGIN_SRC emacs-lisp :tangle yes
-  (add-to-list 'load-path "~/my-dotfiles/.emacs.d/manual-packages/emacs-asdf")
-  (require 'asdf)
-  (asdf-enable)
-#+END_SRC
+(add-to-list 'auto-mode-alist '("\\.org\\.en?\\'" . org-english-mode))
 
-*** Expand-region
-This one is a classic in the Emacs community.
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package expand-region
-  :bind ("C-=" . er/expand-region))
+;; Disable it for outline-mode derivatives like Markdown and Org.
+(add-hook 'org-english-mode-hook #'(lambda () (auto-save-visited-mode 0)))
 #+END_SRC
-*** Avy
-It's a supercharged version of =ace-jump=, with batteries included and better performance!
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package avy
-  :config
-  (avy-setup-default)
-  (global-set-key (kbd "M-g j") 'avy-resume)
-  (global-set-key (kbd "M-3") 'avy-goto-char))
-#+END_SRC
-*** Exec path from shell
-  Replicates terminal env vars in graphical Emacs.
-  #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package exec-path-from-shell
-  :defer t
-  :init
-  (exec-path-from-shell-initialize))
-  #+END_SRC
-*** Git-Link
-Create links to Github/GitLab files from the comfort of your Emacs buffer.
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package git-link
-  :defer t)
-#+END_SRC
-*** Magit delta
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package magit-delta
-  :ensure t
-  :hook (magit-mode . magit-delta-mode))
-#+END_SRC
-*** Smartparens
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package smartparens
-  :hook ((ruby-mode inf-elixir-mode) . 'smartparens-mode)
-  :config
-  (require 'smartparens-config)
-  ;; Remap standard Emacs functions to smartparens equivalents
-  (define-key smartparens-mode-map [remap backward-sexp]   'sp-backward-sexp)
-  (define-key smartparens-mode-map [remap forward-sexp]    'sp-forward-sexp)
-  (define-key smartparens-mode-map [remap kill-sexp]       'sp-kill-sexp)
-  (define-key smartparens-mode-map [remap mark-sexp]       'sp-mark-sexp)
-  (define-key smartparens-mode-map [remap transpose-sexp]  'sp-transpose-sexp)
-  (define-key smartparens-mode-map [remap kill-region]     'sp-kill-region)
-  (define-key smartparens-mode-map [remap kill-whole-line] 'sp-kill-whole-line))
-#+END_SRC
+** Livemd mode
+This mode was created to offer support for =.livemd= files. These are generated by Livebook.
 
-*** Golden Ratio Mode
-    Splits windows using the [[https://en.wikipedia.org/wiki/Golden_ratio][Golden Ratio]].
-    This makes the focused window a bit larger than usual and the
-    smaller ones are easier to read. It makes the multi-window
-    experience more pleasing to the eye. Yeah, nature!
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package golden-ratio
-  :diminish golden-ratio-mode
-  :config
-  (setq golden-ratio-extra-commands
-    (append golden-ratio-extra-commands '(magit-status aw-flip-window)))
-  (golden-ratio-mode 1))
-    #+END_SRC
+Livebook uses a special kind of Markdown, but for us there is no change
+whatsoever from the usual ~gfm-mode~. It also has special keybindings in the
+original implementation to add Elixir, Markdown or Mermaid blocks to the file.
+In our case when implementing this in Emacs, we just need a keybinding to add
+the Mermaid and Elixir code blocks.
 
-*** Restart Emacs
-    Restart Emacs from within Emacs
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package restart-emacs
-  :defer t)
-    #+END_SRC
-*** Magit
-    How to win at Git from Emacs.
-    The configuration for each part is below in separate headings.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package magit
-  :defer t
-  :config
-  ;; Highlight what changed in diffs.
-  (setq magit-diff-refine-hunk t))
-    #+END_SRC
-**** Commit configuration
-     #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package git-commit
-  :after (magit)
-  :hook (git-commit-mode . git-commit-tweaks)
-  :custom (git-commit-summary-max-length 50)
-  :preface
-  (defun git-commit-tweaks ()
-    "Ensures that the commit body does not exceed 72 characters."
-    (setq fill-column 72)
-    (setq-local comment-auto-fill-only-comments nil)))
-     #+END_SRC
-**** Viewing diffs
+Livebook supports Elixir code as a first class citizen as well as Mermaid diagrams.
 #+BEGIN_SRC emacs-lisp :tangle yes
-;; Wrap those long lines.
-(add-hook 'magit-diff-mode-hook 'visual-line-mode)
-#+END_SRC
-**** Open files for code review
-#+BEGIN_SRC emacs-lisp :tangle yes
-(defun auralcat/magit-open-changed-files-from-main (args)
-  "Opens the buffers visiting files that were changed compared to the main branch in the current branch.
-   Requires M-x server-start first.
+(define-derived-mode livemd-mode gfm-mode "Livebook"
+  "A Markdown-flavored mode for editing Livebook notebook files."
+(define-key livemd-mode-map (kbd "C-c e") 'livemd/insert-elixir-block)
+(define-key livemd-mode-map (kbd "C-c m") 'livemd/insert-mermaid-block)
+(define-key livemd-mode-map (kbd "C-c n") 'markdown-insert-header-atx-2)
+(add-to-list '
+auto-mode-alist '("\\.livemd?\\'" . livemd-mode))
+(add-hook 'livemd-mode-hook #'(lambda () (auto-revert-mode 1)))
+(add-hook 'livemd-mode-hook #'(lambda () (auto-save-visited-mode 0))))
 
-   It's highly recommended to update and pull changes from the remote repository into the master/main branch before running this command."
+(defun livemd/insert-elixir-block (args)
+  "Inserts an Elixir code block."
   (interactive "P")
-  (let* ((default-directory (projectile-project-root))
-     (git-changed-files-command "git --no-pager diff --name-only main $(git branch --show-current)"))
-    (message "Opening changed files in the current branch compared to the master/main branch...")
-    (projectile-run-async-shell-command-in-root (format "find $(%s) -exec emacsclient -n {} \\;" git-changed-files-command))))
+  (markdown-insert-gfm-code-block "elixir" nil))
+
+(defun livemd/insert-mermaid-block (args)
+  "Inserts a Mermaid diagram block."
+  (interactive "P")
+  (markdown-insert-gfm-code-block "mermaid" nil))
 #+END_SRC
-*** Yasnippets
-    It originally came with company-mode, it's handy to write faster
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package yasnippet-snippets)
-(use-package yasnippet-classic-snippets)
+** Markdown-portuguese mode
+An extra namespace for ~markdown-mode~ so I can store abbrevs and ~yasnippet~ snippets in Portuguese for ~markdown-mode~.
 
-(setq yas-snippet-dirs
-      '("~/.emacs.d/snippets" yasnippet-snippets-dir yasnippet-classic-snippets-dir))
-
-(defun do-not-add-newline-for-snippets ()
-  "What is says on the tin."
-  (setq-local require-final-newline nil)
-  )
-
-(add-hook 'snippet-mode-hook 'do-not-add-newline-for-snippets)
-    #+END_SRC
-*** Circadian
-    Theme changer for Emacs.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package circadian
-  :ensure t
-  :config
-  (cond
-   ((eq system-type 'darwin)
-    (setq circadian-themes '((:sunrise . modus-operandi)
-         (:sunset  . modus-vivendi))))
-   ;; Personal Linux machine
-   ((and (string-equal system-name auralcat/personal-system-name) (eq system-type 'gnu/linux))
-    (setq circadian-themes '((:sunrise . ef-cyprus)
-         (:sunset  . ef-maris-dark)))))
-  (circadian-setup))
-    #+END_SRC
-
-*** Electric pair mode
-This _built-in_ mode adds paired characters when you type brackets and
-other things.
-
-It's got a better performance than ~smartparens-mode~. Use it when you
-don't need any specific features from ~smartparens-mode~.
-
-#+begin_src emacs-lisp :tangle yes
-(add-hook 'js-mode-hook 'electric-pair-mode)
-(add-hook 'json-mode-hook 'electric-pair-mode)
-(add-hook 'outline-mode-hook 'electric-pair-mode)
-(add-hook 'markdown-mode-hook 'electric-pair-mode)
-#+end_src
-
-*** Auto package update
-I honestly don't know why Emacs doesn't support this out of the box yet, but oh well.
-You can put ~auto-package-update-async~ in the ~midnight-hook~.
+I'm leaving this mode to be toggled manually for now.
 #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package auto-package-update
-  :config
-  (auto-package-update-at-time "11:30am")
-  (setq auto-package-update-delete-old-versions t))
+(define-derived-mode markdown-portuguese-mode markdown-mode "Markdown-PT"
+  "Markdown-mode used to hold Portuguese abbrevs. Does everything that plain markdown-mode does."
+  (setq-local ispell-local-dictionary "pt_BR"))
+
+(add-hook 'markdown-portuguese-mode-hook #'(lambda () (auto-save-visited-mode 0)))
 #+END_SRC
+
+** Gfm-portuguese mode
+An extra namespace for ~gfm-mode~ so I can store abbrevs and ~yasnippet~ snippets in Portuguese for ~gfm-mode~.
+
+I'm leaving this mode to be toggled manually for now.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(define-derived-mode gfm-portuguese-mode gfm-mode "Gfm-PT"
+  "Gfm-mode used to hold Portuguese abbrevs. Does everything that plain gfm-mode does."
+  (setq-local ispell-local-dictionary "pt_BR"))
+
+(add-hook 'gfm-portuguese-mode-hook #'(lambda () (auto-save-visited-mode 0)))
+#+END_SRC
+
+* Org-mode
+** Main configuration
+   #+BEGIN_SRC emacs-lisp :tangle yes
+     (define-key global-map (kbd "C-c a") 'org-agenda)
+     (define-key global-map (kbd "C-c k") 'org-capture)
+
+     (setq org-hierarchical-todo-statistics nil
+       org-src-fontify-natively t
+       org-todo-keywords '((sequence "TODO" "DONE"))
+       org-agenda-scheduled-leaders '("Scheduled: " "Sched. previously %2dx: ")
+       org-agenda-skip-scheduled-if-done t
+       org-agenda-start-on-weekday 0)
+
+     ;; Start indented.
+     ;; (setq org-startup-indented t)
+
+     ;; Change the end of collapsed headings to an arrow.
+     (setq org-ellipsis "⤵")
+
+     ;; Don't split my lines, thx.
+     (setq org-M-RET-may-split-line nil)
+
+     ;; Truncate long task names
+     (setq org-clock-heading-function
+       #'(lambda ()
+     (let ((str (nth 4 (org-heading-components))))
+       (concat (truncate-string-to-width str 27) "...")
+       )))
+
+     ;; Organize the bindings
+     ;; Open subheading with C-c RET and invert with M-RET
+     (define-key org-mode-map (kbd "C-c RET") 'org-ctrl-c-ret)
+     (define-key org-mode-map (kbd "<C-M-return>") 'org-insert-subheading)
+
+     ;; Use C-RET to complete words in Org-mode
+     (define-key org-mode-map (kbd "C-RET") 'complete)
+
+     ;; Map C-S-enter to org-insert-todo-subheading
+     (define-key org-mode-map (kbd "<C-S-return>") 'org-insert-todo-subheading)
+
+     ;; Dummy-proofing my configs
+     (define-key org-mode-map (kbd "C-c ]") nil)
+     (define-key org-mode-map (kbd "C-c [") nil)
+
+     ;; Log when a task was done and when it was rescheduled.
+     (setq org-log-done 'time)
+     (setq org-log-reschedule 'time)
+
+     ;; Don't write inside invisible area when collapsing headings!
+     (setq org-catch-invisible-edits 'error)
+
+     ;; Refile items to the same buffer along with the agenda files
+     (setq org-refile-targets '((nil :maxlevel . 3)
+                (org-agenda-files :maxlevel . 3)))
+
+     ;; Allow alphabetical lists please
+     (setq org-list-allow-alphabetical t)
+   #+END_SRC
+
+** Org-agenda configuration
+Colorize the agenda: https://llazarek.com/2018/07/improving-the-agenda.html
+#+BEGIN_SRC emacs-lisp :tangle yes
+;; Display holidays from calendar into agenda
+(setq org-agenda-include-diary t)
+
+;; Set agenda as sticky. This makes the buffers persistent, and load faster if
+;; you open them all the time.
+(setq org-agenda-sticky t)
+
+;; Keep agenda file list in a single file so I can publish my config.
+;; DO NOT use C-c [ or C-c ] to add/remove files to the agenda otherwise
+;; Emacs will write the var to init.el
+(setq org-agenda-files "~/file-bouncer/org-agenda-file-list.org")
+
+(defun ll/org/agenda/color-headers-with (tag fg-col bg-col)
+  "Color agenda lines matching TAG with color FG-COL."
+  (interactive)
+  (goto-char (point-min))
+  (while (re-search-forward tag nil t)
+    (unless (find-in-line "\\[#[A-Z]\\]")
+      (let ((todo-end (or (ll/org/agenda/find-todo-word-end)
+          (point-at-bol)))
+    (tags-beginning (or (find-in-line " :" t)
+        (point-at-eol))))
+    (add-text-properties todo-end
+         tags-beginning
+         `(face (:foreground ,fg-col :background ,bg-col)))))))
+
+;; Helper definitions
+(setq ll/org/agenda-todo-words
+      '("TODO" "GOAL" "NEXT" "STARTED" "WAITING" "REVIEW" "SUBMIT"
+    "DONE" "DEFERRED" "CANCELLED"))
+(defun find-in-line (needle &optional beginning count)
+  "Find the position of the start of NEEDLE in the current line.
+  If BEGINNING is non-nil, find the beginning of NEEDLE in the current
+  line. If COUNT is non-nil, find the COUNT'th occurrence from the left."
+  (save-excursion
+    (beginning-of-line)
+    (let ((found (re-search-forward needle (point-at-eol) t count)))
+      (if beginning
+      (match-beginning 0)
+    found))))
+(defun ll/org/agenda/find-todo-word-end ()
+  (reduce (lambda (a b) (or a b))
+      (mapcar #'find-in-line ll/org/agenda-todo-words)))
+
+;; Load my tag colors
+(load "~/.agenda-colors")
+#+END_SRC
+*** Custom agenda commands
+#+BEGIN_SRC emacs-lisp :tangle yes
+(setq org-agenda-custom-commands
+      '(("i" "Inbox items"
+    ((tags "inbox")))))
+#+END_SRC
+** Tables
+Use the fixed-pitch font for tables.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(set-face-attribute 'org-table nil :inherit 'fixed-pitch)
+#+END_SRC
+** Capture templates
+   #+BEGIN_SRC emacs-lisp :tangle yes
+;; Load them from a separate file.
+(load "~/.org-capture-templates.el")
+   #+END_SRC
+** Quick capture to inbox
+Borrowed and adapted from https://macowners.club/posts/org-capture-from-everywhere-macos/#capture-an-url-from-safari
+#+begin_src emacs-lisp :tangle yes
+(defun timu-func-make-capture-frame ()
+  "Create a new frame and run `org-capture'."
+  (interactive)
+  (make-frame '((name . "capture")
+        (top . 300)
+        (left . 700)
+        (width . 80)
+        (height . 25)))
+  (select-frame-by-name "capture")
+  (delete-other-windows)
+  (noflet ((switch-to-buffer-other-window (buf) (switch-to-buffer buf)))
+    ;; Customize your org-capture function here
+      (org-capture nil "i")))
+
+(defadvice org-capture-finalize
+    (after delete-capture-frame activate)
+  "Advise capture-finalize to close the frame."
+  (if (equal "capture" (frame-parameter nil 'name))
+      (delete-frame)))
+
+(defadvice org-capture-destroy
+    (after delete-capture-frame activate)
+  "Advise capture-destroy to close the frame."
+  (if (equal "capture" (frame-parameter nil 'name))
+      (delete-frame)))
+#+end_src
+** Org-babel
+*** General settings
+- Do not ask me if I want to run the source block
+- Output the results in _scripting_ mode, instead of eval mode.
+- Wrap them in an example block (for exporting)
+  Important: the default header args will be:
+  =:noweb :results output verbatim replace :exports both=
+- Also display the contents of the source code block in a monospace font when possible.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(defun my-org-confirm-babel-evaluate (lang body)
+  "Don't confirm squat."
+  (not (member lang '("sh" "elisp" "ruby" "elixir" "shell"))))
+
+;; A few more tweaks for org-babel.
+(setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate
+      org-src-preserve-indentation t
+      org-babel-min-lines-for-block-output 1
+      org-babel-default-header-args
+      (cons '(:noweb . "yes")
+    (assq-delete-all :noweb org-babel-default-header-args))
+      org-babel-default-header-args
+      (cons '(:exports . "both")
+    (assq-delete-all :exports org-babel-default-header-args))
+      org-babel-default-header-args
+      (cons '(:results . "output verbatim replace")
+    (assq-delete-all :results org-babel-default-header-args)))
+#+END_SRC
+*** ob-async
+This is to run org source code blocks asynchronously.
+Backends like Python implement their own asynchronous way of running
+things, so you need to add extra configuration when using them.
+Not the case right now, though.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package ob-async)
+#+END_SRC
+
+*** Elixir
+    #+BEGIN_SRC emacs-lisp :tangle yes
+(use-package ob-elixir)
+    #+END_SRC
+*** Load languages
+    #+BEGIN_SRC emacs-lisp :tangle yes
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '(
+   (shell . t)
+   (python . t)
+   (sql . t)
+   (ruby . t)
+   (elixir . t)
+   (plantuml . t)
+   (dot . t)
+   ))
+    #+END_SRC
+** Kill entire heading with a single command
+#+BEGIN_SRC emacs-lisp :tangle yes
+(defalias 'auralcat/org-kill-heading
+   (kmacro "C-c @ C-w"))
+
+(define-key org-mode-map (kbd "C-S-k") 'auralcat/org-kill-heading)
+#+END_SRC
+
+* HOWM
+Quote from https://leahneukirchen.org/blog/archive/2022/03/note-taking-in-emacs-with-howm.html:
+#+begin_quote
+~howm~ is short for =Hitori Otegaru Wiki Modoki=, which roughly translates to
+=Single-user Easy Wiki Mode=.
+#+end_quote
+
+It's a note-taking mode from the Japan Emacs community. The mode has been around
+for the last 20 years, and it does not force any standards on you to write
+notes, except for the note file structure.
+You can customize it however you want, and even use ~org-mode~ to write the notes
+if you wish (!)
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package howm
+  :ensure t
+  :hook (
+     ;; Rename buffers with the base filename as the buffer title
+     (howm-mode-hook . howm-mode-set-buffer-name)
+     (howm-create-hook . auralcat/set-up-olivetti-mode-init)
+     (howm-create-file-hook . auralcat/set-up-olivetti-mode-init)
+     (after-save-hook . howm-mode-set-buffer-name))
+  :demand t
+  :init
+  ;; Use this to set which major mode name you would like to write your notes in through the pattern in file-name-alist.
+  ;; In this case I'm using .txt to open these files in text-mode.
+  (setq howm-file-name-format "%Y-%m-%d__%H%M%S.org.en")
+  ;; Changing the prefix because it clashes with org-mode and rspec-mode.
+  (setq howm-prefix (kbd "C-c ]")))
+#+END_SRC
+
 * Function Aliases
   #+BEGIN_SRC emacs-lisp :tangle yes
 ;; This is how you define aliases for Elisp functions. These are useful for when
@@ -1568,324 +1887,6 @@ If you're using Emacs 28 or lower, you can backport this function like so:
       (insert line "\n"))))))
 
 (define-key global-map (kbd "C-S-d") 'duplicate-line)
-#+END_SRC
-
-* Org-mode
-** Main configuration
-   #+BEGIN_SRC emacs-lisp :tangle yes
-     (define-key global-map (kbd "C-c a") 'org-agenda)
-     (define-key global-map (kbd "C-c k") 'org-capture)
-
-     (setq org-hierarchical-todo-statistics nil
-       org-src-fontify-natively t
-       org-todo-keywords '((sequence "TODO" "DONE"))
-       org-agenda-scheduled-leaders '("Scheduled: " "Sched. previously %2dx: ")
-       org-agenda-skip-scheduled-if-done t
-       org-agenda-start-on-weekday 0)
-
-     ;; Start indented.
-     ;; (setq org-startup-indented t)
-
-     ;; Change the end of collapsed headings to an arrow.
-     (setq org-ellipsis "⤵")
-
-     ;; Don't split my lines, thx.
-     (setq org-M-RET-may-split-line nil)
-
-     ;; Truncate long task names
-     (setq org-clock-heading-function
-       #'(lambda ()
-     (let ((str (nth 4 (org-heading-components))))
-       (concat (truncate-string-to-width str 27) "...")
-       )))
-
-     ;; Organize the bindings
-     ;; Open subheading with C-c RET and invert with M-RET
-     (define-key org-mode-map (kbd "C-c RET") 'org-ctrl-c-ret)
-     (define-key org-mode-map (kbd "<C-M-return>") 'org-insert-subheading)
-
-     ;; Use C-RET to complete words in Org-mode
-     (define-key org-mode-map (kbd "C-RET") 'complete)
-
-     ;; Map C-S-enter to org-insert-todo-subheading
-     (define-key org-mode-map (kbd "<C-S-return>") 'org-insert-todo-subheading)
-
-     ;; Dummy-proofing my configs
-     (define-key org-mode-map (kbd "C-c ]") nil)
-     (define-key org-mode-map (kbd "C-c [") nil)
-
-     ;; Log when a task was done and when it was rescheduled.
-     (setq org-log-done 'time)
-     (setq org-log-reschedule 'time)
-
-     ;; Don't write inside invisible area when collapsing headings!
-     (setq org-catch-invisible-edits 'error)
-
-     ;; Refile items to the same buffer along with the agenda files
-     (setq org-refile-targets '((nil :maxlevel . 3)
-                (org-agenda-files :maxlevel . 3)))
-
-     ;; Allow alphabetical lists please
-     (setq org-list-allow-alphabetical t)
-   #+END_SRC
-
-** Org-agenda configuration
-Colorize the agenda: https://llazarek.com/2018/07/improving-the-agenda.html
-#+BEGIN_SRC emacs-lisp :tangle yes
-;; Display holidays from calendar into agenda
-(setq org-agenda-include-diary t)
-
-;; Set agenda as sticky. This makes the buffers persistent, and load faster if
-;; you open them all the time.
-(setq org-agenda-sticky t)
-
-;; Keep agenda file list in a single file so I can publish my config.
-;; DO NOT use C-c [ or C-c ] to add/remove files to the agenda otherwise
-;; Emacs will write the var to init.el
-(setq org-agenda-files "~/file-bouncer/org-agenda-file-list.org")
-
-(defun ll/org/agenda/color-headers-with (tag fg-col bg-col)
-  "Color agenda lines matching TAG with color FG-COL."
-  (interactive)
-  (goto-char (point-min))
-  (while (re-search-forward tag nil t)
-    (unless (find-in-line "\\[#[A-Z]\\]")
-      (let ((todo-end (or (ll/org/agenda/find-todo-word-end)
-          (point-at-bol)))
-    (tags-beginning (or (find-in-line " :" t)
-        (point-at-eol))))
-    (add-text-properties todo-end
-         tags-beginning
-         `(face (:foreground ,fg-col :background ,bg-col)))))))
-
-;; Helper definitions
-(setq ll/org/agenda-todo-words
-      '("TODO" "GOAL" "NEXT" "STARTED" "WAITING" "REVIEW" "SUBMIT"
-    "DONE" "DEFERRED" "CANCELLED"))
-(defun find-in-line (needle &optional beginning count)
-  "Find the position of the start of NEEDLE in the current line.
-  If BEGINNING is non-nil, find the beginning of NEEDLE in the current
-  line. If COUNT is non-nil, find the COUNT'th occurrence from the left."
-  (save-excursion
-    (beginning-of-line)
-    (let ((found (re-search-forward needle (point-at-eol) t count)))
-      (if beginning
-      (match-beginning 0)
-    found))))
-(defun ll/org/agenda/find-todo-word-end ()
-  (reduce (lambda (a b) (or a b))
-      (mapcar #'find-in-line ll/org/agenda-todo-words)))
-
-;; Load my tag colors
-(load "~/.agenda-colors")
-#+END_SRC
-*** Custom agenda commands
-#+BEGIN_SRC emacs-lisp :tangle yes
-(setq org-agenda-custom-commands
-      '(("i" "Inbox items"
-    ((tags "inbox")))))
-#+END_SRC
-** Tables
-Use the fixed-pitch font for tables.
-#+BEGIN_SRC emacs-lisp :tangle yes
-(set-face-attribute 'org-table nil :inherit 'fixed-pitch)
-#+END_SRC
-** Capture templates
-   #+BEGIN_SRC emacs-lisp :tangle yes
-;; Load them from a separate file.
-(load "~/.org-capture-templates.el")
-   #+END_SRC
-** Quick capture to inbox
-Borrowed and adapted from https://macowners.club/posts/org-capture-from-everywhere-macos/#capture-an-url-from-safari
-#+begin_src emacs-lisp :tangle yes
-(defun timu-func-make-capture-frame ()
-  "Create a new frame and run `org-capture'."
-  (interactive)
-  (make-frame '((name . "capture")
-        (top . 300)
-        (left . 700)
-        (width . 80)
-        (height . 25)))
-  (select-frame-by-name "capture")
-  (delete-other-windows)
-  (noflet ((switch-to-buffer-other-window (buf) (switch-to-buffer buf)))
-    ;; Customize your org-capture function here
-      (org-capture nil "i")))
-
-(defadvice org-capture-finalize
-    (after delete-capture-frame activate)
-  "Advise capture-finalize to close the frame."
-  (if (equal "capture" (frame-parameter nil 'name))
-      (delete-frame)))
-
-(defadvice org-capture-destroy
-    (after delete-capture-frame activate)
-  "Advise capture-destroy to close the frame."
-  (if (equal "capture" (frame-parameter nil 'name))
-      (delete-frame)))
-#+end_src
-** Org-babel
-*** General settings
-- Do not ask me if I want to run the source block
-- Output the results in _scripting_ mode, instead of eval mode.
-- Wrap them in an example block (for exporting)
-  Important: the default header args will be:
-  =:noweb :results output verbatim replace :exports both=
-- Also display the contents of the source code block in a monospace font when possible.
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-(defun my-org-confirm-babel-evaluate (lang body)
-  "Don't confirm squat."
-  (not (member lang '("sh" "elisp" "ruby" "elixir" "shell"))))
-
-;; A few more tweaks for org-babel.
-(setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate
-      org-src-preserve-indentation t
-      org-babel-min-lines-for-block-output 1
-      org-babel-default-header-args
-      (cons '(:noweb . "yes")
-    (assq-delete-all :noweb org-babel-default-header-args))
-      org-babel-default-header-args
-      (cons '(:exports . "both")
-    (assq-delete-all :exports org-babel-default-header-args))
-      org-babel-default-header-args
-      (cons '(:results . "output verbatim replace")
-    (assq-delete-all :results org-babel-default-header-args)))
-#+END_SRC
-*** ob-async
-This is to run org source code blocks asynchronously.
-Backends like Python implement their own asynchronous way of running
-things, so you need to add extra configuration when using them.
-Not the case right now, though.
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package ob-async)
-#+END_SRC
-
-*** Elixir
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package ob-elixir)
-    #+END_SRC
-*** Load languages
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '(
-   (shell . t)
-   (python . t)
-   (sql . t)
-   (ruby . t)
-   (elixir . t)
-   (plantuml . t)
-   (dot . t)
-   ))
-    #+END_SRC
-** Kill entire heading with a single command
-#+BEGIN_SRC emacs-lisp :tangle yes
-(defalias 'auralcat/org-kill-heading
-   (kmacro "C-c @ C-w"))
-
-(define-key org-mode-map (kbd "C-S-k") 'auralcat/org-kill-heading)
-#+END_SRC
-
-* HOWM
-Quote from https://leahneukirchen.org/blog/archive/2022/03/note-taking-in-emacs-with-howm.html:
-#+begin_quote
-~howm~ is short for =Hitori Otegaru Wiki Modoki=, which roughly translates to
-=Single-user Easy Wiki Mode=.
-#+end_quote
-
-It's a note-taking mode from the Japan Emacs community. The mode has been around
-for the last 20 years, and it does not force any standards on you to write
-notes, except for the note file structure.
-You can customize it however you want, and even use ~org-mode~ to write the notes
-if you wish (!)
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package howm
-  :ensure t
-  :hook (
-     ;; Rename buffers with the base filename as the buffer title
-     (howm-mode-hook . howm-mode-set-buffer-name)
-     (howm-create-hook . auralcat/set-up-olivetti-mode-init)
-     (howm-create-file-hook . auralcat/set-up-olivetti-mode-init)
-     (after-save-hook . howm-mode-set-buffer-name))
-  :demand t
-  :init
-  ;; Use this to set which major mode name you would like to write your notes in through the pattern in file-name-alist.
-  ;; In this case I'm using .txt to open these files in text-mode.
-  (setq howm-file-name-format "%Y-%m-%d__%H%M%S.org.en")
-  ;; Changing the prefix because it clashes with org-mode and rspec-mode.
-  (setq howm-prefix (kbd "C-c ]")))
-#+END_SRC
-
-* Custom derived modes
-I use those for creating new namespaces for abbrevs or special functions in them
-without affecting the respective parent mode.
-** Org-English mode
-This is a derived mode to hold English abbrevs.
-#+BEGIN_SRC emacs-lisp :tangle yes
-(define-derived-mode org-english-mode org-mode "Org-EN"
-  "Org-mode used to hold English abbrevs. Does everything that plain org-mode does.")
-
-(add-to-list 'auto-mode-alist '("\\.org\\.en?\\'" . org-english-mode))
-
-;; Disable it for outline-mode derivatives like Markdown and Org.
-(add-hook 'org-english-mode-hook #'(lambda () (auto-save-visited-mode 0)))
-#+END_SRC
-** Livemd mode
-This mode was created to offer support for =.livemd= files. These are generated by Livebook.
-
-Livebook uses a special kind of Markdown, but for us there is no change
-whatsoever from the usual ~gfm-mode~. It also has special keybindings in the
-original implementation to add Elixir, Markdown or Mermaid blocks to the file.
-In our case when implementing this in Emacs, we just need a keybinding to add
-the Mermaid and Elixir code blocks.
-
-Livebook supports Elixir code as a first class citizen as well as Mermaid diagrams.
-#+BEGIN_SRC emacs-lisp :tangle yes
-(define-derived-mode livemd-mode gfm-mode "Livebook"
-  "A Markdown-flavored mode for editing Livebook notebook files."
-(define-key livemd-mode-map (kbd "C-c e") 'livemd/insert-elixir-block)
-(define-key livemd-mode-map (kbd "C-c m") 'livemd/insert-mermaid-block)
-(define-key livemd-mode-map (kbd "C-c n") 'markdown-insert-header-atx-2)
-(add-to-list '
-auto-mode-alist '("\\.livemd?\\'" . livemd-mode))
-(add-hook 'livemd-mode-hook #'(lambda () (auto-revert-mode 1)))
-(add-hook 'livemd-mode-hook #'(lambda () (auto-save-visited-mode 0))))
-
-(defun livemd/insert-elixir-block (args)
-  "Inserts an Elixir code block."
-  (interactive "P")
-  (markdown-insert-gfm-code-block "elixir" nil))
-
-(defun livemd/insert-mermaid-block (args)
-  "Inserts a Mermaid diagram block."
-  (interactive "P")
-  (markdown-insert-gfm-code-block "mermaid" nil))
-#+END_SRC
-** Markdown-portuguese mode
-An extra namespace for ~markdown-mode~ so I can store abbrevs and ~yasnippet~ snippets in Portuguese for ~markdown-mode~.
-
-I'm leaving this mode to be toggled manually for now.
-#+BEGIN_SRC emacs-lisp :tangle yes
-(define-derived-mode markdown-portuguese-mode markdown-mode "Markdown-PT"
-  "Markdown-mode used to hold Portuguese abbrevs. Does everything that plain markdown-mode does."
-  (setq-local ispell-local-dictionary "pt_BR"))
-
-(add-hook 'markdown-portuguese-mode-hook #'(lambda () (auto-save-visited-mode 0)))
-#+END_SRC
-
-** Gfm-portuguese mode
-An extra namespace for ~gfm-mode~ so I can store abbrevs and ~yasnippet~ snippets in Portuguese for ~gfm-mode~.
-
-I'm leaving this mode to be toggled manually for now.
-#+BEGIN_SRC emacs-lisp :tangle yes
-(define-derived-mode gfm-portuguese-mode gfm-mode "Gfm-PT"
-  "Gfm-mode used to hold Portuguese abbrevs. Does everything that plain gfm-mode does."
-  (setq-local ispell-local-dictionary "pt_BR"))
-
-(add-hook 'gfm-portuguese-mode-hook #'(lambda () (auto-save-visited-mode 0)))
 #+END_SRC
 
 * Variables
