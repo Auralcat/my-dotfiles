@@ -246,6 +246,15 @@ points you to where the original code is defined.
 (use-package robe
   :hook ((ruby-mode) . robe-mode))
 #+END_SRC
+*** Rspec-mode
+I use ~RSpec~ quite a lot now.
+#+begin_src emacs-lisp :tangle yes
+(use-package rspec-mode
+  :hook ((after-init) . 'inf-ruby-switch-setup)
+  :config
+  (eval-after-load 'rspec-mode
+ '(rspec-install-snippets)))
+#+end_src
 ** Elixir
 *** Main configuration
 #+BEGIN_SRC emacs-lisp :tangle yes
