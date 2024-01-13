@@ -687,35 +687,6 @@ See `https://github.com/aws-cloudformation/cfn-python-lint'."
   (gcmh-mode 1))
 #+END_SRC
 * IRC
-** Circe setup
-Trying it out with Circe for now.
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package circe
-  :config
-  (setq circe-network-options
-      '(("ZNC bouncer"
-     :tls nil
-     :nick "mretka")))
-
-;; Customize the prompt
-(defun my-circe-prompt ()
-  (lui-set-prompt
-   (concat (propertize (concat (buffer-name) ">")
-               'face 'circe-prompt-face)
-       " ")))
-(add-hook 'circe-chat-mode-hook 'my-circe-prompt)
-
-;; For more configuration, check https://github.com/emacs-circe/circe/wiki/Configuration
-(setq circe-format-server-topic "*** Topic change by {userhost}: {topic-diff}")
-
-;; Show the nicks beside the messages
-(setq circe-format-say "{nick:-16s} {body}")
-(setq circe-format-self-say "<{nick}> {body}")
-
-;; Set the trackbar
-(setq lui-track-bar-behavior 'before-switch-to-buffer)
-(enable-lui-track-bar))
-#+END_SRC
 ** ERC general settings
 #+begin_src emacs-lisp :tangle yes
 ;; Set up nicks and stuff
