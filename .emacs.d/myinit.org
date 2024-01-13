@@ -2136,20 +2136,6 @@ Just like O in Vim.
 (global-set-key (kbd "C-o") 'auralcat/open-line)
 #+END_SRC
 
-* Work configurations
-I prefer to leave the work Elisp configuration files somewhere else because they
-contain private/confidential information.
-
-These are usually aliases to commonly-accessed tools and workflows.
-#+BEGIN_SRC emacs-lisp :tangle yes
-(let ((work-config-file "~/elisp-work/work-config.el")
-      (work-config-entrypoint-dir "~/elisp-work"))
-  (when (file-exists-p work-config-entrypoint-dir)
-    (add-to-list 'load-path work-config-entrypoint-dir)
-    ;; Main entrypoint.
-    (load work-config-file)))
-
-#+END_SRC
 * Mode Line
 ** VC mode customizations
 #+BEGIN_SRC emacs-lisp :tangle yes
