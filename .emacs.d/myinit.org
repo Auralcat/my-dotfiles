@@ -253,7 +253,77 @@ I use ~RSpec~ quite a lot now.
   :hook ((after-init) . 'inf-ruby-switch-setup)
   :config
   (eval-after-load 'rspec-mode
- '(rspec-install-snippets)))
+    '(rspec-install-snippets)))
+#+end_src
+** Python
+I'm starting to work with machine learning lately, so I'll need to set
+up my Python config and brush up my Python-fu.
+
+#+begin_src emacs-lisp :tangle yes
+;; I like IPython better
+(setq python-shell-interpreter "ipython")
+#+end_src
+*** Importmagic
+This is to replicate the import suggestion feature from PyCharm.
+It's a necessity when working with Python code.
+
+You will also need to install the ~epc~ and ~importmagic~ Python
+libraries in your environment:
+#+begin_src sh :export none :noeval
+pip3 install epc importmagic
+#+end_src
+
+#+begin_src emacs-lisp :tangle yes
+(use-package importmagic
+    :ensure t
+    :config
+    (add-hook 'python-mode-hook 'importmagic-mode))
+#+end_src
+*** TODO python-pytest
+Run your Python unit tests straight from Emacs.
+Note that there are two packages for running tests from Python
+projects in MELPA: ~python-pytest~ and simply ~pytest~.
+~python-pytest~ lets you run tests in a "do what I mean" (DWIM)
+fashion, so this is why I chose it.
+
+#+begin_src emacs-lisp :tangle yes
+(use-package python-pytest
+  :bind (:map python-mode-map
+      ;; I'm used to these keybindings from rspec-mode from Ruby
+      ("C-c , ." . 'python-pytest)
+      ("C-c , ," . 'python-pytest-repeat)
+      ("C-c , r" . 'python-pytest-repeat)))
+#+end_src
+
+*** Format all
+Format your code with ~black~.
+You will need to have the ~black~ lib installed in your Python
+interpreter:
+#+begin_src sh :noeval
+pip3 install black
+#+end_src
+
+NOTE: Format all does not work well with Rubocop, so that's why
+I'm not using it for Ruby.
+
+#+begin_src emacs-lisp :tangle yes
+(use-package format-all
+  :commands format-all-mode
+  :hook (python-mode . format-all-mode)
+  :config
+  (setq-default format-all-formatters
+                '(("Python"     (black)))))
+#+end_src
+*** Poetry
+~poetry~ is a Python library that is like ~bundler~ for Ruby.
+It's a better approach for dependency management and isolation than
+using plain ~pip~ with ~virtualenv~.
+~poetry~ is also smart enough to create its own virtual environment to
+isolate its dependencies. This means one less hurdle to work with
+Python in Emacs!
+
+#+begin_src emacs-lisp :tangle yes
+(use-package poetry)
 #+end_src
 ** Elixir
 *** Main configuration
