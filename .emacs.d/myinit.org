@@ -83,6 +83,42 @@ from ~M-x~ and get the same result if you want.
   #+END_SRC
 * Programming
 ** General configuration
+*** LSP mode
+We need this nowadays.
+
+#+begin_src emacs-lisp :tangle yes
+(use-package lsp-mode
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :hook ((python-mode ruby-mode typescript-mode) . lsp)
+  :config
+  (setq lsp-idle-delay 0.5
+        lsp-enable-symbol-highlighting t
+        lsp-enable-snippet nil  ;; Not supported by company capf, which is the recommended company backend
+        lsp-pyls-plugins-flake8-enabled nil
+        lsp-pyls-plugins-black-enabled t
+        lsp-pylsp-plugins-ruff-enabled t
+        lsp-pyls-plugins-rope-autoimport-enabled t)
+  (lsp-register-custom-settings
+   '(("pyls.plugins.pyls_black.enabled" t t)
+     ("pyls.plugins.pyls_isort.enabled" t t)
+     ("pylsp.plugins.rope_autoimport.enabled" t t)
+     ("pylsp.plugins.rope_completion.enabled" t t)))
+  :commands lsp)
+
+(use-package lsp-ui
+  :config (setq lsp-ui-sideline-show-hover t
+                lsp-ui-sideline-delay 0.5
+                lsp-ui-doc-delay 5
+                lsp-ui-sideline-ignore-duplicates t
+                lsp-ui-doc-position 'bottom
+                lsp-ui-doc-alignment 'frame
+                lsp-ui-doc-header nil
+                lsp-ui-doc-include-signature t
+                lsp-ui-doc-use-childframe t)
+  :commands lsp-ui-mode)
+#+end_src
+
 *** Manual customization
 #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Manual completion for you.
@@ -404,6 +440,10 @@ For Vue, we can use ~web-mode~. It's smart enough to work with multiple framewor
 #+BEGIN_SRC emacs-lisp :tangle yes
 (add-to-list 'auto-mode-alist '("\\.vue\\'"  . web-mode))
 #+END_SRC
+** Typescript
+#+begin_src emacs-lisp :tangle yes
+(setq typescript-indent-level 2)
+#+end_src
 ** Svelte
 #+BEGIN_SRC emacs-lisp :tangle yes
   (add-to-list 'auto-mode-alist '("\\.svelte\\'"  . web-mode))
