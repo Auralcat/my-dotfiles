@@ -90,7 +90,7 @@ We need this nowadays.
 (use-package lsp-mode
   :init
   (setq lsp-keymap-prefix "C-c l")
-  :hook ((python-mode ruby-mode typescript-mode) . lsp)
+  :hook ((python-mode ruby-mode web-mode typescript-mode terraform-mode) . lsp)
   :config
   (setq lsp-idle-delay 0.5
         lsp-enable-symbol-highlighting t
