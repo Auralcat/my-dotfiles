@@ -663,6 +663,11 @@ See `https://github.com/aws-cloudformation/cfn-python-lint'."
 ;; Take out unused stuff.
 (setq tool-bar-mode nil
       tooltip-mode nil)
+
+;; I don't need the startup screen either.
+;; Drop me straight into the scratch buffer.
+(setq inhibit-startup-screen t)
+
 ;; Remove the menu bar in terminal mode
 (when (not (display-graphic-p))
   (menu-bar-mode -1))
