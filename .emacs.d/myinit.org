@@ -295,27 +295,7 @@ I use ~RSpec~ quite a lot now.
 I'm starting to work with machine learning lately, so I'll need to set
 up my Python config and brush up my Python-fu.
 
-#+begin_src emacs-lisp :tangle yes
-;; I like IPython better
-(setq python-shell-interpreter "ipython")
-#+end_src
-*** Importmagic
-This is to replicate the import suggestion feature from PyCharm.
-It's a necessity when working with Python code.
-
-You will also need to install the ~epc~ and ~importmagic~ Python
-libraries in your environment:
-#+begin_src sh :export none :noeval
-pip3 install epc importmagic
-#+end_src
-
-#+begin_src emacs-lisp :tangle yes
-(use-package importmagic
-    :ensure t
-    :config
-    (add-hook 'python-mode-hook 'importmagic-mode))
-#+end_src
-*** TODO python-pytest
+*** python-pytest
 Run your Python unit tests straight from Emacs.
 Note that there are two packages for running tests from Python
 projects in MELPA: ~python-pytest~ and simply ~pytest~.
@@ -326,7 +306,8 @@ fashion, so this is why I chose it.
 (use-package python-pytest
   :bind (:map python-mode-map
       ;; I'm used to these keybindings from rspec-mode from Ruby
-      ("C-c , ." . 'python-pytest)
+      ("C-c , s" . 'python-pytest-function)
+      ("C-c , v" . 'python-pytest-file)
       ("C-c , ," . 'python-pytest-repeat)
       ("C-c , r" . 'python-pytest-repeat)))
 #+end_src
@@ -360,6 +341,25 @@ Python in Emacs!
 
 #+begin_src emacs-lisp :tangle yes
 (use-package poetry)
+#+end_src
+*** IPython with Jupyter Notebook kernel
+To run the kernel with code from your project, do this:
+
+#+begin_src sh
+cd ~/your-project-dir
+ipython kernel
+#+end_src
+
+#+begin_src emacs-lisp :tangle yes
+(setq python-shell-interpreter "jupyter")
+;; Set the jupyter kernel dynamically when you use this.
+(setq jupyter-notebook-kernel-id "787daebc-b072-475f-ae70-3b0b2be2f6c9")
+(setq python-shell-interpreter-args (format "console --existing %s --simple-prompt" jupyter-notebook-kernel-id))
+
+;; Need this to have the Python shell scroll results to the bottom
+(add-hook 'inferior-python-mode-hook
+          (lambda ()
+            (setq comint-move-point-for-output t)))
 #+end_src
 ** Elixir
 *** Main configuration
