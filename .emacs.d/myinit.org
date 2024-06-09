@@ -95,10 +95,16 @@ We need this nowadays.
   (setq lsp-idle-delay 0.5
         lsp-enable-symbol-highlighting t
         lsp-enable-snippet nil  ;; Not supported by company capf, which is the recommended company backend
+        lsp-completion-enable t
+        ;; Python LSP configuration
         lsp-pyls-plugins-flake8-enabled nil
         lsp-pyls-plugins-black-enabled t
         lsp-pylsp-plugins-ruff-enabled t
-        lsp-pyls-plugins-rope-autoimport-enabled t)
+        lsp-pyls-plugins-rope-autoimport-enabled t
+        ;; Terraform LSP configuration
+        lsp-terraform-ls-prefill-required-fields t
+        lsp-enable-links t
+        lsp-semantic-tokens-honor-refresh-requests t)
   (lsp-register-custom-settings
    '(("pyls.plugins.pyls_black.enabled" t t)
      ("pyls.plugins.pyls_isort.enabled" t t)
@@ -222,7 +228,12 @@ This does not require any extra packages as of Emacs 21. Great thing to know whe
     [0 0 0 0 0 0 0 0 0 0 0 0 0 128 192 224 240 248]
     nil nil 'center))))
     #+END_SRC
-
+** Terraform
+#+begin_src emacs-lisp :tangle yes
+(use-package terraform-mode
+  :config
+  (setq terraform-format-on-save t))
+#+end_src
 ** Ruby
 *** Main configuration
 #+BEGIN_SRC emacs-lisp :tangle yes
