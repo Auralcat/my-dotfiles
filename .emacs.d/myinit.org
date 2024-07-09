@@ -298,10 +298,21 @@ I use ~RSpec~ quite a lot now.
   (eval-after-load 'rspec-mode
     '(rspec-install-snippets)))
 #+end_src
+*** REPL
+#+begin_src emacs-lisp :tangle yes
+(define-key ruby-mode-map (kbd "C-c SPC") 'ruby-send-buffer)
+#+end_src
 ** Python
 I'm starting to work with machine learning lately, so I'll need to set
 up my Python config and brush up my Python-fu.
 
+#+begin_src emacs-lisp :tangle yes
+(use-package python-mode
+  :bind (:map python-mode-map
+              ("C-c SPC" . 'python-shell-send-buffer)
+              ("C-x C-e" . 'python-shell-send-statement)
+              ))
+#+end_src
 *** python-pytest
 Run your Python unit tests straight from Emacs.
 Note that there are two packages for running tests from Python
@@ -1631,14 +1642,6 @@ Not the case right now, though.
    (dot . t)
    ))
     #+END_SRC
-** Kill entire heading with a single command
-#+BEGIN_SRC emacs-lisp :tangle yes
-(defalias 'auralcat/org-kill-heading
-   (kmacro "C-c @ C-w"))
-
-(define-key org-mode-map (kbd "C-S-k") 'auralcat/org-kill-heading)
-#+END_SRC
-
 * HOWM
 Quote from https://leahneukirchen.org/blog/archive/2022/03/note-taking-in-emacs-with-howm.html:
 #+begin_quote
@@ -1811,10 +1814,7 @@ the themes themselves.
   ;; Maximize frame on startup
   (toggle-frame-maximized)
   ;; Space lines and bask in the gloriousness of graphical mode.
-  ;; 0.4 feels better for prose, and 0.2 is fine for code.
-  (add-hook 'prog-mode-hook #'(lambda () (setq line-spacing 0.2)))
-  (add-hook 'comint-mode-hook #'(lambda () (setq line-spacing 0.2)))
-  (add-hook 'text-mode-hook #'(lambda () (setq line-spacing 0.6))))
+  (setq line-spacing 0.2))
   #+END_SRC
 * Multiplexing
 This involves window and tab management.
