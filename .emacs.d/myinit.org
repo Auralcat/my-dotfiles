@@ -1642,37 +1642,6 @@ Not the case right now, though.
    (dot . t)
    ))
     #+END_SRC
-* HOWM
-Quote from https://leahneukirchen.org/blog/archive/2022/03/note-taking-in-emacs-with-howm.html:
-#+begin_quote
-~howm~ is short for =Hitori Otegaru Wiki Modoki=, which roughly translates to
-=Single-user Easy Wiki Mode=.
-#+end_quote
-
-It's a note-taking mode from the Japan Emacs community. The mode has been around
-for the last 20 years, and it does not force any standards on you to write
-notes, except for the note file structure.
-You can customize it however you want, and even use ~org-mode~ to write the notes
-if you wish (!)
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package howm
-  :ensure t
-  :hook (
-     ;; Rename buffers with the base filename as the buffer title
-     (howm-mode-hook . howm-mode-set-buffer-name)
-     (howm-create-hook . auralcat/set-up-olivetti-mode-init)
-     (howm-create-file-hook . auralcat/set-up-olivetti-mode-init)
-     (after-save-hook . howm-mode-set-buffer-name))
-  :demand t
-  :init
-  ;; Use this to set which major mode name you would like to write your notes in through the pattern in file-name-alist.
-  ;; In this case I'm using .txt to open these files in text-mode.
-  (setq howm-file-name-format "%Y-%m-%d__%H%M%S.org.en")
-  ;; Changing the prefix because it clashes with org-mode and rspec-mode.
-  (setq howm-prefix (kbd "C-c ]")))
-#+END_SRC
-
 * Function Aliases
   #+BEGIN_SRC emacs-lisp :tangle yes
 ;; This is how you define aliases for Elisp functions. These are useful for when
