@@ -16,6 +16,13 @@ alias la='ls -A'
 alias ll='ls -alF'
 alias ls="TERM=ansi ls --color=always"
 
+# Terraform things
+alias tf="terraform"
+alias tp="terraform plan"
+alias tap="terraform apply -auto-approve"
+alias td="terraform destroy"
+alias tds="terraform destroy -auto-approve"
+
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias grep='grep --color=auto'
