@@ -10,20 +10,16 @@
 (load "~/.emacs.secrets")
   #+END_SRC
 
-* Command history
+* Save command history
   It's a good idea to save the previous commands' history, for a couple reasons:
   - Check the complex commands you use most often and improve your workflow
     based on that
   - Store cumbersome commands for specific situations that don't
-    appear too often, but where this command saves your back (example
-    in Ruby: extracting a variable inside "it" clause to a "let" block)
+    appear too often
+
     #+BEGIN_SRC emacs-lisp :tangle yes
-(setq savehist-file "~/file-bouncer/emacs-savehist")
-(setq savehist-additional-variables '(kill-ring search-ring regexp-search-ring))
-(setq history-length 10000)
-(setq history-delete-duplicates t)
 (setq history-length 1024)
-(add-hook 'after-init-hook 'savehist-mode)
+(setq history-delete-duplicates t)
     #+END_SRC
 * Enabled complex commands
 Emacs comes with some commands disabled by default to not confuse new users.
@@ -38,8 +34,8 @@ So I need to enable them like this to not get pestered by it when trying to use 
   This is a command to open the browser for the URL at point.
   #+begin_src emacs-lisp :tangle yes
   (setq browse-url-browser-display nil
-        browse-url-browser-function 'browse-url-default-browser
-        browse-url-firefox-program "firefox")
+    browse-url-browser-function 'browse-url-default-browser
+    browse-url-firefox-program "firefox")
   #+end_src
 * Bookmarks
   It's a quicker way to navigate through files you visit often.
