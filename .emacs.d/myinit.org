@@ -1867,6 +1867,7 @@ right button as well.
 (define-key key-translation-map (kbd "»") (kbd "M-x"))
 (define-key key-translation-map (kbd "«") (kbd "M-z"))
 (define-key key-translation-map (kbd "C-«") (kbd "C-M-z"))
+(define-key key-translation-map (kbd "C-»") (kbd "C-M-x"))
 (define-key key-translation-map (kbd "ŋ") (kbd "M-g"))
 (define-key key-translation-map (kbd "<M-S-dead-grave>") (kbd "M-`"))
 (define-key key-translation-map (kbd "“") (kbd "M-v"))
