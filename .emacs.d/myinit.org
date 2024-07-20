@@ -2000,11 +2000,6 @@ If you're using Emacs 28 or lower, you can backport this function like so:
 ;; Shows trailing whitespace, if any:
 (setq-default show-trailing-whitespace t)
 
-
-;; Emmet-mode: activate for sgml-mode and web-mode
-(add-hook 'sgml-mode-hook 'emmet-mode)
-(add-hook 'web-mode-hook 'emmet-mode)
-
 ;; Python: use python3 as default shell interpreter
 (setq python-shell-interpreter "python3")
 
