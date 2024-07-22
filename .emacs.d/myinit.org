@@ -86,7 +86,13 @@ We need this nowadays.
 (use-package lsp-mode
   :init
   (setq lsp-keymap-prefix "C-c l")
-  :hook ((python-mode ruby-mode web-mode typescript-mode terraform-mode) . lsp)
+  :hook ((python-mode
+          ruby-mode
+          web-mode
+          typescript-mode
+          json-mode
+          cfn-mode
+          terraform-mode) . lsp)
   :config
   (setq lsp-idle-delay 0.5
         lsp-enable-symbol-highlighting t
@@ -224,6 +230,25 @@ This does not require any extra packages as of Emacs 21. Great thing to know whe
     [0 0 0 0 0 0 0 0 0 0 0 0 0 128 192 224 240 248]
     nil nil 'center))))
     #+END_SRC
+'** AWS CloudFormation
+[2024-07-22 seg] Currently the packages available in Emacs support
+linting and working with the YAML version of CFN templates out of the
+box.
+
+YAML is also easier to read and write than JSON, and also easier to maintain.
+You just need to be careful with the indentation in it though.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package cfn-mode)
+
+(defun auralcat/flycheck-cfn-setup ()
+  "Just turn off the LSP checking."
+  (flycheck-cfn-setup))
+
+(use-package flycheck-cfn
+  :config
+  (add-hook 'cfn-json-mode-hook #'(lambda () (auralcat/flycheck-cfn-setup))))
+#+END_SRC
 ** Terraform
 #+begin_src emacs-lisp :tangle yes
 (use-package terraform-mode
