@@ -247,7 +247,7 @@ You just need to be careful with the indentation in it though.
 
 (use-package flycheck-cfn
   :config
-  (add-hook 'cfn-json-mode-hook #'(lambda () (auralcat/flycheck-cfn-setup))))
+  (add-hook 'cfn-mode-hook #'(lambda () (auralcat/flycheck-cfn-setup))))
 #+END_SRC
 ** Terraform
 #+begin_src emacs-lisp :tangle yes
