@@ -327,6 +327,18 @@ I use ~RSpec~ quite a lot now.
 #+begin_src emacs-lisp :tangle yes
 (define-key ruby-mode-map (kbd "C-c SPC") 'ruby-send-buffer)
 #+end_src
+** General configuration
+When you are working in the comint/REPL buffer, you normally want the
+output to be visible at all times.
+
+We need to make it scroll to the bottom of the comint buffer
+automatically.
+
+#+begin_src emacs-lisp :tangle yes
+(setq comint-scroll-to-bottom-on-input t)
+(setq comint-scroll-to-bottom-on-output t)
+(setq comint-move-point-for-output t)
+#+end_src
 ** Python
 I'm starting to work with machine learning lately, so I'll need to set
 up my Python config and brush up my Python-fu.
