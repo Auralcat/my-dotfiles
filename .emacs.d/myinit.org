@@ -1336,6 +1336,7 @@ You can put ~auto-package-update-async~ in the ~midnight-hook~.
       isearch-printing-char
       markdown-enter-key
       abort-recursive-edit
+      lsp-ui-doc--handle-mouse-movement
       ))
 
   ;; Activate it
