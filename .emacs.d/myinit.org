@@ -126,6 +126,29 @@ We need this nowadays.
                 lsp-ui-doc-use-childframe t)
   :commands lsp-ui-mode)
 #+end_src
+*** DAP mode
+This goes hand in hand with ~lsp-mode~, since it implements the Debug
+Adapter Protocol from the LSP specification.
+
+Seriously, this will make your life easier when debugging things.
+
+#+begin_src emacs-lisp :tangle yes
+(use-package dap-mode
+  ;; Comment/uncomment the config below if you want all UI panes to be hidden by default!
+  :custom
+  (lsp-enable-dap-auto-configure nil)
+  :config
+  (dap-ui-mode 1)
+
+  :config
+  ;; Set up Node debugging
+  (require 'dap-python)
+  ;; You need to install debugpy first.
+  ;; pip install "debugpy"
+  (setq dap-python-debugger 'debugpy))
+
+(define-key lsp-mode-map (kbd "C-c l d") 'dap-hydra)
+#+end_src
 
 *** Manual customization
 #+BEGIN_SRC emacs-lisp :tangle yes
