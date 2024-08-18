@@ -2200,6 +2200,23 @@ Just like O in Vim.
 
 (global-set-key (kbd "C-o") 'auralcat/open-line)
 #+END_SRC
+** Open this config file from anywhere
+We need to have access to this file on speed dial.
+This is a huge quality of life improvement!
+#+begin_src emacs-lisp :tangle yes
+(defun auralcat/open-config-file ()
+  "Opens your Emacs configuration file."
+  (interactive)
+  ;; This is how you check if a buffer is opened.
+  (if (buffer-live-p (get-buffer "myinit.org"))
+      (switch-to-buffer "myinit.org")
+    ;; If the buffer is not open, visit the file
+    (find-file "~/.emacs.d/myinit.org")))
+
+;; We also need to bind this to a key
+(global-set-key (kbd "M-g e") 'auralcat/open-config-file)
+(global-set-key (kbd "M-g M-e") 'auralcat/open-config-file)
+#+end_src
 
 * Mode Line
 ** VC mode customizations
