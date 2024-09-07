@@ -1346,6 +1346,20 @@ You can put ~auto-package-update-async~ in the ~midnight-hook~.
 ;; Enable it
 (add-hook 'after-init-hook #'projectile-global-mode)
     #+END_SRC
+**** Tracking projects
+By default, projectile tracks all projects in your machine and runs
+~projectile-track-known-projects-find-file-hook~ in the background.
+
+If you are writing in org-mode in a project with more than 1800 files,
+this slows down the buffer in GUI Emacs. Here's how to fix that:
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(setq projectile-track-known-projects-automatically nil)
+
+;; Add the projects you want to track like this:
+;; (projectile-add-known-project "~/.emacs.d")
+#+END_SRC
+
 *** Keyfreq
     Shows most used commands in editing session.
     #+BEGIN_SRC emacs-lisp :tangle yes
