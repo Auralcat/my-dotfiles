@@ -937,6 +937,13 @@ large buffers and slowing Emacs down. Then I removed it.
 (setq confirm-nonexistent-file-or-buffer nil)
 (setq ido-create-new-buffer 'always)
 #+END_SRC
+* Create scratch buffers
+I'm doing this a lot recently. Need to make it faster.
+#+begin_src emacs-lisp :tangle yes
+  (setq confirm-nonexistent-file-or-buffer nil)
+  ;; For IDO
+  (setq ido-create-new-buffer 'always)
+#+end_src
 * REPL
 We need to do some customizations to comint-related buffers to improve performance.
 #+BEGIN_SRC emacs-lisp :tangle yes
