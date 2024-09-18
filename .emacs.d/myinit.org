@@ -1227,24 +1227,20 @@ Create links to Github/GitLab files from the comfort of your Emacs buffer.
     How to win at Git from Emacs.
     The configuration for each part is below in separate headings.
     #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package magit
-  :defer t
-  :config
-  ;; Highlight what changed in diffs.
-  (setq magit-diff-refine-hunk t))
+      (use-package magit
+        :defer t
+        :hook (git-commit-mode . git-commit-tweaks)
+        :custom (git-commit-summary-max-length 50)
+        :config
+        ;; Highlight what changed in diffs.
+        (setq magit-diff-refine-hunk t)
+        ;; 2024-09-06 git-commit is distributed with magit now.
+        :preface
+        (defun git-commit-tweaks ()
+          "Ensures that the commit body does not exceed 72 characters."
+          (setq fill-column 72)
+          (setq-local comment-auto-fill-only-comments nil)))
     #+END_SRC
-****** Commit configuration
-     #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package git-commit
-  :after (magit)
-  :hook (git-commit-mode . git-commit-tweaks)
-  :custom (git-commit-summary-max-length 50)
-  :preface
-  (defun git-commit-tweaks ()
-    "Ensures that the commit body does not exceed 72 characters."
-    (setq fill-column 72)
-    (setq-local comment-auto-fill-only-comments nil)))
-     #+END_SRC
 ****** Viewing diffs
 #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Wrap those long lines.
