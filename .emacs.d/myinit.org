@@ -1396,6 +1396,13 @@ this slows down the buffer in GUI Emacs. Here's how to fix that:
 (eval-after-load "yasnippet" '(diminish 'yas-minor-mode))
     #+END_SRC
 ** Utilities
+*** Deadgrep
+Search with ~ripgrep~, this is much faster!
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package deadgrep
+  :config
+  (define-key global-map (kbd "C-c d") 'deadgrep))
+#+END_SRC
 * Custom derived modes
 I use those for creating new namespaces for abbrevs or special functions in them
 without affecting the respective parent mode.
