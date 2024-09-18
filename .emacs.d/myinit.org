@@ -1475,6 +1475,8 @@ I'm leaving this mode to be toggled manually for now.
 * Org-mode
 ** Main configuration
    #+BEGIN_SRC emacs-lisp :tangle yes
+     ;; Allow alphabetical lists please
+          (setq org-list-allow-alphabetical t)
      (define-key global-map (kbd "C-c a") 'org-agenda)
      (define-key global-map (kbd "C-c k") 'org-capture)
 
