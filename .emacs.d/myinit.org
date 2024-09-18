@@ -1530,11 +1530,49 @@ I'm leaving this mode to be toggled manually for now.
 
      ;; Refile items to the same buffer along with the agenda files
      (setq org-refile-targets '((nil :maxlevel . 3)
-                (org-agenda-files :maxlevel . 3)))
-
-     ;; Allow alphabetical lists please
-     (setq org-list-allow-alphabetical t)
+                                (org-agenda-files :maxlevel . 3)))
    #+END_SRC
+
+** Tables
+Use the fixed-pitch font for tables.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(set-face-attribute 'org-table nil :inherit 'fixed-pitch)
+#+END_SRC
+** Capture templates
+   #+BEGIN_SRC emacs-lisp :tangle yes
+;; Load them from a separate file.
+(load "~/.org-capture-templates.el")
+   #+END_SRC
+
+** Quick capture to inbox
+Borrowed and adapted from https://macowners.club/posts/org-capture-from-everywhere-macos/#capture-an-url-from-safari
+#+begin_src emacs-lisp :tangle yes
+(defun timu-func-make-capture-frame ()
+  "Create a new frame and run `org-capture'."
+  (interactive)
+  (make-frame '((name . "capture")
+        (top . 300)
+        (left . 700)
+        (width . 80)
+        (height . 25)))
+  (select-frame-by-name "capture")
+  (delete-other-windows)
+  (noflet ((switch-to-buffer-other-window (buf) (switch-to-buffer buf)))
+    ;; Customize your org-capture function here
+      (org-capture nil "i")))
+
+(defadvice org-capture-finalize
+    (after delete-capture-frame activate)
+  "Advise capture-finalize to close the frame."
+  (if (equal "capture" (frame-parameter nil 'name))
+      (delete-frame)))
+
+(defadvice org-capture-destroy
+    (after delete-capture-frame activate)
+  "Advise capture-destroy to close the frame."
+  (if (equal "capture" (frame-parameter nil 'name))
+      (delete-frame)))
+#+end_src
 
 ** Org-agenda configuration
 Colorize the agenda: https://llazarek.com/2018/07/improving-the-agenda.html
@@ -1592,45 +1630,6 @@ Colorize the agenda: https://llazarek.com/2018/07/improving-the-agenda.html
       '(("i" "Inbox items"
     ((tags "inbox")))))
 #+END_SRC
-** Tables
-Use the fixed-pitch font for tables.
-#+BEGIN_SRC emacs-lisp :tangle yes
-(set-face-attribute 'org-table nil :inherit 'fixed-pitch)
-#+END_SRC
-** Capture templates
-   #+BEGIN_SRC emacs-lisp :tangle yes
-;; Load them from a separate file.
-(load "~/.org-capture-templates.el")
-   #+END_SRC
-** Quick capture to inbox
-Borrowed and adapted from https://macowners.club/posts/org-capture-from-everywhere-macos/#capture-an-url-from-safari
-#+begin_src emacs-lisp :tangle yes
-(defun timu-func-make-capture-frame ()
-  "Create a new frame and run `org-capture'."
-  (interactive)
-  (make-frame '((name . "capture")
-        (top . 300)
-        (left . 700)
-        (width . 80)
-        (height . 25)))
-  (select-frame-by-name "capture")
-  (delete-other-windows)
-  (noflet ((switch-to-buffer-other-window (buf) (switch-to-buffer buf)))
-    ;; Customize your org-capture function here
-      (org-capture nil "i")))
-
-(defadvice org-capture-finalize
-    (after delete-capture-frame activate)
-  "Advise capture-finalize to close the frame."
-  (if (equal "capture" (frame-parameter nil 'name))
-      (delete-frame)))
-
-(defadvice org-capture-destroy
-    (after delete-capture-frame activate)
-  "Advise capture-destroy to close the frame."
-  (if (equal "capture" (frame-parameter nil 'name))
-      (delete-frame)))
-#+end_src
 ** Org-babel
 *** General settings
 - Do not ask me if I want to run the source block
