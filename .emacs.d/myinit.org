@@ -2247,7 +2247,11 @@ Just like O in Vim.
 
 (global-set-key (kbd "C-o") 'auralcat/open-line)
 #+END_SRC
-** Open this config file from anywhere
+* Speed dial files
+# TODO: If we add more files in here, we can create a generic function
+# to speed dial through files!
+
+** This config file
 We need to have access to this file on speed dial.
 This is a huge quality of life improvement!
 #+begin_src emacs-lisp :tangle yes
@@ -2263,6 +2267,21 @@ This is a huge quality of life improvement!
 ;; We also need to bind this to a key
 (global-set-key (kbd "M-g e") 'auralcat/open-config-file)
 (global-set-key (kbd "M-g M-e") 'auralcat/open-config-file)
+#+end_src
+** Secrets file
+#+begin_src emacs-lisp :tangle yes
+(defun auralcat/open-secrets-file ()
+  "Opens your Emacs secrets file."
+  (interactive)
+  ;; This is how you check if a buffer is opened.
+  (if (buffer-live-p (get-buffer ".emacs.secrets"))
+      (switch-to-buffer ".emacs.secrets")
+    ;; If the buffer is not open, visit the file
+    (find-file "~/.emacs.secrets")))
+
+;; We also need to bind this to a key
+(global-set-key (kbd "M-g s") 'auralcat/open-secrets-file)
+(global-set-key (kbd "M-g M-s") 'auralcat/open-secrets-file)
 #+end_src
 
 * Mode Line
