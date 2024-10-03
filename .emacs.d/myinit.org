@@ -2025,6 +2025,11 @@ If you're using Emacs 28 or lower, you can backport this function like so:
 (define-key global-map (kbd "C-S-d") 'duplicate-line)
 #+END_SRC
 
+** Append to buffer
+Buffers are the common communication medium in Emacs. Make it easier for you to use them!
+#+begin_src emacs-lisp :tangle yes
+(define-key global-map (kbd "C-x x a") 'append-to-buffer)
+#+end_src
 * Variables
   #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Set Fundamental mode as default mode for new buffers:
