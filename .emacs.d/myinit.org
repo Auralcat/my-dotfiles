@@ -1708,6 +1708,15 @@ Not the case right now, though.
 (defalias 'plp 'package-list-packages)
 (defalias 'kfs 'keyfreq-show)
   #+END_SRC
+* PDFs
+You also need to compile ~epdfinfo~ in Emacs for this to work.
+Run it with ~(pdf-tools-install)~.
+#+begin_src emacs-lisp :tangle yes
+(use-package pdf-tools
+  :init
+  ;; Open PDF files with pdf-view-mode
+  (add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-view-mode)))
+#+end_src
 * Themes
   Remember to _defer_ the loading of the theme packages, otherwise the
   faces might get mixed up and look ugly.
