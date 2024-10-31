@@ -427,17 +427,31 @@ cd ~/your-project-dir
 ipython kernel
 #+end_src
 
+And we also add a function to either use IPython or the first running
+Jupyter Notebook Python kernel.
 #+begin_src emacs-lisp :tangle yes
-(setq python-shell-interpreter "jupyter")
-;; Set the jupyter kernel dynamically when you use this.
-(setq jupyter-notebook-kernel-id "787daebc-b072-475f-ae70-3b0b2be2f6c9")
-(setq python-shell-interpreter-args (format "console --existing %s --simple-prompt" jupyter-notebook-kernel-id))
+(defun jupyter-notebook-running-p ()
+  "Check if a Jupyter notebook is running."
+  (string-match-p "http://\\(localhost\\|127.0.0.1\\):[0-9]+"
+                  (shell-command-to-string "jupyter notebook list")))
+
+(defun auralcat/run-python ()
+  (interactive)
+  "Runs IPython if no Jupyter Notebook instance is running.
+Otherwise, use the running Jupyter Notebook kernel."
+  (if (jupyter-notebook-running-p)
+      (setq python-shell-interpreter "jupyter"
+            python-shell-interpreter-args "console --existing --simple-prompt")
+    (setq python-shell-interpreter "ipython"
+          python-shell-interpreter-args "--simple-prompt"))
+  (run-python))
 
 ;; Need this to have the Python shell scroll results to the bottom
 (add-hook 'inferior-python-mode-hook
           (lambda ()
             (setq comint-move-point-for-output t)))
 #+end_src
+
 ** Elixir
 *** Main configuration
 #+BEGIN_SRC emacs-lisp :tangle yes
