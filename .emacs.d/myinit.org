@@ -1420,6 +1420,13 @@ Search with ~ripgrep~, this is much faster!
   :config
   (define-key global-map (kbd "C-c d") 'deadgrep))
 #+END_SRC
+*** Insert kaomoji
+Because kaomoji is fun! ヽ(*⌒▽⌒*)ﾉ
+#+begin_src emacs-lisp :tangle yes
+(use-package insert-kaomoji
+  :config
+  (define-key global-map (kbd "C-x 8 k") 'insert-kaomoji))
+#+end_src
 * Custom derived modes
 I use those for creating new namespaces for abbrevs or special functions in them
 without affecting the respective parent mode.
