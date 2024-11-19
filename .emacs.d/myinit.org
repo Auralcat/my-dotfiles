@@ -1704,9 +1704,28 @@ Not the case right now, though.
    (ruby . t)
    (elixir . t)
    (plantuml . t)
-   (dot . t)
-   ))
+   (dot . t)))
     #+END_SRC
+*** CUSTOM: Copy block content
+I'm seeing code displayed in browser UIs lately. I noticed that they
+have a button to copy the contents of the code block. That is very
+useful to me since I need to copy code often. I would like to have
+this same feature in org-mode as well.
+
+#+begin_src emacs-lisp :tangle yes
+(defun au/org-babel-copy-block-content ()
+  "Copy the content of the current org-babel source block without moving point."
+  (interactive)
+  (save-excursion
+    (when (org-babel-mark-block)
+      (let ((content (buffer-substring-no-properties (region-beginning) (region-end))))
+        (kill-new content)
+        (message "Source block content copied to kill ring")
+        (deactivate-mark)))))
+
+(define-key org-mode-map (kbd "C-c C-v M-w") #'au/org-babel-copy-block-content)
+#+end_src
+
 * Function Aliases
   #+BEGIN_SRC emacs-lisp :tangle yes
 ;; This is how you define aliases for Elisp functions. These are useful for when
