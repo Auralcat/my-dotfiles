@@ -1008,15 +1008,15 @@ We need to do some customizations to comint-related buffers to improve performan
   :hook ((markdown-mode . markdown-mode-tweaks)
      (gfm-mode . markdown-mode-tweaks))
   :bind (:map markdown-mode-map
-          ("M-<right>" . 'markdown-demote)
-          ("M-<left>" . 'markdown-promote)
-          ("M-<up>" . 'markdown-move-up)
-          ("M-<down>" . 'markdown-move-down)
-          ("C-c 1" . 'markdown-insert-header-atx-1)
-          ("C-c 2" . 'markdown-insert-header-atx-2)
-          ("C-<return>" . 'auralcat/kmacro-markdown-insert-header-same-level)
-          ("C-M-<return>" . 'auralcat/kmacro-markdown-insert-header-nest-one-level)
-          ("C-c 3" . 'markdown-insert-header-atx-3))
+      ("M-<right>" . 'markdown-demote)
+      ("M-<left>" . 'markdown-promote)
+      ("M-<up>" . 'markdown-move-up)
+      ("M-<down>" . 'markdown-move-down)
+      ("C-c 1" . 'markdown-insert-header-atx-1)
+      ("C-c 2" . 'markdown-insert-header-atx-2)
+      ("C-<return>" . 'auralcat/kmacro-markdown-insert-header-same-level)
+      ("C-M-<return>" . 'auralcat/kmacro-markdown-insert-header-nest-one-level)
+      ("C-c 3" . 'markdown-insert-header-atx-3))
   :config
   (setq markdown-fontify-code-blocks-natively t
     markdown-asymmetric-header t
@@ -1038,18 +1038,56 @@ I couldn't customize this through the ~markdown-header-scaling~ var, so let's tr
 
 (add-hook 'markdown-mode-hook 'auralcat/markdown-remap-heading-faces)
   #+END_SRC
+**** Copy code block contents
+This makes it easier for me when reading Markdown files in Emacs to
+copy the contents of a code block immediately.
+
+#+begin_src emacs-lisp :tangle yes
+(defun markdown-mark-code-block-contents ()
+  "Put mark at end of code block contents, point at beginning.
+Marks only the text inside the code block delimiters ```."
+  (interactive)
+  (let (block-start block-end)
+    ;; Find start of content (after opening ```)
+    (save-excursion
+      (when (re-search-backward "^```" nil t)
+        (forward-line 1)
+        (setq block-start (point))
+        ;; Find end of content (before closing ```)
+        (when (re-search-forward "^```" nil t)
+          (forward-line -1)
+          (end-of-line)
+          (setq block-end (point)))))
+    (when (and block-start block-end)
+      (goto-char block-start)
+      (push-mark block-end)
+      (activate-mark)
+      t)))
+
+(defun au/markdown-copy-block-content ()
+  "Copy the content of the current Markdown code block without moving point."
+  (interactive)
+  (save-excursion
+    (when (markdown-mark-code-block-contents)
+      (let ((content (buffer-substring-no-properties (region-beginning) (region-end))))
+        (kill-new content)
+        (message "Code block content copied to kill ring")
+        (deactivate-mark)))))
+
+(define-key markdown-mode-map (kbd "C-c M-w") #'au/markdown-copy-block-content)
+#+end_src
 *** Web Mode
     I use this for HTML files mostly.
   #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package web-mode
   :bind (:map web-mode-map
-          ("C-<up>"    . web-mode-element-previous)
-          ("C-<down>"  . web-mode-element-next)
-          ("C-<left>"  . web-mode-element-beginning)
-          ("C-<right>" . web-mode-tag-match)
-          ("C-S-<up>"  . web-mode-element-parent)
-          ("M-<up>"    . web-mode-element-content-select)
-          ("M-RET"     . complete))
+      ("C-<up>"    . web-mode-element-previous)
+      ("C-<down>"  . web-mode-element-next)
+      ("C-<left>"  . web-mode-element-beginning)
+      ("C-<right>" . web-mode-tag-match)
+      ("C-S-<up>"  . web-mode-element-parent)
+      ("M-<up>"    . web-mode-element-content-select)
+      ("M-RET"     . complete))
   :config
   ;; File associations
   (add-to-list 'auto-mode-alist '(" \\.html.erb\\'"  . web-mode))
