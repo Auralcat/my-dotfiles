@@ -116,16 +116,27 @@ We need this nowadays.
 
 (use-package lsp-ui
   :config (setq lsp-ui-sideline-show-hover t
-                lsp-ui-sideline-delay 0.5
-                lsp-ui-doc-delay 5
-                lsp-ui-sideline-ignore-duplicates t
-                lsp-ui-doc-position 'bottom
-                lsp-ui-doc-alignment 'frame
-                lsp-ui-doc-header nil
-                lsp-ui-doc-include-signature t
-                lsp-ui-doc-use-childframe t)
+        lsp-ui-sideline-delay 0.5
+        lsp-ui-doc-delay 5
+        lsp-ui-sideline-ignore-duplicates t
+        lsp-ui-doc-position 'bottom
+        lsp-ui-doc-alignment 'frame
+        lsp-ui-doc-header nil
+        lsp-ui-doc-include-signature t
+        lsp-ui-doc-use-childframe t)
   :commands lsp-ui-mode)
 #+end_src
+**** Web mode indentation fix
+~web-mode~ has its own indentation configuration. We shouldn't use the
+LSP indentation, it messes things up. And that brings a lot of pain
+and suffering when developing with stuff like Vue and Svelte.
+
+#+begin_src emacs-lisp :tangle yes
+(add-hook 'web-mode-hook
+          (lambda ()
+            (setq-local lsp-enable-indentation nil)))
+#+end_src
+
 *** DAP mode
 This goes hand in hand with ~lsp-mode~, since it implements the Debug
 Adapter Protocol from the LSP specification.
