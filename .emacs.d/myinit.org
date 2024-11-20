@@ -87,26 +87,26 @@ We need this nowadays.
   :init
   (setq lsp-keymap-prefix "C-c l")
   :hook ((python-mode
-          ruby-mode
-          web-mode
-          typescript-mode
-          json-mode
-          cfn-mode
-          terraform-mode) . lsp)
+      ruby-mode
+      web-mode
+      typescript-mode
+      json-mode
+      cfn-mode
+      terraform-mode) . lsp)
   :config
   (setq lsp-idle-delay 0.5
-        lsp-enable-symbol-highlighting t
-        lsp-enable-snippet nil  ;; Not supported by company capf, which is the recommended company backend
-        lsp-completion-enable t
-        ;; Python LSP configuration
-        lsp-pyls-plugins-flake8-enabled nil
-        lsp-pyls-plugins-black-enabled t
-        lsp-pylsp-plugins-ruff-enabled t
-        lsp-pyls-plugins-rope-autoimport-enabled t
-        ;; Terraform LSP configuration
-        lsp-terraform-ls-prefill-required-fields t
-        lsp-enable-links t
-        lsp-semantic-tokens-honor-refresh-requests t)
+    lsp-enable-symbol-highlighting t
+    lsp-enable-snippet nil  ;; Not supported by company capf, which is the recommended company backend
+    lsp-completion-enable t
+    ;; Python LSP configuration
+    lsp-pyls-plugins-flake8-enabled nil
+    lsp-pyls-plugins-black-enabled t
+    lsp-pylsp-plugins-ruff-enabled t
+    lsp-pyls-plugins-rope-autoimport-enabled t
+    ;; Terraform LSP configuration
+    lsp-terraform-ls-prefill-required-fields t
+    lsp-enable-links t
+    lsp-semantic-tokens-honor-refresh-requests t)
   (lsp-register-custom-settings
    '(("pyls.plugins.pyls_black.enabled" t t)
      ("pyls.plugins.pyls_isort.enabled" t t)
@@ -1105,7 +1105,8 @@ Marks only the text inside the code block delimiters ```."
   (setq web-mode-markup-indent-offset 2
     web-mode-css-indent-offset    2
     web-mode-code-indent-offset   2
-    web-mode-script-padding       2)
+    web-mode-script-padding       2
+    web-mode-style-padding        2)
   ;; Use tidy to check HTML buffers with web-mode.
   (eval-after-load 'flycheck
     '(flycheck-add-mode 'html-tidy 'web-mode))
