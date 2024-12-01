@@ -263,7 +263,7 @@ A new package on the block that is faster than ~highlight-indentation~.
     [0 0 0 0 0 0 0 0 0 0 0 0 0 128 192 224 240 248]
     nil nil 'center))))
     #+END_SRC
-'** AWS CloudFormation
+** AWS CloudFormation
 [2024-07-22 seg] Currently the packages available in Emacs support
 linting and working with the YAML version of CFN templates out of the
 box.
@@ -272,22 +272,26 @@ YAML is also easier to read and write than JSON, and also easier to maintain.
 You just need to be careful with the indentation in it though.
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package cfn-mode)
+  (use-package cfn-mode
+    :ensure t)
 
-(defun auralcat/flycheck-cfn-setup ()
-  "Just turn off the LSP checking."
-  (flycheck-cfn-setup))
+  (use-package flycheck-cfn
+    :ensure t
+    :after (flycheck cfn-mode)
+    :config
+    (with-eval-after-load 'flycheck
+      (add-hook 'cfn-mode-hook 'flycheck-cfn-setup)))
 
-(use-package flycheck-cfn
-  :config
-  (add-hook 'cfn-mode-hook #'(lambda () (auralcat/flycheck-cfn-setup))))
+  (use-package cfn-mode)
 #+END_SRC
+
 ** Terraform
 #+begin_src emacs-lisp :tangle yes
 (use-package terraform-mode
   :config
   (setq terraform-format-on-save t))
 #+end_src
+
 ** Ruby
 *** Main configuration
 #+BEGIN_SRC emacs-lisp :tangle yes
