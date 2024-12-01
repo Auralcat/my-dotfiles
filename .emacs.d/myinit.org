@@ -336,11 +336,13 @@ cp /path/to/rcodetools.el ~/emacs.d/manual-packages/rcodetools.el
 After that, we can require it in our configuration:
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package ruby-mode
-    :bind (:map ruby-mode-map
-    ("C-c C-c" . xmp))
+    :ensure t
+    :mode "\\.rb\\'"
     :init
     (add-to-list 'load-path "~/my-dotfiles/.emacs.d/manual-packages")
-    (require 'rcodetools))
+    :config
+    (require 'rcodetools)
+    (define-key ruby-mode-map (kbd "C-c C-c") 'xmp))
 #+END_SRC
 
 *** Robe
@@ -395,13 +397,13 @@ projects in MELPA: ~python-pytest~ and simply ~pytest~.
 fashion, so this is why I chose it.
 
 #+begin_src emacs-lisp :tangle yes
-(use-package python-pytest
-  :bind (:map python-mode-map
-      ;; I'm used to these keybindings from rspec-mode from Ruby
-      ("C-c , s" . 'python-pytest-function)
-      ("C-c , v" . 'python-pytest-file)
-      ("C-c , ," . 'python-pytest-repeat)
-      ("C-c , r" . 'python-pytest-repeat)))
+  (use-package python-pytest
+    :ensure t
+    :after python
+    :init
+    (define-key python-mode-map (kbd "C-c t f") 'python-pytest-function)
+    (define-key python-mode-map (kbd "C-c t t") 'python-pytest-file)
+    (define-key python-mode-map (kbd "C-c t r") 'python-pytest-repeat))
 #+end_src
 
 *** Format all
@@ -774,12 +776,10 @@ Some Lisp configuration to make it easier to use it.
 (load "server")
 (unless (server-running-p) (server-start))
 
-
-
 ;; Store all backups in a specific folder:
 (setq backup-directory-alist `(("." . "~/file-bouncer/emacs-backups")))
 
-;; Manual packages load path
+;; Manual themes load path
 (add-to-list 'custom-theme-load-path "~/my-dotfiles/.emacs.d/manual-themes/")
 
 ;; Manual Elisp scripts load path
@@ -939,14 +939,11 @@ large buffers and slowing Emacs down. Then I removed it.
 (ido-mode 1)
 (ido-everywhere 1)
 (setq ido-enable-flex-matching nil)
-
-;; Stop Ido from prompting me when I want to create a new buffer
-(setq confirm-nonexistent-file-or-buffer nil)
-(setq ido-create-new-buffer 'always)
 #+END_SRC
 * Create scratch buffers
 I'm doing this a lot recently. Need to make it faster.
 #+begin_src emacs-lisp :tangle yes
+;; Stop Ido from prompting me when I want to create a new buffer
   (setq confirm-nonexistent-file-or-buffer nil)
   ;; For IDO
   (setq ido-create-new-buffer 'always)
@@ -1224,8 +1221,12 @@ It's a supercharged version of =ace-jump=, with batteries included and better pe
   Replicates terminal env vars in graphical Emacs.
   #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package exec-path-from-shell
-  :defer t
-  :init
+  :ensure t
+  :if (memq window-system '(mac ns x))  ; Only use on graphical Linux/macOS
+  :config
+  ;; Faster startup
+  (setq exec-path-from-shell-check-startup-files nil)
+  (setq exec-path-from-shell-variables '("PATH" "MANPATH"))
   (exec-path-from-shell-initialize))
   #+END_SRC
 ***** Git-Link
@@ -1281,18 +1282,18 @@ Create links to Github/GitLab files from the comfort of your Emacs buffer.
     The configuration for each part is below in separate headings.
     #+BEGIN_SRC emacs-lisp :tangle yes
       (use-package magit
-        :defer t
-        :hook (git-commit-mode . git-commit-tweaks)
-        :custom (git-commit-summary-max-length 50)
-        :config
-        ;; Highlight what changed in diffs.
-        (setq magit-diff-refine-hunk t)
-        ;; 2024-09-06 git-commit is distributed with magit now.
-        :preface
-        (defun git-commit-tweaks ()
-          "Ensures that the commit body does not exceed 72 characters."
-          (setq fill-column 72)
-          (setq-local comment-auto-fill-only-comments nil)))
+    :defer t
+    :hook (git-commit-mode . git-commit-tweaks)
+    :custom (git-commit-summary-max-length 50)
+    :config
+    ;; Highlight what changed in diffs.
+    (setq magit-diff-refine-hunk t)
+    ;; 2024-09-06 git-commit is distributed with magit now.
+    :preface
+    (defun git-commit-tweaks ()
+      "Ensures that the commit body does not exceed 72 characters."
+      (setq fill-column 72)
+      (setq-local comment-auto-fill-only-comments nil)))
     #+END_SRC
 ****** Viewing diffs
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1897,6 +1898,7 @@ the themes themselves.
     (set-face-attribute 'mode-line nil :family "Helvetica"))
 
   #+END_SRC
+
 * Graphical
   #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Set font in graphical mode
