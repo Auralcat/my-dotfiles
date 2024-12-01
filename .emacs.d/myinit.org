@@ -882,79 +882,51 @@ Some Lisp configuration to make it easier to use it.
   (gcmh-mode 1))
 #+END_SRC
 * IRC
-** ERC general settings
-#+begin_src emacs-lisp :tangle yes
-;; Set up nicks and stuff
-(setq erc-try-new-nick-p t)
-(setq erc-nicklist-voiced-position 'top)
-(setq erc-script-path '("~/my-dotfiles/.emacs.d/.erc/"))
-
-;; Loaded modules
-(setq erc-modules '(autojoin button completion dcc fill hl-nicks irccontrols list match menu move-to-prompt netsplit networks noncommands readonly ring smiley stamp track))
-#+end_src
-** ERC Logging
-Reference: https://www.emacswiki.org/emacs/ErcLogging
+** RCIRC general settings
 #+BEGIN_SRC emacs-lisp :tangle yes
-(setq erc-log-matches-flag t)
-(setq erc-log-matches-types-alist
-         '((pal . "erc_buddies.txt")
-           (current-nick . "erc_mentions.txt")
-           (keyword . "erc_keywords.txt")))
+(use-package rcirc
+  :hook ((rcirc-mode) . 'rcirc-track-minor-mode)
+  :init
+  ;; Enable logging if desired
+  (setq rcirc-log-directory "~/rcirc-logs")
+  (setq rcirc-log-flag t)
 
-(setq erc-save-buffer-on-part nil
-      erc-save-queries-on-quit nil
-      erc-log-write-after-send t
-      erc-log-write-after-insert t)
+  ;; Auto-identify with NickServ (if needed)
+  (setq rcirc-auto-authenticate-flag t)
 
-;; Hide transactional messages
-;; Reference for the numbers: https://datatracker.ietf.org/doc/html/rfc1459
-(setq erc-track-exclude-types '("JOIN" "NICK" "PART" "QUIT" "MODE"
-                   "324" "329" "333" "353" "477"))
-(setq erc-hide-list '("JOIN" "NICK" "PART" "QUIT" "MODE"
-                   "324" "329" "333" "353" "477"))
+  ;; Disable automatic WHO queries.
+  ;; These flood the IRC buffer.
+  (setq rcirc-who-requery-timeout nil)
+  ;; Don't track user info automatically
+  (setq rcirc-auto-who-list nil))
 #+END_SRC
-** Set up a trackbar
-This is the only thing I miss from Circe.
-#+begin_src emacs-lisp :tangle yes
-(eval-after-load 'erc-track
-  '(progn
-     (defun erc-bar-move-back (n)
-       "Moves back n message lines. Ignores wrapping, and server messages."
-       (interactive "nHow many lines ? ")
-       (re-search-backward "^.*<.*>" nil t n))
 
-     (defun erc-bar-update-overlay ()
-       "Update the overlay for current buffer, based on the content of
-erc-modified-channels-alist. Should be executed on window change."
-       (interactive)
-       (let* ((info (assq (current-buffer) erc-modified-channels-alist))
-      (count (cadr info)))
-     (if (and info (> count erc-bar-threshold))
-     (save-excursion
-       (end-of-buffer)
-       (when (erc-bar-move-back count)
-     (let ((inhibit-field-text-motion t))
-       (move-overlay erc-bar-overlay
-         (line-beginning-position)
-         (line-end-position)
-         (current-buffer)))))
-       (delete-overlay erc-bar-overlay))))
-
-     (defvar erc-bar-threshold 1
-       "Display bar when there are more than erc-bar-threshold unread messages.")
-     (defvar erc-bar-overlay nil
-       "Overlay used to set bar")
-     (setq erc-bar-overlay (make-overlay 0 0))
-     (overlay-put erc-bar-overlay 'face '(:underline "black"))
-     ;;put the hook before erc-modified-channels-update
-     (defadvice erc-track-mode (after erc-bar-setup-hook
-              (&rest args) activate)
-       ;;remove and add, so we know it's in the first place
-       (remove-hook 'window-configuration-change-hook 'erc-bar-update-overlay)
-       (add-hook 'window-configuration-change-hook 'erc-bar-update-overlay))
-     (add-hook 'erc-send-completed-hook (lambda (str)
-              (erc-bar-update-overlay)))))
-#+end_src
+** Color nicks
+I want my colors please! 💅
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package rcirc-color
+  :ensure t
+  :hook ((rcirc-mode) . 'rcirc-color-mode))
+#+END_SRC
+** Track chats with ibuffer
+~ibuffer~ is a nice way to list buffers for you. We can use it to
+track IRC channels in a centralized view, besides using ~C-c C-@~ to
+jump between chats. And ~C-c C-a~ to jump to the first unread line.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package ibuffer-rcirc
+  :config
+  (setq ibuffer-formats
+      '((mark modified read-only rcirc-activity-status-one-char " "
+          (name 18 18 :left :elide)
+          " "
+          (size 9 -1 :right)
+          " "
+          (mode 16 16 :left :elide)
+          " "
+          (rcirc-activity-status 20 18 :left) " "
+          ;; (rcirc-activity-status-mini 5 3 :center) " "
+          filename-and-process))))
+#+END_SRC
 * Minibuffer completion
 Currently I'm using ~ido-mode~ to provide completion in the
 minibuffer.
