@@ -566,6 +566,12 @@ Turns out that the built-in ~electric-pair-mode~ behaves better than ~smartparen
   :config
   (setq js-indent-level 2))
 #+end_src
+** Lisp
+Some Lisp configuration to make it easier to use it.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(setq lisp-indent-function 'common-lisp-indent-function)
+(setq lisp-indent-offset 2)
+#+END_SRC
 * Macros
   #+BEGIN_SRC emacs-lisp :tangle yes
 ;; To save a macro, record it with C-x ( (start) and C-x ) (stop),
