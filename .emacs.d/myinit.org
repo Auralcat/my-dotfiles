@@ -2335,23 +2335,6 @@ Just like O in Vim.
 
 (global-set-key (kbd "C-o") 'auralcat/open-line)
 #+END_SRC
-** Save clipboard history into a buffer
-Because browsing the kill-ring is too mainstream.
-#+begin_src emacs-lisp :tangle yes
-;; TODO: What do these args mean?
-(defun append-kill-to-clipboard-buffer (beg end &optional region)
-  "Append the last killed text to a buffer called *clipboard*."
-  (let ((clipboard-buffer (get-buffer-create "*clipboard-history*")))
-    (with-current-buffer clipboard-buffer
-      (goto-char (point-max))
-      (insert (current-kill 0))
-      (insert "\n"))))
-
-;; Plug it in
-(advice-add 'kill-ring-save :after #'append-kill-to-clipboard-buffer)
-(advice-add 'kill-region :after #'append-kill-to-clipboard-buffer)
-#+end_src
-
 * Speed dial files
 # TODO: If we add more files in here, we can create a generic function
 # to speed dial through files!
