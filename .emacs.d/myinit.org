@@ -20,7 +20,9 @@
     #+BEGIN_SRC emacs-lisp :tangle yes
 (setq history-length 1024)
 (setq history-delete-duplicates t)
+(setq savehist-mode 1)
     #+END_SRC
+
 * Enabled complex commands
 Emacs comes with some commands disabled by default to not confuse new users.
 So I need to enable them like this to not get pestered by it when trying to use them.
