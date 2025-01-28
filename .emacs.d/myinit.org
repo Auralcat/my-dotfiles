@@ -2415,10 +2415,29 @@ This is a huge quality of life improvement!
 ;; This needs to be setq-default to make every buffer use this mode line format.
 (setq-default mode-line-format
       '("%e" (:eval (mode-line-align
-         (format-mode-line
-          auralcat/mode-line-left-side)
-         (format-mode-line
-          auralcat/mode-line-right-side)))))
+     (format-mode-line
+      auralcat/mode-line-left-side)
+     (format-mode-line
+      auralcat/mode-line-right-side)))))
+#+END_SRC
+* Scratch tabs (inspired by Tot)
+I'm experimenting this idea inspired by the Tot application on Mac.
+It's essentially fancy temp buffers with Markdown.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(defun make-tot-tab (i tab-name)
+  "Creates a new Tot tab using org-mode."
+  (tab-bar-new-tab)
+  ;; I'm using org-mode way more than Markdown. Let's default to it.
+  (find-file (format "/tmp/tot/%s.org.en" tab-name))
+  (tab-bar-rename-tab (format "*%s*" tab-name)))
+#+END_SRC
+
+We also need a better way to navigate among tabs for this.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(define-key global-map (kbd "C-x t >") 'tab-bar-switch-to-last-tab)
+;; Move to first tab
+(define-key global-map (kbd "C-x t <") #'(lambda (args) (interactive "P") (tab-bar-switch-to-last-tab 99)))
+(define-key global-map (kbd "M-g t") 'tab-bar-switch-to-recent-tab)
 #+END_SRC
 * Cursor
 #+BEGIN_SRC emacs-lisp :tangle yes
