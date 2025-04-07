@@ -18,9 +18,9 @@
     appear too often
 
     #+BEGIN_SRC emacs-lisp :tangle yes
-(setq history-length 1024)
-(setq history-delete-duplicates t)
-(setq savehist-mode 1)
+(setopt history-length 1024)
+(setopt history-delete-duplicates t)
+(setopt savehist-mode 1)
     #+END_SRC
 
 * Enabled complex commands
@@ -35,16 +35,16 @@ So I need to enable them like this to not get pestered by it when trying to use 
 * Browse-url
   This is a command to open the browser for the URL at point.
   #+begin_src emacs-lisp :tangle yes
-  (setq browse-url-browser-display nil
+  (setopt browse-url-browser-display nil
     browse-url-browser-function 'browse-url-default-browser
     browse-url-firefox-program "firefox")
   #+end_src
 * Bookmarks
   It's a quicker way to navigate through files you visit often.
   #+BEGIN_SRC emacs-lisp :tangle yes
-(setq bookmark-default-file "~/emacs-bookmarks")
+(setopt bookmark-default-file "~/emacs-bookmarks")
 ;; Every time bookmarks are changed, save them
-(setq bookmark-save-flag 1)
+(setopt bookmark-save-flag 1)
   #+END_SRC
 * Occur
 Occur is useful for when you want to keep a list of code points of interest in a
@@ -74,7 +74,7 @@ from ~M-x~ and get the same result if you want.
   A couple customizations.
   #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Customize Dired list switches.
-(setq dired-listing-switches "-alh")
+(setopt dired-listing-switches "-alh")
 
 ;; Kill selected subdir with C-M-k
 (add-hook 'dired-mode-hook #'(lambda () (define-key dired-mode-map (kbd "C-M-k") 'dired-kill-subdir)))
@@ -87,7 +87,7 @@ We need this nowadays.
 #+begin_src emacs-lisp :tangle yes
 (use-package lsp-mode
   :init
-  (setq lsp-keymap-prefix "C-c l")
+  (setopt lsp-keymap-prefix "C-c l")
   :hook ((python-mode
       ruby-mode
       web-mode
@@ -96,7 +96,7 @@ We need this nowadays.
       cfn-mode
       terraform-mode) . lsp)
   :config
-  (setq lsp-idle-delay 0.5
+  (setopt lsp-idle-delay 0.5
     lsp-enable-symbol-highlighting t
     lsp-enable-snippet nil  ;; Not supported by company capf, which is the recommended company backend
     lsp-completion-enable t
@@ -117,7 +117,7 @@ We need this nowadays.
   :commands lsp)
 
 (use-package lsp-ui
-  :config (setq lsp-ui-sideline-show-hover t
+  :config (setopt lsp-ui-sideline-show-hover t
         lsp-ui-sideline-delay 0.5
         lsp-ui-doc-delay 5
         lsp-ui-sideline-ignore-duplicates t
@@ -158,7 +158,7 @@ Seriously, this will make your life easier when debugging things.
   (require 'dap-python)
   ;; You need to install debugpy first.
   ;; pip install "debugpy"
-  (setq dap-python-debugger 'debugpy))
+  (setopt dap-python-debugger 'debugpy))
 
 (define-key lsp-mode-map (kbd "C-c l d") 'dap-hydra)
 #+end_src
@@ -174,7 +174,7 @@ Seriously, this will make your life easier when debugging things.
 (defun prog-mode-tweaks ()
   ;; Set line number mode and column number mode for code files
   (display-line-numbers-mode)
-  (setq fill-column 80))
+  (setopt fill-column 80))
 
 (add-hook 'prog-mode-hook 'prog-mode-tweaks)
 #+END_SRC
@@ -291,7 +291,7 @@ You just need to be careful with the indentation in it though.
 #+begin_src emacs-lisp :tangle yes
 (use-package terraform-mode
   :config
-  (setq terraform-format-on-save t))
+  (setopt terraform-format-on-save t))
 #+end_src
 
 ** Ruby
@@ -376,9 +376,9 @@ We need to make it scroll to the bottom of the comint buffer
 automatically.
 
 #+begin_src emacs-lisp :tangle yes
-(setq comint-scroll-to-bottom-on-input t)
-(setq comint-scroll-to-bottom-on-output t)
-(setq comint-move-point-for-output t)
+(setopt comint-scroll-to-bottom-on-input t)
+(setopt comint-scroll-to-bottom-on-output t)
+(setopt comint-move-point-for-output t)
 #+end_src
 ** Python
 I'm starting to work with machine learning lately, so I'll need to set
@@ -459,16 +459,16 @@ Jupyter Notebook Python kernel.
   "Runs IPython if no Jupyter Notebook instance is running.
 Otherwise, use the running Jupyter Notebook kernel."
   (if (jupyter-notebook-running-p)
-      (setq python-shell-interpreter "jupyter"
+      (setopt python-shell-interpreter "jupyter"
             python-shell-interpreter-args "console --existing --simple-prompt")
-    (setq python-shell-interpreter "ipython"
+    (setopt python-shell-interpreter "ipython"
           python-shell-interpreter-args "--simple-prompt"))
   (run-python))
 
 ;; Need this to have the Python shell scroll results to the bottom
 (add-hook 'inferior-python-mode-hook
           (lambda ()
-            (setq comint-move-point-for-output t)))
+            (setopt comint-move-point-for-output t)))
 #+end_src
 
 ** Elixir
@@ -552,7 +552,7 @@ For Vue, we can use ~web-mode~. It's smart enough to work with multiple framewor
 #+END_SRC
 ** Typescript
 #+begin_src emacs-lisp :tangle yes
-(setq typescript-indent-level 2)
+(setopt typescript-indent-level 2)
 #+end_src
 ** Svelte
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -568,13 +568,13 @@ Turns out that the built-in ~electric-pair-mode~ behaves better than ~smartparen
 #+begin_src emacs-lisp :tangle yes
 (use-package json
   :config
-  (setq js-indent-level 2))
+  (setopt js-indent-level 2))
 #+end_src
 ** Lisp
 Some Lisp configuration to make it easier to use it.
 #+BEGIN_SRC emacs-lisp :tangle yes
-(setq lisp-indent-function 'common-lisp-indent-function)
-(setq lisp-indent-offset 2)
+(setopt lisp-indent-function 'common-lisp-indent-function)
+(setopt lisp-indent-offset 2)
 #+END_SRC
 * Macros
   #+BEGIN_SRC emacs-lisp :tangle yes
@@ -717,31 +717,31 @@ Some Lisp configuration to make it easier to use it.
       (set-face-attribute (quote default) nil :font "Monofur" :height 120)
     (set-face-attribute (quote default) nil :font "Monaco" :height 120))
   ;; Map Command to Meta
-  (setq mac-command-modifier 'meta)
+  (setopt mac-command-modifier 'meta)
   ;; Map Option to Control (I know, smaller key, that's what we have for now. :/)
-  (setq mac-option-modifier 'control)
+  (setopt mac-option-modifier 'control)
   ;; Map Control key in OS X to Super
-  (setq mac-control-modifier 'super)
+  (setopt mac-control-modifier 'super)
   ;; Map Fn key in OS X to Hyper
-  (setq ns-function-modifier 'hyper)
+  (setopt ns-function-modifier 'hyper)
   ;; Point the executables in Mac OS to Emacs.
   (add-to-list 'exec-path "/usr/local/bin/")
   ;; Enable EPA
   (custom-set-variables '(epg-gpg-program  "/usr/local/bin/gpg"))
 
   ;; Use Emacsclient in OS X
-  (setq server-socket-dir (format "/tmp/emacs%d" (user-uid))))
+  (setopt server-socket-dir (format "/tmp/emacs%d" (user-uid))))
   #+END_SRC
 
 * Environment Customizations
   #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Take out unused stuff.
-(setq tool-bar-mode nil
+(setopt tool-bar-mode nil
       tooltip-mode nil)
 
 ;; I don't need the startup screen either.
 ;; Drop me straight into the scratch buffer.
-(setq inhibit-startup-screen t)
+(setopt inhibit-startup-screen t)
 
 ;; Remove the menu bar in terminal mode
 (when (not (display-graphic-p))
@@ -749,37 +749,37 @@ Some Lisp configuration to make it easier to use it.
 
 ;; Display things faster in the GUI. You might have some weird issues if you
 ;; do some aggressive scrolling in big files though.
-(setq redisplay-dont-pause t)
+(setopt redisplay-dont-pause t)
 
 ;; Sentences end with single spaces for me.
-(setq sentence-end-double-space nil)
+(setopt sentence-end-double-space nil)
 
 ;; Set locale to Brazilian Portuguese
 (set-locale-environment "pt_BR.UTF-8")
 
 ;; Change window title
-(setq frame-title-format (format "%s %s - %s" (nth 1 (split-string (emacs-version)))
+(setopt frame-title-format (format "%s %s - %s" (nth 1 (split-string (emacs-version)))
            (nth 2 (split-string (emacs-version)))
            (system-name)))
 
 ;; Add frame margins. This makes things more pleasant to read.
-(setq default-frame-alist '((internal-border-width . 20)))
+(setopt default-frame-alist '((internal-border-width . 20)))
 
 ;; A small performance improvement
-(setq redisplay-dont-pause t)
+(setopt redisplay-dont-pause t)
 
 ;; Since I work only with left-to-right languages, we can set it like this.
-(setq bidi-paragraph-direction 'left-to-right)
+(setopt bidi-paragraph-direction 'left-to-right)
 
 ;; I don't like lockfiles
-(setq create-lockfiles nil)
+(setopt create-lockfiles nil)
 
 ;; Starts the Emacs server for emacsclient only if it's not started already
 (load "server")
 (unless (server-running-p) (server-start))
 
 ;; Store all backups in a specific folder:
-(setq backup-directory-alist `(("." . "~/file-bouncer/emacs-backups")))
+(setopt backup-directory-alist `(("." . "~/file-bouncer/emacs-backups")))
 
 ;; Manual themes load path
 (add-to-list 'custom-theme-load-path "~/my-dotfiles/.emacs.d/manual-themes/")
@@ -789,7 +789,7 @@ Some Lisp configuration to make it easier to use it.
 (add-to-list 'load-path "~/my-dotfiles/.emacs.d/manual-packages/")
 
 ;; Backup files by copying them
-(setq backup-by-copying t)
+(setopt backup-by-copying t)
 
 ;; I'm too lazy to type "yes" or "no"
 ;; And I'm also too lazy to press y.
@@ -814,10 +814,10 @@ Some Lisp configuration to make it easier to use it.
 (add-hook 'text-mode-hook #'(lambda () (auto-save-visited-mode 0)))
 
 ;; Allow only one theme at a time
-(setq custom-theme-allow-multiple-selections nil)
+(setopt custom-theme-allow-multiple-selections nil)
 
 ;; Easier mark cycling, both local and global
-(setq set-mark-command-repeat-pop t)
+(setopt set-mark-command-repeat-pop t)
 
 ;; Replace the built-in buffer menu with ibuffer
 (global-set-key [24 2] (quote ibuffer))
@@ -832,23 +832,23 @@ Some Lisp configuration to make it easier to use it.
 
 
 ;; Use Bash as default shell interpreter
-(setq org-babel-sh-command "/bin/bash")
+(setopt org-babel-sh-command "/bin/bash")
 ;; Get Emacs to understand your aliases
-;; (setq shell-file-name "bash")
+;; (setopt shell-file-name "bash")
 ;; For reference, this is the default value:
-;; (setq shell-command-switch "-c")
-;; (setq shell-command-switch "-ic")
+;; (setopt shell-command-switch "-c")
+;; (setopt shell-command-switch "-ic")
 
 ;; Save last edited place in files
 (require 'saveplace)
 (setq-default save-place t)
 
 ;; I need a bigger kill ring.
-(setq kill-ring-max 180)
+(setopt kill-ring-max 180)
 
 ;; Use recentf-mode
 (recentf-mode)
-(setq recentf-max-menu-items 100)
+(setopt recentf-max-menu-items 100)
 (global-set-key (kbd "C-x C-r") 'recentf-open-files)
   #+END_SRC
 ** Garbage collection tweaks
@@ -866,20 +866,20 @@ Some Lisp configuration to make it easier to use it.
 
 (add-hook 'after-init-hook
       `(lambda ()
-     (setq file-name-handler-alist file-name-handler-alist-old
+     (setopt file-name-handler-alist file-name-handler-alist-old
        gc-cons-threshold 80000
        select-active-regions 'only
        gc-cons-percentage 0.1)
      (garbage-collect)) t)
 
-(setq inhibit-compacting-font-caches t)
+(setopt inhibit-compacting-font-caches t)
 
 ;; Optimize garbage collection
 (use-package gcmh
   :ensure t
   :disabled t
   :init
-  (setq gcmh-verbose nil)
+  (setopt gcmh-verbose nil)
   :config
   (gcmh-mode 1))
 #+END_SRC
@@ -890,17 +890,17 @@ Some Lisp configuration to make it easier to use it.
   :hook ((rcirc-mode) . 'rcirc-track-minor-mode)
   :init
   ;; Enable logging if desired
-  (setq rcirc-log-directory "~/rcirc-logs")
-  (setq rcirc-log-flag t)
+  (setopt rcirc-log-directory "~/rcirc-logs")
+  (setopt rcirc-log-flag t)
 
   ;; Auto-identify with NickServ (if needed)
-  (setq rcirc-auto-authenticate-flag t)
+  (setopt rcirc-auto-authenticate-flag t)
 
   ;; Disable automatic WHO queries.
   ;; These flood the IRC buffer.
-  (setq rcirc-who-requery-timeout nil)
+  (setopt rcirc-who-requery-timeout nil)
   ;; Don't track user info automatically
-  (setq rcirc-auto-who-list nil))
+  (setopt rcirc-auto-who-list nil))
 #+END_SRC
 
 ** Color nicks
@@ -917,7 +917,7 @@ jump between chats. And ~C-c C-a~ to jump to the first unread line.
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package ibuffer-rcirc
   :config
-  (setq ibuffer-formats
+  (setopt ibuffer-formats
       '((mark modified read-only rcirc-activity-status-one-char " "
           (name 18 18 :left :elide)
           " "
@@ -940,15 +940,15 @@ large buffers and slowing Emacs down. Then I removed it.
 #+BEGIN_SRC emacs-lisp :tangle yes
 (ido-mode 1)
 (ido-everywhere 1)
-(setq ido-enable-flex-matching nil)
+(setopt ido-enable-flex-matching nil)
 #+END_SRC
 * Create scratch buffers
 I'm doing this a lot recently. Need to make it faster.
 #+begin_src emacs-lisp :tangle yes
 ;; Stop Ido from prompting me when I want to create a new buffer
-  (setq confirm-nonexistent-file-or-buffer nil)
+  (setopt confirm-nonexistent-file-or-buffer nil)
   ;; For IDO
-  (setq ido-create-new-buffer 'always)
+  (setopt ido-create-new-buffer 'always)
 #+end_src
 * REPL
 We need to do some customizations to comint-related buffers to improve performance.
@@ -971,10 +971,10 @@ We need to do some customizations to comint-related buffers to improve performan
 (setq-default abbrev-mode t)
 
 ;; Don't ask to save new abbrevs, just save them.
-(setq save-abbrevs 'silently)
+(setopt save-abbrevs 'silently)
 
 ;; Location of the abbrev definition file
-(setq abbrev-file-name "~/.abbrev_defs")
+(setopt abbrev-file-name "~/.abbrev_defs")
   #+END_SRC
 * Packages
 ** Major Modes
@@ -999,7 +999,7 @@ We need to do some customizations to comint-related buffers to improve performan
       ("C-M-<return>" . 'auralcat/kmacro-markdown-insert-header-nest-one-level)
       ("C-c 3" . 'markdown-insert-header-atx-3))
   :config
-  (setq markdown-fontify-code-blocks-natively t
+  (setopt markdown-fontify-code-blocks-natively t
     markdown-asymmetric-header t
     markdown-header-scaling nil)
 
@@ -1033,12 +1033,12 @@ Marks only the text inside the code block delimiters ```."
     (save-excursion
       (when (re-search-backward "^```" nil t)
         (forward-line 1)
-        (setq block-start (point))
+        (setopt block-start (point))
         ;; Find end of content (before closing ```)
         (when (re-search-forward "^```" nil t)
           (forward-line -1)
           (end-of-line)
-          (setq block-end (point)))))
+          (setopt block-end (point)))))
     (when (and block-start block-end)
       (goto-char block-start)
       (push-mark block-end)
@@ -1075,15 +1075,15 @@ Marks only the text inside the code block delimiters ```."
   (add-to-list 'auto-mode-alist '(" \\.html.heex\\'" . web-mode))
   (add-to-list 'auto-mode-alist '(" \\.html?\\'"     . web-mode))
 
-  (setq web-mode-enable-auto-closing t
+  (setopt web-mode-enable-auto-closing t
     web-mode-enable-auto-expanding nil)
 
   ;; Engine associations
-  (setq web-mode-engines-alist
+  (setopt web-mode-engines-alist
     '(("php"    . "\\.phtml\\'")
       ("blade"  . "\\.blade\\.")))
   ;; Indentation configuration
-  (setq web-mode-markup-indent-offset 2
+  (setopt web-mode-markup-indent-offset 2
     web-mode-css-indent-offset    2
     web-mode-code-indent-offset   2
     web-mode-script-padding       2
@@ -1094,7 +1094,7 @@ Marks only the text inside the code block delimiters ```."
 
   ;; Use smartparens with web-mode
   (defun my-web-mode-hook ()
-    (setq web-mode-enable-auto-pairing nil))
+    (setopt web-mode-enable-auto-pairing nil))
 
   (add-hook 'web-mode-hook  'my-web-mode-hook)
 
@@ -1106,7 +1106,7 @@ Marks only the text inside the code block delimiters ```."
   (sp-local-pair 'web-mode "<" nil :when '(sp-web-mode-is-code-context))
 
   ;; Highlight tag when editing
-  (setq web-mode-enable-current-element-highlight t))
+  (setopt web-mode-enable-current-element-highlight t))
     #+END_SRC
 
 *** Compilation mode tweaks
@@ -1119,7 +1119,7 @@ This is a built-in mode, but I want to change some stuff there.
 (add-hook 'compilation-mode-hook 'compilation-mode-tweaks)
 
 ;; Make the compilation buffer scroll to the end on command finish
-(setq compilation-scroll-output t)
+(setopt compilation-scroll-output t)
 
 ;; Colorize output from compilation-mode
 ;; Taken from https://endlessparentheses.com/ansi-colors-in-the-compilation-buffer-output.html
@@ -1142,7 +1142,7 @@ It's quite comfortable when you want to read longform books in the computer.
   :mode "\\.epub\\'"
   :init
   ;; Set the width to 80 chars, this is better to read.
-  (setq nov-text-width 80)
+  (setopt nov-text-width 80)
   ;; Remove the mode line in the book's buffer.
   (add-hook 'nov-mode-hook #'(lambda ()
            (setq-local mode-line-format nil)
@@ -1161,10 +1161,10 @@ I'm working with Makefiles now, so this is useful.
   :defer t
   :mode "\\.js?\\'"
   :init
-  (setq js-indent-level 2))
+  (setopt js-indent-level 2))
 
 ;; Set syntax highlight level
-(setq js2-highlight-level 3)
+(setopt js2-highlight-level 3)
     #+END_SRC
 
 *** CSV-mode
@@ -1190,7 +1190,7 @@ npm install -g @mermaid-js/mermaid-cli
 (use-package ob-mermaid
   :config
   ;; We need to install the mermaid CLI to be able to compile Mermaid files into diagrams.
-  (setq ob-mermaid-cli-path (string-trim (shell-command-to-string "command -v mmdc"))))
+  (setopt ob-mermaid-cli-path (string-trim (shell-command-to-string "command -v mmdc"))))
 #+END_SRC
 
 ***** Play nice with ASDF
@@ -1227,8 +1227,8 @@ It's a supercharged version of =ace-jump=, with batteries included and better pe
   :if (memq window-system '(mac ns x))  ; Only use on graphical Linux/macOS
   :config
   ;; Faster startup
-  (setq exec-path-from-shell-check-startup-files nil)
-  (setq exec-path-from-shell-variables '("PATH" "MANPATH"))
+  (setopt exec-path-from-shell-check-startup-files nil)
+  (setopt exec-path-from-shell-variables '("PATH" "MANPATH"))
   (exec-path-from-shell-initialize))
   #+END_SRC
 ***** Git-Link
@@ -1268,7 +1268,7 @@ Create links to Github/GitLab files from the comfort of your Emacs buffer.
 (use-package golden-ratio
   :diminish golden-ratio-mode
   :config
-  (setq golden-ratio-extra-commands
+  (setopt golden-ratio-extra-commands
     (append golden-ratio-extra-commands '(magit-status aw-flip-window)))
   (golden-ratio-mode 1))
     #+END_SRC
@@ -1289,12 +1289,12 @@ Create links to Github/GitLab files from the comfort of your Emacs buffer.
     :custom (git-commit-summary-max-length 50)
     :config
     ;; Highlight what changed in diffs.
-    (setq magit-diff-refine-hunk t)
+    (setopt magit-diff-refine-hunk t)
     ;; 2024-09-06 git-commit is distributed with magit now.
     :preface
     (defun git-commit-tweaks ()
       "Ensures that the commit body does not exceed 72 characters."
-      (setq fill-column 72)
+      (setopt fill-column 72)
       (setq-local comment-auto-fill-only-comments nil)))
     #+END_SRC
 ****** Viewing diffs
@@ -1321,7 +1321,7 @@ Create links to Github/GitLab files from the comfort of your Emacs buffer.
 (use-package yasnippet-snippets)
 (use-package yasnippet-classic-snippets)
 
-(setq yas-snippet-dirs
+(setopt yas-snippet-dirs
       '("~/.emacs.d/snippets" yasnippet-snippets-dir yasnippet-classic-snippets-dir))
 
 (defun do-not-add-newline-for-snippets ()
@@ -1339,11 +1339,11 @@ Create links to Github/GitLab files from the comfort of your Emacs buffer.
   :config
   (cond
    ((eq system-type 'darwin)
-    (setq circadian-themes '((:sunrise . modus-operandi)
+    (setopt circadian-themes '((:sunrise . modus-operandi)
          (:sunset  . modus-vivendi))))
    ;; Personal Linux machine
    ((and (string-equal system-name auralcat/personal-system-name) (eq system-type 'gnu/linux))
-    (setq circadian-themes '((:sunrise . ef-cyprus)
+    (setopt circadian-themes '((:sunrise . ef-cyprus)
          (:sunset  . ef-maris-dark)))))
   (circadian-setup))
     #+END_SRC
@@ -1369,7 +1369,7 @@ You can put ~auto-package-update-async~ in the ~midnight-hook~.
 (use-package auto-package-update
   :config
   (auto-package-update-at-time "11:30am")
-  (setq auto-package-update-delete-old-versions t))
+  (setopt auto-package-update-delete-old-versions t))
 #+END_SRC
 ** Minor Modes
 *** Flycheck Inline
@@ -1386,7 +1386,7 @@ You can put ~auto-package-update-async~ in the ~midnight-hook~.
 (use-package projectile
   :defer t
   :init
-  (setq projectile-keymap-prefix (kbd "C-c p")
+  (setopt projectile-keymap-prefix (kbd "C-c p")
     ;; I use Universal ctags, so this needs some adjustment.
     projectile-tags-command "ctags -eR ."
     projectile-switch-project-action 'projectile-vc
@@ -1405,7 +1405,7 @@ If you are writing in org-mode in a project with more than 1800 files,
 this slows down the buffer in GUI Emacs. Here's how to fix that:
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-(setq projectile-track-known-projects-automatically nil)
+(setopt projectile-track-known-projects-automatically nil)
 
 ;; Add the projects you want to track like this:
 ;; (projectile-add-known-project "~/.emacs.d")
@@ -1417,7 +1417,7 @@ this slows down the buffer in GUI Emacs. Here's how to fix that:
 (use-package keyfreq
   :config
   ;; Ignore arrow commands and self-insert-commands
-  (setq keyfreq-excluded-commands
+  (setopt keyfreq-excluded-commands
     '(self-insert-command
       org-self-insert-command
       weechat-self-insert-command
@@ -1535,11 +1535,11 @@ I'm leaving this mode to be toggled manually for now.
 ** Main configuration
    #+BEGIN_SRC emacs-lisp :tangle yes
      ;; Allow alphabetical lists please
-          (setq org-list-allow-alphabetical t)
+          (setopt org-list-allow-alphabetical t)
      (define-key global-map (kbd "C-c a") 'org-agenda)
      (define-key global-map (kbd "C-c k") 'org-capture)
 
-     (setq org-hierarchical-todo-statistics nil
+     (setopt org-hierarchical-todo-statistics nil
        org-src-fontify-natively t
        org-todo-keywords '((sequence "TODO" "DONE"))
        org-agenda-scheduled-leaders '("Scheduled: " "Sched. previously %2dx: ")
@@ -1547,16 +1547,16 @@ I'm leaving this mode to be toggled manually for now.
        org-agenda-start-on-weekday 0)
 
      ;; Start indented.
-     ;; (setq org-startup-indented t)
+     ;; (setopt org-startup-indented t)
 
      ;; Change the end of collapsed headings to an arrow.
-     (setq org-ellipsis "⤵")
+     (setopt org-ellipsis "⤵")
 
      ;; Don't split my lines, thx.
-     (setq org-M-RET-may-split-line nil)
+     (setopt org-M-RET-may-split-line nil)
 
      ;; Truncate long task names
-     (setq org-clock-heading-function
+     (setopt org-clock-heading-function
        #'(lambda ()
      (let ((str (nth 4 (org-heading-components))))
        (concat (truncate-string-to-width str 27) "...")
@@ -1578,14 +1578,14 @@ I'm leaving this mode to be toggled manually for now.
      (define-key org-mode-map (kbd "C-c [") nil)
 
      ;; Log when a task was done and when it was rescheduled.
-     (setq org-log-done 'time)
-     (setq org-log-reschedule 'time)
+     (setopt org-log-done 'time)
+     (setopt org-log-reschedule 'time)
 
      ;; Don't write inside invisible area when collapsing headings!
-     (setq org-catch-invisible-edits 'error)
+     (setopt org-catch-invisible-edits 'error)
 
      ;; Refile items to the same buffer along with the agenda files
-     (setq org-refile-targets '((nil :maxlevel . 3)
+     (setopt org-refile-targets '((nil :maxlevel . 3)
                                 (org-agenda-files :maxlevel . 3)))
    #+END_SRC
 
@@ -1634,16 +1634,16 @@ Borrowed and adapted from https://macowners.club/posts/org-capture-from-everywhe
 Colorize the agenda: https://llazarek.com/2018/07/improving-the-agenda.html
 #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Display holidays from calendar into agenda
-(setq org-agenda-include-diary t)
+(setopt org-agenda-include-diary t)
 
 ;; Set agenda as sticky. This makes the buffers persistent, and load faster if
 ;; you open them all the time.
-(setq org-agenda-sticky t)
+(setopt org-agenda-sticky t)
 
 ;; Keep agenda file list in a single file so I can publish my config.
 ;; DO NOT use C-c [ or C-c ] to add/remove files to the agenda otherwise
 ;; Emacs will write the var to init.el
-(setq org-agenda-files "~/file-bouncer/org-agenda-file-list.org")
+(setopt org-agenda-files "~/file-bouncer/org-agenda-file-list.org")
 
 (defun ll/org/agenda/color-headers-with (tag fg-col bg-col)
   "Color agenda lines matching TAG with color FG-COL."
@@ -1660,7 +1660,7 @@ Colorize the agenda: https://llazarek.com/2018/07/improving-the-agenda.html
          `(face (:foreground ,fg-col :background ,bg-col)))))))
 
 ;; Helper definitions
-(setq ll/org/agenda-todo-words
+(setopt ll/org/agenda-todo-words
       '("TODO" "GOAL" "NEXT" "STARTED" "WAITING" "REVIEW" "SUBMIT"
     "DONE" "DEFERRED" "CANCELLED"))
 (defun find-in-line (needle &optional beginning count)
@@ -1682,7 +1682,7 @@ Colorize the agenda: https://llazarek.com/2018/07/improving-the-agenda.html
 #+END_SRC
 *** Custom agenda commands
 #+BEGIN_SRC emacs-lisp :tangle yes
-(setq org-agenda-custom-commands
+(setopt org-agenda-custom-commands
       '(("i" "Inbox items"
     ((tags "inbox")))))
 #+END_SRC
@@ -1701,7 +1701,7 @@ Colorize the agenda: https://llazarek.com/2018/07/improving-the-agenda.html
   (not (member lang '("sh" "elisp" "ruby" "elixir" "shell"))))
 
 ;; A few more tweaks for org-babel.
-(setq org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate
+(setopt org-confirm-babel-evaluate 'my-org-confirm-babel-evaluate
       org-src-preserve-indentation t
       org-babel-min-lines-for-block-output 1
       org-babel-default-header-args
@@ -1829,8 +1829,8 @@ The ~modus-themes~ come with Emacs since version 28, so you don't need
 to install it through ~use-package~ anymore.
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-(setq modus-themes-deuteranopia t)
-(setq modus-themes-syntax '(green-strings)
+(setopt modus-themes-deuteranopia t)
+(setopt modus-themes-syntax '(green-strings)
       modus-themes-mode-line '(3d accented borderless)
       modus-themes-diffs 'desaturated)
 #+END_SRC
@@ -1912,14 +1912,14 @@ the themes themselves.
   ;; Maximize frame on startup
   (toggle-frame-maximized)
   ;; Space lines and bask in the gloriousness of graphical mode.
-  (setq line-spacing 0.2))
+  (setopt line-spacing 0.2))
   #+END_SRC
 * Multiplexing
 This involves window and tab management.
 
 #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Set rules for displaying buffers in windows.
-(setq display-buffer-alist
+(setopt display-buffer-alist
       ;; Press q in the Magit buffer and the window vanishes!
       `(("^magit: .*$"
      (display-buffer-reuse-mode-window display-buffer-reuse-window display-buffer-at-bottom)
@@ -2119,10 +2119,10 @@ Buffers are the common communication medium in Emacs. Make it easier for you to 
   #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Set Fundamental mode as default mode for new buffers:
 (setq-default major-mode 'fundamental-mode)
-(setq initial-major-mode 'fundamental-mode)
+(setopt initial-major-mode 'fundamental-mode)
 
 ;; When toggling a buffer into read-only mode, activate view-mode immediately.
-(setq view-read-only t)
+(setopt view-read-only t)
 
 ;; Change tab width and change tabs to spaces
 (setq-default tab-width 4)
@@ -2135,7 +2135,7 @@ Buffers are the common communication medium in Emacs. Make it easier for you to 
 (setq-default show-trailing-whitespace t)
 
 ;; Python: use python3 as default shell interpreter
-(setq python-shell-interpreter "python3")
+(setopt python-shell-interpreter "python3")
 
   #+END_SRC
 ** Project-local variables
@@ -2154,7 +2154,7 @@ First we need to enable repeat-mode globally:
 ;; We're also defining a macro to reduce code duplication in this config.
 (defmacro auralcat/macro-make-map-for-repeat-commands (map-symbol key-commands-alist)
   (require 'cl-lib)
-  `(setq ,map-symbol
+  `(setopt ,map-symbol
      (let ((map (make-sparse-keymap)))
        (cl-loop for (key . command) in ,key-commands-alist
         do (define-key map (kbd key) command)
@@ -2398,7 +2398,7 @@ This is a huge quality of life improvement!
   (format (format "%%s %%%ds" (- (window-total-width) (length left) 2))
       left right))
 
-(setq auralcat/mode-line-left-side
+(setopt auralcat/mode-line-left-side
       ;; This should be a quoted list if you want values to be updated
       ;; when things change in the buffer.
       '(
@@ -2409,7 +2409,7 @@ This is a huge quality of life improvement!
     " " (vc-mode vc-mode)
     ))
 
-(setq auralcat/mode-line-right-side
+(setopt auralcat/mode-line-right-side
       (list minor-mode-alist
     " " mode-line-misc-info
     " " mode-line-end-spaces))
