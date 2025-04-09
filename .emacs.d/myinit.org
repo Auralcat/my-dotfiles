@@ -1873,8 +1873,8 @@ the themes themselves.
 
 (defun auralcat--set-fonts-for-gnu-linux (height)
   "Sets fonts for GNU/Linux machines with HEIGHT."
-  (if (font-info "monofur")
-      (auralcat--set-fixed-pitch-fonts "monofur" height)
+  (if (font-info "Consolas")
+      (auralcat--set-fixed-pitch-fonts "Consolas" height)
     (auralcat--set-fixed-pitch-fonts "Ubuntu Mono" height)))
 
 ;; Use Helvetica as the sans-serif font when available.
