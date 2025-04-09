@@ -1,5 +1,7 @@
 (require 'package)
 (setopt package-enable-at-startup nil)
+;; Use native compilation for Emacs 28+
+(setopt package-native-compile t)
 
 ;; Package repositories
 (setopt package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
