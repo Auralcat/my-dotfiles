@@ -120,6 +120,7 @@ We need this nowadays.
   :commands lsp)
 
 (use-package lsp-ui
+  :defer t
   :config (setopt lsp-ui-sideline-show-hover t
         lsp-ui-sideline-delay 0.5
         lsp-ui-doc-delay 5
