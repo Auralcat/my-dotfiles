@@ -1399,6 +1399,12 @@ this slows down the buffer in GUI Emacs. Here's how to fix that:
 ;; Add the projects you want to track like this:
 ;; (projectile-add-known-project "~/.emacs.d")
 #+END_SRC
+**** Ignored project directories
+#+begin_src emacs-lisp :tangle yes
+(setopt projectile-globally-ignored-directories
+      (append '(".git" ".svn" ".hg" "node_modules" "dist" "build" "__pycache__")
+              projectile-globally-ignored-directories))
+#+end_src
 
 *** Keyfreq
     Shows most used commands in editing session.
