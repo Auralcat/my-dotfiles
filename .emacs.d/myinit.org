@@ -86,6 +86,7 @@ We need this nowadays.
 
 #+begin_src emacs-lisp :tangle yes
 (use-package lsp-mode
+  :defer t
   :init
   (setopt lsp-keymap-prefix "C-c l")
   :hook ((python-mode
