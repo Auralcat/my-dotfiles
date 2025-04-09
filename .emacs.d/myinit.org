@@ -105,7 +105,9 @@ We need this nowadays.
     lsp-pyls-plugins-flake8-enabled nil
     lsp-pyls-plugins-black-enabled t
     lsp-pylsp-plugins-ruff-enabled t
-    lsp-pyls-plugins-rope-autoimport-enabled t
+    lsp-pyls-plugins-rope-autoimport-enabled the
+    ;; Pylsp formatter config
+    lsp-pylsp-plugins-black-line-length 88
     ;; Terraform LSP configuration
     lsp-terraform-ls-prefill-required-fields t
     lsp-enable-links t
