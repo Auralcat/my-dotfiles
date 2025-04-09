@@ -870,9 +870,9 @@ Some Lisp configuration to make it easier to use it.
 
 ;; Optimize garbage collection
 (use-package gcmh
-  :disabled t
   :init
-  (setopt gcmh-verbose nil)
+  (setopt gcmh-verbose nil
+          gcmh-high-cons-threshold 16777216)
   :config
   (gcmh-mode 1))
 #+END_SRC
