@@ -1,8 +1,8 @@
 (require 'package)
-(setq package-enable-at-startup nil)
+(setopt package-enable-at-startup nil)
 
 ;; Package repositories
-(setq package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
+(setopt package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
                          ("elpa-nongnu" . "https://elpa.nongnu.org/nongnu/")
           ("melpa" . "https://melpa.org/packages/")))
 (package-initialize)
@@ -17,7 +17,8 @@
 
 ;; This replaces the old require-package.
 ;; If package isn't installed, fetch it.
-(setq use-package-always-ensure t)
+(setopt use-package-always-ensure t)
+(setopt use-package-hook-name-suffix nil)
 
 ;; Load the Org file containing the customizations!
 (org-babel-load-file (expand-file-name "~/my-dotfiles/.emacs.d/myinit.org"))
