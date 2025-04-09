@@ -211,7 +211,6 @@ A new package on the block that is faster than ~highlight-indentation~.
     #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package editorconfig
   :after (prog-mode)
-  :ensure t
   :defer t
   :config
   (editorconfig-mode 1))
@@ -220,7 +219,6 @@ A new package on the block that is faster than ~highlight-indentation~.
     Highlights the changed content in buffer.
     #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package diff-hl
-  :ensure
   :defer t)
     #+END_SRC
 *** Rainbow Delimiters
@@ -249,7 +247,6 @@ A new package on the block that is faster than ~highlight-indentation~.
   (use-package git-gutter-fringe
     :after (git-gutter)
     :defer t
-    :ensure t
     :init
     (require 'git-gutter-fringe)
     (when (fboundp 'define-fringe-bitmap)
@@ -274,11 +271,8 @@ YAML is also easier to read and write than JSON, and also easier to maintain.
 You just need to be careful with the indentation in it though.
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package cfn-mode
-    :ensure t)
-
+  (use-package cfn-mode)
   (use-package flycheck-cfn
-    :ensure t
     :after (flycheck cfn-mode)
     :config
     (with-eval-after-load 'flycheck
@@ -338,7 +332,6 @@ cp /path/to/rcodetools.el ~/emacs.d/manual-packages/rcodetools.el
 After that, we can require it in our configuration:
 #+BEGIN_SRC emacs-lisp :tangle yes
   (use-package ruby-mode
-    :ensure t
     :mode "\\.rb\\'"
     :init
     (add-to-list 'load-path "~/my-dotfiles/.emacs.d/manual-packages")
@@ -400,7 +393,6 @@ fashion, so this is why I chose it.
 
 #+begin_src emacs-lisp :tangle yes
   (use-package python-pytest
-    :ensure t
     :after python
     :init
     (define-key python-mode-map (kbd "C-c t f") 'python-pytest-function)
@@ -535,7 +527,6 @@ A wrapper around Elixir's ~mix~ for Emacs
 *** Main configuration
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package yaml-mode
-  :ensure t
   :hook ((yaml-mode . display-line-numbers-mode)
      (yaml-mode . hl-line-mode)))
 #+END_SRC
@@ -876,7 +867,6 @@ Some Lisp configuration to make it easier to use it.
 
 ;; Optimize garbage collection
 (use-package gcmh
-  :ensure t
   :disabled t
   :init
   (setopt gcmh-verbose nil)
@@ -907,7 +897,6 @@ Some Lisp configuration to make it easier to use it.
 I want my colors please! 💅
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package rcirc-color
-  :ensure t
   :hook ((rcirc-mode) . 'rcirc-color-mode))
 #+END_SRC
 ** Track chats with ibuffer
@@ -1223,7 +1212,6 @@ It's a supercharged version of =ace-jump=, with batteries included and better pe
   Replicates terminal env vars in graphical Emacs.
   #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package exec-path-from-shell
-  :ensure t
   :if (memq window-system '(mac ns x))  ; Only use on graphical Linux/macOS
   :config
   ;; Faster startup
@@ -1240,7 +1228,6 @@ Create links to Github/GitLab files from the comfort of your Emacs buffer.
 ***** Magit delta
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package magit-delta
-  :ensure t
   :hook (magit-mode . magit-delta-mode))
 #+END_SRC
 ***** Smartparens
@@ -1335,7 +1322,6 @@ Create links to Github/GitLab files from the comfort of your Emacs buffer.
     Theme changer for Emacs.
     #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package circadian
-  :ensure t
   :config
   (cond
    ((eq system-type 'darwin)
@@ -1435,7 +1421,6 @@ this slows down the buffer in GUI Emacs. Here's how to fix that:
     Free some space in the mode line removing superfluous mode indications.
     #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package diminish
-  :ensure t
   :defer t
   ;; These are loaded at startup, I prefer declaring everything here.
   :diminish flycheck-mode
@@ -1838,7 +1823,6 @@ to install it through ~use-package~ anymore.
 ** Abyss
    Dark contrast theme
    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package abyss-theme :ensure :defer t)
    #+END_SRC
 ** Twilight Bright
    A port of the theme from TextMate.
