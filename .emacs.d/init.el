@@ -2,6 +2,9 @@
 (setopt package-enable-at-startup nil)
 ;; Use native compilation for Emacs 28+
 (setopt package-native-compile t)
+(when (fboundp 'native-compile-async)
+  (setopt native-comp-async-report-warnings-errors nil)
+  (setopt native-comp-deferred-compilation t))
 
 ;; Package repositories
 (setopt package-archives '(("gnu" . "https://elpa.gnu.org/packages/")
