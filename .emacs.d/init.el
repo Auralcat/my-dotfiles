@@ -21,6 +21,7 @@
 ;; If package isn't installed, fetch it.
 (setopt use-package-always-ensure t)
 (setopt use-package-hook-name-suffix nil)
+(setopt use-package-parallel-processes 8)
 
 ;; Load the Org file containing the customizations!
 (org-babel-load-file (expand-file-name "~/my-dotfiles/.emacs.d/myinit.org"))
