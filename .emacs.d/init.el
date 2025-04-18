@@ -1,3 +1,7 @@
+;; Precompute activation actions to speed up startup.
+;; This requires the use of ‘package-quickstart-refresh’ every time the
+;; activations need to be changed, such as when ‘package-load-list’ is modified.
+(setq package-quickstart t)
 (require 'package)
 (setopt package-enable-at-startup nil)
 ;; Use native compilation for Emacs 28+
