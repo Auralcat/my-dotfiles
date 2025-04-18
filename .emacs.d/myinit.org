@@ -1159,7 +1159,8 @@ Create links to Github/GitLab files from the comfort of your Emacs buffer.
 ;; Combined YASnippet configuration
 (use-package yasnippet
   :defer t
-  :hook (prog-mode . yas-minor-mode)
+  :hook ((prog-mode . yas-minor-mode)
+         (after-init . yas-global-mode))
   :config
   ;; Load snippet packages inside the :config block
   (use-package yasnippet-snippets)
