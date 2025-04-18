@@ -81,6 +81,33 @@ from ~M-x~ and get the same result if you want.
   #+END_SRC
 * Programming
 ** General configuration
+*** Manual customization
+#+BEGIN_SRC emacs-lisp :tangle yes
+;; Manual completion for you.
+(define-key prog-mode-map (kbd "M-<return>") 'dabbrev-expand)
+
+;; Save automatically when visiting source code files.
+(add-hook 'prog-mode-hook #'(lambda () (auto-save-visited-mode 1)))
+
+(defun prog-mode-tweaks ()
+  ;; Set line number mode and column number mode for code files
+  (display-line-numbers-mode)
+  (setopt fill-column 80))
+
+(add-hook 'prog-mode-hook 'prog-mode-tweaks)
+#+END_SRC
+*** Comint tweaks
+When you are working in the comint/REPL buffer, you normally want the
+output to be visible at all times.
+
+We need to make it scroll to the bottom of the comint buffer
+automatically.
+
+#+begin_src emacs-lisp :tangle yes
+(setopt comint-scroll-to-bottom-on-input t)
+(setopt comint-scroll-to-bottom-on-output t)
+(setopt comint-move-point-for-output t)
+#+end_src
 *** LSP mode
 We need this nowadays.
 
@@ -140,21 +167,6 @@ and suffering when developing with stuff like Vue and Svelte.
         (setq-local lsp-enable-indentation nil)))
 #+end_src
 
-*** Manual customization
-#+BEGIN_SRC emacs-lisp :tangle yes
-;; Manual completion for you.
-(define-key prog-mode-map (kbd "M-<return>") 'dabbrev-expand)
-
-;; Save automatically when visiting source code files.
-(add-hook 'prog-mode-hook #'(lambda () (auto-save-visited-mode 1)))
-
-(defun prog-mode-tweaks ()
-  ;; Set line number mode and column number mode for code files
-  (display-line-numbers-mode)
-  (setopt fill-column 80))
-
-(add-hook 'prog-mode-hook 'prog-mode-tweaks)
-#+END_SRC
 *** Highlight TODO
 This is a package to highlight TODO keywords in any given mode, not just on ~org-mode~.
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -298,18 +310,6 @@ I use ~RSpec~ quite a lot now.
   :config
   (eval-after-load 'rspec-mode
     '(rspec-install-snippets)))
-#+end_src
-** General configuration
-When you are working in the comint/REPL buffer, you normally want the
-output to be visible at all times.
-
-We need to make it scroll to the bottom of the comint buffer
-automatically.
-
-#+begin_src emacs-lisp :tangle yes
-(setopt comint-scroll-to-bottom-on-input t)
-(setopt comint-scroll-to-bottom-on-output t)
-(setopt comint-move-point-for-output t)
 #+end_src
 ** Python
 I'm starting to work with machine learning lately, so I'll need to set
