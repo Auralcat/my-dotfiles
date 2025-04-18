@@ -183,7 +183,7 @@ This does not require any extra packages as of Emacs 21. Great thing to know whe
     Sets font lock faces to numbers in Emacs.
     #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package highlight-numbers
-  :after (prog-mode)
+  :after prog-mode
   :hook ((prog-mode . highlight-numbers-mode)))
     #+END_SRC
 *** Indent-bars mode
@@ -197,7 +197,7 @@ A new package on the block that is faster than ~highlight-indentation~.
     between different editors and IDEs.
     #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package editorconfig
-  :after (prog-mode)
+  :after prog-mode
   :defer t
   :hook (after-init . editorconfig-mode))
     #+END_SRC
@@ -211,7 +211,7 @@ A new package on the block that is faster than ~highlight-indentation~.
     depth.
     #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package rainbow-delimiters
-  :after (prog-mode)
+  :after prog-mode
   :hook ((prog-mode . rainbow-delimiters-mode)
      (ielm-mode . rainbow-delimiters-mode)
      (slime-repl-mode . rainbow-delimiters-mode)))
@@ -227,7 +227,7 @@ A new package on the block that is faster than ~highlight-indentation~.
   :diminish ""
   :config
   (use-package git-gutter-fringe
-    :after (git-gutter)
+    :after git-gutter
      :init
     (require 'git-gutter-fringe)
     (when (fboundp 'define-fringe-bitmap)
@@ -260,7 +260,7 @@ A new package on the block that is faster than ~highlight-indentation~.
 Rails utilities for Projectile-mode
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package projectile-rails
-  :after (projectile)
+  :after projectile
   :hook (ruby-mode . projectile-rails-mode))
 #+END_SRC
 *** Bundler
@@ -317,8 +317,7 @@ up my Python config and brush up my Python-fu.
 
 #+begin_src emacs-lisp :tangle yes
 (use-package python-mode
-  :bind (:map python-mode-map
-          ("C-c SPC" . 'python-shell-send-buffer)
+  :bind-keymap (("C-c SPC" . 'python-shell-send-buffer)
           ("C-x C-e" . 'python-shell-send-statement)))
 #+end_src
 *** python-pytest
@@ -330,11 +329,11 @@ fashion, so this is why I chose it.
 
 #+begin_src emacs-lisp :tangle yes
 (use-package python-pytest
+  :after python-mode
   :bind (:map python-mode-map
       ("C-c t f" . python-pytest-function)
          ("C-c t t" . python-pytest-file)
-         ("C-c t r" . python-pytest-repeat))
-  :after python)
+         ("C-c t r" . python-pytest-repeat)))
 #+end_src
 
 *** Format all
@@ -1577,9 +1576,12 @@ You also need to compile ~epdfinfo~ in Emacs for this to work.
 Run it with ~(pdf-tools-install)~.
 #+begin_src emacs-lisp :tangle yes
 (use-package pdf-tools
-  :init
-  ;; Open PDF files with pdf-view-mode
-  (add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-view-mode)))
+  :mode ("\\.pdf\\'" . pdf-view-mode)
+  :commands (pdf-view-mode)
+  :custom (pdf-tools-handle-upgrades nil)  ;; Disable automatic upgrades
+  ;; :config
+  ;; (pdf-tools-install :no-query)
+  )
 #+end_src
 * Themes
   Remember to _defer_ the loading of the theme packages, otherwise the
