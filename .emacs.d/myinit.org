@@ -240,14 +240,10 @@ A new package on the block that is faster than ~highlight-indentation~.
 ** Ruby
 *** Main configuration
 #+BEGIN_SRC emacs-lisp :tangle yes
-;; Completion for Ruby mode
-(defun ruby-mode-tweaks ()
-  ;; Enable flycheck
-  (flycheck-mode 1))
-
-(add-hook 'ruby-mode-hook 'ruby-mode-tweaks)
+(use-package ruby-mode
+  :bind-keymap (("C-c SPC" . ruby-send-buffer))
+  :hook (ruby . (flycheck-mode)))
 #+END_SRC
-
 *** Projectile Rails
 Rails utilities for Projectile-mode
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -292,7 +288,7 @@ the metaprogramming definitions that you may have in the project and
 points you to where the original code is defined.
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package robe
-  :hook ((ruby-mode) . robe-mode))
+  :hook (ruby . robe-mode))
 #+END_SRC
 *** Rspec-mode
 I use ~RSpec~ quite a lot now.
@@ -302,10 +298,6 @@ I use ~RSpec~ quite a lot now.
   :config
   (eval-after-load 'rspec-mode
     '(rspec-install-snippets)))
-#+end_src
-*** REPL
-#+begin_src emacs-lisp :tangle yes
-(define-key ruby-mode-map (kbd "C-c SPC") 'ruby-send-buffer)
 #+end_src
 ** General configuration
 When you are working in the comint/REPL buffer, you normally want the
