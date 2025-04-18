@@ -814,8 +814,7 @@ We need to do some customizations to comint-related buffers to improve performan
   (auto-composition-mode -1)
   (auto-compression-mode -1)
   (column-number-mode -1)
-  (auto-save-visited-mode -1)
-  )
+  (auto-save-visited-mode -1))
 
 (add-hook 'comint-mode-hook 'comint-mode-tweaks)
 #+END_SRC
@@ -980,19 +979,6 @@ This is a built-in mode, but I want to change some stuff there.
 
 (add-hook 'compilation-filter-hook
       #'endless/colorize-compilation)
-#+END_SRC
-*** Nov-mode
-This is a mode for reading .epub files.
-It's quite comfortable when you want to read longform books in the computer.
-#+BEGIN_SRC emacs-lisp :tangle yes
-(defun nov-mode-tweaks ()
-  (setq-local mode-line-format nil)
-  (setq-local show-trailing-whitespace nil))
-
-(use-package nov
-  :mode "\\.epub\\'"
-  :custom ((nov-text-width 80))
-  :hook (nov-mode . nov-mode-tweaks))
 #+END_SRC
 *** Makefile-mode
 I'm working with Makefiles now, so this is useful.
