@@ -4,617 +4,6 @@
 #+DATE: 2017:05:17
 #+STARTUP: overview
 
-* Personal info
-  #+BEGIN_SRC emacs-lisp :tangle yes
-;; Load from external file.
-(load "~/.emacs.secrets")
-  #+END_SRC
-
-* Save command history
-  It's a good idea to save the previous commands' history, for a couple reasons:
-  - Check the complex commands you use most often and improve your workflow
-    based on that
-  - Store cumbersome commands for specific situations that don't
-    appear too often
-
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(setopt history-length 1024)
-(setopt history-delete-duplicates t)
-(setopt savehist-mode 1)
-    #+END_SRC
-
-* Enabled complex commands
-Emacs comes with some commands disabled by default to not confuse new users.
-So I need to enable them like this to not get pestered by it when trying to use them.
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-(put 'downcase-region 'disabled nil)
-(put 'upcase-region 'disabled nil)
-(put 'narrow-to-region 'disabled nil)
-#+END_SRC
-* Browse-url
-  This is a command to open the browser for the URL at point.
-  #+begin_src emacs-lisp :tangle yes
-  (setopt browse-url-browser-display nil
-    browse-url-browser-function 'browse-url-default-browser
-    browse-url-firefox-program "firefox")
-  #+end_src
-* Bookmarks
-  It's a quicker way to navigate through files you visit often.
-  #+BEGIN_SRC emacs-lisp :tangle yes
-(setopt bookmark-default-file "~/emacs-bookmarks")
-;; Every time bookmarks are changed, save them
-(setopt bookmark-save-flag 1)
-  #+END_SRC
-* Occur
-Occur is useful for when you want to keep a list of code points of interest in a
-given buffer or a set of buffers with ~multi-occur-in-matching-buffers~. I was
-used to doing this multi search through ~ibuffer~, but you can call this function
-from ~M-x~ and get the same result if you want.
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-;; Source: https://www.reddit.com/r/emacs/comments/l9b049/comment/glheho5
-(defun rename-occur-buffer ()
-  "Rename *Occur* buffers more descriptively."
-  (interactive) ; if you want to do it manually
-  (save-excursion
-    (save-match-data
-      (goto-char (point-min))
-      (when
-      (search-forward-regexp
-       "^[0-9]+ matches for \"\\(.*\\)\" in buffer: \\(.*\\)$"
-       (line-end-position)
-       nil)
-    (rename-buffer
-     (format "*Occur %s: %s*" (match-string 2) (match-string 1)))))))
-
-(add-hook 'occur-hook #'(lambda () (occur-rename-buffer t nil)))
-#+END_SRC
-* Dired
-  A couple customizations.
-  #+BEGIN_SRC emacs-lisp :tangle yes
-;; Customize Dired list switches.
-(setopt dired-listing-switches "-alh")
-
-;; Kill selected subdir with C-M-k
-(add-hook 'dired-mode-hook #'(lambda () (define-key dired-mode-map (kbd "C-M-k") 'dired-kill-subdir)))
-  #+END_SRC
-* Programming
-** General configuration
-*** Manual customization
-#+BEGIN_SRC emacs-lisp :tangle yes
-;; Manual completion for you.
-(define-key prog-mode-map (kbd "M-<return>") 'dabbrev-expand)
-
-;; Save automatically when visiting source code files.
-(add-hook 'prog-mode-hook #'(lambda () (auto-save-visited-mode 1)))
-
-(defun prog-mode-tweaks ()
-  ;; Set line number mode and column number mode for code files
-  (display-line-numbers-mode)
-  (setopt fill-column 80))
-
-(add-hook 'prog-mode-hook 'prog-mode-tweaks)
-#+END_SRC
-*** Comint tweaks
-When you are working in the comint/REPL buffer, you normally want the
-output to be visible at all times.
-
-We need to make it scroll to the bottom of the comint buffer
-automatically.
-
-#+begin_src emacs-lisp :tangle yes
-(setopt comint-scroll-to-bottom-on-input t)
-(setopt comint-scroll-to-bottom-on-output t)
-(setopt comint-move-point-for-output t)
-#+end_src
-*** LSP mode
-We need this nowadays.
-
-#+begin_src emacs-lisp :tangle yes
-(use-package lsp-mode
-  :custom ((lsp-keymap-prefix "C-c l")
-        (lsp-idle-delay 0.5)
-        (lsp-enable-symbol-highlighting t)
-        ;; Not supported by company capf, which is the recommended company backend
-        (lsp-enable-snippet nil)
-        (lsp-completion-enable t)
-        ;; Python LSP configuration
-        (lsp-pyls-plugins-flake8-enabled nil)
-        (lsp-pyls-plugins-black-enabled t)
-        (lsp-pylsp-plugins-ruff-enabled t)
-        (lsp-pyls-plugins-rope-autoimport-enabled t)
-        ;; Pylsp formatter config
-        (lsp-pylsp-plugins-black-line-length 88)
-        ;; Terraform LSP configuration
-        (lsp-terraform-ls-prefill-required-fields t)
-        (lsp-enable-links t)
-        (lsp-semantic-tokens-honor-refresh-requests t)
-        (lsp-register-custom-settings
-          '(("pyls.plugins.pyls_black.enabled" t t)
-         ("pyls.plugins.pyls_isort.enabled" t t)
-         ("pylsp.plugins.rope_autoimport.enabled" t t)
-         ("pylsp.plugins.rope_completion.enabled" t t))))
-  :hook ((python-mode
-      ruby-mode
-      web-mode
-      typescript-mode
-      json-mode
-      cfn-mode
-      terraform-mode) . lsp)
-  :commands lsp)
-
-(use-package lsp-ui
-  :custom ((lsp-ui-sideline-show-hover t)
-        (lsp-ui-sideline-delay 0.5)
-        (lsp-ui-doc-delay 5)
-        (lsp-ui-sideline-ignore-duplicates t)
-        (lsp-ui-doc-position 'bottom)
-        (lsp-ui-doc-alignment 'frame)
-        (lsp-ui-doc-header nil)
-        (lsp-ui-doc-include-signature t)
-        (lsp-ui-doc-use-childframe t))
-  :commands lsp-ui-mode)
-#+end_src
-**** Web mode indentation fix
-~web-mode~ has its own indentation configuration. We shouldn't use the
-LSP indentation, it messes things up. And that brings a lot of pain
-and suffering when developing with stuff like Vue and Svelte.
-
-#+begin_src emacs-lisp :tangle yes
-(add-hook 'web-mode-hook
-      (lambda ()
-    (setq-local lsp-enable-indentation nil)))
-#+end_src
-
-*** Highlight TODO
-This is a package to highlight TODO keywords in any given mode, not just on ~org-mode~.
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package hl-todo
-  :hook ((prog-mode . hl-todo-mode)))
-#+END_SRC
-*** Highlight line
-This does not require any extra packages as of Emacs 21. Great thing to know where you are at a given point when programming.
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-(add-hook 'prog-mode-hook 'hl-line-mode)
-#+END_SRC
-*** Highlight-numbers mode
-    Sets font lock faces to numbers in Emacs.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package highlight-numbers
-  :after prog-mode
-  :hook ((prog-mode . highlight-numbers-mode)))
-    #+END_SRC
-*** Indent-bars mode
-A new package on the block that is faster than ~highlight-indentation~.
-#+begin_src emacs-lisp :tangle yes
-(use-package indent-bars
-  :hook ((prog-mode) . indent-bars-mode))
-#+end_src
-*** Editorconfig
-    Helps developers define and maintain consistent coding styles
-    between different editors and IDEs.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package editorconfig
-  :after prog-mode
-  :hook (after-init . editorconfig-mode))
-    #+END_SRC
-*** Diff-Highlight
-    Highlights the changed content in buffer.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package diff-hl
-  :hook ((prog-mode . diff-hl-mode)
-         (dired-mode . diff-hl-dired-mode)
-         (magit-post-refresh . diff-hl-magit-post-refresh)))
-    #+END_SRC
-*** Rainbow Delimiters
-    Highlight parentheses, brackets and braces according to their
-    depth.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package rainbow-delimiters
-  :after prog-mode
-  :hook ((prog-mode . rainbow-delimiters-mode)
-     (ielm-mode . rainbow-delimiters-mode)
-     (slime-repl-mode . rainbow-delimiters-mode)))
-    #+END_SRC
-*** Git Gutter
-    Shows (and enables you to navigate between) parts of the code
-    which where changed comparing to the current revision in a
-    version-controlled project.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package git-gutter
-  :when window-system
-  :hook ((prog-mode . git-gutter-mode))
-  :diminish ""
-  :config
-  (use-package git-gutter-fringe
-    :after git-gutter
-     :init
-    (require 'git-gutter-fringe)
-    (when (fboundp 'define-fringe-bitmap)
-      (define-fringe-bitmap 'git-gutter-fr:added
-    [224 224 224 224 224 224 224 224 224 224 224 224 224
-     224 224 224 224 224 224 224 224 224 224 224 224]
-    nil nil 'center)
-      (define-fringe-bitmap 'git-gutter-fr:modified
-    [224 224 224 224 224 224 224 224 224 224 224 224 224
-     224 224 224 224 224 224 224 224 224 224 224 224]
-    nil nil 'center)
-      (define-fringe-bitmap 'git-gutter-fr:deleted
-    [0 0 0 0 0 0 0 0 0 0 0 0 0 128 192 224 240 248]
-    nil nil 'center))))
-    #+END_SRC
-** Terraform
-#+begin_src emacs-lisp :tangle yes
-(use-package terraform-mode
-  :custom
-  (terraform-format-on-save t)
-  :mode "\\.tf\\'")
-#+end_src
-
-** Ruby
-*** Main configuration
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package ruby-mode
-  :bind-keymap (("C-c SPC" . ruby-send-buffer))
-  :hook (ruby . (flycheck-mode)))
-#+END_SRC
-*** Projectile Rails
-Rails utilities for Projectile-mode
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package projectile-rails
-  :after projectile
-  :hook (ruby-mode . projectile-rails-mode))
-#+END_SRC
-*** Bundler
-Interact with Bundler from Emacs
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package ruby-mode
-  :defer t
-  :mode "\\.rb\\'"
-  :interpreter "ruby")
-#+END_SRC
-*** Rcodetools
-This is a gem that you can install and copy the ~rcodetools.el~ file to your ~load-path~ to add bindings to Emacs.
-When you run ~comment-dwim~ twice in a ~ruby-mode~ buffer, it will output a comment like this: ~# =>~
-Then you can run the ~xmp~ function to have Ruby evaluate that snippet of code right in your buffer, without having to run ~inf-ruby~.
-
-To install the ~rcodetools~ gem, run:
-#+BEGIN_SRC shell :eval never
-gem install rcodetools
-#+END_SRC
-
-Then copy ~rcodetools.el~ from the gem directory to your Emacs' ~load-path~:
-#+BEGIN_SRC shell :eval never
-cp /path/to/rcodetools.el ~/emacs.d/manual-packages/rcodetools.el
-#+END_SRC
-
-After that, we can require it in our configuration:
-#+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package ruby-mode
-    :mode "\\.rb\\'"
-    :init
-    (add-to-list 'load-path "~/my-dotfiles/.emacs.d/manual-packages")
-    :config
-    (require 'rcodetools)
-    (define-key ruby-mode-map (kbd "C-c C-c") 'xmp))
-#+END_SRC
-
-*** Robe
-Robe provides references for code evaluated in runtime. It unpacks all
-the metaprogramming definitions that you may have in the project and
-points you to where the original code is defined.
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package robe
-  :hook (ruby . robe-mode))
-#+END_SRC
-*** Rspec-mode
-I use ~RSpec~ quite a lot now.
-#+begin_src emacs-lisp :tangle yes
-(use-package rspec-mode
-  :after ruby-mode
-  :hook ((after-init . inf-ruby-switch-setup)
-     (ruby . rspec-mode)
-     (rspec . rspec-install-snippets)))
-#+end_src
-** Python
-I'm starting to work with machine learning lately, so I'll need to set
-up my Python config and brush up my Python-fu.
-
-#+begin_src emacs-lisp :tangle yes
-(use-package python-mode
-  :bind-keymap (("C-c SPC" . 'python-shell-send-buffer)
-      ("C-x C-e" . 'python-shell-send-statement)))
-#+end_src
-*** python-pytest
-Run your Python unit tests straight from Emacs.
-Note that there are two packages for running tests from Python
-projects in MELPA: ~python-pytest~ and simply ~pytest~.
-~python-pytest~ lets you run tests in a "do what I mean" (DWIM)
-fashion, so this is why I chose it.
-
-#+begin_src emacs-lisp :tangle yes
-(use-package python-pytest
-  :after python-mode
-  :bind (:map python-mode-map
-      ("C-c t f" . python-pytest-function)
-     ("C-c t t" . python-pytest-file)
-     ("C-c t r" . python-pytest-repeat)))
-#+end_src
-
-*** Format all
-Format your code with ~black~.
-You will need to have the ~black~ lib installed in your Python
-interpreter:
-#+begin_src sh :noeval
-pip3 install black
-#+end_src
-
-NOTE: Format all does not work well with Rubocop, so that's why
-I'm not using it for Ruby.
-
-#+begin_src emacs-lisp :tangle yes
-(use-package format-all
-  :commands format-all-mode
-  :hook (python-mode . format-all-mode)
-  :custom (format-all-formatters
-    '(("Python"     (black)))))
-#+end_src
-*** Poetry
-~poetry~ is a Python library that is like ~bundler~ for Ruby.
-It's a better approach for dependency management and isolation than
-using plain ~pip~ with ~virtualenv~.
-~poetry~ is also smart enough to create its own virtual environment to
-isolate its dependencies. This means one less hurdle to work with
-Python in Emacs!
-
-#+begin_src emacs-lisp :tangle yes
-(use-package poetry
-  :after python-mode
-  :commands (poetry-venv-toggle poetry-venv-workon poetry-track-virtualenv)
-  :hook (python-mode . poetry-tracking-mode))
-#+end_src
-*** IPython with Jupyter Notebook kernel
-To run the kernel with code from your project, do this:
-
-#+begin_src sh
-cd ~/your-project-dir
-ipython kernel
-#+end_src
-
-And we also add a function to either use IPython or the first running
-Jupyter Notebook Python kernel.
-#+begin_src emacs-lisp :tangle yes
-(defun jupyter-notebook-running-p ()
-  "Check if a Jupyter notebook is running."
-  (string-match-p "http://\\(localhost\\|127.0.0.1\\):[0-9]+"
-      (shell-command-to-string "jupyter notebook list")))
-
-(defun auralcat/run-python ()
-  (interactive)
-  "Runs IPython if no Jupyter Notebook instance is running.
-Otherwise, use the running Jupyter Notebook kernel."
-  (if (jupyter-notebook-running-p)
-      (setopt python-shell-interpreter "jupyter"
-    python-shell-interpreter-args "console --existing --simple-prompt")
-    (setopt python-shell-interpreter "ipython"
-      python-shell-interpreter-args "--simple-prompt"))
-  (run-python))
-
-;; Need this to have the Python shell scroll results to the bottom
-(add-hook 'inferior-python-mode-hook
-      (lambda ()
-    (setopt comint-move-point-for-output t)))
-#+end_src
-
-** YAML
-*** Main configuration
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package yaml-mode
-  :hook ((yaml-mode . display-line-numbers-mode)
-     (yaml-mode . hl-line-mode)))
-#+END_SRC
-*** Indent-tools
-Necessary to work in a sane way with YAML files.
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package indent-tools
-  :hook ((yaml-mode . indent-tools-minor-mode)))
-#+END_SRC
-** Vue.js
-For Vue, we can use ~web-mode~. It's smart enough to work with multiple frameworks, so we just need to add it to ~auto-mode-alist~ here.
-#+BEGIN_SRC emacs-lisp :tangle yes
-(add-to-list 'auto-mode-alist '("\\.vue\\'"  . web-mode))
-#+END_SRC
-** Typescript
-#+begin_src emacs-lisp :tangle yes
-(setopt typescript-indent-level 2)
-#+end_src
-** Svelte
-#+BEGIN_SRC emacs-lisp :tangle yes
-  (add-to-list 'auto-mode-alist '("\\.svelte\\'"  . web-mode))
-  ;; We want to use ESLint to check our syntax and stuff.
-  ;; To have eslint work, you'll need to have a .eslintrc file in your project root.
-  (eval-after-load 'flycheck
-    '(flycheck-add-mode 'javascript-eslint 'web-mode))
-  (add-hook 'web-mode-hook 'flycheck-mode)
-#+END_SRC
-** JSON
-Turns out that the built-in ~electric-pair-mode~ behaves better than ~smartparens~ when you're writing JSON.
-#+begin_src emacs-lisp :tangle yes
-(use-package json
-  :custom (js-indent-level 2))
-#+end_src
-** Lisp
-Some Lisp configuration to make it easier to use it.
-#+BEGIN_SRC emacs-lisp :tangle yes
-(setopt lisp-indent-function 'common-lisp-indent-function)
-(setopt lisp-indent-offset 2)
-#+END_SRC
-* Macros
-  #+BEGIN_SRC emacs-lisp :tangle yes
-;; To save a macro, record it with C-x ( (start) and C-x ) (stop),
-;; give it a name with C-x C-k n (C-k is for maKro) and
-;; insert it in this file with insert-kbd-macro.
-;; Then you execute it mapping it to a key!
-
-;; This package allows you to override a couple functions.
-(use-package noflet
-  :defer t
-  :commands (noflet))
-(lambda (&optional arg) "Extracts a variable from an it clause and puts in a let statement." (interactive "p") (kmacro-exec-ring-item (quote ([100 100 134217745 134217729 112 99 87 108 101 116 40 58 25 escape 102 61 50 120 67 123 25 escape 86 61 15 15 48 119] 0 "%d")) arg))
-
-;; Adds a byebug line to Ruby code
-(fset 'auralcat/kmacro-ruby/add-byebug-line
-      (kmacro-lambda-form [?O ?b ?y ?e ?b ?u ?g escape return] 0 "%d"))
-
-(fset 'auralcat/kmacro-ruby-clone-method
-      (lambda (&optional arg) "Clones a def method in Ruby." (interactive "p") (kmacro-exec-ring-item (quote ([86 125 121 103 118 escape 112] 0 "%d")) arg)))
-
-(fset 'auralcat/kmacro-search-git-conflict-string
-      (lambda (&optional arg) "Searches for a Git conflict string." (interactive "p") (kmacro-exec-ring-item (quote ([134217747 94 91 60 61 62 93 13] 0 "%d")) arg)))
-
-(fset (quote sample-macro)
-      (lambda (&optional arg) "Sample description" (interactive "p")
-    (undo-boundary)
-    (require 'noflet)
-    (noflet ((undo-boundary ()))
-      (kmacro-exec-ring-item (quote ([100 87 65 32 35 32 65 110 111 116 104 101 114 32 109 97 99 114 111 32 99 97 108 108 46 escape 134217730 return 112 45] 0 "%d")) arg)
-      )
-    (undo-boundary)
-    ))
-
-;; Some macros to adjust Ruby blocks
-(fset 'auralcat/kmacro-ruby-move-defun-backward
-      (lambda (&optional arg) "Moves a DEF block backwards in the class definition." (interactive "p")
-    (undo-boundary)
-    (require 'noflet)
-    (noflet ((undo-boundary ()))
-      (kmacro-exec-ring-item (quote ([26 167772166 23 134217820 16 4 134217820 4 2 134217730 16 return 25 return 134217730 26] 0 "%d")) arg)
-      )
-    (undo-boundary)
-    ))
-
-(fset 'auralcat/kmacro-ruby-move-block-forward
-      (lambda (&optional arg) "Moves a Ruby block forward in the current nesting level." (interactive "p")
-    (undo-boundary)
-    (require 'noflet)
-    (noflet ((undo-boundary ()))
-      (kmacro-lambda-form [?\C-z ?\C-  ?\C-\M-n ?\C-e ?\C-w ?\C-\M-n ?\C-m ?\C-/ ?\C-e ?\C-m ?\C-m ?\C-y ?\C-u ?\C-  ?\C-  ?\C-k ?\C-k ?\C-i ?\C-z] 0 "%d")
-      )
-    (undo-boundary)
-    )
-      )
-
-;; Removes a Ruby block wrapping another block.
-(fset 'auralcat/kmacro-ruby-block-vanish
-      (kmacro-lambda-form [?m ?m ?% ?d ?d ?\' ?m ?d ?d ?\C-x ?\C-x ?=] 0 "%d"))
-
-;; Remove links in an Org entry
-(fset 'auralcat/kmacro-org-remove-link
-      (kmacro-lambda-form [?d ?s ?\] ?d ?f ?\] ?d ?s ?\]] 0 "%d"))
-
-;; Copy the link at point in Org mode buffers
-(fset 'org-copy-link-at-point
-   (kmacro-lambda-form [?\C-c ?\C-l ?\C-  ?\C-a ?\M-w return return] 0 "%d"))
-
-;; Paste the content from the kill ring into the next and previous lines
-(fset 'auralcat/kmacro-yank-content-into-next-line
-      (lambda (&optional arg) "Paste the content from the kill ring into the next line." (interactive "p")
-    (undo-boundary)
-    (require 'noflet)
-    (noflet ((undo-boundary ()))
-      (kmacro-lambda-form [?\C-z return ?\C-p ?\C-y ?\C-a ?\C-n ?\C-z] 0 "%d"))
-    (undo-boundary)))
-
-(fset 'auralcat/kmacro-yank-content-into-previous-line
-      (lambda (&optional arg) "Paste the content from the kill ring into the previous line." (interactive "p")
-    (undo-boundary)
-    (require 'noflet)
-    (noflet ((undo-boundary ()))
-      (kmacro-lambda-form [?\C-z ?\C-e return ?\C-y ?\C-a ?\C-p ?\C-z] 0 "%d"))
-    (undo-boundary)))
-
-  #+END_SRC
-
-** General
-#+BEGIN_SRC emacs-lisp :tangle yes
-;; Trim questions dump text from Udemy.
-;; You need to pull an `occur` buffer first.
-(defalias 'auralcat/udemy-trim-question-explanation
-   (kmacro "M-o C-s E x p l a n a t i o n <return> C-a C-SPC M-o n M-o C-w C-l M-o g M-o C-s C-w C-w <return> M-o C-s C-s C-a"))
-
-(defalias 'auralcat/udemy-format-question-org-headings
-   (kmacro "C-c @ M-q C-n C-d C-p C-c C-n"))
-
-
-#+END_SRC
-
-** Writing modes
-#+BEGIN_SRC emacs-lisp :tangle yes
-(defalias 'auralcat/kmacro-markdown-wrap-region-code
-   (kmacro "C-w ` C-y C-x C-x C-b C-SPC C-SPC"))
-
-(defalias 'auralcat/kmacro-markdown-insert-header-same-level
-   (kmacro "C-e <return> <return> C-c C-t h"))
-
-(defalias 'auralcat/kmacro-markdown-insert-header-nest-one-level
-   (kmacro "C-e <return> <return> C-c C-t h M-<right> C-e"))
-
-;; Not really a macro but behaves like one.
-(defun auralcat/kmacro-markdown-convert-list-region (arg)
-  "Converts a region to a list."
-  (interactive "p")
-  (apply-macro-to-region-lines (region-beginning) (region-end) "- "))
-#+END_SRC
-
-** Elixir
-#+BEGIN_SRC emacs-lisp :tangle yes
-;; Changes a one-line function like:
-;; def something(foo), do: "yay!"
-;;
-;; to:
-;;
-;; def something(foo) do
-;;   "yay!"
-;; end
-(fset 'auralcat/elixir-change-one-line-function-to-multiline
-      (kmacro-lambda-form [?f ?: ?F ?, ?x ?E ?x ?i return escape ?o ?e ?n ?d return escape ?\M-a return] 0 "%d"))
-
-;; Calls IEx.pry in the line above the cursor.
-(fset 'auralcat/elixir-iex-pry
-      (kmacro-lambda-form [?O ?r ?e ?q ?u ?i ?r ?e ?  ?I ?E ?x ?\; ?  ?I ?E ?x ?. ?p ?r ?y escape] 0 "%d"))
-#+END_SRC
-** Ruby
-#+BEGIN_SRC emacs-lisp :tangle yes
-(defalias 'auralcat/kmacro-ruby-extract-region-to-rspec-before-each-block
-   (kmacro "C-w C-d TAB C-r d e s RET C-n TAB RET C-p TAB b e f o r e ( : e a c h C-f SPC d o RET C-y C-n RET C-r d e s RET C-M-n C-x r SPC r C-M-p C-s i t RET C-a C-SPC C-x r j r » k i l l - m a t c h i n g - l i n e s RET C-y RET"))
-#+END_SRC
-
-* Mac OS
-  #+BEGIN_SRC emacs-lisp :tangle yes
-(when (eq system-type 'darwin) ;; mac specific settings
-  ;; Use bigger fonts because of that Retina display
-  (if (member "Monofur" (font-family-list))
-      (set-face-attribute (quote default) nil :font "Monofur" :height 120)
-    (set-face-attribute (quote default) nil :font "Monaco" :height 120))
-  ;; Map Command to Meta
-  (setopt mac-command-modifier 'meta)
-  ;; Map Option to Control (I know, smaller key, that's what we have for now. :/)
-  (setopt mac-option-modifier 'control)
-  ;; Map Control key in OS X to Super
-  (setopt mac-control-modifier 'super)
-  ;; Map Fn key in OS X to Hyper
-  (setopt ns-function-modifier 'hyper)
-  ;; Point the executables in Mac OS to Emacs.
-  (add-to-list 'exec-path "/usr/local/bin/")
-  ;; Enable EPA
-  (custom-set-variables '(epg-gpg-program  "/usr/local/bin/gpg"))
-
-  ;; Use Emacsclient in OS X
-  (setopt server-socket-dir (format "/tmp/emacs%d" (user-uid))))
-  #+END_SRC
-
 * Environment Customizations
   #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Take out unused stuff.
@@ -762,91 +151,6 @@ Some Lisp configuration to make it easier to use it.
       (gcmh-high-cons-threshold 16777216))
   :hook (after-init . gcmh-mode))
 #+END_SRC
-* IRC
-** RCIRC general settings
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package rcirc
-  :commands (rcirc)
-  :hook (rcirc . rcirc-track-minor-mode)
-  :custom (;; Enable logging if desired
-    (rcirc-log-directory "~/rcirc-logs")
-    (rcirc-log-flag t)
-    (rcirc-auto-authenticate-flag t)
-    (rcirc-who-requery-timeout nil)
-    (rcirc-auto-who-list nil)))
-#+END_SRC
-
-** Color nicks
-I want my colors please! 💅
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package rcirc-color
-  :after rcirc
-  :hook (rcirc . rcirc-color-mode))
-#+END_SRC
-** Track chats with ibuffer
-~ibuffer~ is a nice way to list buffers for you. We can use it to
-track IRC channels in a centralized view, besides using ~C-c C-@~ to
-jump between chats. And ~C-c C-a~ to jump to the first unread line.
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package ibuffer-rcirc
-  :after (ibuffer rcirc)
-  :custom (ibuffer-formats
-           '((mark modified read-only rcirc-activity-status-one-char " "
-                   (name 18 18 :left :elide)
-                   " "
-                   (size 9 -1 :right)
-                   " "
-                   (mode 16 16 :left :elide)
-                   " "
-                   (rcirc-activity-status 20 18 :left) " "
-                   filename-and-process))))
-#+END_SRC
-* Minibuffer completion
-Currently I'm using ~ido-mode~ to provide completion in the
-minibuffer.
-~ido-everywhere~ allows you to use ~ido~'s functionality in any function that uses
-the minibuffer, not only the ones that are directly supported.
-
-<2023-10-08 Sun> Turns out ~icomplete-mode~ was hogging too much CPU on
-large buffers and slowing Emacs down. Then I removed it.
-#+BEGIN_SRC emacs-lisp :tangle yes
-(ido-mode 1)
-(ido-everywhere 1)
-(setopt ido-enable-flex-matching nil)
-#+END_SRC
-* Create scratch buffers
-I'm doing this a lot recently. Need to make it faster.
-#+begin_src emacs-lisp :tangle yes
-;; Stop Ido from prompting me when I want to create a new buffer
-  (setopt confirm-nonexistent-file-or-buffer nil)
-  ;; For IDO
-  (setopt ido-create-new-buffer 'always)
-#+end_src
-* REPL
-We need to do some customizations to comint-related buffers to improve performance.
-#+BEGIN_SRC emacs-lisp :tangle yes
-(defun comint-mode-tweaks ()
-  ;; Font-lock is the one that takes the biggest toll on performance.
-  (font-lock-mode -1)
-  (auto-composition-mode -1)
-  (auto-compression-mode -1)
-  (column-number-mode -1)
-  (auto-save-visited-mode -1))
-
-(add-hook 'comint-mode-hook 'comint-mode-tweaks)
-#+END_SRC
-
-* Abbreviations
-  #+BEGIN_SRC emacs-lisp :tangle yes
-;; Enable global Abbrev mode
-(setq-default abbrev-mode t)
-
-;; Don't ask to save new abbrevs, just save them.
-(setopt save-abbrevs 'silently)
-
-;; Location of the abbrev definition file
-(setopt abbrev-file-name "~/.abbrev_defs")
-  #+END_SRC
 * Packages
 ** Major Modes
 *** Markdown-mode
@@ -860,17 +164,17 @@ We need to do some customizations to comint-related buffers to improve performan
   :hook ((markdown-mode . markdown-mode-tweaks)
       (gfm-mode . markdown-mode-tweaks))
   :bind-keymap (("M-<right>" . 'markdown-demote)
-         ("M-<left>" . 'markdown-promote)
-         ("M-<up>" . 'markdown-move-up)
-         ("M-<down>" . 'markdown-move-down)
-         ("C-c 1" . 'markdown-insert-header-atx-1)
-         ("C-c 2" . 'markdown-insert-header-atx-2)
-         ("C-<return>" . 'auralcat/kmacro-markdown-insert-header-same-level)
-         ("C-M-<return>" . 'auralcat/kmacro-markdown-insert-header-nest-one-level)
-         ("C-c 3" . 'markdown-insert-header-atx-3))
+     ("M-<left>" . 'markdown-promote)
+     ("M-<up>" . 'markdown-move-up)
+     ("M-<down>" . 'markdown-move-down)
+     ("C-c 1" . 'markdown-insert-header-atx-1)
+     ("C-c 2" . 'markdown-insert-header-atx-2)
+     ("C-<return>" . 'auralcat/kmacro-markdown-insert-header-same-level)
+     ("C-M-<return>" . 'auralcat/kmacro-markdown-insert-header-nest-one-level)
+     ("C-c 3" . 'markdown-insert-header-atx-3))
   :custom  ((markdown-fontify-code-blocks-natively t)
-         (markdown-asymmetric-header t)
-         (markdown-header-scaling nil))
+     (markdown-asymmetric-header t)
+     (markdown-header-scaling nil))
   :config
   ;; Use fixed-pitch fonts inside code blocks.
   ;; TODO: How to move this out of :config?
@@ -1086,13 +390,13 @@ Create links to Github/GitLab files from the comfort of your Emacs buffer.
 (use-package smartparens
   :hook ((ruby-mode inf-elixir-mode emacs-lisp-mode) . smartparens-mode)
   :bind (:map smartparens-mode-map
-         ([remap backward-sexp] . sp-backward-sexp)
-         ([remap forward-sexp] . sp-forward-sexp)
-         ([remap kill-sexp] . sp-kill-sexp)
-         ([remap mark-sexp] . sp-mark-sexp)
-         ([remap transpose-sexp] . sp-transpose-sexp)
-         ([remap kill-region] . sp-kill-region)
-         ([remap kill-whole-line] . sp-kill-whole-line))
+     ([remap backward-sexp] . sp-backward-sexp)
+     ([remap forward-sexp] . sp-forward-sexp)
+     ([remap kill-sexp] . sp-kill-sexp)
+     ([remap mark-sexp] . sp-mark-sexp)
+     ([remap transpose-sexp] . sp-transpose-sexp)
+     ([remap kill-region] . sp-kill-region)
+     ([remap kill-whole-line] . sp-kill-whole-line))
   :config
   (require 'smartparens-config))
 #+END_SRC
@@ -1127,28 +431,11 @@ Create links to Github/GitLab files from the comfort of your Emacs buffer.
 
 (use-package magit
   :defer t
-  :hook (git-commit-mode . git-commit-tweaks)
+  :hook ((git-commit . git-commit-tweaks)
+     (magit-diff . visual-line-mode))
   :custom ((git-commit-summary-max-length 50)
-        (magit-diff-refine-hunk t)))
+    (magit-diff-refine-hunk t)))
     #+END_SRC
-****** Viewing diffs
-#+BEGIN_SRC emacs-lisp :tangle yes
-;; Wrap those long lines.
-(add-hook 'magit-diff-mode-hook 'visual-line-mode)
-#+END_SRC
-****** Open files for code review
-#+BEGIN_SRC emacs-lisp :tangle yes
-(defun auralcat/magit-open-changed-files-from-main (args)
-  "Opens the buffers visiting files that were changed compared to the main branch in the current branch.
-   Requires M-x server-start first.
-
-   It's highly recommended to update and pull changes from the remote repository into the master/main branch before running this command."
-  (interactive "P")
-  (let* ((default-directory (projectile-project-root))
-     (git-changed-files-command "git --no-pager diff --name-only main $(git branch --show-current)"))
-    (message "Opening changed files in the current branch compared to the master/main branch...")
-    (projectile-run-async-shell-command-in-root (format "find $(%s) -exec emacsclient -n {} \\;" git-changed-files-command))))
-#+END_SRC
 ***** Yasnippets
     It originally came with company-mode, it's handy to write faster
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1160,7 +447,7 @@ Create links to Github/GitLab files from the comfort of your Emacs buffer.
 (use-package yasnippet
   :defer t
   :hook ((prog-mode . yas-minor-mode)
-         (after-init . yas-global-mode))
+     (after-init . yas-global-mode))
   :config
   ;; Load snippet packages inside the :config block
   (use-package yasnippet-snippets)
@@ -1178,20 +465,22 @@ Create links to Github/GitLab files from the comfort of your Emacs buffer.
     Theme changer for Emacs.
     #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package circadian
-  :defer 3  ;; Increase defer time a bit more
+  ;; This is the heaviest package to load currently, so we can ask use-package
+  ;; to load it LAST for us!
+  :defer 1
   :config
   (setopt circadian-themes
-          (cond
-           ((eq system-type 'darwin)
-            '((:sunrise . modus-operandi)
-              (:sunset  . modus-vivendi)))
-           ;; Personal Linux machine
-           ((and (string-equal system-name auralcat/personal-system-name)
-                 (eq system-type 'gnu/linux))
-            '((:sunrise . ef-cyprus)
-              (:sunset  . ef-maris-dark)))
-           (t '((:sunrise . modus-operandi)
-                (:sunset  . modus-vivendi)))))
+      (cond
+       ((eq system-type 'darwin)
+        '((:sunrise . modus-operandi)
+          (:sunset  . modus-vivendi)))
+       ;; Personal Linux machine
+       ((and (string-equal (system-name) auralcat/personal-system-name)
+         (eq system-type 'gnu/linux))
+        '((:sunrise . ef-day)
+          (:sunset  . ef-dream)))
+       (t '((:sunrise . modus-operandi)
+        (:sunset  . modus-vivendi)))))
   (circadian-setup))
     #+END_SRC
 
@@ -1284,6 +573,768 @@ Because kaomoji is fun! ヽ(*⌒▽⌒*)ﾉ
   :bind (:map global-map
       ("C-x 8 k" . insert-kaomoji)))
 #+end_src
+* Evil mode
+Now I'm back into ~evil-mode~!
+It's a nice way to type and use Emacs when we are on the go.
+Evil is more friendly than the standard Emacs keybindings when you have a tiny
+laptop keyboard with only one Ctrl key on the left.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package evil
+  ;; We cannot remove this :init section from here.
+  ;; evil needs this to work properly.
+  :init
+  (setopt evil-want-integration t)
+  (setopt evil-want-keybinding nil)
+  (setopt evil-respect-visual-line-mode t)
+  (setopt evil-undo-system 'undo-redo)
+  (evil-mode 1)
+
+  :custom
+  (evil-symbol-word-search nil)
+  ;; Cursor customizations
+  (evil-normal-state-cursor '(box "purple"))
+  (evil-insert-state-cursor '(bar "green"))
+  (evil-visual-state-cursor '(hollow "orange"))
+  (evil-emacs-state-cursor '(box "blue"))
+  (evil-cross-lines t)
+  ;; Mode line customizations
+  (evil-mode-line-format '(before . mode-line-modified))
+
+  :hook ((after-init . evil-mode))
+
+  :config
+  (evil-select-search-module 'evil-search-module 'evil-search)
+  ;; Key customizations
+  (define-key evil-normal-state-map (kbd "C-z") 'evil-emacs-state)
+  (define-key evil-emacs-state-map (kbd "C-z") 'evil-normal-state)
+  (define-key evil-normal-state-map (kbd "Y")
+    (lambda () (interactive) (evil-yank (point) (line-end-position))))
+
+  ;; Keep your leader key bindings
+  (evil-define-key '(normal visual) 'global
+    (kbd "SPC d") 'deadgrep
+    (kbd "SPC p") 'projectile-command-map
+    (kbd "SPC b") 'ido-switch-buffer
+    (kbd "SPC e") 'eval-last-sexp
+    ;; TODO Fix this:
+    ;; command-execute: Wrong type argument: commandp, auralcat-map
+    (kbd "SPC a") 'auralcat-map))
+
+;; Use evil-collection for mode-specific configurations
+(use-package evil-collection
+  :after evil
+  :custom
+  (evil-collection-setup-minibuffer nil)
+  (evil-collection-magit-use-y-for-yank t)
+  (evil-collection-magit-state 'emacs)
+  :config
+  (evil-collection-init)
+  ;; Not covered by evil-collection currently.
+  (add-to-list 'evil-emacs-state-modes 'occur-mode)
+  (add-to-list 'evil-emacs-state-modes 'inf-ruby-mode))
+
+;; Keep evil-surround
+(use-package evil-surround
+  :after evil
+  :hook (after-init . global-evil-surround-mode))
+#+END_SRC
+
+* Personal info
+  #+BEGIN_SRC emacs-lisp :tangle yes
+;; Load from external file.
+(load "~/.emacs.secrets")
+  #+END_SRC
+
+* Save command history
+  It's a good idea to save the previous commands' history, for a couple reasons:
+  - Check the complex commands you use most often and improve your workflow
+    based on that
+  - Store cumbersome commands for specific situations that don't
+    appear too often
+
+    #+BEGIN_SRC emacs-lisp :tangle yes
+(setopt history-length 1024)
+(setopt history-delete-duplicates t)
+(setopt savehist-mode 1)
+    #+END_SRC
+
+* Enabled complex commands
+Emacs comes with some commands disabled by default to not confuse new users.
+So I need to enable them like this to not get pestered by it when trying to use them.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
+#+END_SRC
+* Browse-url
+  This is a command to open the browser for the URL at point.
+  #+begin_src emacs-lisp :tangle yes
+  (setopt browse-url-browser-display nil
+    browse-url-browser-function 'browse-url-default-browser
+    browse-url-firefox-program "firefox")
+  #+end_src
+* Bookmarks
+  It's a quicker way to navigate through files you visit often.
+  #+BEGIN_SRC emacs-lisp :tangle yes
+(setopt bookmark-default-file "~/emacs-bookmarks")
+;; Every time bookmarks are changed, save them
+(setopt bookmark-save-flag 1)
+  #+END_SRC
+* Occur
+Occur is useful for when you want to keep a list of code points of interest in a
+given buffer or a set of buffers with ~multi-occur-in-matching-buffers~. I was
+used to doing this multi search through ~ibuffer~, but you can call this function
+from ~M-x~ and get the same result if you want.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+;; Source: https://www.reddit.com/r/emacs/comments/l9b049/comment/glheho5
+(defun rename-occur-buffer ()
+  "Rename *Occur* buffers more descriptively."
+  (interactive) ; if you want to do it manually
+  (save-excursion
+    (save-match-data
+      (goto-char (point-min))
+      (when
+      (search-forward-regexp
+       "^[0-9]+ matches for \"\\(.*\\)\" in buffer: \\(.*\\)$"
+       (line-end-position)
+       nil)
+    (rename-buffer
+     (format "*Occur %s: %s*" (match-string 2) (match-string 1)))))))
+
+(add-hook 'occur-hook #'(lambda () (occur-rename-buffer t nil)))
+#+END_SRC
+* Dired
+  A couple customizations.
+  #+BEGIN_SRC emacs-lisp :tangle yes
+;; Customize Dired list switches.
+(setopt dired-listing-switches "-alh")
+
+;; Kill selected subdir with C-M-k
+(add-hook 'dired-mode-hook #'(lambda () (define-key dired-mode-map (kbd "C-M-k") 'dired-kill-subdir)))
+  #+END_SRC
+* Programming
+** General configuration
+*** Manual customization
+#+BEGIN_SRC emacs-lisp :tangle yes
+;; Manual completion for you.
+(define-key prog-mode-map (kbd "M-<return>") 'dabbrev-expand)
+
+;; Save automatically when visiting source code files.
+(add-hook 'prog-mode-hook #'(lambda () (auto-save-visited-mode 1)))
+
+(defun prog-mode-tweaks ()
+  ;; Set line number mode and column number mode for code files
+  (display-line-numbers-mode)
+  (setopt fill-column 80))
+
+(add-hook 'prog-mode-hook 'prog-mode-tweaks)
+#+END_SRC
+*** Comint tweaks
+When you are working in the comint/REPL buffer, you normally want the
+output to be visible at all times.
+
+We need to make it scroll to the bottom of the comint buffer
+automatically.
+
+#+begin_src emacs-lisp :tangle yes
+(setopt comint-scroll-to-bottom-on-input t)
+(setopt comint-scroll-to-bottom-on-output t)
+(setopt comint-move-point-for-output t)
+#+end_src
+*** LSP mode
+We need this nowadays.
+
+#+begin_src emacs-lisp :tangle yes
+(use-package lsp-mode
+  :custom ((lsp-keymap-prefix "C-c l")
+    (lsp-idle-delay 0.5)
+    (lsp-enable-symbol-highlighting t)
+    ;; Not supported by company capf, which is the recommended company backend
+    (lsp-enable-snippet nil)
+    (lsp-completion-enable t)
+    ;; Python LSP configuration
+    (lsp-pyls-plugins-flake8-enabled nil)
+    (lsp-pyls-plugins-black-enabled t)
+    (lsp-pylsp-plugins-ruff-enabled t)
+    (lsp-pyls-plugins-rope-autoimport-enabled t)
+    ;; Pylsp formatter config
+    (lsp-pylsp-plugins-black-line-length 88)
+    ;; Terraform LSP configuration
+    (lsp-terraform-ls-prefill-required-fields t)
+    (lsp-enable-links t)
+    (lsp-semantic-tokens-honor-refresh-requests t)
+    (lsp-register-custom-settings
+      '(("pyls.plugins.pyls_black.enabled" t t)
+     ("pyls.plugins.pyls_isort.enabled" t t)
+     ("pylsp.plugins.rope_autoimport.enabled" t t)
+     ("pylsp.plugins.rope_completion.enabled" t t))))
+  :hook ((python-mode
+      ruby-mode
+      web-mode
+      typescript-mode
+      json-mode
+      cfn-mode
+      terraform-mode) . lsp)
+  :commands lsp)
+
+(use-package lsp-ui
+  :custom ((lsp-ui-sideline-show-hover t)
+    (lsp-ui-sideline-delay 0.5)
+    (lsp-ui-doc-delay 5)
+    (lsp-ui-sideline-ignore-duplicates t)
+    (lsp-ui-doc-position 'bottom)
+    (lsp-ui-doc-alignment 'frame)
+    (lsp-ui-doc-header nil)
+    (lsp-ui-doc-include-signature t)
+    (lsp-ui-doc-use-childframe t))
+  :commands lsp-ui-mode)
+#+end_src
+**** Web mode indentation fix
+~web-mode~ has its own indentation configuration. We shouldn't use the
+LSP indentation, it messes things up. And that brings a lot of pain
+and suffering when developing with stuff like Vue and Svelte.
+
+#+begin_src emacs-lisp :tangle yes
+(add-hook 'web-mode-hook
+      (lambda ()
+    (setq-local lsp-enable-indentation nil)))
+#+end_src
+
+*** Highlight TODO
+This is a package to highlight TODO keywords in any given mode, not just on ~org-mode~.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package hl-todo
+  :hook ((prog-mode . hl-todo-mode)))
+#+END_SRC
+*** Highlight line
+This does not require any extra packages as of Emacs 21. Great thing to know where you are at a given point when programming.
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(add-hook 'prog-mode-hook 'hl-line-mode)
+#+END_SRC
+*** Highlight-numbers mode
+    Sets font lock faces to numbers in Emacs.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+(use-package highlight-numbers
+  :after prog-mode
+  :hook ((prog-mode . highlight-numbers-mode)))
+    #+END_SRC
+*** Indent-bars mode
+A new package on the block that is faster than ~highlight-indentation~.
+#+begin_src emacs-lisp :tangle yes
+(use-package indent-bars
+  :hook ((prog-mode) . indent-bars-mode))
+#+end_src
+*** Editorconfig
+    Helps developers define and maintain consistent coding styles
+    between different editors and IDEs.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+(use-package editorconfig
+  :after prog-mode
+  :hook (after-init . editorconfig-mode))
+    #+END_SRC
+*** Diff-Highlight
+    Highlights the changed content in buffer.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+(use-package diff-hl
+  :hook ((prog-mode . diff-hl-mode)
+     (dired-mode . diff-hl-dired-mode)
+     (magit-post-refresh . diff-hl-magit-post-refresh)))
+    #+END_SRC
+*** Rainbow Delimiters
+    Highlight parentheses, brackets and braces according to their
+    depth.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+(use-package rainbow-delimiters
+  :after prog-mode
+  :hook ((prog-mode . rainbow-delimiters-mode)
+     (ielm-mode . rainbow-delimiters-mode)
+     (slime-repl-mode . rainbow-delimiters-mode)))
+    #+END_SRC
+*** Git Gutter
+    Shows (and enables you to navigate between) parts of the code
+    which where changed comparing to the current revision in a
+    version-controlled project.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+(use-package git-gutter
+  :when window-system
+  :hook ((prog-mode . git-gutter-mode))
+  :diminish ""
+  :config
+  (use-package git-gutter-fringe
+    :after git-gutter
+     :init
+    (require 'git-gutter-fringe)
+    (when (fboundp 'define-fringe-bitmap)
+      (define-fringe-bitmap 'git-gutter-fr:added
+    [224 224 224 224 224 224 224 224 224 224 224 224 224
+     224 224 224 224 224 224 224 224 224 224 224 224]
+    nil nil 'center)
+      (define-fringe-bitmap 'git-gutter-fr:modified
+    [224 224 224 224 224 224 224 224 224 224 224 224 224
+     224 224 224 224 224 224 224 224 224 224 224 224]
+    nil nil 'center)
+      (define-fringe-bitmap 'git-gutter-fr:deleted
+    [0 0 0 0 0 0 0 0 0 0 0 0 0 128 192 224 240 248]
+    nil nil 'center))))
+    #+END_SRC
+** Terraform
+#+begin_src emacs-lisp :tangle yes
+(use-package terraform-mode
+  :custom
+  (terraform-format-on-save t)
+  :mode "\\.tf\\'")
+#+end_src
+
+** Ruby
+*** Main configuration
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package ruby-mode
+  :bind-keymap (("C-c SPC" . ruby-send-buffer))
+  :hook (ruby . (flycheck-mode)))
+#+END_SRC
+*** Projectile Rails
+Rails utilities for Projectile-mode
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package projectile-rails
+  :after projectile
+  :hook (ruby-mode . projectile-rails-mode))
+#+END_SRC
+*** Bundler
+Interact with Bundler from Emacs
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package ruby-mode
+  :defer t
+  :mode "\\.rb\\'"
+  :interpreter "ruby")
+#+END_SRC
+*** Rcodetools
+This is a gem that you can install and copy the ~rcodetools.el~ file to your ~load-path~ to add bindings to Emacs.
+When you run ~comment-dwim~ twice in a ~ruby-mode~ buffer, it will output a comment like this: ~# =>~
+Then you can run the ~xmp~ function to have Ruby evaluate that snippet of code right in your buffer, without having to run ~inf-ruby~.
+
+To install the ~rcodetools~ gem, run:
+#+BEGIN_SRC shell :eval never
+gem install rcodetools
+#+END_SRC
+
+Then copy ~rcodetools.el~ from the gem directory to your Emacs' ~load-path~:
+#+BEGIN_SRC shell :eval never
+cp /path/to/rcodetools.el ~/emacs.d/manual-packages/rcodetools.el
+#+END_SRC
+
+After that, we can require it in our configuration:
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (use-package ruby-mode
+    :mode "\\.rb\\'"
+    :init
+    (add-to-list 'load-path "~/my-dotfiles/.emacs.d/manual-packages")
+    :config
+    (require 'rcodetools)
+    (define-key ruby-mode-map (kbd "C-c C-c") 'xmp))
+#+END_SRC
+
+*** Robe
+Robe provides references for code evaluated in runtime. It unpacks all
+the metaprogramming definitions that you may have in the project and
+points you to where the original code is defined.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package robe
+  :hook (ruby . robe-mode))
+#+END_SRC
+*** Rspec-mode
+I use ~RSpec~ quite a lot now.
+#+begin_src emacs-lisp :tangle yes
+(use-package rspec-mode
+  :after ruby-mode
+  :hook ((after-init . inf-ruby-switch-setup)
+     (ruby . rspec-mode)
+     (rspec . rspec-install-snippets)))
+#+end_src
+** Python
+I'm starting to work with machine learning lately, so I'll need to set
+up my Python config and brush up my Python-fu.
+
+#+begin_src emacs-lisp :tangle yes
+(use-package python-mode
+  :bind-keymap (("C-c SPC" . 'python-shell-send-buffer)
+      ("C-x C-e" . 'python-shell-send-statement)))
+#+end_src
+*** python-pytest
+Run your Python unit tests straight from Emacs.
+Note that there are two packages for running tests from Python
+projects in MELPA: ~python-pytest~ and simply ~pytest~.
+~python-pytest~ lets you run tests in a "do what I mean" (DWIM)
+fashion, so this is why I chose it.
+
+#+begin_src emacs-lisp :tangle yes
+(use-package python-pytest
+  :after python-mode
+  :bind (:map python-mode-map
+      ("C-c t f" . python-pytest-function)
+     ("C-c t t" . python-pytest-file)
+     ("C-c t r" . python-pytest-repeat)))
+#+end_src
+
+*** Format all
+Format your code with ~black~.
+You will need to have the ~black~ lib installed in your Python
+interpreter:
+#+begin_src sh :noeval
+pip3 install black
+#+end_src
+
+NOTE: Format all does not work well with Rubocop, so that's why
+I'm not using it for Ruby.
+
+#+begin_src emacs-lisp :tangle yes
+(use-package format-all
+  :commands format-all-mode
+  :hook (python-mode . format-all-mode)
+  :custom (format-all-formatters
+    '(("Python"     (black)))))
+#+end_src
+*** Poetry
+~poetry~ is a Python library that is like ~bundler~ for Ruby.
+It's a better approach for dependency management and isolation than
+using plain ~pip~ with ~virtualenv~.
+~poetry~ is also smart enough to create its own virtual environment to
+isolate its dependencies. This means one less hurdle to work with
+Python in Emacs!
+
+#+begin_src emacs-lisp :tangle yes
+(use-package poetry
+  :after python-mode
+  :commands (poetry-venv-toggle poetry-venv-workon poetry-track-virtualenv)
+  :hook (python-mode . poetry-tracking-mode))
+#+end_src
+*** IPython with Jupyter Notebook kernel
+To run the kernel with code from your project, do this:
+
+#+begin_src sh
+cd ~/your-project-dir
+ipython kernel
+#+end_src
+
+And we also add a function to either use IPython or the first running
+Jupyter Notebook Python kernel.
+#+begin_src emacs-lisp :tangle yes
+(defun jupyter-notebook-running-p ()
+  "Check if a Jupyter notebook is running."
+  (string-match-p "http://\\(localhost\\|127.0.0.1\\):[0-9]+"
+      (shell-command-to-string "jupyter notebook list")))
+
+(defun auralcat/run-python ()
+  "Runs IPython if no Jupyter Notebook instance is running.
+Otherwise, use the running Jupyter Notebook kernel."
+  (interactive)
+  (if (jupyter-notebook-running-p)
+      (setopt python-shell-interpreter "jupyter"
+    python-shell-interpreter-args "console --existing --simple-prompt")
+    (setopt python-shell-interpreter "ipython"
+      python-shell-interpreter-args "--simple-prompt"))
+  (run-python))
+
+;; Need this to have the Python shell scroll results to the bottom
+(add-hook 'inferior-python-mode-hook
+      (lambda ()
+    (setopt comint-move-point-for-output t)))
+#+end_src
+
+** YAML
+*** Main configuration
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package yaml-mode
+  :hook ((yaml-mode . display-line-numbers-mode)
+     (yaml-mode . hl-line-mode)))
+#+END_SRC
+*** Indent-tools
+Necessary to work in a sane way with YAML files.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package indent-tools
+  :hook ((yaml-mode . indent-tools-minor-mode)))
+#+END_SRC
+** Vue.js
+For Vue, we can use ~web-mode~. It's smart enough to work with multiple frameworks, so we just need to add it to ~auto-mode-alist~ here.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(add-to-list 'auto-mode-alist '("\\.vue\\'"  . web-mode))
+#+END_SRC
+** Typescript
+#+begin_src emacs-lisp :tangle yes
+(setopt typescript-indent-level 2)
+#+end_src
+** Svelte
+#+BEGIN_SRC emacs-lisp :tangle yes
+  (add-to-list 'auto-mode-alist '("\\.svelte\\'"  . web-mode))
+  ;; We want to use ESLint to check our syntax and stuff.
+  ;; To have eslint work, you'll need to have a .eslintrc file in your project root.
+  (eval-after-load 'flycheck
+    '(flycheck-add-mode 'javascript-eslint 'web-mode))
+  (add-hook 'web-mode-hook 'flycheck-mode)
+#+END_SRC
+** JSON
+Turns out that the built-in ~electric-pair-mode~ behaves better than ~smartparens~ when you're writing JSON.
+#+begin_src emacs-lisp :tangle yes
+(use-package json
+  :custom (js-indent-level 2))
+#+end_src
+** Lisp
+Some Lisp configuration to make it easier to use it.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(setopt lisp-indent-function 'common-lisp-indent-function)
+(setopt lisp-indent-offset 2)
+#+END_SRC
+* Macros
+  #+BEGIN_SRC emacs-lisp :tangle yes
+;; To save a macro, record it with C-x ( (start) and C-x ) (stop),
+;; give it a name with C-x C-k n (C-k is for maKro) and
+;; insert it in this file with insert-kbd-macro.
+;; Then you execute it mapping it to a key!
+
+;; This package allows you to override a couple functions.
+(use-package noflet
+  :defer t
+  :commands (noflet))
+(lambda (&optional arg) "Extracts a variable from an it clause and puts in a let statement." (interactive "p") (kmacro-exec-ring-item (quote ([100 100 134217745 134217729 112 99 87 108 101 116 40 58 25 escape 102 61 50 120 67 123 25 escape 86 61 15 15 48 119] 0 "%d")) arg))
+
+;; Adds a byebug line to Ruby code
+(fset 'auralcat/kmacro-ruby/add-byebug-line
+      (kmacro [?O ?b ?y ?e ?b ?u ?g escape return] 0 "%d"))
+
+(fset 'auralcat/kmacro-ruby-clone-method
+      (lambda (&optional arg) "Clones a def method in Ruby." (interactive "p") (kmacro-exec-ring-item (quote ([86 125 121 103 118 escape 112] 0 "%d")) arg)))
+
+(fset 'auralcat/kmacro-search-git-conflict-string
+      (lambda (&optional arg) "Searches for a Git conflict string." (interactive "p") (kmacro-exec-ring-item (quote ([134217747 94 91 60 61 62 93 13] 0 "%d")) arg)))
+
+(fset (quote sample-macro)
+      (lambda (&optional arg) "Sample description" (interactive "p")
+    (undo-boundary)
+    (require 'noflet)
+    (noflet ((undo-boundary ()))
+      (kmacro-exec-ring-item (quote ([100 87 65 32 35 32 65 110 111 116 104 101 114 32 109 97 99 114 111 32 99 97 108 108 46 escape 134217730 return 112 45] 0 "%d")) arg)
+      )
+    (undo-boundary)
+    ))
+
+;; Some macros to adjust Ruby blocks
+(fset 'auralcat/kmacro-ruby-move-defun-backward
+      (lambda (&optional arg) "Moves a DEF block backwards in the class definition." (interactive "p")
+    (undo-boundary)
+    (require 'noflet)
+    (noflet ((undo-boundary ()))
+      (kmacro-exec-ring-item (quote ([26 167772166 23 134217820 16 4 134217820 4 2 134217730 16 return 25 return 134217730 26] 0 "%d")) arg)
+      )
+    (undo-boundary)
+    ))
+
+(fset 'auralcat/kmacro-ruby-move-block-forward
+      (lambda (&optional arg) "Moves a Ruby block forward in the current nesting level." (interactive "p")
+    (undo-boundary)
+    (require 'noflet)
+    (noflet ((undo-boundary ()))
+      (kmacro [?\C-z ?\C-  ?\C-\M-n ?\C-e ?\C-w ?\C-\M-n ?\C-m ?\C-/ ?\C-e ?\C-m ?\C-m ?\C-y ?\C-u ?\C-  ?\C-  ?\C-k ?\C-k ?\C-i ?\C-z] 0 "%d")
+      )
+    (undo-boundary)
+    )
+      )
+
+;; Removes a Ruby block wrapping another block.
+(fset 'auralcat/kmacro-ruby-block-vanish
+      (kmacro [?m ?m ?% ?d ?d ?\' ?m ?d ?d ?\C-x ?\C-x ?=] 0 "%d"))
+
+;; Remove links in an Org entry
+(fset 'auralcat/kmacro-org-remove-link
+      (kmacro [?d ?s ?\] ?d ?f ?\] ?d ?s ?\]] 0 "%d"))
+
+;; Copy the link at point in Org mode buffers
+(fset 'org-copy-link-at-point
+   (kmacro [?\C-c ?\C-l ?\C-  ?\C-a ?\M-w return return] 0 "%d"))
+
+;; Paste the content from the kill ring into the next and previous lines
+(fset 'auralcat/kmacro-yank-content-into-next-line
+      (lambda (&optional arg) "Paste the content from the kill ring into the next line." (interactive "p")
+    (undo-boundary)
+    (require 'noflet)
+    (noflet ((undo-boundary ()))
+      (kmacro [?\C-z return ?\C-p ?\C-y ?\C-a ?\C-n ?\C-z] 0 "%d"))
+    (undo-boundary)))
+
+(fset 'auralcat/kmacro-yank-content-into-previous-line
+      (lambda (&optional arg) "Paste the content from the kill ring into the previous line." (interactive "p")
+    (undo-boundary)
+    (require 'noflet)
+    (noflet ((undo-boundary ()))
+      (kmacro [?\C-z ?\C-e return ?\C-y ?\C-a ?\C-p ?\C-z] 0 "%d"))
+    (undo-boundary)))
+
+  #+END_SRC
+
+** General
+#+BEGIN_SRC emacs-lisp :tangle yes
+;; Trim questions dump text from Udemy.
+;; You need to pull an `occur` buffer first.
+(defalias 'auralcat/udemy-trim-question-explanation
+   (kmacro "M-o C-s E x p l a n a t i o n <return> C-a C-SPC M-o n M-o C-w C-l M-o g M-o C-s C-w C-w <return> M-o C-s C-s C-a"))
+
+(defalias 'auralcat/udemy-format-question-org-headings
+   (kmacro "C-c @ M-q C-n C-d C-p C-c C-n"))
+
+
+#+END_SRC
+
+** Writing modes
+#+BEGIN_SRC emacs-lisp :tangle yes
+(defalias 'auralcat/kmacro-markdown-wrap-region-code
+   (kmacro "C-w ` C-y C-x C-x C-b C-SPC C-SPC"))
+
+(defalias 'auralcat/kmacro-markdown-insert-header-same-level
+   (kmacro "C-e <return> <return> C-c C-t h"))
+
+(defalias 'auralcat/kmacro-markdown-insert-header-nest-one-level
+   (kmacro "C-e <return> <return> C-c C-t h M-<right> C-e"))
+
+;; Not really a macro but behaves like one.
+(defun auralcat/kmacro-markdown-convert-list-region (arg)
+  "Converts a region to a list."
+  (interactive "p")
+  (apply-macro-to-region-lines (region-beginning) (region-end) "- "))
+#+END_SRC
+
+** Elixir
+#+BEGIN_SRC emacs-lisp :tangle yes
+;; Changes a one-line function like:
+;; def something(foo), do: "yay!"
+;;
+;; to:
+;;
+;; def something(foo) do
+;;   "yay!"
+;; end
+(fset 'auralcat/elixir-change-one-line-function-to-multiline
+      (kmacro [?f ?: ?F ?, ?x ?E ?x ?i return escape ?o ?e ?n ?d return escape ?\M-a return] 0 "%d"))
+
+;; Calls IEx.pry in the line above the cursor.
+(fset 'auralcat/elixir-iex-pry
+      (kmacro [?O ?r ?e ?q ?u ?i ?r ?e ?  ?I ?E ?x ?\; ?  ?I ?E ?x ?. ?p ?r ?y escape] 0 "%d"))
+#+END_SRC
+** Ruby
+#+BEGIN_SRC emacs-lisp :tangle yes
+(defalias 'auralcat/kmacro-ruby-extract-region-to-rspec-before-each-block
+   (kmacro "C-w C-d TAB C-r d e s RET C-n TAB RET C-p TAB b e f o r e ( : e a c h C-f SPC d o RET C-y C-n RET C-r d e s RET C-M-n C-x r SPC r C-M-p C-s i t RET C-a C-SPC C-x r j r » k i l l - m a t c h i n g - l i n e s RET C-y RET"))
+#+END_SRC
+
+* Mac OS
+  #+BEGIN_SRC emacs-lisp :tangle yes
+(when (eq system-type 'darwin) ;; mac specific settings
+  ;; Use bigger fonts because of that Retina display
+  (if (member "Monofur" (font-family-list))
+      (set-face-attribute (quote default) nil :font "Monofur" :height 120)
+    (set-face-attribute (quote default) nil :font "Monaco" :height 120))
+  ;; Map Command to Meta
+  (setopt mac-command-modifier 'meta)
+  ;; Map Option to Control (I know, smaller key, that's what we have for now. :/)
+  (setopt mac-option-modifier 'control)
+  ;; Map Control key in OS X to Super
+  (setopt mac-control-modifier 'super)
+  ;; Map Fn key in OS X to Hyper
+  (setopt ns-function-modifier 'hyper)
+  ;; Point the executables in Mac OS to Emacs.
+  (add-to-list 'exec-path "/usr/local/bin/")
+  ;; Enable EPA
+  (custom-set-variables '(epg-gpg-program  "/usr/local/bin/gpg"))
+
+  ;; Use Emacsclient in OS X
+  (setopt server-socket-dir (format "/tmp/emacs%d" (user-uid))))
+  #+END_SRC
+
+* IRC
+** RCIRC general settings
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package rcirc
+  :commands (rcirc)
+  :hook (rcirc . rcirc-track-minor-mode)
+  :custom (;; Enable logging if desired
+    (rcirc-log-directory "~/rcirc-logs")
+    (rcirc-log-flag t)
+    (rcirc-auto-authenticate-flag t)
+    (rcirc-who-requery-timeout nil)
+    (rcirc-auto-who-list nil)))
+#+END_SRC
+
+** Color nicks
+I want my colors please! 💅
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package rcirc-color
+  :after rcirc
+  :hook (rcirc . rcirc-color-mode))
+#+END_SRC
+** Track chats with ibuffer
+~ibuffer~ is a nice way to list buffers for you. We can use it to
+track IRC channels in a centralized view, besides using ~C-c C-@~ to
+jump between chats. And ~C-c C-a~ to jump to the first unread line.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package ibuffer-rcirc
+  :after (ibuffer rcirc)
+  :custom (ibuffer-formats
+       '((mark modified read-only rcirc-activity-status-one-char " "
+           (name 18 18 :left :elide)
+           " "
+           (size 9 -1 :right)
+           " "
+           (mode 16 16 :left :elide)
+           " "
+           (rcirc-activity-status 20 18 :left) " "
+           filename-and-process))))
+#+END_SRC
+* Minibuffer completion
+Currently I'm using ~ido-mode~ to provide completion in the
+minibuffer.
+~ido-everywhere~ allows you to use ~ido~'s functionality in any function that uses
+the minibuffer, not only the ones that are directly supported.
+
+<2023-10-08 Sun> Turns out ~icomplete-mode~ was hogging too much CPU on
+large buffers and slowing Emacs down. Then I removed it.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(ido-mode 1)
+(ido-everywhere 1)
+(setopt ido-enable-flex-matching nil)
+#+END_SRC
+* Create scratch buffers
+I'm doing this a lot recently. Need to make it faster.
+#+begin_src emacs-lisp :tangle yes
+;; Stop Ido from prompting me when I want to create a new buffer
+  (setopt confirm-nonexistent-file-or-buffer nil)
+  ;; For IDO
+  (setopt ido-create-new-buffer 'always)
+#+end_src
+* REPL
+We need to do some customizations to comint-related buffers to improve performance.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(defun comint-mode-tweaks ()
+  ;; Font-lock is the one that takes the biggest toll on performance.
+  (font-lock-mode -1)
+  (auto-composition-mode -1)
+  (auto-compression-mode -1)
+  (column-number-mode -1)
+  (auto-save-visited-mode -1))
+
+(add-hook 'comint-mode-hook 'comint-mode-tweaks)
+#+END_SRC
+
+* Abbreviations
+  #+BEGIN_SRC emacs-lisp :tangle yes
+;; Enable global Abbrev mode
+(setq-default abbrev-mode t)
+
+;; Don't ask to save new abbrevs, just save them.
+(setopt save-abbrevs 'silently)
+
+;; Location of the abbrev definition file
+(setopt abbrev-file-name "~/.abbrev_defs")
+  #+END_SRC
 * Custom derived modes
 I use those for creating new namespaces for abbrevs or special functions in them
 without affecting the respective parent mode.
@@ -1408,7 +1459,7 @@ I'm leaving this mode to be toggled manually for now.
 
      ;; Refile items to the same buffer along with the agenda files
      (setopt org-refile-targets '((nil :maxlevel . 3)
-        (org-agenda-files :maxlevel . 3)))
+    (org-agenda-files :maxlevel . 3)))
    #+END_SRC
 
 ** Tables
@@ -1666,7 +1717,7 @@ The Zenburn theme is the only theme I found so far that is _balanced
 enough_ for both light and dark settings!
 #+begin_src emacs-lisp :tangle yes
 (use-package zenburn-theme
-  :defer t)
+  :defer 1)
 #+end_src
 * Fonts
 It's better to set the fonts here instead of hard-coding them in init.el or in
@@ -1973,51 +2024,51 @@ First we need to enable repeat-mode globally:
 #+BEGIN_SRC emacs-lisp :tangle yes
 ;; TODO: undo-redo is not loaded on startup through this macro. Need to figure out why.
 (auralcat/macro-make-map-for-repeat-commands undo-repeat-map
-         '(("u" . undo)
-           ("r" . undo-redo)))
+     '(("u" . undo)
+       ("r" . undo-redo)))
 
 ;; TODO: why are these keys not bound to scroll-up-command and scroll-down-command?
 (auralcat/macro-make-map-for-repeat-commands scroll-map
-         '(("n" . scroll-up-command)
-           ("p" . scroll-down-command)))
+     '(("n" . scroll-up-command)
+       ("p" . scroll-down-command)))
 
 (auralcat/macro-make-map-for-repeat-commands scroll-other-window-map
-         '(("]" . scroll-other-window)
-           ("[" . scroll-other-window-down)))
+     '(("]" . scroll-other-window)
+       ("[" . scroll-other-window-down)))
 
 (auralcat/macro-make-map-for-repeat-commands control-meta-navigation-map
-         '(("n" . forward-list)
-           ("p" . backward-list)
-           ("a" . beginning-of-defun)
-           ("e" . end-of-defun)
-           ("f" . forward-sexp)
-           ("b" . backward-sexp)))
+     '(("n" . forward-list)
+       ("p" . backward-list)
+       ("a" . beginning-of-defun)
+       ("e" . end-of-defun)
+       ("f" . forward-sexp)
+       ("b" . backward-sexp)))
 
 (auralcat/macro-make-map-for-repeat-commands goto-change-map
-         '(("." . goto-last-change)
-           ("," . goto-last-change-reverse)))
+     '(("." . goto-last-change)
+       ("," . goto-last-change-reverse)))
 #+END_SRC
 
 ** Org-mode repeat maps
 #+BEGIN_SRC emacs-lisp :tangle yes
 (auralcat/macro-make-map-for-repeat-commands org-link-repeat-map
-         '(("n" . org-next-link)
-           ("p" . org-previous-link)))
+     '(("n" . org-next-link)
+       ("p" . org-previous-link)))
 
 (auralcat/macro-make-map-for-repeat-commands org-heading-navigation-map
-         '(("n" . org-next-visible-heading)
-           ("p" . org-previous-visible-heading)
-           ("f" . org-forward-heading-same-level)
-           ("b" . org-backward-heading-same-level)))
+     '(("n" . org-next-visible-heading)
+       ("p" . org-previous-visible-heading)
+       ("f" . org-forward-heading-same-level)
+       ("b" . org-backward-heading-same-level)))
 #+END_SRC
 
 ** Markdown repeat maps
 #+BEGIN_SRC emacs-lisp :tangle yes
 (auralcat/macro-make-map-for-repeat-commands markdown-heading-repeat-map
-         '(("n" . markdown-outline-next)
-           ("p" . markdown-outline-previous)
-           ("f" . markdown-outline-next-same-level)
-           ("b" . markdown-outline-previous-same-level)))
+     '(("n" . markdown-outline-next)
+       ("p" . markdown-outline-previous)
+       ("f" . markdown-outline-next-same-level)
+       ("b" . markdown-outline-previous-same-level)))
 #+END_SRC
 
 * Custom functions
@@ -2205,12 +2256,105 @@ This is a huge quality of life improvement!
   (format (format "%%s %%%ds" (- (window-total-width) (length left) 2))
       left right))
 
+(defun get-theme-color (state fallback)
+  "Get color from current theme if available, otherwise use fallback."
+  (cond
+   ;; Modus themes
+   ((or (member 'modus-operandi custom-enabled-themes)
+    (member 'modus-vivendi custom-enabled-themes))
+    (pcase state
+      ('normal (face-foreground 'modus-themes-fg-blue nil t))
+      ('insert (face-foreground 'modus-themes-fg-green nil t))
+      ('visual (face-foreground 'modus-themes-fg-yellow nil t))
+      ('emacs (face-foreground 'modus-themes-fg-magenta nil t))
+      ('motion (face-foreground 'modus-themes-fg-cyan nil t))
+      ('operator (face-foreground 'modus-themes-fg-red nil t))
+      ('replace (face-foreground 'modus-themes-fg-red-warmer nil t))
+      (_ fallback)))
+
+   ;; EF themes
+   ((string-match-p "^ef-" (symbol-name (car custom-enabled-themes)))
+    (pcase state
+      ('normal (face-foreground 'ef-themes-heading-4 nil t)) ;; blue-ish in most EF themes
+      ('insert (face-foreground 'ef-themes-heading-2 nil t)) ;; green-ish in most EF themes
+      ('visual (face-foreground 'ef-themes-heading-3 nil t)) ;; yellow-ish in most EF themes
+      ('emacs (face-foreground 'ef-themes-heading-1 nil t))  ;; purple-ish in most EF themes
+      ('motion (face-foreground 'ef-themes-heading-5 nil t))
+      ('operator (face-foreground 'ef-themes-heading-6 nil t))
+      ('replace (face-foreground 'ef-themes-heading-7 nil t))
+      (_ fallback)))
+
+   ;; Default fallback
+   (t fallback)))
+
+;; Define custom faces for different Evil states with your preferred colors
+(defface evil-normal-state-face
+  '((t (:foreground "blue" :weight bold)))
+  "Face for Evil normal state indicator in mode line.")
+
+(defface evil-insert-state-face
+  '((t (:foreground "green" :weight bold)))
+  "Face for Evil insert state indicator in mode line.")
+
+(defface evil-visual-state-face
+  '((t (:foreground "yellow" :weight bold)))
+  "Face for Evil visual state indicator in mode line.")
+
+(defface evil-emacs-state-face
+  '((t (:foreground "purple" :weight bold)))
+  "Face for Evil emacs state indicator in mode line.")
+
+(defface evil-motion-state-face
+  '((t (:foreground "cyan" :weight bold)))
+  "Face for Evil motion state indicator in mode line.")
+
+(defface evil-operator-state-face
+  '((t (:foreground "red" :weight bold)))
+  "Face for Evil operator state indicator in mode line.")
+
+(defface evil-replace-state-face
+  '((t (:foreground "brown" :weight bold)))
+  "Face for Evil replace state indicator in mode line.")
+
+;; Function to generate colored Evil mode tag
+(defun colored-evil-mode-line-tag ()
+  "Return a colored Evil mode line tag based on current state."
+  (if (and (featurep 'evil) (bound-and-true-p evil-mode))
+    (let* ((state (if evil-mode
+            (if (boundp 'evil-state) evil-state nil)
+          nil))
+     (state-info
+      (cond
+       ((eq state 'normal)
+        (cons 'normal " [NORMAL] "))
+       ((eq state 'insert)
+        (cons 'insert " [INSERT] "))
+       ((eq state 'visual)
+        (cons 'visual " [VISUAL] "))
+       ((eq state 'emacs)
+        (cons 'emacs " [EMACS] "))
+       ((eq state 'motion)
+        (cons 'motion " [MOTION] "))
+       ((eq state 'operator)
+        (cons 'operator " [OPERATOR] "))
+       ((eq state 'replace)
+        (cons 'replace " [REPLACE] "))
+       (t (cons nil ""))))
+     (state-type (car state-info))
+     (tag (cdr state-info)))
+    (if state-type
+    (let ((color (get-theme-color state-type
+                     (face-foreground
+                      (intern (format "evil-%s-state-face" state-type))
+                      nil t))))
+      (propertize tag 'face `(:foreground ,color :weight bold)))
+      ""))))
+
 (setopt auralcat/mode-line-left-side
-      ;; This should be a quoted list if you want values to be updated
-      ;; when things change in the buffer.
       '(
     " " mode-line-buffer-identification
     " " mode-line-modified
+    (:eval (colored-evil-mode-line-tag))  ;; Add the colored Evil state indicator
     " " mode-name
     " " mode-line-position
     " " (vc-mode vc-mode)
@@ -2229,6 +2373,7 @@ This is a huge quality of life improvement!
      (format-mode-line
       auralcat/mode-line-right-side)))))
 #+END_SRC
+
 * Scratch tabs (inspired by Tot)
 I'm experimenting this idea inspired by the Tot application on Mac.
 It's essentially fancy temp buffers with Markdown.
