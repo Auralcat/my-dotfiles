@@ -620,18 +620,24 @@ laptop keyboard with only one Ctrl key on the left.
     ;; command-execute: Wrong type argument: commandp, auralcat-map
     (kbd "SPC a") 'auralcat-map))
 
+(defun auralcat/custom-evil-emacs-state-modes ()
+  "Add here the modes you want to set evil-emacs-state for that are not
+covered by evil-collection."
+  (let ((emacs-major-modes '(occur-mode ibuffer-mode package-menu-mode comint-mode)))
+    (setopt evil-emacs-state-modes
+      (append evil-emacs-state-modes
+        emacs-major-modes))))
+
 ;; Use evil-collection for mode-specific configurations
 (use-package evil-collection
+  :hook (after-init . auralcat/custom-evil-emacs-state-modes)
   :after evil
   :custom
   (evil-collection-setup-minibuffer nil)
   (evil-collection-magit-use-y-for-yank t)
   (evil-collection-magit-state 'emacs)
   :config
-  (evil-collection-init)
-  ;; Not covered by evil-collection currently.
-  (add-to-list 'evil-emacs-state-modes 'occur-mode)
-  (add-to-list 'evil-emacs-state-modes 'inf-ruby-mode))
+  (evil-collection-init))
 
 ;; Keep evil-surround
 (use-package evil-surround
