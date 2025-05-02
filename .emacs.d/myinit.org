@@ -2201,6 +2201,19 @@ Just like O in Vim.
 
 (global-set-key (kbd "C-o") 'auralcat/open-line)
 #+END_SRC
+** Copy text from whole buffer
+I copy and paste the contents of the entire buffer pretty often. And I wanna do that with a single keystroke.
+Pressing M-< C-x h M-w is too much for me.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(defun copy-whole-buffer ()
+  "Copy the entire buffer to the kill ring."
+  (interactive)
+  (kill-new (buffer-string))
+  (message "✧*｡٩(ˊᗜˋ*)و✧*｡ Buffer copied to clipboard! ✧*｡٩(ˊᗜˋ*)و✧*｡"))
+
+;; Gonna use the function keys for that.
+(global-set-key (kbd "<f5>") 'copy-whole-buffer)
+#+END_SRC
 * Speed dial files
 # TODO: If we add more files in here, we can create a generic function
 # to speed dial through files!
