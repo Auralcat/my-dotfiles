@@ -622,7 +622,11 @@ laptop keyboard with only one Ctrl key on the left.
 (defun auralcat/custom-evil-emacs-state-modes ()
   "Add here the modes you want to set evil-emacs-state for that are not
 covered by evil-collection."
-  (let ((emacs-major-modes '(occur-mode ibuffer-mode package-menu-mode comint-mode)))
+  (let ((emacs-major-modes '(occur-mode
+                             dired-mode
+                             ibuffer-mode
+                             package-menu-mode
+                             comint-mode)))
     (setopt evil-emacs-state-modes
       (append evil-emacs-state-modes
         emacs-major-modes))))
