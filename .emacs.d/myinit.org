@@ -1368,6 +1368,77 @@ We need to do some customizations to comint-related buffers to improve performan
 (add-hook 'comint-mode-hook 'comint-mode-tweaks)
 #+END_SRC
 
+** termint
+This is a HUGE boost in the REPL experience in Emacs!
+This allows you to leverage packages like ~vterm~ and ~eat~ to run the comint REPLs in them instead of the standard Emacs shell!
+Be amazed by the world of 256 colors in your terminal by default, and autocompletion!
+Get all the goodies you have in the standard terminals from the comfort of your Emacs!
+
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package vterm
+  :custom
+  ;; Allow compilation of the vterm module
+  (vterm-always-compile-module t)
+  ;; Increase scrollback
+  (vterm-max-scrollback 10000)
+  ;; Customize appearance
+  (vterm-buffer-name-string "vterm %s")
+  ;; Prevent libvterm issues by using bundled version
+  (vterm-module-cmake-args "-DUSE_SYSTEM_LIBVTERM=no"))
+
+(use-package termint
+  :after '(python ruby)
+  :custom
+  (termint-backend 'vterm)
+  :bind ((:map python-mode-map
+         ("C-c s" . termint-ipython-start)
+          ("C-c r" . termint-ipython-map))
+        (:map ruby-mode-map
+         ("C-c s" . termint-irb-start)
+          ("C-c r" . termint-irb-map)))
+  :config
+  (termint-define "ipython" "ipython"
+                  :bracketed-paste-p t
+                  :source-syntax termint-ipython-source-syntax-template)
+  (termint-define "irb" "irb"
+                  :bracketed-paste-p t
+                  :source-syntax termint-ruby-source-syntax-template)
+  ;; For Evil mode users
+  (when (featurep 'evil)
+    (evil-define-key '(normal visual)
+      python-mode-map (kbd "SPC r s") #'termint-ipython-send-region-operator)
+    (evil-define-key '(normal visual)
+      python-mode-map (kbd "SPC r b") #'termint-ipython-send-buffer)
+    (evil-define-key '(normal visual)
+      python-mode-map (kbd "SPC r f") #'termint-ipython-source-region-operator)
+    (evil-define-key '(normal visual)
+      ruby-mode-map (kbd "SPC r s") #'termint-irb-send-region-operator)
+    (evil-define-key '(normal visual)
+      ruby-mode-map (kbd "SPC r b") #'termint-irb-send-buffer)
+    (evil-define-key '(normal visual)
+      ruby-mode-map (kbd "SPC r f") #'termint-irb-source-region-operator)))
+
+;; Optional: Define a helper for Ruby source syntax if not provided by termint
+(defvar termint-ruby-source-syntax-template
+  "tmp_file=%s
+load tmp_file
+File.delete(tmp_file)")
+
+;; Configure window display rules for REPL buffers
+(add-to-list 'display-buffer-alist
+             '("\\*ipython\\*"
+               (display-buffer-in-side-window)
+               (window-width . 0.5)
+               (side . right)
+               (slot . 0)))
+
+(add-to-list 'display-buffer-alist
+             '("\\*irb\\*"
+               (display-buffer-in-side-window)
+               (window-width . 0.5)
+               (side . right)
+               (slot . 1)))
+#+END_SRC
 * Abbreviations
   #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Enable global Abbrev mode
