@@ -1652,9 +1652,6 @@ Colorize the agenda: https://llazarek.com/2018/07/improving-the-agenda.html
 (defun ll/org/agenda/find-todo-word-end ()
   (reduce (lambda (a b) (or a b))
       (mapcar #'find-in-line ll/org/agenda-todo-words)))
-
-;; Load my tag colors
-(load "~/.agenda-colors")
 #+END_SRC
 *** Custom agenda commands
 #+BEGIN_SRC emacs-lisp :tangle yes
