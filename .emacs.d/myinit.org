@@ -338,17 +338,6 @@ npm install -g @mermaid-js/mermaid-cli
   :custom ((ob-mermaid-cli-path (string-trim (shell-command-to-string "command -v mmdc")))))
 #+END_SRC
 
-***** Play nice with ASDF
-I found this manual package called[[https://github.com/tabfugnic/asdf.el/][ asdf.el]] that makes Emacs identify binaries
-installed through ASDF in the system.
-
-You just need to make sure that the cloned repo is in your ~load-path~.
-#+BEGIN_SRC emacs-lisp :tangle yes
-  (add-to-list 'load-path "~/my-dotfiles/.emacs.d/manual-packages/emacs-asdf")
-  (require 'asdf)
-  (asdf-enable)
-#+END_SRC
-
 ***** Expand-region
 This one is a classic in the Emacs community.
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -472,15 +461,15 @@ Create links to Github/GitLab files from the comfort of your Emacs buffer.
   (setopt circadian-themes
       (cond
        ((eq system-type 'darwin)
-        '((:sunrise . modus-operandi)
-          (:sunset  . modus-vivendi)))
+	'((:sunrise . modus-operandi)
+	  (:sunset  . modus-vivendi)))
        ;; Personal Linux machine
        ((and (string-equal (system-name) auralcat/personal-system-name)
-         (eq system-type 'gnu/linux))
-        '((:sunrise . ef-day)
-          (:sunset  . ef-dream)))
+	 (eq system-type 'gnu/linux))
+	'((:sunrise . ef-day)
+	  (:sunset  . ef-dream)))
        (t '((:sunrise . modus-operandi)
-        (:sunset  . modus-vivendi)))))
+	(:sunset  . modus-vivendi)))))
   (circadian-setup))
     #+END_SRC
 
@@ -623,13 +612,13 @@ laptop keyboard with only one Ctrl key on the left.
   "Add here the modes you want to set evil-emacs-state for that are not
 covered by evil-collection."
   (let ((emacs-major-modes '(occur-mode
-                             dired-mode
-                             ibuffer-mode
-                             package-menu-mode
-                             comint-mode)))
+			     dired-mode
+			     ibuffer-mode
+			     package-menu-mode
+			     comint-mode)))
     (setopt evil-emacs-state-modes
       (append evil-emacs-state-modes
-        emacs-major-modes))))
+	emacs-major-modes))))
 
 ;; Use evil-collection for mode-specific configurations
 (use-package evil-collection
@@ -1328,14 +1317,14 @@ jump between chats. And ~C-c C-a~ to jump to the first unread line.
   :after (ibuffer rcirc)
   :custom (ibuffer-formats
        '((mark modified read-only rcirc-activity-status-one-char " "
-           (name 18 18 :left :elide)
-           " "
-           (size 9 -1 :right)
-           " "
-           (mode 16 16 :left :elide)
-           " "
-           (rcirc-activity-status 20 18 :left) " "
-           filename-and-process))))
+	   (name 18 18 :left :elide)
+	   " "
+	   (size 9 -1 :right)
+	   " "
+	   (mode 16 16 :left :elide)
+	   " "
+	   (rcirc-activity-status 20 18 :left) " "
+	   filename-and-process))))
 #+END_SRC
 * Minibuffer completion
 Currently I'm using ~ido-mode~ to provide completion in the
@@ -1395,18 +1384,18 @@ Get all the goodies you have in the standard terminals from the comfort of your 
   :custom
   (termint-backend 'vterm)
   :bind ((:map python-mode-map
-         ("C-c s" . termint-ipython-start)
-          ("C-c r" . termint-ipython-map))
-        (:map ruby-mode-map
-         ("C-c s" . termint-irb-start)
-          ("C-c r" . termint-irb-map)))
+	 ("C-c s" . termint-ipython-start)
+	  ("C-c r" . termint-ipython-map))
+	(:map ruby-mode-map
+	 ("C-c s" . termint-irb-start)
+	  ("C-c r" . termint-irb-map)))
   :config
   (termint-define "ipython" "ipython"
-                  :bracketed-paste-p t
-                  :source-syntax termint-ipython-source-syntax-template)
+		  :bracketed-paste-p t
+		  :source-syntax termint-ipython-source-syntax-template)
   (termint-define "irb" "irb"
-                  :bracketed-paste-p t
-                  :source-syntax termint-ruby-source-syntax-template)
+		  :bracketed-paste-p t
+		  :source-syntax termint-ruby-source-syntax-template)
   ;; For Evil mode users
   (when (featurep 'evil)
     (evil-define-key '(normal visual)
@@ -1430,18 +1419,18 @@ File.delete(tmp_file)")
 
 ;; Configure window display rules for REPL buffers
 (add-to-list 'display-buffer-alist
-             '("\\*ipython\\*"
-               (display-buffer-in-side-window)
-               (window-width . 0.5)
-               (side . right)
-               (slot . 0)))
+	     '("\\*ipython\\*"
+	       (display-buffer-in-side-window)
+	       (window-width . 0.5)
+	       (side . right)
+	       (slot . 0)))
 
 (add-to-list 'display-buffer-alist
-             '("\\*irb\\*"
-               (display-buffer-in-side-window)
-               (window-width . 0.5)
-               (side . right)
-               (slot . 1)))
+	     '("\\*irb\\*"
+	       (display-buffer-in-side-window)
+	       (window-width . 0.5)
+	       (side . right)
+	       (slot . 1)))
 #+END_SRC
 * Abbreviations
   #+BEGIN_SRC emacs-lisp :tangle yes
@@ -2453,32 +2442,32 @@ This is a huge quality of life improvement!
   "Return a colored Evil mode line tag based on current state."
   (if (and (featurep 'evil) (bound-and-true-p evil-mode))
     (let* ((state (if evil-mode
-            (if (boundp 'evil-state) evil-state nil)
-          nil))
+	    (if (boundp 'evil-state) evil-state nil)
+	  nil))
      (state-info
       (cond
        ((eq state 'normal)
-        (cons 'normal " [NORMAL] "))
+	(cons 'normal " [NORMAL] "))
        ((eq state 'insert)
-        (cons 'insert " [INSERT] "))
+	(cons 'insert " [INSERT] "))
        ((eq state 'visual)
-        (cons 'visual " [VISUAL] "))
+	(cons 'visual " [VISUAL] "))
        ((eq state 'emacs)
-        (cons 'emacs " [EMACS] "))
+	(cons 'emacs " [EMACS] "))
        ((eq state 'motion)
-        (cons 'motion " [MOTION] "))
+	(cons 'motion " [MOTION] "))
        ((eq state 'operator)
-        (cons 'operator " [OPERATOR] "))
+	(cons 'operator " [OPERATOR] "))
        ((eq state 'replace)
-        (cons 'replace " [REPLACE] "))
+	(cons 'replace " [REPLACE] "))
        (t (cons nil ""))))
      (state-type (car state-info))
      (tag (cdr state-info)))
     (if state-type
     (let ((color (get-theme-color state-type
-                     (face-foreground
-                      (intern (format "evil-%s-state-face" state-type))
-                      nil t))))
+		     (face-foreground
+		      (intern (format "evil-%s-state-face" state-type))
+		      nil t))))
       (propertize tag 'face `(:foreground ,color :weight bold)))
       ""))))
 
