@@ -1575,12 +1575,6 @@ Use the fixed-pitch font for tables.
 #+BEGIN_SRC emacs-lisp :tangle yes
 (set-face-attribute 'org-table nil :inherit 'fixed-pitch)
 #+END_SRC
-** Capture templates
-   #+BEGIN_SRC emacs-lisp :tangle yes
-;; Load them from a separate file.
-(load "~/.org-capture-templates.el")
-   #+END_SRC
-
 ** Quick capture to inbox
 Borrowed and adapted from https://macowners.club/posts/org-capture-from-everywhere-macos/#capture-an-url-from-safari
 #+begin_src emacs-lisp :tangle yes
