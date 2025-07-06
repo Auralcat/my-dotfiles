@@ -1818,6 +1818,13 @@ enough_ for both light and dark settings!
 (use-package zenburn-theme
   :defer 1)
 #+end_src
+** EF Themes
+Also from Prot. These look great!
+#+begin_src emacs-lisp :tangle yes
+(use-package ef-themes
+  :defer 1)
+#+end_src
+
 * Fonts
 It's better to set the fonts here instead of hard-coding them in init.el or in
 the themes themselves.
