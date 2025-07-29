@@ -708,9 +708,20 @@ So I need to enable them like this to not get pestered by it when trying to use 
   This is a command to open the browser for the URL at point.
   #+begin_src emacs-lisp :tangle yes
   (setopt browse-url-browser-display nil
-    browse-url-browser-function 'browse-url-default-browser
-    browse-url-firefox-program "firefox")
+    ;; As of July 2025, the order of browsers that browse-url chooses with `browse-url-default-browser' is _hardcoded_:
+    ;; 1. Firefox
+    ;; 2. Chromium
+    ;; 3. KDE browser
+    ;; 4. Google Chrome
+    ;; 5. Webpositive
+    ;; 6. Xterm
+    ;; So this is why we need to add `browse-url-crome' directly here to use it as the default browser for `browse-url'.
+    browse-url-browser-function 'browse-url-chrome
+    browse-url-firefox-program "firefox"
+    browse-url-chrome-program "flatpak run com.Google.chrome")
   #+end_src
+
+  https://google.com
 * Bookmarks
   It's a quicker way to navigate through files you visit often.
   #+BEGIN_SRC emacs-lisp :tangle yes
