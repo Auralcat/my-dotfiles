@@ -377,7 +377,7 @@ Create links to Github/GitLab files from the comfort of your Emacs buffer.
 ***** Smartparens
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package smartparens
-  :hook ((ruby-mode inf-elixir-mode emacs-lisp-mode) . smartparens-mode)
+  :hook ((ruby-mode inf-elixir-mode emacs-lisp-mode shell-script-mode) . smartparens-mode)
   :bind (:map smartparens-mode-map
      ([remap backward-sexp] . sp-backward-sexp)
      ([remap forward-sexp] . sp-forward-sexp)
@@ -485,6 +485,7 @@ don't need any specific features from ~smartparens-mode~.
 (add-hook 'json-mode-hook 'electric-pair-mode)
 (add-hook 'outline-mode-hook 'electric-pair-mode)
 (add-hook 'markdown-mode-hook 'electric-pair-mode)
+(add-hook 'org-mode-hook 'electric-pair-mode)
 #+end_src
 
 ***** Auto package update
