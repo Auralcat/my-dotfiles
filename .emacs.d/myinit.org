@@ -1933,6 +1933,22 @@ This involves window and tab management.
      (window-parameters . ((delete-window . t)))
      )))
 #+END_SRC
+** Splitting windows
+#+begin_src emacs-lisp :tangle yes
+;; Set thresholds for smart splitting
+(setopt split-width-threshold 160)    ; Split horizontally if window is wider than 160 columns
+(setopt split-height-threshold 80)    ; Split vertically if window is taller than 80 lines
+
+;; Use the built-in sensible splitting function
+(setopt split-window-preferred-function 'split-window-sensibly)
+
+;; Optional: Prevent really narrow windows
+(setopt window-min-width 80)          ; Minimum window width
+(setopt window-min-height 20)         ; Minimum window height
+
+;; Optional: Make newly split windows more balanced
+(setopt window-combination-resize t)   ; Resize windows proportionally
+#+end_src
 
 * Keybindings
 ** Translation keymap
