@@ -128,17 +128,21 @@
 
 ;; https://lists.gnu.org/archive/html/bug-gnu-emacs/2017-12/msg01088.html
 ;; Long-story short, use select-active-regions 'only to make visual selection faster.
-(setq-default gc-cons-threshold 800000
+(setq-default gc-cons-threshold (* 100 1024 1024)
       select-active-regions 'only
       file-name-handler-alist nil
       gc-cons-percentage 0.6
       auto-window-vscroll nil
+      ;; Improve LSP performance
+      read-process-output-max (* 1024 1024)
       message-log-max 16384)
 
 (add-hook 'after-init-hook
       `(lambda ()
      (setopt file-name-handler-alist file-name-handler-alist-old
-       gc-cons-threshold 80000
+       gc-cons-threshold (* 100 1024 1024)
+       ;; Improve LSP performance
+       read-process-output-max (* 1024 1024)
        select-active-regions 'only
        gc-cons-percentage 0.1)
      (garbage-collect)) t)
