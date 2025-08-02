@@ -929,6 +929,14 @@ A new package on the block that is faster than ~highlight-indentation~.
     [0 0 0 0 0 0 0 0 0 0 0 0 0 128 192 224 240 248]
     nil nil 'center))))
     #+END_SRC
+** Claude Code
+Use ~claude-code~ straight from the comfort of your Emacs!
+#+begin_src emacs-lisp :tangle yes
+(use-package claude-code
+  :ensure t
+  :bind (:map global-map ("C-c c" . claude-code-transient)))
+#+end_src
+
 ** Terraform
 #+begin_src emacs-lisp :tangle yes
 (use-package terraform-mode
