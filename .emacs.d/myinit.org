@@ -1081,15 +1081,33 @@ Otherwise, use the running Jupyter Notebook kernel."
   (interactive)
   (if (jupyter-notebook-running-p)
       (setopt python-shell-interpreter "jupyter"
-    python-shell-interpreter-args "console --existing --simple-prompt")
+	      python-shell-interpreter-args "console --existing --simple-prompt")
     (setopt python-shell-interpreter "ipython"
-      python-shell-interpreter-args "--simple-prompt"))
-  (run-python))
+	    python-shell-interpreter-args "--simple-prompt"))
+  (run-python)
+  (pop-to-buffer "*Python*"))
 
 ;; Need this to have the Python shell scroll results to the bottom
 (add-hook 'inferior-python-mode-hook
       (lambda ()
     (setopt comint-move-point-for-output t)))
+
+(defun auralcat/python-display-buffer-function (buffer alist)
+  "Smart display function for Python buffers based on frame size."
+  (cond
+   ((> (frame-width) 160)
+    (display-buffer-in-direction buffer (append '((direction . right) (window-width . 0.5)) alist)))
+   ((> (frame-height) 40)
+    (display-buffer-in-direction buffer (append '((direction . below) (window-height . 0.3)) alist)))
+   (t
+    (display-buffer-same-window buffer alist))))
+
+(add-to-list 'display-buffer-alist
+	     '("\\*Python\\*"
+	       auralcat/python-display-buffer-function))
+
+(with-eval-after-load 'python
+  (define-key python-mode-map (kbd "C-c C-p") 'auralcat/run-python))
 #+end_src
 
 ** YAML
