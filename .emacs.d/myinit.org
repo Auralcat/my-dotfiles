@@ -719,7 +719,7 @@ So I need to enable them like this to not get pestered by it when trying to use 
     ;; So this is why we need to add `browse-url-crome' directly here to use it as the default browser for `browse-url'.
     browse-url-browser-function 'browse-url-chrome
     browse-url-firefox-program "firefox"
-    browse-url-chrome-program "flatpak run com.Google.chrome")
+    browse-url-chrome-program "flatpak run com.Google.Chrome")
   #+end_src
 
   https://google.com
