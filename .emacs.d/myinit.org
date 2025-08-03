@@ -1165,6 +1165,19 @@ Some Lisp configuration to make it easier to use it.
 (setopt lisp-indent-function 'common-lisp-indent-function)
 (setopt lisp-indent-offset 2)
 #+END_SRC
+** Prettier
+This is pretty useful to pretty-format HTML, CSS and JS files locally.
+Remember to install the ~prettier~ NPM package in your machine:
+
+#+begin_src shell
+npm install -g prettier
+#+end_src
+
+Invoke it in Emacs with ~prettier-prettify~.
+
+#+begin_src emacs-lisp :tangle yes
+(use-package prettier)
+#+end_src
 * Macros
   #+BEGIN_SRC emacs-lisp :tangle yes
 ;; To save a macro, record it with C-x ( (start) and C-x ) (stop),
