@@ -969,6 +969,34 @@ Use ~claude-code~ straight from the comfort of your Emacs!
   :bind (:map global-map ("C-c c" . claude-code-transient)))
 #+end_src
 
+** Termint
+Use a dedicated terminal in Emacs for comint modes! This works GREAT with ~vterm~!
+#+begin_src emacs-lisp :tangle yes
+(use-package termint
+  :demand t
+  :after python
+  :bind
+  (:map python-ts-mode-map
+   ("C-c s" . termint-ipython-start))
+
+  :config
+  (termint-define "ipython" "ipython" :bracketed-paste-p t
+                  :source-syntax termint-ipython-source-syntax-template)
+
+  ;; C-c m s: `termint-ipython-start'
+  ;; C-c m e: `termint-ipython-send-string'
+  ;; C-c m r: `termint-ipython-send-region' (or `termint-ipython-send-region-operator' if evil is installed.)
+  ;; C-c m p: `termint-ipython-send-paragraph'
+  ;; C-c m b: `termint-ipython-send-buffer'
+  ;; C-c m f: `termint-ipython-send-defun'
+  ;; C-c m R: `termint-ipython-source-region' (or `termint-ipython-source-region-operator' if evil is installed.)
+  ;; C-c m P: `termint-ipython-source-paragraph'
+  ;; C-c m B: `termint-ipython-source-buffer'
+  ;; C-c m F: `termint-ipython-source-defun'
+  ;; C-c m h: `termint-ipython-hide-window'
+  (define-key python-ts-mode-map (kbd "C-c m") termint-ipython-map))
+#+end_src
+
 ** Terraform
 #+begin_src emacs-lisp :tangle yes
 (use-package terraform-mode
