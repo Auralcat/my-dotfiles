@@ -720,13 +720,21 @@ So I need to enable them like this to not get pestered by it when trying to use 
     ;; 4. Google Chrome
     ;; 5. Webpositive
     ;; 6. Xterm
-    ;; So this is why we need to add `browse-url-crome' directly here to use it as the default browser for `browse-url'.
+    ;; So this is why we need to add `browse-url-chrome' directly here to use it as the default browser for `browse-url'.
     browse-url-browser-function 'browse-url-chrome
     browse-url-firefox-program "firefox"
-    browse-url-chrome-program "flatpak run com.google.Chrome")
+    browse-url-chrome-program "chrome-flatpak.sh")
   #+end_src
 
-  https://google.com
+** Flatpak trick
+~executable-find~ is not able to find Flatpak packages directly.
+You'll need to put a script like this in your PATH:
+#+begin_src sh
+#!/bin/bash
+exec flatpak run com.google.Chrome "$@"
+#+end_src
+
+Then set ~(setopt browse-url-chrome-program "<script_name>")~.
 * Bookmarks
   It's a quicker way to navigate through files you visit often.
   #+BEGIN_SRC emacs-lisp :tangle yes
