@@ -234,14 +234,8 @@ Plugin 'flazz/vim-colorschemes'
 " VimSurround: Better bracket/surround symbol control in Vim
 Plugin 'tpope/vim-surround'
 
-" VimEmmet: Emmet support for Vim
-Plugin 'mattn/emmet-vim'
-
 " EditorConfig: Keep standard configurations between editors and projects
 Plugin 'editorconfig/editorconfig-vim'
-
-" VimElixir: Vim support for Elixir
-Plugin 'elixir-editors/vim-elixir'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
