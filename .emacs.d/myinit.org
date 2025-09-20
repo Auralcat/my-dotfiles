@@ -1299,9 +1299,6 @@ This is a derived mode to hold English abbrevs.
        org-agenda-skip-scheduled-if-done t
        org-agenda-start-on-weekday 0)
 
-     ;; Start indented.
-     ;; (setopt org-startup-indented t)
-
      ;; Change the end of collapsed headings to an arrow.
      (setopt org-ellipsis "⤵")
 
@@ -1577,7 +1574,7 @@ the themes themselves.
   ;; Space lines and bask in the gloriousness of graphical mode.
   (setopt line-spacing 0.2))
   #+END_SRC
-* Multiplexing
+* Display buffer alist configuration
 This involves window and tab management.
 
 #+BEGIN_SRC emacs-lisp :tangle yes
