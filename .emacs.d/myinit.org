@@ -100,15 +100,8 @@
 ;; Enable auto-revert-mode
 (global-auto-revert-mode t)
 
-
-
 ;; Use Bash as default shell interpreter
 (setopt org-babel-sh-command "/bin/bash")
-;; Get Emacs to understand your aliases
-;; (setopt shell-file-name "bash")
-;; For reference, this is the default value:
-;; (setopt shell-command-switch "-c")
-;; (setopt shell-command-switch "-ic")
 
 ;; Save last edited place in files
 (require 'saveplace)
@@ -154,6 +147,31 @@
   :custom ((gcmh-verbose nil)
       (gcmh-high-cons-threshold 16777216))
   :hook (after-init . gcmh-mode))
+#+END_SRC
+* Variables
+  #+BEGIN_SRC emacs-lisp :tangle yes
+;; Set Fundamental mode as default mode for new buffers:
+(setq-default major-mode 'fundamental-mode)
+(setopt initial-major-mode 'fundamental-mode)
+
+;; When toggling a buffer into read-only mode, activate view-mode immediately.
+(setopt view-read-only t)
+
+;; Change tab width and change tabs to spaces
+(setq-default tab-width 4)
+(setq-default indent-tabs-mode nil)
+
+;; Shows trailing whitespace, if any:
+(setq-default show-trailing-whitespace t)
+
+;; Enable repeat-mode
+(repeat-mode 1)
+  #+END_SRC
+** Project-local variables
+Disable the ~risky-variable~ check. I know what I'm doing.
+This can be reverted later with ~(advice-remove)~ though.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(advice-add 'risky-local-variable-p :override #'ignore)
 #+END_SRC
 * Packages
 ** Major Modes
@@ -1730,7 +1748,7 @@ right button as well.
 (global-set-key "\M-%" 'replace-string)
   #+END_SRC
 
-** Remappings
+** Mappings and remappings
 #+BEGIN_SRC emacs-lisp :tangle yes
 ;; I use zap-up-to-char much more than zap-to-char.
 (define-key global-map (kbd "M-z") 'zap-up-to-char)
@@ -1739,6 +1757,9 @@ right button as well.
 (define-key global-map (kbd "M-g ,") 'goto-last-change-reverse)
 (define-key global-map (kbd "M-g .") 'goto-last-change)
 (define-key global-map (kbd "M-g u") 'browse-url)
+
+;; Making Emacs auto-indent
+(define-key global-map (kbd "RET") 'newline-and-indent)
 #+END_SRC
 
 ** Append to buffer
@@ -1746,104 +1767,6 @@ Buffers are the common communication medium in Emacs. Make it easier for you to 
 #+begin_src emacs-lisp :tangle yes
 (define-key global-map (kbd "C-x x a") 'append-to-buffer)
 #+end_src
-* Variables
-  #+BEGIN_SRC emacs-lisp :tangle yes
-;; Set Fundamental mode as default mode for new buffers:
-(setq-default major-mode 'fundamental-mode)
-(setopt initial-major-mode 'fundamental-mode)
-
-;; When toggling a buffer into read-only mode, activate view-mode immediately.
-(setopt view-read-only t)
-
-;; Change tab width and change tabs to spaces
-(setq-default tab-width 4)
-(setq-default indent-tabs-mode nil)
-
-;; Making Emacs auto-indent
-(define-key global-map (kbd "RET") 'newline-and-indent)
-
-;; Shows trailing whitespace, if any:
-(setq-default show-trailing-whitespace t)
-
-;; Python: use python3 as default shell interpreter
-(setopt python-shell-interpreter "python3")
-
-  #+END_SRC
-** Project-local variables
-Disable the ~risky-variable~ check. I know what I'm doing.
-This can be reverted later with ~(advice-remove)~ though.
-#+BEGIN_SRC emacs-lisp :tangle yes
-(advice-add 'risky-local-variable-p :override #'ignore)
-#+END_SRC
-* Repeat-mode maps
-These are for the new ~repeat-mode~ added to Emacs 28.
-First we need to enable repeat-mode globally:
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-(repeat-mode 1)
-
-;; We're also defining a macro to reduce code duplication in this config.
-(defmacro auralcat/macro-make-map-for-repeat-commands (map-symbol key-commands-alist)
-  (require 'cl-lib)
-  `(setopt ,map-symbol
-     (let ((map (make-sparse-keymap)))
-       (cl-loop for (key . command) in ,key-commands-alist
-    do (define-key map (kbd key) command)
-    (put command 'repeat-map ',map-symbol))
-       map)))
-#+END_SRC
-
-** General
-#+BEGIN_SRC emacs-lisp :tangle yes
-;; TODO: undo-redo is not loaded on startup through this macro. Need to figure out why.
-(auralcat/macro-make-map-for-repeat-commands undo-repeat-map
-     '(("u" . undo)
-       ("r" . undo-redo)))
-
-;; TODO: why are these keys not bound to scroll-up-command and scroll-down-command?
-(auralcat/macro-make-map-for-repeat-commands scroll-map
-     '(("n" . scroll-up-command)
-       ("p" . scroll-down-command)))
-
-(auralcat/macro-make-map-for-repeat-commands scroll-other-window-map
-     '(("]" . scroll-other-window)
-       ("[" . scroll-other-window-down)))
-
-(auralcat/macro-make-map-for-repeat-commands control-meta-navigation-map
-     '(("n" . forward-list)
-       ("p" . backward-list)
-       ("a" . beginning-of-defun)
-       ("e" . end-of-defun)
-       ("f" . forward-sexp)
-       ("b" . backward-sexp)))
-
-(auralcat/macro-make-map-for-repeat-commands goto-change-map
-     '(("." . goto-last-change)
-       ("," . goto-last-change-reverse)))
-#+END_SRC
-
-** Org-mode repeat maps
-#+BEGIN_SRC emacs-lisp :tangle yes
-(auralcat/macro-make-map-for-repeat-commands org-link-repeat-map
-     '(("n" . org-next-link)
-       ("p" . org-previous-link)))
-
-(auralcat/macro-make-map-for-repeat-commands org-heading-navigation-map
-     '(("n" . org-next-visible-heading)
-       ("p" . org-previous-visible-heading)
-       ("f" . org-forward-heading-same-level)
-       ("b" . org-backward-heading-same-level)))
-#+END_SRC
-
-** Markdown repeat maps
-#+BEGIN_SRC emacs-lisp :tangle yes
-(auralcat/macro-make-map-for-repeat-commands markdown-heading-repeat-map
-     '(("n" . markdown-outline-next)
-       ("p" . markdown-outline-previous)
-       ("f" . markdown-outline-next-same-level)
-       ("b" . markdown-outline-previous-same-level)))
-#+END_SRC
-
 * Custom functions
 ** Auto create missing directories
 Taken from https://emacsredux.com/blog/2022/06/12/auto-create-missing-directories/
