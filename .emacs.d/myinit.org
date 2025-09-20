@@ -1222,7 +1222,16 @@ Get all the goodies you have in the standard terminals from the comfort of your 
   ;; Customize appearance
   (vterm-buffer-name-string "vterm %s")
   ;; Prevent libvterm issues by using bundled version
-  (vterm-module-cmake-args "-DUSE_SYSTEM_LIBVTERM=no"))
+  (vterm-module-cmake-args "-DUSE_SYSTEM_LIBVTERM=no")
+  :bind (:map vterm-mode-map
+         ("C-c C-t" . vterm-copy-mode))
+  :config
+  ;; Make cursor visible in copy mode
+  (add-hook 'vterm-copy-mode-hook
+            (lambda ()
+              (if vterm-copy-mode
+                  (setq-local cursor-type 'box)
+                (setq-local cursor-type t)))))
 
 (use-package termint
   :after '(python ruby)
@@ -1277,6 +1286,7 @@ File.delete(tmp_file)")
                (side . right)
                (slot . 1)))
 #+END_SRC
+
 * Abbreviations
   #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Enable global Abbrev mode
