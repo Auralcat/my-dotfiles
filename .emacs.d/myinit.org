@@ -1224,7 +1224,14 @@ Get all the goodies you have in the standard terminals from the comfort of your 
   ;; Prevent libvterm issues by using bundled version
   (vterm-module-cmake-args "-DUSE_SYSTEM_LIBVTERM=no")
   :bind (:map vterm-mode-map
-         ("C-c C-t" . vterm-copy-mode))
+         ("C-c C-t" . vterm-copy-mode)
+         ("C-c C-y" . vterm-yank)
+         ("©" . vterm-copy-mode)          ;; AltGr+c
+         ("„" . vterm-yank)               ;; AltGr+v
+         :map vterm-copy-mode-map
+         ("C-c C-w" . kill-ring-save)
+         ("C-w" . kill-region)
+         ("M-w" . kill-ring-save))
   :config
   ;; Make cursor visible in copy mode
   (add-hook 'vterm-copy-mode-hook
@@ -1249,21 +1256,7 @@ Get all the goodies you have in the standard terminals from the comfort of your 
                   :source-syntax termint-ipython-source-syntax-template)
   (termint-define "irb" "irb"
                   :bracketed-paste-p t
-                  :source-syntax termint-ruby-source-syntax-template)
-  ;; For Evil mode users
-  (when (featurep 'evil)
-    (evil-define-key '(normal visual)
-      python-mode-map (kbd "SPC r s") #'termint-ipython-send-region-operator)
-    (evil-define-key '(normal visual)
-      python-mode-map (kbd "SPC r b") #'termint-ipython-send-buffer)
-    (evil-define-key '(normal visual)
-      python-mode-map (kbd "SPC r f") #'termint-ipython-source-region-operator)
-    (evil-define-key '(normal visual)
-      ruby-mode-map (kbd "SPC r s") #'termint-irb-send-region-operator)
-    (evil-define-key '(normal visual)
-      ruby-mode-map (kbd "SPC r b") #'termint-irb-send-buffer)
-    (evil-define-key '(normal visual)
-      ruby-mode-map (kbd "SPC r f") #'termint-irb-source-region-operator)))
+                  :source-syntax termint-ruby-source-syntax-template))
 
 ;; Optional: Define a helper for Ruby source syntax if not provided by termint
 (defvar termint-ruby-source-syntax-template
