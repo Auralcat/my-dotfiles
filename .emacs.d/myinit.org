@@ -629,13 +629,6 @@ exec flatpak run com.google.Chrome "$@"
 #+end_src
 
 Then set ~(setopt browse-url-chrome-program "<script_name>")~.
-* Bookmarks
-  It's a quicker way to navigate through files you visit often.
-  #+BEGIN_SRC emacs-lisp :tangle yes
-(setopt bookmark-default-file "~/emacs-bookmarks")
-;; Every time bookmarks are changed, save them
-(setopt bookmark-save-flag 1)
-  #+END_SRC
 * Occur
 Occur is useful for when you want to keep a list of code points of interest in a
 given buffer or a set of buffers with ~multi-occur-in-matching-buffers~. I was
