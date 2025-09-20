@@ -2061,18 +2061,6 @@ Taken from https://emacsredux.com/blog/2022/06/12/auto-create-missing-directorie
 (add-to-list 'find-file-not-found-functions #'er-auto-create-missing-dirs)
    #+END_SRC
 
-** Calculate leap year
-   #+BEGIN_SRC emacs-lisp :tangle yes
-(defun is-leap-year (year)
-  "Checks if the given YEAR is a leap year"
-  (interactive "P")
-  (or
-   (and (not (eq (% year 100) 0))
-    (eq (% year 4) 0))
-   (eq (% year 400) 0))
-  )
-
-   #+END_SRC
 ** Copy text from prog-modes into Markdown code block
 This is useful when you want to copy some lines of code from Emacs to paste on Github comments or in a chat tool. That way you don't have to type `s and paste the text in there. Makes the process much smoother and faster.
 
