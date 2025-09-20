@@ -1153,45 +1153,6 @@ Invoke it in Emacs with ~prettier-prettify~.
   (setopt server-socket-dir (format "/tmp/emacs%d" (user-uid))))
   #+END_SRC
 
-* IRC
-** RCIRC general settings
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package rcirc
-  :commands (rcirc)
-  :hook (rcirc . rcirc-track-minor-mode)
-  :custom (;; Enable logging if desired
-    (rcirc-log-directory "~/rcirc-logs")
-    (rcirc-log-flag t)
-    (rcirc-auto-authenticate-flag t)
-    (rcirc-who-requery-timeout nil)
-    (rcirc-auto-who-list nil)))
-#+END_SRC
-
-** Color nicks
-I want my colors please! 💅
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package rcirc-color
-  :after rcirc
-  :hook (rcirc . rcirc-color-mode))
-#+END_SRC
-** Track chats with ibuffer
-~ibuffer~ is a nice way to list buffers for you. We can use it to
-track IRC channels in a centralized view, besides using ~C-c C-@~ to
-jump between chats. And ~C-c C-a~ to jump to the first unread line.
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package ibuffer-rcirc
-  :after (ibuffer rcirc)
-  :custom (ibuffer-formats
-       '((mark modified read-only rcirc-activity-status-one-char " "
-           (name 18 18 :left :elide)
-           " "
-           (size 9 -1 :right)
-           " "
-           (mode 16 16 :left :elide)
-           " "
-           (rcirc-activity-status 20 18 :left) " "
-           filename-and-process))))
-#+END_SRC
 * Minibuffer completion
 Currently I'm using ~ido-mode~ to provide completion in the
 minibuffer.
