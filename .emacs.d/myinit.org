@@ -1730,24 +1730,6 @@ right button as well.
 (global-set-key "\M-%" 'replace-string)
   #+END_SRC
 
-** Personal keymap
-I need these keybindings to call quick functions I use often.
-
-#+BEGIN_SRC emacs-lisp :tangle yes
-(defvar auralcat-map
-  (let ((map (make-sparse-keymap)))
-    ;; Your keybindings go here.
-    (define-key map (kbd "fo") #'(lambda () (find-file "~/.emacs.d/myinit.org")))
-    (define-key map (kbd "fs") #'(lambda () (switch-to-buffer (get-buffer "*scratch*"))))
-    (define-key map (kbd "fm") #'(lambda () (switch-to-buffer (get-buffer "*Messages*"))))
-    (define-key map (kbd "j") 'jump-to-register)
-    (define-key map (kbd "p") 'projectile-command-map)
-    map)
-  "My personal keymap.")
-
-(global-set-key (kbd "C-\\") auralcat-map)
-#+END_SRC
-
 ** Remappings
 #+BEGIN_SRC emacs-lisp :tangle yes
 ;; I use zap-up-to-char much more than zap-to-char.
