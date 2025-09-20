@@ -122,14 +122,6 @@ augroup writing
     autocmd FileType text SoftPencil
 augroup END
 
-" Encryption:
-augroup encryption
-    autocmd BufReadPre diario.txt set viminfo=
-    autocmd BufReadPre diario.txt set nobackup
-    autocmd BufReadPre diario.txt set nowritebackup
-    autocmd BufReadPre diario.txt set cm=blowfish2
-augroup END
-
 " TodoCommands:
 augroup todo
     " Put a DONE stamp on the selected item.
@@ -173,9 +165,6 @@ nnoremap <C-l> <C-w>l
 " shortcuts to it, you'll get a message saying 'please quit vim with :quit'.
 " It's also a bonus quick button if there's only one window in the session.
 nnoremap <C-c> <C-w>q
-
-" For when you're stuck:
-nnoremap <F2> :!python3 ~/oblique-strategies/oblique.py<CR>
 
 " TabNavigation:
 " Create new tab
