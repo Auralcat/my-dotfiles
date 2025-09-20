@@ -1949,27 +1949,6 @@ I need these keybindings to call quick functions I use often.
 (define-key global-map (kbd "M-g u") 'browse-url)
 #+END_SRC
 
-** Duplicate line
-This is available out of the box from Emacs 29 forward.
-If you're using Emacs 28 or lower, you can backport this function like so:
-#+BEGIN_SRC emacs-lisp :tangle yes
-(when (>= (string-to-number emacs-version) 29)
-  (defun duplicate-line (&optional n)
-    "Duplicate the current line N times.
-+Also see the `copy-from-above-command' command."
-    (interactive "p")
-    (let ((line (buffer-substring (line-beginning-position)
-      (line-end-position))))
-      (save-excursion
-    (forward-line 1)
-    (unless (bolp)
-      (insert "\n"))
-    (dotimes (_ n)
-      (insert line "\n"))))))
-
-(define-key global-map (kbd "C-S-d") 'duplicate-line)
-#+END_SRC
-
 ** Append to buffer
 Buffers are the common communication medium in Emacs. Make it easier for you to use them!
 #+begin_src emacs-lisp :tangle yes
