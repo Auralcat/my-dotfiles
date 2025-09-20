@@ -215,10 +215,6 @@ Plugin 'VundleVim/Vundle.vim'
 " AutoPairs: insert or delete brackets, parens, quotes in pair
 Plugin 'jiangmiao/auto-pairs'
 
-" VimOrganizer: VimOrganizer is partly a clone of Emacs' Org-mode, and partly
-" a front end to Org-mode itself. Do Org in Vim.
-Plugin 'hsitz/vimorganizer'
-
 " Syntastic: Checks syntax of source code.
 Plugin 'scrooloose/syntastic'
 
