@@ -530,15 +530,16 @@ You can put ~auto-package-update-async~ in the ~midnight-hook~.
     #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package keyfreq
   :hook (after-init . (keyfreq-mode keyfreq-autosave-mode))
-  :custom ((keyfreq-excluded-commands
+  :custom (keyfreq-excluded-commands
      '(self-insert-command
     org-self-insert-command
     weechat-self-insert-command
     isearch-printing-char
     markdown-enter-key
     abort-recursive-edit
-    lsp-ui-doc--handle-mouse-movement))))
+    lsp-ui-doc--handle-mouse-movement)))
     #+END_SRC
+
 *** Diminish
     Free some space in the mode line removing superfluous mode indications.
     #+BEGIN_SRC emacs-lisp :tangle yes
