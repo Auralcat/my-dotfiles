@@ -175,67 +175,55 @@ noremap <leader>w :tabclose<CR>
 
 "______________________________________________________________________________
 
-" Installing plugins:
+" Installing plugins with vim-plug:
 " - Type :source %
-" - Type :PluginInstall
+" - Type :PlugInstall
 
-" set the runtime path to include Vundle and initialize
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
+" Install vim-plug if not found
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+endif
 
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
-" EXAMPLES:
-" Git plugin not hosted on GitHub
-" Plugin 'git://git.wincent.com/command-t.git'
-" git repos on your local machine (i.e. when working on your own plugin)
-" Plugin 'file:///home/gmarik/path/to/plugin'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-" ENDEXAMPLES:
+" Run PlugInstall if there are missing plugins
+autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \| PlugInstall --sync | source $MYVIMRC
+\| endif
 
 " PLUGINS:
+call plug#begin('~/.vim/plugged')
 
 " AutoPairs: insert or delete brackets, parens, quotes in pair
-Plugin 'jiangmiao/auto-pairs'
+Plug 'jiangmiao/auto-pairs'
 
-" Syntastic: Checks syntax of source code.
-Plugin 'scrooloose/syntastic'
+" ALE: Asynchronous Lint Engine (modern replacement for Syntastic)
+Plug 'dense-analysis/ale'
 
 " VimPencil: Soft line wrap and hard line breaks
-Plugin 'reedes/vim-pencil'
+Plug 'reedes/vim-pencil'
 
 " RainbowParentheses: Better parentheses
-Plugin 'junegunn/rainbow_parentheses.vim'
+Plug 'junegunn/rainbow_parentheses.vim'
 
 " VimColorSchemes: plugin to manage colorschemes
-Plugin 'flazz/vim-colorschemes'
+Plug 'flazz/vim-colorschemes'
 
 " VimSurround: Better bracket/surround symbol control in Vim
-Plugin 'tpope/vim-surround'
+Plug 'tpope/vim-surround'
 
 " EditorConfig: Keep standard configurations between editors and projects
-Plugin 'editorconfig/editorconfig-vim'
+Plug 'editorconfig/editorconfig-vim'
 
-" All of your Plugins must be added before the following line
-call vundle#end()            " required
-filetype plugin indent on    " required
-" To ignore plugin indent changes, instead use:
-"filetype plugin on
-"
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
-" see :h vundle for more details or wiki for FAQ
-" Put your non-Plugin stuff after this line
+" Coc.nvim: LSP support with autocompletion, diagnostics, and more
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+call plug#end()
+
+" Brief help for vim-plug
+" :PlugInstall    - installs plugins
+" :PlugUpdate     - updates plugins
+" :PlugClean      - removes unlisted plugins
+" :PlugUpgrade    - upgrades vim-plug itself
 "
 
 "________SNIPPETS______________________________________________________________
