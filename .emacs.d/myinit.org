@@ -609,7 +609,7 @@ Because kaomoji is fun! ヽ(*⌒▽⌒*)ﾉ
     #+BEGIN_SRC emacs-lisp :tangle yes
 (setopt history-length 1024)
 (setopt history-delete-duplicates t)
-(setopt savehist-mode 1)
+(savehist-mode 1)
     #+END_SRC
 
 * Enabled complex commands
