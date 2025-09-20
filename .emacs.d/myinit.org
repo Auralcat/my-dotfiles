@@ -567,6 +567,14 @@ Because kaomoji is fun! ヽ(*⌒▽⌒*)ﾉ
   :bind (:map global-map
       ("C-x 8 k" . insert-kaomoji)))
 #+end_src
+*** Ace window
+#+begin_src emacs-lisp tangle: yes
+(use-package ace-window
+  :bind ("M-o" . ace-window)
+  :config
+  (setq aw-keys '(?a ?s ?d ?f ?g)))
+#+end_src
+
 * COMMENT Evil mode
 Now I'm back into ~evil-mode~!
 It's a nice way to type and use Emacs when we are on the go.
@@ -2134,9 +2142,6 @@ right button as well.
 (global-set-key [M-f10] (quote toggle-frame-maximized))
 
 (global-set-key (kbd "M-\"") (quote abbrev-prefix-mark))
-
-;; Switch windows and frames
-(define-key global-map (kbd "M-o") 'other-window)
 
 ;; Scroll other windows' pages easier
 (define-key global-map (kbd "M-]") 'scroll-other-window)
