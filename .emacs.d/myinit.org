@@ -1892,9 +1892,6 @@ right button as well.
 (define-key global-map (kbd "M-]") 'scroll-other-window)
 (define-key global-map (kbd "M-[") 'scroll-other-window-down)
 
-;; Unfill region
-(define-key global-map "\C-\M-q" 'unfill-region)
-
 ;; Mapping AltGr-d to delete-other-windows,
 ;; Another symbol I don't use often.
 (global-set-key [240] (quote delete-other-windows))
@@ -2076,27 +2073,6 @@ Taken from https://emacsredux.com/blog/2022/06/12/auto-create-missing-directorie
   )
 
    #+END_SRC
-** Unfill region
-   #+BEGIN_SRC emacs-lisp :tangle yes
-;; Unfill region, AKA leave single huge line
-(defun unfill-region (beg end)
-  "Unfill the region, joining text paragraphs into a single
-       logical line.  This is useful, e.g., for use with
-       `visual-line-mode'."
-  (interactive "*r")
-  (let ((fill-column (point-max)))
-    (fill-region beg end)))
-   #+END_SRC
-** COMMENT Read value from environment variables
-#+BEGIN_SRC emacs-lisp :tangle yes
-(defun auralcat/get-env-var (env-var-name)
-  "This is a way to work around how the system interprets environment variables
-to read them in real time. It returns the value under ENV-VAR-NAME in your shell init files.
-
-You just need to change the env var value (or add the key) in .bash_profile and
-this function will pick it up."
- (shell-command-to-string (format "$SHELL --login -c 'echo -n $%s'" env-var-name)))
-#+END_SRC
 ** Copy text from prog-modes into Markdown code block
 This is useful when you want to copy some lines of code from Emacs to paste on Github comments or in a chat tool. That way you don't have to type `s and paste the text in there. Makes the process much smoother and faster.
 
