@@ -499,19 +499,6 @@ Create links to Github/GitLab files from the comfort of your Emacs buffer.
   (require 'smartparens-config))
 #+END_SRC
 
-*** Golden Ratio Mode
-    Splits windows using the [[https://en.wikipedia.org/wiki/Golden_ratio][Golden Ratio]].
-    This makes the focused window a bit larger than usual and the
-    smaller ones are easier to read. It makes the multi-window
-    experience more pleasing to the eye. Yeah, nature!
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package golden-ratio
-  :diminish golden-ratio-mode
-  :custom ((golden-ratio-extra-commands
-     (append golden-ratio-extra-commands '(magit-status aw-flip-window))))
-  :hook (after-init . golden-ratio-mode))
-    #+END_SRC
-
 *** Restart Emacs
     Restart Emacs from within Emacs
     #+BEGIN_SRC emacs-lisp :tangle yes
