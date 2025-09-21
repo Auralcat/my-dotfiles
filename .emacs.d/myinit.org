@@ -49,6 +49,17 @@
 (load "server")
 (unless (server-running-p) (server-start))
 
+;; Calendar location settings (required for Circadian theme switching)
+;; These coordinates are for a general location - adjust for your specific area
+(setopt calendar-latitude 40.7128    ; New York City latitude (adjust as needed)
+        calendar-longitude -74.0060  ; New York City longitude (adjust as needed)
+        calendar-location-name "Your City, Country") ; Customize this
+
+;; Alternative: Get location automatically (requires 'request' package)
+;; (setopt calendar-latitude nil
+;;         calendar-longitude nil
+;;         calendar-location-name nil)
+
 ;; Store all backups in a specific folder:
 (setopt backup-directory-alist `(("." . "~/file-bouncer/emacs-backups")))
 
@@ -144,9 +155,10 @@
 
 ;; Optimize garbage collection
 (use-package gcmh
+  :demand t  ;; Need this early for startup performance
   :custom ((gcmh-verbose nil)
       (gcmh-high-cons-threshold 16777216))
-  :hook (after-init . gcmh-mode))
+  :config (gcmh-mode 1))
 #+END_SRC
 * Variables
   #+BEGIN_SRC emacs-lisp :tangle yes
@@ -183,23 +195,27 @@ This can be reverted later with ~(advice-remove)~ though.
   (auto-fill-mode -1))
 
 (use-package markdown-mode
+  :mode (("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode)
+         ("README\\.md\\'" . gfm-mode))
   :hook ((markdown-mode . markdown-mode-tweaks)
-      (gfm-mode . markdown-mode-tweaks))
-  :bind-keymap (("M-<right>" . 'markdown-demote)
-     ("M-<left>" . 'markdown-promote)
-     ("M-<up>" . 'markdown-move-up)
-     ("M-<down>" . 'markdown-move-down)
-     ("C-c 1" . 'markdown-insert-header-atx-1)
-     ("C-c 2" . 'markdown-insert-header-atx-2)
-     ("C-<return>" . 'auralcat/kmacro-markdown-insert-header-same-level)
-     ("C-M-<return>" . 'auralcat/kmacro-markdown-insert-header-nest-one-level)
-     ("C-c 3" . 'markdown-insert-header-atx-3))
-  :custom  ((markdown-fontify-code-blocks-natively t)
-     (markdown-asymmetric-header t)
-     (markdown-header-scaling nil))
+         (gfm-mode . markdown-mode-tweaks))
+  :bind (:map markdown-mode-map
+         ("M-<right>" . markdown-demote)
+         ("M-<left>" . markdown-promote)
+         ("M-<up>" . markdown-move-up)
+         ("M-<down>" . markdown-move-down)
+         ("C-c 1" . markdown-insert-header-atx-1)
+         ("C-c 2" . markdown-insert-header-atx-2)
+         ("C-<return>" . auralcat/kmacro-markdown-insert-header-same-level)
+         ("C-M-<return>" . auralcat/kmacro-markdown-insert-header-nest-one-level)
+         ("C-c 3" . markdown-insert-header-atx-3)
+         ("C-c M-w" . au/markdown-copy-block-content))
+  :custom ((markdown-fontify-code-blocks-natively t)
+           (markdown-asymmetric-header t)
+           (markdown-header-scaling nil))
   :config
   ;; Use fixed-pitch fonts inside code blocks.
-  ;; TODO: How to move this out of :config?
   (set-face-attribute 'markdown-code-face nil :inherit 'fixed-pitch))
 
   #+END_SRC
@@ -252,51 +268,50 @@ copy the contents of a code block immediately.
       (message "Code block content copied to kill ring")
       (deactivate-mark)))))
 
-  (require 'markdown-mode)
-  (eval-after-load 'markdown-mode
-    (define-key markdown-mode-map (kbd "C-c M-w") #'au/markdown-copy-block-content))
 #+end_src
 *** Web Mode
     I use this for HTML files mostly.
   #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package web-mode
+  :mode (("\\.html\\'" . web-mode)
+         ("\\.htm\\'" . web-mode)
+         ("\\.html\\.erb\\'" . web-mode)
+         ("\\.html\\.heex\\'" . web-mode)
+         ("\\.phtml\\'" . web-mode))
   :bind (:map web-mode-map
-      ("C-<up>"    . web-mode-element-previous)
-      ("C-<down>"  . web-mode-element-next)
-      ("C-<left>"  . web-mode-element-beginning)
-      ("C-<right>" . web-mode-tag-match)
-      ("C-S-<up>"  . web-mode-element-parent)
-      ("M-<up>"    . web-mode-element-content-select)
-      ("M-RET"     . complete))
+         ("C-<up>"    . web-mode-element-previous)
+         ("C-<down>"  . web-mode-element-next)
+         ("C-<left>"  . web-mode-element-beginning)
+         ("C-<right>" . web-mode-tag-match)
+         ("C-S-<up>"  . web-mode-element-parent)
+         ("M-<up>"    . web-mode-element-content-select)
+         ("M-RET"     . complete))
   :custom ((web-mode-enable-auto-closing t)
-    (web-mode-enable-auto-pairing nil)
-    (web-mode-enable-current-element-highlight t)
-    (web-mode-enable-auto-expanding nil)
-    ;; Engine associations
-    (web-mode-engines-alist
-      '(("php"    . "\\.phtml\\'")
-     ("blade"  . "\\.blade\\.")))
-    ;; Indentation configuration
-    (web-mode-markup-indent-offset 2)
-    (web-mode-css-indent-offset    2)
-    (web-mode-code-indent-offset   2)
-    (web-mode-script-padding       2)
-    (web-mode-style-padding        2))
+           (web-mode-enable-auto-pairing nil)
+           (web-mode-enable-current-element-highlight t)
+           (web-mode-enable-auto-expanding nil)
+           ;; Engine associations
+           (web-mode-engines-alist
+            '(("php"    . "\\.phtml\\'")
+              ("blade"  . "\\.blade\\.")))
+           ;; Indentation configuration
+           (web-mode-markup-indent-offset 2)
+           (web-mode-css-indent-offset    2)
+           (web-mode-code-indent-offset   2)
+           (web-mode-script-padding       2)
+           (web-mode-style-padding        2))
   :config
-  ;; File associations
-  (add-to-list 'auto-mode-alist '(" \\.html.erb\\'"  . web-mode))
-  (add-to-list 'auto-mode-alist '(" \\.html.heex\\'" . web-mode))
-  (add-to-list 'auto-mode-alist '(" \\.html?\\'"     . web-mode))
   ;; Use tidy to check HTML buffers with web-mode.
-  (eval-after-load 'flycheck
-    '(flycheck-add-mode 'html-tidy 'web-mode))
+  (with-eval-after-load 'flycheck
+    (flycheck-add-mode 'html-tidy 'web-mode))
 
   (defun sp-web-mode-is-code-context (id action context)
     (and (eq action 'insert)
-     (not (or (get-text-property (point) 'part-side)
-      (get-text-property (point) 'block-side)))))
+         (not (or (get-text-property (point) 'part-side)
+                  (get-text-property (point) 'block-side)))))
 
-  (sp-local-pair 'web-mode "<" nil :when '(sp-web-mode-is-code-context)))
+  (with-eval-after-load 'smartparens
+    (sp-local-pair 'web-mode "<" nil :when '(sp-web-mode-is-code-context))))
     #+END_SRC
 
 *** Compilation mode tweaks
@@ -340,7 +355,8 @@ I'm working with Makefiles now, so this is useful.
 *** CSV-mode
     CSV support for Emacs.
     #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package csv-mode)
+(use-package csv-mode
+  :mode "\\.csv\\'")
     #+END_SRC
 *** MermaidJS
 [[http://mermaid-js.github.io/mermaid/][MermaidJS]] is a Markdown syntax to generate flowcharts and diagrams.
@@ -348,7 +364,7 @@ It's quite handy to use whenever you need to explain complex concepts to other p
 
 To install it, run the command below.
 I'm not installing it automatically when Emacs starts because that takes up init time.
-#+BEGIN_SRC shell
+#+BEGIN_SRC shell :tangle no
 npm install -g @mermaid-js/mermaid-cli
 #+END_SRC
 
@@ -357,7 +373,10 @@ npm install -g @mermaid-js/mermaid-cli
   :mode "\\.mermaid\\'")
 
 (use-package ob-mermaid
-  :custom ((ob-mermaid-cli-path (string-trim (shell-command-to-string "command -v mmdc")))))
+  :after org
+  :config
+  (when-let ((mmdc-path (executable-find "mmdc")))
+    (setq ob-mermaid-cli-path mmdc-path)))
 #+END_SRC
 
 ***** Expand-region
@@ -370,10 +389,10 @@ This one is a classic in the Emacs community.
 It's a supercharged version of =ace-jump=, with batteries included and better performance!
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package avy
+  :bind (("M-g j" . avy-resume)
+         ("M-3" . avy-goto-char))
   :config
-  (avy-setup-default)
-  (global-set-key (kbd "M-g j") 'avy-resume)
-  (global-set-key (kbd "M-3") 'avy-goto-char))
+  (avy-setup-default))
 #+END_SRC
 ***** Exec path from shell
   Replicates terminal env vars in graphical Emacs.
@@ -389,7 +408,8 @@ It's a supercharged version of =ace-jump=, with batteries included and better pe
 ***** Git-Link
 Create links to Github/GitLab files from the comfort of your Emacs buffer.
 #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package git-link)
+(use-package git-link
+  :commands git-link)
 #+END_SRC
 ***** Magit delta
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -473,26 +493,43 @@ Create links to Github/GitLab files from the comfort of your Emacs buffer.
   (yas-reload-all))
     #+END_SRC
 ***** Circadian
-    Theme changer for Emacs.
+    Theme changer for Emacs. Automatically switches themes based on sunrise/sunset.
     #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package circadian
-  ;; This is the heaviest package to load currently, so we can ask use-package
-  ;; to load it LAST for us!
-  :defer 1
+  :after (ef-themes modus-themes)  ; Ensure themes are loaded first
+  :demand t  ; Still load immediately, but after dependencies
   :config
+  ;; Validate that required calendar variables are set
+  (unless (and calendar-latitude calendar-longitude)
+    (user-error "Calendar location not configured! Please set calendar-latitude and calendar-longitude."))
+
   (setopt circadian-themes
       (cond
        ((eq system-type 'darwin)
         '((:sunrise . modus-operandi)
           (:sunset  . modus-vivendi)))
-       ;; Personal Linux machine
-       ((and (string-equal (system-name) auralcat/personal-system-name)
-         (eq system-type 'gnu/linux))
+       ;; Linux machines
+       ((eq system-type 'gnu/linux)
         '((:sunrise . ef-day)
           (:sunset  . ef-dream)))
        (t '((:sunrise . modus-operandi)
         (:sunset  . modus-vivendi)))))
-  (circadian-setup))
+
+  ;; Validate that the configured themes exist before setup
+  (let ((themes-to-check (mapcar #'cdr (symbol-value 'circadian-themes))))
+    (dolist (theme themes-to-check)
+      (unless (or (eq theme 'user)  ; Skip 'user' theme
+                  (custom-theme-p theme)
+                  (locate-file (concat (symbol-name theme) "-theme.el")
+                               (custom-theme--load-path) '("" ".el")))
+        (warn "Circadian: Theme '%s' not found, but continuing setup..." theme))))
+
+  ;; Now safely setup Circadian
+  (condition-case err
+      (circadian-setup)
+    (error
+     (message "Circadian setup failed: %s" (error-message-string err))
+     (message "Falling back to manual theme switching with M-` key"))))
     #+END_SRC
 
 ***** Electric pair mode
@@ -515,8 +552,9 @@ I honestly don't know why Emacs doesn't support this out of the box yet, but oh 
 You can put ~auto-package-update-async~ in the ~midnight-hook~.
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package auto-package-update
+  :commands auto-package-update-maybe
   :custom ((auto-package-update-at-time "11:30am")
-       (auto-package-update-delete-old-versions t)))
+           (auto-package-update-delete-old-versions t)))
 #+END_SRC
 ** Minor Modes
 *** Flycheck Inline
@@ -562,15 +600,17 @@ You can put ~auto-package-update-async~ in the ~midnight-hook~.
     Free some space in the mode line removing superfluous mode indications.
     #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package diminish
-  ;; These are loaded at startup, I prefer declaring everything here.
-  :diminish flycheck-mode
-  :diminish projectile-mode
-  :diminish auto-revert-mode
-  :diminish auto-fill-mode
-  :diminish abbrev-mode)
-;; These are loaded in other moments
-(eval-after-load "editorconfig" '(diminish 'editorconfig-mode))
-(eval-after-load "yasnippet" '(diminish 'yas-minor-mode))
+  :demand t  ;; Need this early to diminish built-in modes
+  :config
+  ;; Diminish built-in modes
+  (diminish 'auto-revert-mode)
+  (diminish 'auto-fill-mode)
+  (diminish 'abbrev-mode)
+  ;; Diminish modes loaded by other packages
+  (with-eval-after-load 'flycheck (diminish 'flycheck-mode))
+  (with-eval-after-load 'projectile (diminish 'projectile-mode))
+  (with-eval-after-load 'editorconfig (diminish 'editorconfig-mode))
+  (with-eval-after-load 'yasnippet (diminish 'yas-minor-mode)))
     #+END_SRC
 ** Utilities
 *** Deadgrep
@@ -641,7 +681,7 @@ So I need to enable them like this to not get pestered by it when trying to use 
 ** Flatpak trick
 ~executable-find~ is not able to find Flatpak packages directly.
 You'll need to put a script like this in your PATH:
-#+begin_src sh
+#+begin_src sh :tangle no
 #!/bin/bash
 exec flatpak run com.google.Chrome "$@"
 #+end_src
@@ -784,8 +824,7 @@ This does not require any extra packages as of Emacs 21. Great thing to know whe
     Sets font lock faces to numbers in Emacs.
     #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package highlight-numbers
-  :after prog-mode
-  :hook ((prog-mode . highlight-numbers-mode)))
+  :hook (prog-mode . highlight-numbers-mode))
     #+END_SRC
 *** Indent-bars mode
 A new package on the block that is faster than ~highlight-indentation~.
@@ -798,8 +837,7 @@ A new package on the block that is faster than ~highlight-indentation~.
     between different editors and IDEs.
     #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package editorconfig
-  :after prog-mode
-  :hook (after-init . editorconfig-mode))
+  :hook (prog-mode . editorconfig-mode))
     #+END_SRC
 *** Diff-Highlight
     Highlights the changed content in buffer.
@@ -814,10 +852,9 @@ A new package on the block that is faster than ~highlight-indentation~.
     depth.
     #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package rainbow-delimiters
-  :after prog-mode
   :hook ((prog-mode . rainbow-delimiters-mode)
-     (ielm-mode . rainbow-delimiters-mode)
-     (slime-repl-mode . rainbow-delimiters-mode)))
+         (ielm-mode . rainbow-delimiters-mode)
+         (slime-repl-mode . rainbow-delimiters-mode)))
     #+END_SRC
 *** Git Gutter
     Shows (and enables you to navigate between) parts of the code
@@ -825,26 +862,24 @@ A new package on the block that is faster than ~highlight-indentation~.
     version-controlled project.
     #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package git-gutter
-  :when window-system
-  :hook ((prog-mode . git-gutter-mode))
-  :diminish ""
+  :if window-system
+  :hook (prog-mode . git-gutter-mode)
   :config
   (use-package git-gutter-fringe
     :after git-gutter
-     :init
-    (require 'git-gutter-fringe)
+    :config
     (when (fboundp 'define-fringe-bitmap)
       (define-fringe-bitmap 'git-gutter-fr:added
-    [224 224 224 224 224 224 224 224 224 224 224 224 224
-     224 224 224 224 224 224 224 224 224 224 224 224]
-    nil nil 'center)
+        [224 224 224 224 224 224 224 224 224 224 224 224 224
+         224 224 224 224 224 224 224 224 224 224 224 224]
+        nil nil 'center)
       (define-fringe-bitmap 'git-gutter-fr:modified
-    [224 224 224 224 224 224 224 224 224 224 224 224 224
-     224 224 224 224 224 224 224 224 224 224 224 224]
-    nil nil 'center)
+        [224 224 224 224 224 224 224 224 224 224 224 224 224
+         224 224 224 224 224 224 224 224 224 224 224 224]
+        nil nil 'center)
       (define-fringe-bitmap 'git-gutter-fr:deleted
-    [0 0 0 0 0 0 0 0 0 0 0 0 0 128 192 224 240 248]
-    nil nil 'center))))
+        [0 0 0 0 0 0 0 0 0 0 0 0 0 128 192 224 240 248]
+        nil nil 'center))))
     #+END_SRC
 ** Treesitter
 #+begin_src emacs-lisp :tangle yes
@@ -922,8 +957,11 @@ Use a dedicated terminal in Emacs for comint modes! This works GREAT with ~vterm
 *** Main configuration
 #+BEGIN_SRC emacs-lisp :tangle yes
 (use-package ruby-mode
-  :bind-keymap (("C-c SPC" . ruby-send-buffer))
-  :hook (ruby . (flycheck-mode)))
+  :mode "\\.rb\\'"
+  :interpreter "ruby"
+  :bind (:map ruby-mode-map
+         ("C-c SPC" . ruby-send-buffer))
+  :hook (ruby-mode . flycheck-mode))
 #+END_SRC
 *** Projectile Rails
 Rails utilities for Projectile-mode
@@ -935,10 +973,6 @@ Rails utilities for Projectile-mode
 *** Bundler
 Interact with Bundler from Emacs
 #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package ruby-mode
-  :defer t
-  :mode "\\.rb\\'"
-  :interpreter "ruby")
 #+END_SRC
 *** Rcodetools
 This is a gem that you can install and copy the ~rcodetools.el~ file to your ~load-path~ to add bindings to Emacs.
@@ -946,24 +980,21 @@ When you run ~comment-dwim~ twice in a ~ruby-mode~ buffer, it will output a comm
 Then you can run the ~xmp~ function to have Ruby evaluate that snippet of code right in your buffer, without having to run ~inf-ruby~.
 
 To install the ~rcodetools~ gem, run:
-#+BEGIN_SRC shell :eval never
+#+BEGIN_SRC shell :tangle no
 gem install rcodetools
 #+END_SRC
 
 Then copy ~rcodetools.el~ from the gem directory to your Emacs' ~load-path~:
-#+BEGIN_SRC shell :eval never
+#+BEGIN_SRC shell :tangle no
 cp /path/to/rcodetools.el ~/emacs.d/manual-packages/rcodetools.el
 #+END_SRC
 
 After that, we can require it in our configuration:
 #+BEGIN_SRC emacs-lisp :tangle yes
-  (use-package ruby-mode
-    :mode "\\.rb\\'"
-    :init
-    (add-to-list 'load-path "~/my-dotfiles/.emacs.d/manual-packages")
-    :config
-    (require 'rcodetools)
-    (define-key ruby-mode-map (kbd "C-c C-c") 'xmp))
+(with-eval-after-load 'ruby-mode
+  (add-to-list 'load-path "~/my-dotfiles/.emacs.d/manual-packages")
+  (when (require 'rcodetools nil 'noerror)
+    (define-key ruby-mode-map (kbd "C-c C-c") 'xmp)))
 #+END_SRC
 
 *** Robe
@@ -1012,7 +1043,7 @@ fashion, so this is why I chose it.
 Format your code with ~black~.
 You will need to have the ~black~ lib installed in your Python
 interpreter:
-#+begin_src sh :noeval
+#+begin_src sh :tangle no
 pip3 install black
 #+end_src
 
@@ -1043,7 +1074,7 @@ Python in Emacs!
 *** IPython with Jupyter Notebook kernel
 To run the kernel with code from your project, do this:
 
-#+begin_src sh
+#+begin_src sh :tangle no
 cd ~/your-project-dir
 ipython kernel
 #+end_src
@@ -1138,7 +1169,7 @@ Some Lisp configuration to make it easier to use it.
 This is pretty useful to pretty-format HTML, CSS and JS files locally.
 Remember to install the ~prettier~ NPM package in your machine:
 
-#+begin_src shell
+#+begin_src shell :tangle no
 npm install -g prettier
 #+end_src
 
@@ -1334,19 +1365,21 @@ This is a derived mode to hold English abbrevs.
        )))
 
      ;; Organize the bindings
-     ;; Open subheading with C-c RET and invert with M-RET
-     (define-key org-mode-map (kbd "C-c RET") 'org-ctrl-c-ret)
-     (define-key org-mode-map (kbd "<C-M-return>") 'org-insert-subheading)
+     ;; Defer keybinding setup until org-mode is loaded
+     (with-eval-after-load 'org
+       ;; Open subheading with C-c RET and invert with M-RET
+       (define-key org-mode-map (kbd "C-c RET") 'org-ctrl-c-ret)
+       (define-key org-mode-map (kbd "<C-M-return>") 'org-insert-subheading)
 
-     ;; Use C-RET to complete words in Org-mode
-     (define-key org-mode-map (kbd "C-RET") 'complete)
+       ;; Use C-RET to complete words in Org-mode
+       (define-key org-mode-map (kbd "C-RET") 'complete)
 
-     ;; Map C-S-enter to org-insert-todo-subheading
-     (define-key org-mode-map (kbd "<C-S-return>") 'org-insert-todo-subheading)
+       ;; Map C-S-enter to org-insert-todo-subheading
+       (define-key org-mode-map (kbd "<C-S-return>") 'org-insert-todo-subheading)
 
-     ;; Dummy-proofing my configs
-     (define-key org-mode-map (kbd "C-c ]") nil)
-     (define-key org-mode-map (kbd "C-c [") nil)
+       ;; Dummy-proofing my configs
+       (define-key org-mode-map (kbd "C-c ]") nil)
+       (define-key org-mode-map (kbd "C-c [") nil))
 
      ;; Log when a task was done and when it was rescheduled.
      (setopt org-log-done 'time)
@@ -1411,12 +1444,14 @@ things, so you need to add extra configuration when using them.
 Not the case right now, though.
 
 #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package ob-async)
+(use-package ob-async
+  :after org)
 #+END_SRC
 
 *** Elixir
     #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package ob-elixir)
+(use-package ob-elixir
+  :after org)
     #+END_SRC
 *** Load languages
     #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1448,7 +1483,8 @@ this same feature in org-mode as well.
     (message "Source block content copied to kill ring")
     (deactivate-mark)))))
 
-(define-key org-mode-map (kbd "C-c C-v M-w") #'au/org-babel-copy-block-content)
+(with-eval-after-load 'org
+  (define-key org-mode-map (kbd "C-c C-v M-w") #'au/org-babel-copy-block-content))
 #+end_src
 
 * Reading-focused settings
@@ -1576,7 +1612,26 @@ enough_ for both light and dark settings!
 Also from Prot. These look great!
 #+begin_src emacs-lisp :tangle yes
 (use-package ef-themes
-  :defer 1)
+  :demand t  ; Load immediately for Circadian
+  :custom
+  ;; Set theme preferences using :custom for proper type checking
+  (ef-themes-mixed-fonts t)
+  (ef-themes-headings '((1 . (bold 1.3))
+                        (2 . (bold 1.2))
+                        (3 . (bold 1.1))
+                        (t . (bold)))))
+#+end_src
+
+** Modus Themes
+Built-in themes from Protesilaos Stavrou, excellent for accessibility.
+#+begin_src emacs-lisp :tangle yes
+(use-package modus-themes
+  :demand t  ; Load immediately for Circadian
+  :custom
+  ;; Configure theme preferences using :custom for proper type checking
+  (modus-themes-completions '((matches . extrabold)
+                             (selection . semibold)))
+  (modus-themes-org-blocks 'gray-background))
 #+end_src
 
 * Fonts

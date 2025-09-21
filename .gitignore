@@ -5,23 +5,29 @@
 *type-break
 
 # Emacs stuff
-.emacs.d/snippets/*/private
+*.elc
 .emacs.d/company-statistics-cache.el
 .emacs.d/completions
+.emacs.d/eln-cache
 .emacs.d/elpa
 .emacs.d/elpa/archives/
 .emacs.d/eshell/*
 .emacs.d/eww-bookmarks
 .emacs.d/forge-database.sqlite
 .emacs.d/helm-adaptive-history
+.emacs.d/history
 .emacs.d/manual-themes
 .emacs.d/network-security.data
+.emacs.d/org-table-highlight-metadata.el
+.emacs.d/package-quickstart.el
 .emacs.d/projectile-bookmarks.eld
 .emacs.d/projects
 .emacs.d/quickurls
 .emacs.d/recentf
+.emacs.d/snippets/*/private
 .emacs.d/tramp
 .emacs.d/transient
+.emacs.d/tree-sitter
 .emacs.d/url/cache/
 .emacs.d/url/cookies
 .emacs.desktop
@@ -33,10 +39,7 @@ eshell/history
 eshell/lastdir
 ido.last
 miriamretka.el
-# This is the file generated when starting Emacs, we don't need to send it to
-# version control
 myinit.el
-*.elc
 
 persp-confs/*
 tetris-scores
