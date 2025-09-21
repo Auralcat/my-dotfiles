@@ -114,10 +114,21 @@ augroup programming
     " Python-specific optimizations (consolidated from python_optimized group)
     autocmd FileType python call <SID>SetupPythonPaste()
     autocmd FileType python setlocal cindent
+    " Python auto-formatting with black
+    autocmd BufWritePre *.py call <SID>FormatWithBlack()
 augroup END
 
 " OPTIMIZED PYTHON-SPECIFIC CONFIGURATION
 " =======================================
+" Python auto-formatting with black configuration
+" Set g:python_black_enabled = 0 to disable auto-formatting globally
+" Use :BlackToggle to toggle auto-formatting for current session
+" Use :BlackFormat to manually format current file
+" Key mappings (in Python files): <leader>bf (format), <leader>bt (toggle)
+let g:python_black_enabled = 1
+let g:python_black_check_performed = 0
+let g:python_black_available = 0
+
 " Lazy-loaded Python indentation functions
 let g:python_paste_optimized = 0
 
@@ -133,6 +144,10 @@ function! s:SetupPythonPaste() abort
     nnoremap <buffer><silent> <leader>pp :call <SID>PythonPasteBelow()<CR>
     nnoremap <buffer><silent> <leader>pP :call <SID>PythonPasteAbove()<CR>
     nnoremap <buffer><silent> <leader>= :call <SID>FixPythonIndentLimited()<CR>
+
+    " Black formatting key mappings
+    nnoremap <buffer><silent> <leader>bf :BlackFormat<CR>
+    nnoremap <buffer><silent> <leader>bt :BlackToggle<CR>
 endfunction
 
 " Efficient Python paste functions with limited scope
@@ -178,6 +193,100 @@ function! s:FixPythonIndentLimited() abort
         normal! gg=G
     endif
 endfunction
+
+" PYTHON BLACK AUTO-FORMATTING
+" =============================
+" Check black availability once per session
+function! s:CheckBlackAvailability() abort
+    if g:python_black_check_performed | return g:python_black_available | endif
+    let g:python_black_check_performed = 1
+
+    if !executable('black')
+        let g:python_black_available = 0
+        echo 'Black not found in PATH. Python auto-formatting disabled.'
+        return 0
+    endif
+
+    let g:python_black_available = 1
+    return 1
+endfunction
+
+" Format current buffer with black
+function! s:FormatWithBlack() abort
+    " Check if auto-formatting is enabled
+    if !g:python_black_enabled | return | endif
+
+    " Check black availability (cached after first check)
+    if !s:CheckBlackAvailability() | return | endif
+
+    " Save cursor position and view
+    let l:view = winsaveview()
+    let l:cursor_line = line('.')
+    let l:cursor_col = col('.')
+
+    " Get current buffer content
+    let l:original_content = join(getline(1, '$'), "\n")
+
+    " Create temporary file for black processing
+    let l:temp_file = tempname() . '.py'
+    call writefile(split(l:original_content, "\n"), l:temp_file)
+
+    " Run black on temporary file
+    let l:black_cmd = 'black --quiet --fast ' . shellescape(l:temp_file) . ' 2>&1'
+    let l:result = system(l:black_cmd)
+    let l:exit_code = v:shell_error
+
+    if l:exit_code == 0
+        " Black succeeded, read formatted content
+        let l:formatted_content = readfile(l:temp_file)
+        let l:new_content = join(l:formatted_content, "\n")
+
+        " Only update buffer if content changed
+        if l:new_content !=# l:original_content
+            " Replace buffer content
+            silent! %delete _
+            call setline(1, l:formatted_content)
+
+            " Restore cursor position (approximate)
+            call winrestview(l:view)
+            " Try to maintain cursor position, fallback to original line
+            if line('$') >= l:cursor_line
+                call cursor(l:cursor_line, l:cursor_col)
+            else
+                call cursor(line('$'), 1)
+            endif
+
+            echo 'Python code formatted with black'
+        endif
+    else
+        " Black failed, show error message
+        let l:error_msg = substitute(l:result, '\n.*', '', '')
+        echo 'Black formatting failed: ' . l:error_msg
+    endif
+
+    " Clean up temporary file
+    call delete(l:temp_file)
+endfunction
+
+" Toggle black auto-formatting
+function! s:ToggleBlackFormatting() abort
+    let g:python_black_enabled = !g:python_black_enabled
+    let l:status = g:python_black_enabled ? 'enabled' : 'disabled'
+    echo 'Python black auto-formatting ' . l:status
+endfunction
+
+" Manual black formatting command
+function! s:FormatCurrentFileWithBlack() abort
+    if !s:CheckBlackAvailability()
+        echo 'Black is not available. Please install black: pip install black'
+        return
+    endif
+    call s:FormatWithBlack()
+endfunction
+
+" Commands for manual control
+command! BlackFormat call <SID>FormatCurrentFileWithBlack()
+command! BlackToggle call <SID>ToggleBlackFormatting()
 
 " Python-specific autocmds consolidated into programming group above for better performance
 
