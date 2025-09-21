@@ -822,7 +822,24 @@ This does not require any extra packages as of Emacs 21. Great thing to know whe
 A new package on the block that is faster than ~highlight-indentation~.
 #+begin_src emacs-lisp :tangle yes
 (use-package indent-bars
-  :hook ((prog-mode) . indent-bars-mode))
+  :hook ((prog-mode) . indent-bars-mode)
+  :custom
+  ;; Disable current depth highlighting to prevent visual shifting
+  (indent-bars-highlight-current-depth nil)
+  ;; Disable current depth coloring for consistency
+  (indent-bars-color-by-depth nil)
+  ;; Keep bars stable and consistent
+  (indent-bars-prefer-character t)
+  ;; Additional settings to prevent any dynamic behavior
+  (indent-bars-display-on-blank-lines t)
+  ;; Ensure consistent positioning
+  (indent-bars-starting-column 0)
+  ;; Use subtle, consistent visual style
+  (indent-bars-width-frac 0.1)
+  (indent-bars-pad-frac 0.1)
+  ;; Disable scope-based adjustments that can cause shifting
+  (indent-bars-no-descend-string t)
+  (indent-bars-no-descend-lists t))
 #+end_src
 *** Editorconfig
     Helps developers define and maintain consistent coding styles
