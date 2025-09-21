@@ -378,184 +378,6 @@ npm install -g @mermaid-js/mermaid-cli
   (when-let ((mmdc-path (executable-find "mmdc")))
     (setq ob-mermaid-cli-path mmdc-path)))
 #+END_SRC
-
-***** Expand-region
-This one is a classic in the Emacs community.
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package expand-region
-  :bind ("C-=" . er/expand-region))
-#+END_SRC
-***** Avy
-It's a supercharged version of =ace-jump=, with batteries included and better performance!
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package avy
-  :bind (("M-g j" . avy-resume)
-         ("M-3" . avy-goto-char))
-  :config
-  (avy-setup-default))
-#+END_SRC
-***** Exec path from shell
-  Replicates terminal env vars in graphical Emacs.
-  #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package exec-path-from-shell
-  :if (memq window-system '(mac ns x))
-  :custom
-  (exec-path-from-shell-check-startup-files nil)
-  (exec-path-from-shell-variables '("PATH" "MANPATH"))
-  :hook
-  (after-init . exec-path-from-shell-initialize))
-  #+END_SRC
-***** Git-Link
-Create links to Github/GitLab files from the comfort of your Emacs buffer.
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package git-link
-  :commands git-link)
-#+END_SRC
-***** Magit delta
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package magit-delta
-  :hook (magit-mode . magit-delta-mode))
-#+END_SRC
-***** Smartparens
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package smartparens
-  :hook ((ruby-mode inf-elixir-mode emacs-lisp-mode shell-script-mode) . smartparens-mode)
-  :bind (:map smartparens-mode-map
-     ([remap backward-sexp] . sp-backward-sexp)
-     ([remap forward-sexp] . sp-forward-sexp)
-     ([remap kill-sexp] . sp-kill-sexp)
-     ([remap mark-sexp] . sp-mark-sexp)
-     ([remap transpose-sexp] . sp-transpose-sexp)
-     ([remap kill-region] . sp-kill-region)
-     ([remap kill-whole-line] . sp-kill-whole-line))
-  :config
-  (require 'smartparens-config))
-#+END_SRC
-
-***** Golden Ratio Mode
-    Splits windows using the [[https://en.wikipedia.org/wiki/Golden_ratio][Golden Ratio]].
-    This makes the focused window a bit larger than usual and the
-    smaller ones are easier to read. It makes the multi-window
-    experience more pleasing to the eye. Yeah, nature!
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package golden-ratio
-  :diminish golden-ratio-mode
-  :custom ((golden-ratio-extra-commands
-     (append golden-ratio-extra-commands '(magit-status aw-flip-window))))
-  :hook (after-init . golden-ratio-mode))
-    #+END_SRC
-
-***** Restart Emacs
-    Restart Emacs from within Emacs
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package restart-emacs)
-    #+END_SRC
-***** Magit
-    How to win at Git from Emacs.
-    The configuration for each part is below in separate headings.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-;; 2024-09-06 git-commit is distributed with magit now.
-(defun git-commit-tweaks ()
-  "Ensures that the commit body does not exceed 72 characters."
-  (setopt fill-column 72)
-  (setq-local comment-auto-fill-only-comments nil))
-
-(use-package magit
-  :defer t
-  :hook ((git-commit . git-commit-tweaks)
-     (magit-diff . visual-line-mode))
-  :custom ((git-commit-summary-max-length 50)
-    (magit-diff-refine-hunk t)))
-    #+END_SRC
-***** Yasnippets
-    It originally came with company-mode, it's handy to write faster
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(defun do-not-add-newline-for-snippets ()
-  "What is says on the tin."
-  (setq-local require-final-newline nil))
-
-;; Combined YASnippet configuration
-(use-package yasnippet
-  :defer t
-  :hook ((prog-mode . yas-minor-mode)
-     (after-init . yas-global-mode))
-  :config
-  ;; Load snippet packages inside the :config block
-  (use-package yasnippet-snippets)
-  (use-package yasnippet-classic-snippets
-    :hook (snippet-mode . do-not-add-newline-for-snippets))
-  ;; Set the snippet directories after all packages are loaded
-  (setq yas-snippet-dirs
-    '("~/.emacs.d/snippets"
-       yasnippet-snippets-dir
-       yasnippet-classic-snippets-dir))
-  ;; Initialize yasnippet
-  (yas-reload-all))
-    #+END_SRC
-***** Circadian
-    Theme changer for Emacs. Automatically switches themes based on sunrise/sunset.
-    #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package circadian
-  :after (ef-themes modus-themes)  ; Ensure themes are loaded first
-  :demand t  ; Still load immediately, but after dependencies
-  :config
-  ;; Validate that required calendar variables are set
-  (unless (and calendar-latitude calendar-longitude)
-    (user-error "Calendar location not configured! Please set calendar-latitude and calendar-longitude."))
-
-  (setopt circadian-themes
-      (cond
-       ((eq system-type 'darwin)
-        '((:sunrise . modus-operandi)
-          (:sunset  . modus-vivendi)))
-       ;; Linux machines
-       ((eq system-type 'gnu/linux)
-        '((:sunrise . ef-day)
-          (:sunset  . ef-dream)))
-       (t '((:sunrise . modus-operandi)
-        (:sunset  . modus-vivendi)))))
-
-  ;; Validate that the configured themes exist before setup
-  (let ((themes-to-check (mapcar #'cdr (symbol-value 'circadian-themes))))
-    (dolist (theme themes-to-check)
-      (unless (or (eq theme 'user)  ; Skip 'user' theme
-                  (custom-theme-p theme)
-                  (locate-file (concat (symbol-name theme) "-theme.el")
-                               (custom-theme--load-path) '("" ".el")))
-        (warn "Circadian: Theme '%s' not found, but continuing setup..." theme))))
-
-  ;; Now safely setup Circadian
-  (condition-case err
-      (circadian-setup)
-    (error
-     (message "Circadian setup failed: %s" (error-message-string err))
-     (message "Falling back to manual theme switching with M-` key"))))
-    #+END_SRC
-
-***** Electric pair mode
-This _built-in_ mode adds paired characters when you type brackets and
-other things.
-
-It's got a better performance than ~smartparens-mode~. Use it when you
-don't need any specific features from ~smartparens-mode~.
-
-#+begin_src emacs-lisp :tangle yes
-(add-hook 'js-mode-hook 'electric-pair-mode)
-(add-hook 'json-mode-hook 'electric-pair-mode)
-(add-hook 'outline-mode-hook 'electric-pair-mode)
-(add-hook 'markdown-mode-hook 'electric-pair-mode)
-(add-hook 'org-mode-hook 'electric-pair-mode)
-#+end_src
-
-***** Auto package update
-I honestly don't know why Emacs doesn't support this out of the box yet, but oh well.
-You can put ~auto-package-update-async~ in the ~midnight-hook~.
-#+BEGIN_SRC emacs-lisp :tangle yes
-(use-package auto-package-update
-  :commands auto-package-update-maybe
-  :custom ((auto-package-update-at-time "11:30am")
-           (auto-package-update-delete-old-versions t)))
-#+END_SRC
 ** Minor Modes
 *** Flycheck Inline
     Shows the error when leaving the point over the place where it occurs.
@@ -633,6 +455,175 @@ Because kaomoji is fun! ヽ(*⌒▽⌒*)ﾉ
   :config
   (setq aw-keys '(?a ?s ?d ?f ?g)))
 #+end_src
+*** Expand-region
+This one is a classic in the Emacs community.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package expand-region
+  :bind ("C-=" . er/expand-region))
+#+END_SRC
+*** Exec path from shell
+  Replicates terminal env vars in graphical Emacs.
+  #+BEGIN_SRC emacs-lisp :tangle yes
+(use-package exec-path-from-shell
+  :if (memq window-system '(mac ns x))
+  :custom
+  (exec-path-from-shell-check-startup-files nil)
+  (exec-path-from-shell-variables '("PATH" "MANPATH"))
+  :hook
+  (after-init . exec-path-from-shell-initialize))
+  #+END_SRC
+*** Git-Link
+Create links to Github/GitLab files from the comfort of your Emacs buffer.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package git-link
+  :commands git-link)
+#+END_SRC
+*** Magit delta
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package magit-delta
+  :hook (magit-mode . magit-delta-mode))
+#+END_SRC
+*** Smartparens
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package smartparens
+  :hook ((ruby-mode inf-elixir-mode emacs-lisp-mode shell-script-mode) . smartparens-mode)
+  :bind (:map smartparens-mode-map
+     ([remap backward-sexp] . sp-backward-sexp)
+     ([remap forward-sexp] . sp-forward-sexp)
+     ([remap kill-sexp] . sp-kill-sexp)
+     ([remap mark-sexp] . sp-mark-sexp)
+     ([remap transpose-sexp] . sp-transpose-sexp)
+     ([remap kill-region] . sp-kill-region)
+     ([remap kill-whole-line] . sp-kill-whole-line))
+  :config
+  (require 'smartparens-config))
+#+END_SRC
+
+*** Golden Ratio Mode
+    Splits windows using the [[https://en.wikipedia.org/wiki/Golden_ratio][Golden Ratio]].
+    This makes the focused window a bit larger than usual and the
+    smaller ones are easier to read. It makes the multi-window
+    experience more pleasing to the eye. Yeah, nature!
+    #+BEGIN_SRC emacs-lisp :tangle yes
+(use-package golden-ratio
+  :diminish golden-ratio-mode
+  :custom ((golden-ratio-extra-commands
+     (append golden-ratio-extra-commands '(magit-status aw-flip-window))))
+  :hook (after-init . golden-ratio-mode))
+    #+END_SRC
+
+*** Restart Emacs
+    Restart Emacs from within Emacs
+    #+BEGIN_SRC emacs-lisp :tangle yes
+(use-package restart-emacs)
+    #+END_SRC
+*** Magit
+    How to win at Git from Emacs.
+    The configuration for each part is below in separate headings.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+;; 2024-09-06 git-commit is distributed with magit now.
+(defun git-commit-tweaks ()
+  "Ensures that the commit body does not exceed 72 characters."
+  (setopt fill-column 72)
+  (setq-local comment-auto-fill-only-comments nil))
+
+(use-package magit
+  :defer t
+  :hook ((git-commit . git-commit-tweaks)
+     (magit-diff . visual-line-mode))
+  :custom ((git-commit-summary-max-length 50)
+    (magit-diff-refine-hunk t)))
+    #+END_SRC
+*** Yasnippets
+    It originally came with company-mode, it's handy to write faster
+    #+BEGIN_SRC emacs-lisp :tangle yes
+(defun do-not-add-newline-for-snippets ()
+  "What is says on the tin."
+  (setq-local require-final-newline nil))
+
+;; Combined YASnippet configuration
+(use-package yasnippet
+  :defer t
+  :hook ((prog-mode . yas-minor-mode)
+     (after-init . yas-global-mode))
+  :config
+  ;; Load snippet packages inside the :config block
+  (use-package yasnippet-snippets)
+  (use-package yasnippet-classic-snippets
+    :hook (snippet-mode . do-not-add-newline-for-snippets))
+  ;; Set the snippet directories after all packages are loaded
+  (setq yas-snippet-dirs
+    '("~/.emacs.d/snippets"
+       yasnippet-snippets-dir
+       yasnippet-classic-snippets-dir))
+  ;; Initialize yasnippet
+  (yas-reload-all))
+    #+END_SRC
+*** Circadian
+    Theme changer for Emacs. Automatically switches themes based on sunrise/sunset.
+    #+BEGIN_SRC emacs-lisp :tangle yes
+(use-package circadian
+  :after (ef-themes modus-themes)  ; Ensure themes are loaded first
+  :demand t  ; Still load immediately, but after dependencies
+  :config
+  ;; Validate that required calendar variables are set
+  (unless (and calendar-latitude calendar-longitude)
+    (user-error "Calendar location not configured! Please set calendar-latitude and calendar-longitude."))
+
+  (setopt circadian-themes
+      (cond
+       ((eq system-type 'darwin)
+        '((:sunrise . modus-operandi)
+          (:sunset  . modus-vivendi)))
+       ;; Linux machines
+       ((eq system-type 'gnu/linux)
+        '((:sunrise . ef-day)
+          (:sunset  . ef-dream)))
+       (t '((:sunrise . modus-operandi)
+        (:sunset  . modus-vivendi)))))
+
+  ;; Validate that the configured themes exist before setup
+  (let ((themes-to-check (mapcar #'cdr (symbol-value 'circadian-themes))))
+    (dolist (theme themes-to-check)
+      (unless (or (eq theme 'user)  ; Skip 'user' theme
+                  (custom-theme-p theme)
+                  (locate-file (concat (symbol-name theme) "-theme.el")
+                               (custom-theme--load-path) '("" ".el")))
+        (warn "Circadian: Theme '%s' not found, but continuing setup..." theme))))
+
+  ;; Now safely setup Circadian
+  (condition-case err
+      (circadian-setup)
+    (error
+     (message "Circadian setup failed: %s" (error-message-string err))
+     (message "Falling back to manual theme switching with M-` key"))))
+    #+END_SRC
+
+*** Electric pair mode
+This _built-in_ mode adds paired characters when you type brackets and
+other things.
+
+It's got a better performance than ~smartparens-mode~. Use it when you
+don't need any specific features from ~smartparens-mode~.
+
+#+begin_src emacs-lisp :tangle yes
+(add-hook 'js-mode-hook 'electric-pair-mode)
+(add-hook 'json-mode-hook 'electric-pair-mode)
+(add-hook 'outline-mode-hook 'electric-pair-mode)
+(add-hook 'markdown-mode-hook 'electric-pair-mode)
+(add-hook 'org-mode-hook 'electric-pair-mode)
+#+end_src
+
+*** Auto package update
+I honestly don't know why Emacs doesn't support this out of the box yet, but oh well.
+You can put ~auto-package-update-async~ in the ~midnight-hook~.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(use-package auto-package-update
+  :commands auto-package-update-maybe
+  :custom ((auto-package-update-at-time "11:30am")
+           (auto-package-update-delete-old-versions t)))
+#+END_SRC
+
 * Personal info
   #+BEGIN_SRC emacs-lisp :tangle yes
 ;; Load from external file.
