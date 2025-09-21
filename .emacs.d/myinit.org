@@ -714,7 +714,21 @@ from ~M-x~ and get the same result if you want.
   (setopt fill-column 80))
 
 (add-hook 'prog-mode-hook 'prog-mode-tweaks)
+
+;; Optimize font-lock for large files
+(setopt font-lock-maximum-decoration 2      ; Balance between speed and highlighting
+        font-lock-maximum-size (* 1024 1024) ; 1MB limit
+        jit-lock-stealth-time 16             ; Slower background highlighting
+        jit-lock-defer-time 0.05             ; Small delay before highlighting
+        jit-lock-chunk-size 1024)            ; Smaller chunks
+
+;; Add mode-specific optimizations
+(add-hook 'prog-mode-hook
+          (lambda ()
+            (when (> (buffer-size) (* 100 1024)) ; Files > 100KB
+              (setq-local font-lock-maximum-decoration 1))))
 #+END_SRC
+
 *** Comint tweaks
 When you are working in the comint/REPL buffer, you normally want the
 output to be visible at all times.
