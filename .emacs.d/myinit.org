@@ -1451,6 +1451,43 @@ this same feature in org-mode as well.
 (define-key org-mode-map (kbd "C-c C-v M-w") #'au/org-babel-copy-block-content)
 #+end_src
 
+* Reading-focused settings
+Better outline visibility settings for reading Org and Markdown files.
+#+BEGIN_SRC emacs-lisp :tangle yes
+(setopt org-startup-folded 'content)
+(setopt org-hide-leading-stars t)
+(setopt org-odd-levels-only nil)
+(setopt org-cycle-separator-lines 2)
+
+;; Simple navigation keys for view-mode (when reading)
+(defun setup-view-mode-navigation ()
+  "Setup simple navigation keys for reading structured files in view-mode."
+  (when (bound-and-true-p view-mode)
+    (cond
+     ;; Org-mode navigation
+     ((derived-mode-p 'org-mode)
+      (define-key view-mode-map (kbd "j") 'org-next-visible-heading)
+      (define-key view-mode-map (kbd "k") 'org-previous-visible-heading)
+      (define-key view-mode-map (kbd "h") 'outline-up-heading)
+      (define-key view-mode-map (kbd "l") 'org-forward-heading-same-level)
+      (define-key view-mode-map (kbd "g") 'org-goto)
+      (define-key view-mode-map (kbd "/") 'org-sparse-tree)
+      (define-key view-mode-map (kbd "TAB") 'org-cycle)
+      (define-key view-mode-map (kbd "S-TAB") 'org-global-cycle))
+     ;; Markdown-mode navigation
+     ((derived-mode-p 'markdown-mode)
+      (define-key view-mode-map (kbd "j") 'markdown-next-heading)
+      (define-key view-mode-map (kbd "k") 'markdown-previous-heading)
+      (define-key view-mode-map (kbd "h") 'markdown-up-heading)
+      (define-key view-mode-map (kbd "l") 'markdown-forward-same-level)
+      (define-key view-mode-map (kbd "g") 'markdown-goto-heading)
+      (define-key view-mode-map (kbd "/") 'isearch-forward)
+      (define-key view-mode-map (kbd "TAB") 'markdown-cycle)
+      (define-key view-mode-map (kbd "S-TAB") 'markdown-shifttab)))))
+
+(add-hook 'view-mode-hook 'setup-view-mode-navigation)
+#+END_SRC
+
 * Function Aliases
   #+BEGIN_SRC emacs-lisp :tangle yes
 ;; This is how you define aliases for Elisp functions. These are useful for when
