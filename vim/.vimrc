@@ -83,6 +83,36 @@ augroup scratchfile
     autocmd BufNewFile scratch.md setlocal viminfo=
 augroup END
 
+" PASTE MODE CONFIGURATION
+" =========================
+" Enable bracketed paste mode for modern terminals
+" This automatically detects when text is being pasted and disables autoindent
+if has('patch-8.0.0238') || has('nvim-0.2.3')
+    " Modern Vim/Neovim has built-in bracketed paste support
+    " which automatically handles paste mode
+    set t_BE=
+endif
+
+" Manual paste mode toggle with F2
+set pastetoggle=<F2>
+
+" Smart paste function that temporarily disables problematic settings
+function! SmartPaste()
+    set paste
+    normal! "+p
+    set nopaste
+endfunction
+
+" Key mappings for smart pasting
+nnoremap <leader>p :call SmartPaste()<CR>
+nnoremap <leader>P :call SmartPaste()<CR>
+
+" Insert mode paste that preserves indentation
+inoremap <C-v> <C-o>:set paste<CR><C-r>+<C-o>:set nopaste<CR>
+
+" PYTHON-SPECIFIC INDENTATION SETTINGS
+" ====================================
+
 " ProgrammingMode:
 augroup programming
     autocmd!
@@ -112,7 +142,40 @@ augroup programming
     autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
     autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
     autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+
+    " PYTHON-SPECIFIC PASTE AND INDENTATION SETTINGS
+    " ===============================================
+    " Ensure proper Python indentation settings
+    autocmd FileType python setlocal autoindent
+    autocmd FileType python setlocal smartindent
+    autocmd FileType python setlocal cindent
+    autocmd FileType python setlocal indentkeys-=<:>
+    autocmd FileType python setlocal indentkeys-=:
+    " Python-specific paste mappings that preserve indentation
+    autocmd FileType python nnoremap <buffer> <leader>pp :set paste<CR>o<C-r>+<Esc>:set nopaste<CR>
+    autocmd FileType python nnoremap <buffer> <leader>pP :set paste<CR>O<C-r>+<Esc>:set nopaste<CR>
+    " Better Python indentation handling for pasted code
+    autocmd FileType python inoremap <buffer> <C-v> <C-o>:set paste<CR><C-r>+<C-o>:set nopaste<CR><C-o>:silent! normal ==<CR>
+    " Command to fix indentation of pasted Python code
+    autocmd FileType python command! -buffer FixPythonIndent normal! gg=G
+    autocmd FileType python nnoremap <buffer> <leader>= :FixPythonIndent<CR>
 augroup END
+
+" ADDITIONAL PASTE UTILITIES
+" ==========================
+" Function to clean up common paste artifacts in Python
+function! CleanPythonPaste()
+    " Remove common artifacts from web/email pasting
+    silent! %s/^\s*>>> //g
+    silent! %s/^\s*\.\.\. //g
+    " Remove trailing whitespace
+    silent! %s/\s\+$//g
+    " Fix common indentation issues
+    normal! gg=G
+endfunction
+
+" Command to clean pasted Python code
+command! CleanPythonPaste call CleanPythonPaste()
 
 " Text Mode:
 augroup writing
