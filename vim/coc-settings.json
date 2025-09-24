@@ -50,5 +50,26 @@
   "list.indicator": ">",
   "list.selectedSignText": "→",
   "list.maxHeight": 12,
-  "workspace.ignoredFolders": ["$HOME", "$HOME/.cargo", "$HOME/.rustup", "**/node_modules", "**/.git", "**/venv", "**/__pycache__"]
+  "workspace.ignoredFolders": ["$HOME", "$HOME/.cargo", "$HOME/.rustup", "**/node_modules", "**/.git", "**/venv", "**/__pycache__"],
+  "coc.filetypes": ["c", "cpp", "python", "javascript", "typescript", "java", "ruby", "css", "html", "json", "yaml", "xml"],
+  "coc.preferences.disabledFiletypes": ["text", "markdown", "md", "txt", "rst", "org", "tex", "latex", "asciidoc", "gitcommit", "mail", "notes", "journal", "diary"],
+  "suggest.disableKinds": {
+    "text": ["text", "snippet"],
+    "markdown": ["text", "snippet"],
+    "md": ["text", "snippet"],
+    "txt": ["text", "snippet"],
+    "rst": ["text", "snippet"],
+    "org": ["text", "snippet"],
+    "tex": ["text", "snippet"],
+    "latex": ["text", "snippet"],
+    "asciidoc": ["text", "snippet"],
+    "gitcommit": ["text", "snippet"],
+    "mail": ["text", "snippet"]
+  },
+  "diagnostic.disabledFiletypes": ["text", "markdown", "md", "txt", "rst", "org", "tex", "latex", "asciidoc", "gitcommit", "mail", "notes", "journal", "diary"],
+  "completion.disableFiletypes": ["text", "markdown", "md", "txt", "rst", "org", "tex", "latex", "asciidoc", "gitcommit", "mail", "notes", "journal", "diary"],
+  "hover.disableFiletypes": ["text", "markdown", "md", "txt", "rst", "org", "tex", "latex", "asciidoc", "gitcommit", "mail", "notes", "journal", "diary"],
+  "signature.disableFiletypes": ["text", "markdown", "md", "txt", "rst", "org", "tex", "latex", "asciidoc", "gitcommit", "mail", "notes", "journal", "diary"],
+  "codeLens.disableFiletypes": ["text", "markdown", "md", "txt", "rst", "org", "tex", "latex", "asciidoc", "gitcommit", "mail", "notes", "journal", "diary"],
+  "semanticTokens.disableFiletypes": ["text", "markdown", "md", "txt", "rst", "org", "tex", "latex", "asciidoc", "gitcommit", "mail", "notes", "journal", "diary"]
 }

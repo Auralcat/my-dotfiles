@@ -56,8 +56,8 @@ au BufEnter *.org call org#SetOrgFileType()
 "VimPencil settings:"
 augroup pencil
     autocmd!
-    autocmd FileType markdown, call pencil#init()
-    autocmd FileType text call pencil#init({'wrap': 'soft'})
+    autocmd FileType markdown if exists('*pencil#init') | call pencil#init() | endif
+    autocmd FileType text if exists('*pencil#init') | call pencil#init({'wrap': 'soft'}) | endif
 augroup END
 
 " OPTIMIZED PASTE MODE CONFIGURATION
@@ -108,7 +108,7 @@ augroup programming
     autocmd FileType javascript nnoremap <buffer> <F6> :!nodejs %<CR>
     " Omnicompletion
     autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-    autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+    autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags
     autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
     autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
     " Python-specific optimizations (consolidated from python_optimized group)
@@ -314,12 +314,41 @@ endfunction
 
 inoremap <expr> <C-v> <SID>OptimizedInsertPaste()
 
+" ENHANCED SYSTEM CLIPBOARD INTEGRATION
+" ======================================
+" Additional clipboard mappings for different workflows
+
+" Ctrl+Shift+V for system clipboard paste (common in terminals)
+inoremap <expr> <C-S-v> <SID>OptimizedInsertPaste()
+inoremap <expr> <C-S-V> <SID>OptimizedInsertPaste()
+
+" Alternative clipboard paste mappings
+nnoremap <leader>v "+p
+nnoremap <leader>V "+P
+vnoremap <leader>v "+p
+
+" System clipboard copy mappings
+nnoremap <leader>y "+y
+vnoremap <leader>y "+y
+nnoremap <leader>Y "+Y
+
+" Copy whole file to system clipboard
+nnoremap <leader>ya :%y+<CR>
+
+" Primary selection (middle mouse) integration for Linux
+if has('linux') || has('unix')
+    nnoremap <leader>mp "*p
+    nnoremap <leader>mP "*P
+    nnoremap <leader>my "*y
+    vnoremap <leader>my "*y
+endif
+
 " Text Mode:
 augroup writing
     autocmd!
     autocmd FileType text set nonumber
     autocmd FileType text set noruler
-    autocmd FileType text SoftPencil
+    autocmd FileType text if exists(':SoftPencil') | SoftPencil | endif
 augroup END
 
 " TodoCommands:
@@ -844,9 +873,152 @@ endfunction
 " Auto-install extensions on first Coc startup (with delay to ensure Coc is ready)
 autocmd User CocNvimInit call timer_start(1000, {-> s:InstallCocExtensions()})
 
-" Additional Coc settings for stability
-" Disable Coc for certain file types to prevent conflicts
-autocmd FileType help,fugitive,nerdtree,tagbar let b:coc_enabled = 0
+" WRITING-FOCUSED COC CONFIGURATION
+" ==================================
+" Comprehensive CoC disabling for writing and documentation file types
+" This ensures a distraction-free writing experience without LSP interference
+
+" Define writing-focused file types that should have CoC disabled
+let g:coc_writing_filetypes = [
+  \ 'text', 'markdown', 'md', 'txt', 'rst', 'org', 'tex', 'latex',
+  \ 'asciidoc', 'wiki', 'confluence', 'gitcommit', 'COMMIT_EDITMSG',
+  \ 'mail', 'notes', 'journal', 'diary'
+  \ ]
+
+" Define special buffer types that should have CoC disabled
+let g:coc_disabled_special_buffers = [
+  \ 'help', 'fugitive', 'nerdtree', 'tagbar', 'quickfix', 'loclist',
+  \ 'netrw', 'startify', 'dashboard', 'alpha'
+  \ ]
+
+" Comprehensive CoC disabling function
+function! s:DisableCocForWriting() abort
+    " Disable all major CoC features for writing-focused files
+    let b:coc_enabled = 0
+    let b:coc_suggest_disable = 1
+    let b:coc_diagnostic_disable = 1
+
+    " Disable specific CoC features that might interfere with writing
+    if exists('b:coc_pairs_disabled')
+        let b:coc_pairs_disabled = ['<', '>', '"', "'"]
+    endif
+
+    " Disable semantic highlighting for writing files
+    if exists('*CocAction')
+        try
+            call CocAction('clearHighlight')
+        catch
+            " Silently handle any errors
+        endtry
+    endif
+endfunction
+
+" Apply CoC disabling to writing and special file types
+augroup coc_writing_disable
+    autocmd!
+    " Disable for writing-focused file types
+    for filetype in g:coc_writing_filetypes
+        execute 'autocmd FileType ' . filetype . ' call <SID>DisableCocForWriting()'
+    endfor
+
+    " Disable for special buffer types
+    for filetype in g:coc_disabled_special_buffers
+        execute 'autocmd FileType ' . filetype . ' let b:coc_enabled = 0'
+    endfor
+
+    " Additional buffer-type based disabling
+    autocmd BufNewFile,BufRead *.{diary,journal,note,notes} call <SID>DisableCocForWriting()
+    autocmd BufNewFile,BufRead {TODO,CHANGELOG,README,INSTALL,NEWS,COPYING}* call <SID>DisableCocForWriting()
+
+    " Automatically disable CoC when entering VimPencil mode
+    autocmd User PencilOn call <SID>DisableCocForWriting()
+augroup END
+
+" MANUAL COC CONTROL FOR WRITING
+" ===============================
+" Functions and commands to manually toggle CoC for writing sessions
+
+" Function to enable CoC for current buffer (override writing mode)
+function! s:EnableCocForBuffer() abort
+    let b:coc_enabled = 1
+    let b:coc_suggest_disable = 0
+    let b:coc_diagnostic_disable = 0
+
+    " Re-enable CoC features
+    if exists('b:coc_pairs_disabled')
+        unlet b:coc_pairs_disabled
+    endif
+
+    echo 'CoC enabled for current buffer (' . &filetype . ')'
+endfunction
+
+" Function to disable CoC for current buffer
+function! s:DisableCocForBuffer() abort
+    call <SID>DisableCocForWriting()
+    echo 'CoC disabled for current buffer (' . &filetype . ')'
+endfunction
+
+" Function to toggle CoC for current buffer
+function! s:ToggleCocForBuffer() abort
+    if get(b:, 'coc_enabled', 1)
+        call <SID>DisableCocForBuffer()
+    else
+        call <SID>EnableCocForBuffer()
+    endif
+endfunction
+
+" Check if current buffer is in writing mode
+function! s:IsWritingBuffer() abort
+    let l:writing_types = g:coc_writing_filetypes
+    return index(l:writing_types, &filetype) >= 0
+endfunction
+
+" Smart CoC toggle that considers file type
+function! s:SmartCocToggle() abort
+    if <SID>IsWritingBuffer()
+        call <SID>ToggleCocForBuffer()
+    else
+        echo 'CoC toggle only available for writing file types. Current: ' . &filetype
+    endif
+endfunction
+
+" Function to show CoC status for current buffer
+function! s:ShowCocStatus() abort
+    let l:coc_enabled = get(b:, 'coc_enabled', 1)
+    let l:suggest_disabled = get(b:, 'coc_suggest_disable', 0)
+    let l:diagnostic_disabled = get(b:, 'coc_diagnostic_disable', 0)
+    let l:is_writing_type = <SID>IsWritingBuffer()
+
+    echo 'CoC Status for ' . &filetype . ':'
+    echo '  Enabled: ' . (l:coc_enabled ? 'Yes' : 'No')
+    echo '  Suggestions: ' . (l:suggest_disabled ? 'Disabled' : 'Enabled')
+    echo '  Diagnostics: ' . (l:diagnostic_disabled ? 'Disabled' : 'Enabled')
+    echo '  Writing type: ' . (l:is_writing_type ? 'Yes' : 'No')
+
+    if exists('g:did_coc_loaded')
+        echo '  CoC loaded: Yes'
+        echo '  RPC ready: ' . (coc#rpc#ready() ? 'Yes' : 'No')
+    else
+        echo '  CoC loaded: No'
+    endif
+endfunction
+
+" Commands for manual CoC control
+command! CocEnable call <SID>EnableCocForBuffer()
+command! CocDisable call <SID>DisableCocForBuffer()
+command! CocToggle call <SID>ToggleCocForBuffer()
+command! CocWritingToggle call <SID>SmartCocToggle()
+command! CocStatus call <SID>ShowCocStatus()
+
+" Key mappings for CoC control (only in writing buffers)
+augroup coc_writing_mappings
+    autocmd!
+    for filetype in g:coc_writing_filetypes
+        execute 'autocmd FileType ' . filetype . ' nnoremap <buffer><silent> <leader>ct :CocToggle<CR>'
+        execute 'autocmd FileType ' . filetype . ' nnoremap <buffer><silent> <leader>ce :CocEnable<CR>'
+        execute 'autocmd FileType ' . filetype . ' nnoremap <buffer><silent> <leader>cd :CocDisable<CR>'
+    endfor
+augroup END
 
 " Ensure proper cleanup on Vim exit
 autocmd VimLeave * if exists('g:did_coc_loaded') | call CocActionAsync('shutdown') | endif
