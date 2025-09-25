@@ -6,7 +6,7 @@ filetype plugin on
 "Default colorscheme
 :colorscheme elflord
 
-set laststatus=0 " I don't like the statusline
+set laststatus=1 " Show statusline when multiple windows exist (needed for CoC)
 set wildmenu " Enable wild menu
 set title " Shows title of the file
 syntax on " Enables syntax by default
@@ -67,10 +67,14 @@ let g:paste_optimized = 1
 
 " Enhanced bracketed paste for modern terminals
 if has('patch-8.0.0238') || has('nvim-0.2.3')
-    " Enable bracketed paste with proper escape sequences
-    let &t_SI .= "\<Esc>[?2004h"
-    let &t_EI .= "\<Esc>[?2004l"
-    let &t_BE = "\<Esc>[?2004h"
+    try
+        " Enable bracketed paste with proper escape sequences
+        let &t_SI .= "\<Esc>[?2004h"
+        let &t_EI .= "\<Esc>[?2004l"
+        let &t_BE = "\<Esc>[?2004h"
+    catch
+        " Silently handle terminal compatibility issues
+    endtry
 endif
 
 " Fast paste mode toggle
@@ -434,7 +438,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'dense-analysis/ale', {'for': ['python', 'ruby', 'c', 'cpp', 'java', 'javascript', 'css', 'html']}
 
 " Coc.nvim: LSP support
-Plug 'neoclide/coc.nvim', {'branch': 'release', 'for': ['python', 'javascript', 'typescript', 'c', 'cpp', 'java', 'ruby', 'css', 'html', 'json', 'yaml', 'xml', 'go', 'rust', 'php', 'sh', 'vim']}
+Plug 'neoclide/coc.nvim', {'branch': 'release', 'for': ['python', 'javascript', 'typescript', 'c', 'cpp', 'java', 'ruby', 'css', 'html', 'json', 'yaml', 'xml', 'go', 'rust', 'php', 'vim']}
 
 " RainbowParentheses: Better parentheses - load only for programming files
 Plug 'junegunn/rainbow_parentheses.vim', {'for': ['python', 'ruby', 'c', 'cpp', 'java', 'javascript']}
@@ -634,8 +638,36 @@ command! -nargs=? Fold :call CocAction('fold', <f-args>)
 " Add `:OR` command for organize imports of the current buffer
 command! -nargs=0 OR :call <SID>SafeCocActionAsync('runCommand', 'editor.action.organizeImport')
 
-" Add (Neo)Vim's native statusline support
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+" SAFE COC STATUSLINE CONFIGURATION
+" ==================================
+" Conditional statusline that only calls CoC functions when CoC is ready
+function! s:SafeCocStatus() abort
+    " Only call coc#status() if CoC is loaded and ready
+    if exists('g:did_coc_loaded') && coc#rpc#ready()
+        try
+            return coc#status()
+        catch
+            return ''
+        endtry
+    endif
+    return ''
+endfunction
+
+function! s:SafeCocFunction() abort
+    " Only get current function if CoC is ready and buffer supports it
+    if exists('g:did_coc_loaded') && coc#rpc#ready() && get(b:, 'coc_enabled', 1)
+        return get(b:, 'coc_current_function', '')
+    endif
+    return ''
+endfunction
+
+" Set conditional statusline that won't cause startup errors
+augroup safe_coc_statusline
+    autocmd!
+    " Only enable statusline for programming file types where CoC is useful
+    autocmd FileType python,javascript,typescript,c,cpp,java,ruby,css,html,json,yaml,xml,go,rust,php,vim
+          \ setlocal statusline^=%{<SID>SafeCocStatus()}%{<SID>SafeCocFunction()}
+augroup END
 
 " Mappings for CoCList
 nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<CR>
@@ -871,7 +903,8 @@ function! s:InstallCocExtensions() abort
 endfunction
 
 " Auto-install extensions on first Coc startup (with delay to ensure Coc is ready)
-autocmd User CocNvimInit call timer_start(1000, {-> s:InstallCocExtensions()})
+autocmd User CocNvimInit if &filetype =~# 'python\|javascript\|typescript\|c\|cpp\|java\|ruby\|css\|html\|json\|yaml\|xml\|go\|rust\|php\|vim' |
+      \ call timer_start(1000, {-> s:InstallCocExtensions()}) | endif
 
 " WRITING-FOCUSED COC CONFIGURATION
 " ==================================
