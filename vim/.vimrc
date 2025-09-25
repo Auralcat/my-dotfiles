@@ -434,7 +434,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'dense-analysis/ale', {'for': ['python', 'ruby', 'c', 'cpp', 'java', 'javascript', 'css', 'html']}
 
 " Coc.nvim: LSP support
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', {'branch': 'release', 'for': ['python', 'javascript', 'typescript', 'c', 'cpp', 'java', 'ruby', 'css', 'html', 'json', 'yaml', 'xml', 'go', 'rust', 'php', 'sh', 'vim']}
 
 " RainbowParentheses: Better parentheses - load only for programming files
 Plug 'junegunn/rainbow_parentheses.vim', {'for': ['python', 'ruby', 'c', 'cpp', 'java', 'javascript']}
