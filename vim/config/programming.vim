@@ -348,3 +348,96 @@ function! s:show_documentation()
         execute '!' . &keywordprg . " " . expand('<cword>')
     endif
 endfunction
+
+" ============================================================================
+" C/C++ PASTE CRASH PREVENTION SYSTEM - CRITICAL FIX
+" ============================================================================
+
+" Global protection state
+let g:c_paste_safe_mode = 0
+let g:c_paste_max_lines = 75
+
+" Enter safe paste mode for C files
+function! s:EnterCPasteSafeMode() abort
+    let g:c_paste_safe_mode = 1
+    let b:coc_enabled = 0
+    let b:coc_suggest_disable = 1
+    let b:ale_enabled = 0
+    set paste updatetime=2000 lazyredraw
+    if exists('g:did_coc_loaded') && coc#rpc#ready()
+        try | call CocActionAsync('clearHighlight') | catch | endtry
+    endif
+    echo 'C Safe Paste Mode: ON'
+endfunction
+
+" Exit safe paste mode
+function! s:ExitCPasteSafeMode() abort
+    let g:c_paste_safe_mode = 0
+    let b:coc_enabled = 1
+    let b:coc_suggest_disable = 0
+    let b:ale_enabled = 1
+    set nopaste updatetime=300 nolazyredraw
+    echo 'C Safe Paste Mode: OFF'
+endfunction
+
+" Safe paste detection and execution
+function! s:CPasteBelow() abort
+    let l:clipboard = @+
+    if len(split(l:clipboard, '\n')) > g:c_paste_max_lines || l:clipboard =~# '#include\|struct\s\+\w\+\s*{\|typedef'
+        call s:EnterCPasteSafeMode()
+        silent normal! o
+        silent put +
+        call timer_start(200, {-> s:ExitCPasteSafeMode()})
+    else
+        set paste | normal! o | silent put + | set nopaste
+    endif
+endfunction
+
+" C file setup with crash protection
+function! s:SetupCPasteSafety() abort
+    nnoremap <buffer><silent> <leader>cp :call <SID>CPasteBelow()<CR>
+    nnoremap <buffer><silent> <leader>cs :call <SID>ToggleCPasteSafeMode()<CR>
+endfunction
+
+function! s:ToggleCPasteSafeMode() abort
+    if g:c_paste_safe_mode | call s:ExitCPasteSafeMode() | else | call s:EnterCPasteSafeMode() | endif
+endfunction
+
+" Intercept insert mode paste
+function! s:SafeInsertPaste() abort
+    let l:clipboard = @+
+    if len(split(l:clipboard, '\n')) > g:c_paste_max_lines || l:clipboard =~# '#include\|struct\s\+\w\+\s*{\|typedef'
+        call s:EnterCPasteSafeMode()
+        call timer_start(100, {-> feedkeys("\<C-r>+", 'n')})
+        call timer_start(500, {-> s:ExitCPasteSafeMode()})
+        return ""
+    else
+        return "\<C-r>+"
+    endif
+endfunction
+
+" Auto-setup for C files
+augroup c_paste_safety
+    autocmd!
+    autocmd FileType c,cpp call <SID>SetupCPasteSafety()
+    autocmd FileType c,cpp inoremap <buffer><silent><expr> <C-v> <SID>SafeInsertPaste()
+    autocmd InsertEnter *.c,*.cpp let b:coc_highlight_disabled = 1
+    autocmd InsertLeave *.c,*.cpp let b:coc_highlight_disabled = 0
+    autocmd BufLeave *.c,*.cpp call <SID>ExitCPasteSafeMode()
+augroup END
+
+" Override CoC CursorHold for C files
+augroup c_coc_protection
+    autocmd!
+    autocmd FileType c,cpp autocmd CursorHold <buffer> call <SID>SafeCHighlight()
+augroup END
+
+function! s:SafeCHighlight() abort
+    if !g:c_paste_safe_mode && !get(b:, 'coc_highlight_disabled', 0) && exists('g:did_coc_loaded') && coc#rpc#ready()
+        try | call CocActionAsync('highlight') | catch | endtry
+    endif
+endfunction
+
+" Commands
+command! CPasteToggle call <SID>ToggleCPasteSafeMode()
+command! CPasteStatus echo 'C Safe Paste: ' . (g:c_paste_safe_mode ? 'ON' : 'OFF')
