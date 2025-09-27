@@ -48,12 +48,14 @@ augroup programming
     autocmd FileType python nnoremap <buffer> <F6> :!python3 %<CR>
     autocmd FileType ruby nnoremap <buffer> <F6> :!ruby %<CR>
     autocmd FileType javascript nnoremap <buffer> <F6> :!nodejs %<CR>
+    autocmd FileType php nnoremap <buffer> <F6> :!php %<CR>
 
     " Language-specific omnicompletion
     autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
     autocmd FileType html setlocal omnifunc=htmlcomplete#CompleteTags
     autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
     autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+    autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
 
     " Python-specific optimizations
     autocmd FileType python call <SID>SetupPythonPaste()
@@ -350,6 +352,59 @@ function! s:show_documentation()
 endfunction
 
 " ============================================================================
+" COC PHP-SPECIFIC CONFIGURATION
+" ============================================================================
+
+" Enhanced PHP LSP integration with PHP-CS-Fixer formatting
+augroup coc_php
+    autocmd!
+    " Enable Coc for PHP files
+    autocmd FileType php let b:coc_suggest_disable = 0
+    autocmd FileType php let b:coc_diagnostic_disable = 0
+
+    " PHP will use the existing global CoC keymaps from completion.vim
+    " No need for duplicate PHP-specific mappings
+augroup END
+
+" Enhanced PHP auto-formatting function that combines LSP and PHP-CS-Fixer
+function! s:PHPAutoFormat() abort
+    " First organize imports via LSP if available
+    if exists('g:did_coc_loaded') && coc#rpc#ready()
+        call <SID>SafeCocActionAsync('runCommand', 'editor.action.organizeImport')
+        " Small delay to ensure imports are organized before PHP-CS-Fixer formatting
+        call timer_start(100, {-> s:FormatWithPHPCSFixer()})
+        echo 'Auto-formatting: imports organized, applying PHP-CS-Fixer...'
+    else
+        " Fall back to just PHP-CS-Fixer formatting
+        call s:FormatWithPHPCSFixer()
+    endif
+endfunction
+
+" PHP documentation lookup function
+function! s:PHPDocumentationLookup() abort
+    let l:word = expand('<cword>')
+    if empty(l:word)
+        echo 'No word under cursor for documentation lookup.'
+        return
+    endif
+
+    " Try CoC hover first
+    if exists('g:did_coc_loaded') && coc#rpc#ready()
+        call <SID>SafeCocActionAsync('doHover')
+    else
+        " Fall back to online PHP documentation
+        let l:php_doc_url = 'https://www.php.net/manual/en/function.' . substitute(tolower(l:word), '_', '-', 'g') . '.php'
+        if executable('xdg-open')
+            call system('xdg-open ' . shellescape(l:php_doc_url) . ' &')
+        elseif executable('open')
+            call system('open ' . shellescape(l:php_doc_url) . ' &')
+        else
+            echo 'Documentation URL: ' . l:php_doc_url
+        endif
+    endif
+endfunction
+
+" ============================================================================
 " C/C++ PASTE CRASH PREVENTION SYSTEM - CRITICAL FIX
 " ============================================================================
 
@@ -393,10 +448,9 @@ function! s:CPasteBelow() abort
     endif
 endfunction
 
-" C file setup with crash protection
+" C file setup with crash protection (no manual keymaps needed)
 function! s:SetupCPasteSafety() abort
-    nnoremap <buffer><silent> <leader>cp :call <SID>CPasteBelow()<CR>
-    nnoremap <buffer><silent> <leader>cs :call <SID>ToggleCPasteSafeMode()<CR>
+    " Automatic paste protection via Ctrl+v mapping, no manual commands needed
 endfunction
 
 function! s:ToggleCPasteSafeMode() abort
@@ -441,3 +495,435 @@ endfunction
 " Commands
 command! CPasteToggle call <SID>ToggleCPasteSafeMode()
 command! CPasteStatus echo 'C Safe Paste: ' . (g:c_paste_safe_mode ? 'ON' : 'OFF')
+
+" ============================================================================
+" PHP-SPECIFIC CONFIGURATION
+" ============================================================================
+
+" PHP configuration variables
+let g:php_cs_fixer_enabled = 1
+let g:php_cs_fixer_check_performed = 0
+let g:php_cs_fixer_available = 0
+let g:php_paste_optimized = 0
+let g:php_paste_safe_mode = 0
+let g:php_paste_max_lines = 100
+
+" PHP syntax enhancements
+let g:php_syntax_extensions_enabled = [
+    \ "bcmath", "bz2", "core", "curl", "date", "dom", "ereg", "gd", "gettext",
+    \ "hash", "iconv", "json", "libxml", "mbstring", "mcrypt", "mhash", "mysql",
+    \ "mysqli", "openssl", "pcre", "pdo", "posix", "session", "simplexml",
+    \ "sockets", "spl", "sqlite", "standard", "tokenizer", "wddx", "xml",
+    \ "xmlreader", "xmlwriter", "zip", "zlib"
+\ ]
+
+" Enhanced PHP indentation and formatting
+let g:php_html_load = 1
+let g:php_html_in_heredoc = 1
+let g:php_html_in_nowdoc = 1
+let g:php_sql_query = 1
+let g:php_sql_heredoc = 1
+let g:php_sql_nowdoc = 1
+
+" PSR standard configuration
+let g:php_cs_fixer_rules = "@PSR12"
+let g:php_cs_fixer_config_file = '.php_cs.dist'
+
+" ============================================================================
+" PHP AUTOCOMMANDS AND SETUP
+" ============================================================================
+
+augroup php_development
+    autocmd!
+    " Basic PHP settings
+    autocmd FileType php setlocal tabstop=4 shiftwidth=4 expandtab
+    autocmd FileType php setlocal autoindent smartindent cindent
+    autocmd FileType php setlocal number ruler showcmd tw=120 cc=121
+    autocmd FileType php setlocal foldmethod=indent foldlevelstart=99
+
+    " PHP-specific syntax settings
+    autocmd FileType php setlocal iskeyword+=$
+    autocmd FileType php setlocal includeexpr=substitute(v:fname,'\\.','/','g')
+    autocmd FileType php setlocal suffixesadd=.php
+
+    " Enhanced PHP matchpairs for better bracket matching
+    autocmd FileType php setlocal matchpairs+=<:>
+
+    " PHP file type detection enhancements
+    autocmd BufRead,BufNewFile *.phtml setfiletype php
+    autocmd BufRead,BufNewFile *.php3 setfiletype php
+    autocmd BufRead,BufNewFile *.php4 setfiletype php
+    autocmd BufRead,BufNewFile *.php5 setfiletype php
+    autocmd BufRead,BufNewFile *.phps setfiletype php
+
+    " Initialize PHP-specific features
+    autocmd FileType php call <SID>SetupPHPPaste()
+    autocmd FileType php call <SID>SetupPHPIndentation()
+
+    " PHP auto-formatting with PHP-CS-Fixer
+    autocmd BufWritePre *.php call <SID>FormatWithPHPCSFixer()
+
+    " PHP template and snippet setup
+    autocmd FileType php call <SID>SetupPHPTemplates()
+
+    " PHP debugging and development tools
+    autocmd FileType php nnoremap <buffer> <F7> :call <SID>PHPLint()<CR>
+    autocmd FileType php nnoremap <buffer> <F8> :call <SID>PHPSyntaxCheck()<CR>
+augroup END
+
+" ============================================================================
+" PHP PASTE SAFETY AND OPTIMIZATION
+" ============================================================================
+
+function! s:SetupPHPPaste() abort
+    if g:php_paste_optimized | return | endif
+    let g:php_paste_optimized = 1
+
+    " PHP indentation optimizations
+    setlocal autoindent smartindent
+    setlocal indentkeys=0{,0},0),0],0#,!^F,o,O,e
+    setlocal indentkeys+=0=?>,0=</,0=>
+
+    " Use F-keys for PHP development (no leader conflicts)
+    nnoremap <buffer><silent> <F9> :call <SID>FormatCurrentFileWithPHPCSFixer()<CR>
+    nnoremap <buffer><silent> <F10> :call <SID>PHPDebugToggle()<CR>
+endfunction
+
+" Safe PHP paste detection and execution
+function! s:PHPPasteBelow() abort
+    let l:clipboard = @+
+    if len(split(l:clipboard, '\n')) > g:php_paste_max_lines || l:clipboard =~# '<?php\|class\s\+\w\+\|namespace\s\+\w\+'
+        call s:EnterPHPPasteSafeMode()
+        silent normal! o
+        silent put +
+        call timer_start(200, {-> s:ExitPHPPasteSafeMode()})
+    else
+        set paste | normal! o | silent put + | set nopaste
+        call s:IndentPastedPHPLines(line('.') - len(split(l:clipboard, '\n')), line('.'))
+    endif
+endfunction
+
+function! s:PHPPasteAbove() abort
+    let l:start_line = line('.')
+    set paste
+    normal! O
+    silent put! +
+    set nopaste
+    call s:IndentPastedPHPLines(line('.'), l:start_line)
+endfunction
+
+" Enter safe paste mode for PHP files
+function! s:EnterPHPPasteSafeMode() abort
+    let g:php_paste_safe_mode = 1
+    let b:coc_enabled = 0
+    let b:coc_suggest_disable = 1
+    let b:ale_enabled = 0
+    set paste updatetime=2000 lazyredraw
+    if exists('g:did_coc_loaded') && coc#rpc#ready()
+        try | call CocActionAsync('clearHighlight') | catch | endtry
+    endif
+    echo 'PHP Safe Paste Mode: ON'
+endfunction
+
+" Exit safe paste mode
+function! s:ExitPHPPasteSafeMode() abort
+    let g:php_paste_safe_mode = 0
+    let b:coc_enabled = 1
+    let b:coc_suggest_disable = 0
+    let b:ale_enabled = 1
+    set nopaste updatetime=300 nolazyredraw
+    echo 'PHP Safe Paste Mode: OFF'
+endfunction
+
+" Smart indentation limited to paste area for PHP
+function! s:IndentPastedPHPLines(start, end) abort
+    let l:line_count = a:end - a:start + 1
+    if l:line_count > 50
+        echo 'Large PHP paste detected (' . l:line_count . ' lines). Skipping auto-indent for performance.'
+        return
+    endif
+    execute a:start . ',' . a:end . 'normal! =='
+endfunction
+
+" Limited scope indentation fix for performance
+function! s:FixPHPIndentLimited() abort
+    let l:total_lines = line('$')
+    if l:total_lines > 1000
+        let l:choice = confirm('Large PHP file (' . l:total_lines . ' lines). Indent entire file?', "&Yes\n&No\n&Current function only", 2)
+        if l:choice == 1
+            normal! gg=G
+        elseif l:choice == 3
+            normal! [z=][
+        endif
+    else
+        normal! gg=G
+    endif
+endfunction
+
+" ============================================================================
+" PHP INDENTATION SETUP
+" ============================================================================
+
+function! s:SetupPHPIndentation() abort
+    " Enhanced PHP indentation settings
+    setlocal cinkeys=0{,0},0),0],0#,!^F,o,O,e
+    setlocal cinkeys+=0=?>,0=</,0=>
+    setlocal cinoptions=l1,p0,)50,*50,t0,{1s,>2s,n-1s,:0,=1s
+
+    " PHP-specific indent expressions
+    setlocal indentexpr=GetPhpIndent()
+    setlocal indentkeys=0{,0},0),0],0#,!^F,o,O,e,0=?>,0=</,0=>
+endfunction
+
+" ============================================================================
+" PHP-CS-FIXER INTEGRATION
+" ============================================================================
+
+" Check PHP-CS-Fixer availability once per session
+function! s:CheckPHPCSFixerAvailability() abort
+    if g:php_cs_fixer_check_performed | return g:php_cs_fixer_available | endif
+    let g:php_cs_fixer_check_performed = 1
+
+    if !executable('php-cs-fixer')
+        let g:php_cs_fixer_available = 0
+        echo 'PHP-CS-Fixer not found in PATH. PHP auto-formatting disabled.'
+        return 0
+    endif
+
+    let g:php_cs_fixer_available = 1
+    return 1
+endfunction
+
+" Format current buffer with PHP-CS-Fixer
+function! s:FormatWithPHPCSFixer() abort
+    " Check if auto-formatting is enabled
+    if !g:php_cs_fixer_enabled | return | endif
+
+    " Check PHP-CS-Fixer availability (cached after first check)
+    if !s:CheckPHPCSFixerAvailability() | return | endif
+
+    " Save cursor position and view
+    let l:view = winsaveview()
+    let l:cursor_line = line('.')
+    let l:cursor_col = col('.')
+
+    " Get current buffer content
+    let l:original_content = join(getline(1, '$'), "\n")
+
+    " Create temporary file for PHP-CS-Fixer processing
+    let l:temp_file = tempname() . '.php'
+    call writefile(split(l:original_content, "\n"), l:temp_file)
+
+    " Run PHP-CS-Fixer on temporary file
+    let l:php_cs_fixer_cmd = 'php-cs-fixer fix --rules=' . shellescape(g:php_cs_fixer_rules) . ' ' . shellescape(l:temp_file) . ' 2>&1'
+    let l:result = system(l:php_cs_fixer_cmd)
+    let l:exit_code = v:shell_error
+
+    if l:exit_code == 0
+        " PHP-CS-Fixer succeeded, read formatted content
+        let l:formatted_content = readfile(l:temp_file)
+        let l:new_content = join(l:formatted_content, "\n")
+
+        " Only update buffer if content changed
+        if l:new_content !=# l:original_content
+            " Replace buffer content
+            silent! %delete _
+            call setline(1, l:formatted_content)
+
+            " Restore cursor position (approximate)
+            call winrestview(l:view)
+            " Try to maintain cursor position, fallback to original line
+            if line('$') >= l:cursor_line
+                call cursor(l:cursor_line, l:cursor_col)
+            else
+                call cursor(line('$'), 1)
+            endif
+
+            echo 'PHP code formatted with PHP-CS-Fixer (' . g:php_cs_fixer_rules . ')'
+        endif
+    else
+        " PHP-CS-Fixer failed, show error message
+        let l:error_msg = substitute(l:result, '\n.*', '', '')
+        echo 'PHP-CS-Fixer formatting failed: ' . l:error_msg
+    endif
+
+    " Clean up temporary file
+    call delete(l:temp_file)
+endfunction
+
+" Toggle PHP-CS-Fixer auto-formatting
+function! s:TogglePHPCSFixerFormatting() abort
+    let g:php_cs_fixer_enabled = !g:php_cs_fixer_enabled
+    let l:status = g:php_cs_fixer_enabled ? 'enabled' : 'disabled'
+    echo 'PHP-CS-Fixer auto-formatting ' . l:status
+endfunction
+
+" Manual PHP-CS-Fixer formatting command
+function! s:FormatCurrentFileWithPHPCSFixer() abort
+    if !s:CheckPHPCSFixerAvailability()
+        echo 'PHP-CS-Fixer is not available. Please install PHP-CS-Fixer: composer global require friendsofphp/php-cs-fixer'
+        return
+    endif
+    call s:FormatWithPHPCSFixer()
+endfunction
+
+" ============================================================================
+" PHP DEVELOPMENT TOOLS
+" ============================================================================
+
+" PHP syntax checking
+function! s:PHPSyntaxCheck() abort
+    if !executable('php')
+        echo 'PHP is not available for syntax checking.'
+        return
+    endif
+
+    let l:current_file = expand('%:p')
+    if empty(l:current_file)
+        echo 'No file to check syntax for.'
+        return
+    endif
+
+    let l:result = system('php -l ' . shellescape(l:current_file))
+    let l:exit_code = v:shell_error
+
+    if l:exit_code == 0
+        echo 'PHP syntax OK'
+    else
+        echo 'PHP syntax error: ' . substitute(l:result, '\n', ' ', 'g')
+    endif
+endfunction
+
+" PHP linting
+function! s:PHPLint() abort
+    if !executable('phpcs')
+        echo 'PHPCS not found. Install with: composer global require squizlabs/php_codesniffer'
+        return
+    endif
+
+    let l:current_file = expand('%:p')
+    if empty(l:current_file)
+        echo 'No file to lint.'
+        return
+    endif
+
+    let l:result = system('phpcs --standard=PSR12 ' . shellescape(l:current_file))
+    let l:exit_code = v:shell_error
+
+    if l:exit_code == 0
+        echo 'PHP code style OK (PSR-12)'
+    else
+        echo 'PHP linting issues found. Check :copen for details.'
+        cexpr l:result
+        copen
+    endif
+endfunction
+
+" PHP debugging toggle
+function! s:PHPDebugToggle() abort
+    if exists('b:php_debug_enabled') && b:php_debug_enabled
+        let b:php_debug_enabled = 0
+        echo 'PHP debug mode OFF'
+    else
+        let b:php_debug_enabled = 1
+        echo 'PHP debug mode ON'
+    endif
+endfunction
+
+" ============================================================================
+" PHP TEMPLATE AND SNIPPET SETUP
+" ============================================================================
+
+function! s:SetupPHPTemplates() abort
+    " PHP tag mappings for quick insertion
+    inoremap <buffer> <?p <?php<space>
+    inoremap <buffer> <?= <?=<space><space>?><left><left><left>
+    inoremap <buffer> <? <?php<space>
+
+    " PHP class template
+    inoremap <buffer> phpcls <C-o>:call <SID>InsertPHPClass()<CR>
+
+    " PHP function template
+    inoremap <buffer> phpfun <C-o>:call <SID>InsertPHPFunction()<CR>
+
+    " PHP namespace template
+    inoremap <buffer> phpns <C-o>:call <SID>InsertPHPNamespace()<CR>
+
+    " PHP use statement template
+    inoremap <buffer> phpuse <C-o>:call <SID>InsertPHPUse()<CR>
+endfunction
+
+" Insert PHP class template
+function! s:InsertPHPClass() abort
+    let l:class_name = input('Class name: ')
+    if !empty(l:class_name)
+        let l:template = [
+            \ '<?php',
+            \ '',
+            \ 'class ' . l:class_name,
+            \ '{',
+            \ '    public function __construct()',
+            \ '    {',
+            \ '        ',
+            \ '    }',
+            \ '}'
+        \ ]
+        call append(line('.'), l:template)
+        normal! 7j$
+    endif
+endfunction
+
+" Insert PHP function template
+function! s:InsertPHPFunction() abort
+    let l:function_name = input('Function name: ')
+    if !empty(l:function_name)
+        let l:template = [
+            \ 'public function ' . l:function_name . '()',
+            \ '{',
+            \ '    ',
+            \ '}'
+        \ ]
+        call append(line('.'), l:template)
+        normal! 2j$
+    endif
+endfunction
+
+" Insert PHP namespace template
+function! s:InsertPHPNamespace() abort
+    let l:namespace = input('Namespace: ')
+    if !empty(l:namespace)
+        call append(line('.'), 'namespace ' . l:namespace . ';')
+        normal! j$
+    endif
+endfunction
+
+" Insert PHP use statement template
+function! s:InsertPHPUse() abort
+    let l:use_class = input('Use class: ')
+    if !empty(l:use_class)
+        call append(line('.'), 'use ' . l:use_class . ';')
+        normal! j$
+    endif
+endfunction
+
+" ============================================================================
+" PHP COMMANDS
+" ============================================================================
+
+" Commands for manual PHP-CS-Fixer control
+command! PHPCSFixerFix call <SID>FormatCurrentFileWithPHPCSFixer()
+command! PHPCSFixerToggle call <SID>TogglePHPCSFixerFormatting()
+command! PHPCSFixerFixFile call <SID>FormatCurrentFileWithPHPCSFixer()
+
+" PHP development commands
+command! PHPSyntaxCheck call <SID>PHPSyntaxCheck()
+command! PHPLint call <SID>PHPLint()
+command! PHPDebugToggle call <SID>PHPDebugToggle()
+
+" PHP paste commands
+command! PHPPasteToggle call <SID>TogglePHPPasteSafeMode()
+command! PHPPasteStatus echo 'PHP Safe Paste: ' . (g:php_paste_safe_mode ? 'ON' : 'OFF')
+
+function! s:TogglePHPPasteSafeMode() abort
+    if g:php_paste_safe_mode | call s:ExitPHPPasteSafeMode() | else | call s:EnterPHPPasteSafeMode() | endif
+endfunction

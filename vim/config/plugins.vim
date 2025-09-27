@@ -69,6 +69,16 @@ Plug 'junegunn/rainbow_parentheses.vim', {
 \ }
 
 " ----------------------------------------------------------------------------
+" PHP-SPECIFIC PLUGINS (lazy loaded for PHP development)
+" ----------------------------------------------------------------------------
+
+" StanAngeloff/php.vim: Enhanced PHP syntax highlighting and indentation
+Plug 'StanAngeloff/php.vim', {'for': 'php'}
+
+" 2072/PHP-Indenting-for-VIm: Better PHP indentation
+Plug '2072/PHP-Indenting-for-VIm', {'for': 'php'}
+
+" ----------------------------------------------------------------------------
 " WRITING TOOLS (lazy loaded)
 " ----------------------------------------------------------------------------
 
