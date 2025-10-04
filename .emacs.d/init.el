@@ -14,7 +14,7 @@
                          ("elpa-nongnu" . "https://elpa.nongnu.org/nongnu/")
                          ("gnu" . "https://elpa.gnu.org/packages/")))
 
-(setopt package-check-signature 'all)
+(setopt package-check-signature 'allow-unsigned)
 
 ;; Ensure packages are initialized for use-package
 (unless package--initialized
