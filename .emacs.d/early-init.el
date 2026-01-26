@@ -1,5 +1,8 @@
 ;;; early-init.el --- Early initialization -*- lexical-binding: t -*-
 
+;; Load the NEWEST version of init Elisp code.
+;; This avoid ghost byte-compiled code still hanging around.
+(setopt load-prefer-newer t)
 ;; Disable package.el in favor of use-package
 (setq package-enable-at-startup nil)
 

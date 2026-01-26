@@ -455,6 +455,7 @@ Because kaomoji is fun! ヽ(*⌒▽⌒*)ﾉ
   :config
   (setq aw-keys '(?a ?s ?d ?f ?g)))
 #+end_src
+
 *** Expand-region
 This one is a classic in the Emacs community.
 #+BEGIN_SRC emacs-lisp :tangle yes
@@ -1355,10 +1356,11 @@ This is a derived mode to hold English abbrevs.
 
      (setopt org-hierarchical-todo-statistics nil
        org-src-fontify-natively t
-       org-todo-keywords '((sequence "TODO" "DONE"))
+       org-todo-keywords '((sequence "TODO" "WAITING" "SOMEDAY" "BLOCKED" "|" "DONE" "CANCELED"))
        org-agenda-scheduled-leaders '("Scheduled: " "Sched. previously %2dx: ")
        org-agenda-skip-scheduled-if-done t
-       org-agenda-start-on-weekday 0)
+       org-agenda-start-on-weekday 0
+       org-agenda-files '("/home/mretka/file-bouncer/org-files/vida/"))
 
      ;; Change the end of collapsed headings to an arrow.
      (setopt org-ellipsis "⤵")
@@ -1400,6 +1402,21 @@ This is a derived mode to hold English abbrevs.
      ;; Refile items to the same buffer along with the agenda files
      (setopt org-refile-targets '((nil :maxlevel . 3)
     (org-agenda-files :maxlevel . 3)))
+   #+END_SRC
+
+** Org-habit
+   Configuração do org-habit para rastrear hábitos recorrentes.
+
+   #+BEGIN_SRC emacs-lisp :tangle yes
+     ;; Carregar o módulo org-habit
+     (require 'org-habit)
+     (add-to-list 'org-modules 'org-habit)
+
+     ;; Configurações de exibição do org-habit
+     (setopt org-habit-show-habits-only-for-today nil  ;; Mostrar hábitos futuros
+             org-habit-graph-column 60                  ;; Posição do gráfico na agenda
+             org-habit-preceding-days 21                ;; Dias anteriores no gráfico
+             org-habit-following-days 7)                ;; Dias seguintes no gráfico
    #+END_SRC
 
 ** Tables
@@ -1600,6 +1617,10 @@ Run it with ~(pdf-tools-install)~.
 (global-set-key (kbd "M-`") 'auralcat/change-theme)
   #+END_SRC
 ** Modus themes customization
+
+#+RESULTS:
+: auralcat/change-theme
+
 The ~modus-themes~ come with Emacs since version 28, so you don't need
 to install it through ~use-package~ anymore.
 
@@ -1638,8 +1659,8 @@ Built-in themes from Protesilaos Stavrou, excellent for accessibility.
   :demand t  ; Load immediately for Circadian
   :custom
   ;; Configure theme preferences using :custom for proper type checking
-  (modus-themes-completions '((matches . extrabold)
-                             (selection . semibold)))
+  (modus-themes-completions '((matches . (extrabold))
+                             (selection . (semibold))))
   (modus-themes-org-blocks 'gray-background))
 #+end_src
 
