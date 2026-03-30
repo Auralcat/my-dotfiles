@@ -547,44 +547,43 @@ Create links to Github/GitLab files from the comfort of your Emacs buffer.
   ;; Initialize yasnippet
   (yas-reload-all))
     #+END_SRC
-*** Circadian
-    Theme changer for Emacs. Automatically switches themes based on sunrise/sunset.
+*** System Appearance (freedesktop portal)
+    Switches themes automatically based on system dark/light mode via built-in dbus.
+    Works on Linux with GNOME/KDE/any desktop that supports the freedesktop portal.
     #+BEGIN_SRC emacs-lisp :tangle yes
-(use-package circadian
-  :after (ef-themes modus-themes)  ; Ensure themes are loaded first
-  :demand t  ; Still load immediately, but after dependencies
-  :config
-  ;; Validate that required calendar variables are set
-  (unless (and calendar-latitude calendar-longitude)
-    (user-error "Calendar location not configured! Please set calendar-latitude and calendar-longitude."))
+(defun auralcat/apply-system-appearance ()
+  "Apply theme based on current system appearance via freedesktop portal."
+  (let* ((color-scheme
+          (ignore-errors
+            (caar (dbus-call-method
+                   :session
+                   "org.freedesktop.portal.Desktop"
+                   "/org/freedesktop/portal/desktop"
+                   "org.freedesktop.portal.Settings"
+                   "Read"
+                   "org.freedesktop.appearance"
+                   "color-scheme"))))
+         (dark-p (equal color-scheme 1)))
+    (auralcat/change-theme (if dark-p 'ef-dream 'ef-day))))
 
-  (setopt circadian-themes
-      (cond
-       ((eq system-type 'darwin)
-        '((:sunrise . modus-operandi)
-          (:sunset  . modus-vivendi)))
-       ;; Linux machines
-       ((eq system-type 'gnu/linux)
-        '((:sunrise . ef-day)
-          (:sunset  . ef-dream)))
-       (t '((:sunrise . modus-operandi)
-        (:sunset  . modus-vivendi)))))
+(defun auralcat/on-appearance-changed (_path namespace key value)
+  "Handle system appearance change signal from freedesktop portal."
+  (when (and (equal namespace "org.freedesktop.appearance")
+             (equal key "color-scheme"))
+    (let ((dark-p (equal (caar value) 1)))
+      (auralcat/change-theme (if dark-p 'ef-dream 'ef-day)))))
 
-  ;; Validate that the configured themes exist before setup
-  (let ((themes-to-check (mapcar #'cdr (symbol-value 'circadian-themes))))
-    (dolist (theme themes-to-check)
-      (unless (or (eq theme 'user)  ; Skip 'user' theme
-                  (custom-theme-p theme)
-                  (locate-file (concat (symbol-name theme) "-theme.el")
-                               (custom-theme--load-path) '("" ".el")))
-        (warn "Circadian: Theme '%s' not found, but continuing setup..." theme))))
+;; Register dbus signal to react to system theme changes
+(dbus-register-signal
+ :session
+ "org.freedesktop.portal.Desktop"
+ "/org/freedesktop/portal/desktop"
+ "org.freedesktop.portal.Settings"
+ "SettingChanged"
+ #'auralcat/on-appearance-changed)
 
-  ;; Now safely setup Circadian
-  (condition-case err
-      (circadian-setup)
-    (error
-     (message "Circadian setup failed: %s" (error-message-string err))
-     (message "Falling back to manual theme switching with M-` key"))))
+;; Apply theme matching system appearance on startup
+(add-hook 'after-init-hook #'auralcat/apply-system-appearance)
     #+END_SRC
 
 *** Electric pair mode
@@ -1585,10 +1584,8 @@ Run it with ~(pdf-tools-install)~.
   "Sets the fringe's background to the current theme's background color for the 'default face."
   (set-face-attribute 'fringe nil :background (face-attribute 'default :background)))
 
-;; Set the fringe face function Circadian's change hook.
-;; That way whenever the theme changes automatically, the fringe gets updated as
-;; well.
-(add-hook 'circadian-after-load-theme-hook 'auralcat/set-fringe-face-to-default-bg)
+;; Update fringe background whenever the theme changes.
+(add-hook 'enable-theme-functions (lambda (_theme) (auralcat/set-fringe-face-to-default-bg)))
 
 (defun auralcat/change-theme (new-theme)
   "Disables the current theme in the session, loads and enables the NEW-THEME."
@@ -1612,7 +1609,6 @@ Run it with ~(pdf-tools-install)~.
   ;; run any hooks.
   (auralcat--set-preferred-fonts-for-current-theme))
 
-;; Add the hook on circadian
 ;; Bind it to a keychord.
 (global-set-key (kbd "M-`") 'auralcat/change-theme)
   #+END_SRC
@@ -1642,7 +1638,7 @@ enough_ for both light and dark settings!
 Also from Prot. These look great!
 #+begin_src emacs-lisp :tangle yes
 (use-package ef-themes
-  :demand t  ; Load immediately for Circadian
+  :demand t  ; Load immediately
   :custom
   ;; Set theme preferences using :custom for proper type checking
   (ef-themes-mixed-fonts t)
@@ -1656,7 +1652,7 @@ Also from Prot. These look great!
 Built-in themes from Protesilaos Stavrou, excellent for accessibility.
 #+begin_src emacs-lisp :tangle yes
 (use-package modus-themes
-  :demand t  ; Load immediately for Circadian
+  :demand t  ; Load immediately
   :custom
   ;; Configure theme preferences using :custom for proper type checking
   (modus-themes-completions '((matches . (extrabold))
@@ -2115,7 +2111,7 @@ This is a huge quality of life improvement!
   "Return the hex code from the specified FACE."
   (face-attribute face :foreground))
 
-(add-hook 'circadian-after-load-theme-hook #'(lambda (theme) (auralcat--set-preferred-fonts-for-current-theme)))
+(add-hook 'enable-theme-functions #'(lambda (theme) (auralcat--set-preferred-fonts-for-current-theme)))
 (add-hook 'after-init-hook #'(lambda () (auralcat--set-preferred-fonts-for-current-theme)))
 
 (setq-default blink-cursor-blinks 0)
