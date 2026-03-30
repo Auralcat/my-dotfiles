@@ -610,6 +610,17 @@ You can put ~auto-package-update-async~ in the ~midnight-hook~.
   :custom ((auto-package-update-at-time "11:30am")
            (auto-package-update-delete-old-versions t)))
 #+END_SRC
+*** Emacs MCP server
+Control Emacs with LLMs!
+#+begin_src emacs-lisp :tangle yes
+(use-package mcp-server
+  :load-path "~/emacs-mcp-server"
+  :config
+  (add-hook 'emacs-startup-hook #'mcp-server-start-unix))
+
+(setq mcp-server-security-allowed-dangerous-functions
+        '(find-file-noselect with-current-buffer save-buffer))
+#+end_src
 
 * Personal info
   #+BEGIN_SRC emacs-lisp :tangle yes
