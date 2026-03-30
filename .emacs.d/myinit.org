@@ -566,11 +566,11 @@ Create links to Github/GitLab files from the comfort of your Emacs buffer.
          (dark-p (equal color-scheme 1)))
     (auralcat/change-theme (if dark-p 'ef-dream 'ef-day))))
 
-(defun auralcat/on-appearance-changed (_path namespace key value)
+(defun auralcat/on-appearance-changed (namespace key value)
   "Handle system appearance change signal from freedesktop portal."
   (when (and (equal namespace "org.freedesktop.appearance")
              (equal key "color-scheme"))
-    (let ((dark-p (equal (caar value) 1)))
+    (let ((dark-p (equal (car value) 1)))
       (auralcat/change-theme (if dark-p 'ef-dream 'ef-day)))))
 
 ;; Register dbus signal to react to system theme changes
