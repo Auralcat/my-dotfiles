@@ -621,6 +621,14 @@ Control Emacs with LLMs!
 (setq mcp-server-security-allowed-dangerous-functions
         '(find-file-noselect with-current-buffer save-buffer))
 #+end_src
+*** TMR
+A tiny timer inside your Emacs. Quite useful for ADHD brains like mine!
+#+begin_src emacs-lisp :tangle yes
+(use-package tmr
+  :hook (after-init . tmr-mode-line-mode)
+  :bind-keymap ("C-c t" . tmr-prefix-map)
+  :custom (tmr-notification-urgency 'critical))
+#+end_src
 
 * Personal info
   #+BEGIN_SRC emacs-lisp :tangle yes
